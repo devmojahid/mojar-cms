@@ -1,4 +1,5 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
@@ -431,15 +432,25 @@ class MenuAction extends Action
         HookAction::enqueueScript('core-backend', 'jw-styles/juzaweb/js/backend.min.js', $ver);
         HookAction::enqueueScript('core-tinymce', 'jw-styles/juzaweb/tinymce/tinymce.min.js', $ver);
         HookAction::enqueueScript('core-custom', 'jw-styles/juzaweb/js/custom.min.js', $ver);
+        // Tabler js
+        HookAction::enqueueScript('tabler-apexcharts', 'jw-styles/base/assets/libs/apexcharts/dist/apexcharts.min.js', $ver);
+        HookAction::enqueueScript('tabler-jsvectormap', 'jw-styles/base/assets/libs/jsvectormap/dist/js/jsvectormap.min.js', $ver);
+        HookAction::enqueueScript('tabler-jsvectormap-maps', 'jw-styles/base/assets/libs/jsvectormap/dist/maps/world.js', $ver);
+        HookAction::enqueueScript('tabler-jsvectormap-world', 'jw-styles/base/assets/libs/jsvectormap/dist/maps/world-merc.js?1692870487', $ver);
+        HookAction::enqueueScript('tabler-main-js', 'jw-styles/base/assets/js/tabler.min.js', $ver);
     }
 
     public function addAdminStyles(): void
     {
         $ver = Version::getVersion();
-        HookAction::enqueueStyle('core-vendor', 'jw-styles/juzaweb/css/vendor.min.css', $ver);
-        HookAction::enqueueStyle('core-backend', 'jw-styles/juzaweb/css/backend.min.css', $ver);
+        // HookAction::enqueueStyle('core-vendor', 'jw-styles/juzaweb/css/vendor.min.css', $ver);
+        // HookAction::enqueueStyle('core-backend', 'jw-styles/juzaweb/css/backend.min.css', $ver);
         HookAction::enqueueStyle('core-custom', 'jw-styles/juzaweb/css/custom.min.css', $ver);
-        HookAction::enqueueStyle('core-custom', 'jw-styles/juzaweb/css/custom.min.css', $ver);
+        // Tabler css
+        HookAction::enqueueStyle('tabler-main', 'jw-styles/base/assets/css/tabler.min.css', $ver);
+        HookAction::enqueueStyle('tabler-flags', 'jw-styles/base/assets/css/tabler-flags.min.css', $ver);
+        HookAction::enqueueStyle('tabler-payments', 'jw-styles/base/assets/css/tabler-payments.min.css', $ver);
+        HookAction::enqueueStyle('tabler-vendors', 'jw-styles/base/assets/css/tabler-vendors.min.css', $ver);
     }
 
     public function addDatatableSearchFieldTypes(): void
