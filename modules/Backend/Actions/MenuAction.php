@@ -445,7 +445,7 @@ class MenuAction extends Action
         $ver = Version::getVersion();
         // HookAction::enqueueStyle('core-vendor', 'jw-styles/juzaweb/css/vendor.min.css', $ver);
         // HookAction::enqueueStyle('core-backend', 'jw-styles/juzaweb/css/backend.min.css', $ver);
-        HookAction::enqueueStyle('core-custom', 'jw-styles/juzaweb/css/custom.min.css', $ver);
+        // HookAction::enqueueStyle('core-custom', 'jw-styles/juzaweb/css/custom.min.css', $ver);
         // Tabler css
         HookAction::enqueueStyle('tabler-main', 'jw-styles/base/assets/css/tabler.min.css', $ver);
         HookAction::enqueueStyle('tabler-flags', 'jw-styles/base/assets/css/tabler-flags.min.css', $ver);

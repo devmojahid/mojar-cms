@@ -52,10 +52,17 @@
                     <span class="juzaweb__menuLeft__item__title">{{ $item->get('title') }}</span>
                 </span>
 
-                <ul class="juzaweb__menuLeft__navigation"
+                {{-- <ul class="juzaweb__menuLeft__navigation"
                     @if ($hasActive) style="display: block;" @endif>
                     {!! $strChild !!}
-                </ul>
+                </ul> --}}
+                <div class="dropdown-menu {{ $item->get('active') ? 'show' : '' }}">
+                    <div class="dropdown-menu-columns">
+                        <div class="dropdown-menu-column">
+                            {!! $strChild !!}
+                        </div>
+                    </div>
+                </div>
             </li>
         @else
             @component('cms::backend.items.menu_left_item', [

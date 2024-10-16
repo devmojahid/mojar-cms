@@ -1,5 +1,5 @@
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
+    <ol class="breadcrumb" aria-label="breadcrumbs">
         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ trans('cms::app.dashboard') }}</a></li>
 
         @foreach($items as $item)
