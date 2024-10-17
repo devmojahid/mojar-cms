@@ -1,4 +1,4 @@
-<ul class="juzaweb__menuLeft__navigation">
+<ul class="navbar-nav pt-lg-3">
     @php
         use Juzaweb\CMS\Facades\HookAction;
         use Juzaweb\CMS\Support\MenuCollection;
@@ -40,26 +40,36 @@
                         'adminUrl' => $adminUrl,
                         'item' => $child,
                         'active' => $active,
-                        'icon' => false
+                        'icon' => false,
+                        'submenu_item' => true
                     ])->render();
                 }
             @endphp
 
-            <li class="juzaweb__menuLeft__item juzaweb__menuLeft__submenu juzaweb__menuLeft__item-{{ $item->get('slug') }} @if($hasActive) juzaweb__menuLeft__submenu--toggled @endif">
-                <span class="juzaweb__menuLeft__item__link">
-                    <i class="juzaweb__menuLeft__item__icon {{ $item->get('icon') }}"></i>
-                    <span class="juzaweb__menuLeft__item__title">{{ $item->get('title') }}</span>
-                </span>
+            <li class="Have_children nav-item dropdown juzaweb__menuLeft__item juzaweb__menuLeft__submenu juzaweb__menuLeft__item-{{ $item->get('slug') }} @if($hasActive) active juzaweb__menuLeft__submenu--toggled @endif">
+                <a class="nav-link dropdown-toggle @if($hasActive)show @endif" href="#navbar-help" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="false" >
+                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                        <i class="{{ $item->get('icon') }}"></i>
+                    </span>
+                    <span class="nav-link-title">
+                        {{ $item->get('title') }}
+                    </span>
+                </a>
 
-                <ul class="juzaweb__menuLeft__navigation" @if($hasActive) style="display: block;" @endif>
-                    {!! $strChild !!}
-                </ul>
+                <div class="dropdown-menu @if($hasActive)show @endif">
+                    <div class="dropdown-menu-columns">
+                      <div class="dropdown-menu-column">
+                        {!! $strChild !!}
+                      </div>
+                    </div>
+                </div>
             </li>
         @else
             @component('cms::backend.items.menu_left_item', [
                 'adminUrl' => $adminUrl,
                 'item' => $item,
                 'active' => $item->get('url') == 'dashboard' ? request()->is($adminPrefix) : request()->is($adminPrefix .'/'. $item->get('url') . '*'),
+                'submenu_item' => false
             ])
             @endcomponent
         @endif
