@@ -1,14 +1,14 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Media;
+namespace Mojar\CMS\Support\Media;
 
 use Illuminate\Contracts\Filesystem\Factory;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\File as FileFacade;
-use Juzaweb\CMS\Contracts\Media\Disk as DiskContract;
-use Juzaweb\CMS\Interfaces\Media\FileInterface;
-use Juzaweb\CMS\Interfaces\Media\FolderInterface;
+use Mojar\CMS\Contracts\Media\Disk as DiskContract;
+use Mojar\CMS\Interfaces\Media\FileInterface;
+use Mojar\CMS\Interfaces\Media\FolderInterface;
 use League\MimeTypeDetection\FinfoMimeTypeDetector;
 
 class Disk implements DiskContract

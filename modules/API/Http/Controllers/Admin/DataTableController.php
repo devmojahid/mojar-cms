@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\API\Http\Controllers\Admin;
+namespace Mojar\API\Http\Controllers\Admin;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Juzaweb\Backend\Http\Datatables\UserDataTable;
-use Juzaweb\CMS\Http\Controllers\ApiController;
+use Mojar\Backend\Http\Datatables\UserDataTable;
+use Mojar\CMS\Http\Controllers\ApiController;
 
 class DataTableController extends ApiController
 {

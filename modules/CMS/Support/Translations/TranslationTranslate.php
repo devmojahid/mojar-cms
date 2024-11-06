@@ -1,21 +1,22 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Support\Translations;
+namespace Mojar\CMS\Support\Translations;
 
 use Closure;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
-use Juzaweb\CMS\Contracts\GoogleTranslate;
-use Juzaweb\CMS\Contracts\TranslationManager;
-use Juzaweb\CMS\Models\Translation;
+use Mojar\CMS\Contracts\GoogleTranslate;
+use Mojar\CMS\Contracts\TranslationManager;
+use Mojar\CMS\Models\Translation;
 
 class TranslationTranslate
 {
@@ -30,8 +31,7 @@ class TranslationTranslate
         protected Collection $module,
         protected GoogleTranslate $googleTranslate,
         protected TranslationManager $translationManager
-    ) {
-    }
+    ) {}
 
     public function run(): int
     {

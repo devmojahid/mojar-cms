@@ -1,16 +1,17 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://github.com/juzaweb/cms
+ * @link       https://github.com/mojar/cms
  * @license    GNU V2
  */
 
-use Juzaweb\Backend\Http\Controllers\Backend\Plugin\EditorController;
-use Juzaweb\Backend\Http\Controllers\Backend\Plugin\PluginController;
-use Juzaweb\Backend\Http\Controllers\Backend\Plugin\PluginInstallController;
+use Mojar\Backend\Http\Controllers\Backend\Plugin\EditorController;
+use Mojar\Backend\Http\Controllers\Backend\Plugin\PluginController;
+use Mojar\Backend\Http\Controllers\Backend\Plugin\PluginInstallController;
 
 Route::group(
     ['prefix' => 'plugins'],

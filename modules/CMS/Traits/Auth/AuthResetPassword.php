@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Traits\Auth;
+namespace Mojar\CMS\Traits\Auth;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -16,9 +17,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Juzaweb\Backend\Models\PasswordReset;
-use Juzaweb\CMS\Models\User;
-use Juzaweb\CMS\Traits\ResponseMessage;
+use Mojar\Backend\Models\PasswordReset;
+use Mojar\CMS\Models\User;
+use Mojar\CMS\Traits\ResponseMessage;
 
 trait AuthResetPassword
 {

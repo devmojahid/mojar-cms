@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\DevTool\Commands\Plugin\Publish;
+namespace Mojar\DevTool\Commands\Plugin\Publish;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Support\Plugin;
-use Juzaweb\CMS\Support\Publishing\AssetPublisher;
+use Mojar\CMS\Support\Plugin;
+use Mojar\CMS\Support\Publishing\AssetPublisher;
 use Symfony\Component\Console\Input\InputArgument;
 
 class PublishCommand extends Command

@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Tests;
+namespace Mojar\Tests;
 
 use Illuminate\Support\Facades\File;
 
@@ -23,7 +23,7 @@ class UpdateTest extends TestCase
 
         $this->assertEquals('v2.0', $this->getCMSVersion());
 
-        for ($i=1; $i<=6; $i++) {
+        for ($i = 1; $i <= 6; $i++) {
             $this->printText("Test update step {$i}");
 
             $response = $this->json('POST', "admin-cp/update/cms/{$i}");

@@ -1,62 +1,62 @@
 <?php
 
-namespace Juzaweb\Backend\Providers;
+namespace Mojar\Backend\Providers;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Router;
-use Juzaweb\Backend\Actions\BackupAction;
-use Juzaweb\Backend\Actions\EmailAction;
-use Juzaweb\Backend\Actions\EnqueueStyleAction;
-use Juzaweb\Backend\Actions\MediaAction;
-use Juzaweb\Backend\Actions\MenuAction;
-use Juzaweb\Backend\Actions\PermissionAction;
-use Juzaweb\Backend\Actions\SeoAction;
-use Juzaweb\Backend\Actions\SocialLoginAction;
-use Juzaweb\Backend\Actions\ToolAction;
-use Juzaweb\Backend\Commands\AutoSubmitCommand;
-use Juzaweb\Backend\Commands\AutoTagCommand;
-use Juzaweb\Backend\Commands\EmailTemplateGenerateCommand;
-use Juzaweb\Backend\Commands\ImportTranslationCommand;
-use Juzaweb\Backend\Commands\OptimizeTagCommand;
-use Juzaweb\Backend\Commands\PermissionGenerateCommand;
-use Juzaweb\Backend\Commands\PingFeedCommand;
-use Juzaweb\Backend\Commands\Post\GeneratePostUUIDCommand;
-use Juzaweb\Backend\Commands\Publish\CMSPublishCommand;
-use Juzaweb\Backend\Commands\ThemePublishCommand;
-use Juzaweb\Backend\Commands\TransFromEnglish;
-use Juzaweb\Backend\Models\Comment;
-use Juzaweb\Backend\Models\Menu;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\Backend\Observers\CommentObserver;
-use Juzaweb\Backend\Observers\MenuObserver;
-use Juzaweb\Backend\Observers\PostObserver;
-use Juzaweb\Backend\Observers\TaxonomyObserver;
-use Juzaweb\Backend\Repositories\CommentRepository;
-use Juzaweb\Backend\Repositories\CommentRepositoryEloquent;
-use Juzaweb\Backend\Repositories\Email\EmailTemplateRepository;
-use Juzaweb\Backend\Repositories\Email\EmailTemplateRepositoryEloquent;
-use Juzaweb\Backend\Repositories\MediaFileRepository;
-use Juzaweb\Backend\Repositories\MediaFileRepositoryEloquent;
-use Juzaweb\Backend\Repositories\MediaFolderRepository;
-use Juzaweb\Backend\Repositories\MediaFolderRepositoryEloquent;
-use Juzaweb\Backend\Repositories\MenuRepository;
-use Juzaweb\Backend\Repositories\MenuRepositoryEloquent;
-use Juzaweb\Backend\Repositories\NotificationRepository;
-use Juzaweb\Backend\Repositories\NotificationRepositoryEloquent;
-use Juzaweb\Backend\Repositories\PostRepository;
-use Juzaweb\Backend\Repositories\PostRepositoryEloquent;
-use Juzaweb\Backend\Repositories\ResourceRepository;
-use Juzaweb\Backend\Repositories\ResourceRepositoryEloquent;
-use Juzaweb\Backend\Repositories\TaxonomyRepository;
-use Juzaweb\Backend\Repositories\TaxonomyRepositoryEloquent;
-use Juzaweb\Backend\Repositories\UserRepository;
-use Juzaweb\Backend\Repositories\UserRepositoryEloquent;
-use Juzaweb\CMS\Facades\ActionRegister;
-use Juzaweb\CMS\Http\Middleware\Admin;
-use Juzaweb\CMS\Facades\Field;
-use Juzaweb\CMS\Support\Macros\RouterMacros;
-use Juzaweb\CMS\Support\ServiceProvider;
+use Mojar\Backend\Actions\BackupAction;
+use Mojar\Backend\Actions\EmailAction;
+use Mojar\Backend\Actions\EnqueueStyleAction;
+use Mojar\Backend\Actions\MediaAction;
+use Mojar\Backend\Actions\MenuAction;
+use Mojar\Backend\Actions\PermissionAction;
+use Mojar\Backend\Actions\SeoAction;
+use Mojar\Backend\Actions\SocialLoginAction;
+use Mojar\Backend\Actions\ToolAction;
+use Mojar\Backend\Commands\AutoSubmitCommand;
+use Mojar\Backend\Commands\AutoTagCommand;
+use Mojar\Backend\Commands\EmailTemplateGenerateCommand;
+use Mojar\Backend\Commands\ImportTranslationCommand;
+use Mojar\Backend\Commands\OptimizeTagCommand;
+use Mojar\Backend\Commands\PermissionGenerateCommand;
+use Mojar\Backend\Commands\PingFeedCommand;
+use Mojar\Backend\Commands\Post\GeneratePostUUIDCommand;
+use Mojar\Backend\Commands\Publish\CMSPublishCommand;
+use Mojar\Backend\Commands\ThemePublishCommand;
+use Mojar\Backend\Commands\TransFromEnglish;
+use Mojar\Backend\Models\Comment;
+use Mojar\Backend\Models\Menu;
+use Mojar\Backend\Models\Post;
+use Mojar\Backend\Models\Taxonomy;
+use Mojar\Backend\Observers\CommentObserver;
+use Mojar\Backend\Observers\MenuObserver;
+use Mojar\Backend\Observers\PostObserver;
+use Mojar\Backend\Observers\TaxonomyObserver;
+use Mojar\Backend\Repositories\CommentRepository;
+use Mojar\Backend\Repositories\CommentRepositoryEloquent;
+use Mojar\Backend\Repositories\Email\EmailTemplateRepository;
+use Mojar\Backend\Repositories\Email\EmailTemplateRepositoryEloquent;
+use Mojar\Backend\Repositories\MediaFileRepository;
+use Mojar\Backend\Repositories\MediaFileRepositoryEloquent;
+use Mojar\Backend\Repositories\MediaFolderRepository;
+use Mojar\Backend\Repositories\MediaFolderRepositoryEloquent;
+use Mojar\Backend\Repositories\MenuRepository;
+use Mojar\Backend\Repositories\MenuRepositoryEloquent;
+use Mojar\Backend\Repositories\NotificationRepository;
+use Mojar\Backend\Repositories\NotificationRepositoryEloquent;
+use Mojar\Backend\Repositories\PostRepository;
+use Mojar\Backend\Repositories\PostRepositoryEloquent;
+use Mojar\Backend\Repositories\ResourceRepository;
+use Mojar\Backend\Repositories\ResourceRepositoryEloquent;
+use Mojar\Backend\Repositories\TaxonomyRepository;
+use Mojar\Backend\Repositories\TaxonomyRepositoryEloquent;
+use Mojar\Backend\Repositories\UserRepository;
+use Mojar\Backend\Repositories\UserRepositoryEloquent;
+use Mojar\CMS\Facades\ActionRegister;
+use Mojar\CMS\Http\Middleware\Admin;
+use Mojar\CMS\Facades\Field;
+use Mojar\CMS\Support\Macros\RouterMacros;
+use Mojar\CMS\Support\ServiceProvider;
 
 class BackendServiceProvider extends ServiceProvider
 {
@@ -157,7 +157,7 @@ class BackendServiceProvider extends ServiceProvider
 
         $this->publishes(
             [
-                __DIR__ . '/../resources/assets/public' => public_path('jw-styles/juzaweb'),
+                __DIR__ . '/../resources/assets/public' => public_path('jw-styles/mojar'),
             ],
             'cms_assets'
         );

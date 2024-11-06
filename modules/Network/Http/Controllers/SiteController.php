@@ -1,25 +1,26 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Network\Http\Controllers;
+namespace Mojar\Network\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
-use Juzaweb\CMS\Abstracts\DataTable;
-use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Traits\ResourceController;
-use Juzaweb\Network\Contracts\SiteManagerContract;
-use Juzaweb\Network\Http\Datatables\SiteDatatable;
-use Juzaweb\Network\Models\Site;
+use Mojar\CMS\Abstracts\DataTable;
+use Mojar\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Traits\ResourceController;
+use Mojar\Network\Contracts\SiteManagerContract;
+use Mojar\Network\Http\Datatables\SiteDatatable;
+use Mojar\Network\Models\Site;
 
 class SiteController extends BackendController
 {

@@ -8,19 +8,19 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ $title ?? '' }}</title>
-    <link rel="icon" href="{{ asset('jw-styles/juzaweb/images/favicon.ico') }}" />
+    <link rel="icon" href="{{ asset('jw-styles/mojar/images/favicon.ico') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,400i,700&display=swap" />
 
 
-    @include('cms::components.juzaweb_langs')
+    @include('cms::components.mojar_langs')
 
-    @do_action('juzaweb_header')
+    @do_action('mojar_header')
 
     @yield('header')
 
 </head>
 
-<body class="juzaweb__menuLeft--dark juzaweb__menuLeft--unfixed juzaweb__menuLeft--shadow">
+<body class="mojar__menuLeft--dark mojar__menuLeft--unfixed mojar__menuLeft--shadow">
     <div id="admin-overlay">
         <div class="cv-spinner">
             <span class="spinner"></span>
@@ -36,7 +36,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <h1 class="navbar-brand navbar-brand-autodark">
-                    <a href="/{{ config('juzaweb.admin_prefix') }}">
+                    <a href="/{{ config('mojar.admin_prefix') }}">
                         <img src="{{ asset('jw-styles/base/assets/static/logo.svg') }}" width="110" height="32"
                             alt="Tabler" class="navbar-brand-image">
                     </a>
@@ -260,7 +260,7 @@
                             <h2 class="page-title">
                                 {{ $title }}
                             </h2>
-                            @if (!request()->is(config('juzaweb.admin_prefix')))
+                            @if (!request()->is(config('mojar.admin_prefix')))
                                 {{ jw_breadcrumb('admin', [
                                     [
                                         'title' => $title,
@@ -352,7 +352,7 @@
         });
     </script>
 
-    @do_action('juzaweb_footer')
+    @do_action('mojar_footer')
 
     @yield('footer')
 </body>

@@ -1,16 +1,17 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Commands;
+namespace Mojar\Backend\Commands;
 
-use Juzaweb\CMS\Contracts\TranslationManager;
+use Mojar\CMS\Contracts\TranslationManager;
 use Symfony\Component\Console\Input\InputOption;
 
 class TransFromEnglish extends TranslationCommand

@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\Backend\Policies;
+namespace Mojar\Backend\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Juzaweb\CMS\Models\Model;
-use Juzaweb\CMS\Models\User;
+use Mojar\CMS\Models\Model;
+use Mojar\CMS\Models\User;
 
 class CommentPolicy
 {

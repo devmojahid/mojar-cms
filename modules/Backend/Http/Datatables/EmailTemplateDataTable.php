@@ -1,22 +1,23 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Datatables;
+namespace Mojar\Backend\Http\Datatables;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Juzaweb\CMS\Abstracts\DataTable;
-use Juzaweb\Backend\Models\EmailTemplate;
-use Juzaweb\CMS\Contracts\HookActionContract;
+use Mojar\CMS\Abstracts\DataTable;
+use Mojar\Backend\Models\EmailTemplate;
+use Mojar\CMS\Contracts\HookActionContract;
 
 class EmailTemplateDataTable extends DataTable
 {
@@ -55,7 +56,7 @@ class EmailTemplateDataTable extends DataTable
                 'value' => $value,
                 'row' => $row,
                 'actions' => $this->rowAction($row),
-                'editUrl' => $this->currentUrl .'/'. $row->code . '/edit',
+                'editUrl' => $this->currentUrl . '/' . $row->code . '/edit',
             ]
         )->render();
     }
@@ -65,7 +66,7 @@ class EmailTemplateDataTable extends DataTable
         return [
             'edit' => [
                 'label' => trans('cms::app.edit'),
-                'url' => $this->currentUrl .'/'. $row->code . '/edit',
+                'url' => $this->currentUrl . '/' . $row->code . '/edit',
             ],
             'delete' => [
                 'label' => trans('cms::app.delete'),
@@ -82,8 +83,8 @@ class EmailTemplateDataTable extends DataTable
         if ($keyword = Arr::get($data, 'keyword')) {
             $query->where(
                 function (Builder $q) use ($keyword) {
-                    $q->orWhere('code', JW_SQL_LIKE, '%'. $keyword .'%');
-                    $q->orWhere('subject', JW_SQL_LIKE, '%'. $keyword .'%');
+                    $q->orWhere('code', JW_SQL_LIKE, '%' . $keyword . '%');
+                    $q->orWhere('subject', JW_SQL_LIKE, '%' . $keyword . '%');
                 }
             );
         }

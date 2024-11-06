@@ -1,18 +1,19 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Tests\Feature\Backend;
+namespace Mojar\Tests\Feature\Backend;
 
 use Faker\Generator as Faker;
-use Juzaweb\Backend\Models\Menu;
-use Juzaweb\Tests\TestCase;
+use Mojar\Backend\Models\Menu;
+use Mojar\Tests\TestCase;
 
 class MenuTest extends TestCase
 {

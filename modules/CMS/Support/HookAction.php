@@ -1,22 +1,23 @@
 <?php
+
 /**
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     JuzaWeb Team
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
-use Juzaweb\CMS\Contracts\EventyContract;
-use Juzaweb\CMS\Contracts\GlobalDataContract;
-use Juzaweb\CMS\Contracts\HookActionContract;
-use Juzaweb\CMS\Support\HookActions\Traits\MenuHookAction;
-use Juzaweb\CMS\Support\HookActions\Traits\StyleHookAction;
-use Juzaweb\CMS\Traits\HookAction\GetHookAction;
-use Juzaweb\CMS\Traits\HookAction\RegisterHookAction;
+use Mojar\CMS\Contracts\EventyContract;
+use Mojar\CMS\Contracts\GlobalDataContract;
+use Mojar\CMS\Contracts\HookActionContract;
+use Mojar\CMS\Support\HookActions\Traits\MenuHookAction;
+use Mojar\CMS\Support\HookActions\Traits\StyleHookAction;
+use Mojar\CMS\Traits\HookAction\GetHookAction;
+use Mojar\CMS\Traits\HookAction\RegisterHookAction;
 
 class HookAction implements HookActionContract
 {
@@ -34,7 +35,7 @@ class HookAction implements HookActionContract
         $this->globalData = $globalData;
     }
 
-     /**
+    /**
      * Adds an action to the hook system.
      *
      * @param string $tag The tag name of the action.
@@ -48,7 +49,7 @@ class HookAction implements HookActionContract
         $this->hook->addAction($tag, $callback, $priority, $arguments);
     }
 
-     /**
+    /**
      * Adds a filter to the specified tag.
      *
      * @param string $tag The name of the tag to add the filter to.
@@ -63,7 +64,7 @@ class HookAction implements HookActionContract
         $this->hook->addFilter($tag, $callback, $priority, $arguments);
     }
 
-     /**
+    /**
      * Apply filters to a given value using a specified tag.
      *
      * @param string $tag The tag to apply filters to.
@@ -76,7 +77,7 @@ class HookAction implements HookActionContract
         return $this->hook->filter($tag, $value, ...$args);
     }
 
-     /**
+    /**
      * Add a setting form to the system.
      *
      * @param string $key The unique identifier for the setting form.
@@ -110,7 +111,7 @@ class HookAction implements HookActionContract
         $this->globalData->set('setting_forms.' . $key, new Collection($args));
     }
 
-     /**
+    /**
      * Adds thumbnail sizes to a specific post type.
      *
      * @param string $postType The post type to add thumbnail sizes to.

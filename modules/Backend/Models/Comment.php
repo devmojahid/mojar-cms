@@ -1,16 +1,16 @@
 <?php
 
-namespace Juzaweb\Backend\Models;
+namespace Mojar\Backend\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Models\Model;
-use Juzaweb\CMS\Models\User;
-use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\CMS\Models\Model;
+use Mojar\CMS\Models\User;
+use Mojar\CMS\Traits\QueryCache\QueryCacheable;
 
 /**
- * Juzaweb\Backend\Models\Comment
+ * Mojar\Backend\Models\Comment
  *
  * @property int $id
  * @property int|null $user_id
@@ -23,7 +23,7 @@ use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
  * @property string $status
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read \Juzaweb\Backend\Models\Post $post
+ * @property-read \Mojar\Backend\Models\Post $post
  * @property-read User|null $user
  * @method static Builder|Comment with(array $with)
  * @method static Builder|Comment query()
@@ -102,7 +102,7 @@ class Comment extends Model
             return $this->user->getAvatar();
         }
 
-        return asset('jw-styles/juzaweb/images/avatar.png');
+        return asset('jw-styles/mojar/images/avatar.png');
     }
 
     public function getUpdatedDate($format = JW_DATE_TIME): string

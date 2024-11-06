@@ -1,15 +1,15 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Activators;
+namespace Mojar\CMS\Support\Activators;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
-use Juzaweb\CMS\Contracts\ActivatorInterface;
-use Juzaweb\CMS\Exceptions\PluginNotFoundException;
-use Juzaweb\CMS\Support\Plugin;
+use Mojar\CMS\Contracts\ActivatorInterface;
+use Mojar\CMS\Exceptions\PluginNotFoundException;
+use Mojar\CMS\Support\Plugin;
 
 class FileActivator implements ActivatorInterface
 {
@@ -64,7 +64,7 @@ class FileActivator implements ActivatorInterface
         $this->files = $app['files'];
         $this->config = $app['config'];
         $this->statusesFile = base_path('bootstrap/cache/plugins_statuses.php');
-        $this->cacheKey = cache_prefix('juzaweb.activator.installed');
+        $this->cacheKey = cache_prefix('mojar.activator.installed');
         $this->cacheLifetime = 604800;
         $this->modulesStatuses = $this->getModulesStatuses();
     }
@@ -142,7 +142,7 @@ class FileActivator implements ActivatorInterface
 
             if (isset($setting['autoload']['psr-4'])) {
                 $psr4 = $setting['autoload']['psr-4'];
-                $domain = $setting['extra']['juzaweb']['domain'] ?? null;
+                $domain = $setting['extra']['mojar']['domain'] ?? null;
                 $classMap = [];
 
                 foreach ($psr4 as $key => $paths) {
@@ -165,7 +165,7 @@ class FileActivator implements ActivatorInterface
 
                 $this->modulesStatuses[$name] = $classMap;
             } else {
-                throw new PluginNotFoundException("Plugin [". $name . "] does not exists.");
+                throw new PluginNotFoundException("Plugin [" . $name . "] does not exists.");
             }
         } else {
             unset($this->modulesStatuses[$name]);
@@ -207,7 +207,7 @@ class FileActivator implements ActivatorInterface
     {
         $str = '<?php
 
-return ' . var_export($this->modulesStatuses, true) .';
+return ' . var_export($this->modulesStatuses, true) . ';
 
 ';
         $this->files->put($this->statusesFile, $str);

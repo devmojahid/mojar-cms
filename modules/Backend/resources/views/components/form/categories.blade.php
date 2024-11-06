@@ -9,24 +9,21 @@
     </label>
 
     @php
-        $items = \Juzaweb\Backend\Models\Taxonomy::with(['children'])
+        $items = \Mojar\Backend\Models\Taxonomy::with(['children'])
             ->whereNull('parent_id')
             ->where('taxonomy', '=', $taxonomy->get('taxonomy'))
             ->where('post_type', '=', $taxonomy->get('post_type'))
             ->get();
-        $value = $model->taxonomies
-            ->where('taxonomy', '=', $taxonomy->get('taxonomy'))
-            ->pluck('id')
-            ->toArray();
+        $value = $model->taxonomies->where('taxonomy', '=', $taxonomy->get('taxonomy'))->pluck('id')->toArray();
     @endphp
 
     <div class="show-taxonomies taxonomy-{{ $taxonomy->get('taxonomy') }}">
         <ul class="mt-2 p-0">
-            @foreach($items as $item)
+            @foreach ($items as $item)
                 @component('cms::components.form.taxonomy_item', [
                     'taxonomy' => $taxonomy,
                     'item' => $item,
-                    'value' => $value
+                    'value' => $value,
                 ])
                 @endcomponent
             @endforeach
@@ -39,23 +36,17 @@
             <input type="text" class="form-control taxonomy-name" autocomplete="off">
         </div>
 
-        @if(in_array('hierarchical', $taxonomy->get('supports', [])))
+        @if (in_array('hierarchical', $taxonomy->get('supports', [])))
             <div class="form-group mb-1">
                 <label class="col-form-label">{{ trans('cms::app.parent') }}</label>
                 <select type="text" class="form-control taxonomy-parent load-taxonomies" autocomplete="off"
-                        data-post-type="{{ $taxonomy->get('post_type') }}"
-                        data-taxonomy="{{ $taxonomy->get('taxonomy') }}">
+                    data-post-type="{{ $taxonomy->get('post_type') }}" data-taxonomy="{{ $taxonomy->get('taxonomy') }}">
                 </select>
             </div>
         @endif
 
-        <button
-            type="button"
-            class="btn btn-primary mt-2"
-            data-type="{{ $taxonomy->get('type') }}"
-            data-post_type="{{ $taxonomy->get('post_type') }}"
-            data-taxonomy="{{ $taxonomy->get('taxonomy') }}"
-        >
+        <button type="button" class="btn btn-primary mt-2" data-type="{{ $taxonomy->get('type') }}"
+            data-post_type="{{ $taxonomy->get('post_type') }}" data-taxonomy="{{ $taxonomy->get('taxonomy') }}">
             <i class="fa fa-plus-circle"></i> {{ trans('cms::app.add') }}
         </button>
     </div>

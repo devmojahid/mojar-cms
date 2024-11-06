@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Generators\Migrations;
+namespace Mojar\CMS\Repositories\Generators\Migrations;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
@@ -104,6 +104,6 @@ class RulesParser implements Arrayable
      */
     public function getAttributes($column, $rules)
     {
-        return str_replace($column.'=>', '', $rules);
+        return str_replace($column . '=>', '', $rules);
     }
 }

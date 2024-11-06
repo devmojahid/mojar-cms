@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    GNU General Public License v2.0
  */
 
-namespace Juzaweb\API\Http\Resources;
+namespace Mojar\API\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Juzaweb\Backend\Models\Menu;
+use Mojar\Backend\Models\Menu;
 
 /**
  * @property Menu $resource
@@ -22,8 +23,8 @@ class MenuResource extends JsonResource
     {
         $this->resource->load(
             [
-                'items.recursiveChildren' => fn ($q) => $q->cacheFor(
-                    config('juzaweb.performance.query_cache.lifetime')
+                'items.recursiveChildren' => fn($q) => $q->cacheFor(
+                    config('mojar.performance.query_cache.lifetime')
                 )
             ]
         );

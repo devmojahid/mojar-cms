@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend\Appearance;
+namespace Mojar\Backend\Http\Controllers\Backend\Appearance;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -16,19 +17,17 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
-use Juzaweb\Backend\Http\Requests\Theme\EditorRequest;
-use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
-use Juzaweb\CMS\Facades\ThemeLoader;
-use Juzaweb\CMS\Http\Controllers\BackendController;
+use Mojar\Backend\Http\Requests\Theme\EditorRequest;
+use Mojar\CMS\Contracts\LocalThemeRepositoryContract;
+use Mojar\CMS\Facades\ThemeLoader;
+use Mojar\CMS\Http\Controllers\BackendController;
 use TwigBridge\Facade\Twig;
 
 class EditorController extends BackendController
 {
     protected array $editSupportExtensions = ['twig', 'blade.php', 'tsx'];
 
-    public function __construct(protected LocalThemeRepositoryContract $themeRepository)
-    {
-    }
+    public function __construct(protected LocalThemeRepositoryContract $themeRepository) {}
 
     public function index(Request $request, string $theme = null): View
     {
@@ -138,7 +137,7 @@ class EditorController extends BackendController
 
         $view = str_replace(array('views/', '.twig', '/'), array('', '', '.'), $file);
 
-        return 'theme::'.$view;
+        return 'theme::' . $view;
     }
 
     protected function getThemeTree($folder, $sourcePath): array
@@ -156,7 +155,7 @@ class EditorController extends BackendController
         $files = File::files($folder);
         foreach ($files as $file) {
             $path = str_replace(
-                $sourcePath.'/',
+                $sourcePath . '/',
                 '',
                 convert_linux_path($file->getRealPath())
             );

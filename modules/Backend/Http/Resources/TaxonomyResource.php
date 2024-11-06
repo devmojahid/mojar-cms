@@ -1,18 +1,19 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Resources;
+namespace Mojar\Backend\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Models\Taxonomy;
+use Mojar\Backend\Models\Taxonomy;
 
 class TaxonomyResource extends JsonResource
 {

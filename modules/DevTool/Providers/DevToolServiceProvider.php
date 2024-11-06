@@ -1,20 +1,21 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\DevTool\Providers;
+namespace Mojar\DevTool\Providers;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
-use Juzaweb\CMS\Providers\TelescopeServiceProvider;
-use Juzaweb\CMS\Support\ServiceProvider;
-use Juzaweb\CMS\Support\Stub;
+use Mojar\CMS\Providers\TelescopeServiceProvider;
+use Mojar\CMS\Support\ServiceProvider;
+use Mojar\CMS\Support\Stub;
 use Laravel\Telescope\TelescopeApplicationServiceProvider;
 
 class DevToolServiceProvider extends ServiceProvider
@@ -23,7 +24,8 @@ class DevToolServiceProvider extends ServiceProvider
     {
         if ($this->app->environment('local')) {
             if (config('app.debug')) {
-                if (class_exists(TelescopeApplicationServiceProvider::class)
+                if (
+                    class_exists(TelescopeApplicationServiceProvider::class)
                     && class_exists(TelescopeServiceProvider::class)
                 ) {
                     $this->app->register(TelescopeServiceProvider::class);
@@ -39,7 +41,7 @@ class DevToolServiceProvider extends ServiceProvider
                         static function ($sql, $binding) {
                             return preg_replace(
                                 '/\?/',
-                                is_numeric($binding) ? $binding : "'".$binding."'",
+                                is_numeric($binding) ? $binding : "'" . $binding . "'",
                                 $sql,
                                 1
                             );
@@ -58,7 +60,7 @@ class DevToolServiceProvider extends ServiceProvider
                         static function ($sql, $binding) {
                             return preg_replace(
                                 '/\?/',
-                                is_numeric($binding) ? $binding : "'".$binding."'",
+                                is_numeric($binding) ? $binding : "'" . $binding . "'",
                                 $sql,
                                 1
                             );

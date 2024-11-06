@@ -1,4 +1,4 @@
-let juzawebFileManager = function (options, cb) {
+let mojarFileManager = function (options, cb) {
     let type = options.type || 'image';
     let disk = options.disk || null;
     let routePrefix = options.prefix;
@@ -22,11 +22,11 @@ let juzawebFileManager = function (options, cb) {
     window.SetUrl = cb;
 };
 
-$.fn.filemanager = function(type, options) {
+$.fn.filemanager = function (type, options) {
     let element = this;
-    let prefix = juzaweb.adminPrefix + '/file-manager';
-    this.on('click', function(e) {
-        juzawebFileManager({
+    let prefix = mojar.adminPrefix + '/file-manager';
+    this.on('click', function (e) {
+        mojarFileManager({
             type: type,
             prefix: prefix
         }, function (files) {
@@ -39,7 +39,7 @@ $.fn.filemanager = function(type, options) {
 
             if (element.data('preview')) {
                 let targetPreview = $('#' + element.data('preview'));
-                targetPreview.html('<img src="'+ file.url +'" alt="'+ file.name +'">');
+                targetPreview.html('<img src="' + file.url + '" alt="' + file.name + '">');
             }
 
             if (element.data('name')) {
@@ -58,10 +58,10 @@ $(function () {
         let input = $(this).data('input');
         let preview = $(this).data('preview');
         let name = $(this).data('name');
-        let prefix = juzaweb.adminPrefix + '/file-manager';
+        let prefix = mojar.adminPrefix + '/file-manager';
         let disk = $(this).data('disk');
 
-        juzawebFileManager({
+        mojarFileManager({
             type: type,
             prefix: prefix,
             disk: disk
@@ -75,7 +75,7 @@ $(function () {
 
             if (preview) {
                 let targetPreview = $('#' + preview);
-                targetPreview.html('<img src="'+ file.url +'" alt="">');
+                targetPreview.html('<img src="' + file.url + '" alt="">');
             }
 
             if (name) {
@@ -90,15 +90,15 @@ $(function () {
         let targetInput = item.find('.input-path');
         let targetPreview = item.find('.dropify-render');
         let targetName = item.find('.dropify-filename-inner');
-        let prefix = juzaweb.adminPrefix + '/file-manager';
+        let prefix = mojar.adminPrefix + '/file-manager';
 
-        juzawebFileManager({
+        mojarFileManager({
             type: 'image',
             prefix: prefix
         }, function (files) {
             let file = files[0];
             targetInput.val(file.path);
-            targetPreview.html('<img src="'+ file.url +'" alt="">');
+            targetPreview.html('<img src="' + file.url + '" alt="">');
             targetName.html(file.name);
             item.addClass('previewing');
             item.find('.image-hidden').show();
@@ -119,11 +119,11 @@ $(function () {
     });
 
     bodyElement.on('click', '.add-image-images', function () {
-        let prefix = juzaweb.adminPrefix + '/file-manager';
+        let prefix = mojar.adminPrefix + '/file-manager';
         let item = $(this).closest('.form-images');
         let inputName = item.find('.input-name').val();
 
-        juzawebFileManager({
+        mojarFileManager({
             type: 'image',
             prefix: prefix,
             multichoose: true

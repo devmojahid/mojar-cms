@@ -1,28 +1,29 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
 use GuzzleHttp\Exception\ClientException;
 use Exception;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Contracts\ConfigContract;
-use Juzaweb\CMS\Contracts\JuzawebApiContract;
+use Mojar\CMS\Contracts\ConfigContract;
+use Mojar\CMS\Contracts\MojarApiContract;
 
-class JuzawebApi implements JuzawebApiContract
+class MojarApi implements MojarApiContract
 {
     protected Curl $curl;
 
     protected ConfigContract $config;
 
-    protected string $apiUrl = 'https://juzaweb.com/api';
+    protected string $apiUrl = 'https://mojar.com/api';
 
     protected ?string $accessToken = null;
 
@@ -39,7 +40,7 @@ class JuzawebApi implements JuzawebApiContract
     {
         $response = $this->callApiGetData(
             'POST',
-            $this->apiUrl.'/auth/login',
+            $this->apiUrl . '/auth/login',
             [
                 'email' => $email,
                 'password' => $password,
@@ -82,7 +83,7 @@ class JuzawebApi implements JuzawebApiContract
 
     public function setAccessToken(string $accessToken): void
     {
-        $this->config->setConfig('juzaweb_access_token', $accessToken);
+        $this->config->setConfig('mojar_access_token', $accessToken);
 
         $this->accessToken = $accessToken;
     }
@@ -93,7 +94,7 @@ class JuzawebApi implements JuzawebApiContract
             return $this->accessToken;
         }
 
-        return $this->config->getConfig('juzaweb_access_token');
+        return $this->config->getConfig('mojar_access_token');
     }
 
     public function get(string $uri, array $params = [], array $headers = []): object|array
@@ -113,11 +114,11 @@ class JuzawebApi implements JuzawebApiContract
 
     public function getResponse($uri, $params = []): object|array
     {
-        $url = $this->apiUrl.'/'.$uri;
+        $url = $this->apiUrl . '/' . $uri;
 
         $response = $this->callApiGetData(
             'GET',
-            $this->apiUrl.'/'.$uri,
+            $this->apiUrl . '/' . $uri,
             $params
         );
 
@@ -134,7 +135,7 @@ class JuzawebApi implements JuzawebApiContract
         array $params = [],
         array $headers = []
     ): object|array {
-        $url = $this->apiUrl.'/'.$uri;
+        $url = $this->apiUrl . '/' . $uri;
 
         if ($accessToken = $this->getAccessToken()) {
             $headers['Authorization'] = "Bearer {$accessToken}";

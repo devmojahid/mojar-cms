@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Http\Datatables;
+namespace Mojar\Backend\Http\Datatables;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\CMS\Abstracts\DataTable;
-use Juzaweb\CMS\Repositories\BaseRepository;
+use Mojar\CMS\Abstracts\DataTable;
+use Mojar\CMS\Repositories\BaseRepository;
 
 class ResourceManagementDatatable extends DataTable
 {

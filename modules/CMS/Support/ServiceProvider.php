@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use Juzaweb\CMS\Contracts\ActionRegisterContract;
+use Mojar\CMS\Contracts\ActionRegisterContract;
 
 class ServiceProvider extends BaseServiceProvider
 {

@@ -1,17 +1,17 @@
 <?php
 
-namespace Juzaweb\Backend\Models;
+namespace Mojar\Backend\Models;
 
-use Juzaweb\CMS\Models\Model;
+use Mojar\CMS\Models\Model;
 
 /**
- * Juzaweb\Backend\Models\PostView
+ * Mojar\Backend\Models\PostView
  *
  * @property int $id
  * @property int $post_id
  * @property int $views
  * @property string $day
- * @property-read \Juzaweb\Backend\Models\Post $post
+ * @property-read \Mojar\Backend\Models\Post $post
  * @method static \Illuminate\Database\Eloquent\Builder|PostView newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PostView newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PostView query()

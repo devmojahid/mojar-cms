@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Console\Commands;
+namespace Mojar\CMS\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
@@ -19,7 +20,7 @@ class PluginAutoloadCommand extends Command
 
     public function handle(): int
     {
-        $fileList = glob(config('juzaweb.plugin.path') . '/*/composer.json');
+        $fileList = glob(config('mojar.plugin.path') . '/*/composer.json');
         $vendorDir = base_path('plugins');
 
         $psr4 = [];

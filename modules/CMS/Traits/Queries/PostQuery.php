@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Traits\Queries;
+namespace Mojar\CMS\Traits\Queries;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
-use Juzaweb\Backend\Http\Resources\PostResourceCollection;
-use Juzaweb\Backend\Models\Post;
+use Mojar\Backend\Http\Resources\PostResourceCollection;
+use Mojar\Backend\Models\Post;
 
 trait PostQuery
 {

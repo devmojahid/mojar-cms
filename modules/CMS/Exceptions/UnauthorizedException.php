@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Exceptions;
+namespace Mojar\CMS\Exceptions;
 
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -16,7 +16,7 @@ class UnauthorizedException extends HttpException
 
         if (config('permission.display_permission_in_exception')) {
             $permStr = implode(', ', $roles);
-            $message = 'User does not have the right roles. Necessary roles are '.$permStr;
+            $message = 'User does not have the right roles. Necessary roles are ' . $permStr;
         }
 
         $exception = new static(403, $message, null, []);
@@ -31,7 +31,7 @@ class UnauthorizedException extends HttpException
 
         if (config('permission.display_permission_in_exception')) {
             $permStr = implode(', ', $permissions);
-            $message = 'User does not have the right permissions. Necessary permissions are '.$permStr;
+            $message = 'User does not have the right permissions. Necessary permissions are ' . $permStr;
         }
 
         $exception = new static(403, $message, null, []);
@@ -46,7 +46,7 @@ class UnauthorizedException extends HttpException
 
         if (config('permission.display_permission_in_exception') && config('permission.display_role_in_exception')) {
             $permStr = implode(', ', $rolesOrPermissions);
-            $message = 'User does not have the right permissions. Necessary permissions are '.$permStr;
+            $message = 'User does not have the right permissions. Necessary permissions are ' . $permStr;
         }
 
         $exception = new static(403, $message, null, []);

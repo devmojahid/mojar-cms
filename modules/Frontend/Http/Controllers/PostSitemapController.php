@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\Frontend\Http\Controllers;
+namespace Mojar\Frontend\Http\Controllers;
 
 use Illuminate\Support\Facades\App;
-use Juzaweb\Frontend\Http\Controllers\Abstracts\BaseSitemapController;
+use Mojar\Frontend\Http\Controllers\Abstracts\BaseSitemapController;
 
 class PostSitemapController extends BaseSitemapController
 {

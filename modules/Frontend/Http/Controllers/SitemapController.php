@@ -1,13 +1,13 @@
 <?php
 
-namespace Juzaweb\Frontend\Http\Controllers;
+namespace Mojar\Frontend\Http\Controllers;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\Frontend\Http\Controllers\Abstracts\BaseSitemapController;
+use Mojar\Backend\Models\Post;
+use Mojar\Backend\Models\Taxonomy;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\Frontend\Http\Controllers\Abstracts\BaseSitemapController;
 
 class SitemapController extends BaseSitemapController
 {
@@ -101,7 +101,7 @@ class SitemapController extends BaseSitemapController
                     'page',
                     $page
                 )
-            );
+        );
 
         foreach ($items as $item) {
             $sitemap->add($item->getLink(), $item->updated_at, '0.8', 'weekly');

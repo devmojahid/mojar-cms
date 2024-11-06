@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\FileManager;
+namespace Mojar\Backend\Http\Controllers\FileManager;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Http\Controllers\BackendController;
 
 class FileManagerController extends BackendController
 {
@@ -14,8 +14,8 @@ class FileManagerController extends BackendController
     public function index(Request $request): View
     {
         $type = $this->getType();
-        $mimeTypes = config("juzaweb.filemanager.types.{$type}.valid_mime");
-        $maxSize = config("juzaweb.filemanager.types.{$type}.max_size");
+        $mimeTypes = config("mojar.filemanager.types.{$type}.valid_mime");
+        $maxSize = config("mojar.filemanager.types.{$type}.max_size");
         $multiChoose = $request->get('multichoose', 0);
 
         if (empty($mimeTypes)) {

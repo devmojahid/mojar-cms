@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Mojar\Backend\Http\Controllers\Backend;
 
-use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\CMS\Traits\PostTypeController;
+use Mojar\CMS\Http\Controllers\BackendController;
+use Mojar\Backend\Models\Post;
+use Mojar\CMS\Traits\PostTypeController;
 
 class PostController extends BackendController
 {

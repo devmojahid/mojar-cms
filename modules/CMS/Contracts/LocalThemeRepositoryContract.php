@@ -1,25 +1,26 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Contracts;
+namespace Mojar\CMS\Contracts;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Inertia\Response;
-use Juzaweb\CMS\Exceptions\ThemeNotFoundException;
-use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
-use Juzaweb\CMS\Support\LocalThemeRepository;
+use Mojar\CMS\Exceptions\ThemeNotFoundException;
+use Mojar\CMS\Interfaces\Theme\ThemeInterface;
+use Mojar\CMS\Support\LocalThemeRepository;
 
 /**
-* @see LocalThemeRepository
+ * @see LocalThemeRepository
  */
 interface LocalThemeRepositoryContract
 {
@@ -31,7 +32,7 @@ interface LocalThemeRepositoryContract
      */
     public function scan(bool $collection = false): array|Collection;
 
-     /**
+    /**
      * Find a theme by name.
      *
      * @param string $name The name of the theme to find.
@@ -50,7 +51,7 @@ interface LocalThemeRepositoryContract
      */
     public function findOrFail(string $name): ThemeInterface;
 
-     /**
+    /**
      * Retrieves all items from the collection.
      *
      * @param bool $collection Determines if the items should be returned as a collection.

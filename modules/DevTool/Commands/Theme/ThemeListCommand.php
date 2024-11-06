@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\DevTool\Commands\Theme;
+namespace Mojar\DevTool\Commands\Theme;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Contracts\ThemeLoaderContract;
+use Mojar\CMS\Contracts\ThemeLoaderContract;
 
 class ThemeListCommand extends Command
 {

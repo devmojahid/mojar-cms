@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\DevTool\Commands\Theme;
+namespace Mojar\DevTool\Commands\Theme;
 
 use Illuminate\Support\Facades\File;
-use Juzaweb\CMS\Support\HtmlDom;
+use Mojar\CMS\Support\HtmlDom;
 
 class DownloadStyleCommand extends DownloadTemplateCommandAbstract
 {
@@ -26,11 +26,11 @@ class DownloadStyleCommand extends DownloadTemplateCommandAbstract
         $mix = "const mix = require('laravel-mix');
 
 mix.styles([
-    ". implode(",\n", $css) ."
+    " . implode(",\n", $css) . "
 ], 'themes/{$this->data['name']}/assets/public/css/main.css');
 
 mix.combine([
-    ". implode(",\n", $js) ."
+    " . implode(",\n", $js) . "
 ], 'themes/{$this->data['name']}/assets/public/js/main.js');";
 
         File::put("themes/{$this->data['name']}/assets/mix.js", $mix);

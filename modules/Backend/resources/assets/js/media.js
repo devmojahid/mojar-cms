@@ -25,7 +25,7 @@ $(document).ready(function () {
         let name = $(this).data('name');
 
         confirm_message(
-            juzaweb.lang.remove_question.replace(':name', (is_file == 1 ? ' file '+ name : ' folder '+ name)),
+            mojar.lang.remove_question.replace(':name', (is_file == 1 ? ' file ' + name : ' folder ' + name)),
             function (value) {
                 if (!value) {
                     return false;
@@ -33,7 +33,7 @@ $(document).ready(function () {
 
                 toggle_global_loading(true);
                 ajaxRequest(
-                    juzaweb.adminUrl + '/media/'+ id,
+                    mojar.adminUrl + '/media/' + id,
                     {
                         is_file: is_file
                     },

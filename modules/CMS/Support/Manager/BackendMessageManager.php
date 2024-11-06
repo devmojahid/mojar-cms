@@ -1,18 +1,19 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support\Manager;
+namespace Mojar\CMS\Support\Manager;
 
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Contracts\BackendMessageContract;
-use Juzaweb\CMS\Support\Config;
+use Mojar\CMS\Contracts\BackendMessageContract;
+use Mojar\CMS\Support\Config;
 
 class BackendMessageManager implements BackendMessageContract
 {

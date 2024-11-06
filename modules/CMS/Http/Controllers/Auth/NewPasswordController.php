@@ -1,8 +1,8 @@
 <?php
 
-namespace Juzaweb\CMS\Http\Controllers\Auth;
+namespace Mojar\CMS\Http\Controllers\Auth;
 
-use Juzaweb\CMS\Http\Controllers\Controller;
+use Mojar\CMS\Http\Controllers\Controller;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;

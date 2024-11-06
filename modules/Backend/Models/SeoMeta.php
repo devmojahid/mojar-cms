@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Models;
+namespace Mojar\Backend\Models;
 
-use Juzaweb\CMS\Models\Model;
+use Mojar\CMS\Models\Model;
 
 /**
- * Juzaweb\Seo\Models\SeoMeta
+ * Mojar\Seo\Models\SeoMeta
  *
  * @property int $id
  * @property string $object_type

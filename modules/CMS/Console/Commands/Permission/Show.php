@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\CMS\Console\Commands\Permission;
+namespace Mojar\CMS\Console\Commands\Permission;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use Juzaweb\CMS\Contracts\Permission as PermissionContract;
-use Juzaweb\CMS\Contracts\Role as RoleContract;
+use Mojar\CMS\Contracts\Permission as PermissionContract;
+use Mojar\CMS\Contracts\Role as RoleContract;
 use Symfony\Component\Console\Helper\TableCell;
 
 class Show extends Command
@@ -40,7 +40,7 @@ class Show extends Command
                     $q->orderBy($team_key);
                 })
                 ->orderBy('name')->get()->mapWithKeys(function ($role) use ($team_key) {
-                    return [$role->name.'_'.($role->$team_key ?: '') => ['permissions' => $role->permissions->pluck('id'), $team_key => $role->$team_key ]];
+                    return [$role->name . '_' . ($role->$team_key ?: '') => ['permissions' => $role->permissions->pluck('id'), $team_key => $role->$team_key]];
                 });
 
             $permissions = $permissionClass::whereGuardName($guard)->orderBy('name')->pluck('name', 'id');
@@ -53,7 +53,7 @@ class Show extends Command
 
             if (config('permission.teams')) {
                 $teams = $roles->groupBy($team_key)->values()->map(function ($group, $id) {
-                    return new TableCell('Team ID: '.($id ?: 'NULL'), ['colspan' => $group->count()]);
+                    return new TableCell('Team ID: ' . ($id ?: 'NULL'), ['colspan' => $group->count()]);
                 });
             }
 
@@ -65,7 +65,7 @@ class Show extends Command
 
                         return $name[0];
                     })
-                    ->prepend('')->toArray(),
+                        ->prepend('')->toArray(),
                 ]),
                 $body->toArray(),
                 $style

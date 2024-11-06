@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
 use Illuminate\Container\Container;
 use Illuminate\Contracts\View\Factory;
@@ -16,10 +17,10 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Inertia\Response;
-use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
-use Juzaweb\CMS\Contracts\Theme\ThemeRender;
-use Juzaweb\CMS\Exceptions\ThemeNotFoundException;
-use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
+use Mojar\CMS\Contracts\LocalThemeRepositoryContract;
+use Mojar\CMS\Contracts\Theme\ThemeRender;
+use Mojar\CMS\Exceptions\ThemeNotFoundException;
+use Mojar\CMS\Interfaces\Theme\ThemeInterface;
 
 class LocalThemeRepository implements LocalThemeRepositoryContract
 {

@@ -1,18 +1,19 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    mojar/juzacms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Interfaces\Theme;
+namespace Mojar\CMS\Interfaces\Theme;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
-use Juzaweb\CMS\Support\Plugin;
+use Mojar\CMS\Support\Plugin;
 
 /**
  * @see Plugin

@@ -1,14 +1,14 @@
 <?php
 
-namespace Juzaweb\CMS\Jobs;
+namespace Mojar\CMS\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Juzaweb\Backend\Models\EmailList;
-use Juzaweb\CMS\Support\SendEmail;
+use Mojar\Backend\Models\EmailList;
+use Mojar\CMS\Support\SendEmail;
 
 class SendEmailJob implements ShouldQueue
 {

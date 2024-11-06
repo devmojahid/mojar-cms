@@ -1,11 +1,11 @@
 <?php
 
-use Juzaweb\Frontend\Http\Controllers\AjaxController;
-use Juzaweb\Frontend\Http\Controllers\HomeController;
-use Juzaweb\Frontend\Http\Controllers\PostController;
-use Juzaweb\Frontend\Http\Controllers\RouteController;
-use Juzaweb\Frontend\Http\Controllers\SearchController;
-use Juzaweb\CMS\Support\Installer;
+use Mojar\Frontend\Http\Controllers\AjaxController;
+use Mojar\Frontend\Http\Controllers\HomeController;
+use Mojar\Frontend\Http\Controllers\PostController;
+use Mojar\Frontend\Http\Controllers\RouteController;
+use Mojar\Frontend\Http\Controllers\SearchController;
+use Mojar\CMS\Support\Installer;
 
 Route::match(
     ['get', 'post', 'put'],

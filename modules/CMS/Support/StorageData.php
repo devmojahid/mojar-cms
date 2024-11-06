@@ -1,20 +1,21 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Contracts\StorageDataContract;
+use Mojar\CMS\Contracts\StorageDataContract;
 
 class StorageData implements StorageDataContract
 {
@@ -35,7 +36,7 @@ class StorageData implements StorageDataContract
                 return [$key => $item];
             }
         )
-        ->toArray();
+            ->toArray();
 
         $items = collect(array_merge($data, $fileData))
             ->chunk($this->fileRowLimit);

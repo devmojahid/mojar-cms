@@ -1,14 +1,14 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\FileManager;
+namespace Mojar\Backend\Http\Controllers\FileManager;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\Backend\Events\UploadFileSuccess;
-use Juzaweb\Backend\Http\Requests\FileManager\ImportRequest;
-use Juzaweb\CMS\Support\FileManager;
+use Mojar\Backend\Events\UploadFileSuccess;
+use Mojar\Backend\Http\Requests\FileManager\ImportRequest;
+use Mojar\CMS\Support\FileManager;
 use Pion\Laravel\ChunkUpload\Exceptions\UploadMissingFileException;
 use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
@@ -20,10 +20,10 @@ class UploadController extends FileManagerController
     public function upload(Request $request): JsonResponse
     {
         $folderId = $request->input('working_dir');
-        $disk = $request->input('disk') ?? config('juzaweb.filemanager.disk');
+        $disk = $request->input('disk') ?? config('mojar.filemanager.disk');
 
         if (!in_array($disk, ['public', 'protected', 'tmp'])) {
-            return $this->responseUpload([trans('cms::message.invalid_disk') ]);
+            return $this->responseUpload([trans('cms::message.invalid_disk')]);
         }
 
         if (empty($folderId)) {
@@ -68,20 +68,20 @@ class UploadController extends FileManagerController
 
     public function import(ImportRequest $request): JsonResponse|RedirectResponse
     {
-        if (!config('juzaweb.filemanager.upload_from_url')) {
+        if (!config('mojar.filemanager.upload_from_url')) {
             abort(403);
         }
 
         $folderId = $request->input('working_dir');
         $download = (bool) $request->input('download');
-        $disk = $request->input('disk') ?? config('juzaweb.filemanager.disk');
+        $disk = $request->input('disk') ?? config('mojar.filemanager.disk');
 
         if (empty($folderId)) {
             $folderId = null;
         }
 
         if (!in_array($disk, ['public', 'protected', 'tmp'])) {
-            return $this->responseUpload([trans('cms::message.invalid_disk') ]);
+            return $this->responseUpload([trans('cms::message.invalid_disk')]);
         }
 
         DB::beginTransaction();

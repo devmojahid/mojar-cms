@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Contracts;
+namespace Mojar\CMS\Repositories\Contracts;
 
 use Illuminate\Support\Collection;
-use Juzaweb\CMS\Repositories\Eloquent\BaseRepository as PackageBaseRepository;
+use Mojar\CMS\Repositories\Eloquent\BaseRepository as PackageBaseRepository;
 
 /**
  * Interface RepositoryCriteriaInterface

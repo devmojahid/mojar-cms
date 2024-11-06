@@ -2,20 +2,20 @@ JUZACMS - Laravel CMS for Your Project
 =====================================
 
 ## About
-![https://buymeacoffee.com/juzaweb](https://i.imgur.com/toObY8s.png)
-[![Total Downloads](https://img.shields.io/packagist/dt/juzaweb/juzacms.svg?style=social)](https://packagist.org/packages/juzaweb/cms)
-[![GitHub Repo stars](https://img.shields.io/github/stars/juzaweb/cms?style=social)](https://github.com/juzaweb/cms)
-[![GitHub followers](https://img.shields.io/github/followers/juzaweb?style=social)](https://github.com/juzaweb)
-[![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UCo6Dz9HjjBOJpgWsxkln0-A?style=social)](https://www.youtube.com/@juzaweb)
+![https://buymeacoffee.com/mojar](https://i.imgur.com/toObY8s.png)
+[![Total Downloads](https://img.shields.io/packagist/dt/mojar/juzacms.svg?style=social)](https://packagist.org/packages/mojar/cms)
+[![GitHub Repo stars](https://img.shields.io/github/stars/mojar/cms?style=social)](https://github.com/mojar/cms)
+[![GitHub followers](https://img.shields.io/github/followers/mojar?style=social)](https://github.com/mojar)
+[![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UCo6Dz9HjjBOJpgWsxkln0-A?style=social)](https://www.youtube.com/@mojar)
 
-- [JuzaWeb CMS](https://juzaweb.com) is a Content Management System (CMS) like WordPress developed based on Laravel Framework 9 and web platform whose sole purpose is to make your development workflow simple again. 
-- JuzaWeb CMS is a [Laravel CMS](https://juzaweb.com) was engineered to be easy — for both developers and users. Project develop by Juzaweb Team.
+- [JuzaWeb CMS](https://mojar.com) is a Content Management System (CMS) like WordPress developed based on Laravel Framework 9 and web platform whose sole purpose is to make your development workflow simple again. 
+- JuzaWeb CMS is a [Laravel CMS](https://mojar.com) was engineered to be easy — for both developers and users. Project develop by Mojar Team.
 - Demo Site: 
-    - Frontend: https://cms.juzaweb.com
+    - Frontend: https://cms.mojar.com
     - Admin: 
-        - https://cms.juzaweb.com/admin-cp 
-        - User/Pass: demo@juzaweb.com / demo@juzaweb.com
-- Video Tutorial: https://www.youtube.com/@juzaweb/videos
+        - https://cms.mojar.com/admin-cp 
+        - User/Pass: demo@mojar.com / demo@mojar.com
+- Video Tutorial: https://www.youtube.com/@mojar/videos
 
 ## Requirements
 - The modules package requires:
@@ -25,7 +25,7 @@ JUZACMS - Laravel CMS for Your Project
 ## Install
 ### Create project with composer
 ```
-composer create-project --prefer-dist juzaweb/cms blog
+composer create-project --prefer-dist mojar/cms blog
 ```
 ### Install
 
@@ -36,11 +36,11 @@ php artisan juzacms:install
 ```
 
 ## Documentation
-View all [JuzaWeb CMS documentation](https://juzaweb.com/documentation/plugin/cms/start/installation)
+View all [JuzaWeb CMS documentation](https://mojar.com/documentation/plugin/cms/start/installation)
 
 ## Contributing
 - Contributions are welcome, and are accepted via pull requests. Please review these guidelines before submitting any pull requests.
-[https://github.com/juzaweb/cms/blob/master/CONTRIBUTING.md](https://github.com/juzaweb/cms/blob/master/CONTRIBUTING.md)
+[https://github.com/mojar/cms/blob/master/CONTRIBUTING.md](https://github.com/mojar/cms/blob/master/CONTRIBUTING.md)
 
 ## Features
 - [x] File manager
@@ -90,12 +90,12 @@ View all [JuzaWeb CMS documentation](https://juzaweb.com/documentation/plugin/cm
   - [ ] Media api
 
 ## Plugins
-* [E-Commerce](https://github.com/juzaweb/ecommerce) (developing)
-* [Notification](https://github.com/juzaweb/notification)
-* [Movie](https://github.com/juzaweb/movie)
-* [Image Slider](https://github.com/juzaweb/image-slider)
-* [Ads Manager](https://github.com/juzaweb/ads-manager)
-* [Demo Site](https://github.com/juzaweb/demo-site)
+* [E-Commerce](https://github.com/mojar/ecommerce) (developing)
+* [Notification](https://github.com/mojar/notification)
+* [Movie](https://github.com/mojar/movie)
+* [Image Slider](https://github.com/mojar/image-slider)
+* [Ads Manager](https://github.com/mojar/ads-manager)
+* [Demo Site](https://github.com/mojar/demo-site)
 
 ## Include Themes
 ### Default
@@ -108,7 +108,7 @@ View all [JuzaWeb CMS documentation](https://juzaweb.com/documentation/plugin/cm
 - font-awesome
 
 ## Change Logs
-[https://juzaweb.com/documentation/changelog](https://juzaweb.com/documentation/changelog)
+[https://mojar.com/documentation/changelog](https://mojar.com/documentation/changelog)
 
 ## Buy me coffee
-[![Juzaweb Buy me coffee](https://i.imgur.com/MAqboRu.png)](https://buymeacoffee.com/juzaweb)
+[![Mojar Buy me coffee](https://i.imgur.com/MAqboRu.png)](https://buymeacoffee.com/mojar)

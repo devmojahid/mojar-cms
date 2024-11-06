@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Permission;
+namespace Mojar\CMS\Support\Permission;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Contracts\Auth\Access\Authorizable;
@@ -8,8 +8,8 @@ use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Database\Eloquent\Collection;
-use Juzaweb\CMS\Contracts\Permission;
-use Juzaweb\CMS\Contracts\Role;
+use Mojar\CMS\Contracts\Permission;
+use Mojar\CMS\Contracts\Role;
 
 class PermissionRegistrar
 {
@@ -239,7 +239,7 @@ class PermissionRegistrar
     /**
      * Get an instance of the permission class.
      *
-     * @return \Juzaweb\CMS\Contracts\Permission
+     * @return \Mojar\CMS\Contracts\Permission
      */
     public function getPermissionClass(): Permission
     {
@@ -258,7 +258,7 @@ class PermissionRegistrar
     /**
      * Get an instance of the role class.
      *
-     * @return \Juzaweb\CMS\Contracts\Role
+     * @return \Mojar\CMS\Contracts\Role
      */
     public function getRoleClass(): Role
     {
@@ -321,7 +321,7 @@ class PermissionRegistrar
      */
     private function getSerializedPermissionsForCache()
     {
-        $this->except = config('permission.cache.column_names_except', ['created_at','updated_at', 'deleted_at']);
+        $this->except = config('permission.cache.column_names_except', ['created_at', 'updated_at', 'deleted_at']);
 
         $permissions = $this->getPermissionClass()->select()->with('roles')->get()
             ->map(

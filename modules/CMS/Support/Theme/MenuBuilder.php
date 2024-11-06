@@ -1,20 +1,21 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support\Theme;
+namespace Mojar\CMS\Support\Theme;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
-use Juzaweb\Backend\Http\Resources\MenuItemResource;
-use Juzaweb\Backend\Models\MenuItem;
-use Juzaweb\CMS\Facades\HookAction;
+use Mojar\Backend\Http\Resources\MenuItemResource;
+use Mojar\Backend\Models\MenuItem;
+use Mojar\CMS\Facades\HookAction;
 
 class MenuBuilder implements Arrayable
 {
@@ -86,7 +87,7 @@ class MenuBuilder implements Arrayable
 
         $menuBoxs = HookAction::getMenuBoxs($groups);
         $menuBoxs = array_map(
-            fn ($item) => $item->get('menu_box'),
+            fn($item) => $item->get('menu_box'),
             $menuBoxs
         );
 

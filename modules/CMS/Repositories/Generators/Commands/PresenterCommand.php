@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Generators\Commands;
+namespace Mojar\CMS\Repositories\Generators\Commands;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Repositories\Generators\FileAlreadyExistsException;
-use Juzaweb\CMS\Repositories\Generators\PresenterGenerator;
-use Juzaweb\CMS\Repositories\Generators\TransformerGenerator;
+use Mojar\CMS\Repositories\Generators\FileAlreadyExistsException;
+use Mojar\CMS\Repositories\Generators\PresenterGenerator;
+use Mojar\CMS\Repositories\Generators\TransformerGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -60,25 +60,25 @@ class PresenterCommand extends Command
         try {
             (new PresenterGenerator(
                 [
-                'name' => $this->argument('name'),
-                'force' => $this->option('force'),
+                    'name' => $this->argument('name'),
+                    'force' => $this->option('force'),
                 ]
             ))->run();
             $this->info("Presenter created successfully.");
 
-            if (!\File::exists(app()->path().'/Transformers/'.$this->argument('name').'Transformer.php')) {
+            if (!\File::exists(app()->path() . '/Transformers/' . $this->argument('name') . 'Transformer.php')) {
                 if ($this->confirm('Would you like to create a Transformer? [y|N]')) {
                     (new TransformerGenerator(
                         [
-                        'name' => $this->argument('name'),
-                        'force' => $this->option('force'),
+                            'name' => $this->argument('name'),
+                            'force' => $this->option('force'),
                         ]
                     ))->run();
                     $this->info("Transformer created successfully.");
                 }
             }
         } catch (FileAlreadyExistsException $e) {
-            $this->error($this->type.' already exists!');
+            $this->error($this->type . ' already exists!');
 
             return false;
         }

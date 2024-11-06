@@ -1,16 +1,17 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Support;
+namespace Mojar\Backend\Support;
 
-use Juzaweb\Backend\Models\Post;
+use Mojar\Backend\Models\Post;
 
 class PostContentParser
 {
@@ -21,9 +22,7 @@ class PostContentParser
         return new self($post);
     }
 
-    public function __construct(protected Post $post)
-    {
-    }
+    public function __construct(protected Post $post) {}
 
     public function parse(): string
     {
@@ -33,7 +32,7 @@ class PostContentParser
             foreach ($domp->find('img') as $e) {
                 $content = str_replace(
                     $e->outertext(),
-                    '<img src="'.upload_url($e->src).'" alt="'. addslashes($this->post->title) .'"
+                    '<img src="' . upload_url($e->src) . '" alt="' . addslashes($this->post->title) . '"
                     class="lazyload"
                     loading="lazy">',
                     $content
@@ -49,7 +48,7 @@ class PostContentParser
                     $content
                 );
 
-                $id ++;
+                $id++;
             }
         }
 
@@ -77,7 +76,7 @@ class PostContentParser
                 $content
             );
 
-            $id ++;
+            $id++;
         }
 
         return $content;

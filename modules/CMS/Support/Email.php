@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
-use Juzaweb\CMS\Jobs\SendEmailJob;
-use Juzaweb\Backend\Models\EmailList;
-use Juzaweb\Backend\Models\EmailTemplate;
+use Mojar\CMS\Jobs\SendEmailJob;
+use Mojar\Backend\Models\EmailList;
+use Mojar\Backend\Models\EmailTemplate;
 
 class Email
 {
@@ -112,7 +112,7 @@ class Email
                 ]
             );
 
-            $method = config('juzaweb.email.method');
+            $method = config('mojar.email.method');
             switch ($method) {
                 case 'sync':
                     (new SendEmail($emailList))->send();

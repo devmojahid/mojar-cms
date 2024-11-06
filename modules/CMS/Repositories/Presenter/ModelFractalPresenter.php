@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Presenter;
+namespace Mojar\CMS\Repositories\Presenter;
 
 use Exception;
-use Juzaweb\CMS\Repositories\Transformer\ModelTransformer;
+use Mojar\CMS\Repositories\Transformer\ModelTransformer;
 
 /**
  * Class ModelFractalPresenter

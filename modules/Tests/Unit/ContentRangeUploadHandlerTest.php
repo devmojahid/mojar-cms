@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Tests\Unit;
+namespace Mojar\Tests\Unit;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -169,7 +169,7 @@ class ContentRangeUploadHandlerTest extends TestCase
             [],
             [],
             [
-                'HTTP_CONTENT_RANGE' => 'bytes 100-100/'.$maxFloat,
+                'HTTP_CONTENT_RANGE' => 'bytes 100-100/' . $maxFloat,
             ]
         );
         $file = UploadedFile::fake();

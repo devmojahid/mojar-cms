@@ -3,26 +3,26 @@
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Actions;
+namespace Mojar\Backend\Actions;
 
 use Illuminate\Support\Facades\Cache;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Facades\ThemeLoader;
-use Juzaweb\CMS\Models\User;
-use Juzaweb\CMS\Support\Notification;
-use Juzaweb\CMS\Support\Theme\CustomMenuBox;
-use Juzaweb\CMS\Support\Updater\CmsUpdater;
-use Juzaweb\CMS\Version;
-use Juzaweb\Frontend\Http\Controllers\PageController;
-use Juzaweb\Frontend\Http\Controllers\PostController;
+use Mojar\Backend\Models\Post;
+use Mojar\CMS\Abstracts\Action;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\CMS\Facades\ThemeLoader;
+use Mojar\CMS\Models\User;
+use Mojar\CMS\Support\Notification;
+use Mojar\CMS\Support\Theme\CustomMenuBox;
+use Mojar\CMS\Support\Updater\CmsUpdater;
+use Mojar\CMS\Version;
+use Mojar\Frontend\Http\Controllers\PageController;
+use Mojar\Frontend\Http\Controllers\PostController;
 
 class MenuAction extends Action
 {
@@ -51,7 +51,7 @@ class MenuAction extends Action
             ]
         );
 
-        if (config('juzaweb.plugin.enable_upload')) {
+        if (config('mojar.plugin.enable_upload')) {
             HookAction::addAdminMenu(
                 trans('cms::app.dashboard'),
                 'dashboard',
@@ -107,7 +107,7 @@ class MenuAction extends Action
             ]
         );
 
-        if (config('juzaweb.theme.enable_upload')) {
+        if (config('mojar.theme.enable_upload')) {
             HookAction::addAdminMenu(
                 trans('cms::app.add_new'),
                 'theme.install',
@@ -196,7 +196,7 @@ class MenuAction extends Action
             ]
         );
 
-        if (config('juzaweb.plugin.enable_upload')) {
+        if (config('mojar.plugin.enable_upload')) {
             HookAction::addAdminMenu(
                 trans('cms::app.plugins'),
                 'plugins',
@@ -428,10 +428,10 @@ class MenuAction extends Action
     public function addAdminScripts(): void
     {
         $ver = Version::getVersion();
-        HookAction::enqueueScript('core-vendor', 'jw-styles/juzaweb/js/vendor.min.js', $ver);
-        HookAction::enqueueScript('core-backend', 'jw-styles/juzaweb/js/backend.min.js', $ver);
-        HookAction::enqueueScript('core-tinymce', 'jw-styles/juzaweb/tinymce/tinymce.min.js', $ver);
-        HookAction::enqueueScript('core-custom', 'jw-styles/juzaweb/js/custom.min.js', $ver);
+        HookAction::enqueueScript('core-vendor', 'jw-styles/mojar/js/vendor.min.js', $ver);
+        HookAction::enqueueScript('core-backend', 'jw-styles/mojar/js/backend.min.js', $ver);
+        HookAction::enqueueScript('core-tinymce', 'jw-styles/mojar/tinymce/tinymce.min.js', $ver);
+        HookAction::enqueueScript('core-custom', 'jw-styles/mojar/js/custom.min.js', $ver);
         // Tabler js
         HookAction::enqueueScript('tabler-apexcharts', 'jw-styles/base/assets/libs/apexcharts/dist/apexcharts.min.js', $ver);
         HookAction::enqueueScript('tabler-jsvectormap', 'jw-styles/base/assets/libs/jsvectormap/dist/js/jsvectormap.min.js', $ver);
@@ -443,9 +443,9 @@ class MenuAction extends Action
     public function addAdminStyles(): void
     {
         $ver = Version::getVersion();
-        HookAction::enqueueStyle('core-vendor', 'jw-styles/juzaweb/css/vendor.min.css', $ver);
-        // HookAction::enqueueStyle('core-backend', 'jw-styles/juzaweb/css/backend.min.css', $ver);
-        // HookAction::enqueueStyle('core-custom', 'jw-styles/juzaweb/css/custom.min.css', $ver);
+        HookAction::enqueueStyle('core-vendor', 'jw-styles/mojar/css/vendor.min.css', $ver);
+        // HookAction::enqueueStyle('core-backend', 'jw-styles/mojar/css/backend.min.css', $ver);
+        // HookAction::enqueueStyle('core-custom', 'jw-styles/mojar/css/custom.min.css', $ver);
         // Tabler css
         HookAction::enqueueStyle('tabler-main', 'jw-styles/base/assets/css/tabler.min.css', $ver);
         HookAction::enqueueStyle('tabler-flags', 'jw-styles/base/assets/css/tabler-flags.min.css', $ver);

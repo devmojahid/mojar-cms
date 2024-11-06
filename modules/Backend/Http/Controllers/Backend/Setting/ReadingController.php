@@ -1,20 +1,21 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend\Setting;
+namespace Mojar\Backend\Http\Controllers\Backend\Setting;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
-use Juzaweb\Backend\Http\Requests\Setting\ReadingSettingRequest;
-use Juzaweb\CMS\Http\Controllers\BackendController;
+use Mojar\Backend\Http\Requests\Setting\ReadingSettingRequest;
+use Mojar\CMS\Http\Controllers\BackendController;
 
 class ReadingController extends BackendController
 {

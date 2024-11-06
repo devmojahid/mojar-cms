@@ -1,18 +1,18 @@
 <?php
 
-namespace Juzaweb\Backend\Repositories;
+namespace Mojar\Backend\Repositories;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\CMS\Models\User;
-use Juzaweb\CMS\Repositories\BaseRepository;
-use Juzaweb\CMS\Repositories\Exceptions\RepositoryException;
-use Juzaweb\CMS\Repositories\Interfaces\FilterableInterface;
-use Juzaweb\CMS\Repositories\Interfaces\SearchableInterface;
-use Juzaweb\CMS\Repositories\Interfaces\SortableInterface;
+use Mojar\Backend\Models\Post;
+use Mojar\Backend\Models\Taxonomy;
+use Mojar\CMS\Models\User;
+use Mojar\CMS\Repositories\BaseRepository;
+use Mojar\CMS\Repositories\Exceptions\RepositoryException;
+use Mojar\CMS\Repositories\Interfaces\FilterableInterface;
+use Mojar\CMS\Repositories\Interfaces\SearchableInterface;
+use Mojar\CMS\Repositories\Interfaces\SortableInterface;
 
 /**
  * Interface PostRepository.
@@ -20,7 +20,7 @@ use Juzaweb\CMS\Repositories\Interfaces\SortableInterface;
  * @method Post find($id, $columns = ['*'])
  * @method Post create(array $attributes)
  * @method Post update(array $attributes, int|string $id)
- * @package namespace Juzaweb\Backend\Repositories;
+ * @package namespace Mojar\Backend\Repositories;
  * @see PostRepositoryEloquent
  */
 interface PostRepository extends BaseRepository, FilterableInterface, SearchableInterface, SortableInterface

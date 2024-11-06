@@ -1,24 +1,25 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Models;
+namespace Mojar\CMS\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\CMS\Facades\HookAction;
+use Mojar\Backend\Models\Post;
+use Mojar\Backend\Models\Taxonomy;
+use Mojar\CMS\Facades\HookAction;
 
 /**
- * Juzaweb\CMS\Models\Search
+ * Mojar\CMS\Models\Search
  *
  * @property int $id
  * @property string $title
@@ -48,9 +49,9 @@ use Juzaweb\CMS\Facades\HookAction;
  * @method static Builder|Search whereTitle($value)
  * @method static Builder|Search whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Taxonomy[] $taxonomies
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\Taxonomy[] $taxonomies
  * @property-read int|null $taxonomies_count
- * @property-read \Juzaweb\Backend\Models\Post $post
+ * @property-read \Mojar\Backend\Models\Post $post
  */
 class Search extends Model
 {
@@ -115,16 +116,16 @@ class Search extends Model
                     $q->whereRaw('MATCH (`title`) AGAINST (? IN BOOLEAN MODE)', [$keyword]);
                     $q->orWhereRaw('MATCH (`description`) AGAINST (? IN BOOLEAN MODE)', [$keyword]);
                     $q->orWhereRaw('MATCH (`keyword`) AGAINST (? IN BOOLEAN MODE)', [$keyword]);
-                    $q->orWhere('title', JW_SQL_LIKE, '%'.$keyword.'%');
-                    $q->orWhere('description', JW_SQL_LIKE, '%'.$keyword.'%');
-                    $q->orWhere('keyword', JW_SQL_LIKE, '%'.$keyword.'%');
+                    $q->orWhere('title', JW_SQL_LIKE, '%' . $keyword . '%');
+                    $q->orWhere('description', JW_SQL_LIKE, '%' . $keyword . '%');
+                    $q->orWhere('keyword', JW_SQL_LIKE, '%' . $keyword . '%');
                 });
             } else {
                 // $builder->addSelect(DB::raw('NULL AS match_score'));
                 $builder->where(function (Builder $q) use ($keyword) {
-                    $q->where('title', JW_SQL_LIKE, '%'.$keyword.'%');
-                    $q->orWhere('description', JW_SQL_LIKE, '%'.$keyword.'%');
-                    $q->orWhere('keyword', JW_SQL_LIKE, '%'.$keyword.'%');
+                    $q->where('title', JW_SQL_LIKE, '%' . $keyword . '%');
+                    $q->orWhere('description', JW_SQL_LIKE, '%' . $keyword . '%');
+                    $q->orWhere('keyword', JW_SQL_LIKE, '%' . $keyword . '%');
                 });
             }
         }
@@ -162,7 +163,7 @@ class Search extends Model
                     $builder->orderBy('id', 'DESC');
 
                     break;
-                /*case 'top_views':
+                    /*case 'top_views':
                     $builder->orderBy('views', 'DESC');
                     break;*/
                 case 'new_update':

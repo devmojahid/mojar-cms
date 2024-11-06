@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\CMS\Traits;
+namespace Mojar\CMS\Traits;
 
-use Juzaweb\CMS\Exceptions\FileAlreadyExistException;
-use Juzaweb\CMS\Support\Generators\FileGenerator;
-use Juzaweb\CMS\Support\Stub;
+use Mojar\CMS\Exceptions\FileAlreadyExistException;
+use Mojar\CMS\Support\Generators\FileGenerator;
+use Mojar\CMS\Support\Stub;
 
 trait ModuleCommandTrait
 {

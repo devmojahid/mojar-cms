@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Datatables;
+namespace Mojar\Backend\Http\Datatables;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
-use Juzaweb\CMS\Abstracts\DataTable;
-use Juzaweb\CMS\Models\User;
+use Mojar\CMS\Abstracts\DataTable;
+use Mojar\CMS\Models\User;
 
 class UserDataTable extends DataTable
 {
@@ -29,7 +30,7 @@ class UserDataTable extends DataTable
                 'label' => trans('cms::app.avatar'),
                 'width' => '5%',
                 'formatter' => function ($value, $row, $index) {
-                    return '<img src="'. $row->getAvatar('150x150') .'" class="w-100"/>';
+                    return '<img src="' . $row->getAvatar('150x150') . '" class="w-100"/>';
                 },
             ],
             'name' => [
@@ -77,8 +78,8 @@ class UserDataTable extends DataTable
         if ($keyword = Arr::get($data, 'keyword')) {
             $query->where(
                 function (Builder $q) use ($keyword) {
-                    $q->where('name', JW_SQL_LIKE, '%'. $keyword .'%');
-                    $q->orWhere('email', JW_SQL_LIKE, '%'. $keyword .'%');
+                    $q->where('name', JW_SQL_LIKE, '%' . $keyword . '%');
+                    $q->orWhere('email', JW_SQL_LIKE, '%' . $keyword . '%');
                 }
             );
         }

@@ -1,21 +1,22 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://github.com/juzaweb/cms
+ * @link       https://github.com/mojar/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Installer;
+namespace Mojar\Backend\Http\Controllers\Installer;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Juzaweb\CMS\Models\User;
+use Mojar\CMS\Models\User;
 
 class AdminController extends Controller
 {

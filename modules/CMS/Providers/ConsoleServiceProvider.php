@@ -1,28 +1,29 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Providers;
+namespace Mojar\CMS\Providers;
 
 use Illuminate\Console\Scheduling\Schedule;
-use Juzaweb\Backend\Commands\AutoSubmitCommand;
-use Juzaweb\Backend\Commands\AutoTagCommand;
-use Juzaweb\CMS\Console\Commands\AutoClearSlotCommand;
-use Juzaweb\CMS\Console\Commands\ClearCacheCommand;
-use Juzaweb\CMS\Console\Commands\ClearCacheExpiredCommand;
-use Juzaweb\CMS\Console\Commands\InstallCommand;
-use Juzaweb\CMS\Console\Commands\PluginAutoloadCommand;
-use Juzaweb\CMS\Console\Commands\SendMailCommand;
-use Juzaweb\CMS\Console\Commands\ShowSlotCommand;
-use Juzaweb\CMS\Console\Commands\UpdateCommand;
-use Juzaweb\CMS\Console\Commands\VersionCommand;
-use Juzaweb\CMS\Support\ServiceProvider;
+use Mojar\Backend\Commands\AutoSubmitCommand;
+use Mojar\Backend\Commands\AutoTagCommand;
+use Mojar\CMS\Console\Commands\AutoClearSlotCommand;
+use Mojar\CMS\Console\Commands\ClearCacheCommand;
+use Mojar\CMS\Console\Commands\ClearCacheExpiredCommand;
+use Mojar\CMS\Console\Commands\InstallCommand;
+use Mojar\CMS\Console\Commands\PluginAutoloadCommand;
+use Mojar\CMS\Console\Commands\SendMailCommand;
+use Mojar\CMS\Console\Commands\ShowSlotCommand;
+use Mojar\CMS\Console\Commands\UpdateCommand;
+use Mojar\CMS\Console\Commands\VersionCommand;
+use Mojar\CMS\Support\ServiceProvider;
 
 class ConsoleServiceProvider extends ServiceProvider
 {

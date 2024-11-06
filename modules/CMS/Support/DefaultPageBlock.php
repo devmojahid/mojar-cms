@@ -1,16 +1,17 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
-use Juzaweb\CMS\Abstracts\PageBlock;
+use Mojar\CMS\Abstracts\PageBlock;
 
 class DefaultPageBlock extends PageBlock
 {

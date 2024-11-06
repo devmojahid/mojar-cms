@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
 class RequirementsChecker
 {
@@ -23,7 +23,7 @@ class RequirementsChecker
 
         foreach ($requirements as $type => $requirement) {
             switch ($type) {
-                // check php requirements
+                    // check php requirements
                 case 'php':
                     foreach ($requirements[$type] as $requirement) {
                         $results['requirements'][$type][$requirement] = true;
@@ -36,7 +36,7 @@ class RequirementsChecker
                     }
 
                     break;
-                // check apache requirements
+                    // check apache requirements
                 case 'apache':
                     foreach ($requirements[$type] as $requirement) {
                         // if function doesn't exist we can't check apache modules

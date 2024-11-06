@@ -1,14 +1,15 @@
 @extends('network::layout')
 
 @section('content')
-
     <div class="row box-hidden mb-2" id="form-theme-upload">
         <div class="col-md-12">
-            <form action="{{ route('admin.theme.install.upload') }}" role="form" id="themeUploadForm" name="themeUploadForm" method="post" class="dropzone" enctype="multipart/form-data">
+            <form action="{{ route('admin.theme.install.upload') }}" role="form" id="themeUploadForm" name="themeUploadForm"
+                method="post" class="dropzone" enctype="multipart/form-data">
                 <div class="form-group">
                     <div class="controls text-center">
                         <div class="input-group w-100">
-                            <a class="btn btn-primary w-100 text-white" id="theme-upload-button">{{ trans('cms::filemanager.message-choose') }}</a>
+                            <a class="btn btn-primary w-100 text-white"
+                                id="theme-upload-button">{{ trans('cms::filemanager.message-choose') }}</a>
                         </div>
                     </div>
                 </div>
@@ -33,7 +34,8 @@
     <template id="theme-template">
         <div class="col-md-4">
             <div class="card">
-                <div class="height-200 d-flex flex-column jw__g13__head" style="background-repeat: no-repeat;
+                <div class="height-200 d-flex flex-column jw__g13__head"
+                    style="background-repeat: no-repeat;
     background-size: 395px 200px;background-image: url('{screenshot}')">
                 </div>
 
@@ -44,7 +46,8 @@
                                 {title}
                             </div>
                             <div class="text-gray-6">
-                                <button class="btn btn-primary install-theme" data-theme="{name}"> {{ trans('cms::app.install') }}</button>
+                                <button class="btn btn-primary install-theme" data-theme="{name}">
+                                    {{ trans('cms::app.install') }}</button>
                             </div>
                         </div>
                     </div>
@@ -54,7 +57,7 @@
     </template>
 
     <script>
-        var listView = new JuzawebListView({
+        var listView = new MojarListView({
             url: "{{ route('admin.theme.install.all') }}",
             list: "#theme-list",
             template: "theme-template",
@@ -70,9 +73,9 @@
                 timeout: 0,
                 clickable: '#theme-upload-button',
                 dictDefaultMessage: "{{ trans('cms::filemanager.message-drop') }}",
-                init: function () {
-                    this.on('success', function (file, response) {
-                        if(response.status == false) {
+                init: function() {
+                    this.on('success', function(file, response) {
+                        if (response.status == false) {
                             this.defaultOptions.error(file, response.data.message);
                         }
                     });
@@ -86,9 +89,9 @@
                 chunkSize: 1048576,
             });
 
-            $('body').on('click', '#upload-theme', function () {
+            $('body').on('click', '#upload-theme', function() {
                 let frm = $('#form-theme-upload');
-                if(frm.is(':hidden')) {
+                if (frm.is(':hidden')) {
                     frm.show('slow');
                 } else {
                     frm.hide('slow');

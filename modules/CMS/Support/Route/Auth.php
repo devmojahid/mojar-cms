@@ -1,21 +1,22 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support\Route;
+namespace Mojar\CMS\Support\Route;
 
 use Illuminate\Support\Facades\Route;
-use Juzaweb\Backend\Http\Controllers\Auth\LoginController;
-use Juzaweb\Backend\Http\Controllers\Auth\RegisterController;
-use Juzaweb\Backend\Http\Controllers\Auth\ForgotPasswordController;
-use Juzaweb\Backend\Http\Controllers\Auth\ResetPasswordController;
-use Juzaweb\Backend\Http\Controllers\Auth\SocialLoginController;
+use Mojar\Backend\Http\Controllers\Auth\LoginController;
+use Mojar\Backend\Http\Controllers\Auth\RegisterController;
+use Mojar\Backend\Http\Controllers\Auth\ForgotPasswordController;
+use Mojar\Backend\Http\Controllers\Auth\ResetPasswordController;
+use Mojar\Backend\Http\Controllers\Auth\SocialLoginController;
 
 class Auth
 {

@@ -1,6 +1,6 @@
 <?php
 
-use Juzaweb\CMS\Facades\Facades;
+use Mojar\CMS\Facades\Facades;
 
 return [
     /**
@@ -27,9 +27,9 @@ return [
     /**
      * Cache prefix
      *
-     * Default: juzaweb_
+     * Default: mojar_
      */
-    'cache_prefix' => 'juzaweb_',
+    'cache_prefix' => 'mojar_',
 
     /**
      * Show logs in admin page
@@ -190,7 +190,7 @@ return [
         /**
          * Optimizer image after upload
          *
-         * @see https://juzaweb.com/documentation/start/image-optimizer
+         * @see https://mojar.com/documentation/start/image-optimizer
          */
         'image-optimizer' => (bool) env('IMAGE_OPTIMIZER', false),
 

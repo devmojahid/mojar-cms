@@ -1,20 +1,21 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Facades;
+namespace Mojar\CMS\Facades;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Facade;
-use Juzaweb\CMS\Contracts\Field as FieldContract;
+use Mojar\CMS\Contracts\Field as FieldContract;
 
 /**
  * @method static fieldByType($fields)
@@ -29,8 +30,8 @@ use Juzaweb\CMS\Contracts\Field as FieldContract;
  * @method static editor(string|Model $label, ?string $name, ?array $options = [])
  * @method static image(string|Model $label, ?string $name, ?array $options = [])
  * @method static checkbox(string|Model $label, ?string $name, ?array $options = [])
- * @see \Juzaweb\CMS\Support\Html\Field
-*/
+ * @see \Mojar\CMS\Support\Html\Field
+ */
 class Field extends Facade
 {
     /**

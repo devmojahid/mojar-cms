@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Generators;
+namespace Mojar\CMS\Repositories\Generators;
 
-use Juzaweb\CMS\Repositories\Generators\Generator;
-use Juzaweb\CMS\Repositories\Generators\Migrations\SchemaParser;
+use Mojar\CMS\Repositories\Generators\Generator;
+use Mojar\CMS\Repositories\Generators\Migrations\SchemaParser;
 
 /**
  * Class RepositoryInterfaceGenerator
@@ -28,7 +28,7 @@ class RepositoryInterfaceGenerator extends Generator
      */
     public function getRootNamespace()
     {
-        return parent::getRootNamespace().parent::getConfigGeneratorClassPath($this->getPathConfigNode());
+        return parent::getRootNamespace() . parent::getConfigGeneratorClassPath($this->getPathConfigNode());
     }
 
     /**
@@ -48,10 +48,10 @@ class RepositoryInterfaceGenerator extends Generator
      */
     public function getPath()
     {
-        return $this->getBasePath().'/'.parent::getConfigGeneratorClassPath(
+        return $this->getBasePath() . '/' . parent::getConfigGeneratorClassPath(
             $this->getPathConfigNode(),
             true
-        ).'/'.$this->getName().'Repository.php';
+        ) . '/' . $this->getName() . 'Repository.php';
     }
 
     /**
@@ -74,7 +74,7 @@ class RepositoryInterfaceGenerator extends Generator
         return array_merge(
             parent::getReplacements(),
             [
-            'fillable' => $this->getFillable(),
+                'fillable' => $this->getFillable(),
             ]
         );
     }
@@ -89,13 +89,13 @@ class RepositoryInterfaceGenerator extends Generator
         if (!$this->fillable) {
             return '[]';
         }
-        $results = '['.PHP_EOL;
+        $results = '[' . PHP_EOL;
 
         foreach ($this->getSchemaParser()->toArray() as $column => $value) {
-            $results .= "\t\t'{$column}',".PHP_EOL;
+            $results .= "\t\t'{$column}'," . PHP_EOL;
         }
 
-        return $results."\t".']';
+        return $results . "\t" . ']';
     }
 
     /**

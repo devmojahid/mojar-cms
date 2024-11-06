@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Providers;
+namespace Mojar\CMS\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -12,14 +12,14 @@ use Illuminate\Support\ServiceProvider;
  */
 class RepositoryServiceProvider extends ServiceProvider
 {
-    
+
     /**
      * Indicates if loading of the provider is deferred.
      *
      * @var bool
      */
     protected bool $defer = false;
-    
+
     /**
      *
      * @return void
@@ -28,14 +28,14 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->publishes(
             [
-                __DIR__.'/../config/repository.php' => config_path('repository.php'),
+                __DIR__ . '/../config/repository.php' => config_path('repository.php'),
             ]
         );
-        
-        $this->mergeConfigFrom(__DIR__.'/../config/repository.php', 'repository');
+
+        $this->mergeConfigFrom(__DIR__ . '/../config/repository.php', 'repository');
     }
-    
-    
+
+
     /**
      * Register the service provider.
      *
@@ -43,18 +43,18 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->commands('Juzaweb\CMS\Repositories\Generators\Commands\RepositoryCommand');
-        $this->commands('Juzaweb\CMS\Repositories\Generators\Commands\TransformerCommand');
-        $this->commands('Juzaweb\CMS\Repositories\Generators\Commands\PresenterCommand');
-        $this->commands('Juzaweb\CMS\Repositories\Generators\Commands\EntityCommand');
-        $this->commands('Juzaweb\CMS\Repositories\Generators\Commands\ValidatorCommand');
-        $this->commands('Juzaweb\CMS\Repositories\Generators\Commands\ControllerCommand');
-        $this->commands('Juzaweb\CMS\Repositories\Generators\Commands\BindingsCommand');
-        $this->commands('Juzaweb\CMS\Repositories\Generators\Commands\CriteriaCommand');
-        $this->app->register('Juzaweb\CMS\Repositories\Providers\EventServiceProvider');
+        $this->commands('Mojar\CMS\Repositories\Generators\Commands\RepositoryCommand');
+        $this->commands('Mojar\CMS\Repositories\Generators\Commands\TransformerCommand');
+        $this->commands('Mojar\CMS\Repositories\Generators\Commands\PresenterCommand');
+        $this->commands('Mojar\CMS\Repositories\Generators\Commands\EntityCommand');
+        $this->commands('Mojar\CMS\Repositories\Generators\Commands\ValidatorCommand');
+        $this->commands('Mojar\CMS\Repositories\Generators\Commands\ControllerCommand');
+        $this->commands('Mojar\CMS\Repositories\Generators\Commands\BindingsCommand');
+        $this->commands('Mojar\CMS\Repositories\Generators\Commands\CriteriaCommand');
+        $this->app->register('Mojar\CMS\Repositories\Providers\EventServiceProvider');
     }
-    
-    
+
+
     /**
      * Get the services provided by the provider.
      *

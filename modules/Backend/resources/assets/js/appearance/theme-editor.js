@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('.load-media').filemanager('image', {prefix: '/'+ juzaweb.adminPrefix +'/file-manager'});
+    $('.load-media').filemanager('image', { prefix: '/' + mojar.adminPrefix + '/file-manager' });
 
     $("#theme-editor-sidebar").on('click', '.add-card-item', function () {
         let item = $(this);

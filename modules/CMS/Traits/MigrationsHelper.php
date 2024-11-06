@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Traits;
+namespace Mojar\CMS\Traits;
 
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +13,7 @@ trait MigrationsHelper
      */
     public function getMigrations()
     {
-        $migrations = glob(database_path().DIRECTORY_SEPARATOR.'migrations'.DIRECTORY_SEPARATOR.'*.php');
+        $migrations = glob(database_path() . DIRECTORY_SEPARATOR . 'migrations' . DIRECTORY_SEPARATOR . '*.php');
 
         return str_replace('.php', '', $migrations);
     }

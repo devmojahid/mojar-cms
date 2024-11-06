@@ -1,21 +1,22 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Http\Requests\Auth;
+namespace Mojar\CMS\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
-use Juzaweb\Backend\Events\RegisterSuccessful;
-use Juzaweb\CMS\Models\User;
+use Mojar\Backend\Events\RegisterSuccessful;
+use Mojar\CMS\Models\User;
 
 class RegisterRequest extends FormRequest
 {

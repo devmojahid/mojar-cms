@@ -1,26 +1,27 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Models;
+namespace Mojar\Backend\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Juzaweb\CMS\Models\Model;
+use Mojar\CMS\Models\Model;
 
 /**
- * Juzaweb\Backend\Models\PostMeta
+ * Mojar\Backend\Models\PostMeta
  *
  * @property int $id
  * @property int $post_id
  * @property string $meta_key
  * @property string|null $meta_value
- * @property-read \Juzaweb\Backend\Models\Post $post
+ * @property-read \Mojar\Backend\Models\Post $post
  * @method static \Illuminate\Database\Eloquent\Builder|PostMeta newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PostMeta newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PostMeta query()

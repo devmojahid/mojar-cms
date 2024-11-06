@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\CMS\Console\Commands\Permission;
+namespace Mojar\CMS\Console\Commands\Permission;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Contracts\Permission as PermissionContract;
+use Mojar\CMS\Contracts\Permission as PermissionContract;
 
 class CreatePermission extends Command
 {
@@ -19,6 +19,6 @@ class CreatePermission extends Command
 
         $permission = $permissionClass::findOrCreate($this->argument('name'), $this->argument('guard'));
 
-        $this->info("Permission `{$permission->name}` ".($permission->wasRecentlyCreated ? 'created' : 'already exists'));
+        $this->info("Permission `{$permission->name}` " . ($permission->wasRecentlyCreated ? 'created' : 'already exists'));
     }
 }

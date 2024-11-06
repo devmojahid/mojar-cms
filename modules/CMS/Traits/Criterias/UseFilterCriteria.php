@@ -1,8 +1,8 @@
 <?php
 
-namespace Juzaweb\CMS\Traits\Criterias;
+namespace Mojar\CMS\Traits\Criterias;
 
-use Juzaweb\CMS\Repositories\Criterias\FilterCriteria;
+use Mojar\CMS\Repositories\Criterias\FilterCriteria;
 
 /**
  * @property array $filterableFields

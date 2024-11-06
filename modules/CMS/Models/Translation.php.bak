@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\CMS\Models;
+namespace Mojar\CMS\Models;
 
 /**
- * Juzaweb\CMS\Models\Translation
+ * Mojar\CMS\Models\Translation
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Translation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Translation newQuery()

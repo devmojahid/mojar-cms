@@ -1,20 +1,21 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Support\Translations;
+namespace Mojar\CMS\Support\Translations;
 
 use Closure;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
-use Juzaweb\CMS\Contracts\TranslationManager;
-use Juzaweb\CMS\Contracts\TranslationFinder;
+use Mojar\CMS\Contracts\TranslationManager;
+use Mojar\CMS\Contracts\TranslationFinder;
 
 class TranslationImporter
 {
@@ -24,8 +25,7 @@ class TranslationImporter
         protected Collection $module,
         protected TranslationFinder $translationFinder,
         protected TranslationManager $translationManager
-    ) {
-    }
+    ) {}
 
     public function run(): int
     {
@@ -71,7 +71,7 @@ class TranslationImporter
         );
 
         if ($this->module->get('type') != 'cms') {
-            $results = collect($results)->filter(fn ($item) => $item['namespace'] != 'cms')->toArray();
+            $results = collect($results)->filter(fn($item) => $item['namespace'] != 'cms')->toArray();
         }
 
         $total = 0;
@@ -107,7 +107,7 @@ class TranslationImporter
         }
 
         $folders = collect(File::directories($folderPath))
-            ->map(fn ($item) => basename($item))
+            ->map(fn($item) => basename($item))
             ->values()
             ->toArray();
 
@@ -127,7 +127,7 @@ class TranslationImporter
     {
         $files = File::files($this->module->get('lang_path') . "/{$locale}");
         $files = collect($files)
-            ->filter(fn ($item) => $item->getExtension() == 'php')
+            ->filter(fn($item) => $item->getExtension() == 'php')
             ->values()
             ->toArray();
 

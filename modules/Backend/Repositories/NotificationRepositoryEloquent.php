@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\Backend\Repositories;
+namespace Mojar\Backend\Repositories;
 
-use Juzaweb\Backend\Models\Notification;
-use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
+use Mojar\Backend\Models\Notification;
+use Mojar\CMS\Repositories\BaseRepositoryEloquent;
 
 /**
  * Class NotificationRepositoryRepositoryEloquent.

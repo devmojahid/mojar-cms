@@ -1,14 +1,15 @@
 @extends('cms::layouts.backend')
 
 @section('content')
-
     <div class="row box-hidden mb-2" id="form-theme-upload">
         <div class="col-md-12">
-            <form action="{{ route('admin.theme.install.upload') }}" role="form" id="themeUploadForm" name="themeUploadForm" method="post" class="dropzone" enctype="multipart/form-data">
+            <form action="{{ route('admin.theme.install.upload') }}" role="form" id="themeUploadForm" name="themeUploadForm"
+                method="post" class="dropzone" enctype="multipart/form-data">
                 <div class="form-group">
                     <div class="controls text-center">
                         <div class="input-group w-100">
-                            <a class="btn btn-primary w-100 text-white" id="theme-upload-button">{{ trans('cms::filemanager.message-choose') }}</a>
+                            <a class="btn btn-primary w-100 text-white"
+                                id="theme-upload-button">{{ trans('cms::filemanager.message-choose') }}</a>
                         </div>
                     </div>
                 </div>
@@ -31,12 +32,13 @@
     <div class="row" id="theme-list"></div>
 
     <script>
-        function themeItemFormatter(index, row)
-        {
-            let installBtn = `<button class="btn btn-primary install-theme" data-theme="${row.name}"> ${juzaweb.lang.install}</button>`;
+        function themeItemFormatter(index, row) {
+            let installBtn =
+                `<button class="btn btn-primary install-theme" data-theme="${row.name}"> ${mojar.lang.install}</button>`;
 
-            if(row.is_paid && !row.is_purchased) {
-                installBtn = `<button class="btn btn-success buy-theme" data-theme="${row.name}"> ${juzaweb.lang.buy} (${row.price})</button>`;
+            if (row.is_paid && !row.is_purchased) {
+                installBtn =
+                    `<button class="btn btn-success buy-theme" data-theme="${row.name}"> ${mojar.lang.buy} (${row.price})</button>`;
             }
 
             return `<div class="col-md-4">
@@ -63,7 +65,7 @@
             </div>`;
         }
 
-        const listView = new JuzawebListView({
+        const listView = new MojarListView({
             url: "{{ route('admin.theme.install.all') }}",
             list: "#theme-list",
             page_size: 9,
@@ -79,9 +81,9 @@
                 timeout: 0,
                 clickable: '#theme-upload-button',
                 dictDefaultMessage: "{{ trans('cms::filemanager.message-drop') }}",
-                init: function () {
-                    this.on('success', function (file, response) {
-                        if(response.status == false) {
+                init: function() {
+                    this.on('success', function(file, response) {
+                        if (response.status == false) {
                             this.defaultOptions.error(file, response.data.message);
                         }
                     });
@@ -95,9 +97,9 @@
                 chunkSize: 1048576,
             });
 
-            $('body').on('click', '#upload-theme', function () {
+            $('body').on('click', '#upload-theme', function() {
                 let frm = $('#form-theme-upload');
-                if(frm.is(':hidden')) {
+                if (frm.is(':hidden')) {
                     frm.show('slow');
                 } else {
                     frm.hide('slow');

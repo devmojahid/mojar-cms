@@ -1,16 +1,17 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    mojar/juzacms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-use Juzaweb\DevTool\Http\Controllers\DevToolController;
-use Juzaweb\DevTool\Http\Controllers\Plugins;
-use Juzaweb\DevTool\Http\Controllers\Themes;
+use Mojar\DevTool\Http\Controllers\DevToolController;
+use Mojar\DevTool\Http\Controllers\Plugins;
+use Mojar\DevTool\Http\Controllers\Themes;
 
 Route::group(
     ['prefix' => 'dev-tools'],

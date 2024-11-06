@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Abstracts;
+namespace Mojar\CMS\Abstracts;
 
 use Illuminate\View\View;
-use Juzaweb\CMS\Facades\ThemeLoader;
+use Mojar\CMS\Facades\ThemeLoader;
 use TwigBridge\Facade\Twig;
 
 abstract class PageBlock

@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\CMS\Traits;
+namespace Mojar\CMS\Traits;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
-use Juzaweb\CMS\Models\User;
+use Mojar\CMS\Models\User;
 
 trait UseChangeBy
 {

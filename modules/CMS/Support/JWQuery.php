@@ -1,22 +1,23 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Traits\Macroable;
-use Juzaweb\CMS\Contracts\JWQueryContract;
-use Juzaweb\CMS\Traits\Queries\PostQuery;
+use Mojar\CMS\Contracts\JWQueryContract;
+use Mojar\CMS\Traits\Queries\PostQuery;
 use Illuminate\Support\Collection;
 
 class JWQuery implements JWQueryContract

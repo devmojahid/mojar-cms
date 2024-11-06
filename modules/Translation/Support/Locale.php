@@ -1,21 +1,22 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    MIT
  */
 
-namespace Juzaweb\Translation\Support;
+namespace Mojar\Translation\Support;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Collection;
-use Juzaweb\CMS\Facades\Plugin;
-use Juzaweb\CMS\Facades\ThemeLoader;
+use Mojar\CMS\Facades\Plugin;
+use Mojar\CMS\Facades\ThemeLoader;
 use Illuminate\Support\Facades\File;
-use Juzaweb\Translation\Contracts\TranslationContract;
+use Mojar\Translation\Contracts\TranslationContract;
 use Symfony\Component\Finder\SplFileInfo;
 
 class Locale implements TranslationContract
@@ -117,14 +118,14 @@ class Locale implements TranslationContract
         if (is_dir($enPath)) {
             $files = File::files($enPath);
             $files = collect($files)
-                ->filter(fn (SplFileInfo $item) => $item->getExtension() == 'php')
+                ->filter(fn(SplFileInfo $item) => $item->getExtension() == 'php')
                 ->values()
                 ->toArray();
 
             foreach ($files as $file) {
                 $trans = [];
                 $lang = require($file->getRealPath());
-                $langPublish = $this->publishPath($key, $locale.'/'.$file->getFilename());
+                $langPublish = $this->publishPath($key, $locale . '/' . $file->getFilename());
 
                 if (file_exists($langPublish)) {
                     $langPublish = require($langPublish);
@@ -141,7 +142,7 @@ class Locale implements TranslationContract
         if ($key->get('type') == 'theme') {
             $jsonPath = $this->originPath($key);
             $files = collect(File::files($jsonPath))
-                ->filter(fn (SplFileInfo $item) => $item->getExtension() == 'json')
+                ->filter(fn(SplFileInfo $item) => $item->getExtension() == 'json')
                 ->values();
             foreach ($files as $file) {
                 $trans = [];
@@ -212,14 +213,14 @@ class Locale implements TranslationContract
     public function getLanguageInFolder(string $path, $json = false): array
     {
         $folders = File::directories($path);
-        $folders = collect($folders)->map(fn ($item) => basename($item))->values()->toArray();
+        $folders = collect($folders)->map(fn($item) => basename($item))->values()->toArray();
 
         if ($json) {
             $files = collect(File::files($path))
                 ->filter(
-                    fn (SplFileInfo $item) => $item->getExtension() == 'json'
+                    fn(SplFileInfo $item) => $item->getExtension() == 'json'
                 )->map(
-                    fn (SplFileInfo $item) => $item->getFilenameWithoutExtension()
+                    fn(SplFileInfo $item) => $item->getFilenameWithoutExtension()
                 )->values()
                 ->toArray();
 
@@ -238,7 +239,7 @@ class Locale implements TranslationContract
             return $basePath;
         }
 
-        return $basePath.'/'.$path;
+        return $basePath . '/' . $path;
     }
 
     public function publishPath(Collection|string $key, $path = ''): string
@@ -250,7 +251,7 @@ class Locale implements TranslationContract
             return $basePath;
         }
 
-        return $basePath.'/'.$path;
+        return $basePath . '/' . $path;
     }
 
     protected function parseVar(Collection|string $key): string|Collection
@@ -266,10 +267,10 @@ class Locale implements TranslationContract
     {
         foreach ($lang as $key => $item) {
             if (is_array($item)) {
-                $this->mapGroupKeys($item, $group.'.'.$key, $trans, $result);
+                $this->mapGroupKeys($item, $group . '.' . $key, $trans, $result);
             } else {
                 $result[] = [
-                    'key' => $group.'.'.$key,
+                    'key' => $group . '.' . $key,
                     'value' => $item,
                     'trans' => $trans[$key] ?? $item,
                 ];

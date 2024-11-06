@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Hooks;
+namespace Mojar\CMS\Support\Hooks;
 
 abstract class Event
 {

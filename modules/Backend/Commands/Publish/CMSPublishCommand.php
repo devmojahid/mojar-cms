@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    mojar/juzacms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Commands\Publish;
+namespace Mojar\Backend\Commands\Publish;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -26,7 +27,7 @@ class CMSPublishCommand extends Command
         };
 
         if ($tag == 'cms_assets') {
-            File::deleteDirectory(base_path('public/jw-styles/juzaweb/build'), true);
+            File::deleteDirectory(base_path('public/jw-styles/mojar/build'), true);
         }
 
         $this->call(

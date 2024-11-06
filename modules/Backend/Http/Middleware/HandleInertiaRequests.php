@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Middleware;
+namespace Mojar\Backend\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;

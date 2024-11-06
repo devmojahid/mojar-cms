@@ -1,21 +1,22 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\API\Http\Controllers\Auth;
+namespace Mojar\API\Http\Controllers\Auth;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Juzaweb\API\Http\Requests\Auth\LoginRequest;
-use Juzaweb\Backend\Http\Resources\UserResource;
-use Juzaweb\CMS\Http\Controllers\ApiController;
-use Juzaweb\CMS\Models\User;
+use Mojar\API\Http\Requests\Auth\LoginRequest;
+use Mojar\Backend\Http\Resources\UserResource;
+use Mojar\CMS\Http\Controllers\ApiController;
+use Mojar\CMS\Models\User;
 use Laravel\Passport\PersonalAccessTokenResult;
 use OpenApi\Annotations as OA;
 

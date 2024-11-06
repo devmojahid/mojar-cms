@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Frontend\Providers;
+namespace Mojar\Frontend\Providers;
 
-use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
-use Juzaweb\CMS\Support\ServiceProvider;
+use Mojar\CMS\Contracts\LocalThemeRepositoryContract;
+use Mojar\CMS\Support\ServiceProvider;
 
 class FrontendServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,6 @@ class FrontendServiceProvider extends ServiceProvider
         //$this->loadViewsFrom(__DIR__.'/../resources/views', 'cms');
         //$this->app->register(RouteServiceProvider::class);
 
-        $this->mergeConfigFrom(__DIR__.'/../config/theme.php', 'theme');
+        $this->mergeConfigFrom(__DIR__ . '/../config/theme.php', 'theme');
     }
 }

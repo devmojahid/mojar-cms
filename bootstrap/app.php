@@ -11,7 +11,7 @@
 |
 */
 
-$app = new \Juzaweb\CMS\Support\Application(
+$app = new \Mojar\CMS\Support\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
 
@@ -30,17 +30,17 @@ $app->useAppPath('modules/Backend');
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    Juzaweb\CMS\Http\Kernel::class
+    Mojar\CMS\Http\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    Juzaweb\CMS\Console\Kernel::class
+    Mojar\CMS\Console\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    Juzaweb\CMS\Exceptions\Handler::class
+    Mojar\CMS\Exceptions\Handler::class
 );
 
 /*

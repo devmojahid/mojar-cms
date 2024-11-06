@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Installer;
+namespace Mojar\Backend\Http\Controllers\Installer;
 
 use Exception;
 use Illuminate\Http\Request;
@@ -8,8 +8,8 @@ use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Juzaweb\CMS\Events\EnvironmentSaved;
-use Juzaweb\CMS\Support\Manager\EnvironmentManager;
+use Mojar\CMS\Events\EnvironmentSaved;
+use Mojar\CMS\Support\Manager\EnvironmentManager;
 
 class EnvironmentController extends Controller
 {
@@ -51,8 +51,8 @@ class EnvironmentController extends Controller
             return $redirect->route('installer.environment')
                 ->withInput()
                 ->withErrors([
-                'database_connection' => trans('cms::installer.environment.wizard.form.db_connection_failed'),
-            ]);
+                    'database_connection' => trans('cms::installer.environment.wizard.form.db_connection_failed'),
+                ]);
         }
 
         $results = $this->environmentManager->saveFileWizard($request);
@@ -60,7 +60,7 @@ class EnvironmentController extends Controller
         event(new EnvironmentSaved($request));
 
         return $redirect->route('installer.database')
-                        ->with(['results' => $results]);
+            ->with(['results' => $results]);
     }
 
     private function checkDatabaseConnection(Request $request)

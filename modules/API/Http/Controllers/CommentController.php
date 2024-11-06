@@ -1,33 +1,33 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    GNU General Public License v2.0
  */
 
-namespace Juzaweb\API\Http\Controllers;
+namespace Mojar\API\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Http\Resources\CommentResource;
-use Juzaweb\Backend\Repositories\CommentRepository;
-use Juzaweb\Backend\Repositories\PostRepository;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Http\Controllers\ApiController;
-use Juzaweb\Frontend\Http\Requests\CommentRequest;
+use Mojar\Backend\Http\Resources\CommentResource;
+use Mojar\Backend\Repositories\CommentRepository;
+use Mojar\Backend\Repositories\PostRepository;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\CMS\Http\Controllers\ApiController;
+use Mojar\Frontend\Http\Requests\CommentRequest;
 
 class CommentController extends ApiController
 {
     public function __construct(
         protected CommentRepository $commentRepository,
         protected PostRepository    $postRepository
-    ) {
-    }
+    ) {}
 
     public function index(Request $request, $type, $slug): AnonymousResourceCollection
     {

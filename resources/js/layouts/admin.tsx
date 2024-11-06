@@ -7,12 +7,12 @@ export default function Admin({children}: {children: React.ReactNode}) {
     return (
         <>
             <Head>
-                <title>{(title || '') + ' - Juzaweb CMS'}</title>
+                <title>{(title || '') + ' - Mojar CMS'}</title>
             </Head>
 
             <h4 className="font-weight-bold ml-3 text-capitalize">{title || ''}</h4>
 
-            <div className="juzaweb__utils__content">
+            <div className="mojar__utils__content">
                 {children}
             </div>
 

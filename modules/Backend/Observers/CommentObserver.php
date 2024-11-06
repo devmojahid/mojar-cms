@@ -1,8 +1,8 @@
 <?php
 
-namespace Juzaweb\Backend\Observers;
+namespace Mojar\Backend\Observers;
 
-use Juzaweb\Backend\Models\Comment;
+use Mojar\Backend\Models\Comment;
 
 class CommentObserver
 {

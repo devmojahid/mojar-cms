@@ -1,25 +1,26 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Support\Imports;
+namespace Mojar\CMS\Support\Imports;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Repositories\TaxonomyRepository;
-use Juzaweb\CMS\Contracts\HookActionContract;
-use Juzaweb\CMS\Contracts\PostManagerContract;
-use Juzaweb\CMS\Contracts\PostImporterContract;
-use Juzaweb\CMS\Models\User;
-use Juzaweb\CMS\Support\FileManager;
+use Mojar\Backend\Models\Post;
+use Mojar\Backend\Repositories\TaxonomyRepository;
+use Mojar\CMS\Contracts\HookActionContract;
+use Mojar\CMS\Contracts\PostManagerContract;
+use Mojar\CMS\Contracts\PostImporterContract;
+use Mojar\CMS\Models\User;
+use Mojar\CMS\Support\FileManager;
 
 class PostImporter implements PostImporterContract
 {
@@ -31,8 +32,7 @@ class PostImporter implements PostImporterContract
         protected PostManagerContract $postCreator,
         protected HookActionContract $hookAction,
         protected TaxonomyRepository $taxonomyRepository
-    ) {
-    }
+    ) {}
 
     public function import(array $data, array $options = []): Post
     {

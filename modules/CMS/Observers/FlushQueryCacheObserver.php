@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Observers;
+namespace Mojar\CMS\Observers;
 
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
@@ -168,8 +168,8 @@ class FlushQueryCacheObserver
 
         if (! $tags) {
             throw new Exception(
-                'Automatic invalidation for '.$class
-                .' works only if at least one tag to be invalidated is specified.'
+                'Automatic invalidation for ' . $class
+                    . ' works only if at least one tag to be invalidated is specified.'
             );
         }
 

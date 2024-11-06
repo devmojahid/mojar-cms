@@ -1,26 +1,25 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\API\Http\Controllers\Admin;
+namespace Mojar\API\Http\Controllers\Admin;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
-use Juzaweb\CMS\Contracts\ConfigContract;
-use Juzaweb\CMS\Http\Controllers\ApiController;
+use Mojar\CMS\Contracts\ConfigContract;
+use Mojar\CMS\Http\Controllers\ApiController;
 use OpenApi\Annotations as OA;
 
 class SettingController extends ApiController
 {
-    public function __construct(protected ConfigContract $config)
-    {
-    }
+    public function __construct(protected ConfigContract $config) {}
 
     /**
      * @OA\Get(

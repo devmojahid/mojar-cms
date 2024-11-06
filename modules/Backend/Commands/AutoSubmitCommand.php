@@ -1,12 +1,12 @@
 <?php
 
-namespace Juzaweb\Backend\Commands;
+namespace Mojar\Backend\Commands;
 
 use Google\Service\Indexing;
 use GuzzleHttp\Client;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Juzaweb\Backend\Models\Post;
+use Mojar\Backend\Models\Post;
 
 class AutoSubmitCommand extends Command
 {
@@ -91,7 +91,7 @@ class AutoSubmitCommand extends Command
         $batch = $service->createBatch();
 
         foreach ($links as $link) {
-            $this->info("=> Submiting url: ". $link->getLink(true));
+            $this->info("=> Submiting url: " . $link->getLink(true));
             $url = new Indexing\UrlNotification();
             $url->setUrl($link->getLink(true));
             $url->setType('URL_UPDATED');
@@ -131,8 +131,8 @@ class AutoSubmitCommand extends Command
                 ];
             }
         )
-        ->pluck('url')
-        ->toArray();
+            ->pluck('url')
+            ->toArray();
 
         $url = config('app.url');
 

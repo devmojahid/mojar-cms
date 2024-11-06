@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://github.com/juzaweb/cms
+ * @link       https://github.com/mojar/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Traits;
+namespace Mojar\CMS\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -17,14 +18,14 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Http\Resources\TaxonomyResource;
-use Juzaweb\Backend\Models\Comment;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\PostMeta;
-use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\Backend\Support\PostContentParser;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Facades\ShortCode;
+use Mojar\Backend\Http\Resources\TaxonomyResource;
+use Mojar\Backend\Models\Comment;
+use Mojar\Backend\Models\Post;
+use Mojar\Backend\Models\PostMeta;
+use Mojar\Backend\Models\Taxonomy;
+use Mojar\Backend\Support\PostContentParser;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\CMS\Facades\ShortCode;
 
 /**
  * @method Builder wherePublish()
@@ -183,8 +184,8 @@ trait PostTypeModel
 
             $builder->where(
                 function (Builder $q) use ($keyword, $condition) {
-                    $q->where('title', $condition, '%'.$keyword.'%');
-                    $q->orWhere('description', $condition, '%'.$keyword.'%');
+                    $q->where('title', $condition, '%' . $keyword . '%');
+                    $q->orWhere('description', $condition, '%' . $keyword . '%');
                 }
             );
         }
@@ -691,7 +692,7 @@ trait PostTypeModel
             return $this->createdBy->getAvatar();
         }
 
-        return asset('jw-styles/juzaweb/images/avatar.png');
+        return asset('jw-styles/mojar/images/avatar.png');
     }
 
     public function getViews(): int|string

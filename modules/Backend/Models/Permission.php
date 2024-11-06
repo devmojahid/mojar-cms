@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Models;
+namespace Mojar\Backend\Models;
 
-use Juzaweb\CMS\Models\Permission as BasePermission;
+use Mojar\CMS\Models\Permission as BasePermission;
 
 /**
- * Juzaweb\Backend\Models\Permission
+ * Mojar\Backend\Models\Permission
  *
  * @property int $id
  * @property string $name
@@ -23,9 +24,9 @@ use Juzaweb\CMS\Models\Permission as BasePermission;
  * @property-read int|null $group_count
  * @property-read \Illuminate\Database\Eloquent\Collection|Permission[] $permissions
  * @property-read int|null $permissions_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Role[] $roles
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\Role[] $roles
  * @property-read int|null $roles_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\CMS\Models\User[] $users
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\CMS\Models\User[] $users
  * @property-read int|null $users_count
  * @method static \Illuminate\Database\Eloquent\Builder|Permission newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Permission newQuery()

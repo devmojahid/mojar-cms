@@ -1,12 +1,12 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Updater;
+namespace Mojar\CMS\Support\Updater;
 
-use Juzaweb\Backend\Events\DumpAutoloadPlugin;
-use Juzaweb\CMS\Abstracts\UpdateManager;
-use Juzaweb\CMS\Facades\CacheGroup;
-use Juzaweb\CMS\Support\Plugin;
-use Juzaweb\CMS\Version;
+use Mojar\Backend\Events\DumpAutoloadPlugin;
+use Mojar\CMS\Abstracts\UpdateManager;
+use Mojar\CMS\Facades\CacheGroup;
+use Mojar\CMS\Support\Plugin;
+use Mojar\CMS\Version;
 
 class PluginUpdater extends UpdateManager
 {
@@ -96,6 +96,6 @@ class PluginUpdater extends UpdateManager
 
         $folder = explode('/', $this->name);
 
-        return config('juzaweb.plugin.path').'/'.$folder[1];
+        return config('mojar.plugin.path') . '/' . $folder[1];
     }
 }

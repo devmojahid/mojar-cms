@@ -1,20 +1,21 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Datatables\Email;
+namespace Mojar\Backend\Http\Datatables\Email;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
-use Juzaweb\Backend\Models\EmailTemplate;
-use Juzaweb\Backend\Repositories\Email\EmailTemplateRepository;
-use Juzaweb\CMS\Abstracts\DataTable;
+use Mojar\Backend\Models\EmailTemplate;
+use Mojar\Backend\Repositories\Email\EmailTemplateRepository;
+use Mojar\CMS\Abstracts\DataTable;
 
 class EmailHookDataTable extends DataTable
 {

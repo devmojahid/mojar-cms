@@ -1,18 +1,19 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Abstracts;
+namespace Mojar\CMS\Abstracts;
 
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
-use Juzaweb\Backend\Models\MenuItem;
+use Mojar\Backend\Models\MenuItem;
 
 abstract class MenuBox
 {

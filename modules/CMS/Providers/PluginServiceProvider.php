@@ -1,13 +1,13 @@
 <?php
 
-namespace Juzaweb\CMS\Providers;
+namespace Mojar\CMS\Providers;
 
-use Juzaweb\CMS\Contracts\ActivatorInterface;
-use Juzaweb\CMS\Contracts\ConfigContract;
-use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
-use Juzaweb\CMS\Exceptions\InvalidActivatorClass;
-use Juzaweb\CMS\Support\LocalPluginRepository;
-use Juzaweb\CMS\Support\ServiceProvider;
+use Mojar\CMS\Contracts\ActivatorInterface;
+use Mojar\CMS\Contracts\ConfigContract;
+use Mojar\CMS\Contracts\LocalPluginRepositoryContract;
+use Mojar\CMS\Exceptions\InvalidActivatorClass;
+use Mojar\CMS\Support\LocalPluginRepository;
+use Mojar\CMS\Support\ServiceProvider;
 
 class PluginServiceProvider extends ServiceProvider
 {
@@ -43,7 +43,7 @@ class PluginServiceProvider extends ServiceProvider
         $this->app->singleton(
             LocalPluginRepositoryContract::class,
             function ($app) {
-                $path = config('juzaweb.plugin.path');
+                $path = config('mojar.plugin.path');
                 return new LocalPluginRepository($app, $path);
             }
         );

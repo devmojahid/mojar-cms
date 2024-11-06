@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
@@ -12,9 +12,9 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
-use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
+use Mojar\CMS\Interfaces\Theme\ThemeInterface;
 use Noodlehaus\Config as ReadConfig;
-use Juzaweb\CMS\Facades\Config;
+use Mojar\CMS\Facades\Config;
 
 class Theme implements ThemeInterface, Arrayable
 {
@@ -114,12 +114,12 @@ class Theme implements ThemeInterface, Arrayable
 
     public function getViewPublicPath(string $path = null): string
     {
-        return resource_path('views/themes/' . $this->name) .'/'. ltrim($path, '/');
+        return resource_path('views/themes/' . $this->name) . '/' . ltrim($path, '/');
     }
 
     public function getLangPublicPath(string $path = null): string
     {
-        return resource_path('lang/themes/' . $this->name) .'/'. ltrim($path, '/');
+        return resource_path('lang/themes/' . $this->name) . '/' . ltrim($path, '/');
     }
 
     /**
@@ -210,7 +210,7 @@ class Theme implements ThemeInterface, Arrayable
     {
         return $this->asset(
             'images/screenshot.png',
-            'jw-styles/juzaweb/images/screenshot.svg'
+            'jw-styles/mojar/images/screenshot.svg'
         );
     }
 
@@ -258,7 +258,7 @@ class Theme implements ThemeInterface, Arrayable
         $status = [
             'name' => $this->name,
             'namespace' => 'Theme\\',
-            'path' => config('juzaweb.theme.path') .'/'.$this->name,
+            'path' => config('mojar.theme.path') . '/' . $this->name,
         ];
 
         Config::setConfig('theme_statuses', $status);

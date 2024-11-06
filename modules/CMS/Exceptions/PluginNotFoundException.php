@@ -1,7 +1,5 @@
 <?php
 
-namespace Juzaweb\CMS\Exceptions;
+namespace Mojar\CMS\Exceptions;
 
-class PluginNotFoundException extends \Exception
-{
-}
+class PluginNotFoundException extends \Exception {}

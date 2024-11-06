@@ -12,15 +12,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\CMS\Contracts\BackendMessageContract;
-use Juzaweb\CMS\Contracts\ConfigContract;
-use Juzaweb\CMS\Facades\Config;
-use Juzaweb\CMS\Facades\Hook;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Facades\XssCleaner;
-use Juzaweb\CMS\Models\User;
-use Juzaweb\CMS\Support\Breadcrumb;
+use Mojar\Backend\Models\Post;
+use Mojar\CMS\Contracts\BackendMessageContract;
+use Mojar\CMS\Contracts\ConfigContract;
+use Mojar\CMS\Facades\Config;
+use Mojar\CMS\Facades\Hook;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\CMS\Facades\XssCleaner;
+use Mojar\CMS\Models\User;
+use Mojar\CMS\Support\Breadcrumb;
 
 if (!function_exists('e_html')) {
     function e_html($str): string
@@ -90,9 +90,9 @@ if (!function_exists('set_config')) {
      *
      * @param string $key
      * @param mixed $value
-     * @return \Juzaweb\CMS\Models\Config
+     * @return \Mojar\CMS\Models\Config
      */
-    function set_config(string $key, mixed $value): \Juzaweb\CMS\Models\Config
+    function set_config(string $key, mixed $value): \Mojar\CMS\Models\Config
     {
         return Config::setConfig($key, $value);
     }
@@ -176,7 +176,7 @@ function user_avatar($user = null): string
         return $user->getAvatar();
     }
 
-    return asset('jw-styles/juzaweb/images/thumb-default.png');
+    return asset('jw-styles/mojar/images/thumb-default.png');
 }
 
 if (!function_exists('jw_breadcrumb')) {
@@ -239,7 +239,7 @@ if (!function_exists('upload_url')) {
                 return $default;
             }
 
-            return asset('jw-styles/juzaweb/images/thumb-default.png');
+            return asset('jw-styles/mojar/images/thumb-default.png');
         }
 
         if ($size) {
@@ -250,7 +250,7 @@ if (!function_exists('upload_url')) {
                 return $storage->url($pathSize);
             }
 
-            if (config('juzaweb.filemanager.image_resizer')) {
+            if (config('mojar.filemanager.image_resizer')) {
                 return asset("jw-styles/images/resize/{$size}/{$path}");
             }
         }
@@ -606,7 +606,7 @@ if (!function_exists('has_permission')) {
 if (!function_exists('collect_metas')) {
     function collect_metas(array $metas): Collection
     {
-        return \Juzaweb\CMS\Facades\Field::collect($metas);
+        return \Mojar\CMS\Facades\Field::collect($metas);
     }
 }
 
@@ -634,12 +634,11 @@ if (!function_exists('get_vimeo_id')) {
         $id = '';
         if (preg_match(
             '%^https?:\/\/(?:www\.|player\.)?vimeo.com\/'
-            . '(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)'
-            . '(\d+)(?:$|\/|\?)(?:[?]?.*)$%im',
+                . '(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)'
+                . '(\d+)(?:$|\/|\?)(?:[?]?.*)$%im',
             $url,
             $regs
-        )
-        ) {
+        )) {
             $id = $regs[3];
         }
 
@@ -726,7 +725,7 @@ function sub_char($str, $n, $end = '...')
 
 function cache_prefix($name): string
 {
-    return config('juzaweb.cache_prefix') . $name;
+    return config('mojar.cache_prefix') . $name;
 }
 
 if (!function_exists('admin_url')) {
@@ -734,13 +733,13 @@ if (!function_exists('admin_url')) {
     {
         if ($path) {
             return url(
-                config('juzaweb.admin_prefix') . '/' . ltrim($path, '/'),
+                config('mojar.admin_prefix') . '/' . ltrim($path, '/'),
                 $parameters,
                 $secure
             );
         }
 
-        return url(config('juzaweb.admin_prefix'), $parameters, $secure);
+        return url(config('mojar.admin_prefix'), $parameters, $secure);
     }
 }
 
@@ -766,7 +765,8 @@ if (!function_exists('remove_bbcode')) {
 if (!function_exists('get_domain_by_url')) {
     function get_domain_by_url(string $url, bool $noneWWW = false): string|bool
     {
-        if (str_starts_with($url, 'https://')
+        if (
+            str_starts_with($url, 'https://')
             || str_starts_with($url, 'http://')
             || str_starts_with($url, '//')
         ) {

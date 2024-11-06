@@ -1,18 +1,18 @@
 <?php
 
-namespace Juzaweb\CMS\Http\Controllers\Auth;
+namespace Mojar\CMS\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Juzaweb\CMS\Http\Controllers\Controller;
-use Juzaweb\CMS\Http\Requests\API\Auth\LoginRequest;
+use Mojar\CMS\Http\Controllers\Controller;
+use Mojar\CMS\Http\Requests\API\Auth\LoginRequest;
 
 class AuthenticatedSessionController extends Controller
 {
     /**
      * Handle an incoming authentication request.
      *
-     * @param  \Juzaweb\CMS\Http\Requests\API\Auth\LoginRequest  $request
+     * @param  \Mojar\CMS\Http\Requests\API\Auth\LoginRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(LoginRequest $request)

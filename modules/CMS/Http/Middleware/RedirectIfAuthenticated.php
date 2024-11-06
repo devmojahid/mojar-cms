@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Http\Middleware;
+namespace Mojar\CMS\Http\Middleware;
 
 use App\Providers\RouteServiceProvider;
 use Closure;

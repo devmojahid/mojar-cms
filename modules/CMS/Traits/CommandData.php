@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Traits;
+namespace Mojar\CMS\Traits;
 
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
@@ -70,7 +71,7 @@ trait CommandData
 
     protected function getCommandDataPath(): string
     {
-        return "command-datas/". $this->getCommandDataKey() .".json";
+        return "command-datas/" . $this->getCommandDataKey() . ".json";
     }
 
     protected function storageDisk(): Filesystem

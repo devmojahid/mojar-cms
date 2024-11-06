@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Http\Middleware;
+namespace Mojar\CMS\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
 

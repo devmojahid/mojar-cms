@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Installer;
+namespace Mojar\Backend\Http\Controllers\Installer;
 
 use Illuminate\Routing\Controller;
-use Juzaweb\CMS\Events\InstallerFinished;
-use Juzaweb\CMS\Support\Manager\FinalInstallManager;
-use Juzaweb\CMS\Support\Manager\InstalledFileManager;
+use Mojar\CMS\Events\InstallerFinished;
+use Mojar\CMS\Support\Manager\FinalInstallManager;
+use Mojar\CMS\Support\Manager\InstalledFileManager;
 
 class FinalController extends Controller
 {

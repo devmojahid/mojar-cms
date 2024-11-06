@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Generators\Commands;
+namespace Mojar\CMS\Repositories\Generators\Commands;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Repositories\Generators\CriteriaGenerator;
-use Juzaweb\CMS\Repositories\Generators\FileAlreadyExistsException;
+use Mojar\CMS\Repositories\Generators\CriteriaGenerator;
+use Mojar\CMS\Repositories\Generators\FileAlreadyExistsException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -58,14 +58,14 @@ class CriteriaCommand extends Command
         try {
             (new CriteriaGenerator(
                 [
-                'name' => $this->argument('name'),
-                'force' => $this->option('force'),
+                    'name' => $this->argument('name'),
+                    'force' => $this->option('force'),
                 ]
             ))->run();
 
             $this->info("Criteria created successfully.");
         } catch (FileAlreadyExistsException $ex) {
-            $this->error($this->type.' already exists!');
+            $this->error($this->type . ' already exists!');
 
             return false;
         }

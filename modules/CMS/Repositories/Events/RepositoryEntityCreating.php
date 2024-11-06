@@ -1,8 +1,8 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Events;
+namespace Mojar\CMS\Repositories\Events;
 
-use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
+use Mojar\CMS\Repositories\Contracts\RepositoryInterface;
 
 /**
  * Class RepositoryEntityCreated

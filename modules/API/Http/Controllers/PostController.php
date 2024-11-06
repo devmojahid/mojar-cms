@@ -1,29 +1,28 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\API\Http\Controllers;
+namespace Mojar\API\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Juzaweb\Backend\Http\Resources\PostCollection;
-use Juzaweb\Backend\Http\Resources\PostResource;
-use Juzaweb\Backend\Repositories\PostRepository;
-use Juzaweb\CMS\Http\Controllers\ApiController;
-use Juzaweb\CMS\Repositories\Criterias\FilterCriteria;
-use Juzaweb\CMS\Repositories\Criterias\SearchCriteria;
-use Juzaweb\CMS\Repositories\Criterias\SortCriteria;
+use Mojar\Backend\Http\Resources\PostCollection;
+use Mojar\Backend\Http\Resources\PostResource;
+use Mojar\Backend\Repositories\PostRepository;
+use Mojar\CMS\Http\Controllers\ApiController;
+use Mojar\CMS\Repositories\Criterias\FilterCriteria;
+use Mojar\CMS\Repositories\Criterias\SearchCriteria;
+use Mojar\CMS\Repositories\Criterias\SortCriteria;
 
 class PostController extends ApiController
 {
-    public function __construct(protected PostRepository $postRepository)
-    {
-    }
+    public function __construct(protected PostRepository $postRepository) {}
 
     public function index(Request $request, $type): PostCollection
     {

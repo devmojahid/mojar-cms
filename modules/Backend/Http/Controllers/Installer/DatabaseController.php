@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Installer;
+namespace Mojar\Backend\Http\Controllers\Installer;
 
 use Illuminate\Http\RedirectResponse;
-use Juzaweb\CMS\Http\Controllers\Controller;
-use Juzaweb\CMS\Support\Manager\DatabaseManager;
+use Mojar\CMS\Http\Controllers\Controller;
+use Mojar\CMS\Support\Manager\DatabaseManager;
 
 class DatabaseController extends Controller
 {

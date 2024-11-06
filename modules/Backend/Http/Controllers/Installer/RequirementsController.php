@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Installer;
+namespace Mojar\Backend\Http\Controllers\Installer;
 
 use Illuminate\Routing\Controller;
-use Juzaweb\CMS\Support\RequirementsChecker;
+use Mojar\CMS\Support\RequirementsChecker;
 
 class RequirementsController extends Controller
 {

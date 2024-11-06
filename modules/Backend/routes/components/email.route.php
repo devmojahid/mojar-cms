@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://github.com/juzaweb/cms
+ * @link       https://github.com/mojar/cms
  * @license    GNU V2
  */
 
-use Juzaweb\Backend\Http\Controllers\Backend\Email\EmailHookController;
+use Mojar\Backend\Http\Controllers\Backend\Email\EmailHookController;
 
 Route::group(
     ['prefix' => 'email'],

@@ -1,6 +1,5 @@
-function initSelect2(parent = 'body')
-{
-    $(parent +' .select2').select2({
+function initSelect2(parent = 'body') {
+    $(parent + ' .select2').select2({
         allowClear: true,
         dropdownAutoWidth: !$(this).data('width'),
         width: $(this).data('width') || '100%',
@@ -12,16 +11,16 @@ function initSelect2(parent = 'body')
         },
     });
 
-    $(parent +' .select2-default').select2({
+    $(parent + ' .select2-default').select2({
         width: $(this).data('width') || '100%',
         dropdownAutoWidth: !$(this).data('width'),
     });
 
-    $(parent +' .load-taxonomies').select2({
+    $(parent + ' .load-taxonomies').select2({
         allowClear: true,
         dropdownAutoWidth: !$(this).data('width'),
         width: $(this).data('width') || '100%',
-        placeholder: function(params) {
+        placeholder: function (params) {
             return {
                 id: null,
                 text: params.placeholder,
@@ -29,7 +28,7 @@ function initSelect2(parent = 'body')
         },
         ajax: {
             method: 'GET',
-            url: juzaweb.adminUrl +'/load-data/loadTaxonomies',
+            url: mojar.adminUrl + '/load-data/loadTaxonomies',
             dataType: 'json',
             data: function (params) {
                 let postType = $(this).data('post-type');
@@ -52,7 +51,7 @@ function initSelect2(parent = 'body')
         }
     });
 
-    $(parent +' .load-users').select2({
+    $(parent + ' .load-users').select2({
         allowClear: true,
         dropdownAutoWidth: !$(this).data('width'),
         width: $(this).data('width') || '100%',
@@ -64,12 +63,12 @@ function initSelect2(parent = 'body')
         },
         ajax: {
             method: 'GET',
-            url: '/'+ juzaweb.adminPrefix +'/load-data/loadUsers',
+            url: '/' + mojar.adminPrefix + '/load-data/loadUsers',
             dataType: 'json',
             data: function (params) {
                 let explodes = $(this).data('explodes') ? $(this).data('explodes') : null;
                 if (explodes) {
-                    explodes = $("." + explodes).map(function () {return $(this).val();}).get();
+                    explodes = $("." + explodes).map(function () { return $(this).val(); }).get();
                 }
 
                 return {
@@ -81,7 +80,7 @@ function initSelect2(parent = 'body')
         },
     });
 
-    $(parent +' .load-menu').select2({
+    $(parent + ' .load-menu').select2({
         allowClear: true,
         dropdownAutoWidth: !$(this).data('width'),
         width: $(this).data('width') || '100%',
@@ -93,12 +92,12 @@ function initSelect2(parent = 'body')
         },
         ajax: {
             method: 'GET',
-            url: '/'+ juzaweb.adminPrefix +'/load-data/loadMenu',
+            url: '/' + mojar.adminPrefix + '/load-data/loadMenu',
             dataType: 'json',
             data: function (params) {
                 let explodes = $(this).data('explodes') ? $(this).data('explodes') : null;
                 if (explodes) {
-                    explodes = $("." + explodes).map(function () {return $(this).val();}).get();
+                    explodes = $("." + explodes).map(function () { return $(this).val(); }).get();
                 }
 
                 return {
@@ -110,7 +109,7 @@ function initSelect2(parent = 'body')
         },
     });
 
-    $(parent +' .load-pages').select2({
+    $(parent + ' .load-pages').select2({
         allowClear: true,
         dropdownAutoWidth: !$(this).data('width'),
         width: $(this).data('width') || '100%',
@@ -122,7 +121,7 @@ function initSelect2(parent = 'body')
         },
         ajax: {
             method: 'GET',
-            url: '/'+ juzaweb.adminPrefix +'/load-data/loadPages',
+            url: '/' + mojar.adminPrefix + '/load-data/loadPages',
             dataType: 'json',
             data: function (params) {
                 return {
@@ -133,7 +132,7 @@ function initSelect2(parent = 'body')
         },
     });
 
-    $(parent +' .load-posts').select2({
+    $(parent + ' .load-posts').select2({
         allowClear: true,
         dropdownAutoWidth: !$(this).data('width'),
         width: $(this).data('width') || '100%',
@@ -145,7 +144,7 @@ function initSelect2(parent = 'body')
         },
         ajax: {
             method: 'GET',
-            url: '/'+ juzaweb.adminPrefix +'/load-data/loadPosts',
+            url: '/' + mojar.adminPrefix + '/load-data/loadPosts',
             dataType: 'json',
             data: function (params) {
                 let type = $(this).data('type') ? $(this).data('type') : null;
@@ -158,7 +157,7 @@ function initSelect2(parent = 'body')
         },
     });
 
-    $(parent +' .load-locales').select2({
+    $(parent + ' .load-locales').select2({
         allowClear: true,
         dropdownAutoWidth: !$(this).data('width'),
         width: $(this).data('width') || '100%',
@@ -170,7 +169,7 @@ function initSelect2(parent = 'body')
         },
         ajax: {
             method: 'GET',
-            url: '/'+ juzaweb.adminPrefix +'/load-data/loadLocales',
+            url: '/' + mojar.adminPrefix + '/load-data/loadLocales',
             dataType: 'json',
             data: function (params) {
                 let type = $(this).data('type') ? $(this).data('type') : null;
@@ -185,7 +184,7 @@ function initSelect2(parent = 'body')
         },
     });
 
-    $(parent +' .load-select2').select2({
+    $(parent + ' .load-select2').select2({
         allowClear: true,
         dropdownAutoWidth: !$(this).data('width'),
         width: $(this).data('width') || '100%',
@@ -208,11 +207,11 @@ function initSelect2(parent = 'body')
         },
     });
 
-    $(parent +' .load-resources').select2({
+    $(parent + ' .load-resources').select2({
         allowClear: true,
         dropdownAutoWidth: !$(this).data('width'),
         width: $(this).data('width') || '100%',
-        placeholder: function(params) {
+        placeholder: function (params) {
             return {
                 id: null,
                 text: params.placeholder,
@@ -220,7 +219,7 @@ function initSelect2(parent = 'body')
         },
         ajax: {
             method: 'GET',
-            url: juzaweb.adminUrl +'/load-data/loadResource',
+            url: mojar.adminUrl + '/load-data/loadResource',
             dataType: 'json',
             data: function (params) {
                 let type = $(this).data('type');
@@ -242,11 +241,11 @@ function initSelect2(parent = 'body')
         }
     });
 
-    $(parent +' .load-subscription-objects').select2({
+    $(parent + ' .load-subscription-objects').select2({
         allowClear: true,
         dropdownAutoWidth: !$(this).data('width'),
         width: $(this).data('width') || '100%',
-        placeholder: function(params) {
+        placeholder: function (params) {
             return {
                 id: null,
                 text: params.placeholder,
@@ -254,7 +253,7 @@ function initSelect2(parent = 'body')
         },
         ajax: {
             method: 'GET',
-            url: juzaweb.adminUrl +'/load-data/loadSubscriptionObjects',
+            url: mojar.adminUrl + '/load-data/loadSubscriptionObjects',
             dataType: 'json',
             data: function (params) {
                 let module = $(this).data('module');

@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\CMS\Traits\QueryCache;
+namespace Mojar\CMS\Traits\QueryCache;
 
 use Illuminate\Database\Eloquent\Collection;
-use Juzaweb\CMS\Observers\FlushQueryCacheObserver;
-use Juzaweb\CMS\Support\Query\Builder;
+use Mojar\CMS\Observers\FlushQueryCacheObserver;
+use Mojar\CMS\Support\Query\Builder;
 
 /**
  * @method static bool flushQueryCache(array $tags = [])
@@ -83,8 +83,7 @@ trait QueryCacheable
     public function getCacheTagsToInvalidateOnUpdate(
         ?string         $relation = null,
         Collection|null $pivotedModels = null
-    ): array
-    {
+    ): array {
         return $this->getCacheBaseTags();
     }
 

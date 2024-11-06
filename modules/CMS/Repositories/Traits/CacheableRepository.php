@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Traits;
+namespace Mojar\CMS\Repositories\Traits;
 
 use Exception;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
-use Juzaweb\CMS\Repositories\Contracts\CriteriaInterface;
-use Juzaweb\CMS\Repositories\Helpers\CacheKeys;
+use Mojar\CMS\Repositories\Contracts\CriteriaInterface;
+use Mojar\CMS\Repositories\Helpers\CacheKeys;
 use ReflectionObject;
 
 /**
@@ -124,7 +124,7 @@ trait CacheableRepository
         $request = app('Illuminate\Http\Request');
         $args = serialize($args);
         $criteria = $this->serializeCriteria();
-        $key = sprintf('%s@%s-%s', get_called_class(), $method, md5($args.$criteria.$request->fullUrl()));
+        $key = sprintf('%s@%s-%s', get_called_class(), $method, md5($args . $criteria . $request->fullUrl()));
 
         CacheKeys::putKey(get_called_class(), $key);
 
@@ -154,8 +154,8 @@ trait CacheableRepository
     /**
      * Serialize single criterion with customized serialization of Closures.
      *
-     * @param  \Juzaweb\CMS\Repositories\Contracts\CriteriaInterface  $criterion
-     * @return \Juzaweb\CMS\Repositories\Contracts\CriteriaInterface|array
+     * @param  \Mojar\CMS\Repositories\Contracts\CriteriaInterface  $criterion
+     * @return \Mojar\CMS\Repositories\Contracts\CriteriaInterface|array
      *
      * @throws \Exception
      */

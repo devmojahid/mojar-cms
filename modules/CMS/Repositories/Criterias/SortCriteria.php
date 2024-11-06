@@ -1,21 +1,22 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    GNU General Public License v2.0
  */
 
-namespace Juzaweb\CMS\Repositories\Criterias;
+namespace Mojar\CMS\Repositories\Criterias;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
-use Juzaweb\CMS\Repositories\Abstracts\Criteria;
-use Juzaweb\CMS\Repositories\Contracts\CriteriaInterface;
-use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
+use Mojar\CMS\Repositories\Abstracts\Criteria;
+use Mojar\CMS\Repositories\Contracts\CriteriaInterface;
+use Mojar\CMS\Repositories\Contracts\RepositoryInterface;
 
 class SortCriteria extends Criteria implements CriteriaInterface
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\CMS\Traits\HookAction;
+namespace Mojar\CMS\Traits\HookAction;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Juzaweb\CMS\Facades\GlobalData;
+use Mojar\CMS\Facades\GlobalData;
 
 trait GetHookAction
 {
@@ -25,13 +25,13 @@ trait GetHookAction
 
     public function getMenuBox($key): bool|Collection
     {
-        return GlobalData::get('menu_boxs.'.$key);
+        return GlobalData::get('menu_boxs.' . $key);
     }
 
     public function getPostTypes(string $postType = null): Collection
     {
         if ($postType) {
-            $data = GlobalData::get('post_types.'.$postType);
+            $data = GlobalData::get('post_types.' . $postType);
 
             return is_array($data) ? collect($data) : $data;
         }
@@ -70,11 +70,11 @@ trait GetHookAction
 
     public function getConfigs(string|null $key = null): Collection
     {
-        $globals = collect(config('juzaweb.config'))
-            ->mapWithKeys(fn ($item, $key) => $this->mapConfigFields($item, $key));
+        $globals = collect(config('mojar.config'))
+            ->mapWithKeys(fn($item, $key) => $this->mapConfigFields($item, $key));
 
         $configs = collect($this->globalData->get('configs'))
-            ->mapWithKeys(fn ($item, $key) => $this->mapConfigFields($item, $key))
+            ->mapWithKeys(fn($item, $key) => $this->mapConfigFields($item, $key))
             ->merge($globals);
 
         if ($key) {
@@ -117,7 +117,7 @@ trait GetHookAction
     public function getEmailHooks(?string $key = null): ?Collection
     {
         if ($key) {
-            return GlobalData::get('email_hooks.'.$key);
+            return GlobalData::get('email_hooks.' . $key);
         }
 
         return new Collection(GlobalData::get('email_hooks'));

@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Facades;
+namespace Mojar\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Juzaweb\CMS\Contracts\MacroableModelContract;
+use Mojar\CMS\Contracts\MacroableModelContract;
 
 /**
  * @method static void addMacro(string $model, string $name, \Closure $closure)

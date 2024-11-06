@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Backend\Plugin;
+namespace Mojar\Backend\Http\Controllers\Backend\Plugin;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -8,22 +8,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\URL;
-use Juzaweb\Backend\Events\AfterPluginBulkAction;
-use Juzaweb\Backend\Events\DumpAutoloadPlugin;
-use Juzaweb\Backend\Http\Requests\Plugin\BulkActionRequest;
-use Juzaweb\CMS\Contracts\JuzawebApiContract;
-use Juzaweb\CMS\Facades\CacheGroup;
-use Juzaweb\CMS\Facades\Plugin;
-use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Support\ArrayPagination;
-use Juzaweb\CMS\Support\Plugin as SupportPlugin;
-use Juzaweb\CMS\Version;
+use Mojar\Backend\Events\AfterPluginBulkAction;
+use Mojar\Backend\Events\DumpAutoloadPlugin;
+use Mojar\Backend\Http\Requests\Plugin\BulkActionRequest;
+use Mojar\CMS\Contracts\MojarApiContract;
+use Mojar\CMS\Facades\CacheGroup;
+use Mojar\CMS\Facades\Plugin;
+use Mojar\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Support\ArrayPagination;
+use Mojar\CMS\Support\Plugin as SupportPlugin;
+use Mojar\CMS\Version;
 
 class PluginController extends BackendController
 {
-    protected JuzawebApiContract $api;
+    protected MojarApiContract $api;
 
-    public function __construct(JuzawebApiContract $api)
+    public function __construct(MojarApiContract $api)
     {
         $this->api = $api;
     }
@@ -104,7 +104,7 @@ class PluginController extends BackendController
 
             return $this->success(
                 [
-                    'window_redirect' => route('admin.update.process', ['plugin']).'?'.$query,
+                    'window_redirect' => route('admin.update.process', ['plugin']) . '?' . $query,
                 ]
             );
         }
@@ -117,7 +117,7 @@ class PluginController extends BackendController
             try {
                 switch ($action) {
                     case 'delete':
-                        if (!config('juzaweb.plugin.enable_upload')) {
+                        if (!config('mojar.plugin.enable_upload')) {
                             throw new \Exception('Access deny.');
                         }
                         /**
@@ -159,7 +159,7 @@ class PluginController extends BackendController
 
     protected function getDataUpdates(Collection $plugins): ?object
     {
-        if (!config('juzaweb.plugin.enable_upload')) {
+        if (!config('mojar.plugin.enable_upload')) {
             return (object) [];
         }
 

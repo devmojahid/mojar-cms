@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Providers;
+namespace Mojar\CMS\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Laravel\Telescope\IncomingEntry;
@@ -27,10 +27,10 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
                 }
 
                 return $entry->isReportableException() ||
-                       $entry->isFailedRequest() ||
-                       $entry->isFailedJob() ||
-                       $entry->isScheduledTask() ||
-                       $entry->hasMonitoredTag();
+                    $entry->isFailedRequest() ||
+                    $entry->isFailedJob() ||
+                    $entry->isScheduledTask() ||
+                    $entry->hasMonitoredTag();
             }
         );
     }

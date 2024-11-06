@@ -1,23 +1,24 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Contracts;
+namespace Mojar\CMS\Contracts;
 
 use Exception;
 use Illuminate\Support\Collection;
-use Juzaweb\API\Support\Swagger\SwaggerDocument;
+use Mojar\API\Support\Swagger\SwaggerDocument;
 
 /**
- * @see \Juzaweb\CMS\Support\HookAction
- * @see \Juzaweb\CMS\Traits\HookAction\RegisterHookAction
- * @see \Juzaweb\CMS\Traits\HookAction\GetHookAction
+ * @see \Mojar\CMS\Support\HookAction
+ * @see \Mojar\CMS\Traits\HookAction\RegisterHookAction
+ * @see \Mojar\CMS\Traits\HookAction\GetHookAction
  */
 interface HookActionContract
 {

@@ -1,18 +1,19 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Support\FileManager;
+namespace Mojar\CMS\Support\FileManager;
 
-use Juzaweb\Backend\Repositories\MediaFileRepository;
-use Juzaweb\Backend\Repositories\MediaFolderRepository;
-use Juzaweb\CMS\Models\Model;
+use Mojar\Backend\Repositories\MediaFileRepository;
+use Mojar\Backend\Repositories\MediaFolderRepository;
+use Mojar\CMS\Models\Model;
 
 class Media
 {

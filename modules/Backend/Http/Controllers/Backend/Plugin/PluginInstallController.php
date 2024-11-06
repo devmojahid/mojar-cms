@@ -1,25 +1,26 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend\Plugin;
+namespace Mojar\Backend\Http\Controllers\Backend\Plugin;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Juzaweb\Backend\Events\AfterUploadPlugin;
-use Juzaweb\Backend\Events\DumpAutoloadPlugin;
-use Juzaweb\Backend\Support\PluginUploader;
-use Juzaweb\CMS\Contracts\JuzawebApiContract;
-use Juzaweb\CMS\Facades\Plugin;
-use Juzaweb\CMS\Http\Controllers\BackendController;
+use Mojar\Backend\Events\AfterUploadPlugin;
+use Mojar\Backend\Events\DumpAutoloadPlugin;
+use Mojar\Backend\Support\PluginUploader;
+use Mojar\CMS\Contracts\MojarApiContract;
+use Mojar\CMS\Facades\Plugin;
+use Mojar\CMS\Http\Controllers\BackendController;
 use Pion\Laravel\ChunkUpload\Exceptions\UploadMissingFileException;
 use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
@@ -28,7 +29,7 @@ class PluginInstallController extends BackendController
 {
     public function index(): View
     {
-        if (!config('juzaweb.plugin.enable_upload')) {
+        if (!config('mojar.plugin.enable_upload')) {
             abort(403, 'Access deny.');
         }
 
@@ -47,9 +48,9 @@ class PluginInstallController extends BackendController
         );
     }
 
-    public function getData(Request $request, JuzawebApiContract $api): object|array
+    public function getData(Request $request, MojarApiContract $api): object|array
     {
-        if (!config('juzaweb.plugin.enable_upload')) {
+        if (!config('mojar.plugin.enable_upload')) {
             return (object) [];
         }
 
@@ -69,7 +70,7 @@ class PluginInstallController extends BackendController
 
     public function upload(Request $request): JsonResponse|RedirectResponse
     {
-        if (!config('juzaweb.plugin.enable_upload')) {
+        if (!config('mojar.plugin.enable_upload')) {
             abort(403, 'Access deny.');
         }
 

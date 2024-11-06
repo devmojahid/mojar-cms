@@ -1,12 +1,12 @@
 <?php
 
-namespace Juzaweb\CMS\Support\ShortCode\View;
+namespace Mojar\CMS\Support\ShortCode\View;
 
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\View\Engines\EngineResolver;
 use Illuminate\View\Factory as IlluminateViewFactory;
 use Illuminate\View\ViewFinderInterface;
-use Juzaweb\CMS\Support\ShortCode\Compilers\ShortCodeCompiler;
+use Mojar\CMS\Support\ShortCode\Compilers\ShortCodeCompiler;
 
 class Factory extends IlluminateViewFactory
 {
@@ -23,7 +23,7 @@ class Factory extends IlluminateViewFactory
      * @param \Illuminate\View\Compilers\EngineResolver|EngineResolver $engines
      * @param  \Illuminate\View\ViewFinderInterface                    $finder
      * @param  \Illuminate\Events\Dispatcher                           $events
-     * @param \Juzaweb\CMS\Support\ShortCode\Compilers\ShortCodeCompiler          $shortcode
+     * @param \Mojar\CMS\Support\ShortCode\Compilers\ShortCodeCompiler          $shortcode
      */
     public function __construct(EngineResolver $engines, ViewFinderInterface $finder, Dispatcher $events, ShortCodeCompiler $shortcode)
     {

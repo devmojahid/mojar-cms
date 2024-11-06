@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Console\Commands;
+namespace Mojar\CMS\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
@@ -71,7 +72,7 @@ class ClearCacheExpiredCommand extends Command
                     $this->activeFileCount++;
                     $this->activeFileSize += Storage::disk('fcache')->size($cachefile);
                 }
-            }  catch (\Throwable $e) {
+            } catch (\Throwable $e) {
                 // File is deleted
             }
 
@@ -110,12 +111,12 @@ class ClearCacheExpiredCommand extends Command
 
     private function formatBytes($size): string
     {
-        $unit = ['Byte','KB','MB','GB','TB','PB','EB','ZB','YB'];
+        $unit = ['Byte', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
-        for ($i = 0; $size >= 1024 && $i < count($unit)-1; $i++) {
+        for ($i = 0; $size >= 1024 && $i < count($unit) - 1; $i++) {
             $size /= 1024;
         }
 
-        return round($size, 2).' '.$unit[$i];
+        return round($size, 2) . ' ' . $unit[$i];
     }
 }

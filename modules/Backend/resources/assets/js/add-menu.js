@@ -116,7 +116,7 @@ $("#modal-edit-menu").on('click', '.save-menu-item', function () {
 
 $(".load-menu").on('change', function () {
     let id = $(this).val();
-    window.location = juzaweb.adminUrl + "/menu/" + id;
+    window.location = mojar.adminUrl + "/menu/" + id;
 });
 
 $('#accordion').on('submit', '.add-menu-item', function () {
@@ -137,7 +137,7 @@ $('#accordion').on('submit', '.add-menu-item', function () {
     if (type !== "custom") {
         $.ajax({
             type: "POST",
-            url: "/" + juzaweb.adminPrefix + "/menu/get-data",
+            url: "/" + mojar.adminPrefix + "/menu/get-data",
             dataType: 'json',
             data: formData,
             success: function (result) {

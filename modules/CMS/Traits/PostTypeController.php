@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Traits;
+namespace Mojar\CMS\Traits;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
@@ -19,12 +20,12 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
-use Juzaweb\Backend\Events\AfterPostSave;
-use Juzaweb\Backend\Http\Datatables\PostTypeDataTable;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\CMS\Abstracts\DataTable;
-use Juzaweb\CMS\Facades\HookAction;
+use Mojar\Backend\Events\AfterPostSave;
+use Mojar\Backend\Http\Datatables\PostTypeDataTable;
+use Mojar\Backend\Models\Post;
+use Mojar\CMS\Abstracts\Action;
+use Mojar\CMS\Abstracts\DataTable;
+use Mojar\CMS\Facades\HookAction;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
@@ -261,7 +262,7 @@ trait PostTypeController
     protected function updateSuccessResponse($model, $request, ...$params): JsonResponse|RedirectResponse
     {
         $message = trans('cms::app.updated_successfully')
-            .' <a href="'. $model->getLink() .'" target="_blank">'. trans('cms::app.view_post') .'</a>';
+            . ' <a href="' . $model->getLink() . '" target="_blank">' . trans('cms::app.view_post') . '</a>';
 
         return $this->success(
             [

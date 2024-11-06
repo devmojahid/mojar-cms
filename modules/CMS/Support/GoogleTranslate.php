@@ -1,12 +1,12 @@
 <?php
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
-use Juzaweb\CMS\Contracts\GoogleTranslate as GoogleTranslateContract;
-use Juzaweb\CMS\Exceptions\GoogleTranslateException;
+use Mojar\CMS\Contracts\GoogleTranslate as GoogleTranslateContract;
+use Mojar\CMS\Exceptions\GoogleTranslateException;
 
 class GoogleTranslate implements GoogleTranslateContract
 {
@@ -14,9 +14,7 @@ class GoogleTranslate implements GoogleTranslateContract
 
     protected string|array|null $proxy = null;
 
-    public function __construct(protected Filesystem $storage)
-    {
-    }
+    public function __construct(protected Filesystem $storage) {}
 
     public function withProxy(string|array $proxy): static
     {
@@ -45,7 +43,7 @@ class GoogleTranslate implements GoogleTranslateContract
             if ($lock < now()->subHours(2)->format('Y-m-d H:i:s')) {
                 throw new GoogleTranslateException(
                     'Translate locked: Google detected unusual traffic from your computer network,'
-                    .' try again later (2 - 48 hours)'
+                        . ' try again later (2 - 48 hours)'
                 );
             }
 
@@ -79,8 +77,8 @@ class GoogleTranslate implements GoogleTranslateContract
         }
 
         $url = "https://translate.google.com/translate_a/single"
-         . "?client=at&dt=t&dt=ld&dt=qca&dt=rm&dt=bd&dj=1&hl=es-ES"
-         . "&ie=UTF-8&oe=UTF-8&inputm=2&otf=2&iid=1dd3b944-fa62-4b55-b330-74909a99969e";
+            . "?client=at&dt=t&dt=ld&dt=qca&dt=rm&dt=bd&dj=1&hl=es-ES"
+            . "&ie=UTF-8&oe=UTF-8&inputm=2&otf=2&iid=1dd3b944-fa62-4b55-b330-74909a99969e";
 
         $client = $this->getClient()->post(
             $url,
@@ -115,7 +113,7 @@ class GoogleTranslate implements GoogleTranslateContract
 
             throw new GoogleTranslateException(
                 'Google detected unusual traffic from your computer network,'
-                    .' try again later (2 - 48 hours)'
+                    . ' try again later (2 - 48 hours)'
             );
         }
 

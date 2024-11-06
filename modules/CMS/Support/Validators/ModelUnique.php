@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support\Validators;
+namespace Mojar\CMS\Support\Validators;
 
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Database\Eloquent\Builder;
@@ -44,8 +45,7 @@ class ModelUnique implements Rule
     {
         $this->modelClass = $modelClass;
         $this->modelAttribute = $modelAttribute;
-        $this->closure = $closure ?? function () {
-        };
+        $this->closure = $closure ?? function () {};
     }
 
     public function passes($attribute, $value)

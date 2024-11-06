@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Frontend\Http\Controllers;
+namespace Mojar\Frontend\Http\Controllers;
 
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\File;
@@ -9,17 +9,15 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageCache;
-use Juzaweb\CMS\Contracts\TranslationManager;
-use Juzaweb\CMS\Facades\ThemeLoader;
-use Juzaweb\CMS\Http\Controllers\Controller;
+use Mojar\CMS\Contracts\TranslationManager;
+use Mojar\CMS\Facades\ThemeLoader;
+use Mojar\CMS\Http\Controllers\Controller;
 
 class AssetController extends Controller
 {
     private int $cacheAge = 86400;
 
-    public function __construct(protected TranslationManager $translationManager)
-    {
-    }
+    public function __construct(protected TranslationManager $translationManager) {}
 
     public function assetPlugin($vendor, $plugin, $path): HttpResponse
     {
@@ -46,7 +44,7 @@ class AssetController extends Controller
     {
         $path = Storage::disk('public')->path($path);
         if (!file_exists($path)) {
-            $path = public_path('jw-styles/juzaweb/images/thumb-default.png');
+            $path = public_path('jw-styles/mojar/images/thumb-default.png');
         }
 
         list($width, $height) = explode('x', $size);
@@ -91,7 +89,7 @@ class AssetController extends Controller
             $length = Storage::size($cacheFile);
         } else {
             $langs['cms'] = Lang::get('cms::app');
-            $content = 'const langs = '. json_encode($langs);
+            $content = 'const langs = ' . json_encode($langs);
             Storage::put($cacheFile, $content);
             $length = Storage::size($cacheFile);
         }

@@ -1,18 +1,19 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Http\Datatables;
+namespace Mojar\Backend\Http\Datatables;
 
 use Illuminate\Database\Eloquent\Builder;
-use Juzaweb\Backend\Repositories\NotificationRepository;
-use Juzaweb\CMS\Abstracts\DataTable;
+use Mojar\Backend\Repositories\NotificationRepository;
+use Mojar\CMS\Abstracts\DataTable;
 
 class NotificationDatatable extends DataTable
 {
@@ -31,8 +32,8 @@ class NotificationDatatable extends DataTable
             'subject' => [
                 'label' => trans('cms::app.subject'),
                 'formatter' => function ($value, $row, $index) {
-                    $class = $row->read_at ? '': 'font-weight-bold';
-                    return '<a href="'. route('admin.profile.notification', [$row->id]) .'" class="'. $class .'">'.
+                    $class = $row->read_at ? '' : 'font-weight-bold';
+                    return '<a href="' . route('admin.profile.notification', [$row->id]) . '" class="' . $class . '">' .
                         e($row->subject) .
                         '</a>';
                 },
@@ -82,7 +83,7 @@ class NotificationDatatable extends DataTable
 
         $query = $this->notificationRepository->query();
 
-        $query->where('notifiable_type', '=', 'Juzaweb\CMS\Models\User');
+        $query->where('notifiable_type', '=', 'Mojar\CMS\Models\User');
 
         $query->where('notifiable_id', '=', $jw_user->id);
 

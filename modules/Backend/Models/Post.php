@@ -1,21 +1,21 @@
 <?php
 
-namespace Juzaweb\Backend\Models;
+namespace Mojar\Backend\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Juzaweb\CMS\Database\Factories\PostFactory;
-use Juzaweb\CMS\Models\Model;
-use Juzaweb\CMS\Traits\PostTypeModel;
-use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
-use Juzaweb\CMS\Traits\UseUUIDColumn;
+use Mojar\CMS\Database\Factories\PostFactory;
+use Mojar\CMS\Models\Model;
+use Mojar\CMS\Traits\PostTypeModel;
+use Mojar\CMS\Traits\QueryCache\QueryCacheable;
+use Mojar\CMS\Traits\UseUUIDColumn;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 
 /**
- * Juzaweb\Backend\Models\Post
+ * Mojar\Backend\Models\Post
  *
  * @property int $id
  * @property string $title
@@ -35,21 +35,21 @@ use Spatie\Feed\FeedItem;
  * @property float $rating
  * @property int $total_rating
  * @property int $total_comment
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Comment[] $comments
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\Comment[] $comments
  * @property-read int|null $comments_count
- * @property-read \Juzaweb\CMS\Models\User|null $createdBy
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\MenuItem[] $menuItems
+ * @property-read \Mojar\CMS\Models\User|null $createdBy
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\MenuItem[] $menuItems
  * @property-read int|null $menu_items_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\PostMeta[] $metas
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\PostMeta[] $metas
  * @property-read int|null $metas_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\PostRating[] $ratings
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\PostRating[] $ratings
  * @property-read int|null $post_ratings_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\PostView[] $postViews
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\PostView[] $postViews
  * @property-read int|null $post_views_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Taxonomy[] $taxonomies
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\Taxonomy[] $taxonomies
  * @property-read int|null $taxonomies_count
- * @property-read \Juzaweb\CMS\Models\User|null $updatedBy
- * @method static \Juzaweb\CMS\Database\Factories\PostFactory factory(...$parameters)
+ * @property-read \Mojar\CMS\Models\User|null $updatedBy
+ * @method static \Mojar\CMS\Database\Factories\PostFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Post newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Post newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Post query()
@@ -84,16 +84,16 @@ use Spatie\Feed\FeedItem;
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereSiteId($value)
  * @property string|null $domain
  * @property string|null $url
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Taxonomy[] $categories
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\Taxonomy[] $categories
  * @property-read int|null $categories_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Taxonomy[] $tags
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\Taxonomy[] $tags
  * @property-read int|null $tags_count
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereDomain($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUrl($value)
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\PostLike[] $likes
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\PostLike[] $likes
  * @property-read int|null $likes_count
  * @property-read int|null $ratings_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Resource[] $resources
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\Resource[] $resources
  * @property-read int|null $resources_count
  * @property string|null $uuid
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUuid($value)
@@ -169,7 +169,7 @@ class Post extends Model implements Feedable
             ->where(
                 'model_class',
                 '=',
-                'Juzaweb\\Models\\Post'
+                'Mojar\\Models\\Post'
             );
     }
 

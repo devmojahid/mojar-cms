@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Generators;
+namespace Mojar\CMS\Repositories\Generators;
 
 /**
  * Class Stub
@@ -119,7 +119,7 @@ class Stub
     {
         $contents = file_get_contents($this->getPath());
         foreach ($this->replaces as $search => $replace) {
-            $contents = str_replace('$'.strtoupper($search).'$', $replace, $contents);
+            $contents = str_replace('$' . strtoupper($search) . '$', $replace, $contents);
         }
 
         return $contents;
@@ -132,7 +132,7 @@ class Stub
      */
     public function getPath()
     {
-        return static::$basePath.$this->path;
+        return static::$basePath . $this->path;
     }
 
     /**

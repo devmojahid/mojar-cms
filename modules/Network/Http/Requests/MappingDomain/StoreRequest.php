@@ -1,18 +1,19 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Network\Http\Requests\MappingDomain;
+namespace Mojar\Network\Http\Requests\MappingDomain;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Juzaweb\Network\Models\DomainMapping;
+use Mojar\Network\Models\DomainMapping;
 
 class StoreRequest extends FormRequest
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Mojar\Backend\Http\Controllers\Backend;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -8,12 +8,12 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
-use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\Backend\Models\MediaFile;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\PostView;
-use Juzaweb\CMS\Models\User;
+use Mojar\CMS\Abstracts\Action;
+use Mojar\CMS\Http\Controllers\BackendController;
+use Mojar\Backend\Models\MediaFile;
+use Mojar\Backend\Models\Post;
+use Mojar\Backend\Models\PostView;
+use Mojar\CMS\Models\User;
 
 class DashboardController extends BackendController
 {

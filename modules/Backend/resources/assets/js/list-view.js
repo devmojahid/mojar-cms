@@ -1,13 +1,13 @@
-class JuzawebListView {
+class MojarListView {
     constructor(e) {
         this.url = e.url;
-        this.list = (e.list) ? e.list : '.juzaweb-list';
+        this.list = (e.list) ? e.list : '.mojar-list';
         this.method = (e.method) ? e.method : 'get';
         this.template = (e.template) ? e.template : null;
         this.sort_name = (e.sort_name) ? e.sort_name : 'id';
         this.sort_order = (e.sort_order) ? e.sort_order : 'desc';
-        this.page_size = (e.page_size) ? e.page_size: 10;
-        this.after_load_callback = (e.after_load_callback) ? e.after_load_callback: null;
+        this.page_size = (e.page_size) ? e.page_size : 10;
+        this.after_load_callback = (e.after_load_callback) ? e.after_load_callback : null;
         this.item_formatter = (e.item_formatter) ? e.item_formatter : null;
         this.offset = 0;
         this.total = 0;
@@ -15,7 +15,7 @@ class JuzawebListView {
         this.init();
     }
 
-    init () {
+    init() {
         let item = this;
         item.loadData();
 
@@ -37,7 +37,7 @@ class JuzawebListView {
         if (this.page > 1) {
             this.offset = (this.page * this.page_size) - this.page_size;
         }
-        
+
         let jqxhr = $.ajax({
             type: this.method,
             url: this.url,

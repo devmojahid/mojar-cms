@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Abstracts;
+namespace Mojar\CMS\Abstracts;
 
 use GuzzleHttp\Psr7\Utils;
 use Illuminate\Filesystem\FilesystemAdapter;
@@ -17,23 +18,23 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Contracts\JuzawebApiContract;
-use Juzaweb\CMS\Support\Curl;
+use Mojar\CMS\Contracts\MojarApiContract;
+use Mojar\CMS\Support\Curl;
 
 /**
  * @method void beforeFinish()
  * @method void afterFinish()
  * @method void afterUpdateFileAndFolder()
-*/
+ */
 abstract class UpdateManager
 {
     protected Curl $curl;
-    protected JuzawebApiContract $api;
+    protected MojarApiContract $api;
     protected FilesystemAdapter $storage;
     protected array $updatePaths = [];
     protected int $maxStep = 6;
 
-    public function __construct(Curl $curl, JuzawebApiContract $api)
+    public function __construct(Curl $curl, MojarApiContract $api)
     {
         $this->curl = $curl;
         $this->api = $api;
@@ -55,7 +56,7 @@ abstract class UpdateManager
 
     public function update(): bool
     {
-        for ($i=1; $i<=$this->maxStep; $i++) {
+        for ($i = 1; $i <= $this->maxStep; $i++) {
             $this->updateByStep($i);
         }
 
@@ -109,7 +110,7 @@ abstract class UpdateManager
             }
         }
 
-        $tmpFile = $tmpFolder.'/zip/'. Str::lower(Str::random(5)).'.zip';
+        $tmpFile = $tmpFolder . '/zip/' . Str::lower(Str::random(5)) . '.zip';
         $tmpFilePath = $this->storage->path($tmpFile);
 
         if (!$this->downloadFile($this->getCacheData('response')->data->link, $tmpFilePath)) {

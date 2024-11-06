@@ -1,18 +1,19 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Tests\Feature\Backend;
+namespace Mojar\Tests\Feature\Backend;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Juzaweb\Tests\TestCase;
+use Mojar\Tests\TestCase;
 
 class PluginTest extends TestCase
 {
@@ -35,7 +36,7 @@ class PluginTest extends TestCase
             'POST',
             'admin-cp/plugins/bulk-actions',
             [
-                'ids' => ['juzaweb/example'],
+                'ids' => ['mojar/example'],
                 'action' => 'activate'
             ]
         )
@@ -48,7 +49,7 @@ class PluginTest extends TestCase
             'POST',
             'admin-cp/plugins/bulk-actions',
             [
-                'ids' => ['juzaweb/example'],
+                'ids' => ['mojar/example'],
                 'action' => 'deactivate'
             ]
         )
@@ -57,11 +58,11 @@ class PluginTest extends TestCase
 
     public function testDeletePlugin()
     {
-        config()->set('juzaweb.plugin.enable_upload', true);
+        config()->set('mojar.plugin.enable_upload', true);
 
-        $pluginName = 'juzaweb/example';
+        $pluginName = 'mojar/example';
 
-        $pluginPath = config('juzaweb.plugin.path') . "/example";
+        $pluginPath = config('mojar.plugin.path') . "/example";
 
         $destination = Storage::disk('local')->path("backups/example");
 

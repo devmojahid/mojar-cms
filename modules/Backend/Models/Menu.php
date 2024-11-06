@@ -1,10 +1,11 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  *
  * Created by JUZAWEB.
@@ -12,23 +13,23 @@
  * Time: 12:38 PM
  */
 
-namespace Juzaweb\Backend\Models;
+namespace Mojar\Backend\Models;
 
 use Illuminate\Support\Arr;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Models\Model;
-use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
-use Juzaweb\CMS\Traits\UseUUIDColumn;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\CMS\Models\Model;
+use Mojar\CMS\Traits\QueryCache\QueryCacheable;
+use Mojar\CMS\Traits\UseUUIDColumn;
 
 /**
- * Juzaweb\Backend\Models\Menu
+ * Mojar\Backend\Models\Menu
  *
  * @property int $id
  * @property string $name
  * @property string|null $description
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\MenuItem[] $items
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\MenuItem[] $items
  * @property-read int|null $items_count
  * @method static \Illuminate\Database\Eloquent\Builder|Menu newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Menu newQuery()

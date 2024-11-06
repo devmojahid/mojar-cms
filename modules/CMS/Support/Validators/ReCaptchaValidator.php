@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Validators;
+namespace Mojar\CMS\Support\Validators;
 
 use GuzzleHttp\Client;
 
@@ -11,7 +11,8 @@ class ReCaptchaValidator
         $client = new Client();
         $response = $client->post(
             'https://www.google.com/recaptcha/api/siteverify',
-            ['form_params' =>
+            [
+                'form_params' =>
                 [
                     'secret' => get_config('google_captcha.secret_key'),
                     'response' => $value,

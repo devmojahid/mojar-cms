@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Generators;
+namespace Mojar\CMS\Repositories\Generators;
 
-use Juzaweb\CMS\Repositories\Generators\Generator;
-use Juzaweb\CMS\Repositories\Generators\ValidatorGenerator;
-use Juzaweb\CMS\Repositories\Generators\Migrations\SchemaParser;
+use Mojar\CMS\Repositories\Generators\Generator;
+use Mojar\CMS\Repositories\Generators\ValidatorGenerator;
+use Mojar\CMS\Repositories\Generators\Migrations\SchemaParser;
 
 /**
  * Class RepositoryEloquentGenerator
@@ -29,7 +29,7 @@ class RepositoryEloquentGenerator extends Generator
      */
     public function getRootNamespace()
     {
-        return parent::getRootNamespace().parent::getConfigGeneratorClassPath($this->getPathConfigNode());
+        return parent::getRootNamespace() . parent::getConfigGeneratorClassPath($this->getPathConfigNode());
     }
 
     /**
@@ -49,10 +49,10 @@ class RepositoryEloquentGenerator extends Generator
      */
     public function getPath()
     {
-        return $this->getBasePath().'/'.parent::getConfigGeneratorClassPath(
+        return $this->getBasePath() . '/' . parent::getConfigGeneratorClassPath(
             $this->getPathConfigNode(),
             true
-        ).'/'.$this->getName().'RepositoryEloquent.php';
+        ) . '/' . $this->getName() . 'RepositoryEloquent.php';
     }
 
     /**
@@ -72,11 +72,11 @@ class RepositoryEloquentGenerator extends Generator
      */
     public function getReplacements()
     {
-        $repository = parent::getRootNamespace().parent::getConfigGeneratorClassPath('interfaces').'\\'.$this->name.'Repository;';
+        $repository = parent::getRootNamespace() . parent::getConfigGeneratorClassPath('interfaces') . '\\' . $this->name . 'Repository;';
         $repository = str_replace(
             [
-            "\\",
-            '/',
+                "\\",
+                '/',
             ],
             '\\',
             $repository
@@ -85,11 +85,11 @@ class RepositoryEloquentGenerator extends Generator
         return array_merge(
             parent::getReplacements(),
             [
-            'fillable' => $this->getFillable(),
-            'use_validator' => $this->getValidatorUse(),
-            'validator' => $this->getValidatorMethod(),
-            'repository' => $repository,
-            'model' => isset($this->options['model']) ? $this->options['model'] : '',
+                'fillable' => $this->getFillable(),
+                'use_validator' => $this->getValidatorUse(),
+                'validator' => $this->getValidatorMethod(),
+                'repository' => $repository,
+                'model' => isset($this->options['model']) ? $this->options['model'] : '',
             ]
         );
     }
@@ -104,13 +104,13 @@ class RepositoryEloquentGenerator extends Generator
         if (!$this->fillable) {
             return '[]';
         }
-        $results = '['.PHP_EOL;
+        $results = '[' . PHP_EOL;
 
         foreach ($this->getSchemaParser()->toArray() as $column => $value) {
-            $results .= "\t\t'{$column}',".PHP_EOL;
+            $results .= "\t\t'{$column}'," . PHP_EOL;
         }
 
-        return $results."\t".']';
+        return $results . "\t" . ']';
     }
 
     /**
@@ -135,13 +135,13 @@ class RepositoryEloquentGenerator extends Generator
     {
         $validatorGenerator = new ValidatorGenerator(
             [
-            'name' => $this->name,
-            'rules' => $this->rules,
-            'force' => $this->force,
+                'name' => $this->name,
+                'rules' => $this->rules,
+                'force' => $this->force,
             ]
         );
 
-        $validator = $validatorGenerator->getRootNamespace().'\\'.$validatorGenerator->getName();
+        $validator = $validatorGenerator->getRootNamespace() . '\\' . $validatorGenerator->getName();
 
         return str_replace(
             [
@@ -150,7 +150,7 @@ class RepositoryEloquentGenerator extends Generator
             ],
             '\\',
             $validator
-        ).'Validator';
+        ) . 'Validator';
     }
 
 
@@ -162,6 +162,6 @@ class RepositoryEloquentGenerator extends Generator
 
         $class = $this->getClass();
 
-        return '/**'.PHP_EOL.'    * Specify Validator class name'.PHP_EOL.'    *'.PHP_EOL.'    * @return mixed'.PHP_EOL.'    */'.PHP_EOL.'    public function validator()'.PHP_EOL.'    {'.PHP_EOL.PHP_EOL.'        return '.$class.'Validator::class;'.PHP_EOL.'    }'.PHP_EOL;
+        return '/**' . PHP_EOL . '    * Specify Validator class name' . PHP_EOL . '    *' . PHP_EOL . '    * @return mixed' . PHP_EOL . '    */' . PHP_EOL . '    public function validator()' . PHP_EOL . '    {' . PHP_EOL . PHP_EOL . '        return ' . $class . 'Validator::class;' . PHP_EOL . '    }' . PHP_EOL;
     }
 }

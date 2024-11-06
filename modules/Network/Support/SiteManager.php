@@ -1,22 +1,23 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Network\Support;
+namespace Mojar\Network\Support;
 
 use Illuminate\Database\ConnectionResolverInterface;
 use Illuminate\Support\Arr;
-use Juzaweb\CMS\Models\User;
-use Juzaweb\Network\Contracts\NetworkSiteContract;
-use Juzaweb\Network\Contracts\SiteCreaterContract;
-use Juzaweb\Network\Contracts\SiteManagerContract;
-use Juzaweb\Network\Models\Site;
+use Mojar\CMS\Models\User;
+use Mojar\Network\Contracts\NetworkSiteContract;
+use Mojar\Network\Contracts\SiteCreaterContract;
+use Mojar\Network\Contracts\SiteManagerContract;
+use Mojar\Network\Models\Site;
 
 class SiteManager implements SiteManagerContract
 {

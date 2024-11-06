@@ -1,26 +1,25 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    GNU General Public License v2.0
  */
 
-namespace Juzaweb\API\Support\Documentation;
+namespace Mojar\API\Support\Documentation;
 
 use Illuminate\Support\Collection;
-use Juzaweb\API\Support\Swagger\SwaggerDocument;
-use Juzaweb\API\Support\Swagger\SwaggerMethod;
-use Juzaweb\API\Support\Swagger\SwaggerPath;
-use Juzaweb\CMS\Contracts\HookActionContract;
+use Mojar\API\Support\Swagger\SwaggerDocument;
+use Mojar\API\Support\Swagger\SwaggerMethod;
+use Mojar\API\Support\Swagger\SwaggerPath;
+use Mojar\CMS\Contracts\HookActionContract;
 
 class PostTypeAdminSwaggerDocumentation implements APISwaggerDocumentation
 {
-    public function __construct(protected HookActionContract $hookAction)
-    {
-    }
+    public function __construct(protected HookActionContract $hookAction) {}
 
     public function handle(SwaggerDocument $document): SwaggerDocument
     {

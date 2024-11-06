@@ -1,10 +1,11 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
@@ -16,21 +17,21 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
-use Juzaweb\Backend\Models\Comment;
-use Juzaweb\Backend\Models\Menu;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Facades\Plugin;
-use Juzaweb\CMS\Facades\Theme;
-use Juzaweb\CMS\Facades\ThemeLoader;
-use Juzaweb\CMS\Facades\ThemeConfig;
-use Juzaweb\CMS\Support\Theme\BackendMenuBuilder;
-use Juzaweb\CMS\Support\Theme\MenuBuilder;
+use Mojar\Backend\Models\Comment;
+use Mojar\Backend\Models\Menu;
+use Mojar\Backend\Models\Post;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\CMS\Facades\Plugin;
+use Mojar\CMS\Facades\Theme;
+use Mojar\CMS\Facades\ThemeLoader;
+use Mojar\CMS\Facades\ThemeConfig;
+use Mojar\CMS\Support\Theme\BackendMenuBuilder;
+use Mojar\CMS\Support\Theme\MenuBuilder;
 use TwigBridge\Facade\Twig;
 
 function body_class($class = ''): string
 {
-    $class = trim('jw-theme jw-theme-body '.$class);
+    $class = trim('jw-theme jw-theme-body ' . $class);
 
     return apply_filters('theme.body_class', $class);
 }
@@ -303,7 +304,7 @@ if (!function_exists('get_logo')) {
     {
         return upload_url(
             get_config('logo'),
-            asset($default ?: 'jw-styles/juzaweb/images/logo.png')
+            asset($default ?: 'jw-styles/mojar/images/logo.png')
         );
     }
 }
@@ -313,7 +314,7 @@ if (!function_exists('get_icon')) {
     {
         return upload_url(
             get_config('icon'),
-            asset($default ?: 'jw-styles/juzaweb/images/favicon.ico')
+            asset($default ?: 'jw-styles/mojar/images/favicon.ico')
         );
     }
 }
@@ -335,7 +336,7 @@ if (!function_exists('jw_get_sidebar')) {
 if (!function_exists('jw_get_widgets_sidebar')) {
     function jw_get_widgets_sidebar($key): Collection
     {
-        $content = get_theme_config('sidebar_'.$key, []);
+        $content = get_theme_config('sidebar_' . $key, []);
 
         return collect($content);
     }
@@ -441,8 +442,7 @@ function theme_action($action): void
         [
             'auth_form',
         ]
-    )
-    ) {
+    )) {
         do_action($action);
     }
 }
@@ -546,7 +546,7 @@ if (!function_exists('get_media_image_with_size')) {
 
         $path = str_replace($filename, "{$filename}_{$size}", $path);
 
-        return Storage::disk(config('juzaweb.filemanager.disk'))->{$type}($path);
+        return Storage::disk(config('mojar.filemanager.disk'))->{$type}($path);
     }
 }
 
@@ -557,6 +557,6 @@ if (!function_exists('has_media_image_size')) {
 
         $path = str_replace($filename, "{$filename}_{$size}", $path);
 
-        return Storage::disk(config('juzaweb.filemanager.disk'))->exists($path);
+        return Storage::disk(config('mojar.filemanager.disk'))->exists($path);
     }
 }

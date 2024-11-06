@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend\Setting;
+namespace Mojar\Backend\Http\Controllers\Backend\Setting;
 
 use Illuminate\Http\Request;
-use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Abstracts\Action;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\CMS\Http\Controllers\BackendController;
 
 class PermalinkController extends BackendController
 {

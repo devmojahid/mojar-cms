@@ -1,23 +1,24 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Frontend\Actions;
+namespace Mojar\Frontend\Actions;
 
 use Illuminate\Support\Arr;
-use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Facades\ThemeLoader;
-use Juzaweb\CMS\Support\DefaultPageBlock;
-use Juzaweb\CMS\Support\DefaultWidget;
-use Juzaweb\Frontend\Http\Controllers\AjaxController;
+use Mojar\CMS\Abstracts\Action;
+use Mojar\CMS\Contracts\LocalThemeRepositoryContract;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\CMS\Facades\ThemeLoader;
+use Mojar\CMS\Support\DefaultPageBlock;
+use Mojar\CMS\Support\DefaultWidget;
+use Mojar\Frontend\Http\Controllers\AjaxController;
 use TwigBridge\Facade\Twig;
 
 class ThemeAction extends Action
@@ -51,7 +52,7 @@ class ThemeAction extends Action
         HookAction::addAction(Action::BLOCKS_INIT, [$this, 'blocks']);
         HookAction::addAction(Action::INIT_ACTION, [$this, 'settingFields']);
 
-        if (config('juzaweb.adminbar.enable')) {
+        if (config('mojar.adminbar.enable')) {
             HookAction::addAction(Action::FRONTEND_AFTER_BODY, [$this, 'addThemeHeader']);
         }
 

@@ -2,9 +2,9 @@ toastr.options.timeOut = 3000;
 
 function toastr_message(message, status, title = null) {
     if (status == true) {
-        toastr.success(message, title || juzaweb.lang.successfully + ' !!');
+        toastr.success(message, title || mojar.lang.successfully + ' !!');
     } else {
-        toastr.error(message, title || juzaweb.lang.error + ' !!');
+        toastr.error(message, title || mojar.lang.error + ' !!');
     }
 }
 
@@ -16,15 +16,14 @@ function confirm_message(question, callback, title = '', type = 'warning') {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: juzaweb.lang.yes + '!',
-        cancelButtonText: juzaweb.lang.cancel + '!',
+        confirmButtonText: mojar.lang.yes + '!',
+        cancelButtonText: mojar.lang.cancel + '!',
     }).then((result) => {
         callback(result.value);
     });
 }
 
-function get_message_response(response)
-{
+function get_message_response(response) {
     // Get response message
     if (response.data) {
         if (response.data.message) {
@@ -68,19 +67,18 @@ function get_message_response(response)
     }
 }
 
-function show_message(response, append = false)
-{
+function show_message(response, append = false) {
     let msg = get_message_response(response);
     if (!msg) {
         return;
     }
 
-    let msgHTML = `<div class="alert alert-${msg.status ? 'success' : 'danger' } jw-message">
-        <button type="button" class="close" data-dismiss="alert" aria-label="${juzaweb.lang.close}">
+    let msgHTML = `<div class="alert alert-${msg.status ? 'success' : 'danger'} jw-message">
+        <button type="button" class="close" data-dismiss="alert" aria-label="${mojar.lang.close}">
             <span aria-hidden="true">&times;</span>
         </button>
 
-        ${msg.status ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>' } ${msg.message}
+        ${msg.status ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>'} ${msg.message}
     </div>`;
 
     if (append) {
@@ -104,7 +102,7 @@ function toggle_global_loading(status, timeout = 300) {
     if (status) {
         $("#admin-overlay").fadeIn(300);
     } else {
-        setTimeout(function(){
+        setTimeout(function () {
             $("#admin-overlay").fadeOut(300);
         }, timeout);
     }

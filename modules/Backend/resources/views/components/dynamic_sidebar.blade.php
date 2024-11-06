@@ -1,9 +1,9 @@
 @foreach ($widgets as $widget)
     @php
-        $widgetData = \Juzaweb\CMS\Facades\HookAction::getWidgets($widget['widget'] ?? 'null');
+        $widgetData = \Mojar\CMS\Facades\HookAction::getWidgets($widget['widget'] ?? 'null');
     @endphp
 
-    @if(empty($widgetData))
+    @if (empty($widgetData))
         @continue
     @endif
 
@@ -12,5 +12,4 @@
     {!! $widgetData['widget']->show($widget) !!}
 
     {!! $sidebar->get('after_widget') !!}
-
 @endforeach

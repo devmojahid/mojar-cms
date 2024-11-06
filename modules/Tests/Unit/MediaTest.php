@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Tests\Unit;
+namespace Mojar\Tests\Unit;
 
 use Illuminate\Support\Facades\Storage;
-use Juzaweb\CMS\Models\User;
-use Juzaweb\CMS\Support\FileManager;
-use Juzaweb\Tests\TestCase;
+use Mojar\CMS\Models\User;
+use Mojar\CMS\Support\FileManager;
+use Mojar\Tests\TestCase;
 
 class MediaTest extends TestCase
 {
@@ -35,7 +36,7 @@ class MediaTest extends TestCase
 
     public function testUploadByUrl()
     {
-        $img = 'https://cdn.juzaweb.com/jw-styles/juzaweb/images/thumb-default.png';
+        $img = 'https://cdn.mojar.com/jw-styles/mojar/images/thumb-default.png';
 
         $media = FileManager::addFile($img, 'image', null, User::first()->id);
 

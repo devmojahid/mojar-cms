@@ -1,12 +1,12 @@
 <?php
 
-namespace Juzaweb\DevTool\Commands\Plugin;
+namespace Mojar\DevTool\Commands\Plugin;
 
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Support\Config\GenerateConfigReader;
-use Juzaweb\CMS\Support\Stub;
-use Juzaweb\CMS\Traits\ModuleCommandTrait;
-use Juzaweb\DevTool\Abstracts\GeneratorCommand;
+use Mojar\CMS\Support\Config\GenerateConfigReader;
+use Mojar\CMS\Support\Stub;
+use Mojar\CMS\Traits\ModuleCommandTrait;
+use Mojar\DevTool\Abstracts\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -48,7 +48,7 @@ class ModelMakeCommand extends GeneratorCommand
     private function handleOptionalMigrationOption(): void
     {
         if ($this->option('migration') === true) {
-            $migrationName = 'create_'.$this->createMigrationName().'_table';
+            $migrationName = 'create_' . $this->createMigrationName() . '_table';
             $this->call('plugin:make-migration', ['name' => $migrationName, 'module' => $this->argument('module')]);
         }
     }
@@ -66,7 +66,7 @@ class ModelMakeCommand extends GeneratorCommand
         $string = '';
         foreach ($pieces as $i => $piece) {
             if ($i + 1 < count($pieces)) {
-                $string .= strtolower($piece).'_';
+                $string .= strtolower($piece) . '_';
             } else {
                 $string .= Str::plural(strtolower($piece));
             }
@@ -121,7 +121,7 @@ class ModelMakeCommand extends GeneratorCommand
     {
         $module = $this->laravel['plugins']->findOrFail($this->getModuleName());
         if (!$table = $this->option('table')) {
-            $table = $module->getDomainName().'_'.$this->createMigrationName();
+            $table = $module->getDomainName() . '_' . $this->createMigrationName();
         }
 
         return (new Stub(
@@ -143,7 +143,7 @@ class ModelMakeCommand extends GeneratorCommand
     protected function getStubPath(): string
     {
         if ($stub = $this->option('stub')) {
-            return '/'.$stub;
+            return '/' . $stub;
         }
 
         return '/model.stub';
@@ -180,6 +180,6 @@ class ModelMakeCommand extends GeneratorCommand
 
         $modelPath = GenerateConfigReader::read('model');
 
-        return $path.$modelPath->getPath().'/'.$this->getModelName().'.php';
+        return $path . $modelPath->getPath() . '/' . $this->getModelName() . '.php';
     }
 }

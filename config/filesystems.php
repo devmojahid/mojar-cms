@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'disks' => \Juzaweb\CMS\Facades\Facades::defaultFileSystemDisks()->merge(
+    'disks' => \Mojar\CMS\Facades\Facades::defaultFileSystemDisks()->merge(
         [
             // ...
         ]

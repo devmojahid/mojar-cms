@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Console\Commands;
+namespace Mojar\CMS\Console\Commands;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Support\Updater\CmsUpdater;
+use Mojar\CMS\Support\Updater\CmsUpdater;
 
 class UpdateCommand extends Command
 {

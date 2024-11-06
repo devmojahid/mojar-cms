@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\CMS\Console\Commands\Permission;
+namespace Mojar\CMS\Console\Commands\Permission;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Contracts\Permission as PermissionContract;
-use Juzaweb\CMS\Contracts\Role as RoleContract;
-use Juzaweb\CMS\Support\Permission\PermissionRegistrar;
+use Mojar\CMS\Contracts\Permission as PermissionContract;
+use Mojar\CMS\Contracts\Role as RoleContract;
+use Mojar\CMS\Support\Permission\PermissionRegistrar;
 
 class CreateRole extends Command
 {
@@ -40,7 +40,7 @@ class CreateRole extends Command
 
         $role->givePermissionTo($this->makePermissions($this->argument('permissions')));
 
-        $this->info("Role `{$role->name}` ".($role->wasRecentlyCreated ? 'created' : 'updated'));
+        $this->info("Role `{$role->name}` " . ($role->wasRecentlyCreated ? 'created' : 'updated'));
     }
 
     /**

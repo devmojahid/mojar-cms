@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Providers;
+namespace Mojar\CMS\Providers;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Routing\Route;
@@ -8,9 +8,9 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
-use Juzaweb\CMS\Contracts\Permission as PermissionContract;
-use Juzaweb\CMS\Contracts\Role as RoleContract;
-use Juzaweb\CMS\Support\Permission\PermissionRegistrar;
+use Mojar\CMS\Contracts\Permission as PermissionContract;
+use Mojar\CMS\Contracts\Role as RoleContract;
+use Mojar\CMS\Support\Permission\PermissionRegistrar;
 
 class PermissionServiceProvider extends ServiceProvider
 {
@@ -40,7 +40,7 @@ class PermissionServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/permission.php',
+            __DIR__ . '/../config/permission.php',
             'permission'
         );
 
@@ -61,7 +61,7 @@ class PermissionServiceProvider extends ServiceProvider
 
         $this->publishes(
             [
-                __DIR__.'/../config/permission.php' => config_path('permission.php'),
+                __DIR__ . '/../config/permission.php' => config_path('permission.php'),
             ],
             'config'
         );
@@ -71,11 +71,11 @@ class PermissionServiceProvider extends ServiceProvider
     {
         $this->commands(
             [
-                \Juzaweb\CMS\Console\Commands\Permission\CacheReset::class,
-                \Juzaweb\CMS\Console\Commands\Permission\CreateRole::class,
-                \Juzaweb\CMS\Console\Commands\Permission\CreatePermission::class,
-                \Juzaweb\CMS\Console\Commands\Permission\Show::class,
-                \Juzaweb\CMS\Console\Commands\Permission\UpgradeForTeams::class,
+                \Mojar\CMS\Console\Commands\Permission\CacheReset::class,
+                \Mojar\CMS\Console\Commands\Permission\CreateRole::class,
+                \Mojar\CMS\Console\Commands\Permission\CreatePermission::class,
+                \Mojar\CMS\Console\Commands\Permission\Show::class,
+                \Mojar\CMS\Console\Commands\Permission\UpgradeForTeams::class,
             ]
         );
     }
@@ -97,7 +97,7 @@ class PermissionServiceProvider extends ServiceProvider
         $bladeCompiler->directive(
             'role',
             function ($arguments) {
-                list($role, $guard) = explode(',', $arguments.',');
+                list($role, $guard) = explode(',', $arguments . ',');
 
                 return "<?php if(auth({$guard})->check() && auth({$guard})->user()->hasRole({$role})): ?>";
             }
@@ -106,7 +106,7 @@ class PermissionServiceProvider extends ServiceProvider
         $bladeCompiler->directive(
             'elserole',
             function ($arguments) {
-                list($role, $guard) = explode(',', $arguments.',');
+                list($role, $guard) = explode(',', $arguments . ',');
 
                 return "<?php elseif(auth({$guard})->check() && auth({$guard})->user()->hasRole({$role})): ?>";
             }
@@ -122,7 +122,7 @@ class PermissionServiceProvider extends ServiceProvider
         $bladeCompiler->directive(
             'hasrole',
             function ($arguments) {
-                list($role, $guard) = explode(',', $arguments.',');
+                list($role, $guard) = explode(',', $arguments . ',');
 
                 return "<?php if(auth({$guard})->check() && auth({$guard})->user()->hasRole({$role})): ?>";
             }
@@ -137,7 +137,7 @@ class PermissionServiceProvider extends ServiceProvider
         $bladeCompiler->directive(
             'hasanyrole',
             function ($arguments) {
-                list($roles, $guard) = explode(',', $arguments.',');
+                list($roles, $guard) = explode(',', $arguments . ',');
 
                 return "<?php if(auth({$guard})->check() && auth({$guard})->user()->hasAnyRole({$roles})): ?>";
             }
@@ -153,7 +153,7 @@ class PermissionServiceProvider extends ServiceProvider
         $bladeCompiler->directive(
             'hasallroles',
             function ($arguments) {
-                list($roles, $guard) = explode(',', $arguments.',');
+                list($roles, $guard) = explode(',', $arguments . ',');
 
                 return "<?php if(auth({$guard})->check() && auth({$guard})->user()->hasAllRoles({$roles})): ?>";
             }
@@ -169,7 +169,7 @@ class PermissionServiceProvider extends ServiceProvider
         $bladeCompiler->directive(
             'unlessrole',
             function ($arguments) {
-                list($role, $guard) = explode(',', $arguments.',');
+                list($role, $guard) = explode(',', $arguments . ',');
 
                 return "<?php if(!auth({$guard})->check() || ! auth({$guard})->user()->hasRole({$role})): ?>";
             }
@@ -184,7 +184,7 @@ class PermissionServiceProvider extends ServiceProvider
         $bladeCompiler->directive(
             'hasexactroles',
             function ($arguments) {
-                list($roles, $guard) = explode(',', $arguments.',');
+                list($roles, $guard) = explode(',', $arguments . ',');
 
                 return "<?php if(auth({$guard})->check() && auth({$guard})->user()->hasExactRoles({$roles})): ?>";
             }
@@ -238,13 +238,13 @@ class PermissionServiceProvider extends ServiceProvider
 
         $filesystem = $this->app->make(Filesystem::class);
 
-        return Collection::make($this->app->databasePath().DIRECTORY_SEPARATOR.'migrations'.DIRECTORY_SEPARATOR)
+        return Collection::make($this->app->databasePath() . DIRECTORY_SEPARATOR . 'migrations' . DIRECTORY_SEPARATOR)
             ->flatMap(
                 function ($path) use ($filesystem, $migrationFileName) {
-                    return $filesystem->glob($path.'*_'.$migrationFileName);
+                    return $filesystem->glob($path . '*_' . $migrationFileName);
                 }
             )
-            ->push($this->app->databasePath()."/migrations/{$timestamp}_{$migrationFileName}")
+            ->push($this->app->databasePath() . "/migrations/{$timestamp}_{$migrationFileName}")
             ->first();
     }
 }

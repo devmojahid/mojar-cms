@@ -24,19 +24,19 @@ function jwCMSUpdate(
     successCallback = null,
     failCallback = null
 ) {
-    let cmsUpdateUrl = juzaweb.adminUrl + '/update/'+type+'/__STEP__';
+    let cmsUpdateUrl = mojar.adminUrl + '/update/' + type + '/__STEP__';
 
     if (processElement) {
         jwUpdateProcess(
             processElement,
-            juzaweb.lang.update_process['step'+step].before
+            mojar.lang.update_process['step' + step].before
         )
     }
 
     ajaxRequest(cmsUpdateUrl.replace('__STEP__', step), params, {
         method: 'POST',
         callback: function (response) {
-            if(response.status == false) {
+            if (response.status == false) {
                 if (failCallback) {
                     failCallback(response);
                 }
@@ -52,14 +52,14 @@ function jwCMSUpdate(
                 return false;
             }
 
-            if(response.data.next_url) {
+            if (response.data.next_url) {
                 if (processElement) {
                     jwUpdateProcess(processElement, null, step * 17);
                 }
 
                 jwCMSUpdate(
                     type,
-                    step+1,
+                    step + 1,
                     processElement,
                     params,
                     successCallback,
@@ -73,7 +73,7 @@ function jwCMSUpdate(
                 if (processElement) {
                     jwUpdateProcess(
                         processElement,
-                        juzaweb.lang.update_process.done,
+                        mojar.lang.update_process.done,
                         100,
                         'success'
                     );
@@ -107,18 +107,18 @@ function recursiveUpdate(
 ) {
     let params = {};
     if (type == 'theme') {
-        params = {theme: items[updateIndex]};
+        params = { theme: items[updateIndex] };
     } else {
-        params = {plugin: items[updateIndex]};
+        params = { plugin: items[updateIndex] };
     }
 
     jwCMSUpdate(
         type,
         1,
-        '#'+type+'-'+ items[updateIndex].replace('/', '_') +'-update-process',
+        '#' + type + '-' + items[updateIndex].replace('/', '_') + '-update-process',
         params,
         function (response) {
-            if (items[updateIndex+1]) {
+            if (items[updateIndex + 1]) {
                 recursiveUpdate(type, items, updateIndex + 1, successCallback, failCallback);
             } else {
                 if (successCallback) {
@@ -131,7 +131,7 @@ function recursiveUpdate(
                 failCallback(response);
             }
 
-            if (items[updateIndex+1]) {
+            if (items[updateIndex + 1]) {
                 recursiveUpdate(type, items, updateIndex + 1, successCallback, failCallback);
             }
         }

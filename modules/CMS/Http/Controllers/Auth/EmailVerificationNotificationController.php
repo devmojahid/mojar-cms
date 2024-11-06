@@ -1,8 +1,8 @@
 <?php
 
-namespace Juzaweb\CMS\Http\Controllers\Auth;
+namespace Mojar\CMS\Http\Controllers\Auth;
 
-use Juzaweb\CMS\Http\Controllers\Controller;
+use Mojar\CMS\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 

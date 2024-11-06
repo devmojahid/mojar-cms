@@ -1,13 +1,13 @@
 <?php
 
-namespace Juzaweb\Backend\Models;
+namespace Mojar\Backend\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Juzaweb\CMS\Models\Model;
+use Mojar\CMS\Models\Model;
 
 /**
- * Juzaweb\Backend\Models\MediaFolder
+ * Mojar\Backend\Models\MediaFolder
  *
  * @property int $id
  * @property string $name
@@ -17,7 +17,7 @@ use Juzaweb\CMS\Models\Model;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|MediaFolder[] $children
  * @property-read int|null $children_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\MediaFile[] $files
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\MediaFile[] $files
  * @property-read int|null $files_count
  * @property-read MediaFolder|null $parent
  * @method static \Illuminate\Database\Eloquent\Builder|MediaFolder newModelQuery()

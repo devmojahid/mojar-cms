@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Support\Translations;
+namespace Mojar\CMS\Support\Translations;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
-use Juzaweb\CMS\Models\Translation;
+use Mojar\CMS\Models\Translation;
 
 class TranslationExporter
 {
@@ -22,8 +23,7 @@ class TranslationExporter
 
     public function __construct(
         protected Collection $module
-    ) {
-    }
+    ) {}
 
     public function run(): int
     {
@@ -146,7 +146,7 @@ class TranslationExporter
             ->where('namespace', '=', $this->module->get('namespace'))
             ->where('group', '=', $group)
             ->get()
-            ->mapWithKeys(fn ($item) => [$item->key => $item->value])
+            ->mapWithKeys(fn($item) => [$item->key => $item->value])
             ->toArray();
     }
 

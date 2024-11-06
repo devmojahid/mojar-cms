@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\CMS\Console\Commands\Permission;
+namespace Mojar\CMS\Console\Commands\Permission;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Support\Permission\PermissionRegistrar;
+use Mojar\CMS\Support\Permission\PermissionRegistrar;
 
 class CacheReset extends Command
 {

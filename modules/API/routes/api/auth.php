@@ -1,15 +1,16 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-use Juzaweb\API\Http\Controllers\Auth\LoginController;
-use Juzaweb\API\Http\Controllers\Auth\RegisterController;
+use Mojar\API\Http\Controllers\Auth\LoginController;
+use Mojar\API\Http\Controllers\Auth\RegisterController;
 
 Route::group(
     ['prefix' => 'auth'],

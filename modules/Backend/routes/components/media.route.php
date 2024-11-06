@@ -1,6 +1,6 @@
 <?php
 
-use Juzaweb\Backend\Http\Controllers\Backend\MediaController;
+use Mojar\Backend\Http\Controllers\Backend\MediaController;
 
 Route::group(
     ['prefix' => 'media'],

@@ -1,22 +1,23 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Models;
+namespace Mojar\Backend\Models;
 
 use Illuminate\Support\Collection;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Models\Model;
-use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\CMS\Models\Model;
+use Mojar\CMS\Traits\QueryCache\QueryCacheable;
 
 /**
- * Juzaweb\Backend\Models\MenuItem
+ * Mojar\Backend\Models\MenuItem
  *
  * @property int $id
  * @property int $menu_id
@@ -28,7 +29,7 @@ use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
  * @property string $type
  * @property string|null $icon
  * @property string $target
- * @property-read \Juzaweb\Backend\Models\Menu $menu
+ * @property-read \Mojar\Backend\Models\Menu $menu
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem query()
@@ -51,8 +52,8 @@ use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereBoxKey($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereLabel($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereNumOrder($value)
- * @property-read \Juzaweb\Backend\Models\Taxonomy|null $post
- * @property-read \Juzaweb\Backend\Models\Taxonomy|null $taxonomy
+ * @property-read \Mojar\Backend\Models\Taxonomy|null $post
+ * @property-read \Mojar\Backend\Models\Taxonomy|null $taxonomy
  * @property-read \Illuminate\Database\Eloquent\Collection|MenuItem[] $children
  * @property-read int|null $children_count
  * @property-read MenuItem|null $parent
@@ -95,7 +96,7 @@ class MenuItem extends Model
         return $this->belongsTo(Taxonomy::class, 'model_id', 'id')->where(
             'model_class',
             '=',
-            'Juzaweb\\Models\\Taxonomy'
+            'Mojar\\Models\\Taxonomy'
         );
     }
 
@@ -104,7 +105,7 @@ class MenuItem extends Model
         return $this->belongsTo(Taxonomy::class, 'model_id', 'id')->where(
             'model_class',
             '=',
-            'Juzaweb\\Models\\Post'
+            'Mojar\\Models\\Post'
         );
     }
 
@@ -122,8 +123,8 @@ class MenuItem extends Model
     {
         return $this->children()->with(
             [
-                'recursiveChildren' => fn ($q) => $q->cacheFor(
-                    config('juzaweb.performance.query_cache.lifetime')
+                'recursiveChildren' => fn($q) => $q->cacheFor(
+                    config('mojar.performance.query_cache.lifetime')
                 )
             ]
         );

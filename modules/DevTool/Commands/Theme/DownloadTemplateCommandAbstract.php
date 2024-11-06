@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\DevTool\Commands\Theme;
+namespace Mojar\DevTool\Commands\Theme;
 
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;

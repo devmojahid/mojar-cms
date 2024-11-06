@@ -1,16 +1,16 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories;
+namespace Mojar\CMS\Repositories;
 
 use Illuminate\Database\Eloquent\Builder;
-use Juzaweb\CMS\Repositories\Contracts\RepositoryCriteriaInterface;
-use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
+use Mojar\CMS\Repositories\Contracts\RepositoryCriteriaInterface;
+use Mojar\CMS\Repositories\Contracts\RepositoryInterface;
 
 /**
  * Interface BaseRepository.
  *
  * @method Builder query()
- * @package namespace Juzaweb\Backend\Repositories;
+ * @package namespace Mojar\Backend\Repositories;
  */
 interface BaseRepository extends RepositoryInterface, RepositoryCriteriaInterface
 {

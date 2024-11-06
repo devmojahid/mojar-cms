@@ -1,18 +1,19 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support\Theme;
+namespace Mojar\CMS\Support\Theme;
 
 use Illuminate\Support\Collection;
-use Juzaweb\Backend\Models\MenuItem;
-use Juzaweb\CMS\Facades\HookAction;
+use Mojar\Backend\Models\MenuItem;
+use Mojar\CMS\Facades\HookAction;
 
 class BackendMenuBuilder
 {
@@ -36,7 +37,7 @@ class BackendMenuBuilder
 
         $menuBoxs = HookAction::getMenuBoxs($groups);
         $menuBoxs = array_map(
-            fn ($item) => $item->get('menu_box'),
+            fn($item) => $item->get('menu_box'),
             $menuBoxs
         );
 
@@ -83,9 +84,9 @@ class BackendMenuBuilder
 
         return $this->args['item_view']->with(
             [
-            'item' => $item,
-            'children' => $children,
-            'builder' => $this,
+                'item' => $item,
+                'children' => $children,
+                'builder' => $this,
             ]
         )->render();
     }

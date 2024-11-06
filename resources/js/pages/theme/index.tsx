@@ -7,7 +7,7 @@ export default function Index({ currentTheme }) {
                 <div className="col-md-6"></div>
                 <div className="col-md-6">
                     <div className="btn-group float-right">
-                        {/*@if(config('juzaweb.theme.enable_upload'))
+                        {/*@if(config('mojar.theme.enable_upload'))
                         <a href="{{ route('admin.theme.install') }}" className="btn btn-success"
                            data-turbolinks="false"><i className="fa fa-plus-circle"></i> {{trans('cms::app.add_new')}}
                         </a>

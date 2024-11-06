@@ -1,17 +1,15 @@
 <?php
 
-namespace Juzaweb\Frontend\Http\Controllers;
+namespace Mojar\Frontend\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Juzaweb\Backend\Repositories\PostRepository;
-use Juzaweb\CMS\Http\Controllers\FrontendController;
+use Mojar\Backend\Repositories\PostRepository;
+use Mojar\CMS\Http\Controllers\FrontendController;
 
 class HomeController extends FrontendController
 {
-    public function __construct(protected PostRepository $postRepository)
-    {
-    }
+    public function __construct(protected PostRepository $postRepository) {}
 
     public function index(Request $request)
     {
@@ -21,7 +19,7 @@ class HomeController extends FrontendController
             $page = $this->postRepository->scopeQuery(fn($q) => $q->where(['id' => $pageId]))->first();
 
             if ($page) {
-                return App::call(PageController::class .'@detail', ['id' => $page]);
+                return App::call(PageController::class . '@detail', ['id' => $page]);
             }
         }
 

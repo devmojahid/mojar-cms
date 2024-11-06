@@ -1,18 +1,19 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\DevTool\Commands\Theme;
+namespace Mojar\DevTool\Commands\Theme;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Facades\Theme;
-use Juzaweb\CMS\Support\Updater\ThemeUpdater;
+use Mojar\CMS\Facades\Theme;
+use Mojar\CMS\Support\Updater\ThemeUpdater;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 

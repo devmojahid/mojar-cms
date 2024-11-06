@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\Frontend\Http\Controllers;
+namespace Mojar\Frontend\Http\Controllers;
 
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\CMS\Http\Controllers\Controller;
+use Mojar\Backend\Models\Post;
+use Mojar\Backend\Models\Taxonomy;
+use Mojar\CMS\Http\Controllers\Controller;
 use Spatie\Feed\Feed;
 
 class FeedController extends Controller

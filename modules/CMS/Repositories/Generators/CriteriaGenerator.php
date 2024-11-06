@@ -1,8 +1,8 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Generators;
+namespace Mojar\CMS\Repositories\Generators;
 
-use Juzaweb\CMS\Repositories\Generators\Generator;
+use Mojar\CMS\Repositories\Generators\Generator;
 
 /**
  * Class CriteriaGenerator
@@ -26,7 +26,7 @@ class CriteriaGenerator extends Generator
      */
     public function getRootNamespace()
     {
-        return parent::getRootNamespace().parent::getConfigGeneratorClassPath($this->getPathConfigNode());
+        return parent::getRootNamespace() . parent::getConfigGeneratorClassPath($this->getPathConfigNode());
     }
 
     /**
@@ -46,10 +46,10 @@ class CriteriaGenerator extends Generator
      */
     public function getPath()
     {
-        return $this->getBasePath().'/'.parent::getConfigGeneratorClassPath(
+        return $this->getBasePath() . '/' . parent::getConfigGeneratorClassPath(
             $this->getPathConfigNode(),
             true
-        ).'/'.$this->getName().'Criteria.php';
+        ) . '/' . $this->getName() . 'Criteria.php';
     }
 
     /**

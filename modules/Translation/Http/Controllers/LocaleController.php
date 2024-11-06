@@ -1,30 +1,29 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    MIT
  */
 
-namespace Juzaweb\Translation\Http\Controllers;
+namespace Mojar\Translation\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Juzaweb\CMS\Contracts\TranslationManager;
-use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Support\ArrayPagination;
+use Mojar\CMS\Contracts\TranslationManager;
+use Mojar\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Support\ArrayPagination;
 use Spatie\TranslationLoader\LanguageLine;
 
 class LocaleController extends BackendController
 {
-    public function __construct(protected TranslationManager $translationManager)
-    {
-    }
+    public function __construct(protected TranslationManager $translationManager) {}
 
     public function index($type, $locale): View
     {

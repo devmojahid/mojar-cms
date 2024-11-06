@@ -1,24 +1,23 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend\Setting;
+namespace Mojar\Backend\Http\Controllers\Backend\Setting;
 
 use Illuminate\Contracts\View\View;
-use Juzaweb\CMS\Contracts\HookActionContract as HookAction;
-use Juzaweb\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Contracts\HookActionContract as HookAction;
+use Mojar\CMS\Http\Controllers\BackendController;
 
 class MediaController extends BackendController
 {
-    public function __construct(protected HookAction $hookAction)
-    {
-    }
+    public function __construct(protected HookAction $hookAction) {}
 
     public function index(): View
     {

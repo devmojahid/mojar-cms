@@ -1,23 +1,22 @@
 <?php
 
-namespace Juzaweb\Frontend\Http\Controllers;
+namespace Mojar\Frontend\Http\Controllers;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Http\Resources\PostResourceCollection;
-use Juzaweb\Backend\Http\Resources\TaxonomyResource;
-use Juzaweb\Backend\Repositories\PostRepository;
-use Juzaweb\Backend\Repositories\TaxonomyRepository;
-use Juzaweb\CMS\Facades\Facades;
-use Juzaweb\CMS\Http\Controllers\FrontendController;
+use Mojar\Backend\Http\Resources\PostResourceCollection;
+use Mojar\Backend\Http\Resources\TaxonomyResource;
+use Mojar\Backend\Repositories\PostRepository;
+use Mojar\Backend\Repositories\TaxonomyRepository;
+use Mojar\CMS\Facades\Facades;
+use Mojar\CMS\Http\Controllers\FrontendController;
 
 class TaxonomyController extends FrontendController
 {
     public function __construct(
         protected PostRepository $postRepository,
         protected TaxonomyRepository $taxonomyRepository
-    ) {
-    }
+    ) {}
 
     public function index(...$slug): string|\Inertia\Response
     {

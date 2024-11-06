@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://github.com/juzaweb/cms
+ * @link       https://github.com/mojar/cms
  * @license    GNU V2
  */
 
-use Juzaweb\Backend\Http\Controllers\Backend\DashboardController;
-use Juzaweb\Backend\Http\Controllers\Backend\LoadDataController;
-use Juzaweb\Backend\Http\Controllers\Backend\UpdateController;
-use Juzaweb\Backend\Http\Controllers\Backend\AjaxController;
+use Mojar\Backend\Http\Controllers\Backend\DashboardController;
+use Mojar\Backend\Http\Controllers\Backend\LoadDataController;
+use Mojar\Backend\Http\Controllers\Backend\UpdateController;
+use Mojar\Backend\Http\Controllers\Backend\AjaxController;
 
 Route::group(
     ['prefix' => '/'],

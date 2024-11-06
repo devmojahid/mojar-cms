@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\Backend\Commands;
+namespace Mojar\Backend\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use Juzaweb\CMS\Facades\ThemeLoader;
+use Mojar\CMS\Facades\ThemeLoader;
 use Symfony\Component\Console\Input\InputArgument;
 
 class ThemePublishCommand extends Command
@@ -34,8 +34,8 @@ class ThemePublishCommand extends Command
 
     protected function publishAssets(string $theme): void
     {
-        $sourceFolder = ThemeLoader::getThemePath($theme).'/assets/public';
-        $publicFolder = ThemeLoader::publicPath($theme).'/assets';
+        $sourceFolder = ThemeLoader::getThemePath($theme) . '/assets/public';
+        $publicFolder = ThemeLoader::publicPath($theme) . '/assets';
 
         if (!File::isDirectory($publicFolder)) {
             File::makeDirectory($publicFolder, 0755, true, true);
@@ -43,8 +43,8 @@ class ThemePublishCommand extends Command
 
         File::copyDirectory($sourceFolder, $publicFolder);
 
-        $buildFolder = ThemeLoader::getThemePath($theme).'/assets/build';
-        $publicBuildFolder = ThemeLoader::publicPath($theme).'/build';
+        $buildFolder = ThemeLoader::getThemePath($theme) . '/assets/build';
+        $publicBuildFolder = ThemeLoader::publicPath($theme) . '/build';
 
         File::deleteDirectory($publicBuildFolder, true);
         File::makeDirectory($publicBuildFolder, 0755, true, true);
@@ -54,8 +54,8 @@ class ThemePublishCommand extends Command
 
     protected function publishViews(string $theme): void
     {
-        $sourceFolder = ThemeLoader::getThemePath($theme).'/views';
-        $publicFolder = resource_path('views/themes/'.$theme);
+        $sourceFolder = ThemeLoader::getThemePath($theme) . '/views';
+        $publicFolder = resource_path('views/themes/' . $theme);
 
         if (!File::isDirectory($publicFolder)) {
             File::makeDirectory($publicFolder, 0755, true, true);
@@ -66,8 +66,8 @@ class ThemePublishCommand extends Command
 
     protected function publishLang(string $theme): void
     {
-        $sourceFolder = ThemeLoader::getThemePath($theme).'/lang';
-        $publicFolder = resource_path('lang/themes/'.$theme);
+        $sourceFolder = ThemeLoader::getThemePath($theme) . '/lang';
+        $publicFolder = resource_path('lang/themes/' . $theme);
 
         if (!File::isDirectory($publicFolder)) {
             File::makeDirectory($publicFolder, 0755, true, true);

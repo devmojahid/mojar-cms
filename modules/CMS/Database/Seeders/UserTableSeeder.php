@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\CMS\Database\Seeders;
+namespace Mojar\CMS\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Juzaweb\CMS\Models\User;
+use Mojar\CMS\Models\User;
 
 class UserTableSeeder extends Seeder
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Mojar\Backend\Http\Controllers\Backend;
 
 use Illuminate\Contracts\View\View;
-use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\Backend\Http\Datatables\EmailLogDatatable;
+use Mojar\CMS\Http\Controllers\BackendController;
+use Mojar\Backend\Http\Datatables\EmailLogDatatable;
 
 class EmailLogController extends BackendController
 {

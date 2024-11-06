@@ -1,20 +1,21 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Juzaweb\CMS\Contracts\ConfigContract;
-use Juzaweb\CMS\Models\Config as ConfigModel;
+use Mojar\CMS\Contracts\ConfigContract;
+use Mojar\CMS\Models\Config as ConfigModel;
 use Illuminate\Container\Container;
 
 class Config implements ConfigContract

@@ -1,18 +1,19 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Listeners;
+namespace Mojar\Backend\Listeners;
 
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use Juzaweb\Backend\Events\AfterPostSave;
+use Mojar\Backend\Events\AfterPostSave;
 
 class ResizeThumbnailPostListener
 {
@@ -32,7 +33,7 @@ class ResizeThumbnailPostListener
             return;
         }
 
-        $img = Image::make(Storage::disk(config('juzaweb.filemanager.disk'))->path($event->post->thumbnail));
+        $img = Image::make(Storage::disk(config('mojar.filemanager.disk'))->path($event->post->thumbnail));
         $img->fit($size['width'], $size['height']);
         $img->save(
             get_media_image_with_size(

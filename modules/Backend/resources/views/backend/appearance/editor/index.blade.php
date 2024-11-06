@@ -1,16 +1,16 @@
 @extends('cms::layouts.backend')
 
 @section('header')
-    <link rel="stylesheet" href="{{ asset('jw-styles/juzaweb/css/code-editor.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('jw-styles/mojar/css/code-editor.min.css') }}" />
     <script>
         const currentTheme = "{{ $theme }}";
         const themeEditUrl = "{{ route('admin.theme.editor', ['__THEME__']) }}";
         const loadFileUrl = "{{ route('admin.theme.editor.content', [$theme]) }}";
         const saveUrl = "{{ route('admin.theme.editor.save', [$theme]) }}";
-        const monacoFolder = "{{ asset('jw-styles/juzaweb/monaco-editor/min/vs') }}";
+        const monacoFolder = "{{ asset('jw-styles/mojar/monaco-editor/min/vs') }}";
         let file = "{{ $file }}";
     </script>
-    <script src="{{ asset('jw-styles/juzaweb/js/theme-editor.min.js') }}"></script>
+    <script src="{{ asset('jw-styles/mojar/js/theme-editor.min.js') }}"></script>
 @endsection
 
 @section('content')
@@ -25,8 +25,8 @@
             </button>
 
             <select id="change-theme" class="form-control mt-2">
-                @foreach($themes as $name => $info)
-                    <option value="{{ $name }}" @if($name == $theme) selected @endif>
+                @foreach ($themes as $name => $info)
+                    <option value="{{ $name }}" @if ($name == $theme) selected @endif>
                         {{ $info->get('title') }}
                     </option>
                 @endforeach
@@ -36,10 +36,10 @@
                 <h6 class="pt-3 pl-3">{{ trans('cms::app.folders') }}</h6>
                 <hr>
                 <ul class="treeview-animated-list mb-3">
-                    @foreach($directories as $directory)
+                    @foreach ($directories as $directory)
                         @component('cms::backend.appearance.editor.components.tree_item', [
                             'item' => $directory,
-                            'theme' => $theme
+                            'theme' => $theme,
                         ])
                         @endcomponent
                     @endforeach

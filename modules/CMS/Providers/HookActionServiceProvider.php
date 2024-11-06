@@ -1,17 +1,18 @@
 <?php
+
 /**
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://github.com/juzaweb/cms
+ * @link       https://github.com/mojar/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Providers;
+namespace Mojar\CMS\Providers;
 
 use Illuminate\Support\Facades\Blade;
-use Juzaweb\CMS\Support\ServiceProvider;
-use Juzaweb\CMS\Contracts\EventyContract;
-use Juzaweb\CMS\Support\Hooks\Events;
+use Mojar\CMS\Support\ServiceProvider;
+use Mojar\CMS\Contracts\EventyContract;
+use Mojar\CMS\Support\Hooks\Events;
 
 class HookActionServiceProvider extends ServiceProvider
 {
@@ -23,7 +24,7 @@ class HookActionServiceProvider extends ServiceProvider
         Blade::directive(
             'do_action',
             function ($expression) {
-                return "<?php app(\Juzaweb\CMS\Contracts\EventyContract::class)->action({$expression}); ?>";
+                return "<?php app(\Mojar\CMS\Contracts\EventyContract::class)->action({$expression}); ?>";
             }
         );
 
@@ -33,7 +34,7 @@ class HookActionServiceProvider extends ServiceProvider
         Blade::directive(
             'apply_filters',
             function ($expression) {
-                return "<?php echo app(\Juzaweb\CMS\Contracts\EventyContract::class)->filter({$expression}); ?>";
+                return "<?php echo app(\Mojar\CMS\Contracts\EventyContract::class)->filter({$expression}); ?>";
             }
         );
     }

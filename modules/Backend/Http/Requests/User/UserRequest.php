@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Http\Requests\User;
+namespace Mojar\Backend\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Juzaweb\CMS\Models\User;
+use Mojar\CMS\Models\User;
 
 class UserRequest extends FormRequest
 {

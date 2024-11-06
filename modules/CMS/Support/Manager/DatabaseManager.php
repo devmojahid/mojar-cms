@@ -1,13 +1,13 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Manager;
+namespace Mojar\CMS\Support\Manager;
 
 use Exception;
 use Illuminate\Database\SQLiteConnection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\CMS\Facades\Config as DbConfig;
+use Mojar\CMS\Facades\Config as DbConfig;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 class DatabaseManager
@@ -90,7 +90,7 @@ class DatabaseManager
                 touch($database);
                 DB::reconnect(Config::get('database.default'));
             }
-            $outputLog->write('Using SqlLite database: '.$database, 1);
+            $outputLog->write('Using SqlLite database: ' . $database, 1);
         }
     }
 
@@ -100,9 +100,9 @@ class DatabaseManager
         DbConfig::setConfig(
             'description',
             'Juzacms is a Content Management System (CMS)'
-            . ' and web platform whose sole purpose is to make your development workflow simple again.'
+                . ' and web platform whose sole purpose is to make your development workflow simple again.'
         );
-        DbConfig::setConfig('author_name', 'Juzaweb Team');
+        DbConfig::setConfig('author_name', 'Mojar Team');
         DbConfig::setConfig('user_registration', 1);
         DbConfig::setConfig('user_verification', 0);
     }

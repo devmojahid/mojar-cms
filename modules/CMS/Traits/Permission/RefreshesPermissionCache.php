@@ -1,8 +1,8 @@
 <?php
 
-namespace Juzaweb\CMS\Traits\Permission;
+namespace Mojar\CMS\Traits\Permission;
 
-use Juzaweb\CMS\Support\Permission\PermissionRegistrar;
+use Mojar\CMS\Support\Permission\PermissionRegistrar;
 
 trait RefreshesPermissionCache
 {

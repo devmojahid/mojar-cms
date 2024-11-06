@@ -1,14 +1,15 @@
 <?php
+
 /**
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://github.com/juzaweb/cms
+ * @link       https://github.com/mojar/cms
  * @license    GNU V2
  */
 
-use Juzaweb\Backend\Http\Controllers\Backend\Profile\ProfileController;
-use Juzaweb\Backend\Http\Controllers\Backend\RoleController;
-use Juzaweb\Backend\Http\Controllers\Backend\UserController;
+use Mojar\Backend\Http\Controllers\Backend\Profile\ProfileController;
+use Mojar\Backend\Http\Controllers\Backend\RoleController;
+use Mojar\Backend\Http\Controllers\Backend\UserController;
 
 Route::jwResource('users', UserController::class);
 

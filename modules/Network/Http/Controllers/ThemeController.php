@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\Network\Http\Controllers;
+namespace Mojar\Network\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
-use Juzaweb\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Http\Controllers\BackendController;
 
 class ThemeController extends BackendController
 {

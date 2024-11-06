@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Macros;
+namespace Mojar\CMS\Support\Macros;
 
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Http\Controllers\Backend\TaxonomyController;
-use Juzaweb\Backend\Http\Controllers\Backend\CommentController;
+use Mojar\Backend\Http\Controllers\Backend\TaxonomyController;
+use Mojar\Backend\Http\Controllers\Backend\CommentController;
 
 class RouterMacros
 {
@@ -21,7 +21,7 @@ class RouterMacros
             $where = $options['where'] ?? [];
             $routeName = 'admin.' . $routeName;
 
-            $this->get($uri, "{$controller}@index")->name($routeName .'.index')->where($where);
+            $this->get($uri, "{$controller}@index")->name($routeName . '.index')->where($where);
             $this->get($uri . '/create', $controller . '@create')->name($routeName . '.create')->where($where);
             $this->get("{$uri}/datatable", $controller . '@datatable')->name($routeName . '.datatable')->where($where);
             $this->get($uri . '/{id}/edit', $controller . '@edit')->name($routeName . '.edit')
@@ -50,11 +50,11 @@ class RouterMacros
                 ]
             );
 
-            $this->get($singular . '/{taxonomy}/component-item', ['\\'. TaxonomyController::class, 'getTagComponent']);
+            $this->get($singular . '/{taxonomy}/component-item', ['\\' . TaxonomyController::class, 'getTagComponent']);
 
             $this->jwResource(
                 "{$singular}/{taxonomy}",
-                '\\'. TaxonomyController::class,
+                '\\' . TaxonomyController::class,
                 [
                     'name' => $singular . '.taxonomy',
                 ]

@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\DevTool\Commands\Theme;
+namespace Mojar\DevTool\Commands\Theme;
 
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
@@ -55,7 +55,7 @@ class ThemeGeneratorCommand extends Command
 
     public function handle(): void
     {
-        $this->themePath = config('juzaweb.theme.path');
+        $this->themePath = config('mojar.theme.path');
         $this->themeFolders = config('theme.stubs.folders');
         $this->theme['name'] = strtolower($this->argument('name'));
         $this->themeStubPath = $this->getThemeStubPath();
@@ -70,10 +70,10 @@ class ThemeGeneratorCommand extends Command
      */
     protected function init(): void
     {
-        $createdThemePath = $this->themePath.'/'.$this->theme['name'];
+        $createdThemePath = $this->themePath . '/' . $this->theme['name'];
 
         if (File::isDirectory($createdThemePath)) {
-            $this->error('Sorry Boss '.ucfirst($this->theme['name']).' Theme Folder Already Exist !!!');
+            $this->error('Sorry Boss ' . ucfirst($this->theme['name']) . ' Theme Folder Already Exist !!!');
             exit();
         }
 
@@ -85,12 +85,12 @@ class ThemeGeneratorCommand extends Command
         $this->makeDir($createdThemePath);
 
         foreach ($this->themeFolders as $key => $folder) {
-            $this->makeDir($createdThemePath.'/'.$folder);
+            $this->makeDir($createdThemePath . '/' . $folder);
         }
 
         $this->createStubs($themeStubFiles, $createdThemePath);
 
-        $this->info(ucfirst($this->theme['name']).' Theme Folder Successfully Generated !!!');
+        $this->info(ucfirst($this->theme['name']) . ' Theme Folder Successfully Generated !!!');
     }
 
     /**
@@ -102,7 +102,7 @@ class ThemeGeneratorCommand extends Command
     {
         $this->theme['title'] = $this->option('title') ?? Str::ucfirst($this->theme['name']);
         $this->theme['description'] = $this->option('description')
-            ?? Str::ucfirst($this->theme['name']).' description';
+            ?? Str::ucfirst($this->theme['name']) . ' description';
         $this->theme['author'] = $this->option('author');
         $this->theme['version'] = $this->option('ver');
         $this->theme['parent'] = '';
@@ -133,18 +133,18 @@ class ThemeGeneratorCommand extends Command
     {
         foreach ($themeStubFiles as $filename => $storePath) {
             if ($filename == 'changelog') {
-                $filename = 'changelog'.pathinfo($storePath, PATHINFO_EXTENSION);
+                $filename = 'changelog' . pathinfo($storePath, PATHINFO_EXTENSION);
             } elseif ($filename == 'theme') {
                 $filename = pathinfo($storePath, PATHINFO_EXTENSION);
             } elseif ($filename == 'css' || $filename == 'js') {
                 $this->theme[$filename] = ltrim(
                     $storePath,
-                    rtrim('assets', '/').'/'
+                    rtrim('assets', '/') . '/'
                 );
             }
 
-            $themeStubFile = $this->themeStubPath.'/'.$filename.'.stub';
-            $this->makeFile($themeStubFile, $createdThemePath.'/'.$storePath);
+            $themeStubFile = $this->themeStubPath . '/' . $filename . '.stub';
+            $this->makeFile($themeStubFile, $createdThemePath . '/' . $storePath);
         }
     }
 
@@ -198,7 +198,7 @@ class ThemeGeneratorCommand extends Command
 
     protected function getThemeStubPath(): string
     {
-        return __DIR__.'/../../stubs/theme';
+        return __DIR__ . '/../../stubs/theme';
     }
 
     protected function getArguments(): array

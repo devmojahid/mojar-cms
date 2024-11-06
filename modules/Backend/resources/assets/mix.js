@@ -4,11 +4,11 @@ const baseAsset = 'modules/Backend/resources/assets';
 const basePublish = baseAsset + '/public';
 
 mix.combine(
-     [
-         'modules/Backend/resources/assets/vendors/mdb.min.js',
-         'modules/Backend/resources/assets/public/monaco-editor/min/vs/loader.js',
-         'modules/Backend/resources/assets/js/appearance/editor.js',
-     ],
+    [
+        'modules/Backend/resources/assets/vendors/mdb.min.js',
+        'modules/Backend/resources/assets/public/monaco-editor/min/vs/loader.js',
+        'modules/Backend/resources/assets/js/appearance/editor.js',
+    ],
     `${basePublish}/js/theme-editor.min.js`
 );
 
@@ -61,7 +61,7 @@ mix.combine(
         baseAsset + '/js/plugin-install.js',
         baseAsset + '/js/appearance/theme-install.js',
         baseAsset + '/js/load-select2.js',
-        baseAsset + '/js/juzaweb-table.js',
+        baseAsset + '/js/mojar-table.js',
         baseAsset + '/js/list-view.js',
         baseAsset + '/js/form-ajax.js',
         baseAsset + '/js/taxonomy.js',

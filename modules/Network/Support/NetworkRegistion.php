@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Network\Support;
+namespace Mojar\Network\Support;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
@@ -16,9 +17,9 @@ use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Http\Request;
-use Juzaweb\Network\Contracts\NetworkRegistionContract;
-use Juzaweb\Network\Contracts\SiteSetupContract;
-use Juzaweb\Network\Models\Site;
+use Mojar\Network\Contracts\NetworkRegistionContract;
+use Mojar\Network\Contracts\SiteSetupContract;
+use Mojar\Network\Models\Site;
 use Illuminate\Support\Facades\URL;
 
 class NetworkRegistion implements NetworkRegistionContract

@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\CMS\Support\FileManager;
+namespace Mojar\CMS\Support\FileManager;
 
 use Illuminate\Container\Container;
 use Intervention\Image\Facades\Image;
-use Juzaweb\CMS\Support\FileManager\Events\ImageIsUploading;
-use Juzaweb\CMS\Support\FileManager\Events\ImageWasUploaded;
+use Mojar\CMS\Support\FileManager\Events\ImageIsUploading;
+use Mojar\CMS\Support\FileManager\Events\ImageWasUploaded;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class LfmPath
@@ -299,11 +299,11 @@ class LfmPath
             $file_name_without_extentions = $new_file_name;
             while ($this->setName(($extension) ? $new_file_name_with_extention : $new_file_name)->exists()) {
                 if (config('lfm.alphanumeric_filename') === true) {
-                    $suffix = '_'.$counter;
+                    $suffix = '_' . $counter;
                 } else {
                     $suffix = " ({$counter})";
                 }
-                $new_file_name = $file_name_without_extentions.$suffix;
+                $new_file_name = $file_name_without_extentions . $suffix;
 
                 if ($extension) {
                     $new_file_name_with_extention = $new_file_name . '.' . $extension;

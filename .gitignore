@@ -17,4 +17,4 @@ yarn-error.log
 /.vscode
 /.php-cs-fixer.cache
 /.deploy.yml
-/public/jw-styles/juzaweb/build
+/public/jw-styles/mojar/build

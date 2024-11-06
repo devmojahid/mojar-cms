@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Models\Email;
+namespace Mojar\Backend\Models\Email;
 
-use Juzaweb\CMS\Models\Model;
+use Mojar\CMS\Models\Model;
 
 /**
- * Juzaweb\Backend\Models\Email\EmailTemplateUser
+ * Mojar\Backend\Models\Email\EmailTemplateUser
  *
  * @method static \Illuminate\Database\Eloquent\Builder|EmailTemplateUser newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|EmailTemplateUser newQuery()

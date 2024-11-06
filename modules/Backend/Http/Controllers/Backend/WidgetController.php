@@ -1,20 +1,21 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Mojar\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Abstracts\Action;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\CMS\Http\Controllers\BackendController;
 
 class WidgetController extends BackendController
 {
@@ -50,7 +51,7 @@ class WidgetController extends BackendController
             $content->put($wkey, $data);
         }
 
-        set_theme_config('sidebar_'.$key, $content->toArray());
+        set_theme_config('sidebar_' . $key, $content->toArray());
 
         return $this->success(
             [
@@ -104,14 +105,14 @@ class WidgetController extends BackendController
 
         return response()->json(
             [
-            'key' => $key,
-            'html' => view(
-                'cms::backend.post.components.page_block_item',
-                compact(
-                    'widget',
-                    'key'
-                )
-            )->render(),
+                'key' => $key,
+                'html' => view(
+                    'cms::backend.post.components.page_block_item',
+                    compact(
+                        'widget',
+                        'key'
+                    )
+                )->render(),
             ]
         );
     }

@@ -1,22 +1,23 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend\Appearance;
+namespace Mojar\Backend\Http\Controllers\Backend\Appearance;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Juzaweb\CMS\Contracts\HookActionContract;
-use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
-use Juzaweb\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Contracts\HookActionContract;
+use Mojar\CMS\Contracts\LocalThemeRepositoryContract;
+use Mojar\CMS\Http\Controllers\BackendController;
 
 class SettingController extends BackendController
 {

@@ -1,16 +1,17 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    mojar/juzacms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\DevTool\Actions;
+namespace Mojar\DevTool\Actions;
 
-use Juzaweb\CMS\Abstracts\Action;
+use Mojar\CMS\Abstracts\Action;
 
 class MenuAction extends Action
 {

@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-use Juzaweb\Frontend\Http\Controllers\AssetController;
+use Mojar\Frontend\Http\Controllers\AssetController;
 
 //Route::get('jw-styles/{lang}/langs.js', [AssetController::class, 'languageScript'])
 //    ->where('lang', '[a-z]+');

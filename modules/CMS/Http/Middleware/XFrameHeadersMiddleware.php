@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\CMS\Http\Middleware;
+namespace Mojar\CMS\Http\Middleware;
 
 use Closure;
-use Juzaweb\CMS\Support\Installer;
+use Mojar\CMS\Support\Installer;
 
 class XFrameHeadersMiddleware
 {
@@ -39,7 +39,7 @@ class XFrameHeadersMiddleware
 
         $response = $next($request);
 
-        if (config('juzaweb.performance.deny_iframe')) {
+        if (config('mojar.performance.deny_iframe')) {
             $response->headers->set('X-Frame-Options', 'SAMEORIGIN');
         }
 

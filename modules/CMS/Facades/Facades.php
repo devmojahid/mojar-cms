@@ -1,18 +1,19 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Facades;
+namespace Mojar\CMS\Facades;
 
 use Illuminate\Support\Collection;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\Taxonomy;
+use Mojar\Backend\Models\Post;
+use Mojar\Backend\Models\Taxonomy;
 
 class Facades
 {
@@ -57,7 +58,7 @@ class Facades
             /*
              * Package Service Providers...
              */
-            \Juzaweb\CMS\Providers\CmsServiceProvider::class,
+            \Mojar\CMS\Providers\CmsServiceProvider::class,
         ];
     }
 
@@ -278,7 +279,7 @@ class Facades
             'TwigBridge\Extension\Loader\Facades',
             'TwigBridge\Extension\Loader\Filters',
             'TwigBridge\Extension\Loader\Functions',
-            'Juzaweb\CMS\Extension\Globals',
+            'Mojar\CMS\Extension\Globals',
 
             //'TwigBridge\Extension\Laravel\Session',
             //'TwigBridge\Extension\Laravel\Model',
@@ -288,11 +289,11 @@ class Facades
             //'TwigBridge\Extension\Laravel\Html',
             //'TwigBridge\Extension\Laravel\Legacy\Facades',
 
-            'Juzaweb\CMS\Extension\Url',
-            'Juzaweb\CMS\Extension\Dump',
-            'Juzaweb\CMS\Extension\Input',
-            'Juzaweb\CMS\Extension\Translator',
-            'Juzaweb\CMS\Extension\Str',
+            'Mojar\CMS\Extension\Url',
+            'Mojar\CMS\Extension\Dump',
+            'Mojar\CMS\Extension\Input',
+            'Mojar\CMS\Extension\Translator',
+            'Mojar\CMS\Extension\Str',
         ];
     }
 

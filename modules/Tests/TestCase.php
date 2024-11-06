@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\Tests;
+namespace Mojar\Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Auth;
-use Juzaweb\CMS\Models\User;
+use Mojar\CMS\Models\User;
 
 abstract class TestCase extends BaseTestCase
 {

@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-use Juzaweb\Backend\Http\Controllers\Backend\UpdateController;
+use Mojar\Backend\Http\Controllers\Backend\UpdateController;
 
 Route::group(
     ['prefix' => 'updates'],
@@ -28,10 +29,10 @@ Route::post('update/{type}/{step}', [UpdateController::class, 'updateStep'])
     ->where('step', '[0-9]+')->name('admin.update.step');
 
 Route::post(
-    'module/login-juzaweb',
+    'module/login-mojar',
     'Backend\Module\BuyModuleController@loginJuzaWeb'
 )
-    ->name('admin.module.login-juzaweb');
+    ->name('admin.module.login-mojar');
 
 Route::get(
     'module/{module}/buy-modal',

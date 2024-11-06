@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: dtv
@@ -6,11 +7,9 @@
  * Time: 8:45 PM
  */
 
-namespace Juzaweb\CMS\Contracts;
+namespace Mojar\CMS\Contracts;
 
 /**
  * @deprecated
  */
-interface ThemeInterface
-{
-}
+interface ThemeInterface {}

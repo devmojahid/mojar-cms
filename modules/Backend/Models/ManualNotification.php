@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\Backend\Models;
+namespace Mojar\Backend\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Juzaweb\Backend\Models\ManualNotification
+ * Mojar\Backend\Models\ManualNotification
  *
  * @property int $id
  * @property string|null $method

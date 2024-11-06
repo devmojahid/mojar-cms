@@ -1,16 +1,16 @@
 <?php
 
-namespace Juzaweb\Backend\Providers;
+namespace Mojar\Backend\Providers;
 
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\CMS\Models\User;
-use Juzaweb\Backend\Policies\PostPolicy;
-use Juzaweb\Backend\Policies\TaxonomyPolicy;
-use Juzaweb\Backend\Policies\UserPolicy;
+use Mojar\Backend\Models\Post;
+use Mojar\Backend\Models\Taxonomy;
+use Mojar\CMS\Models\User;
+use Mojar\Backend\Policies\PostPolicy;
+use Mojar\Backend\Policies\TaxonomyPolicy;
+use Mojar\Backend\Policies\UserPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {

@@ -1,21 +1,22 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    GNU General Public License v2.0
  */
 
-namespace Juzaweb\API\Http\Controllers;
+namespace Mojar\API\Http\Controllers;
 
 use Illuminate\Support\Arr;
-use Juzaweb\CMS\Contracts\ConfigContract;
-use Juzaweb\CMS\Contracts\HookActionContract;
-use Juzaweb\CMS\Contracts\ThemeConfigContract;
-use Juzaweb\CMS\Facades\Theme;
-use Juzaweb\CMS\Http\Controllers\ApiController;
+use Mojar\CMS\Contracts\ConfigContract;
+use Mojar\CMS\Contracts\HookActionContract;
+use Mojar\CMS\Contracts\ThemeConfigContract;
+use Mojar\CMS\Facades\Theme;
+use Mojar\CMS\Http\Controllers\ApiController;
 
 class SettingController extends ApiController
 {
@@ -23,8 +24,7 @@ class SettingController extends ApiController
         protected HookActionContract $hookAction,
         protected ThemeConfigContract $themeConfig,
         protected ConfigContract $configContract
-    ) {
-    }
+    ) {}
 
     public function index(): \Illuminate\Http\JsonResponse
     {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\CMS\Traits\QueryCache;
+namespace Mojar\CMS\Traits\QueryCache;
 
 use BadMethodCallException;
 use DateTime;
 use Illuminate\Cache\CacheManager;
-use Juzaweb\CMS\Facades\CacheGroup;
+use Mojar\CMS\Facades\CacheGroup;
 
 trait QueryCacheModule
 {
@@ -177,10 +177,10 @@ trait QueryCacheModule
 
         // Count has no Sql, that's why it can't be used ->toSql()
         if ($method === 'count') {
-            return $name.$method.$id.serialize($this->getBindings()).$appends;
+            return $name . $method . $id . serialize($this->getBindings()) . $appends;
         }
 
-        return $name.$method.$id.$this->toSql().serialize($this->getBindings()).$appends;
+        return $name . $method . $id . $this->toSql() . serialize($this->getBindings()) . $appends;
     }
 
     /**
@@ -371,7 +371,7 @@ trait QueryCacheModule
         }
 
         return config(
-            'juzaweb.performance.query_cache.driver',
+            'mojar.performance.query_cache.driver',
             'file'
         );
     }
@@ -460,6 +460,6 @@ trait QueryCacheModule
 
     public function getCacheGroupKey(): string
     {
-        return $this->getCachePrefix(). $this->defaultGroupKey;
+        return $this->getCachePrefix() . $this->defaultGroupKey;
     }
 }

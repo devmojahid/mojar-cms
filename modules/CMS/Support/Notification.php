@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
-use Juzaweb\CMS\Jobs\SendNotification as SendNotificationJob;
-use Juzaweb\Backend\Models\ManualNotification;
+use Mojar\CMS\Jobs\SendNotification as SendNotificationJob;
+use Mojar\Backend\Models\ManualNotification;
 use Illuminate\Foundation\Auth\User;
 
 class Notification
@@ -36,7 +36,7 @@ class Notification
     }
 
     /**
-     * @param array|int|\Juzaweb\CMS\Models\User $users
+     * @param array|int|\Mojar\CMS\Models\User $users
      * @return $this
      */
     public function setUsers($users)
@@ -104,7 +104,7 @@ class Notification
             ]
         );
 
-        switch (config('juzaweb.notification.method', 'sync')) {
+        switch (config('mojar.notification.method', 'sync')) {
             case 'sync':
                 (new SendNotification($notification))->send();
                 break;

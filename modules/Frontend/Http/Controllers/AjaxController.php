@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Frontend\Http\Controllers;
+namespace Mojar\Frontend\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -16,15 +17,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Http\Resources\PostResourceCollection;
-use Juzaweb\Backend\Models\PostRating;
-use Juzaweb\Backend\Repositories\MenuRepository;
-use Juzaweb\Backend\Repositories\PostRepository;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Http\Controllers\FrontendController;
-use Juzaweb\CMS\Support\Theme\MenuBuilder;
-use Juzaweb\Frontend\Http\Requests\LikeRequest;
-use Juzaweb\Frontend\Http\Requests\RatingRequest;
+use Mojar\Backend\Http\Resources\PostResourceCollection;
+use Mojar\Backend\Models\PostRating;
+use Mojar\Backend\Repositories\MenuRepository;
+use Mojar\Backend\Repositories\PostRepository;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\CMS\Http\Controllers\FrontendController;
+use Mojar\CMS\Support\Theme\MenuBuilder;
+use Mojar\Frontend\Http\Requests\LikeRequest;
+use Mojar\Frontend\Http\Requests\RatingRequest;
 
 class AjaxController extends FrontendController
 {

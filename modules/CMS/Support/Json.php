@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
 use Illuminate\Filesystem\Filesystem;
-use Juzaweb\CMS\Exceptions\InvalidJsonException;
+use Mojar\CMS\Exceptions\InvalidJsonException;
 
 class Json
 {

@@ -1,18 +1,18 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Mojar\Backend\Http\Controllers\Backend;
 
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
-use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\CMS\Abstracts\DataTable;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Models\Permission;
-use Juzaweb\CMS\Traits\ResourceController;
+use Mojar\CMS\Abstracts\Action;
+use Mojar\CMS\Abstracts\DataTable;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\CMS\Models\Permission;
+use Mojar\CMS\Traits\ResourceController;
 use Illuminate\Support\Facades\Validator;
-use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\Backend\Http\Datatables\RoleDatatable;
-use Juzaweb\Backend\Models\Role;
+use Mojar\CMS\Http\Controllers\BackendController;
+use Mojar\Backend\Http\Datatables\RoleDatatable;
+use Mojar\Backend\Models\Role;
 
 class RoleController extends BackendController
 {

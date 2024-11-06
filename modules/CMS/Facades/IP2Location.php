@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Facades;
+namespace Mojar\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

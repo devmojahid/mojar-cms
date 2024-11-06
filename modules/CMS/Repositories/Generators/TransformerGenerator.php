@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Generators;
+namespace Mojar\CMS\Repositories\Generators;
 
-use Juzaweb\CMS\Repositories\Generators\Generator;
-use Juzaweb\CMS\Repositories\Generators\ModelGenerator;
+use Mojar\CMS\Repositories\Generators\Generator;
+use Mojar\CMS\Repositories\Generators\ModelGenerator;
 
 /**
  * Class TransformerGenerator
@@ -27,7 +27,7 @@ class TransformerGenerator extends Generator
      */
     public function getRootNamespace()
     {
-        return parent::getRootNamespace().parent::getConfigGeneratorClassPath($this->getPathConfigNode());
+        return parent::getRootNamespace() . parent::getConfigGeneratorClassPath($this->getPathConfigNode());
     }
 
     /**
@@ -47,10 +47,10 @@ class TransformerGenerator extends Generator
      */
     public function getPath()
     {
-        return $this->getBasePath().'/'.parent::getConfigGeneratorClassPath(
+        return $this->getBasePath() . '/' . parent::getConfigGeneratorClassPath(
             $this->getPathConfigNode(),
             true
-        ).'/'.$this->getName().'Transformer.php';
+        ) . '/' . $this->getName() . 'Transformer.php';
     }
 
     /**
@@ -72,14 +72,14 @@ class TransformerGenerator extends Generator
     {
         $modelGenerator = new ModelGenerator(
             [
-            'name' => $this->name,
+                'name' => $this->name,
             ]
         );
-        $model = $modelGenerator->getRootNamespace().'\\'.$modelGenerator->getName();
+        $model = $modelGenerator->getRootNamespace() . '\\' . $modelGenerator->getName();
         $model = str_replace(
             [
-            "\\",
-            '/',
+                "\\",
+                '/',
             ],
             '\\',
             $model
@@ -88,7 +88,7 @@ class TransformerGenerator extends Generator
         return array_merge(
             parent::getReplacements(),
             [
-            'model' => $model,
+                'model' => $model,
             ]
         );
     }

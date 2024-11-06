@@ -1,12 +1,12 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Updater;
+namespace Mojar\CMS\Support\Updater;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Abstracts\UpdateManager;
-use Juzaweb\CMS\Facades\CacheGroup;
-use Juzaweb\CMS\Version;
+use Mojar\CMS\Abstracts\UpdateManager;
+use Mojar\CMS\Facades\CacheGroup;
+use Mojar\CMS\Version;
 
 class ThemeUpdater extends UpdateManager
 {
@@ -97,6 +97,6 @@ class ThemeUpdater extends UpdateManager
 
     protected function getLocalPath(): string
     {
-        return config('juzaweb.theme.path').'/'.$this->name;
+        return config('mojar.theme.path') . '/' . $this->name;
     }
 }

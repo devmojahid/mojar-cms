@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\CMS\Models;
+namespace Mojar\CMS\Models;
 
-use Juzaweb\CMS\Facades\GlobalData;
+use Mojar\CMS\Facades\GlobalData;
 
 /**
- * Juzaweb\CMS\Models\Config
+ * Mojar\CMS\Models\Config
  *
  * @property int $id
  * @property string $code
@@ -31,7 +31,7 @@ class Config extends Model
 
     public static function configs()
     {
-        $configs = config('juzaweb.config');
+        $configs = config('mojar.config');
         $configs = array_merge(GlobalData::get('configs'), $configs);
         return apply_filters('configs', $configs);
     }

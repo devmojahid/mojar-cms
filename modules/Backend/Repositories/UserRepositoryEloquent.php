@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\Backend\Repositories;
+namespace Mojar\Backend\Repositories;
 
-use Juzaweb\CMS\Models\User;
-use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
+use Mojar\CMS\Models\User;
+use Mojar\CMS\Repositories\BaseRepositoryEloquent;
 
 /**
  * Class UserRepositoryEloquent.

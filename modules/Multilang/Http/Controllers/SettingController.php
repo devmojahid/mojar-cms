@@ -1,12 +1,12 @@
 <?php
 
-namespace Juzaweb\Multilang\Http\Controllers;
+namespace Mojar\Multilang\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Http\Controllers\Backend\PageController;
-use Juzaweb\CMS\Models\Language;
+use Mojar\Backend\Http\Controllers\Backend\PageController;
+use Mojar\CMS\Models\Language;
 
 class SettingController extends PageController
 {

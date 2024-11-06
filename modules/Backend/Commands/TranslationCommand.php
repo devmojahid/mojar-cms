@@ -1,18 +1,19 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Commands;
+namespace Mojar\Backend\Commands;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Facades\Plugin;
-use Juzaweb\CMS\Facades\ThemeLoader;
+use Mojar\CMS\Facades\Plugin;
+use Mojar\CMS\Facades\ThemeLoader;
 use Illuminate\Support\Collection;
 
 abstract class TranslationCommand extends Command
@@ -22,7 +23,7 @@ abstract class TranslationCommand extends Command
         $result = [];
         $result['core'] = collect(
             [
-                'title' => 'Core Juzaweb',
+                'title' => 'Core Mojar',
                 'key' => 'core',
                 'type' => 'core',
                 'namespace' => 'cms',

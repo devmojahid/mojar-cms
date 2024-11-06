@@ -1,20 +1,21 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\API\Http\Controllers\Auth;
+namespace Mojar\API\Http\Controllers\Auth;
 
 use Illuminate\Http\JsonResponse;
-use Juzaweb\Backend\Http\Resources\UserResource;
-use Juzaweb\Backend\Repositories\UserRepository;
-use Juzaweb\CMS\Http\Controllers\ApiController;
-use Juzaweb\CMS\Http\Requests\Auth\RegisterRequest;
+use Mojar\Backend\Http\Resources\UserResource;
+use Mojar\Backend\Repositories\UserRepository;
+use Mojar\CMS\Http\Controllers\ApiController;
+use Mojar\CMS\Http\Requests\Auth\RegisterRequest;
 use OpenApi\Annotations as OA;
 
 class RegisterController extends ApiController
@@ -38,7 +39,7 @@ class RegisterController extends ApiController
      *              mediaType="multipart/form-data",
      *              @OA\Schema(
      *                  required={"name","email","password","password_confirmation"},
- *                      @OA\Property(property="name",
+     *                      @OA\Property(property="name",
      *                      type="string",
      *                      example="string",
      *                      description="name"

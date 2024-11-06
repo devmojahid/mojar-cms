@@ -1,20 +1,21 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Traits;
+namespace Mojar\CMS\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
-use Juzaweb\CMS\Facades\HookAction;
+use Mojar\CMS\Facades\HookAction;
 
 trait TaxonomyModel
 {
@@ -80,8 +81,8 @@ trait TaxonomyModel
         if ($keyword = Arr::get($params, 'keyword')) {
             $builder->where(
                 function (Builder $q) use ($keyword) {
-                    $q->where('name', JW_SQL_LIKE, '%'. $keyword .'%');
-                    $q->orWhere('description', JW_SQL_LIKE, '%'. $keyword .'%');
+                    $q->where('name', JW_SQL_LIKE, '%' . $keyword . '%');
+                    $q->orWhere('description', JW_SQL_LIKE, '%' . $keyword . '%');
                 }
             );
         }

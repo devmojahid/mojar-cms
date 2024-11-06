@@ -1,23 +1,24 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
 use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Contracts\TableGroupContract;
-use Juzaweb\CMS\Models\TableGroup;
-use Juzaweb\CMS\Models\TableGroupData;
-use Juzaweb\CMS\Models\TableGroupTable;
+use Mojar\CMS\Contracts\TableGroupContract;
+use Mojar\CMS\Models\TableGroup;
+use Mojar\CMS\Models\TableGroupData;
+use Mojar\CMS\Models\TableGroupTable;
 
 class DatabaseTableGroup implements TableGroupContract
 {
@@ -120,8 +121,7 @@ class DatabaseTableGroup implements TableGroupContract
         if ($keys) {
             $tableGroupTable = $this->findOrCreateTable(
                 $table,
-                $keys[array_key_first($keys)
-                ]
+                $keys[array_key_first($keys)]
             );
 
             $tables[$tableGroupTable->real_table] = [

@@ -1,27 +1,28 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://github.com/juzaweb/cms
+ * @link       https://github.com/mojar/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
 class Blade extends MinifyHtml
 {
     /** @var string */
     protected const BLOCK_TAGS_REGEX = 'area|article|aside|base(?:font)?|blockquote|body|'
-    . 'canvas|caption|center|col(?:group)?|dd|dir|div|dl|dt|fieldset|figcaption|figure|'
-    . 'footer|form|frame(?:set)?|h[1-6]|head|header|hgroup|hr|html|legend|li|link|main|'
-    . 'map|menu|meta|nav|ol|opt(?:group|ion)|output|p|param|section|table|tbody|thead|'
-    . 'td|th|tr|tfoot|title|ul|video';
+        . 'canvas|caption|center|col(?:group)?|dd|dir|div|dl|dt|fieldset|figcaption|figure|'
+        . 'footer|form|frame(?:set)?|h[1-6]|head|header|hgroup|hr|html|legend|li|link|main|'
+        . 'map|menu|meta|nav|ol|opt(?:group|ion)|output|p|param|section|table|tbody|thead|'
+        . 'td|th|tr|tfoot|title|ul|video';
 
     /** @var string */
     protected const INLINE_TAGS_REGEX = 'a|abbr|acronym|b|bdo|big|br|button|cite|dfn|em|i|'
-    . 'img|input|kbd|label|map|object|q|samp|select|small|span|strong|sub|sup|time|tt|var';
+        . 'img|input|kbd|label|map|object|q|samp|select|small|span|strong|sub|sup|time|tt|var';
 
     /**
      * "Minify" an Blade page
@@ -143,7 +144,7 @@ class Blade extends MinifyHtml
         // remove ws between block and inline tags
         $this->_html = preg_replace(
             '/(<\\/?(?:' . self::BLOCK_TAGS_REGEX . ')\\b[^>]*>)'
-            . '\\s+(<\\/?(?:' . self::INLINE_TAGS_REGEX . ')\\b[^>]*>)/iu',
+                . '\\s+(<\\/?(?:' . self::INLINE_TAGS_REGEX . ')\\b[^>]*>)/iu',
             '$1$2',
             $this->_html
         );
@@ -151,7 +152,7 @@ class Blade extends MinifyHtml
         // remove ws at the front of opening inline tags (ex. <a>hello <span>world)
         $this->_html = preg_replace(
             '/(<(?:' . self::INLINE_TAGS_REGEX . ')\\b[^>]*>)'
-            . '\\s([^\\s][^<]+[\\s]?)?(<(?:' . self::INLINE_TAGS_REGEX . ')\\b[^>]*>)/iu',
+                . '\\s([^\\s][^<]+[\\s]?)?(<(?:' . self::INLINE_TAGS_REGEX . ')\\b[^>]*>)/iu',
             '$1$2$3',
             $this->_html
         );
@@ -159,7 +160,7 @@ class Blade extends MinifyHtml
         // remove ws closing adjacent inline tags (ex. </span></label>)
         $this->_html = preg_replace(
             '/(<\\/(?:' . self::INLINE_TAGS_REGEX . ')>)'
-            . '\\s+(<\\/(?:' . self::INLINE_TAGS_REGEX . ')>)/iu',
+                . '\\s+(<\\/(?:' . self::INLINE_TAGS_REGEX . ')>)/iu',
             '$1$2',
             $this->_html
         );

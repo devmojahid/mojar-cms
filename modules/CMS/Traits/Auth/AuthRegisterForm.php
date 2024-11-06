@@ -1,22 +1,23 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Traits\Auth;
+namespace Mojar\CMS\Traits\Auth;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\CMS\Http\Requests\Auth\RegisterRequest;
-use Juzaweb\CMS\Models\User;
-use Juzaweb\CMS\Traits\ResponseMessage;
+use Mojar\CMS\Http\Requests\Auth\RegisterRequest;
+use Mojar\CMS\Models\User;
+use Mojar\CMS\Traits\ResponseMessage;
 
 trait AuthRegisterForm
 {

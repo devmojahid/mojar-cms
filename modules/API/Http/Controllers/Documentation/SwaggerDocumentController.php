@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    GNU General Public License v2.0
  */
 
-namespace Juzaweb\API\Http\Controllers\Documentation;
+namespace Mojar\API\Http\Controllers\Documentation;
 
 use Illuminate\Http\JsonResponse;
-use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\CMS\Contracts\HookActionContract as HookAction;
-use Juzaweb\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Abstracts\Action;
+use Mojar\CMS\Contracts\HookActionContract as HookAction;
+use Mojar\CMS\Http\Controllers\BackendController;
 
 class SwaggerDocumentController extends BackendController
 {

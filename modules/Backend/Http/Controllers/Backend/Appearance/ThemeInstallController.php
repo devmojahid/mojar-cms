@@ -1,24 +1,25 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend\Appearance;
+namespace Mojar\Backend\Http\Controllers\Backend\Appearance;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Juzaweb\Backend\Events\AfterUploadTheme;
-use Juzaweb\Backend\Support\ThemeUploader;
-use Juzaweb\CMS\Contracts\JuzawebApiContract;
-use Juzaweb\CMS\Facades\ThemeLoader;
-use Juzaweb\CMS\Http\Controllers\BackendController;
+use Mojar\Backend\Events\AfterUploadTheme;
+use Mojar\Backend\Support\ThemeUploader;
+use Mojar\CMS\Contracts\MojarApiContract;
+use Mojar\CMS\Facades\ThemeLoader;
+use Mojar\CMS\Http\Controllers\BackendController;
 use Pion\Laravel\ChunkUpload\Exceptions\UploadMissingFileException;
 use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
@@ -27,7 +28,7 @@ class ThemeInstallController extends BackendController
 {
     public function index(): View
     {
-        if (!config('juzaweb.theme.enable_upload')) {
+        if (!config('mojar.theme.enable_upload')) {
             abort(403, 'Access deny.');
         }
 
@@ -43,9 +44,9 @@ class ThemeInstallController extends BackendController
         return $this->view('cms::backend.theme.install', compact('title'));
     }
 
-    public function getData(Request $request, JuzawebApiContract $api): object|array
+    public function getData(Request $request, MojarApiContract $api): object|array
     {
-        if (!config('juzaweb.theme.enable_upload')) {
+        if (!config('mojar.theme.enable_upload')) {
             return (object) [];
         }
 
@@ -65,7 +66,7 @@ class ThemeInstallController extends BackendController
 
     public function upload(Request $request): JsonResponse|RedirectResponse
     {
-        if (!config('juzaweb.theme.enable_upload')) {
+        if (!config('mojar.theme.enable_upload')) {
             abort(403, 'Access deny.');
         }
 

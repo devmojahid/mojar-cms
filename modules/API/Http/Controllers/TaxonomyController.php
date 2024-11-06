@@ -1,34 +1,34 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    GNU General Public License v2.0
  */
 
-namespace Juzaweb\API\Http\Controllers;
+namespace Mojar\API\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Juzaweb\Backend\Http\Resources\PostCollection;
-use Juzaweb\Backend\Http\Resources\TaxonomyResource;
-use Juzaweb\Backend\Repositories\PostRepository;
-use Juzaweb\Backend\Repositories\TaxonomyRepository;
-use Juzaweb\CMS\Http\Controllers\ApiController;
-use Juzaweb\CMS\Repositories\Criterias\FilterCriteria;
-use Juzaweb\CMS\Repositories\Criterias\SearchCriteria;
-use Juzaweb\CMS\Repositories\Criterias\SortCriteria;
+use Mojar\Backend\Http\Resources\PostCollection;
+use Mojar\Backend\Http\Resources\TaxonomyResource;
+use Mojar\Backend\Repositories\PostRepository;
+use Mojar\Backend\Repositories\TaxonomyRepository;
+use Mojar\CMS\Http\Controllers\ApiController;
+use Mojar\CMS\Repositories\Criterias\FilterCriteria;
+use Mojar\CMS\Repositories\Criterias\SearchCriteria;
+use Mojar\CMS\Repositories\Criterias\SortCriteria;
 
 class TaxonomyController extends ApiController
 {
     public function __construct(
         protected TaxonomyRepository $taxonomyRepository,
         protected PostRepository $postRepository
-    ) {
-    }
+    ) {}
 
     public function index(Request $request, string $type, string $taxonomy): AnonymousResourceCollection
     {
@@ -49,8 +49,7 @@ class TaxonomyController extends ApiController
         return TaxonomyResource::collection($paginate);
     }
 
-    public function show(Request $request, string $type, string $taxonomy, string $slug):
-    JsonResource
+    public function show(Request $request, string $type, string $taxonomy, string $slug): JsonResource
     {
         $queries = $request->all();
         $queries['post_type'] = $type;

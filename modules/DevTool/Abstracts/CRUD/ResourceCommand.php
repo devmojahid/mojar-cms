@@ -1,22 +1,23 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\DevTool\Abstracts\CRUD;
+namespace Mojar\DevTool\Abstracts\CRUD;
 
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Support\Config\GenerateConfigReader;
-use Juzaweb\CMS\Support\Plugin;
-use Juzaweb\CMS\Traits\ModuleCommandTrait;
+use Mojar\CMS\Support\Config\GenerateConfigReader;
+use Mojar\CMS\Support\Plugin;
+use Mojar\CMS\Traits\ModuleCommandTrait;
 
 abstract class ResourceCommand extends Command
 {
@@ -84,17 +85,17 @@ abstract class ResourceCommand extends Command
      */
     protected function makeController(string $table, string $model): void
     {
-        $file = $model.'Controller.php';
+        $file = $model . 'Controller.php';
         $path = $this->getDestinationControllerFilePath($file);
 
         $contents = $this->stubRender(
             'resource/controller.stub',
             [
-                'CLASS_NAMESPACE' => $this->module->getNamespace().'Http\Controllers\Backend',
-                'DATATABLE' => $model.'Datatable',
+                'CLASS_NAMESPACE' => $this->module->getNamespace() . 'Http\Controllers\Backend',
+                'DATATABLE' => $model . 'Datatable',
                 'MODEL_NAME' => $model,
                 'MODULE_NAMESPACE' => $this->module->getNamespace(),
-                'CLASS' => $model.'Controller',
+                'CLASS' => $model . 'Controller',
                 'TABLE_NAME' => $table,
                 'VIEW_NAME' => Str::singular(Str::lower(Str::snake($model))),
                 'MODULE_DOMAIN' => $this->module->getDomainName(),
@@ -140,7 +141,7 @@ abstract class ResourceCommand extends Command
         $path = convert_linux_path($this->getDestinationViewsFilePath($singular, 'form.blade.php'));
 
         $contents = $this->stubRender(
-            'resource/views/'.$stubFile,
+            'resource/views/' . $stubFile,
             [
                 'ROUTE_NAME' => $table,
                 'FORM_COL1' => $this->getViewsFormCol1(),
@@ -180,15 +181,15 @@ abstract class ResourceCommand extends Command
      */
     protected function getDestinationControllerFilePath(mixed $file): string
     {
-        $controllerPath = $this->module->getPath().'/'.
-            GenerateConfigReader::read('controller')->getPath().
+        $controllerPath = $this->module->getPath() . '/' .
+            GenerateConfigReader::read('controller')->getPath() .
             '/Backend/';
 
         if (!is_dir($controllerPath)) {
             File::makeDirectory($controllerPath, 0775, true);
         }
 
-        return $controllerPath.'/'.$file;
+        return $controllerPath . '/' . $file;
     }
 
     /**
@@ -200,15 +201,15 @@ abstract class ResourceCommand extends Command
      */
     protected function getDestinationViewsFilePath(string $table, string $file): string
     {
-        $viewPath = $this->module->getPath().'/'.
-            GenerateConfigReader::read('views')->getPath().
-            '/backend/'.$table;
+        $viewPath = $this->module->getPath() . '/' .
+            GenerateConfigReader::read('views')->getPath() .
+            '/backend/' . $table;
 
         if (!is_dir($viewPath)) {
             File::makeDirectory($viewPath, 0775, true);
         }
 
-        return $viewPath.'/'.$file;
+        return $viewPath . '/' . $file;
     }
 
     /**
@@ -231,7 +232,7 @@ abstract class ResourceCommand extends Command
         $index = 0;
         foreach ($columns as $column) {
             $prefix = $index != 0 ? "\n\n\t\t\t" : "";
-            $str .= $prefix.$this->stubRender(
+            $str .= $prefix . $this->stubRender(
                 $this->getColumnViewsStubPath($column),
                 [
                     'COLUMN' => $column,
@@ -260,12 +261,12 @@ abstract class ResourceCommand extends Command
         $index = 0;
         foreach ($columns as $column) {
             $prefix = $index != 0 ? "\n\n\t\t\t" : "";
-            $str .= $prefix.$this->stubRender(
+            $str .= $prefix . $this->stubRender(
                 $this->getColumnViewsStubPath($column),
                 [
-                        'COLUMN' => $column,
-                        'MODULE_DOMAIN' => $this->module->getDomainName(),
-                    ]
+                    'COLUMN' => $column,
+                    'MODULE_DOMAIN' => $this->module->getDomainName(),
+                ]
             );
 
             $index++;
@@ -295,10 +296,10 @@ abstract class ResourceCommand extends Command
      */
     protected function getColumnViewsStubPath(string $column): string
     {
-        $stubPath = JW_PACKAGE_PATH.'/stubs/plugin/';
-        $columnStub = 'resource/views/columns/'.$column.'.stub';
+        $stubPath = JW_PACKAGE_PATH . '/stubs/plugin/';
+        $columnStub = 'resource/views/columns/' . $column . '.stub';
 
-        if (file_exists($stubPath.'/'.$columnStub)) {
+        if (file_exists($stubPath . '/' . $columnStub)) {
             return $columnStub;
         }
 

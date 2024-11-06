@@ -1,22 +1,23 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Mojar\Backend\Http\Controllers\Backend;
 
 use Illuminate\Support\Collection;
-use Juzaweb\Backend\Http\Datatables\ResourceDatatable;
-use Juzaweb\Backend\Models\Resource;
-use Juzaweb\CMS\Abstracts\DataTable;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Traits\ResourceController as ResourceControllerTrait;
+use Mojar\Backend\Http\Datatables\ResourceDatatable;
+use Mojar\Backend\Models\Resource;
+use Mojar\CMS\Abstracts\DataTable;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Traits\ResourceController as ResourceControllerTrait;
 
 class ResourceController extends BackendController
 {

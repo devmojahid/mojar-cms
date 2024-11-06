@@ -1,21 +1,22 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Support;
+namespace Mojar\Backend\Support;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Facades\Theme;
+use Mojar\CMS\Facades\Theme;
 
 class ThemeUploader
 {
@@ -63,7 +64,7 @@ class ThemeUploader
     {
         File::moveDirectory(
             $this->tmpRootFolder,
-            config('juzaweb.theme.path') . '/' . $this->themeInfo['name']
+            config('mojar.theme.path') . '/' . $this->themeInfo['name']
         );
 
         return true;

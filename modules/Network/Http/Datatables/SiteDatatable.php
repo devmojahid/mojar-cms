@@ -1,21 +1,22 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/laravel-cms
+ * @package    mojar/laravel-cms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    MIT
  */
 
-namespace Juzaweb\Network\Http\Datatables;
+namespace Mojar\Network\Http\Datatables;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Abstracts\DataTable;
-use Juzaweb\Network\Contracts\SiteManagerContract;
-use Juzaweb\Network\Models\Site;
+use Mojar\CMS\Abstracts\DataTable;
+use Mojar\Network\Contracts\SiteManagerContract;
+use Mojar\Network\Models\Site;
 
 class SiteDatatable extends DataTable
 {

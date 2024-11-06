@@ -1,16 +1,16 @@
 <?php
 
-namespace Juzaweb\Backend\Repositories\Email;
+namespace Mojar\Backend\Repositories\Email;
 
-use Juzaweb\Backend\Models\EmailTemplate;
-use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
-use Juzaweb\CMS\Traits\Criterias\UseFilterCriteria;
-use Juzaweb\CMS\Traits\Criterias\UseSearchCriteria;
+use Mojar\Backend\Models\EmailTemplate;
+use Mojar\CMS\Repositories\BaseRepositoryEloquent;
+use Mojar\CMS\Traits\Criterias\UseFilterCriteria;
+use Mojar\CMS\Traits\Criterias\UseSearchCriteria;
 
 /**
  * Class CommentRepositoryEloquent.
  *
- * @package namespace Juzaweb\Backend\Repositories;
+ * @package namespace Mojar\Backend\Repositories;
  */
 class EmailTemplateRepositoryEloquent extends BaseRepositoryEloquent implements EmailTemplateRepository
 {

@@ -1,16 +1,16 @@
 <?php
 
-namespace Juzaweb\Backend\Models;
+namespace Mojar\Backend\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Juzaweb\CMS\Models\Model;
-use Juzaweb\CMS\Models\User;
-use Juzaweb\CMS\Traits\Models\UseCodeColumn;
-use Juzaweb\CMS\Traits\ResourceModel;
-use Juzaweb\CMS\Traits\UseUUIDColumn;
+use Mojar\CMS\Models\Model;
+use Mojar\CMS\Models\User;
+use Mojar\CMS\Traits\Models\UseCodeColumn;
+use Mojar\CMS\Traits\ResourceModel;
+use Mojar\CMS\Traits\UseUUIDColumn;
 
 /**
- * Juzaweb\Backend\Models\EmailTemplate
+ * Mojar\Backend\Models\EmailTemplate
  *
  * @property int $id
  * @property string $code

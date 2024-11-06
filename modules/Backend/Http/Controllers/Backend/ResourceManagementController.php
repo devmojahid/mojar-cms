@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Mojar\Backend\Http\Controllers\Backend;
 
 use Exception;
 use Illuminate\Contracts\View\Factory;
@@ -19,11 +20,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Juzaweb\Backend\Http\Datatables\ResourceManagementDatatable;
-use Juzaweb\CMS\Abstracts\DataTable;
-use Juzaweb\CMS\Contracts\HookActionContract;
-use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Repositories\BaseRepository;
+use Mojar\Backend\Http\Datatables\ResourceManagementDatatable;
+use Mojar\CMS\Abstracts\DataTable;
+use Mojar\CMS\Contracts\HookActionContract;
+use Mojar\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Repositories\BaseRepository;
 
 class ResourceManagementController extends BackendController
 {

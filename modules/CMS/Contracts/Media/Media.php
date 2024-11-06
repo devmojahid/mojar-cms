@@ -1,13 +1,13 @@
 <?php
 
-namespace Juzaweb\CMS\Contracts\Media;
+namespace Mojar\CMS\Contracts\Media;
 
 use Illuminate\Contracts\Filesystem\Factory;
 use Illuminate\Contracts\Filesystem\Filesystem;
-use Juzaweb\CMS\Support\Media\Disk;
+use Mojar\CMS\Support\Media\Disk;
 
 /**
- * @see \Juzaweb\CMS\Support\Media\Media
+ * @see \Mojar\CMS\Support\Media\Media
  */
 interface Media
 {

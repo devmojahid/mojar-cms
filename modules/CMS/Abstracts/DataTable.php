@@ -1,10 +1,11 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://github.com/juzaweb/cms
+ * @link       https://github.com/mojar/cms
  * @license    GNU V2
  *
  * Created by JUZAWEB.
@@ -12,7 +13,7 @@
  * Time: 9:55 PM
  */
 
-namespace Juzaweb\CMS\Abstracts;
+namespace Mojar\CMS\Abstracts;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\View\View;
@@ -66,7 +67,7 @@ abstract class DataTable implements Arrayable
      */
     protected ?string $actionUrl = null;
 
-     /**
+    /**
      * Array of characters to escape.
      *
      * @var array
@@ -214,7 +215,7 @@ abstract class DataTable implements Arrayable
         return [
             'edit' => [
                 'label' => trans('cms::app.edit'),
-                'url' => $this->currentUrl .'/'. $row->id . '/edit',
+                'url' => $this->currentUrl . '/' . $row->id . '/edit',
             ],
             'delete' => [
                 'label' => trans('cms::app.delete'),
@@ -240,7 +241,7 @@ abstract class DataTable implements Arrayable
                 'value' => $value,
                 'row' => $row,
                 'actions' => $this->rowAction($row),
-                'editUrl' => $this->currentUrl .'/'. $row->id . '/edit',
+                'editUrl' => $this->currentUrl . '/' . $row->id . '/edit',
             ]
         )
             ->render();
@@ -364,7 +365,7 @@ abstract class DataTable implements Arrayable
      */
     protected function getUniqueId(): string
     {
-        return 'juzaweb_' . Str::random(10);
+        return 'mojar_' . Str::random(10);
     }
 
     /**

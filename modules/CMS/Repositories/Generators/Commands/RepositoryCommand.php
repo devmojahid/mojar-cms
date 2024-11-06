@@ -1,15 +1,15 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Generators\Commands;
+namespace Mojar\CMS\Repositories\Generators\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Repositories\Generators\FileAlreadyExistsException;
-use Juzaweb\CMS\Repositories\Generators\MigrationGenerator;
-use Juzaweb\CMS\Repositories\Generators\ModelGenerator;
-use Juzaweb\CMS\Repositories\Generators\RepositoryEloquentGenerator;
-use Juzaweb\CMS\Repositories\Generators\RepositoryInterfaceGenerator;
+use Mojar\CMS\Repositories\Generators\FileAlreadyExistsException;
+use Mojar\CMS\Repositories\Generators\MigrationGenerator;
+use Mojar\CMS\Repositories\Generators\ModelGenerator;
+use Mojar\CMS\Repositories\Generators\RepositoryEloquentGenerator;
+use Mojar\CMS\Repositories\Generators\RepositoryInterfaceGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -70,7 +70,7 @@ class RepositoryCommand extends Command
         $this->generators = new Collection();
 
         $migrationGenerator = new MigrationGenerator([
-            'name' => 'create_'.Str::snake(Str::plural($this->argument('name'))).'_table',
+            'name' => 'create_' . Str::snake(Str::plural($this->argument('name'))) . '_table',
             'fields' => $this->option('fillable'),
             'force' => $this->option('force'),
         ]);
@@ -98,7 +98,7 @@ class RepositoryCommand extends Command
             $generator->run();
         }
 
-        $model = $modelGenerator->getRootNamespace().'\\'.$modelGenerator->getName();
+        $model = $modelGenerator->getRootNamespace() . '\\' . $modelGenerator->getName();
         $model = str_replace([
             "\\",
             '/',
@@ -114,7 +114,7 @@ class RepositoryCommand extends Command
             ]))->run();
             $this->info("Repository created successfully.");
         } catch (FileAlreadyExistsException $e) {
-            $this->error($this->type.' already exists!');
+            $this->error($this->type . ' already exists!');
 
             return false;
         }

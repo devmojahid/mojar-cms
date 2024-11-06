@@ -4,9 +4,11 @@
     <div class="row">
         <div class="col-md-12">
             <div class="alert alert-success">
-                <p>{{ __('You are using Juzaweb CMS Version') }}: {{ \Juzaweb\CMS\Version::getVersion() }}</p>
+                <p>{{ __('You are using Mojar CMS Version') }}: {{ \Mojar\CMS\Version::getVersion() }}</p>
                 <p>
-                    <a href="https://github.com/juzaweb/cms/releases" target="_blank">{{ __('View change logs here') }}</a>. <a href="https://juzaweb.com/documentation/start/update" target="_blank">{{ __('View update guide here') }}</a>
+                    <a href="https://github.com/mojar/cms/releases" target="_blank">{{ __('View change logs here') }}</a>. <a
+                        href="https://mojar.com/documentation/start/update"
+                        target="_blank">{{ __('View update guide here') }}</a>
                 </p>
             </div>
 
@@ -29,7 +31,8 @@
                             <option value="update">{{ trans('cms::app.update') }}</option>
                         </select>
 
-                        <button type="submit" class="btn btn-primary px-3" id="apply-action-plugins">{{ trans('cms::app.apply') }}</button>
+                        <button type="submit" class="btn btn-primary px-3"
+                            id="apply-action-plugins">{{ trans('cms::app.apply') }}</button>
                     </form>
                 </div>
             </div>
@@ -51,7 +54,7 @@
 
     <div class="row mt-2">
         <div class="col-md-12">
-            <h5>{{__('Update themes')}}</h5>
+            <h5>{{ __('Update themes') }}</h5>
             <div class="row mb-2">
                 <div class="col-md-4">
                     <form method="post" class="form-inline">
@@ -62,7 +65,8 @@
                             <option value="update">{{ trans('cms::app.update') }}</option>
                         </select>
 
-                        <button type="submit" class="btn btn-primary px-3" id="apply-action-themes">{{ trans('cms::app.apply') }}</button>
+                        <button type="submit" class="btn btn-primary px-3"
+                            id="apply-action-themes">{{ trans('cms::app.apply') }}</button>
                     </form>
                 </div>
             </div>
@@ -84,20 +88,20 @@
 
     <script type="text/javascript">
         function update_success() {
-            setTimeout(function () {
+            setTimeout(function() {
                 window.location = "";
             }, 300);
             return false;
         }
 
-        var table1 = new JuzawebTable({
+        var table1 = new MojarTable({
             table: "#plugins-table",
             apply_button: "#apply-action-plugins",
             url: "{{ route('admin.update.plugins') }}",
             action_url: "{{ route('admin.plugin.bulk-actions') }}"
         });
 
-        var table2 = new JuzawebTable({
+        var table2 = new MojarTable({
             table: "#themes-table",
             apply_button: "#apply-action-themes",
             url: "{{ route('admin.update.themes') }}",
@@ -106,7 +110,7 @@
 
         ajaxRequest("{{ route('admin.update.check') }}", {}, {
             method: 'GET',
-            callback: function (response) {
+            callback: function(response) {
                 $('#update-form').html(response.html);
             }
         })

@@ -4,7 +4,7 @@ namespace $CLASS_NAMESPACE$;
 
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Builder;
-use Juzaweb\CMS\Abstracts\DataTable;
+use Mojar\CMS\Abstracts\DataTable;
 $USE_NAMESPACE$
 class $CLASS$ extends DataTable
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Criterias;
+namespace Mojar\CMS\Repositories\Criterias;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Juzaweb\CMS\Repositories\Contracts\CriteriaInterface;
-use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
+use Mojar\CMS\Repositories\Contracts\CriteriaInterface;
+use Mojar\CMS\Repositories\Contracts\RepositoryInterface;
 
 class CacheCriteria implements CriteriaInterface
 {

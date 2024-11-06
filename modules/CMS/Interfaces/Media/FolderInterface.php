@@ -1,8 +1,5 @@
 <?php
 
-namespace Juzaweb\CMS\Interfaces\Media;
+namespace Mojar\CMS\Interfaces\Media;
 
-interface FolderInterface
-{
-
-}
+interface FolderInterface {}

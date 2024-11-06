@@ -1,8 +1,8 @@
 <?php
 
-namespace Juzaweb\Example\Actions;
+namespace Mojar\Example\Actions;
 
-use Juzaweb\CMS\Abstracts\Action;
+use Mojar\CMS\Abstracts\Action;
 
 class ExampleAction extends Action
 {

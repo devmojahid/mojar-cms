@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Tests\Feature\Auth;
+namespace Mojar\Tests\Feature\Auth;
 
 use Faker\Generator as Faker;
-use Juzaweb\Backend\Models\EmailList;
-use Juzaweb\Backend\Models\EmailTemplate;
-use Juzaweb\Tests\TestCase;
+use Mojar\Backend\Models\EmailList;
+use Mojar\Backend\Models\EmailTemplate;
+use Mojar\Tests\TestCase;
 
 class RegisterTest extends TestCase
 {

@@ -1,25 +1,26 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Models;
+namespace Mojar\Backend\Models;
 
-use Juzaweb\CMS\Models\Model;
+use Mojar\CMS\Models\Model;
 
 /**
- * Juzaweb\Backend\Models\ResourceMeta
+ * Mojar\Backend\Models\ResourceMeta
  *
  * @property int $id
  * @property int $resource_id
  * @property string $meta_key
  * @property string|null $meta_value
- * @property-read \Juzaweb\Backend\Models\Resource $resource
+ * @property-read \Mojar\Backend\Models\Resource $resource
  * @method static \Illuminate\Database\Eloquent\Builder|ResourceMeta newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ResourceMeta newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ResourceMeta query()

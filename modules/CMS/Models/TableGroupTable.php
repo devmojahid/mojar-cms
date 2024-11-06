@@ -1,21 +1,22 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Models;
+namespace Mojar\CMS\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Juzaweb\CMS\Models\TableGroupTable
+ * Mojar\CMS\Models\TableGroupTable
  *
- * @property-read \Juzaweb\CMS\Models\TableGroup|null $tableGroup
+ * @property-read \Mojar\CMS\Models\TableGroup|null $tableGroup
  * @method static \Illuminate\Database\Eloquent\Builder|TableGroupTable newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TableGroupTable newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TableGroupTable query()

@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Console\Commands\Permission;
+namespace Mojar\CMS\Console\Commands\Permission;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;
@@ -47,8 +47,8 @@ class UpgradeForTeams extends Command
             $this->info("Migration created successfully.");
         } else {
             $this->error(
-                "Couldn't create migration.\n".
-                "Check the write permissions within the database/migrations directory."
+                "Couldn't create migration.\n" .
+                    "Check the write permissions within the database/migrations directory."
             );
         }
 
@@ -63,7 +63,7 @@ class UpgradeForTeams extends Command
     protected function createMigration()
     {
         try {
-            $migrationStub = __DIR__."/../../database/migrations/{$this->migrationSuffix}.stub";
+            $migrationStub = __DIR__ . "/../../database/migrations/{$this->migrationSuffix}.stub";
             copy($migrationStub, $this->getMigrationPath());
 
             return true;

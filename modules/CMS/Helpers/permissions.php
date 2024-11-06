@@ -26,7 +26,7 @@ if (! function_exists('setPermissionsTeamId')) {
      */
     function setPermissionsTeamId($id)
     {
-        app(\Juzaweb\CMS\Support\Permission\PermissionRegistrar::class)->setPermissionsTeamId($id);
+        app(\Mojar\CMS\Support\Permission\PermissionRegistrar::class)->setPermissionsTeamId($id);
     }
 }
 
@@ -36,6 +36,6 @@ if (! function_exists('getPermissionsTeamId')) {
      */
     function getPermissionsTeamId()
     {
-        return app(\Juzaweb\CMS\Support\Permission\PermissionRegistrar::class)->getPermissionsTeamId();
+        return app(\Mojar\CMS\Support\Permission\PermissionRegistrar::class)->getPermissionsTeamId();
     }
 }

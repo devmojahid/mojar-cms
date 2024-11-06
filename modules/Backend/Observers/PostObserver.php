@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Observers;
+namespace Mojar\Backend\Observers;
 
 use Illuminate\Support\Facades\DB;
-use Juzaweb\Backend\Models\Post;
+use Mojar\Backend\Models\Post;
 use Illuminate\Support\Facades\Cache;
 
 class PostObserver

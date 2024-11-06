@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Generators;
+namespace Mojar\CMS\Repositories\Generators;
 
 use Exception;
 
@@ -10,6 +10,4 @@ use Exception;
  * @package Prettus\Repository\Generators
  * @author Anderson Andrade <contato@andersonandra.de>
  */
-class FileAlreadyExistsException extends Exception
-{
-}
+class FileAlreadyExistsException extends Exception {}

@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://github.com/juzaweb/cms
+ * @link       https://github.com/mojar/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Providers;
+namespace Mojar\CMS\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Juzaweb\CMS\Support\BladeMinifyCompiler;
+use Mojar\CMS\Support\BladeMinifyCompiler;
 
 class PerformanceServiceProvider extends ServiceProvider
 {
@@ -22,7 +23,7 @@ class PerformanceServiceProvider extends ServiceProvider
 
     public function register()
     {
-        if (config('juzaweb.performance.minify_views')) {
+        if (config('mojar.performance.minify_views')) {
             $this->registerBladeCompiler();
         }
     }

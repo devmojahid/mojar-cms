@@ -13,13 +13,13 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'POST',
-            url: juzaweb.adminUrl + '/ajax/seo-content',
+            url: mojar.adminUrl + '/ajax/seo-content',
             dataType: 'json',
             data: {
                 'title': title,
                 'description': description,
             }
-        }).done(function(data) {
+        }).done(function (data) {
 
             if (data.status === false) {
                 show_message(data);
@@ -45,7 +45,7 @@ $(document).ready(function () {
             item.hide('slow');
             $(".box-custom-seo").show('slow');
             return false;
-        }).fail(function(data) {
+        }).fail(function (data) {
             show_message(data);
             return false;
         });
@@ -57,13 +57,13 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'POST',
-            url: juzaweb.adminUrl + '/ajax/seo-content',
+            url: mojar.adminUrl + '/ajax/seo-content',
             dataType: 'json',
             data: {
                 'title': title,
                 'description': description,
             }
-        }).done(function(data) {
+        }).done(function (data) {
 
             if (data.status === false) {
                 show_message(data);
@@ -79,7 +79,7 @@ $(document).ready(function () {
             }
 
             return false;
-        }).fail(function(data) {
+        }).fail(function (data) {
             show_message(data);
             return false;
         });
@@ -96,13 +96,13 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'POST',
-            url: juzaweb.adminUrl + '/ajax/seo-content',
+            url: mojar.adminUrl + '/ajax/seo-content',
             dataType: 'json',
             data: {
                 'title': title,
                 'description': description
             }
-        }).done(function(data) {
+        }).done(function (data) {
 
             if (data.status === false) {
                 show_message(data.message);
@@ -114,7 +114,7 @@ $(document).ready(function () {
             //$(".review-url span").text(data.slug);
             //if (!$("#meta_url").val()) $("#meta_url").val(data.slug);
             return false;
-        }).fail(function(data) {
+        }).fail(function (data) {
             show_message(data);
             return false;
         });

@@ -13,7 +13,7 @@ return [
          * `Spatie\Permission\Contracts\Permission` contract.
          */
 
-        'permission' => \Juzaweb\CMS\Models\Permission::class,
+        'permission' => \Mojar\CMS\Models\Permission::class,
 
         /*
          * When using the "HasRoles" trait from this package, we need to know which
@@ -24,7 +24,7 @@ return [
          * `Spatie\Permission\Contracts\Role` contract.
          */
 
-        'role' => \Juzaweb\CMS\Models\Role::class,
+        'role' => \Mojar\CMS\Models\Role::class,
 
     ],
 
@@ -149,7 +149,7 @@ return [
          * The cache key used to store all permissions.
          */
 
-        'key' => 'juzaweb.permission.cache',
+        'key' => 'mojar.permission.cache',
 
         /*
          * You may optionally indicate a specific cache driver to use for permission and

@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\Backend\Commands;
+namespace Mojar\Backend\Commands;
 
-use Juzaweb\CMS\Contracts\TranslationManager;
-use Juzaweb\CMS\Facades\Plugin;
-use Juzaweb\CMS\Facades\ThemeLoader;
-use Juzaweb\DevTool\Commands\Plugin\Translation\ImportTranslationCommand as PluginImportTranslationCommand;
+use Mojar\CMS\Contracts\TranslationManager;
+use Mojar\CMS\Facades\Plugin;
+use Mojar\CMS\Facades\ThemeLoader;
+use Mojar\DevTool\Commands\Plugin\Translation\ImportTranslationCommand as PluginImportTranslationCommand;
 
 class ImportTranslationCommand extends TranslationCommand
 {

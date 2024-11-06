@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    mojar/juzacms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\DevTool\Providers;
+namespace Mojar\DevTool\Providers;
 
-use Juzaweb\CMS\Support\ServiceProvider;
-use Juzaweb\DevTool\Actions\MenuAction;
+use Mojar\CMS\Support\ServiceProvider;
+use Mojar\DevTool\Actions\MenuAction;
 
 class UIServiceProvider extends ServiceProvider
 {

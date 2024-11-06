@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Juzaweb\CMS\Support\Permission\PermissionRegistrar;
+use Mojar\CMS\Support\Permission\PermissionRegistrar;
 
 return new class extends Migration {
     /**
@@ -83,8 +83,10 @@ return new class extends Migration {
                 $table->string('model_type');
                 $table->unsignedBigInteger($columnNames['model_morph_key']);
                 $table->index(
-                    [$columnNames['model_morph_key'],
-                        'model_type'],
+                    [
+                        $columnNames['model_morph_key'],
+                        'model_type'
+                    ],
                     "{$tbprefix}has_permissions_model_id_model_type_index"
                 );
 
@@ -101,9 +103,12 @@ return new class extends Migration {
                     );
 
                     $table->primary(
-                        [$columnNames['team_foreign_key'],
+                        [
+                            $columnNames['team_foreign_key'],
                             PermissionRegistrar::$pivotPermission,
-                            $columnNames['model_morph_key'], 'model_type'],
+                            $columnNames['model_morph_key'],
+                            'model_type'
+                        ],
                         "{$tbprefix}has_permissions_permission_model_type_primary"
                     );
                 } else {
@@ -128,8 +133,10 @@ return new class extends Migration {
                 $table->string('model_type');
                 $table->unsignedBigInteger($columnNames['model_morph_key']);
                 $table->index(
-                    [$columnNames['model_morph_key'],
-                        'model_type'],
+                    [
+                        $columnNames['model_morph_key'],
+                        'model_type'
+                    ],
                     $tbprefix . 'has_roles_model_id_model_type_index'
                 );
 
@@ -145,7 +152,8 @@ return new class extends Migration {
                         [
                             $columnNames['team_foreign_key'],
                             PermissionRegistrar::$pivotRole,
-                            $columnNames['model_morph_key'], 'model_type'
+                            $columnNames['model_morph_key'],
+                            'model_type'
                         ],
                         $tbprefix . 'has_roles_role_model_type_primary'
                     );

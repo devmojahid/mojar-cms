@@ -1,25 +1,26 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\API\Http\Controllers\Admin;
+namespace Mojar\API\Http\Controllers\Admin;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Http\Requests\User\StoreUserRequest;
-use Juzaweb\Backend\Http\Requests\User\UpdateUserRequest;
-use Juzaweb\Backend\Repositories\UserRepository;
-use Juzaweb\CMS\Http\Controllers\ApiController;
-use Juzaweb\CMS\Models\User;
+use Mojar\Backend\Http\Requests\User\StoreUserRequest;
+use Mojar\Backend\Http\Requests\User\UpdateUserRequest;
+use Mojar\Backend\Repositories\UserRepository;
+use Mojar\CMS\Http\Controllers\ApiController;
+use Mojar\CMS\Models\User;
 use OpenApi\Annotations as OA;
 
 class UserController extends ApiController

@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    mojar/juzacms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\DevTool\Http\Controllers\Plugins;
+namespace Mojar\DevTool\Http\Controllers\Plugins;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -16,10 +17,10 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Inertia\Response;
-use Juzaweb\CMS\Contracts\HookActionContract;
-use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
-use Juzaweb\DevTool\Http\Controllers\Controller;
-use Juzaweb\DevTool\Http\Requests\PostTypeRequest;
+use Mojar\CMS\Contracts\HookActionContract;
+use Mojar\CMS\Contracts\LocalPluginRepositoryContract;
+use Mojar\DevTool\Http\Controllers\Controller;
+use Mojar\DevTool\Http\Requests\PostTypeRequest;
 
 class PostTypeController extends Controller
 {

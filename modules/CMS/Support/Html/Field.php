@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support\Html;
+namespace Mojar\CMS\Support\Html;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -16,8 +17,8 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use Juzaweb\CMS\Contracts\Field as FieldContract;
-use Juzaweb\CMS\Support\Html\Traits\InputField;
+use Mojar\CMS\Contracts\Field as FieldContract;
+use Mojar\CMS\Support\Html\Traits\InputField;
 
 class Field implements FieldContract
 {
@@ -156,7 +157,7 @@ class Field implements FieldContract
         $options['id'] = Arr::get(
             $options,
             'id',
-            'a'. Str::random(5) . '-' . $name
+            'a' . Str::random(5) . '-' . $name
         );
 
         $options['id'] = Str::slug($options['id']);

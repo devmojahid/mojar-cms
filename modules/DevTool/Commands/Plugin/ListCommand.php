@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\DevTool\Commands\Plugin;
+namespace Mojar\DevTool\Commands\Plugin;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Support\Plugin;
+use Mojar\CMS\Support\Plugin;
 use Symfony\Component\Console\Input\InputOption;
 
 class ListCommand extends Command

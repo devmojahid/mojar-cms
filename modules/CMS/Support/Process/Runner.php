@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Process;
+namespace Mojar\CMS\Support\Process;
 
-use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
-use Juzaweb\CMS\Contracts\RunableInterface;
+use Mojar\CMS\Contracts\LocalPluginRepositoryContract;
+use Mojar\CMS\Contracts\RunableInterface;
 
 class Runner implements RunableInterface
 {

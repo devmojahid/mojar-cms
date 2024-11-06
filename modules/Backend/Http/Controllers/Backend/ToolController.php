@@ -1,8 +1,8 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Mojar\Backend\Http\Controllers\Backend;
 
-use Juzaweb\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Http\Controllers\BackendController;
 
 class ToolController extends BackendController
 {

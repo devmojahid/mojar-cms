@@ -1,33 +1,34 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Providers;
+namespace Mojar\CMS\Providers;
 
 use Illuminate\Support\Facades\Lang;
-use Juzaweb\CMS\Contracts\Theme\ThemeRender as ThemeRenderContract;
-use Juzaweb\CMS\Contracts\ThemeLoaderContract;
-use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
-use Juzaweb\CMS\Facades\ActionRegister;
-use Juzaweb\CMS\Facades\ThemeLoader;
-use Juzaweb\CMS\Support\ServiceProvider;
-use Juzaweb\CMS\Support\Theme\Theme;
-use Juzaweb\CMS\Support\LocalThemeRepository;
-use Juzaweb\CMS\Support\Theme\ThemeRender;
-use Juzaweb\Frontend\Actions\FrontendAction;
-use Juzaweb\Frontend\Actions\ThemeAction;
+use Mojar\CMS\Contracts\Theme\ThemeRender as ThemeRenderContract;
+use Mojar\CMS\Contracts\ThemeLoaderContract;
+use Mojar\CMS\Contracts\LocalThemeRepositoryContract;
+use Mojar\CMS\Facades\ActionRegister;
+use Mojar\CMS\Facades\ThemeLoader;
+use Mojar\CMS\Support\ServiceProvider;
+use Mojar\CMS\Support\Theme\Theme;
+use Mojar\CMS\Support\LocalThemeRepository;
+use Mojar\CMS\Support\Theme\ThemeRender;
+use Mojar\Frontend\Actions\FrontendAction;
+use Mojar\Frontend\Actions\ThemeAction;
 
 class ThemeServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        if (config('juzaweb.frontend.enable')) {
+        if (config('mojar.frontend.enable')) {
             $this->registerTheme();
         }
     }
@@ -44,7 +45,7 @@ class ThemeServiceProvider extends ServiceProvider
         $this->app->singleton(
             LocalThemeRepositoryContract::class,
             function ($app) {
-                $path = config('juzaweb.theme.path');
+                $path = config('mojar.theme.path');
                 return new LocalThemeRepository($app, $path);
             }
         );

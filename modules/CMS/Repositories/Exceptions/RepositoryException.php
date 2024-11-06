@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Exceptions;
+namespace Mojar\CMS\Repositories\Exceptions;
 
 use Exception;
 
@@ -10,6 +10,4 @@ use Exception;
  * @package Prettus\Repository\Exceptions
  * @author Anderson Andrade <contato@andersonandra.de>
  */
-class RepositoryException extends Exception
-{
-}
+class RepositoryException extends Exception {}

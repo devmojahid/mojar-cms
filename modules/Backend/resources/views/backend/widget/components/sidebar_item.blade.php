@@ -12,18 +12,18 @@
             </div>
         </div>
 
-        <div class="card-body @if(empty($show)) box-hidden @endif">
+        <div class="card-body @if (empty($show)) box-hidden @endif">
             <div class="dd jw-widget-builder" data-key="{{ $item->get('key') }}">
                 @php
                     $widgets = jw_get_widgets_sidebar($item->get('key'));
                 @endphp
                 <ol class="dd-list">
-                    @foreach($widgets as $key => $widget)
+                    @foreach ($widgets as $key => $widget)
                         @php
-                            $widgetData = \Juzaweb\CMS\Facades\HookAction::getWidgets($widget['widget'] ?? 'null');
+                            $widgetData = \Mojar\CMS\Facades\HookAction::getWidgets($widget['widget'] ?? 'null');
                         @endphp
 
-                        @if(empty($widgetData))
+                        @if (empty($widgetData))
                             @continue
                         @endif
 
@@ -31,7 +31,7 @@
                             'widget' => $widgetData,
                             'sidebar' => $item,
                             'key' => $key,
-                            'data' => $widget
+                            'data' => $widget,
                         ])
                         @endcomponent
                     @endforeach

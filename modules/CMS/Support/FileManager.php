@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
 use Exception;
 use GuzzleHttp\Client;
@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
-use Juzaweb\Backend\Events\MediaWasUploaded;
-use Juzaweb\CMS\Exceptions\FileManagerException;
-use Juzaweb\Backend\Models\MediaFile;
+use Mojar\Backend\Events\MediaWasUploaded;
+use Mojar\CMS\Exceptions\FileManagerException;
+use Mojar\Backend\Models\MediaFile;
 use Spatie\ImageOptimizer\OptimizerChainFactory;
 use GuzzleHttp\Exception\RequestException;
 
@@ -218,7 +218,7 @@ class FileManager
             $filename
         );
 
-        if (config('juzaweb.filemanager.image-optimizer')) {
+        if (config('mojar.filemanager.image-optimizer')) {
             if (in_array($uploadedFile->getMimeType(), $this->getImageMimetype())) {
                 $optimizerChain = OptimizerChainFactory::create();
                 $optimizerChain->optimize($this->getStorage()->path($newPath));
@@ -236,7 +236,7 @@ class FileManager
                     'extension' => $uploadedFile->getClientOriginalExtension(),
                     'folder_id' => $this->folder_id,
                     'user_id' => $this->user_id ?: $jw_user->id,
-                    'disk' => $this->disk ?? config('juzaweb.filemanager.disk'),
+                    'disk' => $this->disk ?? config('mojar.filemanager.disk'),
                 ]
             );
 
@@ -275,7 +275,7 @@ class FileManager
 
     protected function getImageMimetype()
     {
-        return config('juzaweb.filemanager.types.image.valid_mime');
+        return config('mojar.filemanager.types.image.valid_mime');
     }
 
     protected function makeFolderUpload(): string
@@ -343,7 +343,7 @@ class FileManager
 
         $i = 0;
         while (1) {
-            $filename = $name . ($i > 0 ? "-{$i}": '') .'.'. $extension;
+            $filename = $name . ($i > 0 ? "-{$i}" : '') . '.' . $extension;
             if (!$this->getStorage()->exists("{$uploadFolder}/{$filename}")) {
                 break;
             }
@@ -379,7 +379,7 @@ class FileManager
         $mimetype = $file->getMimeType();
         $extension = $file->getClientOriginalExtension();
 
-        $config = config('juzaweb.filemanager.types.' . $this->type);
+        $config = config('mojar.filemanager.types.' . $this->type);
         if (empty($config)) {
             $this->errors[] = $this->errorMessage('not-supported');
             return false;
@@ -393,12 +393,12 @@ class FileManager
         $extensions = $config['extensions'] ?? [];
 
         if (in_array($mimetype, $validMimetypes) === false) {
-            $this->errors[] = $this->errorMessage('mime').$mimetype;
+            $this->errors[] = $this->errorMessage('mime') . $mimetype;
             return false;
         }
 
         if ($extensions && !in_array($extension, $extensions)) {
-            $this->errors[] = $this->errorMessage('extension').$mimetype;
+            $this->errors[] = $this->errorMessage('extension') . $mimetype;
             return false;
         }
 
@@ -446,7 +446,7 @@ class FileManager
             return $this->storage;
         }
 
-        $this->storage = Storage::disk($this->disk ?? config('juzaweb.filemanager.disk'));
+        $this->storage = Storage::disk($this->disk ?? config('mojar.filemanager.disk'));
 
         return $this->storage;
     }

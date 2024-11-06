@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Generators;
+namespace Mojar\CMS\Support\Generators;
 
 use Illuminate\Filesystem\Filesystem;
-use Juzaweb\CMS\Exceptions\FileAlreadyExistException;
+use Mojar\CMS\Exceptions\FileAlreadyExistException;
 
 class FileGenerator extends Generator
 {

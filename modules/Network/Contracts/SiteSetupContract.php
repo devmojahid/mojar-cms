@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Network\Contracts;
+namespace Mojar\Network\Contracts;
 
 /**
- * @see \Juzaweb\Network\Support\SiteSetup
+ * @see \Mojar\Network\Support\SiteSetup
  */
 interface SiteSetupContract
 {

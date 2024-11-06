@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\CMS\Http\Middleware;
+namespace Mojar\CMS\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use Juzaweb\CMS\Exceptions\UnauthorizedException;
+use Mojar\CMS\Exceptions\UnauthorizedException;
 
 class RoleOrPermissionMiddleware
 {

@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Models;
+namespace Mojar\CMS\Models;
 
-use Juzaweb\Network\Interfaces\RootNetworkModelInterface;
+use Mojar\Network\Interfaces\RootNetworkModelInterface;
 
 /**
- * Juzaweb\CMS\Models\Job
+ * Mojar\CMS\Models\Job
  *
  * @property int $id
  * @property string $queue

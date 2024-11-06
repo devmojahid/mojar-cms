@@ -1,10 +1,10 @@
 function addStyleSubmenu(e) {
-    var t = e.find(".juzaweb__menuLeft__navigation"),
+    var t = e.find(".mojar__menuLeft__navigation"),
         n = e.offset().top,
         i = $(window).scrollTop(),
         o = n - i - 30,
         e = n + t.height() + 1,
-        n = 60 + e - $('.juzaweb__layout').height(),
+        n = 60 + e - $('.mojar__layout').height(),
         i = $(window).height() + i - 50;
 
     if ((n = o < (n = i < e - n ? e - i : n) ? o : n) > 1 && n > 40) {
@@ -36,7 +36,7 @@ $(document).ready(function () {
     bodyElement.on('change', '.generate-slug', function () {
         let title = $(this).val();
 
-        ajaxRequest(juzaweb.adminUrl +'/load-data/generateSlug', {
+        ajaxRequest(mojar.adminUrl + '/load-data/generateSlug', {
             title: title
         }, {
             method: 'GET',
@@ -53,7 +53,7 @@ $(document).ready(function () {
 
     bodyElement.on('click', '.close-message', function () {
         let id = $(this).data('id');
-        ajaxRequest(juzaweb.adminUrl + '/remove-message', {
+        ajaxRequest(mojar.adminUrl + '/remove-message', {
             id: id,
         }, {
             method: 'POST',
@@ -63,10 +63,10 @@ $(document).ready(function () {
         });
     });
 
-    $(".juzaweb__menuLeft__submenu").on("mouseover", function () {
-            if (!$(this).hasClass('juzaweb__menuLeft__submenu--toggled')) {
-                addStyleSubmenu($(this));
-            }
+    $(".mojar__menuLeft__submenu").on("mouseover", function () {
+        if (!$(this).hasClass('mojar__menuLeft__submenu--toggled')) {
+            addStyleSubmenu($(this));
         }
+    }
     );
 });

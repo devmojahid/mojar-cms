@@ -6,13 +6,13 @@ $(document).ready(function () {
         let btn = $(this);
         let btnText = btn.html();
         btn.prop("disabled", true);
-        btn.html('<i class="fa fa-spinner fa-spin"></i> ' + juzaweb.lang.please_wait);
+        btn.html('<i class="fa fa-spinner fa-spin"></i> ' + mojar.lang.please_wait);
 
         jwCMSUpdate(
             'theme',
             1,
             null,
-            {theme: theme},
+            { theme: theme },
             function (response) {
                 btn.remove();
                 show_message(response);
@@ -30,20 +30,20 @@ $(document).ready(function () {
         let btn = $(this);
         let btnText = btn.html();
         btn.prop("disabled", true);
-        btn.html('<i class="fa fa-spinner fa-spin"></i> ' + juzaweb.lang.please_wait);
+        btn.html('<i class="fa fa-spinner fa-spin"></i> ' + mojar.lang.please_wait);
 
         jwCMSUpdate(
             'theme',
             1,
             null,
-            {theme: theme},
+            { theme: theme },
             function (response) {
-                btn.html(juzaweb.lang.activate);
+                btn.html(mojar.lang.activate);
                 btn.removeClass('install-theme');
                 btn.addClass('active-theme');
                 btn.prop("disabled", false);
             },
-            function(response) {
+            function (response) {
                 show_message(response);
                 btn.prop("disabled", false);
                 btn.html(btnText);
@@ -56,17 +56,17 @@ $(document).ready(function () {
         let btn = $(this);
         btn.prop("disabled", true);
 
-        ajaxRequest(juzaweb.adminUrl + '/themes/activate', {
+        ajaxRequest(mojar.adminUrl + '/themes/activate', {
             theme: theme
         }, {
             method: 'POST',
             callback: function (response) {
                 show_message(response);
-                btn.html(`<i class="fa fa-check"></i> ${juzaweb.lang.activated}`);
+                btn.html(`<i class="fa fa-check"></i> ${mojar.lang.activated}`);
                 btn.removeClass('active-theme');
                 btn.prop("disabled", true);
             },
-            failCallback: function(response) {
+            failCallback: function (response) {
                 show_message(response);
                 btn.prop("disabled", false);
             }
@@ -79,15 +79,15 @@ $(document).ready(function () {
         let btnText = btn.html();
 
         confirm_message(
-            juzaweb.lang.delete_theme_confirm,
+            mojar.lang.delete_theme_confirm,
             function (result) {
                 if (!result) {
                     return false;
                 }
 
-                btn.html('<i class="fa fa-spinner fa-spin"></i> ' + juzaweb.lang.please_wait);
+                btn.html('<i class="fa fa-spinner fa-spin"></i> ' + mojar.lang.please_wait);
 
-                ajaxRequest(juzaweb.adminUrl + '/themes/bulk-actions', {
+                ajaxRequest(mojar.adminUrl + '/themes/bulk-actions', {
                     ids: [theme],
                     action: 'delete'
                 }, {
@@ -98,12 +98,12 @@ $(document).ready(function () {
                             btn.closest('.theme-list-item').remove();
                         }
                     },
-                    failCallback: function(response) {
+                    failCallback: function (response) {
                         show_message(response);
                         btn.html(btnText);
                     }
                 });
-        });
+            });
     });
 
     bodyElement.on('click', '.buy-theme', function () {
@@ -115,7 +115,7 @@ $(document).ready(function () {
         btn.html('<i class="fa fa-spinner fa-spin"></i>');
 
         ajaxRequest(
-            juzaweb.adminUrl+'/module/theme/buy-modal',
+            mojar.adminUrl + '/module/theme/buy-modal',
             {
                 module: module
             },
@@ -156,10 +156,10 @@ $(document).ready(function () {
         }
 
         btn.prop('disabled', true);
-        btn.html('<i class="fa fa-spinner fa-spin"></i> '+ juzaweb.lang.please_wait);
+        btn.html('<i class="fa fa-spinner fa-spin"></i> ' + mojar.lang.please_wait);
 
         ajaxRequest(
-            juzaweb.adminUrl+'/module/theme/activation-code',
+            mojar.adminUrl + '/module/theme/activation-code',
             {
                 module: module,
                 key: key
@@ -175,21 +175,21 @@ $(document).ready(function () {
                     }
 
                     form.find('input[name=key]').closest('.form-group').hide();
-                    btn.html('<i class="fa fa-spinner fa-spin"></i> '+ juzaweb.lang.installing);
+                    btn.html('<i class="fa fa-spinner fa-spin"></i> ' + mojar.lang.installing);
 
                     jwCMSUpdate(
                         'theme',
                         1,
                         null,
-                        {theme: module},
+                        { theme: module },
                         function (response) {
-                            btn.html(juzaweb.lang.activate);
+                            btn.html(mojar.lang.activate);
                             btn.removeClass('install-theme');
                             btn.addClass('active-theme');
                             btn.data('theme', module);
                             btn.prop("disabled", false);
                         },
-                        function(response) {
+                        function (response) {
                             show_message(response);
                             btn.prop("disabled", false);
                             btn.html(btnText);
@@ -211,7 +211,7 @@ $(document).ready(function () {
         return false;
     });
 
-    bodyElement.on('submit', '#form-login-juzaweb', function (event) {
+    bodyElement.on('submit', '#form-login-mojar', function (event) {
         if (event.isDefaultPrevented()) {
             return false;
         }
@@ -230,10 +230,10 @@ $(document).ready(function () {
         }
 
         btn.prop('disabled', true);
-        btn.html('<i class="fa fa-spinner fa-spin"></i> '+ juzaweb.lang.please_wait);
+        btn.html('<i class="fa fa-spinner fa-spin"></i> ' + mojar.lang.please_wait);
 
         ajaxRequest(
-            juzaweb.adminUrl+'/module/login-juzaweb',
+            mojar.adminUrl + '/module/login-mojar',
             {
                 module: module,
                 email: email,
@@ -250,7 +250,7 @@ $(document).ready(function () {
                     }
 
                     ajaxRequest(
-                        juzaweb.adminUrl+'/module/theme/buy-modal',
+                        mojar.adminUrl + '/module/theme/buy-modal',
                         {
                             module: module
                         },

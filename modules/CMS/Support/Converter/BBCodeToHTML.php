@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Support\Converter;
+namespace Mojar\CMS\Support\Converter;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -79,11 +80,11 @@ class BBCodeToHTML
             '<span style="color:$1;">$2</span>',
             '<a href="$1" rel="nofollow" target="_blank">$1</a>',
             '<a href="$1" rel="nofollow" target="_blank">$2</a>',
-            '<img src="$1" alt="'. e($alt) .'" />',
-            '<img src="'. $imageUrl .'$1" alt="'. e($alt) .'" />',
-            '<div class="embed-responsive">'.
-            '<iframe src="$1" class="embed-responsive-item" allowfullscreen></iframe>'
-            .'</div>',
+            '<img src="$1" alt="' . e($alt) . '" />',
+            '<img src="' . $imageUrl . '$1" alt="' . e($alt) . '" />',
+            '<div class="embed-responsive">' .
+                '<iframe src="$1" class="embed-responsive-item" allowfullscreen></iframe>'
+                . '</div>',
             '<pre>$1</pre>',
         ];
 

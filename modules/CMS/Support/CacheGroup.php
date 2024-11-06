@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Support\Traits\Macroable;

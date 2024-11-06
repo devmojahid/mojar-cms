@@ -1,10 +1,11 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://github.com/juzaweb/cms
+ * @link       https://github.com/mojar/cms
  * @license    GNU V2
  *
  * Created by JUZAWEB.
@@ -12,15 +13,15 @@
  * Time: 10:10 PM
  */
 
-namespace Juzaweb\CMS\Http\Controllers;
+namespace Mojar\CMS\Http\Controllers;
 
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
-use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\CMS\Traits\ResponseMessage;
+use Mojar\CMS\Abstracts\Action;
+use Mojar\CMS\Traits\ResponseMessage;
 
 class BackendController extends Controller
 {
@@ -83,7 +84,7 @@ class BackendController extends Controller
     protected function addBreadcrumb(array $item, string $name = 'admin'): void
     {
         add_filters(
-            $name.'_breadcrumb',
+            $name . '_breadcrumb',
             function ($items) use ($item) {
                 $items[] = $item;
 

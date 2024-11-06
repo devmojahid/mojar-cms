@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Traits;
+namespace Mojar\CMS\Repositories\Traits;
 
 /**
  * Trait ComparesVersionsTrait

@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
 class HtmlDomNode
 {
@@ -142,18 +143,21 @@ class HtmlDomNode
             $debug_object->debug_log(
                 3,
                 'source charset: '
-                . $sourceCharset
-                . ' target charaset: '
-                . $targetCharset
+                    . $sourceCharset
+                    . ' target charaset: '
+                    . $targetCharset
             );
         }
 
-        if (!empty($sourceCharset)
+        if (
+            !empty($sourceCharset)
             && !empty($targetCharset)
-            && (strcasecmp($sourceCharset, $targetCharset) != 0)) {
+            && (strcasecmp($sourceCharset, $targetCharset) != 0)
+        ) {
             // Check if the reported encoding could have been incorrect and the text is actually already UTF-8
             if ((strcasecmp($targetCharset, 'UTF-8') == 0)
-                && ($this->is_utf8($text))) {
+                && ($this->is_utf8($text))
+            ) {
                 $converted_text = $text;
             } else {
                 $converted_text = iconv($sourceCharset, $targetCharset, $text);
@@ -164,7 +168,6 @@ class HtmlDomNode
         if ($targetCharset === 'UTF-8') {
             if (substr($converted_text, 0, 3) === "\xef\xbb\xbf") {
                 $converted_text = substr($converted_text, 3);
-
             }
 
             if (substr($converted_text, -3) === "\xef\xbb\xbf") {
@@ -1092,16 +1095,20 @@ class HtmlDomNode
             $nodes = array_slice($this->dom->nodes, $nodes_start, $nodes_count, true);
         } elseif ($parent_cmd === '>') { // Child Combinator
             $nodes = $this->children;
-        } elseif ($parent_cmd === '+'
+        } elseif (
+            $parent_cmd === '+'
             && $this->parent
-            && in_array($this, $this->parent->children)) { // Next-Sibling Combinator
+            && in_array($this, $this->parent->children)
+        ) { // Next-Sibling Combinator
             $index = array_search($this, $this->parent->children, true) + 1;
             if ($index < count($this->parent->children)) {
                 $nodes[] = $this->parent->children[$index];
             }
-        } elseif ($parent_cmd === '~'
+        } elseif (
+            $parent_cmd === '~'
             && $this->parent
-            && in_array($this, $this->parent->children)) { // Subsequent Sibling Combinator
+            && in_array($this, $this->parent->children)
+        ) { // Subsequent Sibling Combinator
             $index = array_search($this, $this->parent->children, true);
             $nodes = array_slice($this->parent->children, $index);
         }
@@ -1170,10 +1177,12 @@ class HtmlDomNode
             }
 
             // Check attributes
-            if ($pass
+            if (
+                $pass
                 && $attributes !== ''
                 && is_array($attributes)
-                && !empty($attributes)) {
+                && !empty($attributes)
+            ) {
                 foreach ($attributes as $a) {
                     list(
                         $att_name,
@@ -1181,7 +1190,7 @@ class HtmlDomNode
                         $att_val,
                         $att_inv,
                         $att_case_sensitivity
-                        ) = $a;
+                    ) = $a;
 
                     // Handle indexing attributes (i.e. "[2]")
                     /**
@@ -1192,9 +1201,11 @@ class HtmlDomNode
                      * Note: This doesn't conflict with the CSS Standard which
                      * doesn't work on numeric attributes anyway.
                      */
-                    if (is_numeric($att_name)
+                    if (
+                        is_numeric($att_name)
                         && $att_expr === ''
-                        && $att_val === '') {
+                        && $att_val === ''
+                    ) {
                         $count = 0;
 
                         // Find index of current element in parent
@@ -1222,8 +1233,10 @@ class HtmlDomNode
                         }
                     } else { // Attribute should be set
                         // todo: "plaintext" is not a valid CSS selector!
-                        if ($att_name !== 'plaintext'
-                            && !isset($node->attr[$att_name])) {
+                        if (
+                            $att_name !== 'plaintext'
+                            && !isset($node->attr[$att_name])
+                        ) {
                             $pass = false;
                             break;
                         }
@@ -1247,13 +1260,13 @@ class HtmlDomNode
                         $debug_object->debug_log(
                             2,
                             'testing node: '
-                            . $node->tag
-                            . ' for attribute: '
-                            . $att_name
-                            . $att_expr
-                            . $att_val
-                            . ' where nodes value is: '
-                            . $nodeKeyValue
+                                . $node->tag
+                                . ' for attribute: '
+                                . $att_name
+                                . $att_expr
+                                . $att_val
+                                . ' where nodes value is: '
+                                . $nodeKeyValue
                         );
                     }
 
@@ -1279,7 +1292,7 @@ class HtmlDomNode
                         $debug_object->debug_log(
                             2,
                             'after match: '
-                            . ($check ? 'true' : 'false')
+                                . ($check ? 'true' : 'false')
                         );
                     }
 

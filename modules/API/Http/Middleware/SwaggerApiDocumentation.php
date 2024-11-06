@@ -1,20 +1,21 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    GNU General Public License v2.0
  */
 
-namespace Juzaweb\API\Http\Middleware;
+namespace Mojar\API\Http\Middleware;
 
 class SwaggerApiDocumentation
 {
     public function handle($request, \Closure $next)
     {
-        if (!config('juzaweb.api.enable')) {
+        if (!config('mojar.api.enable')) {
             abort(404);
         }
 

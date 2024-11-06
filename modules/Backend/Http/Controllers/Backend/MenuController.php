@@ -1,14 +1,14 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Mojar\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\Backend\Models\Menu;
-use Juzaweb\Backend\Models\MenuItem;
-use Juzaweb\CMS\Facades\GlobalData;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Http\Controllers\BackendController;
+use Mojar\Backend\Models\Menu;
+use Mojar\Backend\Models\MenuItem;
+use Mojar\CMS\Facades\GlobalData;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\CMS\Http\Controllers\BackendController;
 
 class MenuController extends BackendController
 {
@@ -20,7 +20,7 @@ class MenuController extends BackendController
         $navMenus = GlobalData::get('nav_menus');
         $location = get_theme_config('nav_location');
 
-        add_action('juzaweb.add_menu_items', [$this, 'addMenuBoxs']);
+        add_action('mojar.add_menu_items', [$this, 'addMenuBoxs']);
 
         if (empty($id)) {
             $menu = Menu::first();

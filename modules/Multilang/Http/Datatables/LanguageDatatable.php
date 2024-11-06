@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\Multilang\Http\Datatables;
+namespace Mojar\Multilang\Http\Datatables;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
-use Juzaweb\CMS\Abstracts\DataTable;
-use Juzaweb\CMS\Models\Language;
+use Mojar\CMS\Abstracts\DataTable;
+use Mojar\CMS\Models\Language;
 
 class LanguageDatatable extends DataTable
 {
@@ -25,8 +25,8 @@ class LanguageDatatable extends DataTable
                     return '<input
                     type="radio"
                     class="form-control"
-                    name="default" '. ($value == 1 ? 'checked': '') .'
-                    value="'. $row->code .'">';
+                    name="default" ' . ($value == 1 ? 'checked' : '') . '
+                    value="' . $row->code . '">';
                 },
             ],
             'created_at' => [

@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Tests\Unit;
+namespace Mojar\Tests\Unit;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Juzaweb\CMS\Support\Theme;
-use Juzaweb\Tests\TestCase;
+use Mojar\CMS\Support\Theme;
+use Mojar\Tests\TestCase;
 
 class ThemeTest extends TestCase
 {
@@ -42,7 +43,7 @@ class ThemeTest extends TestCase
 
         $theme = app('themes')->find($themeName);
 
-        $themePath = config('juzaweb.theme.path') . "/{$themeName}";
+        $themePath = config('mojar.theme.path') . "/{$themeName}";
 
         $destination = Storage::disk('local')->path("backups/{$themeName}");
 

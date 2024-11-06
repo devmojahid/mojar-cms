@@ -1,20 +1,21 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Contracts\Theme;
+namespace Mojar\CMS\Contracts\Theme;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 
 /**
- * @see \Juzaweb\CMS\Support\Theme\ThemeRender
+ * @see \Mojar\CMS\Support\Theme\ThemeRender
  */
 interface ThemeRender
 {

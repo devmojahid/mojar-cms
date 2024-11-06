@@ -1,18 +1,18 @@
 <?php
 
-namespace Juzaweb\Backend\Repositories;
+namespace Mojar\Backend\Repositories;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\CMS\Models\User;
-use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
-use Juzaweb\CMS\Repositories\Criterias\SortCriteria;
-use Juzaweb\CMS\Traits\Criterias\UseFilterCriteria;
-use Juzaweb\CMS\Traits\Criterias\UseSearchCriteria;
-use Juzaweb\CMS\Traits\Criterias\UseSortableCriteria;
+use Mojar\Backend\Models\Post;
+use Mojar\Backend\Models\Taxonomy;
+use Mojar\CMS\Models\User;
+use Mojar\CMS\Repositories\BaseRepositoryEloquent;
+use Mojar\CMS\Repositories\Criterias\SortCriteria;
+use Mojar\CMS\Traits\Criterias\UseFilterCriteria;
+use Mojar\CMS\Traits\Criterias\UseSearchCriteria;
+use Mojar\CMS\Traits\Criterias\UseSortableCriteria;
 
 /**
  * @property Post $model
@@ -164,7 +164,7 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
         };*/
 
         $builder = $this->model->newQuery()->with($with)
-            ->cacheFor(config('juzaweb.performance.query_cache.lifetime', 3600))
+            ->cacheFor(config('mojar.performance.query_cache.lifetime', 3600))
             ->whereIn('status', [Post::STATUS_PUBLISH, Post::STATUS_PRIVATE]);
 
         return apply_filters('post.createFrontendDetailBuilder', $builder);
@@ -189,7 +189,7 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
         $this->applyScope();
 
         $taxonomies = collect($post->json_taxonomies)
-            ->when($taxonomy, fn ($q) => $q->where('taxonomy', $taxonomy))
+            ->when($taxonomy, fn($q) => $q->where('taxonomy', $taxonomy))
             ->pluck('id')
             ->toArray();
 
@@ -210,7 +210,7 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
 
         $results = $this->createSelectFrontendBuilder()->whereHas(
             'likes',
-            fn ($q) => $q->where("{$q->getModel()->getTable()}.user_id", '=', $user->id)
+            fn($q) => $q->where("{$q->getModel()->getTable()}.user_id", '=', $user->id)
         )->paginate($limit, $columns);
 
         $this->resetModel();
@@ -227,7 +227,7 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
             Post::STATUS_TRASH => trans('cms::app.trash'),
         ];
 
-        return apply_filters($type.'.statuses', $statuses);
+        return apply_filters($type . '.statuses', $statuses);
     }
 
     public function model(): string

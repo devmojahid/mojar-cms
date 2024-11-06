@@ -1,7 +1,5 @@
 <?php
 
-namespace Juzaweb\CMS\Contracts;
+namespace Mojar\CMS\Contracts;
 
-interface ActionRegisterContract
-{
-}
+interface ActionRegisterContract {}

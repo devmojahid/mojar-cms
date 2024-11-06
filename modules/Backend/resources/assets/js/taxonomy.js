@@ -16,12 +16,12 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'GET',
-            url: juzaweb.adminUrl + '/taxonomy/' + type +'/' + taxonomy + '/component-item',
+            url: mojar.adminUrl + '/taxonomy/' + type + '/' + taxonomy + '/component-item',
             dataType: 'json',
             data: {
                 'id': id
             }
-        }).done(function(response) {
+        }).done(function (response) {
             if (response.status === false) {
                 show_message(response);
                 return false;
@@ -34,7 +34,7 @@ $(document).ready(function () {
             item.val(null).trigger('change.select2');
 
             return false;
-        }).fail(function(response) {
+        }).fail(function (response) {
             show_message(response);
             return false;
         });
@@ -59,7 +59,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'POST',
-            url: juzaweb.adminUrl + '/taxonomy/' + type +'/' + taxonomy,
+            url: mojar.adminUrl + '/taxonomy/' + type + '/' + taxonomy,
             dataType: 'json',
             data: {
                 name: name,
@@ -67,7 +67,7 @@ $(document).ready(function () {
                 post_type: postType,
                 taxonomy: taxonomy,
             }
-        }).done(function(response) {
+        }).done(function (response) {
             btn.find('i').attr('class', icon);
             btn.prop("disabled", false);
 
@@ -89,12 +89,12 @@ $(document).ready(function () {
                 </li>`;
 
                 if (parent) {
-                    addForm = btn.closest('.form-taxonomy').find('.show-taxonomies ul #item-category-'+res.parent_id+' ul:first');
+                    addForm = btn.closest('.form-taxonomy').find('.show-taxonomies ul #item-category-' + res.parent_id + ' ul:first');
                     if (addForm.length) {
                         addForm.append(htmlItem);
                     } else {
-                        htmlItem = '<ul class="mt-2 p-0">'+htmlItem+'</ul>';
-                        btn.closest('.form-taxonomy').find('.show-taxonomies ul #item-category-'+res.parent_id)
+                        htmlItem = '<ul class="mt-2 p-0">' + htmlItem + '</ul>';
+                        btn.closest('.form-taxonomy').find('.show-taxonomies ul #item-category-' + res.parent_id)
                             .append(htmlItem);
                     }
                 } else {
@@ -110,7 +110,7 @@ $(document).ready(function () {
             }
 
             return false;
-        }).fail(function(response) {
+        }).fail(function (response) {
             btn.find('i').attr('class', icon);
             btn.prop("disabled", false);
             show_message(response);

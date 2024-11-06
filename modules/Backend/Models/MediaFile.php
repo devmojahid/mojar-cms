@@ -1,12 +1,12 @@
 <?php
 
-namespace Juzaweb\Backend\Models;
+namespace Mojar\Backend\Models;
 
 use Illuminate\Support\Facades\Storage;
-use Juzaweb\CMS\Models\Model;
+use Mojar\CMS\Models\Model;
 
 /**
- * Juzaweb\Backend\Models\MediaFile
+ * Mojar\Backend\Models\MediaFile
  *
  * @property int $id
  * @property string $name
@@ -59,7 +59,7 @@ class MediaFile extends Model
 
     public function delete()
     {
-        Storage::disk(config('juzaweb.filemanager.disk'))->delete($this->path);
+        Storage::disk(config('mojar.filemanager.disk'))->delete($this->path);
 
         return parent::delete();
     }
@@ -68,7 +68,7 @@ class MediaFile extends Model
     {
         return in_array(
             $this->mime_type,
-            config('juzaweb.filemanager.types.image.valid_mime')
+            config('mojar.filemanager.types.image.valid_mime')
         );
     }
 }

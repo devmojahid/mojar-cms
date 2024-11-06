@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex flex-wrap flex-column align-items-center">
-                        <div class="juzaweb__utils__avatar juzaweb__utils__avatar--size64 mb-3">
+                        <div class="mojar__utils__avatar mojar__utils__avatar--size64 mb-3">
                             <img src="{{ $jw_user->getAvatar() }}" alt="Mary Stanform">
                         </div>
                         <div class="text-center">
@@ -16,12 +16,12 @@
                                 {{ $jw_user->is_admin ? 'Administrator' : 'User' }}
                             </div>
 
-                            {{--<button class="btn btn-primary btn-with-addon">
+                            {{-- <button class="btn btn-primary btn-with-addon">
                                 <span class="btn-addon">
                                     <i class="btn-addon-icon fa fa-plus-circle"></i>
                                 </span>
                                 Request Access
-                            </button>--}}
+                            </button> --}}
                         </div>
                     </div>
                 </div>
@@ -59,9 +59,12 @@
             <div class="card">
                 <div class="card-header p-2">
                     <ul class="nav nav-pills">
-                        <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">{{ trans('cms::app.settings') }}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#notifications" data-toggle="tab">{{ trans('cms::app.notifications') }}</a></li>
-                        <li class="nav-item text-capitalize"><a class="nav-link" href="#change-password" data-toggle="tab">{{ trans('cms::app.change_password') }}</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="#settings"
+                                data-toggle="tab">{{ trans('cms::app.settings') }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#notifications"
+                                data-toggle="tab">{{ trans('cms::app.notifications') }}</a></li>
+                        <li class="nav-item text-capitalize"><a class="nav-link" href="#change-password"
+                                data-toggle="tab">{{ trans('cms::app.change_password') }}</a></li>
                     </ul>
                 </div>
                 <div class="card-body">

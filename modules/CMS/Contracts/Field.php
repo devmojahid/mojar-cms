@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Contracts;
+namespace Mojar\CMS\Contracts;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 /**
- * @see \Juzaweb\CMS\Support\Html\Field
+ * @see \Mojar\CMS\Support\Html\Field
  */
 interface Field
 {
@@ -30,7 +31,7 @@ interface Field
      */
     public function render(array $fields, array|Model $values = [], bool $collection = false): View|Factory;
 
-     /**
+    /**
      * Generates a row for a form.
      *
      * @param array $options The options for the row.
@@ -39,7 +40,7 @@ interface Field
      */
     public function row(array $options, array|Model $values = []): View|Factory;
 
-     /**
+    /**
      * Creates a column for a form.
      *
      * @param array $options An array of options for the column.
@@ -48,7 +49,7 @@ interface Field
      */
     public function col(array $options, array|Model $values = []): View|Factory;
 
-     /**
+    /**
      * Collects the given array of fields and returns a Collection.
      *
      * @param array $fields The array of fields to collect.
@@ -56,7 +57,7 @@ interface Field
      */
     public function collect(array $fields): Collection;
 
-     /**
+    /**
      * Retrieves the field view or factory based on the given data type.
      *
      * @param array $data The array containing the field data.
@@ -64,7 +65,7 @@ interface Field
      */
     public function fieldByType(array $data): View|Factory|string;
 
-     /**
+    /**
      * Generate the function comment for the `text` function.
      *
      * @param string|Model $label The label parameter description.
@@ -74,7 +75,7 @@ interface Field
      */
     public function text(string|Model $label, ?string $name, ?array $options = []): Factory|View;
 
-     /**
+    /**
      * Generates a function comment for the given function body.
      *
      * @param string|Model $label The label for the form input.
@@ -84,7 +85,7 @@ interface Field
      */
     public function hidden(string|Model $label, ?string $name, ?array $options = []): Factory|View;
 
-     /**
+    /**
      * Generates a textarea input element for a form.
      *
      * @param string|Model $label The label for the textarea input.
@@ -104,7 +105,7 @@ interface Field
      */
     public function select(string|Model $label, ?string $name, ?array $options = []): Factory|View;
 
-     /**
+    /**
      * Generates a checkbox input field for a form.
      *
      * @param string|Model $label The label for the checkbox.
@@ -114,7 +115,7 @@ interface Field
      */
     public function checkbox(string|Model $label, ?string $name, ?array $options = []): Factory|View;
 
-     /**
+    /**
      * Generate a slug for a given label and name with optional options.
      *
      * @param string|Model $label The label or model to generate the slug for.
@@ -124,7 +125,7 @@ interface Field
      */
     public function slug(string|Model $label, ?string $name, ?array $options = []): Factory|View;
 
-     /**
+    /**
      * Generates the function comment for the given function body.
      *
      * @param string|Model $label The label for the editor.
@@ -174,7 +175,7 @@ interface Field
      */
     public function selectUser(string|Model $label, ?string $name, ?array $options = []): Factory|View;
 
-     /**
+    /**
      * Creates and returns an image component for a form.
      *
      * @param string|Model $label The label for the image component.

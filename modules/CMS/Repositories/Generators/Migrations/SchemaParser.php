@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Generators\Migrations;
+namespace Mojar\CMS\Repositories\Generators\Migrations;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
@@ -136,7 +136,7 @@ class SchemaParser implements Arrayable
      */
     public function getAttributes($column, $schema)
     {
-        $fields = str_replace($column.':', '', $schema);
+        $fields = str_replace($column . ':', '', $schema);
 
         return $this->hasCustomAttribute($column) ? $this->getCustomAttribute($column) : explode(':', $fields);
     }
@@ -175,12 +175,12 @@ class SchemaParser implements Arrayable
      */
     public function createField($column, $attributes, $type = 'add')
     {
-        $results = "\t\t\t".'$table';
+        $results = "\t\t\t" . '$table';
         foreach ($attributes as $key => $field) {
             $results .= $this->{"{$type}Column"}($key, $field, $column);
         }
 
-        return $results .= ';'.PHP_EOL;
+        return $results .= ';' . PHP_EOL;
     }
 
     /**
@@ -210,16 +210,16 @@ class SchemaParser implements Arrayable
     protected function addColumn($key, $field, $column)
     {
         if ($this->hasCustomAttribute($column)) {
-            return '->'.$field;
+            return '->' . $field;
         }
         if ($key == 0) {
-            return '->'.$field."('".$column."')";
+            return '->' . $field . "('" . $column . "')";
         }
         if (Str::contains($field, '(')) {
-            return '->'.$field;
+            return '->' . $field;
         }
 
-        return '->'.$field.'()';
+        return '->' . $field . '()';
     }
 
     /**
@@ -234,9 +234,9 @@ class SchemaParser implements Arrayable
     protected function removeColumn($key, $field, $column)
     {
         if ($this->hasCustomAttribute($column)) {
-            return '->'.$field;
+            return '->' . $field;
         }
 
-        return '->dropColumn('."'".$column."')";
+        return '->dropColumn(' . "'" . $column . "')";
     }
 }

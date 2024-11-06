@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Facades;
+namespace Mojar\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Juzaweb\CMS\Contracts\JWQueryContract;
+use Mojar\CMS\Contracts\JWQueryContract;
 
 /**
  * @method static array posts(string $type, array $options = [])
@@ -19,8 +20,8 @@ use Juzaweb\CMS\Contracts\JWQueryContract;
  * @method static array postTaxonomies($post, $taxonomy, $params)
  * @method static array relatedPosts($post, $taxonomy, $params)
  *
- * @see \Juzaweb\CMS\Support\JWQuery
- * @see \Juzaweb\CMS\Traits\Queries\PostQuery
+ * @see \Mojar\CMS\Support\JWQuery
+ * @see \Mojar\CMS\Traits\Queries\PostQuery
  */
 class JWQuery extends Facade
 {

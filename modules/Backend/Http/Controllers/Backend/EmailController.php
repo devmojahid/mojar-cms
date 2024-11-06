@@ -1,21 +1,22 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Mojar\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Support\Email;
+use Mojar\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Support\Email;
 
 class EmailController extends BackendController
 {
@@ -57,7 +58,7 @@ class EmailController extends BackendController
             ->setEmails($email)
             ->setSubject('Send email for {{ name }}')
             ->setBody(
-                'Hello {{ name }}, If you receive this email, it means that your config email on Juzaweb is active.'
+                'Hello {{ name }}, If you receive this email, it means that your config email on Mojar is active.'
             )
             ->setParams(['name' => Auth::user()->name])
             ->send();

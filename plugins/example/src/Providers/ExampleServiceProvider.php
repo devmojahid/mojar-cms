@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\Example\Providers;
+namespace Mojar\Example\Providers;
 
-use Juzaweb\CMS\Facades\ActionRegister;
-use Juzaweb\CMS\Support\ServiceProvider;
-use Juzaweb\Example\Actions\ExampleAction;
+use Mojar\CMS\Facades\ActionRegister;
+use Mojar\CMS\Support\ServiceProvider;
+use Mojar\Example\Actions\ExampleAction;
 
 class ExampleServiceProvider extends ServiceProvider
 {

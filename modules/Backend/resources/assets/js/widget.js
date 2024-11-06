@@ -21,9 +21,9 @@ $(document).ready(function () {
         btn.find('i').attr('class', 'fa fa-spinner fa-spin');
         btn.prop("disabled", true);
 
-        ajaxRequest(juzaweb.adminUrl + '/widgets/get-item', form, {
+        ajaxRequest(mojar.adminUrl + '/widgets/get-item', form, {
             method: 'GET',
-            callback: function(response) {
+            callback: function (response) {
                 let items = response.items || [];
                 $.each(items, function (key, item) {
                     $('#sidebar-' + key + ' .jw-widget-builder .dd-empty').remove();

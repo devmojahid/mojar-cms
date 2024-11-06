@@ -1,13 +1,13 @@
 <?php
 
-namespace Juzaweb\Backend\Providers;
+namespace Mojar\Backend\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    protected $namespace = 'Juzaweb\Backend\Http\Controllers';
+    protected $namespace = 'Mojar\Backend\Http\Controllers';
 
     public function boot()
     {
@@ -31,7 +31,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware('admin')
             ->namespace($this->namespace)
-            ->prefix(config('juzaweb.admin_prefix'))
+            ->prefix(config('mojar.admin_prefix'))
             ->group(__DIR__ . '/../routes/admin.php');
     }
 }

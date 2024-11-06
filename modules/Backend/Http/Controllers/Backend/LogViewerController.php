@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Mojar\Backend\Http\Controllers\Backend;
 
 use Arcanedev\LogViewer\Contracts\LogViewer;
 use Arcanedev\LogViewer\Entities\Log;
@@ -23,7 +24,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Http\Controllers\BackendController;
 
 class LogViewerController extends BackendController
 {
@@ -31,9 +32,7 @@ class LogViewerController extends BackendController
 
     protected string $showRoute = 'admin.logs.error.show';
 
-    public function __construct(protected LogViewer $logViewer)
-    {
-    }
+    public function __construct(protected LogViewer $logViewer) {}
 
     public function index(): View
     {
@@ -57,7 +56,7 @@ class LogViewerController extends BackendController
         );
 
         $level = 'all';
-        $title = trans('cms::app.error_logs').' '.$date;
+        $title = trans('cms::app.error_logs') . ' ' . $date;
         $log = $this->getLogOrFail($date);
         $query = $request->get('query');
         $levels = $this->logViewer->levelsNames();
@@ -118,7 +117,7 @@ class LogViewerController extends BackendController
             ]
         );
 
-        $title = trans('cms::app.error_logs').' '.$date;
+        $title = trans('cms::app.error_logs') . ' ' . $date;
         $query = $request->get('query');
         if (is_null($query)) {
             return redirect()->route($this->showRoute, [$date]);

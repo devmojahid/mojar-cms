@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\API\Http\Requests\Auth;
+namespace Mojar\API\Http\Requests\Auth;
 
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
@@ -22,11 +22,11 @@ class LoginRequest extends FormRequest
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
         ];
-    
+
         if (get_config('captcha')) {
             $rules['g-recaptcha-response'] = 'bail|required|recaptcha';
         }
-        
+
         return $rules;
     }
 
@@ -91,6 +91,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey()
     {
-        return Str::lower($this->input('email')).'|'.$this->ip();
+        return Str::lower($this->input('email')) . '|' . $this->ip();
     }
 }

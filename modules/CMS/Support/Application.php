@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
 use Illuminate\Foundation\Application as BaseApplication;
 
@@ -20,6 +21,6 @@ class Application extends BaseApplication
             return $this->namespace;
         }
 
-        return $this->namespace = 'Juzaweb\\Backend\\';
+        return $this->namespace = 'Mojar\\Backend\\';
     }
 }

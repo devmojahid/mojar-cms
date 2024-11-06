@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Backend\Appearance;
+namespace Mojar\Backend\Http\Controllers\Backend\Appearance;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Inertia\Inertia;
 use Inertia\Response;
-use Juzaweb\CMS\Facades\ThemeConfig;
-use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Support\Theme\Customize;
-use Juzaweb\CMS\Support\Theme\CustomizeControl;
+use Mojar\CMS\Facades\ThemeConfig;
+use Mojar\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Support\Theme\Customize;
+use Mojar\CMS\Support\Theme\CustomizeControl;
 
 class CustomizerController extends BackendController
 {

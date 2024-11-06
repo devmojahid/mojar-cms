@@ -12,3 +12,133 @@
     border-bottom: 0;
     border-left: 0.3em solid transparent;
 }
+
+/* Enhanced DataTable Styling - Specific to vendor.min.js implementation */
+.table.dataTable {
+    border-collapse: collapse !important;
+    margin-bottom: 1rem;
+    width: 100% !important;
+}
+
+.table.dataTable thead th {
+    border-bottom: 2px solid #e9ecef !important;
+    padding: 1rem !important;
+    font-weight: 600;
+    background-color: #f9fafb;
+    white-space: nowrap;
+}
+
+.table.dataTable tbody td {
+    padding: 1rem !important;
+    vertical-align: middle;
+    border-bottom: 1px solid #f0f2f5 !important;
+}
+
+/* Fix for sorting icons */
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_desc:before {
+    right: 1em !important;
+    content: "" !important;
+}
+
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:after {
+    right: 0.5em !important;
+}
+
+/* DataTable Filter and Length */
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter {
+    margin-bottom: 1rem;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    min-width: 80px;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    min-width: 200px;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    margin-left: 0.5rem;
+}
+
+/* Pagination Styling */
+.dataTables_wrapper .dataTables_paginate {
+    padding-top: 1rem;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    margin: 0 3px;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    background: transparent !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #e9ecef !important;
+    border-color: #dee2e6;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: #007bff !important;
+    border-color: #007bff;
+    color: #fff !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    color: #6c757d !important;
+    pointer-events: none;
+    opacity: 0.65;
+}
+
+/* Responsive improvements */
+@media (max-width: 767px) {
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter {
+        text-align: left;
+        margin-bottom: 0.5rem;
+    }
+    
+    .dataTables_wrapper .dataTables_filter input {
+        min-width: 100%;
+        margin-left: 0;
+    }
+    
+    .table.dataTable {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Row hover effect */
+.table.dataTable tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.05) !important;
+}
+
+/* Striped rows */
+.table.dataTable tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Processing indicator */
+.dataTables_processing {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Info text styling */
+.dataTables_info {
+    color: #6c757d;
+    padding-top: 1rem;
+}

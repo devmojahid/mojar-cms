@@ -1,7 +1,9 @@
-<?php namespace Juzaweb\CMS\Support\ShortCode;
+<?php
 
-use Juzaweb\CMS\Contracts\ShortCode as ShortCodeContract;
-use Juzaweb\CMS\Support\ShortCode\Compilers\ShortCodeCompiler;
+namespace Mojar\CMS\Support\ShortCode;
+
+use Mojar\CMS\Contracts\ShortCode as ShortCodeContract;
+use Mojar\CMS\Support\ShortCode\Compilers\ShortCodeCompiler;
 
 class ShortCode implements ShortCodeContract
 {
@@ -28,7 +30,7 @@ class ShortCode implements ShortCodeContract
      * @param string $name
      * @param callable|string $callback
      *
-     * @return \Juzaweb\CMS\Support\ShortCode\Shortcode
+     * @return \Mojar\CMS\Support\ShortCode\Shortcode
      */
     public function register(string $name, callable|string $callback): static
     {
@@ -40,7 +42,7 @@ class ShortCode implements ShortCodeContract
     /**
      * Enable the laravel-shortcodes
      *
-     * @return \Juzaweb\CMS\Support\ShortCode\Shortcode
+     * @return \Mojar\CMS\Support\ShortCode\Shortcode
      */
     public function enable(): static
     {
@@ -52,7 +54,7 @@ class ShortCode implements ShortCodeContract
     /**
      * Disable the laravel-shortcodes
      *
-     * @return \Juzaweb\CMS\Support\ShortCode\Shortcode
+     * @return \Mojar\CMS\Support\ShortCode\Shortcode
      */
     public function disable(): static
     {

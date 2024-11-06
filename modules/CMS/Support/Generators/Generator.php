@@ -1,7 +1,5 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Generators;
+namespace Mojar\CMS\Support\Generators;
 
-abstract class Generator
-{
-}
+abstract class Generator {}

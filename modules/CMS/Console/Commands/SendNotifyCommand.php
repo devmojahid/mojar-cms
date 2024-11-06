@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\CMS\Console\Commands;
+namespace Mojar\CMS\Console\Commands;
 
 use Illuminate\Console\Command;
-use Juzaweb\Backend\Models\ManualNotification;
-use Juzaweb\CMS\Support\SendNotification;
+use Mojar\Backend\Models\ManualNotification;
+use Mojar\CMS\Support\SendNotification;
 
 class SendNotifyCommand extends Command
 {
@@ -14,7 +14,7 @@ class SendNotifyCommand extends Command
 
     public function handle()
     {
-        if (config('juzaweb.notification.method') != 'cron') {
+        if (config('mojar.notification.method') != 'cron') {
             return;
         }
 
@@ -34,7 +34,7 @@ class SendNotifyCommand extends Command
                 $this->error('Send notify error: ' . $notification->id);
             }
 
-            $count ++;
+            $count++;
         }
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\CMS\Console;
+namespace Mojar\CMS\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Juzaweb\CMS\Console\Commands\ClearCacheExpiredCommand;
+use Mojar\CMS\Console\Commands\ClearCacheExpiredCommand;
 
 class Kernel extends ConsoleKernel
 {

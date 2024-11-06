@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Backend\Listeners;
+namespace Mojar\Backend\Listeners;
 
 use Illuminate\Support\Facades\Artisan;
 

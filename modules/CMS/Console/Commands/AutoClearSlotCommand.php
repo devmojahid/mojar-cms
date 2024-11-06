@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Console\Commands;
+namespace Mojar\CMS\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -33,12 +34,12 @@ class AutoClearSlotCommand extends Command
         $files = File::files($storage->path('command-slots'));
 
         foreach ($files as $file) {
-            $path = 'command-slots/'. $file->getBasename();
+            $path = 'command-slots/' . $file->getBasename();
 
             $data = collect(json_decode($file->getContents(), true))
                 ->filter(
                     function ($item) {
-                        $plus1Day = date('Y-m-d H:i:s', strtotime($item['date']. " + {$this->limitSeconds} seconds"));
+                        $plus1Day = date('Y-m-d H:i:s', strtotime($item['date'] . " + {$this->limitSeconds} seconds"));
                         return $plus1Day > date('Y-m-d H:i:s');
                     }
                 )

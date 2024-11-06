@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\CMS\Database\Factories;
+namespace Mojar\CMS\Database\Factories;
 
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Models\Post;
+use Mojar\Backend\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Juzaweb\CMS\Models\User;
+use Mojar\CMS\Models\User;
 
 class PostFactory extends Factory
 {
@@ -43,7 +43,7 @@ class PostFactory extends Factory
     protected function randomThumbnail($width = 640, $height = 480): string
     {
         $date = date('Y/m/d');
-        $imageFolder = storage_path("app/public/". $date);
+        $imageFolder = storage_path("app/public/" . $date);
 
         if (!is_dir($imageFolder)) {
             if (!mkdir($imageFolder, 0777, true) && !is_dir($imageFolder)) {

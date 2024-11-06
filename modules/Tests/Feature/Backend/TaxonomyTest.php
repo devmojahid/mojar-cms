@@ -1,22 +1,23 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Tests\Feature\Backend;
+namespace Mojar\Tests\Feature\Backend;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Models\Model;
-use Juzaweb\CMS\Models\User;
-use Juzaweb\Tests\TestCase;
+use Mojar\Backend\Models\Taxonomy;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\CMS\Models\Model;
+use Mojar\CMS\Models\User;
+use Mojar\Tests\TestCase;
 
 class TaxonomyTest extends TestCase
 {

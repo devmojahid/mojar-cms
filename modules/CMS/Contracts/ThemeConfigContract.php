@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/
+ * @link       https://mojar.com/
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Contracts;
+namespace Mojar\CMS\Contracts;
 
 use Illuminate\Database\Eloquent\Model;
-use Juzaweb\CMS\Models\ThemeConfig as ConfigModel;
+use Mojar\CMS\Models\ThemeConfig as ConfigModel;
 
 interface ThemeConfigContract
 {

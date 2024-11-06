@@ -1,24 +1,25 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support\Activators;
+namespace Mojar\CMS\Support\Activators;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
-use Juzaweb\CMS\Contracts\ActivatorInterface;
-use Juzaweb\CMS\Contracts\ConfigContract;
-use Juzaweb\CMS\Exceptions\PluginNotFoundException;
-use Juzaweb\CMS\Support\Plugin;
+use Mojar\CMS\Contracts\ActivatorInterface;
+use Mojar\CMS\Contracts\ConfigContract;
+use Mojar\CMS\Exceptions\PluginNotFoundException;
+use Mojar\CMS\Support\Plugin;
 
 class DbActivator implements ActivatorInterface
 {
@@ -137,7 +138,7 @@ class DbActivator implements ActivatorInterface
 
             // if (isset($setting['autoload']['psr-4'])) {
             //     $psr4 = $setting['autoload']['psr-4'];
-            //     $domain = $setting['extra']['juzaweb']['domain'] ?? '';
+            //     $domain = $setting['extra']['mojar']['domain'] ?? '';
             //
             //     $classMap = [];
             //     foreach ($psr4 as $key => $paths) {

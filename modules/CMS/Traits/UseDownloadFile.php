@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Traits;
+namespace Mojar\CMS\Traits;
 
 use Illuminate\Support\Str;
 
@@ -40,7 +40,7 @@ trait UseDownloadFile
 
             $cnt += strlen($buffer);
 
-            echo "Chunk download: ".round($cnt / 1048576, 2)." MB \n";
+            echo "Chunk download: " . round($cnt / 1048576, 2) . " MB \n";
         }
 
         $status = fclose($handle);
@@ -77,7 +77,7 @@ trait UseDownloadFile
 
     protected function generateFileName($url)
     {
-        return Str::random(10).'_'.date('H-i-s').'.'.$this->getFileExtension($url);
+        return Str::random(10) . '_' . date('H-i-s') . '.' . $this->getFileExtension($url);
     }
 
     protected function getFileExtension($url)

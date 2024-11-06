@@ -1,18 +1,19 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\API\Http\Middleware;
+namespace Mojar\API\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use Juzaweb\CMS\Abstracts\Action;
+use Mojar\CMS\Abstracts\Action;
 
 class Admin
 {

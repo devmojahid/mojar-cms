@@ -1,21 +1,22 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Http\Middleware;
+namespace Mojar\CMS\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\View;
-use Juzaweb\Backend\Http\Resources\UserResource;
-use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\CMS\Facades\ThemeLoader as ThemeFacade;
-use Juzaweb\CMS\Support\Installer;
+use Mojar\Backend\Http\Resources\UserResource;
+use Mojar\CMS\Abstracts\Action;
+use Mojar\CMS\Facades\ThemeLoader as ThemeFacade;
+use Mojar\CMS\Support\Installer;
 
 class Theme
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Theme;
+namespace Mojar\CMS\Support\Theme;
 
 use Illuminate\Config\Repository;
 use Illuminate\Container\Container;
@@ -8,8 +8,8 @@ use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 use Illuminate\View\ViewFinderInterface;
-use Juzaweb\CMS\Contracts\ThemeLoaderContract;
-use Juzaweb\CMS\Exceptions\ThemeNotFoundException;
+use Mojar\CMS\Contracts\ThemeLoaderContract;
+use Mojar\CMS\Exceptions\ThemeNotFoundException;
 use Noodlehaus\Config;
 
 class Theme implements ThemeLoaderContract
@@ -74,7 +74,7 @@ class Theme implements ThemeLoaderContract
         $this->app = $app;
         $this->finder = $finder;
         $this->lang = $lang;
-        $this->basePath = config('juzaweb.theme.path');
+        $this->basePath = config('mojar.theme.path');
     }
 
     /**
@@ -289,7 +289,7 @@ class Theme implements ThemeLoaderContract
 
         if (! file_exists($fullPath) && $themeInfo->has('parent') && ! empty($themeInfo->get('parent'))) {
             $themePath = str_replace(
-                base_path(). DIRECTORY_SEPARATOR,
+                base_path() . DIRECTORY_SEPARATOR,
                 '',
                 $this->getThemeInfo(
                     $themeInfo->get('parent')
@@ -309,7 +309,7 @@ class Theme implements ThemeLoaderContract
             return theme_assets('images/screenshot.png', $theme);
         }
 
-        return asset('jw-styles/juzaweb/images/screenshot.svg');
+        return asset('jw-styles/mojar/images/screenshot.svg');
     }
 
     public function getVersion($theme): string
@@ -363,7 +363,7 @@ class Theme implements ThemeLoaderContract
         }
 
         $viewPath = $themeInfo->get('path') . '/views';
-        $langPath = $themeInfo->get('path') .'/lang';
+        $langPath = $themeInfo->get('path') . '/lang';
 
         $viewPublishPath = resource_path('views/themes/' . $theme);
         $langPublishPath = resource_path('lang/themes/' . $theme);

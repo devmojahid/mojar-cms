@@ -1,12 +1,12 @@
 <?php
 
-namespace Juzaweb\CMS\Facades;
+namespace Mojar\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static \Juzaweb\CMS\Support\Plugin[] all(bool $collection = false)
- * @method static \Juzaweb\CMS\Support\Plugin|null find(string $name)
+ * @method static \Mojar\CMS\Support\Plugin[] all(bool $collection = false)
+ * @method static \Mojar\CMS\Support\Plugin|null find(string $name)
  * @method static delete(string $plugin)
  * @method static enable(string $plugin)
  * @method static disable(string $plugin)
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static string assets(string $plugin, string $path)
  * @method static bool isEnabled(string $name)
  *
- * @see \Juzaweb\CMS\Support\LocalPluginRepository
+ * @see \Mojar\CMS\Support\LocalPluginRepository
  */
 class Plugin extends Facade
 {

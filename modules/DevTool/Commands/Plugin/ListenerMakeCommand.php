@@ -1,13 +1,13 @@
 <?php
 
-namespace Juzaweb\DevTool\Commands\Plugin;
+namespace Mojar\DevTool\Commands\Plugin;
 
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Support\Config\GenerateConfigReader;
-use Juzaweb\CMS\Support\Plugin;
-use Juzaweb\CMS\Support\Stub;
-use Juzaweb\CMS\Traits\ModuleCommandTrait;
-use Juzaweb\DevTool\Abstracts\GeneratorCommand;
+use Mojar\CMS\Support\Config\GenerateConfigReader;
+use Mojar\CMS\Support\Plugin;
+use Mojar\CMS\Support\Stub;
+use Mojar\CMS\Traits\ModuleCommandTrait;
+use Mojar\DevTool\Abstracts\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -101,7 +101,7 @@ class ListenerMakeCommand extends GeneratorCommand
     {
         $eventPath = GenerateConfigReader::read('event');
 
-        return $this->getClassNamespace($module)."\\".$eventPath->getPath()."\\".$this->option('event');
+        return $this->getClassNamespace($module) . "\\" . $eventPath->getPath() . "\\" . $this->option('event');
     }
 
     protected function getDestinationFilePath()
@@ -110,7 +110,7 @@ class ListenerMakeCommand extends GeneratorCommand
 
         $listenerPath = GenerateConfigReader::read('listener');
 
-        return $path.$listenerPath->getPath().'/'.$this->getFileName().'.php';
+        return $path . $listenerPath->getPath() . '/' . $this->getFileName() . '.php';
     }
 
     /**

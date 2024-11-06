@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\DevTool\Commands\Plugin\Migration;
+namespace Mojar\DevTool\Commands\Plugin\Migration;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Support\Migrations\Migrator;
-use Juzaweb\CMS\Support\Plugin;
+use Mojar\CMS\Support\Migrations\Migrator;
+use Mojar\CMS\Support\Plugin;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -25,7 +25,7 @@ class MigrateStatusCommand extends Command
     protected $description = 'Status for all plugin migrations';
 
     /**
-     * @var \Juzaweb\CMS\Contracts\LocalPluginRepositoryContract
+     * @var \Mojar\CMS\Contracts\LocalPluginRepositoryContract
      */
     protected $module;
 

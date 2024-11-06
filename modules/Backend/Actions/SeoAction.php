@@ -1,20 +1,21 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Actions;
+namespace Mojar\Backend\Actions;
 
-use Juzaweb\Backend\Http\Controllers\Backend\Setting\SeoController;
-use Juzaweb\Backend\Models\SeoMeta;
-use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Models\Model;
+use Mojar\Backend\Http\Controllers\Backend\Setting\SeoController;
+use Mojar\Backend\Models\SeoMeta;
+use Mojar\CMS\Abstracts\Action;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\CMS\Models\Model;
 
 class SeoAction extends Action
 {

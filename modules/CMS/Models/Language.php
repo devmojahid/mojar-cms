@@ -1,20 +1,21 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Models;
+namespace Mojar\CMS\Models;
 
 use Illuminate\Database\Eloquent\Collection;
-use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
+use Mojar\CMS\Traits\QueryCache\QueryCacheable;
 
 /**
- * Juzaweb\CMS\Models\Language
+ * Mojar\CMS\Models\Language
  *
  * @property int $id
  * @property string $code
@@ -78,7 +79,7 @@ class Language extends Model
 
     public static function languages(): Collection
     {
-        return Language::cacheFor(config('juzaweb.performance.query_cache.lifetime'))
+        return Language::cacheFor(config('mojar.performance.query_cache.lifetime'))
             ->all()
             ->keyBy('code');
     }

@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Generators\Commands;
+namespace Mojar\CMS\Repositories\Generators\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use Juzaweb\CMS\Repositories\Generators\FileAlreadyExistsException;
-use Juzaweb\CMS\Repositories\Generators\ValidatorGenerator;
+use Mojar\CMS\Repositories\Generators\FileAlreadyExistsException;
+use Mojar\CMS\Repositories\Generators\ValidatorGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -60,14 +60,14 @@ class ValidatorCommand extends Command
         try {
             (new ValidatorGenerator(
                 [
-                'name' => $this->argument('name'),
-                'rules' => $this->option('rules'),
-                'force' => $this->option('force'),
+                    'name' => $this->argument('name'),
+                    'rules' => $this->option('rules'),
+                    'force' => $this->option('force'),
                 ]
             ))->run();
             $this->info("Validator created successfully.");
         } catch (FileAlreadyExistsException $e) {
-            $this->error($this->type.' already exists!');
+            $this->error($this->type . ' already exists!');
 
             return false;
         }

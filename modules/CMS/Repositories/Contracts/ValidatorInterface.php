@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Repositories\Contracts;
+namespace Mojar\CMS\Repositories\Contracts;
 
 use Illuminate\Contracts\Support\MessageBag;
-use Juzaweb\CMS\Repositories\Exceptions\ValidatorException;
+use Mojar\CMS\Repositories\Exceptions\ValidatorException;
 
 interface ValidatorInterface
 {

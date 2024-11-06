@@ -1,21 +1,22 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    mojar/juzacms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\DevTool\Http\Controllers;
+namespace Mojar\DevTool\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
-use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
-use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
+use Mojar\CMS\Contracts\LocalPluginRepositoryContract;
+use Mojar\CMS\Contracts\LocalThemeRepositoryContract;
 
 class DevToolController extends Controller
 {

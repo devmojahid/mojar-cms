@@ -1,24 +1,25 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Contracts;
+namespace Mojar\CMS\Contracts;
 
 use Illuminate\Support\Collection;
-use Juzaweb\CMS\Models\Translation;
-use Juzaweb\CMS\Support\Translations\TranslationExporter;
-use Juzaweb\CMS\Support\Translations\TranslationImporter;
-use Juzaweb\CMS\Support\Translations\TranslationLocale;
-use Juzaweb\CMS\Support\Translations\TranslationTranslate;
+use Mojar\CMS\Models\Translation;
+use Mojar\CMS\Support\Translations\TranslationExporter;
+use Mojar\CMS\Support\Translations\TranslationImporter;
+use Mojar\CMS\Support\Translations\TranslationLocale;
+use Mojar\CMS\Support\Translations\TranslationTranslate;
 
 /**
- * @see \Juzaweb\CMS\Support\Manager\TranslationManager
+ * @see \Mojar\CMS\Support\Manager\TranslationManager
  */
 interface TranslationManager
 {
@@ -38,7 +39,7 @@ interface TranslationManager
      * @param string $module The name of the translation module to import.
      * @param string|null $name The optional name of the translation.
      * @return TranslationImporter The created TranslationImporter instance.
-     * @see \Juzaweb\CMS\Support\Manager\TranslationManager::import()
+     * @see \Mojar\CMS\Support\Manager\TranslationManager::import()
      */
     public function import(string $module, string $name = null): TranslationImporter;
 
@@ -84,7 +85,7 @@ interface TranslationManager
     public function modules(): Collection;
 
     /**
-     * @see \Juzaweb\CMS\Support\Manager\TranslationManager::importTranslationLine()
+     * @see \Mojar\CMS\Support\Manager\TranslationManager::importTranslationLine()
      */
     public function importTranslationLine(array $data): Translation;
 }

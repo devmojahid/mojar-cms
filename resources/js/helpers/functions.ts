@@ -2,7 +2,7 @@ import {getSidebar} from "@/helpers/fetch";
 import axios, {AxiosRequestConfig} from "axios";
 
 export function __(key: string, args = {}): string {
-    // let lang = juzaweb.lang[key.replace('cms::app.', '')];
+    // let lang = mojar.lang[key.replace('cms::app.', '')];
     // if (lang) {
     //     return lang;
     // }

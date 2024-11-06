@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Generators;
+namespace Mojar\CMS\Repositories\Generators;
 
-use Juzaweb\CMS\Repositories\Generators\Generator;
-use Juzaweb\CMS\Repositories\Generators\TransformerGenerator;
+use Mojar\CMS\Repositories\Generators\Generator;
+use Mojar\CMS\Repositories\Generators\TransformerGenerator;
 
 /**
  * Class PresenterGenerator
@@ -27,7 +27,7 @@ class PresenterGenerator extends Generator
      */
     public function getRootNamespace()
     {
-        return parent::getRootNamespace().parent::getConfigGeneratorClassPath($this->getPathConfigNode());
+        return parent::getRootNamespace() . parent::getConfigGeneratorClassPath($this->getPathConfigNode());
     }
 
     /**
@@ -49,14 +49,14 @@ class PresenterGenerator extends Generator
     {
         $transformerGenerator = new TransformerGenerator(
             [
-            'name' => $this->name,
+                'name' => $this->name,
             ]
         );
-        $transformer = $transformerGenerator->getRootNamespace().'\\'.$transformerGenerator->getName().'Transformer';
+        $transformer = $transformerGenerator->getRootNamespace() . '\\' . $transformerGenerator->getName() . 'Transformer';
         $transformer = str_replace(
             [
-            "\\",
-            '/',
+                "\\",
+                '/',
             ],
             '\\',
             $transformer
@@ -66,7 +66,7 @@ class PresenterGenerator extends Generator
         return array_merge(
             parent::getReplacements(),
             [
-            'transformer' => $transformer,
+                'transformer' => $transformer,
             ]
         );
     }
@@ -78,10 +78,10 @@ class PresenterGenerator extends Generator
      */
     public function getPath()
     {
-        return $this->getBasePath().'/'.parent::getConfigGeneratorClassPath(
+        return $this->getBasePath() . '/' . parent::getConfigGeneratorClassPath(
             $this->getPathConfigNode(),
             true
-        ).'/'.$this->getName().'Presenter.php';
+        ) . '/' . $this->getName() . 'Presenter.php';
     }
 
     /**

@@ -1,20 +1,20 @@
-class JuzawebTable {
+class MojarTable {
 
     constructor(e) {
         this.url = e.url;
         this.action_url = e.action_url;
         this.remove_url = e.remove_url || null;
         this.status_url = e.status_url || null;
-        this.remove_question = (e.remove_question) ? e.remove_question: juzaweb.lang.remove_question.replace(':name', juzaweb.lang.the_selected_items);
+        this.remove_question = (e.remove_question) ? e.remove_question : mojar.lang.remove_question.replace(':name', mojar.lang.the_selected_items);
         this.detete_button = (e.detete_button) ? e.detete_button : "#delete-item";
         this.status_button = (e.status_button) ? e.status_button : ".status-button";
-        this.apply_button = (e.apply_button) ? e.apply_button: "#apply-action";
-        this.table = (e.table) ? e.table : '.juzaweb-table';
+        this.apply_button = (e.apply_button) ? e.apply_button : "#apply-action";
+        this.table = (e.table) ? e.table : '.mojar-table';
         this.field_id = (e.field_id) ? e.field_id : 'id';
-        this.form_search = (e.form_search) ? e.form_search : "#form-search";
+        this.form_search = (e.form_search) ? juzawebe.form_search : "#form-search";
         this.sort_name = (e.sort_name) ? e.sort_name : 'id';
         this.sort_order = (e.sort_order) ? e.sort_order : 'desc';
-        this.page_size = (e.page_size) ? e.page_size: 10;
+        this.page_size = (e.page_size) ? e.page_size : 10;
         this.search = (e.search) ? e.search : false;
         this.method = (e.method) ? e.method : 'get';
         this.locale = (e.locale) ? e.locale : 'en-US';
@@ -97,8 +97,8 @@ class JuzawebTable {
         table.on('check.bs.table uncheck.bs.table ' +
             'check-all.bs.table uncheck-all.bs.table ' +
             'pre-body.bs.table', () => {
-            action_button();
-        });
+                action_button();
+            });
 
         apply_button.on('click', function () {
             let btn = $(this);
@@ -106,7 +106,7 @@ class JuzawebTable {
             let text = btn.html();
             let action = form.find('select[name=bulk_actions]').val();
             let token = form.find('input[name=_token]').val();
-            let ids = $("input[name=btSelectItem]:checked").map(function(){return $(this).val();}).get();
+            let ids = $("input[name=btSelectItem]:checked").map(function () { return $(this).val(); }).get();
 
             if (!ids || !action) {
                 return false;
@@ -118,7 +118,7 @@ class JuzawebTable {
                         return false;
                     }
 
-                    btn.html(juzaweb.lang.please_wait);
+                    btn.html(mojar.lang.please_wait);
                     btn.prop("disabled", true);
 
                     ajaxRequest(action_url, {
@@ -156,7 +156,7 @@ class JuzawebTable {
                     });
                 });
             } else {
-                btn.html(juzaweb.lang.please_wait);
+                btn.html(mojar.lang.please_wait);
                 btn.prop("disabled", true);
 
                 if (chunk_action) {
@@ -264,7 +264,7 @@ class JuzawebTable {
             let action = $(this).data('action');
             let form = $(this).closest('form');
             let token = form.find('input[name=_token]').val();
-            let ids = $("input[name=btSelectItem]:checked").map(function(){return $(this).val();}).get();
+            let ids = $("input[name=btSelectItem]:checked").map(function () { return $(this).val(); }).get();
             bulkActionButton.dropdown('toggle');
 
             if (!ids || !action) {
@@ -277,7 +277,7 @@ class JuzawebTable {
                         return false;
                     }
 
-                    btn.html(juzaweb.lang.please_wait);
+                    btn.html(mojar.lang.please_wait);
                     btn.prop("disabled", true);
 
                     ajaxRequest(action_url, {
@@ -314,7 +314,7 @@ class JuzawebTable {
                     });
                 });
             } else {
-                btn.html(juzaweb.lang.please_wait);
+                btn.html(mojar.lang.please_wait);
                 btn.prop("disabled", true);
 
                 if (chunk_action) {
@@ -414,7 +414,7 @@ class JuzawebTable {
         });
 
         btn_status.on('click', function () {
-            let ids = $("input[name=btSelectItem]:checked").map(function () {return $(this).val();}).get();
+            let ids = $("input[name=btSelectItem]:checked").map(function () { return $(this).val(); }).get();
             let status = $(this).data('status');
 
             if (ids.length <= 0) {
@@ -457,11 +457,11 @@ class JuzawebTable {
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: juzaweb.lang.yes + '!',
-                    cancelButtonText: juzaweb.lang.cancel + '!',
+                    confirmButtonText: mojar.lang.yes + '!',
+                    cancelButtonText: mojar.lang.cancel + '!',
                 }).then((result) => {
                     if (result.value) {
-                        $(this).html(juzaweb.lang.please_wait);
+                        $(this).html(mojar.lang.please_wait);
 
                         $.ajax({
                             type: "POST",
@@ -492,7 +492,7 @@ class JuzawebTable {
                     }
                 });
             } else {
-                $(this).html(juzaweb.lang.please_wait);
+                $(this).html(mojar.lang.please_wait);
 
                 $.ajax({
                     type: "POST",

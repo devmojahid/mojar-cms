@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend\Plugin;
+namespace Mojar\Backend\Http\Controllers\Backend\Plugin;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -16,22 +17,20 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
-use Juzaweb\Backend\Http\Requests\Theme\EditorRequest;
-use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
-use Juzaweb\CMS\Http\Controllers\BackendController;
+use Mojar\Backend\Http\Requests\Theme\EditorRequest;
+use Mojar\CMS\Contracts\LocalPluginRepositoryContract;
+use Mojar\CMS\Http\Controllers\BackendController;
 
 class EditorController extends BackendController
 {
     protected array $editSupportExtensions = ['twig', 'php', 'js', 'css', 'json'];
 
-    public function __construct(protected LocalPluginRepositoryContract $pluginRepository)
-    {
-    }
+    public function __construct(protected LocalPluginRepositoryContract $pluginRepository) {}
 
     public function index(Request $request): View
     {
         $title = trans('cms::app.plugin_editor');
-        $plugin = $request->query('plugin', 'juzaweb/example');
+        $plugin = $request->query('plugin', 'mojar/example');
         $repository = $this->pluginRepository->find($plugin);
         $plugins = $this->pluginRepository->all();
         $pluginPath = convert_linux_path($repository->getPath());
@@ -65,7 +64,7 @@ class EditorController extends BackendController
             ]
         );
 
-        $plugin = $request->query('plugin', 'juzaweb/example');
+        $plugin = $request->query('plugin', 'mojar/example');
         $file = Crypt::decryptString($request->get('file'));
         $file = str_replace('..', '', $file);
         $repository = $this->pluginRepository->find($plugin);
@@ -84,7 +83,7 @@ class EditorController extends BackendController
 
     public function save(EditorRequest $request): JsonResponse|RedirectResponse
     {
-        $plugin = $request->input('plugin', 'juzaweb/example');
+        $plugin = $request->input('plugin', 'mojar/example');
         $file = Crypt::decryptString($request->input('file'));
         $contents = $request->input('content');
         $repository = $this->pluginRepository->find($plugin);

@@ -1,8 +1,8 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Publishing;
+namespace Mojar\CMS\Support\Publishing;
 
-use Juzaweb\CMS\Support\Config\GenerateConfigReader;
+use Mojar\CMS\Support\Config\GenerateConfigReader;
 
 class AssetPublisher extends Publisher
 {

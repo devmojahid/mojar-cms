@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Http\Controllers;
+namespace Mojar\CMS\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ use OpenApi\Annotations as OA;
  *      title="L5 OpenApi",
  *      description="Open Api",
  *      @OA\Contact(
- *          email="admin@juzaweb.com"
+ *          email="admin@mojar.com"
  *      )
  * ),
  * @OA\Parameter(

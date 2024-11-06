@@ -21,7 +21,7 @@ export default defineConfig({
     },
     experimental: {
         renderBuiltUrl(filename, { hostId, hostType, type }) {
-            return '/jw-styles/juzaweb/build/' + filename
+            return '/jw-styles/mojar/build/' + filename
         }
     }
 });

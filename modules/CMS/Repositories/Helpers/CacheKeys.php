@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Helpers;
+namespace Mojar\CMS\Repositories\Helpers;
 
 /**
  * Class CacheKeys
@@ -65,7 +65,7 @@ class CacheKeys
      */
     public static function getFileKeys()
     {
-        return storage_path("framework/cache/".self::$storeFile);
+        return storage_path("framework/cache/" . self::$storeFile);
     }
 
     /**

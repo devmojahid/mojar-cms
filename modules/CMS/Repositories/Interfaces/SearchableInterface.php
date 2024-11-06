@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Interfaces;
+namespace Mojar\CMS\Repositories\Interfaces;
 
 interface SearchableInterface
 {

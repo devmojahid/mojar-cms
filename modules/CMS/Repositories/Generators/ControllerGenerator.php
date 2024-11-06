@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Generators;
+namespace Mojar\CMS\Repositories\Generators;
 
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Repositories\Generators\Generator;
-use Juzaweb\CMS\Repositories\Generators\ValidatorGenerator;
-use Juzaweb\CMS\Repositories\Generators\RepositoryInterfaceGenerator;
+use Mojar\CMS\Repositories\Generators\Generator;
+use Mojar\CMS\Repositories\Generators\ValidatorGenerator;
+use Mojar\CMS\Repositories\Generators\RepositoryInterfaceGenerator;
 
 /**
  * Class ControllerGenerator
@@ -33,7 +33,7 @@ class ControllerGenerator extends Generator
         return str_replace(
             '/',
             '\\',
-            parent::getRootNamespace().parent::getConfigGeneratorClassPath($this->getPathConfigNode())
+            parent::getRootNamespace() . parent::getConfigGeneratorClassPath($this->getPathConfigNode())
         );
     }
 
@@ -54,10 +54,10 @@ class ControllerGenerator extends Generator
      */
     public function getPath()
     {
-        return $this->getBasePath().'/'.parent::getConfigGeneratorClassPath(
+        return $this->getBasePath() . '/' . parent::getConfigGeneratorClassPath(
             $this->getPathConfigNode(),
             true
-        ).'/'.$this->getControllerName().'Controller.php';
+        ) . '/' . $this->getControllerName() . 'Controller.php';
     }
 
     /**
@@ -100,12 +100,12 @@ class ControllerGenerator extends Generator
         return array_merge(
             parent::getReplacements(),
             [
-            'controller' => $this->getControllerName(),
-            'plural' => $this->getPluralName(),
-            'singular' => $this->getSingularName(),
-            'validator' => $this->getValidator(),
-            'repository' => $this->getRepository(),
-            'appname' => $this->getAppNamespace(),
+                'controller' => $this->getControllerName(),
+                'plural' => $this->getPluralName(),
+                'singular' => $this->getSingularName(),
+                'validator' => $this->getValidator(),
+                'repository' => $this->getRepository(),
+                'appname' => $this->getAppNamespace(),
             ]
         );
     }
@@ -129,20 +129,20 @@ class ControllerGenerator extends Generator
     {
         $validatorGenerator = new ValidatorGenerator(
             [
-            'name' => $this->name,
+                'name' => $this->name,
             ]
         );
 
-        $validator = $validatorGenerator->getRootNamespace().'\\'.$validatorGenerator->getName();
+        $validator = $validatorGenerator->getRootNamespace() . '\\' . $validatorGenerator->getName();
 
-        return 'use '.str_replace(
+        return 'use ' . str_replace(
             [
                 "\\",
                 '/',
             ],
             '\\',
             $validator
-        ).'Validator;';
+        ) . 'Validator;';
     }
 
 
@@ -155,19 +155,19 @@ class ControllerGenerator extends Generator
     {
         $repositoryGenerator = new RepositoryInterfaceGenerator(
             [
-            'name' => $this->name,
+                'name' => $this->name,
             ]
         );
 
-        $repository = $repositoryGenerator->getRootNamespace().'\\'.$repositoryGenerator->getName();
+        $repository = $repositoryGenerator->getRootNamespace() . '\\' . $repositoryGenerator->getName();
 
-        return 'use '.str_replace(
+        return 'use ' . str_replace(
             [
                 "\\",
                 '/',
             ],
             '\\',
             $repository
-        ).'Repository;';
+        ) . 'Repository;';
     }
 }

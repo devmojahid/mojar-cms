@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
 class JSMin
 {
@@ -81,7 +82,8 @@ class JSMin
             $command = self::ACTION_KEEP_A; // default
             if ($this->a === ' ') {
                 if (($this->lastByteOut === '+' || $this->lastByteOut === '-')
-                    && ($this->b === $this->lastByteOut)) {
+                    && ($this->b === $this->lastByteOut)
+                ) {
                     // Don't delete this space. If we do, the addition/subtraction
                     // could be parsed as a post-increment
                 } elseif (! $this->isAlphaNum($this->b)) {
@@ -91,17 +93,21 @@ class JSMin
                 if ($this->b === ' ') {
                     $command = self::ACTION_DELETE_A_B;
 
-                // in case of mbstring.func_overload & 2, must check for null b,
+                    // in case of mbstring.func_overload & 2, must check for null b,
                     // otherwise mb_strpos will give WARNING
-                } elseif ($this->b === null
+                } elseif (
+                    $this->b === null
                     || (false === strpos('{[(+-!~', $this->b)
-                        && ! $this->isAlphaNum($this->b))) {
+                        && ! $this->isAlphaNum($this->b))
+                ) {
                     $command = self::ACTION_DELETE_A;
                 }
             } elseif (! $this->isAlphaNum($this->a)) {
-                if ($this->b === ' '
+                if (
+                    $this->b === ' '
                     || ($this->b === "\n"
-                        && (false === strpos('}])+-"\'', $this->a)))) {
+                        && (false === strpos('}])+-"\'', $this->a)))
+                ) {
                     $command = self::ACTION_DELETE_A_B;
                 }
             }
@@ -127,9 +133,11 @@ class JSMin
     protected function action($command)
     {
         // make sure we don't compress "a + ++b" to "a+++b", etc.
-        if ($command === self::ACTION_DELETE_A_B
+        if (
+            $command === self::ACTION_DELETE_A_B
             && $this->b === ' '
-            && ($this->a === '+' || $this->a === '-')) {
+            && ($this->a === '+' || $this->a === '-')
+        ) {
             // Note: we're at an addition/substraction operator; the inputIndex
             // will certainly be a valid index
             if ($this->input[$this->inputIndex] === $this->a) {
@@ -150,8 +158,8 @@ class JSMin
 
                 $this->lastByteOut = $this->a;
 
-            // fallthrough intentional
-            // no break
+                // fallthrough intentional
+                // no break
             case self::ACTION_DELETE_A: // 2
                 $this->a = $this->b;
                 if ($this->a === "'" || $this->a === '"' || $this->a === '`') { // string/template literal
@@ -185,8 +193,8 @@ class JSMin
                     }
                 }
 
-            // fallthrough intentional
-            // no break
+                // fallthrough intentional
+                // no break
             case self::ACTION_DELETE_A_B: // 3
                 $this->b = $this->next();
                 if ($this->b === '/' && $this->isRegexpLiteral()) {
@@ -211,7 +219,7 @@ class JSMin
                                 if ($this->isEOF($this->a)) {
                                     throw new UnterminatedRegExpException(
                                         "JSMin: Unterminated set in RegExp at byte "
-                                        . $this->inputIndex .": {$pattern}"
+                                            . $this->inputIndex . ": {$pattern}"
                                     );
                                 }
                             }
@@ -235,7 +243,7 @@ class JSMin
                     }
                     $this->b = $this->next();
                 }
-            // end case ACTION_DELETE_A_B
+                // end case ACTION_DELETE_A_B
         }
     }
 

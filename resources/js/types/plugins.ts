@@ -1,7 +1,7 @@
 export interface Plugin {
     name: string
     extra: {
-        juzaweb?: {
+        mojar?: {
             name?: string
         }
     };

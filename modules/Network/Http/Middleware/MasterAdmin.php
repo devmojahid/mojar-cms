@@ -1,18 +1,19 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Network\Http\Middleware;
+namespace Mojar\Network\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use Juzaweb\CMS\Abstracts\Action;
+use Mojar\CMS\Abstracts\Action;
 
 class MasterAdmin
 {
@@ -33,8 +34,8 @@ class MasterAdmin
             abort(404);
         }
 
-        config()->set('juzaweb.plugin.enable_upload', true);
-        config()->set('juzaweb.theme.enable_upload', true);
+        config()->set('mojar.plugin.enable_upload', true);
+        config()->set('mojar.theme.enable_upload', true);
 
         do_action(Action::NETWORK_INIT, $request);
 

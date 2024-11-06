@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\API\Http\Controllers\Documentation;
+namespace Mojar\API\Http\Controllers\Documentation;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
@@ -13,10 +13,10 @@ class SwaggerAssetController extends BaseController
     public function index(Request $request, $asset)
     {
         $fileSystem = new Filesystem();
-        
+
         try {
             $path = swagger_ui_dist_path('default', $asset);
-            
+
             return (new Response(
                 $fileSystem->get($path),
                 200,

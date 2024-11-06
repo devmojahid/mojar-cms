@@ -1,21 +1,22 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Abstracts;
+namespace Mojar\CMS\Abstracts;
 
-use Juzaweb\CMS\Contracts\HookActionContract;
-use Juzaweb\CMS\Facades\Hook;
+use Mojar\CMS\Contracts\HookActionContract;
+use Mojar\CMS\Facades\Hook;
 
 abstract class Action
 {
-    public const INIT_ACTION = 'juzaweb.init';
+    public const INIT_ACTION = 'mojar.init';
     public const BACKEND_INIT = 'backend.init';
     public const NETWORK_INIT = 'backend.init';
     public const FRONTEND_INIT = 'frontend.init';
@@ -33,10 +34,10 @@ abstract class Action
     public const RESOURCE_FORM_LEFT_ACTION = 'resource.{name}.form_left';
     public const RESOURCE_FORM_RIGHT_ACTION = 'resource.{name}.form_right';
     public const PERMALINKS_SAVED_ACTION = 'permalinks.saved';
-    public const BACKEND_HEADER_ACTION = 'juzaweb_header';
-    public const BACKEND_FOOTER_ACTION = 'juzaweb_footer';
-    public const WIDGETS_INIT = 'juzaweb.widget_init';
-    public const BLOCKS_INIT = 'juzaweb.block_init';
+    public const BACKEND_HEADER_ACTION = 'mojar_header';
+    public const BACKEND_FOOTER_ACTION = 'mojar_footer';
+    public const WIDGETS_INIT = 'mojar.widget_init';
+    public const BLOCKS_INIT = 'mojar.block_init';
     public const BACKEND_USER_FORM_RIGHT = 'user.form.right';
     public const BACKEND_USER_BEFORE_SAVE = 'user.before_save';
     public const BACKEND_USER_AFTER_SAVE = 'user.after_save';

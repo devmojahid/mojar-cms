@@ -1,14 +1,14 @@
 <?php
 
-namespace Juzaweb\Backend\Repositories;
+namespace Mojar\Backend\Repositories;
 
-use Juzaweb\Backend\Models\Resource;
-use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
+use Mojar\Backend\Models\Resource;
+use Mojar\CMS\Repositories\BaseRepositoryEloquent;
 
 /**
  * Class CommentRepositoryEloquent.
  *
- * @package namespace Juzaweb\Backend\Repositories;
+ * @package namespace Mojar\Backend\Repositories;
  */
 class ResourceRepositoryEloquent extends BaseRepositoryEloquent implements ResourceRepository
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\FileManager;
+namespace Mojar\Backend\Http\Controllers\FileManager;
 
 use Illuminate\Http\Request;
-use Juzaweb\Backend\Models\MediaFile;
-use Juzaweb\Backend\Models\MediaFolder;
-use Juzaweb\CMS\Facades\Facades;
+use Mojar\Backend\Models\MediaFile;
+use Mojar\Backend\Models\MediaFolder;
+use Mojar\CMS\Facades\Facades;
 
 class ItemsController extends FileManagerController
 {
@@ -17,7 +17,7 @@ class ItemsController extends FileManagerController
         $perPage = 15;
 
         $workingDir = $request->get('working_dir');
-        $disk = $request->get('disk') ?? config('juzaweb.filemanager.disk');
+        $disk = $request->get('disk') ?? config('mojar.filemanager.disk');
 
         $folders = collect([]);
         if ($currentPage == 1) {
@@ -42,7 +42,7 @@ class ItemsController extends FileManagerController
                 'is_file' => false,
                 'is_image' => false,
                 'name' => $folder->name,
-                'thumb_url' => asset('jw-styles/juzaweb/images/folder.png'),
+                'thumb_url' => asset('jw-styles/mojar/images/folder.png'),
                 'time' => false,
                 'url' => $folder->id,
                 'path' => $folder->id,
@@ -87,19 +87,19 @@ class ItemsController extends FileManagerController
         return view('filemanager::.move')
             ->with(
                 [
-                'root_folders' => array_map(
-                    function ($type) use ($folder_types) {
-                        $path = $this->lfm->dir($this->helper->getRootFolder($type));
+                    'root_folders' => array_map(
+                        function ($type) use ($folder_types) {
+                            $path = $this->lfm->dir($this->helper->getRootFolder($type));
 
-                        return (object) [
-                            'name' => trans('cms::filemanager.title_' . $type),
-                            'url' => $path->path('working_dir'),
-                            'children' => $path->folders(),
-                            'has_next' => ! ($type == end($folder_types)),
-                        ];
-                    },
-                    $folder_types
-                ),
+                            return (object) [
+                                'name' => trans('cms::filemanager.title_' . $type),
+                                'url' => $path->path('working_dir'),
+                                'children' => $path->folders(),
+                                'has_next' => ! ($type == end($folder_types)),
+                            ];
+                        },
+                        $folder_types
+                    ),
                 ]
             )
             ->with('items', $items);
@@ -137,7 +137,7 @@ class ItemsController extends FileManagerController
 
     protected function getTypeExtensions(string $type)
     {
-        $extensions = config("juzaweb.filemanager.types.{$type}.extensions");
+        $extensions = config("mojar.filemanager.types.{$type}.extensions");
         if (empty($extensions)) {
             $extensions = match ($type) {
                 'file' => Facades::defaultFileExtensions(),

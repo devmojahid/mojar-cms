@@ -1,4 +1,4 @@
-use Juzaweb\CMS\Repositories\Criterias\FilterCriteria;
-use Juzaweb\CMS\Repositories\Criterias\SearchCriteria;
-use Juzaweb\CMS\Repositories\Criterias\SortCriteria;
+use Mojar\CMS\Repositories\Criterias\FilterCriteria;
+use Mojar\CMS\Repositories\Criterias\SearchCriteria;
+use Mojar\CMS\Repositories\Criterias\SortCriteria;
 use $NAMESPACE$

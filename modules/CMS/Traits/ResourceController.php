@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://github.com/juzaweb/cms
+ * @link       https://github.com/mojar/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Traits;
+namespace Mojar\CMS\Traits;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\View;
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Response;
-use Juzaweb\CMS\Abstracts\DataTable;
+use Mojar\CMS\Abstracts\DataTable;
 
 /**
  * @method void getBreadcrumbPrefix(...$params)
@@ -108,7 +109,7 @@ trait ResourceController
         $this->checkPermission('edit', $model, ...$params);
 
         return $this->view(
-            $this->viewPrefix.'.form',
+            $this->viewPrefix . '.form',
             array_merge(
                 [
                     'title' => $model->{$model->getFieldName()},
@@ -320,7 +321,7 @@ trait ResourceController
         $query->select(
             [
                 'id',
-                $model->getFieldName().' AS text',
+                $model->getFieldName() . ' AS text',
             ]
         );
 
@@ -375,7 +376,7 @@ trait ResourceController
      * After Save model
      *
      * @param  array  $data
-     * @param  \Juzaweb\CMS\Models\Model  $model
+     * @param  \Mojar\CMS\Models\Model  $model
      * @param  mixed  $params
      */
     protected function afterSave($data, $model, ...$params)
@@ -385,7 +386,7 @@ trait ResourceController
 
     /**
      * @param $params
-     * @return \Juzaweb\CMS\Models\ResourceModel
+     * @return \Mojar\CMS\Models\ResourceModel
      */
     protected function makeModel(...$params)
     {

@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    mojar/juzacms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\DevTool\Http\Controllers;
+namespace Mojar\DevTool\Http\Controllers;
 
 use Illuminate\Support\Facades\File;
-use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
-use Juzaweb\CMS\Interfaces\Theme\PluginInterface as Plugin;
+use Mojar\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Interfaces\Theme\ThemeInterface;
+use Mojar\CMS\Interfaces\Theme\PluginInterface as Plugin;
 
 class Controller extends BackendController
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Generators;
+namespace Mojar\CMS\Repositories\Generators;
 
-use Juzaweb\CMS\Repositories\Generators\Generator;
-use Juzaweb\CMS\Repositories\Generators\Migrations\RulesParser;
-use Juzaweb\CMS\Repositories\Generators\Migrations\SchemaParser;
+use Mojar\CMS\Repositories\Generators\Generator;
+use Mojar\CMS\Repositories\Generators\Migrations\RulesParser;
+use Mojar\CMS\Repositories\Generators\Migrations\SchemaParser;
 
 /**
  * Class ValidatorGenerator
@@ -29,7 +29,7 @@ class ValidatorGenerator extends Generator
      */
     public function getRootNamespace()
     {
-        return parent::getRootNamespace().parent::getConfigGeneratorClassPath($this->getPathConfigNode());
+        return parent::getRootNamespace() . parent::getConfigGeneratorClassPath($this->getPathConfigNode());
     }
 
     /**
@@ -49,10 +49,10 @@ class ValidatorGenerator extends Generator
      */
     public function getPath()
     {
-        return $this->getBasePath().'/'.parent::getConfigGeneratorClassPath(
+        return $this->getBasePath() . '/' . parent::getConfigGeneratorClassPath(
             $this->getPathConfigNode(),
             true
-        ).'/'.$this->getName().'Validator.php';
+        ) . '/' . $this->getName() . 'Validator.php';
     }
 
     /**
@@ -75,7 +75,7 @@ class ValidatorGenerator extends Generator
         return array_merge(
             parent::getReplacements(),
             [
-            'rules' => $this->getRules(),
+                'rules' => $this->getRules(),
             ]
         );
     }
@@ -90,13 +90,13 @@ class ValidatorGenerator extends Generator
         if (!$this->rules) {
             return '[]';
         }
-        $results = '['.PHP_EOL;
+        $results = '[' . PHP_EOL;
 
         foreach ($this->getSchemaParser()->toArray() as $column => $value) {
-            $results .= "\t\t'{$column}'\t=>'\t{$value}',".PHP_EOL;
+            $results .= "\t\t'{$column}'\t=>'\t{$value}'," . PHP_EOL;
         }
 
-        return $results."\t".']';
+        return $results . "\t" . ']';
     }
 
     /**

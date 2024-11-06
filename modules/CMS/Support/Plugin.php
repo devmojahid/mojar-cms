@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
 use Composer\Autoload\ClassLoader;
 use Illuminate\Cache\CacheManager;
@@ -17,9 +17,9 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\Translation\Translator;
 use Illuminate\View\ViewFinderInterface;
-use Juzaweb\CMS\Contracts\ActivatorInterface;
+use Mojar\CMS\Contracts\ActivatorInterface;
 use Illuminate\Contracts\Foundation\Application as ApplicationContract;
-use Juzaweb\CMS\Interfaces\Theme\PluginInterface;
+use Mojar\CMS\Interfaces\Theme\PluginInterface;
 use Noodlehaus\Config as ReadConfig;
 
 class Plugin implements PluginInterface
@@ -131,7 +131,7 @@ class Plugin implements PluginInterface
             $this->moduleJson,
             $file,
             function () use ($file) {
-                return $this->moduleJson[$file] = new Json($this->getPath().'/'.$file, $this->files);
+                return $this->moduleJson[$file] = new Json($this->getPath() . '/' . $file, $this->files);
             }
         );
     }
@@ -145,7 +145,7 @@ class Plugin implements PluginInterface
     public function getPath(string $path = ''): string
     {
         if ($path) {
-            return $this->path .'/'. $path;
+            return $this->path . '/' . $path;
         }
 
         return $this->path;
@@ -246,13 +246,13 @@ class Plugin implements PluginInterface
 
     public function getDomainName()
     {
-        return $this->getExtraJuzaweb('domain');
+        return $this->getExtraMojar('domain');
     }
 
-    public function getExtraJuzaweb($key, $default = null)
+    public function getExtraMojar($key, $default = null)
     {
         $extra = $this->get('extra', []);
-        if ($laravel = Arr::get($extra, 'juzaweb', [])) {
+        if ($laravel = Arr::get($extra, 'mojar', [])) {
             return Arr::get($laravel, $key, $default);
         }
 
@@ -308,7 +308,7 @@ class Plugin implements PluginInterface
 
         if (file_exists($adminRouter)) {
             $this->router->middleware('admin')
-                ->prefix(config('juzaweb.admin_prefix'))
+                ->prefix(config('mojar.admin_prefix'))
                 ->group($adminRouter);
         }
 
@@ -337,7 +337,7 @@ class Plugin implements PluginInterface
     {
         $loader = AliasLoader::getInstance();
 
-        foreach ($this->getExtraJuzaweb('aliases', []) as $aliasName => $aliasClass) {
+        foreach ($this->getExtraMojar('aliases', []) as $aliasName => $aliasClass) {
             $loader->alias($aliasName, $aliasClass);
         }
     }
@@ -347,7 +347,7 @@ class Plugin implements PluginInterface
      */
     public function registerProviders(): void
     {
-        $providers = $this->getExtraJuzaweb('providers', []);
+        $providers = $this->getExtraMojar('providers', []);
 
         if (JW_PLUGIN_AUTOLOAD) {
             $providers = array_merge(
@@ -386,7 +386,7 @@ class Plugin implements PluginInterface
     {
         return Str::replaceLast(
             'services.php',
-            $this->getSnakeName().'_module.php',
+            $this->getSnakeName() . '_module.php',
             $this->app->getCachedServicesPath()
         );
     }
@@ -431,7 +431,7 @@ class Plugin implements PluginInterface
         $name = explode('/', $this->name);
         $author = Str::studly($name[0]);
         $module = Str::studly($name[1]);
-        return $author.'/'.$module;
+        return $author . '/' . $module;
     }
 
     /**
@@ -524,12 +524,12 @@ class Plugin implements PluginInterface
      */
     public function getExtraPath(string $path): string
     {
-        return $this->getPath().'/'.$path;
+        return $this->getPath() . '/' . $path;
     }
 
     public function getDisplayName()
     {
-        $name = $this->getExtraJuzaweb('name');
+        $name = $this->getExtraMojar('name');
         if (empty($name)) {
             $name = $this->get('name');
         }
@@ -547,12 +547,12 @@ class Plugin implements PluginInterface
 
     public function getVersion()
     {
-        return $this->getExtraJuzaweb('version', 0);
+        return $this->getExtraMojar('version', 0);
     }
 
     public function getSettingUrl(): ?string
     {
-        return $this->getExtraJuzaweb('setting_url');
+        return $this->getExtraMojar('setting_url');
     }
 
     public function asset(string $path, string $default = null): string
@@ -577,14 +577,14 @@ class Plugin implements PluginInterface
             return $this->url->asset($default);
         }
 
-        return $this->url->asset('jw-styles/juzaweb/images/thumb-default.png');
+        return $this->url->asset('jw-styles/mojar/images/thumb-default.png');
     }
 
     public function getScreenshot(): ?string
     {
         return $this->asset(
             'images/screenshot.png',
-            'jw-styles/juzaweb/images/screenshot.svg'
+            'jw-styles/mojar/images/screenshot.svg'
         );
     }
 
@@ -604,7 +604,7 @@ class Plugin implements PluginInterface
 
     public function isVisible(): bool
     {
-        return (bool) $this->getExtraJuzaweb('visible', true);
+        return (bool) $this->getExtraMojar('visible', true);
     }
 
     public function toArray(): array
@@ -630,7 +630,7 @@ class Plugin implements PluginInterface
     protected function fireEvent(string $event): void
     {
         $this->app['events']->dispatch(
-            sprintf('plugin.%s.'.$event, $this->getLowerName()),
+            sprintf('plugin.%s.' . $event, $this->getLowerName()),
             [$this]
         );
     }
@@ -668,7 +668,7 @@ class Plugin implements PluginInterface
     {
         $files = Arr::get($this->get('autoload', []), 'files', []);
         foreach ($files as $file) {
-            include $this->path.'/'.$file;
+            include $this->path . '/' . $file;
         }
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\Translation;
+namespace Mojar\Translation;
 
-use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\CMS\Facades\HookAction;
+use Mojar\CMS\Abstracts\Action;
+use Mojar\CMS\Facades\HookAction;
 
 class TranslationAction extends Action
 {

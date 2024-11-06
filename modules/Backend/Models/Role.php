@@ -1,13 +1,13 @@
 <?php
 
-namespace Juzaweb\Backend\Models;
+namespace Mojar\Backend\Models;
 
 use Illuminate\Support\Arr;
-use Juzaweb\CMS\Models\Role as BaseRole;
-use Juzaweb\CMS\Traits\ResourceModel;
+use Mojar\CMS\Models\Role as BaseRole;
+use Mojar\CMS\Traits\ResourceModel;
 
 /**
- * Juzaweb\Backend\Models\Role
+ * Mojar\Backend\Models\Role
  *
  * @property int $id
  * @property string $name
@@ -15,9 +15,9 @@ use Juzaweb\CMS\Traits\ResourceModel;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $description
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Permission[] $permissions
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\Permission[] $permissions
  * @property-read int|null $permissions_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\CMS\Models\User[] $users
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\CMS\Models\User[] $users
  * @property-read int|null $users_count
  * @method static \Illuminate\Database\Eloquent\Builder|Role newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Role newQuery()

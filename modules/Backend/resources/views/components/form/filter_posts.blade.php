@@ -1,9 +1,9 @@
 @php
-$value = $options['value'] ?? [];
+    $value = $options['value'] ?? [];
 @endphp
-@if(empty($options['type']))
+@if (empty($options['type']))
     @php
-        $typeOptions = \Juzaweb\CMS\Facades\HookAction::getPostTypes()
+        $typeOptions = \Mojar\CMS\Facades\HookAction::getPostTypes()
             ->mapWithKeys(function ($item) {
                 return [$item->get('key') => $item->get('label')];
             })
@@ -11,13 +11,13 @@ $value = $options['value'] ?? [];
 
         $option = array_merge(
             ['options' => $typeOptions, 'value' => $value['type'] ?? null],
-             Arr::get($options ?? [], 'fields.type', [])
+            Arr::get($options ?? [], 'fields.type', []),
         );
     @endphp
 
     {{ Field::select(trans('cms::app.post_type'), "{$name}[type]", $option) }}
 @else
-    <input type="hidden" name="{{"{$name}[type]"}}" value="{{ $options['type'] }}">
+    <input type="hidden" name="{{ "{$name}[type]" }}" value="{{ $options['type'] }}">
 @endif
 
 @php
@@ -25,7 +25,7 @@ $value = $options['value'] ?? [];
     $fieldName = $multiple ? 'taxonomies' : 'taxonomy';
     $option = array_merge(
         ['multiple' => $multiple, 'post_type' => $options['type'] ?? null, 'value' => $value[$fieldName] ?? null],
-         Arr::get($options, "fields.{$fieldName}", [])
+        Arr::get($options, "fields.{$fieldName}", []),
     );
 @endphp
 
@@ -37,11 +37,11 @@ $value = $options['value'] ?? [];
             [
                 'options' => [
                     'id' => 'ID',
-                    'views' => 'Views'
+                    'views' => 'Views',
                 ],
-                 'value' => $value['sort_by'] ?? null
+                'value' => $value['sort_by'] ?? null,
             ],
-             Arr::get($options, 'fields.sort_by', [])
+            Arr::get($options, 'fields.sort_by', []),
         );
     @endphp
     <div class="col-md-6">
@@ -53,11 +53,11 @@ $value = $options['value'] ?? [];
                 [
                     'options' => [
                         'asc' => 'ASC',
-                        'desc' => 'DESC'
+                        'desc' => 'DESC',
                     ],
-                     'value' => $value['sort_order'] ?? null
+                    'value' => $value['sort_order'] ?? null,
                 ],
-                 Arr::get($options, 'fields.sort_order', [])
+                Arr::get($options, 'fields.sort_order', []),
             );
         @endphp
 
@@ -68,7 +68,7 @@ $value = $options['value'] ?? [];
 @php
     $option = array_merge(
         ['type' => 'number', 'default' => 6, 'value' => $value['limit'] ?? null],
-         Arr::get($options, 'fields.taxonomy', [])
+        Arr::get($options, 'fields.taxonomy', []),
     );
 @endphp
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Generators\Migrations;
+namespace Mojar\CMS\Repositories\Generators\Migrations;
 
 /**
  * Class NameParser

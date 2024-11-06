@@ -1,18 +1,19 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Commands;
+namespace Mojar\Backend\Commands;
 
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
-use Juzaweb\Backend\Models\Taxonomy;
+use Mojar\Backend\Models\Taxonomy;
 use Symfony\Component\Console\Input\InputOption;
 
 class PingFeedCommand extends Command

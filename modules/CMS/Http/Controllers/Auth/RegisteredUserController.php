@@ -1,8 +1,8 @@
 <?php
 
-namespace Juzaweb\CMS\Http\Controllers\Auth;
+namespace Mojar\CMS\Http\Controllers\Auth;
 
-use Juzaweb\CMS\Http\Controllers\Controller;
+use Mojar\CMS\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;

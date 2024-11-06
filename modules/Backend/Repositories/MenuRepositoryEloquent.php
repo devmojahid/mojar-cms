@@ -1,14 +1,14 @@
 <?php
 
-namespace Juzaweb\Backend\Repositories;
+namespace Mojar\Backend\Repositories;
 
-use Juzaweb\Backend\Models\Menu;
-use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
+use Mojar\Backend\Models\Menu;
+use Mojar\CMS\Repositories\BaseRepositoryEloquent;
 
 /**
  * Class CommentRepositoryEloquent.
  *
- * @package namespace Juzaweb\Backend\Repositories;
+ * @package namespace Mojar\Backend\Repositories;
  */
 class MenuRepositoryEloquent extends BaseRepositoryEloquent implements MenuRepository
 {
@@ -25,7 +25,7 @@ class MenuRepositoryEloquent extends BaseRepositoryEloquent implements MenuRepos
     public function getFrontendDetail(int $menu): Menu
     {
         $result = $this->model->newQuery()
-            ->cacheFor(config('juzaweb.performance.query_cache.lifetime'))
+            ->cacheFor(config('mojar.performance.query_cache.lifetime'))
             ->where(['id' => $menu])
             ->firstOrFail();
 
@@ -40,7 +40,7 @@ class MenuRepositoryEloquent extends BaseRepositoryEloquent implements MenuRepos
         }
 
         $result = $this->model->newQuery()
-            ->cacheFor(config('juzaweb.performance.query_cache.lifetime'))
+            ->cacheFor(config('mojar.performance.query_cache.lifetime'))
             ->where(['id' => $menu])
             ->first();
 

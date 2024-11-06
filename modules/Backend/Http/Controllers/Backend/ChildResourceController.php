@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Mojar\Backend\Http\Controllers\Backend;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\CMS\Facades\HookAction;
+use Mojar\Backend\Models\Post;
+use Mojar\CMS\Facades\HookAction;
 
 class ChildResourceController extends ResourceController
 {

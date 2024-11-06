@@ -1,17 +1,17 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Imports;
+namespace Mojar\CMS\Support\Imports;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
-use Juzaweb\CMS\Support\Collections\BloggerXMLCollection;
+use Mojar\CMS\Support\Collections\BloggerXMLCollection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\CMS\Support\Collections\WordpressXMLCollection;
-use Juzaweb\CMS\Support\FileManager;
+use Mojar\Backend\Models\Post;
+use Mojar\Backend\Models\Taxonomy;
+use Mojar\CMS\Support\Collections\WordpressXMLCollection;
+use Mojar\CMS\Support\FileManager;
 
 class PostImportFromXml
 {

@@ -1,7 +1,5 @@
 <?php
 
-namespace Juzaweb\CMS\Exceptions;
+namespace Mojar\CMS\Exceptions;
 
-class FileAlreadyExistException extends \Exception
-{
-}
+class FileAlreadyExistException extends \Exception {}

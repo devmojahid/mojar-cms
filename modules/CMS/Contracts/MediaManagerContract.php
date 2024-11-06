@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://juzaweb.com/
+ * @link       https://mojar.com/
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Contracts;
+namespace Mojar\CMS\Contracts;
 
-use Juzaweb\CMS\Models\Model;
-use Juzaweb\CMS\Support\FileManager\Media;
+use Mojar\CMS\Models\Model;
+use Mojar\CMS\Support\FileManager\Media;
 
 interface MediaManagerContract
 {

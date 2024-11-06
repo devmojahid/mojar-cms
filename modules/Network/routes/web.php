@@ -1,6 +1,6 @@
 <?php
 
-use Juzaweb\Network\Http\Controllers\SiteController;
+use Mojar\Network\Http\Controllers\SiteController;
 
 Route::get(
     'admin-cp/token-login',

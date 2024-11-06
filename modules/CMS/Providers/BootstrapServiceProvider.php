@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\CMS\Providers;
+namespace Mojar\CMS\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
-use Juzaweb\CMS\Facades\ActionRegister;
-use Juzaweb\Frontend\Providers\RouteServiceProvider;
+use Mojar\CMS\Contracts\LocalPluginRepositoryContract;
+use Mojar\CMS\Facades\ActionRegister;
+use Mojar\Frontend\Providers\RouteServiceProvider;
 
 class BootstrapServiceProvider extends ServiceProvider
 {
@@ -20,7 +20,7 @@ class BootstrapServiceProvider extends ServiceProvider
             function () {
                 ActionRegister::init();
 
-                do_action('juzaweb.init');
+                do_action('mojar.init');
             }
         );
     }

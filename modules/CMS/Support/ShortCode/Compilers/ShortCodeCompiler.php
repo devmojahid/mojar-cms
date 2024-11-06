@@ -1,4 +1,6 @@
-<?php namespace Juzaweb\CMS\Support\ShortCode\Compilers;
+<?php
+
+namespace Mojar\CMS\Support\ShortCode\Compilers;
 
 use Illuminate\Support\Str;
 
@@ -280,7 +282,7 @@ class ShortCodeCompiler
         $attributes = [];
         // attributes pattern
         $pattern = '/(\w+)\s*=\s*"([^"]*)"(?:\s|$)|(\w+)\s*=\s*\'([^\']*)\'(?:\s|$)|(\w+)\s*=\s*([^\s\'"]+)'
-            .'(?:\s|$)|"([^"]*)"(?:\s|$)|(\S+)(?:\s|$)/';
+            . '(?:\s|$)|"([^"]*)"(?:\s|$)|(\S+)(?:\s|$)/';
         // Match
         if (preg_match_all($pattern, preg_replace('/[\x{00a0}\x{200b}]+/u', " ", $text), $match, PREG_SET_ORDER)) {
             foreach ($match as $m) {
@@ -325,7 +327,7 @@ class ShortCodeCompiler
         $shortcodeNames = $this->getShortcodeNames();
 
         return "\\[(\\[?)($shortcodeNames)(?![\\w-])([^\\]\\/]*(?:\\/(?!\\])[^\\]\\/]*)*?)(?:(\\/)\\]|\\](?:([^\\[]*"
-            ."+(?:\\[(?!\\/\\2\\])[^\\[]*+)*+)\\[\\/\\2\\])?)(\\]?)";
+            . "+(?:\\[(?!\\/\\2\\])[^\\[]*+)*+)\\[\\/\\2\\])?)(\\]?)";
     }
 
     /**

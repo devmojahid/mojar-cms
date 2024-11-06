@@ -1,18 +1,18 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Mojar\Backend\Http\Controllers\Backend;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Models\Menu;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\Resource;
-use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Models\User;
-use Juzaweb\CMS\Support\ArrayPagination;
+use Mojar\Backend\Models\Menu;
+use Mojar\Backend\Models\Post;
+use Mojar\Backend\Models\Resource;
+use Mojar\Backend\Models\Taxonomy;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Models\User;
+use Mojar\CMS\Support\ArrayPagination;
 
 class LoadDataController extends BackendController
 {
@@ -66,7 +66,7 @@ class LoadDataController extends BackendController
         }
 
         if ($search) {
-            $query->where('name', JW_SQL_LIKE, '%'. $search .'%');
+            $query->where('name', JW_SQL_LIKE, '%' . $search . '%');
         }
 
         if ($explodes) {
@@ -99,8 +99,8 @@ class LoadDataController extends BackendController
         if ($search) {
             $query->where(
                 function (Builder $q) use ($search) {
-                    $q->where('name', JW_SQL_LIKE, '%'. $search .'%');
-                    $q->orWhere('email', JW_SQL_LIKE, '%'. $search .'%');
+                    $q->where('name', JW_SQL_LIKE, '%' . $search . '%');
+                    $q->orWhere('email', JW_SQL_LIKE, '%' . $search . '%');
                 }
             );
         }
@@ -134,7 +134,7 @@ class LoadDataController extends BackendController
         if ($search) {
             $query->where(
                 function (Builder $q) use ($search) {
-                    $q->orWhere('name', JW_SQL_LIKE, '%'. $search .'%');
+                    $q->orWhere('name', JW_SQL_LIKE, '%' . $search . '%');
                 }
             );
         }
@@ -202,7 +202,7 @@ class LoadDataController extends BackendController
         );
 
         if ($search) {
-            $query->where('title', JW_SQL_LIKE, '%'. $search .'%');
+            $query->where('title', JW_SQL_LIKE, '%' . $search . '%');
         }
 
         if ($explodes) {
@@ -239,7 +239,7 @@ class LoadDataController extends BackendController
         }
 
         if ($search) {
-            $query->where('title', JW_SQL_LIKE, '%'. $search .'%');
+            $query->where('title', JW_SQL_LIKE, '%' . $search . '%');
         }
 
         if ($explodes) {
@@ -280,7 +280,7 @@ class LoadDataController extends BackendController
         );
 
         if ($search) {
-            $query->where('title', JW_SQL_LIKE, '%'. $search .'%');
+            $query->where('title', JW_SQL_LIKE, '%' . $search . '%');
         }
 
         $paginate = $query->paginate($perPage);
@@ -317,7 +317,7 @@ class LoadDataController extends BackendController
         $query->where('type', '=', $type);
 
         if ($search) {
-            $query->where('name', JW_SQL_LIKE, '%'. $search .'%');
+            $query->where('name', JW_SQL_LIKE, '%' . $search . '%');
         }
 
         $paginate = $query->paginate($perPage);
@@ -354,7 +354,7 @@ class LoadDataController extends BackendController
         );
 
         if ($search) {
-            $query->where('name', JW_SQL_LIKE, '%'. $search .'%');
+            $query->where('name', JW_SQL_LIKE, '%' . $search . '%');
         }
 
         $paginate = $query->paginate($perPage);

@@ -86,7 +86,7 @@ export default function TopOptions(
             label: 'Plugins',
             options: plugins?.map((plugin: Plugin) => (
                 {
-                    label: plugin.extra?.juzaweb?.name || plugin.name,
+                    label: plugin.extra?.mojar?.name || plugin.name,
                     value: `plugins/${plugin.name}`,
                 }
             )),

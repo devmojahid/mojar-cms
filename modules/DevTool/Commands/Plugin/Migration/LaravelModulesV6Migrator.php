@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Juzaweb\DevTool\Commands\Plugin\Migration;
+namespace Mojar\DevTool\Commands\Plugin\Migration;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
-use Juzaweb\CMS\Support\Plugin;
+use Mojar\CMS\Contracts\LocalPluginRepositoryContract;
+use Mojar\CMS\Support\Plugin;
 
 class LaravelModulesV6Migrator extends Command
 {

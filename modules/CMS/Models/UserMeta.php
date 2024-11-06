@@ -1,25 +1,26 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Models;
+namespace Mojar\CMS\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Juzaweb\CMS\Models\UserMeta
+ * Mojar\CMS\Models\UserMeta
  *
  * @property int $id
  * @property int $user_id
  * @property string $meta_key
  * @property string|null $meta_value
- * @property-read \Juzaweb\CMS\Models\User $user
+ * @property-read \Mojar\CMS\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|UserMeta newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserMeta newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserMeta query()

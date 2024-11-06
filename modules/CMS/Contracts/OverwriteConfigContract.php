@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Contracts;
+namespace Mojar\CMS\Contracts;
 
 interface OverwriteConfigContract
 {

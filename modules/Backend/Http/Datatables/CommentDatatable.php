@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Datatables;
+namespace Mojar\Backend\Http\Datatables;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
-use Juzaweb\CMS\Abstracts\DataTable;
-use Juzaweb\Backend\Models\Comment;
+use Mojar\CMS\Abstracts\DataTable;
+use Mojar\Backend\Models\Comment;
 
 class CommentDatatable extends DataTable
 {
@@ -98,8 +99,8 @@ class CommentDatatable extends DataTable
         if ($keyword = Arr::get($data, 'keyword')) {
             $query->where(
                 function (Builder $q) use ($keyword) {
-                    $q->where('name', JW_SQL_LIKE, '%'. $keyword .'%');
-                    $q->orWhere('content', JW_SQL_LIKE, '%'. $keyword .'%');
+                    $q->where('name', JW_SQL_LIKE, '%' . $keyword . '%');
+                    $q->orWhere('content', JW_SQL_LIKE, '%' . $keyword . '%');
                 }
             );
         }

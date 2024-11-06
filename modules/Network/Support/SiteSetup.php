@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Network\Support;
+namespace Mojar\Network\Support;
 
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Database\ConnectionResolverInterface;
 use Illuminate\Support\Facades\URL;
-use Juzaweb\Network\Contracts\SiteSetupContract;
+use Mojar\Network\Contracts\SiteSetupContract;
 
 class SiteSetup implements SiteSetupContract
 {
@@ -40,9 +41,9 @@ class SiteSetup implements SiteSetupContract
     public function setupConfig(object $site): void
     {
         if ($site->id) {
-            $this->config->set('juzaweb.plugin.enable_upload', false);
+            $this->config->set('mojar.plugin.enable_upload', false);
 
-            $this->config->set('juzaweb.theme.enable_upload', false);
+            $this->config->set('mojar.theme.enable_upload', false);
 
             $this->setCachePrefix("jw_site_{$site->id}");
         }
@@ -80,6 +81,6 @@ class SiteSetup implements SiteSetupContract
 
         $this->config->set('database.redis.options.prefix', $prefix);
 
-        $this->config->set('juzaweb.cache_prefix', $prefix);
+        $this->config->set('mojar.cache_prefix', $prefix);
     }
 }

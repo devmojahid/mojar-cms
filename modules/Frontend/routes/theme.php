@@ -1,18 +1,19 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-use Juzaweb\CMS\Support\Route\Auth;
+use Mojar\CMS\Support\Route\Auth;
 
 Auth::routes();
 
-if (config('juzaweb.frontend.enable')) {
+if (config('mojar.frontend.enable')) {
     require __DIR__ . '/components/profile.route.php';
 
     require __DIR__ . '/components/sitemap.route.php';
@@ -21,5 +22,5 @@ if (config('juzaweb.frontend.enable')) {
 
     require __DIR__ . '/components/page.route.php';
 } else {
-    Route::get('/', fn() => redirect(config('juzaweb.admin_prefix')));
+    Route::get('/', fn() => redirect(config('mojar.admin_prefix')));
 }

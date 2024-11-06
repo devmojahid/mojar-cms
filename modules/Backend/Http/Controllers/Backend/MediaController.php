@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Mojar\Backend\Http\Controllers\Backend;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\View;
@@ -18,23 +19,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Juzaweb\Backend\Events\AddFolderSuccess;
-use Juzaweb\Backend\Http\Requests\Media\AddFolderRequest;
-use Juzaweb\Backend\Http\Requests\Media\UpdateRequest;
-use Juzaweb\Backend\Repositories\MediaFileRepository;
-use Juzaweb\Backend\Repositories\MediaFolderRepository;
-use Juzaweb\CMS\Facades\Facades;
-use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\Backend\Models\MediaFile;
-use Juzaweb\Backend\Models\MediaFolder;
+use Mojar\Backend\Events\AddFolderSuccess;
+use Mojar\Backend\Http\Requests\Media\AddFolderRequest;
+use Mojar\Backend\Http\Requests\Media\UpdateRequest;
+use Mojar\Backend\Repositories\MediaFileRepository;
+use Mojar\Backend\Repositories\MediaFolderRepository;
+use Mojar\CMS\Facades\Facades;
+use Mojar\CMS\Http\Controllers\BackendController;
+use Mojar\Backend\Models\MediaFile;
+use Mojar\Backend\Models\MediaFolder;
 
 class MediaController extends BackendController
 {
     public function __construct(
         protected MediaFileRepository $fileRepository,
         protected MediaFolderRepository $folderRepository
-    ) {
-    }
+    ) {}
 
     public function index(Request $request, $folderId = null): View
     {
@@ -62,10 +62,10 @@ class MediaController extends BackendController
         }
 
         $mediaFiles = $this->getFiles($query, 36 - $mediaFolders->count(), $folderId);
-        $maxSize = config("juzaweb.filemanager.types.{$type}.max_size");
-        $mimeTypes = config("juzaweb.filemanager.types.{$type}.valid_mime");
+        $maxSize = config("mojar.filemanager.types.{$type}.max_size");
+        $mimeTypes = config("mojar.filemanager.types.{$type}.valid_mime");
         if (empty($mimeTypes)) {
-            $mimeTypes = config("juzaweb.filemanager.types.file.valid_mime");
+            $mimeTypes = config("mojar.filemanager.types.file.valid_mime");
         }
 
         return view(
@@ -106,7 +106,7 @@ class MediaController extends BackendController
     public function download($id): \Symfony\Component\HttpFoundation\BinaryFileResponse
     {
         $model = $this->fileRepository->find($id);
-        $storage = Storage::disk(config('juzaweb.filemanager.disk'));
+        $storage = Storage::disk(config('mojar.filemanager.disk'));
         if (!$storage->exists($model->path)) {
             abort(404, 'File not exists.');
         }
@@ -154,7 +154,7 @@ class MediaController extends BackendController
 
     protected function getFileTypes()
     {
-        return config('juzaweb.filemanager.types');
+        return config('mojar.filemanager.types');
     }
 
     protected function addBreadcrumbFolder($folder)
@@ -213,7 +213,7 @@ class MediaController extends BackendController
 
     protected function getTypeExtensions(string $type)
     {
-        $extensions = config("juzaweb.filemanager.types.{$type}.extensions");
+        $extensions = config("mojar.filemanager.types.{$type}.extensions");
         if (empty($extensions)) {
             $extensions = match ($type) {
                 'file' => Facades::defaultFileExtensions(),

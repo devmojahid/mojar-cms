@@ -1,27 +1,28 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Datatables;
+namespace Mojar\Backend\Http\Datatables;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\Backend\Models\Resource;
-use Juzaweb\CMS\Abstracts\DataTable;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Repositories\BaseRepository;
-use Juzaweb\CMS\Repositories\Criterias\FilterCriteria;
-use Juzaweb\CMS\Repositories\Criterias\SearchCriteria;
-use Juzaweb\CMS\Repositories\Criterias\SortCriteria;
+use Mojar\Backend\Models\Resource;
+use Mojar\CMS\Abstracts\DataTable;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\CMS\Repositories\BaseRepository;
+use Mojar\CMS\Repositories\Criterias\FilterCriteria;
+use Mojar\CMS\Repositories\Criterias\SearchCriteria;
+use Mojar\CMS\Repositories\Criterias\SortCriteria;
 
 class ResourceDatatable extends DataTable
 {
@@ -115,7 +116,7 @@ class ResourceDatatable extends DataTable
         if ($keyword = Arr::get($data, 'keyword')) {
             $query->where(
                 function (Builder $q) use ($keyword) {
-                    $q->where('name', JW_SQL_LIKE, '%'.$keyword.'%');
+                    $q->where('name', JW_SQL_LIKE, '%' . $keyword . '%');
                     //$q->orWhere('description', JW_SQL_LIKE, '%'.$keyword.'%');
                 }
             );

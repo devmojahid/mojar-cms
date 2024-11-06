@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Commands\Post;
+namespace Mojar\Backend\Commands\Post;
 
 use Illuminate\Console\Command;
-use Juzaweb\Backend\Models\Post;
+use Mojar\Backend\Models\Post;
 
 class GeneratePostUUIDCommand extends Command
 {

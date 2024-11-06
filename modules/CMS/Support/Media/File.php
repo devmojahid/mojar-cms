@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Media;
+namespace Mojar\CMS\Support\Media;
 
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Intervention\Image\Facades\Image;
-use Juzaweb\CMS\Contracts\Media\Disk as DiskContract;
-use Juzaweb\CMS\Interfaces\Media\FileInterface;
+use Mojar\CMS\Contracts\Media\Disk as DiskContract;
+use Mojar\CMS\Interfaces\Media\FileInterface;
 use League\Flysystem\FilesystemAdapter;
 use League\Flysystem\StorageAttributes;
 use Symfony\Component\HttpFoundation\StreamedResponse;

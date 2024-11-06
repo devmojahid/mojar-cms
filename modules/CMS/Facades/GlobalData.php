@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Facades;
+namespace Mojar\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Juzaweb\CMS\Contracts\GlobalDataContract;
+use Mojar\CMS\Contracts\GlobalDataContract;
 
 /**
  * @method static void set($key, $value)
@@ -19,7 +20,7 @@ use Juzaweb\CMS\Contracts\GlobalDataContract;
  * @method static void registerAction(array $actions)
  * @method static void initAction()
  * @method static mixed get($key)
- * @see \Juzaweb\CMS\Support\GlobalData
+ * @see \Mojar\CMS\Support\GlobalData
  */
 class GlobalData extends Facade
 {

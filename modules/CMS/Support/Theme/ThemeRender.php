@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support\Theme;
+namespace Mojar\CMS\Support\Theme;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Support\Arrayable;
@@ -19,15 +20,15 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
-use Juzaweb\Backend\Http\Resources\CommentResource;
-use Juzaweb\Backend\Http\Resources\PostResource;
-use Juzaweb\Backend\Http\Resources\PostResourceCollection;
-use Juzaweb\Backend\Http\Resources\TaxonomyResource;
-use Juzaweb\Backend\Models\Comment;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\CMS\Contracts\Theme\ThemeRender as ThemeRenderContract;
-use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
+use Mojar\Backend\Http\Resources\CommentResource;
+use Mojar\Backend\Http\Resources\PostResource;
+use Mojar\Backend\Http\Resources\PostResourceCollection;
+use Mojar\Backend\Http\Resources\TaxonomyResource;
+use Mojar\Backend\Models\Comment;
+use Mojar\Backend\Models\Post;
+use Mojar\Backend\Models\Taxonomy;
+use Mojar\CMS\Contracts\Theme\ThemeRender as ThemeRenderContract;
+use Mojar\CMS\Interfaces\Theme\ThemeInterface;
 use TwigBridge\Facade\Twig;
 
 class ThemeRender implements ThemeRenderContract
@@ -122,8 +123,7 @@ class ThemeRender implements ThemeRenderContract
                 'array',
                 'double',
             ]
-        )
-        ) {
+        )) {
             return null;
         }
 

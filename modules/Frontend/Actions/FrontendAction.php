@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Frontend\Actions;
+namespace Mojar\Frontend\Actions;
 
 use Illuminate\Support\Facades\File;
-use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Facades\ThemeLoader;
+use Mojar\CMS\Abstracts\Action;
+use Mojar\CMS\Facades\HookAction;
+use Mojar\CMS\Facades\ThemeLoader;
 
 class FrontendAction extends Action
 {
@@ -71,7 +72,7 @@ class FrontendAction extends Action
         }
 
         if ($str) {
-            echo '<style>'.$str.'</style>';
+            echo '<style>' . $str . '</style>';
         }
     }
 }

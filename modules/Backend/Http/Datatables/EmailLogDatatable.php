@@ -1,21 +1,22 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Datatables;
+namespace Mojar\Backend\Http\Datatables;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
-use Juzaweb\CMS\Abstracts\DataTable;
-use Juzaweb\CMS\Jobs\SendEmailJob;
-use Juzaweb\Backend\Models\EmailList;
-use Juzaweb\CMS\Support\SendEmail;
+use Mojar\CMS\Abstracts\DataTable;
+use Mojar\CMS\Jobs\SendEmailJob;
+use Mojar\Backend\Models\EmailList;
+use Mojar\CMS\Support\SendEmail;
 
 class EmailLogDatatable extends DataTable
 {
@@ -47,10 +48,10 @@ class EmailLogDatatable extends DataTable
                 'width' => '10%',
                 'formatter' => function ($value, $row, $index) {
                     return match ($value) {
-                        EmailList::STATUS_SUCCESS => '<span class="text-success">'.trans('cms::app.sended').'</span>',
-                        EmailList::STATUS_PENDING => '<span class="text-warning">'.trans('cms::app.pending').'</span>',
-                        EmailList::STATUS_CANCEL => '<span class="text-success">'.trans('cms::app.cancel').'</span>',
-                        default => '<span class="text-danger">'.trans('cms::app.error').'</span>',
+                        EmailList::STATUS_SUCCESS => '<span class="text-success">' . trans('cms::app.sended') . '</span>',
+                        EmailList::STATUS_PENDING => '<span class="text-warning">' . trans('cms::app.pending') . '</span>',
+                        EmailList::STATUS_CANCEL => '<span class="text-success">' . trans('cms::app.cancel') . '</span>',
+                        default => '<span class="text-danger">' . trans('cms::app.error') . '</span>',
                     };
                 }
             ],
@@ -78,8 +79,8 @@ class EmailLogDatatable extends DataTable
         if ($search = Arr::get($data, 'keyword')) {
             $query->where(
                 function (Builder $q) use ($search) {
-                    $q->where('subject', JW_SQL_LIKE, '%'. $search .'%');
-                    $q->orWhere('content', JW_SQL_LIKE, '%'. $search .'%');
+                    $q->where('subject', JW_SQL_LIKE, '%' . $search . '%');
+                    $q->orWhere('content', JW_SQL_LIKE, '%' . $search . '%');
                 }
             );
         }
@@ -107,7 +108,7 @@ class EmailLogDatatable extends DataTable
                 EmailList::destroy($ids);
                 break;
             case 'resend':
-                $method = config('juzaweb.email.method');
+                $method = config('mojar.email.method');
                 $status = EmailList::STATUS_PENDING;
 
                 $emailLists = EmailList::whereIn('id', $ids)

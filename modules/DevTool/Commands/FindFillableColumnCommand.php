@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\DevTool\Commands;
+namespace Mojar\DevTool\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;

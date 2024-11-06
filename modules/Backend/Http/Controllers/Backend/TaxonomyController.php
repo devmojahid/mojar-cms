@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Mojar\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Facades\GlobalData;
-use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\Backend\Http\Datatables\TaxonomyDataTable;
-use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\CMS\Traits\ResourceController;
+use Mojar\CMS\Facades\GlobalData;
+use Mojar\CMS\Http\Controllers\BackendController;
+use Mojar\Backend\Http\Datatables\TaxonomyDataTable;
+use Mojar\Backend\Models\Taxonomy;
+use Mojar\CMS\Traits\ResourceController;
 
 class TaxonomyController extends BackendController
 {

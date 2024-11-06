@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Config;
+namespace Mojar\CMS\Support\Config;
 
 class GenerateConfigReader
 {

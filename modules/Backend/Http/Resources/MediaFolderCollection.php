@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Http\Resources;
+namespace Mojar\Backend\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -28,7 +29,7 @@ class MediaFolderCollection extends ResourceCollection
                     'time' => (string) $item->created_at,
                     'type' => $item->type,
                     'icon' => 'fa-folder-o',
-                    'thumb' => asset('jw-styles/juzaweb/images/folder.png'),
+                    'thumb' => asset('jw-styles/mojar/images/folder.png'),
                     'is_file' => false,
                 ];
             }

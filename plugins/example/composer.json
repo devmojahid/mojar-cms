@@ -1,14 +1,14 @@
 {
-    "name": "juzaweb/example",
-    "description": "This is Example plugin for Juzaweb CMS",
+    "name": "mojar/example",
+    "description": "This is Example plugin for Mojar CMS",
     "extra": {
         "laravel": {
             "providers": [
-                "Juzaweb\\Example\\Providers\\ExampleServiceProvider"
+                "Mojar\\Example\\Providers\\ExampleServiceProvider"
             ],
             "aliases": {}
         },
-        "juzaweb": {
+        "mojar": {
             "name": "Example Plugin",
             "domain": "exam",
             "cms_min": "3.2",
@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Juzaweb\\Example\\": "src/"
+            "Mojar\\Example\\": "src/"
         }
     }
 }

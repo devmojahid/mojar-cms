@@ -1,15 +1,16 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package juzaweb/cms
+ * @package mojar/cms
  * @author The Anh Dang
  *
  * Developed based on Laravel Framework
- * Github: https://juzaweb.com/cms
+ * Github: https://mojar.com/cms
  */
 
-namespace Juzaweb\CMS\Http\Controllers;
+namespace Mojar\CMS\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;

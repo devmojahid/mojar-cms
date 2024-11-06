@@ -1,14 +1,15 @@
 @extends('network::layout')
 
 @section('content')
-
     <div class="row box-hidden mb-2" id="form-plugin-upload">
         <div class="col-md-12">
-            <form action="{{ route('admin.plugin.install.upload') }}" role="form" id="pluginUploadForm" name="pluginUploadForm" method="post" class="dropzone" enctype="multipart/form-data">
+            <form action="{{ route('admin.plugin.install.upload') }}" role="form" id="pluginUploadForm"
+                name="pluginUploadForm" method="post" class="dropzone" enctype="multipart/form-data">
                 <div class="form-group">
                     <div class="controls text-center">
                         <div class="input-group w-100">
-                            <a class="btn btn-primary w-100 text-white" id="plugin-upload-button">{{ trans('cms::filemanager.message-choose') }}</a>
+                            <a class="btn btn-primary w-100 text-white"
+                                id="plugin-upload-button">{{ trans('cms::filemanager.message-choose') }}</a>
                         </div>
                     </div>
                 </div>
@@ -37,7 +38,7 @@
                     <img src="{thumbnail}" alt="{title}" width="70" height="70">
                     <div class="d-flex flex-column ml-2">
                         <span>{title}</span>
-                        {{--<span class="text-black-50">Payment Services</span>--}}
+                        {{-- <span class="text-black-50">Payment Services</span> --}}
 
                         <span class="ratings text-secondary">
                             <i class="fa fa-star"></i>
@@ -50,22 +51,20 @@
                 </div>
                 <h6>{description}</h6>
                 <div class="d-flex justify-content-between install mt-3">
-                    {{--<span>Installed 172 times</span>--}}
-                    <button
-                        class="btn btn-primary install-plugin"
-                        data-plugin="{name}"
-                    >{{ trans('cms::app.install') }}</button>
+                    {{-- <span>Installed 172 times</span> --}}
+                    <button class="btn btn-primary install-plugin"
+                        data-plugin="{name}">{{ trans('cms::app.install') }}</button>
 
-                    {{--<a target="_blank" href="{url}" class="text-primary">
+                    {{-- <a target="_blank" href="{url}" class="text-primary">
                         {{ trans('cms::app.view') }}&nbsp;<i class="fa fa-angle-right"></i>
-                    </a>--}}
+                    </a> --}}
                 </div>
             </div>
         </div>
     </template>
 
     <script>
-        var listView = new JuzawebListView({
+        var listView = new MojarListView({
             url: "{{ route('admin.plugin.install.all') }}",
             list: "#plugin-list",
             template: "plugin-template"
@@ -73,16 +72,16 @@
 
         Dropzone.autoDiscover = false;
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             new Dropzone("#pluginUploadForm", {
                 uploadMultiple: false,
                 parallelUploads: 5,
                 timeout: 0,
                 clickable: '#plugin-upload-button',
                 dictDefaultMessage: "{{ trans('cms::filemanager.message-drop') }}",
-                init: function () {
-                    this.on('success', function (file, response) {
-                        if(response.status == false) {
+                init: function() {
+                    this.on('success', function(file, response) {
+                        if (response.status == false) {
                             this.defaultOptions.error(file, response.data.message);
                         }
                     });
@@ -96,9 +95,9 @@
                 chunkSize: 1048576,
             });
 
-            $('body').on('click', '#upload-plugin', function () {
+            $('body').on('click', '#upload-plugin', function() {
                 let frm = $('#form-plugin-upload');
-                if(frm.is(':hidden')) {
+                if (frm.is(':hidden')) {
                     frm.show('slow');
                 } else {
                     frm.hide('slow');

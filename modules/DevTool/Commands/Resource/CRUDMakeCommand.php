@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\DevTool\Commands\Resource;
+namespace Mojar\DevTool\Commands\Resource;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\DevTool\Abstracts\CRUD\ResourceCommand;
+use Mojar\CMS\Abstracts\Action;
+use Mojar\DevTool\Abstracts\CRUD\ResourceCommand;
 use Symfony\Component\Console\Input\InputArgument;
 
 class CRUDMakeCommand extends ResourceCommand
@@ -59,9 +60,9 @@ class CRUDMakeCommand extends ResourceCommand
 
         $this->addLanguageTranslate();
 
-        $routePath = $this->module->getPath().'/src/routes/admin.php';
+        $routePath = $this->module->getPath() . '/src/routes/admin.php';
 
-        $this->info('Add resource route '.$routePath);
+        $this->info('Add resource route ' . $routePath);
 
         $tableName = $this->getTableNameNonePrefix($table);
         $content = "Route::jwResource('{$tableName}', {$model}Controller::class);";
@@ -74,11 +75,11 @@ class CRUDMakeCommand extends ResourceCommand
         $info .= "use {$this->module->getNamespace()}Http\Controllers\Backend\\{$model}Controller;\n";
         $info .= $content . "\n\n";
 
-        $info .= "And add to hook ". Action::BACKEND_INIT . " in your action:\n\n";
+        $info .= "And add to hook " . Action::BACKEND_INIT . " in your action:\n\n";
         $info .= "\$this->hookAction->registerAdminPage(
             '{$tableName}',
             [
-                'title' => '". Str::ucfirst($tableName) ."',
+                'title' => '" . Str::ucfirst($tableName) . "',
             ]
         );";
 
@@ -89,7 +90,7 @@ class CRUDMakeCommand extends ResourceCommand
     {
         return collect(Schema::getColumnListing($table))
             ->filter(
-                fn ($item) => !in_array(
+                fn($item) => !in_array(
                     $item,
                     [
                         'id',

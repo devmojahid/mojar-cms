@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\CMS\Facades;
+namespace Mojar\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Juzaweb\CMS\Contracts\EventyContract;
+use Mojar\CMS\Contracts\EventyContract;
 
 class Eventy extends Facade
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\DevTool\Commands\Theme;
+namespace Mojar\DevTool\Commands\Theme;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
-use Juzaweb\CMS\Facades\Theme;
+use Mojar\CMS\Facades\Theme;
 
 class GenerateDataThemeCommand extends Command
 {
@@ -202,7 +202,7 @@ class GenerateDataThemeCommand extends Command
                 ];
             case 'resource':
                 return [
-                    "type" =>"resource",
+                    "type" => "resource",
                     "name" => $name,
                     "label" => $label,
                     "data" => [

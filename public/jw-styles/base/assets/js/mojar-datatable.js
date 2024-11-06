@@ -5,7 +5,7 @@ class mojarTable {
         this.action_url = e.action_url;
         this.remove_url = e.remove_url || null;
         this.status_url = e.status_url || null;
-        // this.remove_question = (e.remove_question) ? e.remove_question : juzaweb.lang.remove_question.replace(':name', juzaweb.lang.the_selected_items);
+        // this.remove_question = (e.remove_question) ? e.remove_question : mojar.lang.remove_question.replace(':name', mojar.lang.the_selected_items);
         this.detete_button = (e.detete_button) ? e.detete_button : "#delete-item";
         this.status_button = (e.status_button) ? e.status_button : ".status-button";
         this.apply_button = (e.apply_button) ? e.apply_button : "#apply-action";

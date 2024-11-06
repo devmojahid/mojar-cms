@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Generators\Commands;
+namespace Mojar\CMS\Repositories\Generators\Commands;
 
 use File;
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Repositories\Generators\BindingsGenerator;
-use Juzaweb\CMS\Repositories\Generators\FileAlreadyExistsException;
+use Mojar\CMS\Repositories\Generators\BindingsGenerator;
+use Mojar\CMS\Repositories\Generators\FileAlreadyExistsException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -86,9 +86,9 @@ class BindingsCommand extends Command
                 );
             }
             $bindingGenerator->run();
-            $this->info($this->type.' created successfully.');
+            $this->info($this->type . ' created successfully.');
         } catch (FileAlreadyExistsException $e) {
-            $this->error($this->type.' already exists!');
+            $this->error($this->type . ' already exists!');
             return false;
         }
     }

@@ -1,12 +1,12 @@
 <?php
 
-namespace Juzaweb\CMS\Support\ShortCode\View;
+namespace Mojar\CMS\Support\ShortCode\View;
 
 use ArrayAccess;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Engine as EngineInterface;
 use Illuminate\View\View as IlluminateView;
-use Juzaweb\CMS\Support\ShortCode\Compilers\ShortCodeCompiler;
+use Mojar\CMS\Support\ShortCode\Compilers\ShortCodeCompiler;
 
 class View extends IlluminateView implements ArrayAccess, Renderable
 {
@@ -14,14 +14,14 @@ class View extends IlluminateView implements ArrayAccess, Renderable
     /**
      * Short code engine resolver
      *
-     * @var \Juzaweb\CMS\Support\ShortCode\Compilers\ShortCodeCompiler
+     * @var \Mojar\CMS\Support\ShortCode\Compilers\ShortCodeCompiler
      */
     public $shortcode;
 
     /**
      * Create a new view instance.
      *
-     * @param \Juzaweb\CMS\Support\ShortCode\Compilers\ShortCodeCompiler       $shortcode
+     * @param \Mojar\CMS\Support\ShortCode\Compilers\ShortCodeCompiler       $shortcode
      * @param \Illuminate\View\Factory|Factory                      $factory
      * @param \Illuminate\Contracts\View\Engine|EngineInterface     $engine
      * @param  string                                               $view

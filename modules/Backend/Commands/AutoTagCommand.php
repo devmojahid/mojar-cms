@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Commands;
+namespace Mojar\Backend\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
-use Juzaweb\Backend\Jobs\AutoTagJob;
-use Juzaweb\Backend\Models\Post;
+use Mojar\Backend\Jobs\AutoTagJob;
+use Mojar\Backend\Models\Post;
 
 class AutoTagCommand extends Command
 {
@@ -38,9 +39,9 @@ class AutoTagCommand extends Command
                         ->delay(Carbon::now()->addSeconds($job * 305));
 
                     $lastDate = $rows->last()->updated_at->format('Y-m-d H:i:s');
-                    $job ++;
+                    $job++;
 
-                    $this->info("Adding tags to post id ". $rows->last()->id);
+                    $this->info("Adding tags to post id " . $rows->last()->id);
                 }
             );
 

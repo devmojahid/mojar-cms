@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Permission;
+namespace Mojar\CMS\Support\Permission;
 
 use Illuminate\Support\Collection;
-use Juzaweb\CMS\Exceptions\WildcardPermissionNotProperlyFormatted;
+use Mojar\CMS\Exceptions\WildcardPermissionNotProperlyFormatted;
 
 class WildcardPermission
 {
@@ -52,8 +52,10 @@ class WildcardPermission
                 return true;
             }
 
-            if (! $this->parts->get($i)->contains(self::WILDCARD_TOKEN)
-                && ! $this->containsAll($this->parts->get($i), $otherPart)) {
+            if (
+                ! $this->parts->get($i)->contains(self::WILDCARD_TOKEN)
+                && ! $this->containsAll($this->parts->get($i), $otherPart)
+            ) {
                 return false;
             }
 

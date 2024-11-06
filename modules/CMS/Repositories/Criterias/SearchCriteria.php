@@ -1,14 +1,14 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Criterias;
+namespace Mojar\CMS\Repositories\Criterias;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
-use Juzaweb\CMS\Interfaces\Repositories\WithAppendSearch;
-use Juzaweb\CMS\Repositories\Abstracts\Criteria;
-use Juzaweb\CMS\Repositories\Contracts\CriteriaInterface;
-use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
+use Mojar\CMS\Interfaces\Repositories\WithAppendSearch;
+use Mojar\CMS\Repositories\Abstracts\Criteria;
+use Mojar\CMS\Repositories\Contracts\CriteriaInterface;
+use Mojar\CMS\Repositories\Contracts\RepositoryInterface;
 
 class SearchCriteria extends Criteria implements CriteriaInterface
 {

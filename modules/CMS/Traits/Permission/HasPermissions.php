@@ -1,19 +1,19 @@
 <?php
 
-namespace Juzaweb\CMS\Traits\Permission;
+namespace Mojar\CMS\Traits\Permission;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Juzaweb\CMS\Contracts\Permission;
-use Juzaweb\CMS\Contracts\Role;
-use Juzaweb\CMS\Exceptions\GuardDoesNotMatch;
-use Juzaweb\CMS\Exceptions\PermissionDoesNotExist;
-use Juzaweb\CMS\Exceptions\WildcardPermissionInvalidArgument;
-use Juzaweb\CMS\Support\Permission\Guard;
-use Juzaweb\CMS\Support\Permission\PermissionRegistrar;
-use Juzaweb\CMS\Support\Permission\WildcardPermission;
+use Mojar\CMS\Contracts\Permission;
+use Mojar\CMS\Contracts\Role;
+use Mojar\CMS\Exceptions\GuardDoesNotMatch;
+use Mojar\CMS\Exceptions\PermissionDoesNotExist;
+use Mojar\CMS\Exceptions\WildcardPermissionInvalidArgument;
+use Mojar\CMS\Support\Permission\Guard;
+use Mojar\CMS\Support\Permission\PermissionRegistrar;
+use Mojar\CMS\Support\Permission\WildcardPermission;
 
 trait HasPermissions
 {
@@ -66,7 +66,7 @@ trait HasPermissions
      * Scope the model query to certain permissions only.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string|int|array|\Juzaweb\CMS\Contracts\Permission|\Illuminate\Support\Collection $permissions
+     * @param string|int|array|\Mojar\CMS\Contracts\Permission|\Illuminate\Support\Collection $permissions
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
@@ -92,7 +92,7 @@ trait HasPermissions
                         $permissionClass = $this->getPermissionClass();
                         $key = (new $permissionClass())->getKeyName();
                         $subQuery->whereIn(
-                            config('permission.table_names.permissions').".$key",
+                            config('permission.table_names.permissions') . ".$key",
                             \array_column($permissions, $key)
                         );
                     }
@@ -105,7 +105,7 @@ trait HasPermissions
                             $roleClass = $this->getRoleClass();
                             $key = (new $roleClass())->getKeyName();
                             $subQuery->whereIn(
-                                config('permission.table_names.roles').".$key",
+                                config('permission.table_names.roles') . ".$key",
                                 \array_column($rolesWithPermissions, $key)
                             );
                         }
@@ -116,10 +116,10 @@ trait HasPermissions
     }
 
     /**
-     * @param string|int|array|\Juzaweb\CMS\Contracts\Permission|\Illuminate\Support\Collection $permissions
+     * @param string|int|array|\Mojar\CMS\Contracts\Permission|\Illuminate\Support\Collection $permissions
      *
      * @return array
-     * @throws \Juzaweb\CMS\Exceptions\PermissionDoesNotExist
+     * @throws \Mojar\CMS\Exceptions\PermissionDoesNotExist
      */
     protected function convertToPermissionModels($permissions): array
     {
@@ -143,7 +143,7 @@ trait HasPermissions
     /**
      * Determine if the model may perform the given permission.
      *
-     * @param string|int|\Juzaweb\CMS\Contracts\Permission $permission
+     * @param string|int|\Mojar\CMS\Contracts\Permission $permission
      * @param string|null $guardName
      *
      * @return bool
@@ -181,7 +181,7 @@ trait HasPermissions
     /**
      * Validates a wildcard permission against all permissions of a user.
      *
-     * @param string|int|\Juzaweb\CMS\Contracts\Permission $permission
+     * @param string|int|\Mojar\CMS\Contracts\Permission $permission
      * @param string|null $guardName
      *
      * @return bool
@@ -220,7 +220,7 @@ trait HasPermissions
     /**
      * An alias to hasPermissionTo(), but avoids throwing an exception.
      *
-     * @param string|int|\Juzaweb\CMS\Contracts\Permission $permission
+     * @param string|int|\Mojar\CMS\Contracts\Permission $permission
      * @param string|null $guardName
      *
      * @return bool
@@ -237,7 +237,7 @@ trait HasPermissions
     /**
      * Determine if the model has any of the given permissions.
      *
-     * @param string|int|array|\Juzaweb\CMS\Contracts\Permission|\Illuminate\Support\Collection ...$permissions
+     * @param string|int|array|\Mojar\CMS\Contracts\Permission|\Illuminate\Support\Collection ...$permissions
      *
      * @return bool
      */
@@ -257,7 +257,7 @@ trait HasPermissions
     /**
      * Determine if the model has all of the given permissions.
      *
-     * @param string|int|array|\Juzaweb\CMS\Contracts\Permission|\Illuminate\Support\Collection ...$permissions
+     * @param string|int|array|\Mojar\CMS\Contracts\Permission|\Illuminate\Support\Collection ...$permissions
      *
      * @return bool
      * @throws \Exception
@@ -278,7 +278,7 @@ trait HasPermissions
     /**
      * Determine if the model has, via roles, the given permission.
      *
-     * @param \Juzaweb\CMS\Contracts\Permission $permission
+     * @param \Mojar\CMS\Contracts\Permission $permission
      *
      * @return bool
      */
@@ -290,7 +290,7 @@ trait HasPermissions
     /**
      * Determine if the model has the given permission.
      *
-     * @param string|int|\Juzaweb\CMS\Contracts\Permission $permission
+     * @param string|int|\Mojar\CMS\Contracts\Permission $permission
      *
      * @return bool
      * @throws PermissionDoesNotExist
@@ -345,7 +345,7 @@ trait HasPermissions
     /**
      * Grant the given permission(s) to a role.
      *
-     * @param string|int|array|\Juzaweb\CMS\Contracts\Permission|\Illuminate\Support\Collection $permissions
+     * @param string|int|array|\Mojar\CMS\Contracts\Permission|\Illuminate\Support\Collection $permissions
      *
      * @return $this
      */
@@ -403,7 +403,7 @@ trait HasPermissions
     /**
      * Remove all current permissions and set the given ones.
      *
-     * @param string|int|array|\Juzaweb\CMS\Contracts\Permission|\Illuminate\Support\Collection $permissions
+     * @param string|int|array|\Mojar\CMS\Contracts\Permission|\Illuminate\Support\Collection $permissions
      *
      * @return $this
      */
@@ -417,7 +417,7 @@ trait HasPermissions
     /**
      * Revoke the given permission(s).
      *
-     * @param \Juzaweb\CMS\Contracts\Permission|\Juzaweb\CMS\Contracts\Permission[]|string|string[] $permission
+     * @param \Mojar\CMS\Contracts\Permission|\Mojar\CMS\Contracts\Permission[]|string|string[] $permission
      *
      * @return $this
      */
@@ -440,9 +440,9 @@ trait HasPermissions
     }
 
     /**
-     * @param string|int|array|\Juzaweb\CMS\Contracts\Permission|\Illuminate\Support\Collection $permissions
+     * @param string|int|array|\Mojar\CMS\Contracts\Permission|\Illuminate\Support\Collection $permissions
      *
-     * @return \Juzaweb\CMS\Contracts\Permission|\Juzaweb\CMS\Contracts\Permission[]|\Illuminate\Support\Collection
+     * @return \Mojar\CMS\Contracts\Permission|\Mojar\CMS\Contracts\Permission[]|\Illuminate\Support\Collection
      */
     protected function getStoredPermission($permissions)
     {
@@ -474,9 +474,9 @@ trait HasPermissions
     }
 
     /**
-     * @param \Juzaweb\CMS\Contracts\Permission|\Juzaweb\CMS\Contracts\Role $roleOrPermission
+     * @param \Mojar\CMS\Contracts\Permission|\Mojar\CMS\Contracts\Role $roleOrPermission
      *
-     * @throws \Juzaweb\CMS\Exceptions\GuardDoesNotMatch
+     * @throws \Mojar\CMS\Exceptions\GuardDoesNotMatch
      */
     protected function ensureModelSharesGuard($roleOrPermission)
     {
@@ -505,7 +505,7 @@ trait HasPermissions
 
     /**
      * Check if the model has All of the requested Direct permissions.
-     * @param string|int|array|\Juzaweb\CMS\Contracts\Permission|\Illuminate\Support\Collection ...$permissions
+     * @param string|int|array|\Mojar\CMS\Contracts\Permission|\Illuminate\Support\Collection ...$permissions
      * @return bool
      */
     public function hasAllDirectPermissions(...$permissions): bool
@@ -523,7 +523,7 @@ trait HasPermissions
 
     /**
      * Check if the model has Any of the requested Direct permissions.
-     * @param string|int|array|\Juzaweb\CMS\Contracts\Permission|\Illuminate\Support\Collection ...$permissions
+     * @param string|int|array|\Mojar\CMS\Contracts\Permission|\Illuminate\Support\Collection ...$permissions
      * @return bool
      */
     public function hasAnyDirectPermission(...$permissions): bool

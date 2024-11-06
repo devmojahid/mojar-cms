@@ -7,7 +7,7 @@
 |
 */
 return [
-    
+
     /*
     |--------------------------------------------------------------------------
     | Repository Pagination Limit Default
@@ -17,7 +17,7 @@ return [
     'pagination' => [
         'limit' => 15,
     ],
-    
+
     /*
     |--------------------------------------------------------------------------
     | Fractal Presenter Config
@@ -36,7 +36,7 @@ return [
         ],
         'serializer' => League\Fractal\Serializer\DataArraySerializer::class,
     ],
-    
+
     /*
     |--------------------------------------------------------------------------
     | Cache Config
@@ -53,7 +53,7 @@ return [
          |
          */
         'enabled' => false,
-        
+
         /*
          |--------------------------------------------------------------------------
          | Cache Minutes
@@ -63,7 +63,7 @@ return [
          |
          */
         'minutes' => 30,
-        
+
         /*
          |--------------------------------------------------------------------------
          | Cache Repository
@@ -73,7 +73,7 @@ return [
          |
          */
         'repository' => 'cache',
-        
+
         /*
           |--------------------------------------------------------------------------
           | Cache Clean Listener
@@ -83,7 +83,7 @@ return [
           |
           */
         'clean' => [
-            
+
             /*
               |--------------------------------------------------------------------------
               | Enable clear cache on repository changes
@@ -91,7 +91,7 @@ return [
               |
               */
             'enabled' => true,
-            
+
             /*
               |--------------------------------------------------------------------------
               | Actions in Repository
@@ -108,7 +108,7 @@ return [
                 'delete' => true,
             ],
         ],
-        
+
         'params' => [
             /*
             |--------------------------------------------------------------------------
@@ -121,7 +121,7 @@ return [
             */
             'skipCache' => 'skipCache',
         ],
-        
+
         /*
        |--------------------------------------------------------------------------
        | Methods Allowed
@@ -142,7 +142,7 @@ return [
             'except' => null,
         ],
     ],
-    
+
     /*
     |--------------------------------------------------------------------------
     | Criteria Config
@@ -229,7 +229,7 @@ return [
     */
     'generator' => [
         'basePath' => base_path('modules/Backend'),
-        'rootNamespace' => 'Juzaweb\\Backend\\',
+        'rootNamespace' => 'Mojar\\Backend\\',
         'stubsOverridePath' => app()->path(),
         'paths' => [
             'models' => 'Models',

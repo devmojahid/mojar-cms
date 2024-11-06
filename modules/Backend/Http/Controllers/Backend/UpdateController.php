@@ -1,43 +1,44 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://github.com/juzaweb/cms
+ * @link       https://github.com/mojar/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Mojar\Backend\Http\Controllers\Backend;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Juzaweb\Backend\Events\DumpAutoloadPlugin;
-use Juzaweb\CMS\Abstracts\UpdateManager;
-use Juzaweb\CMS\Contracts\BackendMessageContract;
-use Juzaweb\CMS\Contracts\JuzawebApiContract;
-use Juzaweb\CMS\Facades\ThemeLoader;
-use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Support\Plugin;
-use Juzaweb\CMS\Support\Updater\CmsUpdater;
-use Juzaweb\CMS\Support\Updater\PluginUpdater;
-use Juzaweb\CMS\Support\Updater\ThemeUpdater;
-use Juzaweb\CMS\Version;
+use Mojar\Backend\Events\DumpAutoloadPlugin;
+use Mojar\CMS\Abstracts\UpdateManager;
+use Mojar\CMS\Contracts\BackendMessageContract;
+use Mojar\CMS\Contracts\MojarApiContract;
+use Mojar\CMS\Facades\ThemeLoader;
+use Mojar\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Support\Plugin;
+use Mojar\CMS\Support\Updater\CmsUpdater;
+use Mojar\CMS\Support\Updater\PluginUpdater;
+use Mojar\CMS\Support\Updater\ThemeUpdater;
+use Mojar\CMS\Version;
 
 class UpdateController extends BackendController
 {
-    protected JuzawebApiContract $api;
+    protected MojarApiContract $api;
 
-    public function __construct(JuzawebApiContract $api)
+    public function __construct(MojarApiContract $api)
     {
         $this->api = $api;
     }
 
     public function index(): View
     {
-        if (!config('juzaweb.plugin.enable_upload')) {
+        if (!config('mojar.plugin.enable_upload')) {
             abort(403);
         }
 
@@ -77,7 +78,7 @@ class UpdateController extends BackendController
 
     public function update(Request $request, string $type): View
     {
-        if (!config('juzaweb.plugin.enable_upload')) {
+        if (!config('mojar.plugin.enable_upload')) {
             abort(403);
         }
 
@@ -114,7 +115,7 @@ class UpdateController extends BackendController
     {
         set_time_limit(0);
 
-        if (!config('juzaweb.plugin.enable_upload')) {
+        if (!config('mojar.plugin.enable_upload')) {
             abort(403);
         }
 

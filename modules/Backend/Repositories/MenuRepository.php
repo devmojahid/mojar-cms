@@ -1,14 +1,14 @@
 <?php
 
-namespace Juzaweb\Backend\Repositories;
+namespace Mojar\Backend\Repositories;
 
-use Juzaweb\Backend\Models\Menu;
-use Juzaweb\CMS\Repositories\BaseRepository;
+use Mojar\Backend\Models\Menu;
+use Mojar\CMS\Repositories\BaseRepository;
 
 /**
  * Interface CommentRepository.
  *
- * @package namespace Juzaweb\Backend\Repositories;
+ * @package namespace Mojar\Backend\Repositories;
  */
 interface MenuRepository extends BaseRepository
 {

@@ -1,16 +1,17 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Support\Converter;
+namespace Mojar\CMS\Support\Converter;
 
-use Juzaweb\CMS\Support\HtmlDom;
+use Mojar\CMS\Support\HtmlDom;
 
 class HTMLToBBCode
 {
@@ -53,7 +54,7 @@ class HTMLToBBCode
             foreach ($preTags as $index => $e) {
                 $text = str_replace(
                     $e->outertext,
-                    '[none_peplace-'. $index .'][/none_peplace-'. $index .']',
+                    '[none_peplace-' . $index . '][/none_peplace-' . $index . ']',
                     $text
                 );
                 $this->noneReplace[$index] = $e->innertext;
@@ -67,7 +68,7 @@ class HTMLToBBCode
     {
         foreach ($this->noneReplace as $index => $item) {
             $text = str_replace(
-                '[none_peplace-'. $index .'][/none_peplace-'. $index .']',
+                '[none_peplace-' . $index . '][/none_peplace-' . $index . ']',
                 '<pre>' . $item . '</pre>',
                 $text
             );
@@ -86,7 +87,7 @@ class HTMLToBBCode
         foreach ($dom->find('a') as $e) {
             $text = str_replace(
                 $e->outertext,
-                '[url="' . $this->escUrl($e->href) . '"]'. $e->innertext .'[/url]',
+                '[url="' . $this->escUrl($e->href) . '"]' . $e->innertext . '[/url]',
                 $text
             );
         }
@@ -113,7 +114,7 @@ class HTMLToBBCode
 
             $text = str_replace(
                 $e->outertext,
-                '[img]'. $imgUrl .'[/img]',
+                '[img]' . $imgUrl . '[/img]',
                 $text
             );
         }
@@ -122,7 +123,7 @@ class HTMLToBBCode
             if (isset($e->{'data-pin-media'})) {
                 $text = str_replace(
                     $e->outertext,
-                    '[img]'. $this->escUrl($e->{'data-pin-media'}) .'[/img]',
+                    '[img]' . $this->escUrl($e->{'data-pin-media'}) . '[/img]',
                     $text
                 );
             }
@@ -141,7 +142,7 @@ class HTMLToBBCode
             if ($e->src) {
                 $text = str_replace(
                     $e->outertext,
-                    '[embed]'. $this->escUrl($e->src) .'[/embed]',
+                    '[embed]' . $this->escUrl($e->src) . '[/embed]',
                     $text
                 );
             }
@@ -149,7 +150,7 @@ class HTMLToBBCode
             if (@$e->{'data-src'}) {
                 $text = str_replace(
                     $e->outertext,
-                    '[embed]'. $this->escUrl($e->{'data-src'}) .'[/embed]',
+                    '[embed]' . $this->escUrl($e->{'data-src'}) . '[/embed]',
                     $text
                 );
             }
@@ -157,7 +158,7 @@ class HTMLToBBCode
             if (@$e->{'data-lazy-src'}) {
                 $text = str_replace(
                     $e->outertext,
-                    '[embed]'. $this->escUrl($e->{'data-lazy-src'}) .'[/embed]',
+                    '[embed]' . $this->escUrl($e->{'data-lazy-src'}) . '[/embed]',
                     $text
                 );
             }
@@ -179,7 +180,7 @@ class HTMLToBBCode
 
             $text = str_replace(
                 $e->outertext,
-                '[size=]'. trim($e->innertext) .'[/size]',
+                '[size=]' . trim($e->innertext) . '[/size]',
                 $text
             );
         }
@@ -194,40 +195,40 @@ class HTMLToBBCode
         }
 
         foreach ($dom->find('p') as $e) {
-            $text = str_replace($e->outertext, '[p]'. trim($e->innertext) .'[/p]', $text);
+            $text = str_replace($e->outertext, '[p]' . trim($e->innertext) . '[/p]', $text);
         }
 
         foreach ($dom->find('b') as $e) {
-            $text = str_replace($e->outertext, '[b]'. trim($e->innertext) .'[/b]', $text);
+            $text = str_replace($e->outertext, '[b]' . trim($e->innertext) . '[/b]', $text);
         }
 
         foreach ($dom->find('u') as $e) {
-            $text = str_replace($e->outertext, '[u]'. trim($e->innertext) .'[/u]', $text);
+            $text = str_replace($e->outertext, '[u]' . trim($e->innertext) . '[/u]', $text);
         }
 
         foreach ($dom->find('i') as $e) {
-            $text = str_replace($e->outertext, '[i]'. trim($e->innertext) .'[/i]', $text);
+            $text = str_replace($e->outertext, '[i]' . trim($e->innertext) . '[/i]', $text);
         }
 
         foreach ($dom->find('ul') as $e) {
-            $text = str_replace($e->outertext, '[ul]'. trim($e->innertext) .'[/ul]', $text);
+            $text = str_replace($e->outertext, '[ul]' . trim($e->innertext) . '[/ul]', $text);
         }
 
         foreach ($dom->find('ol') as $e) {
-            $text = str_replace($e->outertext, '[ol]'. trim($e->innertext) .'[/ol]', $text);
+            $text = str_replace($e->outertext, '[ol]' . trim($e->innertext) . '[/ol]', $text);
         }
 
         foreach ($dom->find('li') as $e) {
-            $text = str_replace($e->outertext, '[li]'. trim($e->innertext) .'[/li]', $text);
+            $text = str_replace($e->outertext, '[li]' . trim($e->innertext) . '[/li]', $text);
         }
 
         foreach ($dom->find('strong') as $e) {
-            $text = str_replace($e->outertext, '[b]'. trim($e->innertext) .'[/b]', $text);
+            $text = str_replace($e->outertext, '[b]' . trim($e->innertext) . '[/b]', $text);
         }
 
-        for ($i=1; $i<=6; $i++) {
+        for ($i = 1; $i <= 6; $i++) {
             foreach ($dom->find('h' . $i) as $e) {
-                $text = str_replace($e->outertext, '[h3]'. trim($e->innertext) .'[/h3]', $text);
+                $text = str_replace($e->outertext, '[h3]' . trim($e->innertext) . '[/h3]', $text);
             }
         }
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Backend\Setting;
+namespace Mojar\Backend\Http\Controllers\Backend\Setting;
 
 use Illuminate\Http\Request;
-use Juzaweb\CMS\Http\Controllers\Controller;
-use Juzaweb\CMS\Models\Config;
+use Mojar\CMS\Http\Controllers\Controller;
+use Mojar\CMS\Models\Config;
 
 class CommentSettingController extends Controller
 {

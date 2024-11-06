@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Network\Support;
+namespace Mojar\Network\Support;
 
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Models\User;
-use Juzaweb\Network\Contracts\NetworkSiteContract;
-use Juzaweb\Network\Models\Site;
+use Mojar\CMS\Models\User;
+use Mojar\Network\Contracts\NetworkSiteContract;
+use Mojar\Network\Models\Site;
 
 class NetworkSite implements NetworkSiteContract
 {
@@ -27,7 +28,7 @@ class NetworkSite implements NetworkSiteContract
     public function getLoginUrl(User $user): string
     {
         $random = Str::random(5);
-        $loginUrl = $this->getUrl(config('juzaweb.admin_prefix'));
+        $loginUrl = $this->getUrl(config('mojar.admin_prefix'));
         $string = "{$loginUrl}/{$random}";
         $token = generate_token($string);
         $user = encrypt(json_encode(['id' => $user->id]));
@@ -38,7 +39,7 @@ class NetworkSite implements NetworkSiteContract
             'user' => urlencode($user)
         ];
 
-        return $loginUrl.'/token-login?' . http_build_query($data);
+        return $loginUrl . '/token-login?' . http_build_query($data);
     }
 
     public function getUrl(string $path = null): string

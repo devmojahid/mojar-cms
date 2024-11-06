@@ -56,7 +56,7 @@ ul {
     text-transform: capitalize;
 }
 
-.juzaweb__menuLeft__item__link {
+.mojar__menuLeft__item__link {
     margin-top: unset;
     padding: 0 10px 0 8px;
 }
@@ -211,47 +211,47 @@ span.tag {
     pointer-events: none;
 }
 
-.juzaweb__menuLeft__item {
+.mojar__menuLeft__item {
     border-radius: 0;
 }
 
-.juzaweb__menuLeft__navigation {
+.mojar__menuLeft__navigation {
     padding: unset;
 }
 
-.juzaweb__menuLeft__item__icon {
+.mojar__menuLeft__item__icon {
     right: 8px;
 }
 
-.juzaweb__menuLeft__item__link {
+.mojar__menuLeft__item__link {
     border-radius: 2px;
     text-transform: capitalize;
 }
 
-.juzaweb__menuLeft__logo__container {
+.mojar__menuLeft__logo__container {
     padding: 0 1rem 0 1rem;
 }
 
-.juzaweb__menuLeft--dark .juzaweb__menuLeft {
+.mojar__menuLeft--dark .mojar__menuLeft {
     z-index: 999;
 }
 
-.juzaweb__menuLeft--dark .juzaweb__menuLeft__item:hover {
+.mojar__menuLeft--dark .mojar__menuLeft__item:hover {
     color: var(--kit-color-primary) !important;
     background: #232135 !important;
 }
 
-.juzaweb__menuLeft__submenu:hover ul.juzaweb__menuLeft__navigation,
-.juzaweb__menuLeft__submenu ul.juzaweb__menuLeft__navigation:hover
+.mojar__menuLeft__submenu:hover ul.mojar__menuLeft__navigation,
+.mojar__menuLeft__submenu ul.mojar__menuLeft__navigation:hover
 {
     display: block;
 }
 
-.juzaweb__menuLeft__trigger {
+.mojar__menuLeft__trigger {
     width: 180px;
 }
 
-.juzaweb__menuLeft__submenu ul.juzaweb__menuLeft__navigation {
+.mojar__menuLeft__submenu ul.mojar__menuLeft__navigation {
     margin-left: 180px;
     margin-top: -40px;
     position: absolute;
@@ -262,7 +262,7 @@ span.tag {
     z-index: 99;
 }
 
-.juzaweb__menuLeft__submenu.juzaweb__menuLeft__submenu--toggled ul.juzaweb__menuLeft__navigation {
+.mojar__menuLeft__submenu.mojar__menuLeft__submenu--toggled ul.mojar__menuLeft__navigation {
     margin-left: unset;
     margin-top: unset;
     position: relative;
@@ -273,17 +273,17 @@ span.tag {
     padding: 0 0 8px 8px;
 }
 
-.juzaweb__menuLeft__item--active {
+.mojar__menuLeft__item--active {
     background: unset !important;
     color: var(--kit-color-primary) !important;
 }
 
-.juzaweb__menuLeft__item--active:hover {
+.mojar__menuLeft__item--active:hover {
     background: unset !important;
     color: var(--kit-color-primary) !important;
 }
 
-.juzaweb__menuLeft__navigation .juzaweb__menuLeft__navigation .juzaweb__menuLeft__item__link {
+.mojar__menuLeft__navigation .mojar__menuLeft__navigation .mojar__menuLeft__item__link {
     padding-left: 10px;
     height: 30px;
     line-height: 30px;
@@ -478,7 +478,7 @@ Form file management
     margin-left: 10px;
 }
 
-.juzaweb__menuLeft {
+.mojar__menuLeft {
     background: #fff;
     color: #595c97;
     transition: none;
@@ -490,7 +490,7 @@ Form file management
     width: 180px;
 }
 
-.juzaweb__menuLeft__outer {
+.mojar__menuLeft__outer {
     background: #fff;
     position: fixed;
     height: 100%;
@@ -498,25 +498,25 @@ Form file management
     max-width: inherit;
 }
 
-.juzaweb__menuLeft__logo img {
+.mojar__menuLeft__logo img {
     max-width: 150px;
 }
 
-.juzaweb__menuLeft--dark .juzaweb__menuLeft__item__link {
+.mojar__menuLeft--dark .mojar__menuLeft__item__link {
     color: #7575a3 !important;
 }
 
-.juzaweb__menuLeft--dark .juzaweb__menuLeft__item__link:hover {
+.mojar__menuLeft--dark .mojar__menuLeft__item__link:hover {
     color: var(--kit-color-primary) !important;
     background: #232135 !important;
 }
 
-.juzaweb__menuLeft--dark .juzaweb__menuLeft__item__link.juzaweb__menuLeft__item--active {
+.mojar__menuLeft--dark .mojar__menuLeft__item__link.mojar__menuLeft__item--active {
     color: var(--kit-color-primary) !important;
     background: unset !important;
 }
 
-.juzaweb__menuLeft--dark .juzaweb__menuLeft__item__link:after, .juzaweb__menuLeft--dark .juzaweb__menuLeft__item__link:before {
+.mojar__menuLeft--dark .mojar__menuLeft__item__link:after, .mojar__menuLeft--dark .mojar__menuLeft__item__link:before {
     background: #3b3b5b;
 }
 
@@ -540,16 +540,16 @@ Form file management
     display: none;
 }
 
-.juzaweb__layout__header {
+.mojar__layout__header {
     height: 54px;
 }
 
-.juzaweb__topbar {
+.mojar__topbar {
     min-height: 54px;
     height: 54px;
 }
 
-.juzaweb__topbar .juzaweb__btn-top {
+.mojar__topbar .mojar__btn-top {
     position: absolute;
     right: 20px;
 }
@@ -579,7 +579,7 @@ Form file management
     cursor: auto;
 }
 
-.juzaweb__topbar__notify .dropdown-toggle span {
+.mojar__topbar__notify .dropdown-toggle span {
     font-size: 10px;
     background: #419af9;
     border-radius: 6px;
@@ -655,7 +655,7 @@ Form file management
 }
 
 @media (max-width: 767px) {
-    .juzaweb__menuLeft {
+    .mojar__menuLeft {
         position: fixed;
         left: 0;
         top: 0;
@@ -666,20 +666,20 @@ Form file management
         z-index: 999;
     }
 
-    .juzaweb__menuLeft--mobileToggled .juzaweb__menuLeft {
+    .mojar__menuLeft--mobileToggled .mojar__menuLeft {
         transform: translate(0, 0);
     }
 
-    .juzaweb__menuLeft--mobileToggled .juzaweb__menuLeft__backdrop {
+    .mojar__menuLeft--mobileToggled .mojar__menuLeft__backdrop {
         opacity: 0.4;
         visibility: visible;
     }
 
-    .juzaweb__menuLeft__scroll {
+    .mojar__menuLeft__scroll {
         overflow-y: auto;
     }
 
-    .juzaweb__menuLeft__backdrop {
+    .mojar__menuLeft__backdrop {
         position: fixed;
         z-index: 99;
         top: 0;
@@ -692,7 +692,7 @@ Form file management
         transition: opacity 0.2s ease-in-out;
     }
 
-    .juzaweb__menuLeft__mobileTrigger {
+    .mojar__menuLeft__mobileTrigger {
         position: absolute;
         right: -41px;
         top: 72px;
@@ -709,7 +709,7 @@ Form file management
         border-radius: 0 4px 4px 0;
         box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
     }
-    .juzaweb__menuLeft__mobileTrigger span {
+    .mojar__menuLeft__mobileTrigger span {
         display: inline-block;
         width: 14px;
         height: 2px;
@@ -719,7 +719,7 @@ Form file management
         left: 50;
         margin: -1px 0 0 -7px;
     }
-    .juzaweb__menuLeft__mobileTrigger span:after, .juzaweb__menuLeft__mobileTrigger span:before {
+    .mojar__menuLeft__mobileTrigger span:after, .mojar__menuLeft__mobileTrigger span:before {
         content: '';
         display: block;
         position: absolute;
@@ -727,10 +727,10 @@ Form file management
         width: 100%;
         height: 2px;
     }
-    .juzaweb__menuLeft__mobileTrigger span:before {
+    .mojar__menuLeft__mobileTrigger span:before {
         top: -5px;
     }
-    .juzaweb__menuLeft__mobileTrigger span:after {
+    .mojar__menuLeft__mobileTrigger span:after {
         top: 5px;
     }
 }

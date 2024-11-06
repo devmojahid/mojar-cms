@@ -1,23 +1,21 @@
 <?php
 
-namespace Juzaweb\Frontend\Http\Controllers;
+namespace Mojar\Frontend\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
-use Juzaweb\Backend\Events\PostViewed;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Repositories\PostRepository;
-use Juzaweb\CMS\Facades\ThemeLoader;
-use Juzaweb\CMS\Http\Controllers\FrontendController;
+use Mojar\Backend\Events\PostViewed;
+use Mojar\Backend\Models\Post;
+use Mojar\Backend\Repositories\PostRepository;
+use Mojar\CMS\Facades\ThemeLoader;
+use Mojar\CMS\Http\Controllers\FrontendController;
 
 class PageController extends FrontendController
 {
     protected array $themeRegister;
 
-    public function __construct(protected PostRepository $postRepository)
-    {
-    }
+    public function __construct(protected PostRepository $postRepository) {}
 
     public function index(Request $request, ...$slug)
     {
@@ -189,7 +187,7 @@ class PageController extends FrontendController
         /* Get view default of theme */
         if (empty($view)) {
             $template = get_name_template_part('page', 'single');
-            $view = 'theme::template-parts.'.$template;
+            $view = 'theme::template-parts.' . $template;
 
             if (!view()->exists(theme_viewname($view))) {
                 $view = 'theme::template-parts.single';

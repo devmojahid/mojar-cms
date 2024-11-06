@@ -1,16 +1,16 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Generators;
+namespace Mojar\CMS\Support\Generators;
 
 use Illuminate\Config\Repository as Config;
 use Illuminate\Console\Command as Console;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Contracts\ActivatorInterface;
-use Juzaweb\CMS\Support\Config\GenerateConfigReader;
-use Juzaweb\CMS\Support\LocalPluginRepository;
-use Juzaweb\CMS\Support\Plugin;
-use Juzaweb\CMS\Support\Stub;
+use Mojar\CMS\Contracts\ActivatorInterface;
+use Mojar\CMS\Support\Config\GenerateConfigReader;
+use Mojar\CMS\Support\LocalPluginRepository;
+use Mojar\CMS\Support\Plugin;
+use Mojar\CMS\Support\Stub;
 
 class ModuleGenerator extends Generator
 {
@@ -52,7 +52,7 @@ class ModuleGenerator extends Generator
     /**
      * The plugin instance.
      *
-     * @var \Juzaweb\CMS\Support\Plugin|LocalPluginRepository|null
+     * @var \Mojar\CMS\Support\Plugin|LocalPluginRepository|null
      */
     protected Plugin|null|LocalPluginRepository $module;
 
@@ -328,7 +328,7 @@ class ModuleGenerator extends Generator
      *
      * @return LocalPluginRepository|Plugin|null
      */
-    public function getModule(): LocalPluginRepository|\Juzaweb\CMS\Support\Plugin|null
+    public function getModule(): LocalPluginRepository|\Mojar\CMS\Support\Plugin|null
     {
         return $this->module;
     }

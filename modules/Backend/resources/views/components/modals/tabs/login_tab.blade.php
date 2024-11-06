@@ -1,6 +1,6 @@
 <p class="mt-2">Connect to your JuzaWeb Account and activate {{ $moduleName }}</p>
 
-<form method="post" action="{{ route('admin.module.login-juzaweb') }}" id="form-login-juzaweb">
+<form method="post" action="{{ route('admin.module.login-mojar') }}" id="form-login-mojar">
     <input type="hidden" name="module" value="{{ $name }}">
 
     @csrf
@@ -8,13 +8,13 @@
     {{ Field::text(trans('cms::app.email'), 'email', [
         'required' => true,
         'data' => [
-            'rule-email' => true
-        ]
+            'rule-email' => true,
+        ],
     ]) }}
 
     {{ Field::text(trans('cms::app.password'), 'password', [
         'required' => true,
-        'type' => 'password'
+        'type' => 'password',
     ]) }}
 
     <button type="submit" class="btn btn-primary">

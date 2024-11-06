@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\DevTool\Commands\Plugin\Translation;
+namespace Mojar\DevTool\Commands\Plugin\Translation;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Contracts\TranslationManager;
+use Mojar\CMS\Contracts\TranslationManager;
 use Symfony\Component\Console\Input\InputArgument;
 
 class ImportTranslationCommand extends Command

@@ -1,13 +1,13 @@
 @extends('network::layout')
 
 @section('content')
-
     <div class="row mb-3">
         <div class="col-md-6"></div>
         <div class="col-md-6">
             <div class="btn-group float-right">
-                @if(config('juzaweb.theme.enable_upload'))
-                    <a href="{{ route('admin.network.theme.install') }}" class="btn btn-success" data-turbolinks="false"><i class="fa fa-plus-circle"></i> {{ trans('cms::app.add_new') }}</a>
+                @if (config('mojar.theme.enable_upload'))
+                    <a href="{{ route('admin.network.theme.install') }}" class="btn btn-success" data-turbolinks="false"><i
+                            class="fa fa-plus-circle"></i> {{ trans('cms::app.add_new') }}</a>
                 @endif
             </div>
         </div>
@@ -22,8 +22,8 @@
     </template>
 
     <script>
-        setTimeout(function () {
-            var listView = new JuzawebListView({
+        setTimeout(function() {
+            var listView = new MojarListView({
                 url: "{{ route('admin.themes.get-data') }}?network=true",
                 list: "#theme-list",
                 template: "theme-template",

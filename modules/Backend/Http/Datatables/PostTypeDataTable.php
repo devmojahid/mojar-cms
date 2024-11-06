@@ -1,21 +1,22 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Datatables;
+namespace Mojar\Backend\Http\Datatables;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\CMS\Abstracts\DataTable;
-use Juzaweb\CMS\Facades\HookAction;
+use Mojar\CMS\Abstracts\DataTable;
+use Mojar\CMS\Facades\HookAction;
 
 class PostTypeDataTable extends DataTable
 {
@@ -67,8 +68,8 @@ class PostTypeDataTable extends DataTable
                 'sortable' => false,
                 'align' => 'center',
                 'formatter' => function ($value, $row, $index) {
-                    return $row->thumbnail ? '<img class="lazyload w-100" data-src="'. $row->getThumbnail('150x150') .'"'
-                        .' src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>' : '_';
+                    return $row->thumbnail ? '<img class="lazyload w-100" data-src="' . $row->getThumbnail('150x150') . '"'
+                        . ' src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>' : '_';
                 },
             ];
         }
@@ -227,7 +228,7 @@ class PostTypeDataTable extends DataTable
                 'value' => $row->{$row->getFieldName()},
                 'row' => $row,
                 'actions' => $this->rowAction($row),
-                'editUrl' => $this->currentUrl .'/'. $row->id . '/edit',
+                'editUrl' => $this->currentUrl . '/' . $row->id . '/edit',
             ]
         )
             ->render();

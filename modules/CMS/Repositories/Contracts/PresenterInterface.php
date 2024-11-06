@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Contracts;
+namespace Mojar\CMS\Repositories\Contracts;
 
 /**
  * Interface PresenterInterface

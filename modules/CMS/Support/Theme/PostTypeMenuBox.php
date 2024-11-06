@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support\Theme;
+namespace Mojar\CMS\Support\Theme;
 
-use Juzaweb\CMS\Abstracts\MenuBox;
-use Juzaweb\CMS\Facades\HookAction;
+use Mojar\CMS\Abstracts\MenuBox;
+use Mojar\CMS\Facades\HookAction;
 
 class PostTypeMenuBox extends MenuBox
 {

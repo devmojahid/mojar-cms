@@ -1,18 +1,19 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Repositories\Abstracts;
+namespace Mojar\CMS\Repositories\Abstracts;
 
 use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Support\MessageBag;
-use Juzaweb\CMS\Repositories\Exceptions\ValidatorException;
+use Mojar\CMS\Repositories\Exceptions\ValidatorException;
 
 abstract class Validator
 {
@@ -270,7 +271,7 @@ abstract class Validator
                     $p[2] = $id;
 
                     $params = implode(",", $p);
-                    $rules[$ruleIdx] = $name.":".$params;
+                    $rules[$ruleIdx] = $name . ":" . $params;
                 }
             }
         );

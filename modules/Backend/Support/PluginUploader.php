@@ -1,21 +1,22 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Support;
+namespace Mojar\Backend\Support;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Facades\Plugin;
+use Mojar\CMS\Facades\Plugin;
 
 class PluginUploader
 {
@@ -63,7 +64,7 @@ class PluginUploader
     {
         return File::moveDirectory(
             $this->tmpRootFolder,
-            config('juzaweb.plugin.path') . '/' . $this->getLocalFolder()
+            config('mojar.plugin.path') . '/' . $this->getLocalFolder()
         );
     }
 
@@ -78,9 +79,9 @@ class PluginUploader
             $this->info,
             [
                 'name' => 'bail|required|max:100',
-                'extra.juzaweb.name' => 'bail|required|max:100',
-                'extra.juzaweb.version' => 'bail|required|max:50',
-                'extra.juzaweb.domain' => 'bail|required|max:50',
+                'extra.mojar.name' => 'bail|required|max:100',
+                'extra.mojar.version' => 'bail|required|max:50',
+                'extra.mojar.domain' => 'bail|required|max:50',
             ]
         );
 
@@ -88,7 +89,7 @@ class PluginUploader
             $this->throwError(array_values($validator->errors()->messages())[0][0]);
         }
 
-        if (Plugin::find($this->info['name']) || is_dir(config('juzaweb.plugin.path').'/'.$this->getLocalFolder())) {
+        if (Plugin::find($this->info['name']) || is_dir(config('mojar.plugin.path') . '/' . $this->getLocalFolder())) {
             $this->throwError(
                 trans(
                     'cms::app.plugin_upload.error.exists',

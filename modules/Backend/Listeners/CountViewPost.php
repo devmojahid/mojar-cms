@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Listeners;
+namespace Mojar\Backend\Listeners;
 
 use Illuminate\Support\Facades\DB;
-use Juzaweb\Backend\Events\PostViewed;
+use Mojar\Backend\Events\PostViewed;
 use Illuminate\Session\Store;
-use Juzaweb\Backend\Models\PostView;
+use Mojar\Backend\Models\PostView;
 
 class CountViewPost
 {

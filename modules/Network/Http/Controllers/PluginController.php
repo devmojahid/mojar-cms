@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\Network\Http\Controllers;
+namespace Mojar\Network\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
-use Juzaweb\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Http\Controllers\BackendController;
 
 class PluginController extends BackendController
 {
@@ -19,7 +19,7 @@ class PluginController extends BackendController
 
     public function install(): View
     {
-        if (!config('juzaweb.plugin.enable_upload')) {
+        if (!config('mojar.plugin.enable_upload')) {
             abort(403, 'Access deny.');
         }
 

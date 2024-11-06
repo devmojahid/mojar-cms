@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Juzaweb\CMS\Extension;
+namespace Mojar\CMS\Extension;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Twig\TwigFunction;

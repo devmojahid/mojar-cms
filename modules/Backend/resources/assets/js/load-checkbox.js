@@ -9,10 +9,10 @@ $(document).ready(function () {
     if ($('.load-checkbox-items').length) {
         $.ajax({
             type: 'GET',
-            url: '/'+ juzaweb.adminPrefix +'/load-data/loadGenres',
+            url: '/' + mojar.adminPrefix + '/load-data/loadGenres',
             dataType: 'json',
             data: {}
-        }).done(function(data) {
+        }).done(function (data) {
 
             if (data.status === "error") {
                 show_message(data.message, 'error');
@@ -25,8 +25,8 @@ $(document).ready(function () {
             $('.load-checkbox-items').append();
 
             return false;
-        }).fail(function(data) {
-            show_message(juzaweb.lang.data_error, 'error');
+        }).fail(function (data) {
+            show_message(mojar.lang.data_error, 'error');
             return false;
         });
     }

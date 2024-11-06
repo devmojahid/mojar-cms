@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\CMS\Models;
+namespace Mojar\CMS\Models;
 
 /**
- * Juzaweb\CMS\Models\ResourceModel
+ * Mojar\CMS\Models\ResourceModel
  *
  * @method static \Illuminate\Database\Eloquent\Builder|ResourceModel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ResourceModel newQuery()
@@ -13,5 +13,5 @@ namespace Juzaweb\CMS\Models;
  */
 class ResourceModel extends Model
 {
-    use \Juzaweb\CMS\Traits\ResourceModel;
+    use \Mojar\CMS\Traits\ResourceModel;
 }

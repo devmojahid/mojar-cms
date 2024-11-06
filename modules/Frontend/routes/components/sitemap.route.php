@@ -1,7 +1,7 @@
 <?php
 
-use Juzaweb\Frontend\Http\Controllers\SitemapController;
-use Juzaweb\Frontend\Http\Controllers\PostSitemapController;
+use Mojar\Frontend\Http\Controllers\SitemapController;
+use Mojar\Frontend\Http\Controllers\PostSitemapController;
 
 Route::get('sitemap.xml', [SitemapController::class, 'index'])->name('sitemap.index');
 

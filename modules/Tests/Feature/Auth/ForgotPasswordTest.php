@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Tests\Feature\Auth;
+namespace Mojar\Tests\Feature\Auth;
 
-use Juzaweb\Backend\Models\EmailTemplate;
-use Juzaweb\Backend\Models\PasswordReset;
-use Juzaweb\CMS\Models\User;
-use Juzaweb\Tests\TestCase;
+use Mojar\Backend\Models\EmailTemplate;
+use Mojar\Backend\Models\PasswordReset;
+use Mojar\CMS\Models\User;
+use Mojar\Tests\TestCase;
 
 class ForgotPasswordTest extends TestCase
 {

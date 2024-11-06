@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    mojar/juzacms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\DevTool\Http\Controllers\Themes;
+namespace Mojar\DevTool\Http\Controllers\Themes;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -17,10 +18,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Inertia\Response;
-use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
-use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
-use Juzaweb\CMS\Models\ThemeConfig;
-use Juzaweb\DevTool\Http\Controllers\Controller;
+use Mojar\CMS\Contracts\LocalThemeRepositoryContract;
+use Mojar\CMS\Interfaces\Theme\ThemeInterface;
+use Mojar\CMS\Models\ThemeConfig;
+use Mojar\DevTool\Http\Controllers\Controller;
 
 class SettingController extends Controller
 {
@@ -77,7 +78,7 @@ class SettingController extends Controller
                     return [$name => $item];
                 }
             )
-            ->filter(fn ($item, $key) => !empty($key))
+            ->filter(fn($item, $key) => !empty($key))
             ->toArray();
     }
 

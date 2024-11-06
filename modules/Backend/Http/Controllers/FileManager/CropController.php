@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\FileManager;
+namespace Mojar\Backend\Http\Controllers\FileManager;
 
 use Intervention\Image\Facades\Image;
-use Juzaweb\CMS\Support\FileManager\Events\ImageIsCropping;
-use Juzaweb\CMS\Support\FileManager\Events\ImageWasCropped;
+use Mojar\CMS\Support\FileManager\Events\ImageIsCropping;
+use Mojar\CMS\Support\FileManager\Events\ImageWasCropped;
 
 class CropController extends FileManagerController
 {

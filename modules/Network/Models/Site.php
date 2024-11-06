@@ -1,22 +1,23 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Network\Models;
+namespace Mojar\Network\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Juzaweb\CMS\Models\Model;
-use Juzaweb\Network\Interfaces\RootNetworkModelInterface;
-use Juzaweb\Network\Traits\RootNetworkModel;
+use Mojar\CMS\Models\Model;
+use Mojar\Network\Interfaces\RootNetworkModelInterface;
+use Mojar\Network\Traits\RootNetworkModel;
 
 /**
- * Juzaweb\Network\Models\Site
+ * Mojar\Network\Models\Site
  *
  * @property int $id
  * @property string $domain
@@ -34,7 +35,7 @@ use Juzaweb\Network\Traits\RootNetworkModel;
  * @method static \Illuminate\Database\Eloquent\Builder|Site whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Site whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Network\Models\DomainMapping[] $domainMappings
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Network\Models\DomainMapping[] $domainMappings
  * @property-read int|null $domain_mappings_count
  */
 class Site extends Model implements RootNetworkModelInterface
@@ -70,12 +71,12 @@ class Site extends Model implements RootNetworkModelInterface
 
     public function getFullDomain(): string
     {
-        return $this->domain .'.'. config('network.domain');
+        return $this->domain . '.' . config('network.domain');
     }
 
     public function getSiteUrl(string $path = null): string
     {
-        return 'http://' . $this->getFullDomain() . '/'. ltrim($path, '/');
+        return 'http://' . $this->getFullDomain() . '/' . ltrim($path, '/');
     }
 
     public function getFieldName(): string

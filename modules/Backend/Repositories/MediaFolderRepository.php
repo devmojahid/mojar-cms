@@ -1,13 +1,13 @@
 <?php
 
-namespace Juzaweb\Backend\Repositories;
+namespace Mojar\Backend\Repositories;
 
-use Juzaweb\CMS\Repositories\BaseRepository;
+use Mojar\CMS\Repositories\BaseRepository;
 
 /**
  * Interface MediaFolderRepository.
  *
- * @package namespace Juzaweb\Backend\Repositories;
+ * @package namespace Mojar\Backend\Repositories;
  */
 interface MediaFolderRepository extends BaseRepository
 {

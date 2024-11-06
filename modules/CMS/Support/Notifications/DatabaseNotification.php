@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Notifications;
+namespace Mojar\CMS\Support\Notifications;
 
 use Illuminate\Support\Arr;
-use Juzaweb\CMS\Models\User;
+use Mojar\CMS\Models\User;
 use Illuminate\Support\Facades\Notification;
 
 class DatabaseNotification extends NotificationAbstract

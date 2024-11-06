@@ -1,13 +1,13 @@
 <?php
 
 use Illuminate\Support\Arr;
-use Juzaweb\Backend\Http\Resources\ResourceResource;
-use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\Backend\Http\Resources\PostResource;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\Resource;
-use Juzaweb\CMS\Facades\JWQuery;
-use Juzaweb\CMS\Facades\Theme;
+use Mojar\Backend\Http\Resources\ResourceResource;
+use Mojar\Backend\Models\Taxonomy;
+use Mojar\Backend\Http\Resources\PostResource;
+use Mojar\Backend\Models\Post;
+use Mojar\Backend\Models\Resource;
+use Mojar\CMS\Facades\JWQuery;
+use Mojar\CMS\Facades\Theme;
 
 function get_posts(string $type = null, array $options = []): array
 {
@@ -215,9 +215,9 @@ if (!function_exists('get_next_post')) {
 /**
  * Get taxonomy
  *
-* @param $taxonomy
-* @param $args
-* @return array|Post|null
+ * @param $taxonomy
+ * @param $args
+ * @return array|Post|null
  */
 function get_taxonomy($taxonomy, $args = []): mixed
 {

@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Network\Providers;
+namespace Mojar\Network\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
@@ -24,7 +25,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapMasterAdminRoutes()
     {
         Route::middleware('master_admin')
-            ->prefix(config('juzaweb.admin_prefix').'/network')
+            ->prefix(config('mojar.admin_prefix') . '/network')
             ->group(__DIR__ . '/../routes/master_admin.php');
     }
 

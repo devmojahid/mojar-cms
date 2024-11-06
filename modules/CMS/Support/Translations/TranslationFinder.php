@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Support\Translations;
+namespace Mojar\CMS\Support\Translations;
 
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Contracts\TranslationFinder as TranslationFinderContract;
+use Mojar\CMS\Contracts\TranslationFinder as TranslationFinderContract;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -46,12 +47,12 @@ class TranslationFinder implements TranslationFinderContract
             "[\'\"]" .                           // Closing quote
             "[\),]";                             // Close parentheses or new parameter
 
-        $stringPattern = "[^\w]".                                     // Must not have an alphanum before real method
-            '('.implode('|', $functions).')'.             // Must start with one of the functions
-            "\(\s*".                                       // Match opening parenthesis
-            "(?P<quote>['\"])".                            // Match " or ' and store in {quote}
-            "(?P<string>(?:\\\k{quote}|(?!\k{quote}).)*)". // Match any string that can be {quote} escaped
-            "\k{quote}".                                   // Match " or ' previously matched
+        $stringPattern = "[^\w]" .                                     // Must not have an alphanum before real method
+            '(' . implode('|', $functions) . ')' .             // Must start with one of the functions
+            "\(\s*" .                                       // Match opening parenthesis
+            "(?P<quote>['\"])" .                            // Match " or ' and store in {quote}
+            "(?P<string>(?:\\\k{quote}|(?!\k{quote}).)*)" . // Match any string that can be {quote} escaped
+            "\k{quote}" .                                   // Match " or ' previously matched
             "\s*[\),]";                                    // Close parentheses or new parameter
 
         // Find all PHP + Twig files in the app folder, except for storage
@@ -80,8 +81,7 @@ class TranslationFinder implements TranslationFinderContract
                         "/(^[\/a-zA-Z0-9_-]+([.][^\1)\ ]+)+$)/siU",
                         $key,
                         $groupMatches
-                    )
-                    ) {
+                    )) {
                         // group{.group}.key format, already in $groupKeys but also matched here
                         // do nothing, it has to be treated as a group
                         continue;
@@ -90,7 +90,8 @@ class TranslationFinder implements TranslationFinderContract
                     //TODO: This can probably be done in the regex, but I couldn't do it.
                     //skip keys which contain namespacing characters, unless they also contain a
                     //space, which makes it JSON.
-                    if (!(Str::contains($key, '::') && Str::contains($key, '.'))
+                    if (
+                        !(Str::contains($key, '::') && Str::contains($key, '.'))
                         || Str::contains($key, ' ')
                     ) {
                         $stringKeys[] = $key;

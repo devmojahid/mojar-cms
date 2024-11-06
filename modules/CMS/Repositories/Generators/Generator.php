@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Generators;
+namespace Mojar\CMS\Repositories\Generators;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
@@ -83,11 +83,11 @@ abstract class Generator
     {
         $path = config('repository.generator.stubsOverridePath', __DIR__);
 
-        if (!file_exists($path.'/Stubs/'.$this->stub.'.stub')) {
+        if (!file_exists($path . '/Stubs/' . $this->stub . '.stub')) {
             $path = __DIR__;
         }
 
-        return (new Stub($path.'/Stubs/'.$this->stub.'.stub', $this->getReplacements()))->render();
+        return (new Stub($path . '/Stubs/' . $this->stub . '.stub', $this->getReplacements()))->render();
     }
 
 
@@ -124,7 +124,7 @@ abstract class Generator
      */
     public function getPath()
     {
-        return $this->getBasePath().'/'.$this->getName().'.php';
+        return $this->getBasePath() . '/' . $this->getName() . '.php';
     }
 
 
@@ -260,7 +260,7 @@ abstract class Generator
             return null;
         }
 
-        return 'namespace '.rtrim($rootNamespace.'\\'.implode('\\', $segments), '\\').';';
+        return 'namespace ' . rtrim($rootNamespace . '\\' . implode('\\', $segments), '\\') . ';';
     }
 
 

@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://github.com/juzaweb/cms
+ * @link       https://github.com/mojar/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Traits;
+namespace Mojar\CMS\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
@@ -34,7 +35,7 @@ trait ResourceModel
             $builder->where(
                 function (Builder $q) use ($keyword) {
                     foreach ($this->searchFields as $key => $attribute) {
-                        $q->orWhere($attribute, JW_SQL_LIKE, '%'. $keyword .'%');
+                        $q->orWhere($attribute, JW_SQL_LIKE, '%' . $keyword . '%');
                     }
                 }
             );

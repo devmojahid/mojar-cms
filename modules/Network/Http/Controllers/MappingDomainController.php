@@ -1,20 +1,21 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Network\Http\Controllers;
+namespace Mojar\Network\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\Network\Http\Requests\MappingDomain\StoreRequest;
-use Juzaweb\Network\Models\Site;
+use Mojar\CMS\Http\Controllers\BackendController;
+use Mojar\Network\Http\Requests\MappingDomain\StoreRequest;
+use Mojar\Network\Models\Site;
 
 class MappingDomainController extends BackendController
 {

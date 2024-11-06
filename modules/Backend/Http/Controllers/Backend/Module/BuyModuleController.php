@@ -1,29 +1,30 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend\Module;
+namespace Mojar\Backend\Http\Controllers\Backend\Module;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Http\Requests\Module\ActivateByCodeRequest;
-use Juzaweb\Backend\Http\Requests\Module\LoginJuzaWebRequest;
-use Juzaweb\CMS\Contracts\JuzawebApiContract as JuzawebApi;
-use Juzaweb\CMS\Http\Controllers\BackendController;
+use Mojar\Backend\Http\Requests\Module\ActivateByCodeRequest;
+use Mojar\Backend\Http\Requests\Module\LoginJuzaWebRequest;
+use Mojar\CMS\Contracts\MojarApiContract as MojarApi;
+use Mojar\CMS\Http\Controllers\BackendController;
 
 class BuyModuleController extends BackendController
 {
-    protected JuzawebApi $api;
+    protected MojarApi $api;
 
-    public function __construct(JuzawebApi $api)
+    public function __construct(MojarApi $api)
     {
         $this->api = $api;
     }
@@ -133,6 +134,6 @@ class BuyModuleController extends BackendController
     protected function getModuleName(string $module, string $name): string
     {
         $module = $module == 'theme' ? trans('cms::app.theme') : trans('cms::app.plugin');
-        return ucfirst($name) .' ' . $module;
+        return ucfirst($name) . ' ' . $module;
     }
 }

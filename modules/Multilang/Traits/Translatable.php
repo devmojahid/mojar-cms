@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Multilang\Traits;
+namespace Mojar\Multilang\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -179,7 +179,8 @@ trait Translatable
                 return $translation;
             }
 
-            if (is_string($configFallbackLocale)
+            if (
+                is_string($configFallbackLocale)
                 && $fallbackLocale !== $configFallbackLocale
                 && $translation = $this->getTranslationByLocaleKey($configFallbackLocale)
             ) {
@@ -191,7 +192,8 @@ trait Translatable
             $configuredLocales = $this->getLocalesHelper()->all();
 
             foreach ($configuredLocales as $configuredLocale) {
-                if ($locale !== $configuredLocale
+                if (
+                    $locale !== $configuredLocale
                     && $fallbackLocale !== $configuredLocale
                     && $translation = $this->getTranslationByLocaleKey($configuredLocale)
                 ) {
@@ -251,7 +253,8 @@ trait Translatable
 
     protected function getTranslationByLocaleKey(string $key): ?Model
     {
-        if ($this->relationLoaded('translation')
+        if (
+            $this->relationLoaded('translation')
             && $this->translation
             && $this->translation->getAttribute($this->getLocaleKey()) == $key
         ) {
@@ -274,7 +277,8 @@ trait Translatable
     public function fill(array $attributes)
     {
         foreach ($attributes as $key => $values) {
-            if ($this->getLocalesHelper()->has($key)
+            if (
+                $this->getLocalesHelper()->has($key)
                 && is_array($values)
             ) {
                 $this->getTranslationOrNew($key)->fill($values);
@@ -282,7 +286,8 @@ trait Translatable
             } else {
                 [$attribute, $locale] = $this->getAttributeAndLocale($key);
 
-                if ($this->getLocalesHelper()->has($locale)
+                if (
+                    $this->getLocalesHelper()->has($locale)
                     && $this->isTranslationAttribute($attribute)
                 ) {
                     $this->getTranslationOrNew($locale)->fill([$attribute => $values]);

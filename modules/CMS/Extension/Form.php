@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Juzaweb\CMS\Extension;
+namespace Mojar\CMS\Extension;
 
 use Collective\Html\FormBuilder;
 use Illuminate\Support\Str as IlluminateStr;

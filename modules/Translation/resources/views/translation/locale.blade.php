@@ -8,7 +8,8 @@
                     <form method="get" class="form-inline" id="form-search">
                         <div class="form-group mb-2 mr-1">
                             <label for="search" class="sr-only">@lang('cms::app.search')</label>
-                            <input name="search" type="text" id="search" class="form-control" placeholder="{{ trans('cms::app.search') }}" autocomplete="off">
+                            <input name="search" type="text" id="search" class="form-control"
+                                placeholder="{{ trans('cms::app.search') }}" autocomplete="off">
                         </div>
 
                         <button type="submit" class="btn btn-primary mb-2">@lang('cms::app.search')</button>
@@ -17,11 +18,13 @@
             </div>
 
             <div class="table-responsive mb-5">
-                <table class="table juzaweb-table">
+                <table class="table mojar-table">
                     <thead>
                         <tr>
-                            <th data-field="index" data-width="3%" data-formatter="index_formatter" data-align="center">#</th>
-                            <th data-field="value" data-width="35%" data-formatter="origin_formatter">{{ trans('cms::app.origin') }}</th>
+                            <th data-field="index" data-width="3%" data-formatter="index_formatter" data-align="center">#
+                            </th>
+                            <th data-field="value" data-width="35%" data-formatter="origin_formatter">
+                                {{ trans('cms::app.origin') }}</th>
                             <th data-formatter="translate_formatter">{{ trans('cms::app.your_value') }}</th>
                         </tr>
                     </thead>
@@ -43,11 +46,11 @@
             return `<input class="form-control trans-input" value="${row.trans}" data-key="${row.key}" data-group="${row.group}">`;
         }
 
-        let table = new JuzawebTable({
+        let table = new MojarTable({
             url: '{{ route('admin.translations.locale.get-data', [$type, $locale]) }}',
         });
 
-        $(document).on('change', '.trans-input', function () {
+        $(document).on('change', '.trans-input', function() {
             let key = $(this).data('key');
             let group = $(this).data('group');
             let value = $(this).val();

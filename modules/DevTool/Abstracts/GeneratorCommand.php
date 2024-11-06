@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\DevTool\Abstracts;
+namespace Mojar\DevTool\Abstracts;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Exceptions\FileAlreadyExistException;
-use Juzaweb\CMS\Support\Generators\FileGenerator;
+use Mojar\CMS\Exceptions\FileAlreadyExistException;
+use Mojar\CMS\Support\Generators\FileGenerator;
 
 abstract class GeneratorCommand extends Command
 {
@@ -65,7 +65,7 @@ abstract class GeneratorCommand extends Command
     /**
      * Get class namespace.
      *
-     * @param \Juzaweb\CMS\Support\Plugin $module
+     * @param \Mojar\CMS\Support\Plugin $module
      *
      * @return string
      */
@@ -110,6 +110,6 @@ abstract class GeneratorCommand extends Command
 
     public function getDomainName()
     {
-        return $this->laravel['plugins']->find($this->getModuleName())->getExtraJuzaweb('domain');
+        return $this->laravel['plugins']->find($this->getModuleName())->getExtraMojar('domain');
     }
 }

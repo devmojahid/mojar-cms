@@ -1,16 +1,16 @@
 @extends('cms::layouts.backend')
 
 @section('header')
-    <link rel="stylesheet" href="{{ asset('jw-styles/juzaweb/css/code-editor.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('jw-styles/mojar/css/code-editor.min.css') }}" />
     <script>
         const currentPlugin = "{{ $plugin }}";
         const pluginEditUrl = "{{ route('admin.plugin.editor') }}?plugin=__PLUGIN__";
         const loadFileUrl = "{{ route('admin.plugin.editor.content') }}?plugin={{ $plugin }}";
         const saveUrl = "{{ route('admin.plugin.editor.save') }}";
-        const monacoFolder = "{{ asset('jw-styles/juzaweb/monaco-editor/min/vs') }}";
+        const monacoFolder = "{{ asset('jw-styles/mojar/monaco-editor/min/vs') }}";
         let file = "{{ $file }}";
     </script>
-    <script src="{{ asset('jw-styles/juzaweb/js/plugin-editor.min.js') }}"></script>
+    <script src="{{ asset('jw-styles/mojar/js/plugin-editor.min.js') }}"></script>
 @endsection
 
 @section('content')
@@ -25,8 +25,9 @@
             </button>
 
             <select id="change-plugin" class="form-control mt-2">
-                @foreach($plugins as $name => $info)
-                    <option value="{{ $name }}" @if($name == $plugin) selected @endif>{{ $info->get('name') }}</option>
+                @foreach ($plugins as $name => $info)
+                    <option value="{{ $name }}" @if ($name == $plugin) selected @endif>
+                        {{ $info->get('name') }}</option>
                 @endforeach
             </select>
 
@@ -34,10 +35,10 @@
                 <h6 class="pt-3 pl-3">{{ trans('cms::app.folders') }}</h6>
                 <hr>
                 <ul class="treeview-animated-list mb-3">
-                    @foreach($directories as $directory)
+                    @foreach ($directories as $directory)
                         @component('cms::backend.plugin.editor.components.tree_item', [
                             'item' => $directory,
-                            'plugin' => $plugin
+                            'plugin' => $plugin,
                         ])
                         @endcomponent
                     @endforeach

@@ -1,8 +1,8 @@
 <?php
 
-namespace Juzaweb\CMS\Support\Manager;
+namespace Mojar\CMS\Support\Manager;
 
-use Juzaweb\CMS\Models\Translation;
+use Mojar\CMS\Models\Translation;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Symfony\Component\Finder\Finder;
@@ -69,19 +69,19 @@ class FindTransManager
                 if (in_array($group, $this->config['exclude_groups'])) {
                     continue;
                 }
-                $subLangPath = str_replace($langPath.DIRECTORY_SEPARATOR, '', $info['dirname']);
+                $subLangPath = str_replace($langPath . DIRECTORY_SEPARATOR, '', $info['dirname']);
                 $subLangPath = str_replace(DIRECTORY_SEPARATOR, '/', $subLangPath);
                 $langPath = str_replace(DIRECTORY_SEPARATOR, '/', $langPath);
 
                 if ($subLangPath != $langPath) {
-                    $group = $subLangPath.'/'.$group;
+                    $group = $subLangPath . '/' . $group;
                 }
 
                 if (! $vendor) {
                     $translations = \Lang::getLoader()->load($locale, $group);
                 } else {
                     $translations = include $file;
-                    $group = 'vendor/'.$vendorName;
+                    $group = 'vendor/' . $vendorName;
                 }
 
                 if ($translations && is_array($translations)) {
@@ -169,23 +169,23 @@ class FindTransManager
         ];
 
         $groupPattern =                          // See https://regex101.com/r/WEJqdL/6
-            "[^\w|>]".                          // Must not have an alphanum or _ or > before real method
-            '('.implode('|', $functions).')'.  // Must start with one of the functions
-            "\(".                               // Match opening parenthesis
-            "[\'\"]".                           // Match " or '
-            '('.                                // Start a new group to match:
-            '[a-zA-Z0-9_-]+'.               // Must start with group
-            "([.](?! )[^\1)]+)+".             // Be followed by one or more items/keys
-            ')'.                                // Close group
-            "[\'\"]".                           // Closing quote
+            "[^\w|>]" .                          // Must not have an alphanum or _ or > before real method
+            '(' . implode('|', $functions) . ')' .  // Must start with one of the functions
+            "\(" .                               // Match opening parenthesis
+            "[\'\"]" .                           // Match " or '
+            '(' .                                // Start a new group to match:
+            '[a-zA-Z0-9_-]+' .               // Must start with group
+            "([.](?! )[^\1)]+)+" .             // Be followed by one or more items/keys
+            ')' .                                // Close group
+            "[\'\"]" .                           // Closing quote
             "[\),]";                            // Close parentheses or new parameter
 
-        $stringPattern = "[^\w]".                                     // Must not have an alphanum before real method
-            '('.implode('|', $functions).')'.             // Must start with one of the functions
-            "\(\s*".                                       // Match opening parenthesis
-            "(?P<quote>['\"])".                            // Match " or ' and store in {quote}
-            "(?P<string>(?:\\\k{quote}|(?!\k{quote}).)*)". // Match any string that can be {quote} escaped
-            "\k{quote}".                                   // Match " or ' previously matched
+        $stringPattern = "[^\w]" .                                     // Must not have an alphanum before real method
+            '(' . implode('|', $functions) . ')' .             // Must start with one of the functions
+            "\(\s*" .                                       // Match opening parenthesis
+            "(?P<quote>['\"])" .                            // Match " or ' and store in {quote}
+            "(?P<string>(?:\\\k{quote}|(?!\k{quote}).)*)" . // Match any string that can be {quote} escaped
+            "\k{quote}" .                                   // Match " or ' previously matched
             "\s*[\),]";                                    // Close parentheses or new parameter
 
         // Find all PHP + Twig files in the app folder, except for storage
@@ -220,7 +220,8 @@ class FindTransManager
                     //TODO: This can probably be done in the regex, but I couldn't do it.
                     //skip keys which contain namespacing characters, unless they also contain a
                     //space, which makes it JSON.
-                    if (!(Str::contains($key, '::') && Str::contains($key, '.'))
+                    if (
+                        !(Str::contains($key, '::') && Str::contains($key, '.'))
                         || Str::contains($key, ' ')
                     ) {
                         $stringKeys[] = $key;
@@ -294,9 +295,9 @@ class FindTransManager
                         $translations = $groups[$group];
                         $path = $this->app['path.lang'];
 
-                        $locale_path = $locale.DIRECTORY_SEPARATOR.$group;
+                        $locale_path = $locale . DIRECTORY_SEPARATOR . $group;
                         if ($vendor) {
-                            $path = $basePath.'/'.$group.'/'.$locale;
+                            $path = $basePath . '/' . $group . '/' . $locale;
                             $locale_path = Str::after($group, '/');
                         }
                         $subfolders = explode(DIRECTORY_SEPARATOR, $locale_path);
@@ -304,17 +305,17 @@ class FindTransManager
 
                         $subfolder_level = '';
                         foreach ($subfolders as $subfolder) {
-                            $subfolder_level = $subfolder_level.$subfolder.DIRECTORY_SEPARATOR;
+                            $subfolder_level = $subfolder_level . $subfolder . DIRECTORY_SEPARATOR;
 
-                            $temp_path = rtrim($path.DIRECTORY_SEPARATOR.$subfolder_level, DIRECTORY_SEPARATOR);
+                            $temp_path = rtrim($path . DIRECTORY_SEPARATOR . $subfolder_level, DIRECTORY_SEPARATOR);
                             if (! is_dir($temp_path)) {
                                 mkdir($temp_path, 0777, true);
                             }
                         }
 
-                        $path = $path.DIRECTORY_SEPARATOR.$locale.DIRECTORY_SEPARATOR.$group.'.php';
+                        $path = $path . DIRECTORY_SEPARATOR . $locale . DIRECTORY_SEPARATOR . $group . '.php';
 
-                        $output = "<?php\n\nreturn ".var_export($translations, true).';'.\PHP_EOL;
+                        $output = "<?php\n\nreturn " . var_export($translations, true) . ';' . \PHP_EOL;
                         $this->files->put($path, $output);
                     }
                 }
@@ -333,7 +334,7 @@ class FindTransManager
             foreach ($tree as $locale => $groups) {
                 if (isset($groups[self::JSON_GROUP])) {
                     $translations = $groups[self::JSON_GROUP];
-                    $path = $this->app['path.lang'].'/'.$locale.'.json';
+                    $path = $this->app['path.lang'] . '/' . $locale . '.json';
                     $output = json_encode($translations, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_UNICODE);
                     $this->files->put($path, $output);
                 }

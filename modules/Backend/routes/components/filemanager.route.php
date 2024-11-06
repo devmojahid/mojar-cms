@@ -1,18 +1,19 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://github.com/juzaweb/cms
+ * @link       https://github.com/mojar/cms
  * @license    GNU V2
  */
 
-use Juzaweb\Backend\Http\Controllers\FileManager\FileManagerController;
-use Juzaweb\Backend\Http\Controllers\FileManager\UploadController;
-use Juzaweb\Backend\Http\Controllers\FileManager\ItemsController;
-use Juzaweb\Backend\Http\Controllers\FileManager\FolderController;
-use Juzaweb\Backend\Http\Controllers\FileManager\DeleteController;
+use Mojar\Backend\Http\Controllers\FileManager\FileManagerController;
+use Mojar\Backend\Http\Controllers\FileManager\UploadController;
+use Mojar\Backend\Http\Controllers\FileManager\ItemsController;
+use Mojar\Backend\Http\Controllers\FileManager\FolderController;
+use Mojar\Backend\Http\Controllers\FileManager\DeleteController;
 
 Route::group(
     ['prefix' => 'file-manager'],

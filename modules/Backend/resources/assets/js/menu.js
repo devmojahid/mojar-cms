@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var updateOutput = function(e) {
+    var updateOutput = function (e) {
         var list = e.length ? e : $(e.target);
         if (window.JSON) {
             $('#items-output').val(window.JSON.stringify(list.nestable('serialize')));
@@ -14,7 +14,7 @@ $(document).ready(function () {
 
     updateOutput($('#jw-menu-builder'));
 
-    $('#menu-container').on('submit', '.form-menu-block', function(event) {
+    $('#menu-container').on('submit', '.form-menu-block', function (event) {
         if (event.isDefaultPrevented()) {
             return false;
         }
@@ -33,10 +33,10 @@ $(document).ready(function () {
             url: form.attr('action'),
             dataType: 'json',
             data: formData,
-            cache:false,
+            cache: false,
             contentType: false,
             processData: false
-        }).done(function(response) {
+        }).done(function (response) {
 
             btnsubmit.find('i').attr('class', currentIcon);
             btnsubmit.prop("disabled", false);
@@ -59,7 +59,7 @@ $(document).ready(function () {
             form.find('.reset-after-add').val('');
 
             return false;
-        }).fail(function(response) {
+        }).fail(function (response) {
             btnsubmit.find('i').attr('class', currentIcon);
             btnsubmit.prop("disabled", false);
 
@@ -80,7 +80,7 @@ $(document).ready(function () {
     $('#menu-container').on('change', '.form-select-menu .load-menu', function () {
         let id = $(this).val();
         if (id) {
-            window.location = juzaweb.adminUrl + "/menus/" + id;
+            window.location = mojar.adminUrl + "/menus/" + id;
         }
     });
 
@@ -110,17 +110,17 @@ $(document).ready(function () {
         let id = $(this).data('id');
 
         confirm_message(
-            juzaweb.lang.remove_question.replace(':name', juzaweb.lang.menu),
+            mojar.lang.remove_question.replace(':name', mojar.lang.menu),
             function (result) {
                 if (result) {
                     ajaxRequest(
-                        juzaweb.adminUrl + "/menus/" + id,
+                        mojar.adminUrl + "/menus/" + id,
                         {},
                         {
                             'method': 'DELETE',
                             'callback': function (response) {
                                 show_message(response);
-                                window.location = juzaweb.adminUrl + "/menus";
+                                window.location = mojar.adminUrl + "/menus";
                             }
                         }
                     );
@@ -174,7 +174,7 @@ $(document).ready(function () {
             return false;
         }
 
-        ajaxRequest(juzaweb.adminUrl +'/load-data/loadPostType', {
+        ajaxRequest(mojar.adminUrl + '/load-data/loadPostType', {
             search: search,
             per_page: 5,
             post_type: postType
@@ -213,7 +213,7 @@ $(document).ready(function () {
             return false;
         }
 
-        ajaxRequest(juzaweb.adminUrl +'/load-data/loadTaxonomies', {
+        ajaxRequest(mojar.adminUrl + '/load-data/loadTaxonomies', {
             search: search,
             per_page: 5,
             taxonomy: taxonomy

@@ -1,19 +1,19 @@
 <?php
 
-namespace Juzaweb\CMS\Providers;
+namespace Mojar\CMS\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Juzaweb\Backend\Events\AfterPostSave;
-use Juzaweb\Backend\Events\DumpAutoloadPlugin;
-use Juzaweb\Backend\Listeners\ResizeThumbnailPostListener;
-use Juzaweb\Backend\Listeners\SaveSeoMetaPost;
-use Juzaweb\CMS\Events\EmailHook;
-use Juzaweb\Backend\Events\PostViewed;
-use Juzaweb\Backend\Listeners\CountViewPost;
-use Juzaweb\CMS\Listeners\SendEmailHook;
-use Juzaweb\Backend\Listeners\SendMailRegisterSuccessful;
-use Juzaweb\Backend\Events\RegisterSuccessful;
-use Juzaweb\Backend\Listeners\DumpAutoloadPluginListener;
+use Mojar\Backend\Events\AfterPostSave;
+use Mojar\Backend\Events\DumpAutoloadPlugin;
+use Mojar\Backend\Listeners\ResizeThumbnailPostListener;
+use Mojar\Backend\Listeners\SaveSeoMetaPost;
+use Mojar\CMS\Events\EmailHook;
+use Mojar\Backend\Events\PostViewed;
+use Mojar\Backend\Listeners\CountViewPost;
+use Mojar\CMS\Listeners\SendEmailHook;
+use Mojar\Backend\Listeners\SendMailRegisterSuccessful;
+use Mojar\Backend\Events\RegisterSuccessful;
+use Mojar\Backend\Listeners\DumpAutoloadPluginListener;
 
 class EventServiceProvider extends ServiceProvider
 {

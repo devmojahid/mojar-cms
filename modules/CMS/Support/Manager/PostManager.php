@@ -1,19 +1,20 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Support\Manager;
+namespace Mojar\CMS\Support\Manager;
 
 use Illuminate\Support\Arr;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Repositories\PostRepository;
-use Juzaweb\CMS\Contracts\PostManagerContract;
+use Mojar\Backend\Models\Post;
+use Mojar\Backend\Repositories\PostRepository;
+use Mojar\CMS\Contracts\PostManagerContract;
 
 class PostManager implements PostManagerContract
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\CMS\Facades;
+namespace Mojar\CMS\Facades;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Facade;
-use Juzaweb\CMS\Contracts\HookActionContract;
+use Mojar\CMS\Contracts\HookActionContract;
 
 /**
  * @method static void addAdminMenu(string $menuTitle, $menuSlug, array $args)
@@ -66,7 +66,7 @@ use Juzaweb\CMS\Contracts\HookActionContract;
  * @method static Collection getThumbnailSizes(string $postType = null)
  * @method static void addMetaPostTypes(string $postType, array $metas)
  *
- * @see \Juzaweb\CMS\Support\HookAction
+ * @see \Mojar\CMS\Support\HookAction
  */
 class HookAction extends Facade
 {

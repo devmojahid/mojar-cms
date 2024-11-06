@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Jobs;
+namespace Mojar\Backend\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -16,8 +17,8 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\Taxonomy;
+use Mojar\Backend\Models\Post;
+use Mojar\Backend\Models\Taxonomy;
 
 class AutoTagJob implements ShouldQueue
 {
@@ -28,8 +29,7 @@ class AutoTagJob implements ShouldQueue
     public function __construct(
         protected string $lastDate,
         protected int $limit
-    ) {
-    }
+    ) {}
 
     public function handle(): void
     {

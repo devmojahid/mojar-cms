@@ -1,21 +1,22 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://github.com/juzaweb/cms
+ * @link       https://github.com/mojar/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Console\Commands;
+namespace Mojar\CMS\Console\Commands;
 
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
-use Juzaweb\CMS\Support\Manager\DatabaseManager;
-use Juzaweb\CMS\Support\Manager\FinalInstallManager;
-use Juzaweb\CMS\Support\Manager\InstalledFileManager;
+use Mojar\CMS\Support\Manager\DatabaseManager;
+use Mojar\CMS\Support\Manager\FinalInstallManager;
+use Mojar\CMS\Support\Manager\InstalledFileManager;
 
 class InstallCommand extends Command
 {

@@ -1,29 +1,30 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Support\Manager;
+namespace Mojar\CMS\Support\Manager;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Juzaweb\CMS\Contracts\GoogleTranslate;
-use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
-use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
-use Juzaweb\CMS\Contracts\TranslationFinder;
-use Juzaweb\CMS\Contracts\TranslationManager as TranslationManagerContract;
-use Juzaweb\CMS\Facades\Plugin;
-use Juzaweb\CMS\Facades\ThemeLoader;
-use Juzaweb\CMS\Models\Translation;
-use Juzaweb\CMS\Support\Translations\TranslationExporter;
-use Juzaweb\CMS\Support\Translations\TranslationImporter;
-use Juzaweb\CMS\Support\Translations\TranslationLocale;
-use Juzaweb\CMS\Support\Translations\TranslationTranslate;
+use Mojar\CMS\Contracts\GoogleTranslate;
+use Mojar\CMS\Contracts\LocalPluginRepositoryContract;
+use Mojar\CMS\Contracts\LocalThemeRepositoryContract;
+use Mojar\CMS\Contracts\TranslationFinder;
+use Mojar\CMS\Contracts\TranslationManager as TranslationManagerContract;
+use Mojar\CMS\Facades\Plugin;
+use Mojar\CMS\Facades\ThemeLoader;
+use Mojar\CMS\Models\Translation;
+use Mojar\CMS\Support\Translations\TranslationExporter;
+use Mojar\CMS\Support\Translations\TranslationImporter;
+use Mojar\CMS\Support\Translations\TranslationLocale;
+use Mojar\CMS\Support\Translations\TranslationTranslate;
 
 class TranslationManager implements TranslationManagerContract
 {
@@ -32,8 +33,7 @@ class TranslationManager implements TranslationManagerContract
         protected LocalThemeRepositoryContract $themeRepository,
         protected TranslationFinder $translationFinder,
         protected GoogleTranslate $googleTranslate
-    ) {
-    }
+    ) {}
 
     public function export(string $module = 'cms', string $name = null): TranslationExporter
     {

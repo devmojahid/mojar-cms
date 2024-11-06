@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Exceptions;
+namespace Mojar\CMS\Exceptions;
 
 use Throwable;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -63,7 +63,7 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         if ($this->is404Exception($exception)) {
-            if ($request->is(config('juzaweb.admin_prefix').'/*')) {
+            if ($request->is(config('mojar.admin_prefix') . '/*')) {
                 return response()->view('cms::404', [], 404);
             }
 

@@ -5,35 +5,38 @@
         <div class="col-md-6"></div>
         <div class="col-md-6">
             <div class="btn-group float-right">
-                @if(config('juzaweb.theme.enable_upload'))
-                    <a href="{{ route('admin.theme.install') }}" class="btn btn-success" data-turbolinks="false"><i class="fa fa-plus-circle"></i> {{ trans('cms::app.add_new') }}</a>
+                @if (config('mojar.theme.enable_upload'))
+                    <a href="{{ route('admin.theme.install') }}" class="btn btn-success" data-turbolinks="false"><i
+                            class="fa fa-plus-circle"></i> {{ trans('cms::app.add_new') }}</a>
                 @endif
             </div>
         </div>
     </div>
 
     <div class="row" id="theme-list">
-        @if($currentTheme)
-        <div class="col-md-4 p-2 theme-list-item">
-            <div class="card">
-                <div class="height-200 d-flex flex-column jw__g13__head">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ $currentTheme->get('screenshot') }}" alt="{{ $currentTheme->get('title') }}" class="lazyload w-100 h-100">
-                </div>
+        @if ($currentTheme)
+            <div class="col-md-4 p-2 theme-list-item">
+                <div class="card">
+                    <div class="height-200 d-flex flex-column jw__g13__head">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                            data-src="{{ $currentTheme->get('screenshot') }}" alt="{{ $currentTheme->get('title') }}"
+                            class="lazyload w-100 h-100">
+                    </div>
 
-                <div class="card card-bottom card-borderless mb-0">
-                    <div class="card-header border-bottom-0">
-                        <div class="d-flex">
-                            <div class="text-dark text-uppercase font-weight-bold mr-auto">
-                                {{ $currentTheme->get('title') }}
-                            </div>
-                            <div class="text-gray-6">
-                                <button class="btn btn-secondary" disabled> {{ trans('cms::app.activated') }}</button>
+                    <div class="card card-bottom card-borderless mb-0">
+                        <div class="card-header border-bottom-0">
+                            <div class="d-flex">
+                                <div class="text-dark text-uppercase font-weight-bold mr-auto">
+                                    {{ $currentTheme->get('title') }}
+                                </div>
+                                <div class="text-gray-6">
+                                    <button class="btn btn-secondary" disabled> {{ trans('cms::app.activated') }}</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         @endif
     </div>
 
@@ -46,13 +49,13 @@
     <script>
         toggle_global_loading(true);
 
-        setTimeout(function () {
-            const listView = new JuzawebListView({
+        setTimeout(function() {
+            const listView = new MojarListView({
                 url: "{{ route('admin.themes.get-data') }}",
                 list: "#theme-list",
                 template: "theme-template",
                 page_size: 9,
-                after_load_callback: function () {
+                after_load_callback: function() {
                     toggle_global_loading(false);
                 }
             });
@@ -60,7 +63,7 @@
     </script>
 
     <script type="text/javascript">
-        $('#theme-list').on('click', '.active-theme', function () {
+        $('#theme-list').on('click', '.active-theme', function() {
             let btn = $(this);
             let icon = btn.find('i').attr('class');
             let theme = btn.data('theme');

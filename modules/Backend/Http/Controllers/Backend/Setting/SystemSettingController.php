@@ -1,15 +1,15 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Backend\Setting;
+namespace Mojar\Backend\Http\Controllers\Backend\Setting;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Juzaweb\Backend\Http\Requests\Setting\SettingRequest;
-use Juzaweb\CMS\Contracts\GlobalDataContract;
-use Juzaweb\CMS\Contracts\HookActionContract;
-use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Models\Language;
+use Mojar\Backend\Http\Requests\Setting\SettingRequest;
+use Mojar\CMS\Contracts\GlobalDataContract;
+use Mojar\CMS\Contracts\HookActionContract;
+use Mojar\CMS\Http\Controllers\BackendController;
+use Mojar\CMS\Models\Language;
 
 class SystemSettingController extends BackendController
 {

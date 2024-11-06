@@ -1,17 +1,18 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Tests\Unit;
+namespace Mojar\Tests\Unit;
 
-use Juzaweb\CMS\Support\Plugin;
-use Juzaweb\Tests\TestCase;
+use Mojar\CMS\Support\Plugin;
+use Mojar\Tests\TestCase;
 
 class PluginTest extends TestCase
 {
@@ -39,7 +40,7 @@ class PluginTest extends TestCase
         $dbPlugins = get_config('plugin_statuses', []);
         $dbPlugins = array_keys($dbPlugins);
         $notEnable = collect(array_keys($plugins))
-            ->filter(fn ($item) => !in_array($item, $dbPlugins))
+            ->filter(fn($item) => !in_array($item, $dbPlugins))
             ->all();
 
         $this->assertEmpty($notEnable);

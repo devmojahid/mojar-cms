@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Support\Translations;
+namespace Mojar\CMS\Support\Translations;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Collection;
@@ -17,9 +18,7 @@ use Symfony\Component\Finder\SplFileInfo;
 
 class TranslationLocale
 {
-    public function __construct(protected Collection $module)
-    {
-    }
+    public function __construct(protected Collection $module) {}
 
     /**
      * Get all language publish and origin
@@ -48,7 +47,7 @@ class TranslationLocale
         if (is_dir($enPath)) {
             $files = File::files($enPath);
             $files = collect($files)
-                ->filter(fn (SplFileInfo $item) => $item->getExtension() == 'php')
+                ->filter(fn(SplFileInfo $item) => $item->getExtension() == 'php')
                 ->values()
                 ->toArray();
 
@@ -62,7 +61,7 @@ class TranslationLocale
                     }
                 }
 
-                $langPublish = $this->module->get('publish_path') . '/'. $locale.'/'.$file->getFilename();
+                $langPublish = $this->module->get('publish_path') . '/' . $locale . '/' . $file->getFilename();
                 if (file_exists($langPublish)) {
                     $langPublish = require($langPublish);
                     foreach ($langPublish as $langKey => $langVal) {
@@ -78,7 +77,7 @@ class TranslationLocale
 
         if ($this->module->get('type') == 'theme') {
             $files = collect(File::files($this->module->get('lang_path')))
-                ->filter(fn (SplFileInfo $item) => $item->getExtension() == 'json')
+                ->filter(fn(SplFileInfo $item) => $item->getExtension() == 'json')
                 ->values();
 
             foreach ($files as $file) {
@@ -91,7 +90,7 @@ class TranslationLocale
                     }
                 }
 
-                $langPublish = $this->module->get('publish_path') .'/'. $file->getFilename();
+                $langPublish = $this->module->get('publish_path') . '/' . $file->getFilename();
                 if (file_exists($langPublish)) {
                     $langPublish = json_decode(File::get($langPublish), true);
                     foreach ($langPublish as $langKey => $langVal) {
@@ -156,14 +155,14 @@ class TranslationLocale
 
     public function getLanguageInFolder(string $path, $json = false): array
     {
-        $folders = collect(File::directories($path))->map(fn ($item) => basename($item))->values()->toArray();
+        $folders = collect(File::directories($path))->map(fn($item) => basename($item))->values()->toArray();
 
         if ($json) {
             $files = collect(File::files($path))
                 ->filter(
-                    fn (SplFileInfo $item) => $item->getExtension() == 'json'
+                    fn(SplFileInfo $item) => $item->getExtension() == 'json'
                 )->map(
-                    fn (SplFileInfo $item) => $item->getFilenameWithoutExtension()
+                    fn(SplFileInfo $item) => $item->getFilenameWithoutExtension()
                 )->values()
                 ->toArray();
 

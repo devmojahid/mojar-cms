@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Juzaweb\CMS\Facades\HookAction;
+use Mojar\CMS\Facades\HookAction;
 
 class CreateSearchTable extends Migration
 {
@@ -30,13 +30,13 @@ class CreateSearchTable extends Migration
             DB::statement('ALTER TABLE `'. $prefix .'search` ADD FULLTEXT index_search_keyword(keyword);');
         }*/
 
-//        $types = HookAction::getPostTypes();
-//        foreach ($types as $type) {
-//            $posts = app($type->get('model'))->get();
-//            foreach ($posts as $post) {
-//                $post->touch();
-//            }
-//        }
+        //        $types = HookAction::getPostTypes();
+        //        foreach ($types as $type) {
+        //            $posts = app($type->get('model'))->get();
+        //            foreach ($posts as $post) {
+        //                $post->touch();
+        //            }
+        //        }
     }
 
     public function down()

@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support;
+namespace Mojar\CMS\Support;
 
 class HtmlDom
 {
@@ -344,8 +345,10 @@ class HtmlDom
             if ($parent_lower !== $tag_lower) {
                 // Parent tag does not have to be closed necessarily (optional closing tag)
                 // Current tag is a block tag, so it may close an ancestor
-                if (isset($this->optional_closing_tags[$parent_lower])
-                    && isset($this->block_tags[$tag_lower])) {
+                if (
+                    isset($this->optional_closing_tags[$parent_lower])
+                    && isset($this->block_tags[$tag_lower])
+                ) {
                     $this->parent->_[HDOM_INFO_END] = 0;
                     $org_parent = $this->parent;
 
@@ -752,7 +755,7 @@ class HtmlDom
                     $debug_object->debug_log(
                         2,
                         'header content-type found charset of: '
-                        . $charset
+                            . $charset
                     );
                 }
             }
@@ -768,7 +771,7 @@ class HtmlDom
                     $debug_object->debug_log(
                         2,
                         'meta content-type tag found'
-                        . $fullvalue
+                            . $fullvalue
                     );
                 }
 
@@ -828,7 +831,7 @@ class HtmlDom
                  */
                 $encoding = mb_detect_encoding(
                     $this->doc,
-                    array( 'UTF-8', 'CP1252', 'ISO-8859-1' )
+                    array('UTF-8', 'CP1252', 'ISO-8859-1')
                 );
 
                 if ($encoding === 'CP1252' || $encoding === 'ISO-8859-1') {
@@ -862,7 +865,8 @@ class HtmlDom
         // it instead.
         if ((strtolower($charset) == 'iso-8859-1')
             || (strtolower($charset) == 'latin1')
-            || (strtolower($charset) == 'latin-1')) {
+            || (strtolower($charset) == 'latin-1')
+        ) {
             $charset = 'CP1252';
             if (is_object($debug_object)) {
                 $debug_object->debug_log(

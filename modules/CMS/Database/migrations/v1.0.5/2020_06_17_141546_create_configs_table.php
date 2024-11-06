@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Juzaweb\CMS\Facades\Config;
+use Mojar\CMS\Facades\Config;
 
 class CreateConfigsTable extends Migration
 {
@@ -27,7 +27,7 @@ class CreateConfigsTable extends Migration
         Config::setConfig('description', 'MYMO is a powerful, flexible and User friendly TV Series & Movie Portal CMS with advance video contents management system. It’s easy to use & install. It has been created to provide a unique experience to movie lover & movie site owner.');
         Config::setConfig('logo', '2020/08/15/logo-1597464831-Z4tc4jsTu6.png');
         Config::setConfig('icon', '2020/08/15/icon-1597477743-dkiMRD8xpZ.png');
-        Config::setConfig('banner', '2020/08/15/banner-juzaweb-1597477743-EHZ3staOHI.png');
+        Config::setConfig('banner', '2020/08/15/banner-mojar-1597477743-EHZ3staOHI.png');
         Config::setConfig('author_name', 'MyMo Team');
         Config::setConfig('user_registration', 1);
         Config::setConfig('user_verification', 0);

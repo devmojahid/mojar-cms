@@ -1,12 +1,12 @@
 <?php
 
-namespace Juzaweb\Translation\Providers;
+namespace Mojar\Translation\Providers;
 
-use Juzaweb\CMS\Facades\ActionRegister;
-use Juzaweb\CMS\Support\ServiceProvider;
-use Juzaweb\Translation\Contracts\TranslationContract;
-use Juzaweb\Translation\Support\Locale;
-use Juzaweb\Translation\TranslationAction;
+use Mojar\CMS\Facades\ActionRegister;
+use Mojar\CMS\Support\ServiceProvider;
+use Mojar\Translation\Contracts\TranslationContract;
+use Mojar\Translation\Support\Locale;
+use Mojar\Translation\TranslationAction;
 
 class TranslationServiceProvider extends ServiceProvider
 {

@@ -1,14 +1,15 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://mojar.com
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Support\HookActions\Traits;
+namespace Mojar\CMS\Support\HookActions\Traits;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;

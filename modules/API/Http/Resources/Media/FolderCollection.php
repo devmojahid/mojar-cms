@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\API\Http\Resources\Media;
+namespace Mojar\API\Http\Resources\Media;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 

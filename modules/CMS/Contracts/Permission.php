@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Contracts;
+namespace Mojar\CMS\Contracts;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -20,7 +20,7 @@ interface Permission
      * @param string|null $guardName
      *
      * @return Permission
-     * @throws \Juzaweb\CMS\Exceptions\PermissionDoesNotExist
+     * @throws \Mojar\CMS\Exceptions\PermissionDoesNotExist
      *
      */
     public static function findByName(string $name, $guardName): ?self;
@@ -32,7 +32,7 @@ interface Permission
      * @param string|null $guardName
      *
      * @return Permission
-     * @throws \Juzaweb\CMS\Exceptions\PermissionDoesNotExist
+     * @throws \Mojar\CMS\Exceptions\PermissionDoesNotExist
      *
      */
     public static function findById(int $id, $guardName): ?self;

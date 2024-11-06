@@ -1,23 +1,24 @@
 <?php
+
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/cms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
  * @license    MIT
  */
 
-namespace Juzaweb\Network\Support;
+namespace Mojar\Network\Support;
 
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Database\ConnectionResolverInterface;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
-use Juzaweb\CMS\Facades\Config as DbConfig;
-use Juzaweb\Network\Contracts\SiteCreaterContract;
-use Juzaweb\Network\Contracts\SiteSetupContract;
-use Juzaweb\Network\Models\Site;
+use Mojar\CMS\Facades\Config as DbConfig;
+use Mojar\Network\Contracts\SiteCreaterContract;
+use Mojar\Network\Contracts\SiteSetupContract;
+use Mojar\Network\Models\Site;
 
 class SiteCreater implements SiteCreaterContract
 {
@@ -75,9 +76,9 @@ class SiteCreater implements SiteCreaterContract
         DbConfig::setConfig(
             'description',
             'Juzacms is a Content Management System (CMS)'
-            . ' and web platform whose sole purpose is to make your development workflow simple again.'
+                . ' and web platform whose sole purpose is to make your development workflow simple again.'
         );
-        DbConfig::setConfig('author_name', 'Juzaweb Team');
+        DbConfig::setConfig('author_name', 'Mojar Team');
         DbConfig::setConfig('user_registration', 1);
         DbConfig::setConfig('user_verification', 0);
     }

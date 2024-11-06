@@ -1,7 +1,5 @@
 <?php
 
-namespace Juzaweb\CMS\Exceptions;
+namespace Mojar\CMS\Exceptions;
 
-class InvalidJsonException extends \Exception
-{
-}
+class InvalidJsonException extends \Exception {}

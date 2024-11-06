@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Repositories\Eloquent;
+namespace Mojar\CMS\Repositories\Eloquent;
 
 use Closure;
 use Exception;
@@ -9,22 +9,22 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use Juzaweb\CMS\Repositories\Contracts\CriteriaInterface;
-use Juzaweb\CMS\Repositories\Contracts\Presentable;
-use Juzaweb\CMS\Repositories\Contracts\PresenterInterface;
-use Juzaweb\CMS\Repositories\Contracts\RepositoryCriteriaInterface;
-use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
-use Juzaweb\CMS\Repositories\Contracts\ValidatorInterface;
-use Juzaweb\CMS\Repositories\Eloquent\BaseRepository as PackageBaseRepository;
-use Juzaweb\CMS\Repositories\Events\RepositoryEntityCreated;
-use Juzaweb\CMS\Repositories\Events\RepositoryEntityCreating;
-use Juzaweb\CMS\Repositories\Events\RepositoryEntityDeleted;
-use Juzaweb\CMS\Repositories\Events\RepositoryEntityDeleting;
-use Juzaweb\CMS\Repositories\Events\RepositoryEntityUpdated;
-use Juzaweb\CMS\Repositories\Events\RepositoryEntityUpdating;
-use Juzaweb\CMS\Repositories\Exceptions\RepositoryException;
-use Juzaweb\CMS\Repositories\Exceptions\ValidatorException;
-use Juzaweb\CMS\Repositories\Traits\ComparesVersionsTrait;
+use Mojar\CMS\Repositories\Contracts\CriteriaInterface;
+use Mojar\CMS\Repositories\Contracts\Presentable;
+use Mojar\CMS\Repositories\Contracts\PresenterInterface;
+use Mojar\CMS\Repositories\Contracts\RepositoryCriteriaInterface;
+use Mojar\CMS\Repositories\Contracts\RepositoryInterface;
+use Mojar\CMS\Repositories\Contracts\ValidatorInterface;
+use Mojar\CMS\Repositories\Eloquent\BaseRepository as PackageBaseRepository;
+use Mojar\CMS\Repositories\Events\RepositoryEntityCreated;
+use Mojar\CMS\Repositories\Events\RepositoryEntityCreating;
+use Mojar\CMS\Repositories\Events\RepositoryEntityDeleted;
+use Mojar\CMS\Repositories\Events\RepositoryEntityDeleting;
+use Mojar\CMS\Repositories\Events\RepositoryEntityUpdated;
+use Mojar\CMS\Repositories\Events\RepositoryEntityUpdating;
+use Mojar\CMS\Repositories\Exceptions\RepositoryException;
+use Mojar\CMS\Repositories\Exceptions\ValidatorException;
+use Mojar\CMS\Repositories\Traits\ComparesVersionsTrait;
 
 /**
  * Class BaseRepository

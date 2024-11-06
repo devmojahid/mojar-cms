@@ -1,25 +1,26 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Models;
+namespace Mojar\Backend\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
-use Juzaweb\CMS\Models\Model;
-use Juzaweb\CMS\Traits\UseSlug;
-use Juzaweb\CMS\Traits\UseUUIDColumn;
+use Mojar\CMS\Models\Model;
+use Mojar\CMS\Traits\UseSlug;
+use Mojar\CMS\Traits\UseUUIDColumn;
 
 /**
- * Juzaweb\Backend\Models\Resource
+ * Mojar\Backend\Models\Resource
  *
  * @property int $id
  * @property string $name
@@ -35,10 +36,10 @@ use Juzaweb\CMS\Traits\UseUUIDColumn;
  * @property int $display_order
  * @property-read \Illuminate\Database\Eloquent\Collection|Resource[] $children
  * @property-read int|null $children_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\ResourceMeta[] $metas
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\ResourceMeta[] $metas
  * @property-read int|null $metas_count
  * @property-read Resource|null $parent
- * @property-read \Juzaweb\Backend\Models\Post|null $post
+ * @property-read \Mojar\Backend\Models\Post|null $post
  * @method static Builder|Resource newModelQuery()
  * @method static Builder|Resource newQuery()
  * @method static Builder|Resource query()
@@ -136,7 +137,7 @@ class Resource extends Model
     {
         return $builder->whereHas(
             'metas',
-            fn ($q) => $q->where('meta_key', $key)->where('meta_value', $value)
+            fn($q) => $q->where('meta_key', $key)->where('meta_value', $value)
         );
     }
 
@@ -144,7 +145,7 @@ class Resource extends Model
     {
         return $builder->orWhereHas(
             'metas',
-            fn ($q) => $q->where('meta_key', $key)->where('meta_value', $value)
+            fn($q) => $q->where('meta_key', $key)->where('meta_value', $value)
         );
     }
 

@@ -2,7 +2,7 @@
 
 namespace $NAMESPACE$;
 
-use Juzaweb\CMS\Abstracts\Action;
+use Mojar\CMS\Abstracts\Action;
 
 class $CLASS$ extends Action
 {

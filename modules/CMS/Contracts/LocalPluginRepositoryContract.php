@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\CMS\Contracts;
+namespace Mojar\CMS\Contracts;
 
 use Exception;
 use Illuminate\Support\Collection;
-use Juzaweb\CMS\Exceptions\PluginNotFoundException;
-use Juzaweb\CMS\Support\Plugin;
+use Mojar\CMS\Exceptions\PluginNotFoundException;
+use Mojar\CMS\Support\Plugin;
 
 interface LocalPluginRepositoryContract
 {
@@ -34,7 +34,7 @@ interface LocalPluginRepositoryContract
     /**
      * Get plugins as plugins collection instance.
      *
-     * @return \Juzaweb\CMS\Support\PluginCollection
+     * @return \Mojar\CMS\Support\PluginCollection
      */
     public function toCollection();
 
@@ -160,7 +160,7 @@ interface LocalPluginRepositoryContract
      * Delete a specific plugin.
      * @param string $module
      * @return bool
-     * @throws \Juzaweb\CMS\Exceptions\PluginNotFoundException
+     * @throws \Mojar\CMS\Exceptions\PluginNotFoundException
      */
     public function delete(string $module): bool;
 

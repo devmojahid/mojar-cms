@@ -1,22 +1,23 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\DevTool\Commands\Resource;
+namespace Mojar\DevTool\Commands\Resource;
 
-use Juzaweb\DevTool\Abstracts\CRUD\ResourceCommand;
+use Mojar\DevTool\Abstracts\CRUD\ResourceCommand;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
  * @deprecated
  */
-class JuzawebResouceMakeCommand extends ResourceCommand
+class MojarResouceMakeCommand extends ResourceCommand
 {
     /**
      * The name of argument being used.

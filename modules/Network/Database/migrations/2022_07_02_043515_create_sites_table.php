@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Juzaweb\Network\Models\Site;
+use Mojar\Network\Models\Site;
 
 return new class extends Migration {
     /**

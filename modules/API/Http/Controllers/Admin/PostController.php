@@ -1,24 +1,25 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
+ * @package    mojar/cms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://mojar.com/cms
  * @license    GNU V2
  */
 
-namespace Juzaweb\API\Http\Controllers\Admin;
+namespace Mojar\API\Http\Controllers\Admin;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Juzaweb\API\Http\Requests\Post\StoreRequest;
-use Juzaweb\API\Http\Requests\Post\UpdateRequest;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Repositories\PostRepository;
-use Juzaweb\CMS\Http\Controllers\ApiController;
-use Juzaweb\CMS\Repositories\Criterias\FilterCriteria;
-use Juzaweb\CMS\Repositories\Criterias\SearchCriteria;
+use Mojar\API\Http\Requests\Post\StoreRequest;
+use Mojar\API\Http\Requests\Post\UpdateRequest;
+use Mojar\Backend\Models\Post;
+use Mojar\Backend\Repositories\PostRepository;
+use Mojar\CMS\Http\Controllers\ApiController;
+use Mojar\CMS\Repositories\Criterias\FilterCriteria;
+use Mojar\CMS\Repositories\Criterias\SearchCriteria;
 use OpenApi\Annotations as OA;
 
 class PostController extends ApiController
