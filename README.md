@@ -1,5 +1,7 @@
-JUZACMS - Laravel CMS for Your Project
+MojarCms - Laravel CMS for Your Project
 =====================================
+### This Is the main cms from JuzaWeb cms. there have lots of error why not i am find and replace any place make sure you solve every issue you rename the file name and folder name
+
 
 ## About
 ![https://buymeacoffee.com/mojar](https://i.imgur.com/toObY8s.png)
