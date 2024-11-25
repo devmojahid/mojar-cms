@@ -1,8 +1,8 @@
 <?php
 
-namespace Mojar\Example\Http\Controllers;
+namespace Juzaweb\Example\Http\Controllers;
 
-use Mojar\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class ExampleController extends BackendController
 {

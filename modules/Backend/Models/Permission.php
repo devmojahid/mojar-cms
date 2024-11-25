@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Models;
+namespace Juzaweb\Backend\Models;
 
-use Mojar\CMS\Models\Permission as BasePermission;
+use Juzaweb\CMS\Models\Permission as BasePermission;
 
 /**
- * Mojar\Backend\Models\Permission
+ * Juzaweb\Backend\Models\Permission
  *
  * @property int $id
  * @property string $name
@@ -24,9 +24,9 @@ use Mojar\CMS\Models\Permission as BasePermission;
  * @property-read int|null $group_count
  * @property-read \Illuminate\Database\Eloquent\Collection|Permission[] $permissions
  * @property-read int|null $permissions_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\Role[] $roles
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Role[] $roles
  * @property-read int|null $roles_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\CMS\Models\User[] $users
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\CMS\Models\User[] $users
  * @property-read int|null $users_count
  * @method static \Illuminate\Database\Eloquent\Builder|Permission newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Permission newQuery()

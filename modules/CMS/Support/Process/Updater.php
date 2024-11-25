@@ -1,8 +1,8 @@
 <?php
 
-namespace Mojar\CMS\Support\Process;
+namespace Juzaweb\CMS\Support\Process;
 
-use Mojar\CMS\Support\Plugin;
+use Juzaweb\CMS\Support\Plugin;
 
 class Updater extends Runner
 {

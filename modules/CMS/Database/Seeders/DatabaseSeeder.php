@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Database\Seeders;
+namespace Juzaweb\CMS\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 

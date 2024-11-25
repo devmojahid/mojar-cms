@@ -20,7 +20,7 @@
                 <ol class="dd-list">
                     @foreach ($widgets as $key => $widget)
                         @php
-                            $widgetData = \Mojar\CMS\Facades\HookAction::getWidgets($widget['widget'] ?? 'null');
+                            $widgetData = \Juzaweb\CMS\Facades\HookAction::getWidgets($widget['widget'] ?? 'null');
                         @endphp
 
                         @if (empty($widgetData))

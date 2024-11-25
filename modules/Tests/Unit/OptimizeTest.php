@@ -9,9 +9,9 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Tests\Unit;
+namespace Juzaweb\Tests\Unit;
 
-use Mojar\Tests\TestCase;
+use Juzaweb\Tests\TestCase;
 
 class OptimizeTest extends TestCase
 {

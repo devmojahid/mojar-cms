@@ -1,14 +1,14 @@
 <?php
 
-namespace Mojar\CMS\Jobs;
+namespace Juzaweb\CMS\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Mojar\Backend\Models\ManualNotification;
-use Mojar\CMS\Support\SendNotification as CMSSendNotification;
+use Juzaweb\Backend\Models\ManualNotification;
+use Juzaweb\CMS\Support\SendNotification as CMSSendNotification;
 
 class SendNotification implements ShouldQueue
 {

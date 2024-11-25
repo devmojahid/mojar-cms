@@ -1,16 +1,16 @@
 <?php
 
-namespace Mojar\Backend\Models;
+namespace Juzaweb\Backend\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Models\Model;
-use Mojar\CMS\Models\User;
-use Mojar\CMS\Traits\QueryCache\QueryCacheable;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
 
 /**
- * Mojar\Backend\Models\Comment
+ * Juzaweb\Backend\Models\Comment
  *
  * @property int $id
  * @property int|null $user_id
@@ -23,7 +23,7 @@ use Mojar\CMS\Traits\QueryCache\QueryCacheable;
  * @property string $status
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read \Mojar\Backend\Models\Post $post
+ * @property-read \Juzaweb\Backend\Models\Post $post
  * @property-read User|null $user
  * @method static Builder|Comment with(array $with)
  * @method static Builder|Comment query()

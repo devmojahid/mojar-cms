@@ -9,13 +9,13 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Models;
+namespace Juzaweb\CMS\Models;
 
 use Illuminate\Database\Eloquent\Collection;
-use Mojar\CMS\Traits\QueryCache\QueryCacheable;
+use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
 
 /**
- * Mojar\CMS\Models\Language
+ * Juzaweb\CMS\Models\Language
  *
  * @property int $id
  * @property string $code

@@ -1,8 +1,8 @@
 <?php
 
-use Mojar\Translation\Http\Controllers\LocaleController;
-use Mojar\Translation\Http\Controllers\ModuleController;
-use Mojar\Translation\Http\Controllers\TranslationController;
+use Juzaweb\Translation\Http\Controllers\LocaleController;
+use Juzaweb\Translation\Http\Controllers\ModuleController;
+use Juzaweb\Translation\Http\Controllers\TranslationController;
 
 Route::group(
     ['prefix' => 'translations'],

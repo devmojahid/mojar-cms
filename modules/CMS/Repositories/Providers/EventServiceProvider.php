@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Repositories\Providers;
+namespace Juzaweb\CMS\Repositories\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -19,14 +19,14 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Mojar\CMS\Repositories\Events\RepositoryEntityCreated' => [
-            'Mojar\CMS\Repositories\Listeners\CleanCacheRepository',
+        'Juzaweb\CMS\Repositories\Events\RepositoryEntityCreated' => [
+            'Juzaweb\CMS\Repositories\Listeners\CleanCacheRepository',
         ],
-        'Mojar\CMS\Repositories\Events\RepositoryEntityUpdated' => [
-            'Mojar\CMS\Repositories\Listeners\CleanCacheRepository',
+        'Juzaweb\CMS\Repositories\Events\RepositoryEntityUpdated' => [
+            'Juzaweb\CMS\Repositories\Listeners\CleanCacheRepository',
         ],
-        'Mojar\CMS\Repositories\Events\RepositoryEntityDeleted' => [
-            'Mojar\CMS\Repositories\Listeners\CleanCacheRepository',
+        'Juzaweb\CMS\Repositories\Events\RepositoryEntityDeleted' => [
+            'Juzaweb\CMS\Repositories\Listeners\CleanCacheRepository',
         ],
     ];
 

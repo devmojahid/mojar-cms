@@ -1,19 +1,19 @@
 <?php
 
-namespace Mojar\CMS\Models;
+namespace Juzaweb\CMS\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Mojar\CMS\Contracts\Permission as PermissionContract;
-use Mojar\CMS\Exceptions\PermissionAlreadyExists;
-use Mojar\CMS\Support\Permission\Guard;
-use Mojar\CMS\Support\Permission\PermissionRegistrar;
-use Mojar\CMS\Traits\Permission\HasRoles;
-use Mojar\CMS\Traits\Permission\RefreshesPermissionCache;
+use Juzaweb\CMS\Contracts\Permission as PermissionContract;
+use Juzaweb\CMS\Exceptions\PermissionAlreadyExists;
+use Juzaweb\CMS\Support\Permission\Guard;
+use Juzaweb\CMS\Support\Permission\PermissionRegistrar;
+use Juzaweb\CMS\Traits\Permission\HasRoles;
+use Juzaweb\CMS\Traits\Permission\RefreshesPermissionCache;
 
 /**
- * Mojar\CMS\Models\Permission
+ * Juzaweb\CMS\Models\Permission
  *
  * @property int $id
  * @property string $name
@@ -23,9 +23,9 @@ use Mojar\CMS\Traits\Permission\RefreshesPermissionCache;
  * @property string|null $description
  * @property-read Collection|Permission[] $permissions
  * @property-read int|null $permissions_count
- * @property-read Collection|\Mojar\CMS\Models\Role[] $roles
+ * @property-read Collection|\Juzaweb\CMS\Models\Role[] $roles
  * @property-read int|null $roles_count
- * @property-read Collection|\Mojar\CMS\Models\User[] $users
+ * @property-read Collection|\Juzaweb\CMS\Models\User[] $users
  * @property-read int|null $users_count
  * @method static \Illuminate\Database\Eloquent\Builder|Permission newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Permission newQuery()
@@ -111,8 +111,8 @@ class Permission extends Model implements PermissionContract
      * @param string $name
      * @param string|null $guardName
      *
-     * @return \Mojar\CMS\Contracts\Permission
-     *@throws \Mojar\CMS\Exceptions\PermissionDoesNotExist
+     * @return \Juzaweb\CMS\Contracts\Permission
+     *@throws \Juzaweb\CMS\Exceptions\PermissionDoesNotExist
      *
      */
     public static function findByName(string $name, $guardName = null): ?PermissionContract
@@ -132,8 +132,8 @@ class Permission extends Model implements PermissionContract
      * @param int $id
      * @param string|null $guardName
      *
-     * @return \Mojar\CMS\Contracts\Permission
-     *@throws \Mojar\CMS\Exceptions\PermissionDoesNotExist
+     * @return \Juzaweb\CMS\Contracts\Permission
+     *@throws \Juzaweb\CMS\Exceptions\PermissionDoesNotExist
      *
      */
     public static function findById(int $id, $guardName = null): ?PermissionContract
@@ -154,7 +154,7 @@ class Permission extends Model implements PermissionContract
      * @param string $name
      * @param string|null $guardName
      *
-     * @return \Mojar\CMS\Contracts\Permission
+     * @return \Juzaweb\CMS\Contracts\Permission
      */
     public static function findOrCreate(string $name, $guardName = null): PermissionContract
     {
@@ -188,7 +188,7 @@ class Permission extends Model implements PermissionContract
      *
      * @param array $params
      *
-     * @return \Mojar\CMS\Contracts\Permission
+     * @return \Juzaweb\CMS\Contracts\Permission
      */
     protected static function getPermission(array $params = []): ?PermissionContract
     {

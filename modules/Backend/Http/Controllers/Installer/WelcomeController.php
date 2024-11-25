@@ -1,8 +1,8 @@
 <?php
 
-namespace Mojar\Backend\Http\Controllers\Installer;
+namespace Juzaweb\Backend\Http\Controllers\Installer;
 
-use Mojar\CMS\Http\Controllers\Controller;
+use Juzaweb\CMS\Http\Controllers\Controller;
 
 class WelcomeController extends Controller
 {

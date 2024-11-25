@@ -9,8 +9,8 @@
  * @license    GNU V2
  */
 
-use Mojar\API\Http\Controllers\Auth\LoginController;
-use Mojar\API\Http\Controllers\Auth\RegisterController;
+use Juzaweb\API\Http\Controllers\Auth\LoginController;
+use Juzaweb\API\Http\Controllers\Auth\RegisterController;
 
 Route::group(
     ['prefix' => 'auth'],

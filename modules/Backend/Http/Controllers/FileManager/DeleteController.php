@@ -1,10 +1,10 @@
 <?php
 
-namespace Mojar\Backend\Http\Controllers\FileManager;
+namespace Juzaweb\Backend\Http\Controllers\FileManager;
 
 use Illuminate\Http\Request;
-use Mojar\Backend\Models\MediaFile;
-use Mojar\Backend\Models\MediaFolder;
+use Juzaweb\Backend\Models\MediaFile;
+use Juzaweb\Backend\Models\MediaFolder;
 
 class DeleteController extends FileManagerController
 {

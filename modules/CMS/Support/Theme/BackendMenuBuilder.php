@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support\Theme;
+namespace Juzaweb\CMS\Support\Theme;
 
 use Illuminate\Support\Collection;
-use Mojar\Backend\Models\MenuItem;
-use Mojar\CMS\Facades\HookAction;
+use Juzaweb\Backend\Models\MenuItem;
+use Juzaweb\CMS\Facades\HookAction;
 
 class BackendMenuBuilder
 {

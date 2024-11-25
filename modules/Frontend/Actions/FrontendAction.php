@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Frontend\Actions;
+namespace Juzaweb\Frontend\Actions;
 
 use Illuminate\Support\Facades\File;
-use Mojar\CMS\Abstracts\Action;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Facades\ThemeLoader;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Facades\ThemeLoader;
 
 class FrontendAction extends Action
 {

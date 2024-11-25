@@ -9,12 +9,12 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Contracts;
+namespace Juzaweb\CMS\Contracts;
 
-use Mojar\Backend\Models\Post;
+use Juzaweb\Backend\Models\Post;
 
 /**
- * @see \Mojar\CMS\Support\Manager\PostManager
+ * @see \Juzaweb\CMS\Support\Manager\PostManager
  */
 interface PostManagerContract
 {

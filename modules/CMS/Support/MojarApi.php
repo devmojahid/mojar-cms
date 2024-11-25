@@ -9,13 +9,13 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
 use GuzzleHttp\Exception\ClientException;
 use Exception;
 use Illuminate\Support\Str;
-use Mojar\CMS\Contracts\ConfigContract;
-use Mojar\CMS\Contracts\MojarApiContract;
+use Juzaweb\CMS\Contracts\ConfigContract;
+use Juzaweb\CMS\Contracts\MojarApiContract;
 
 class MojarApi implements MojarApiContract
 {

@@ -9,12 +9,12 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Models;
+namespace Juzaweb\Backend\Models;
 
-use Mojar\CMS\Models\Model;
+use Juzaweb\CMS\Models\Model;
 
 /**
- * Mojar\Backend\Models\PostLike
+ * Juzaweb\Backend\Models\PostLike
  *
  * @property int $id
  * @property int $post_id

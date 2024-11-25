@@ -9,11 +9,11 @@
  * @license    MIT
  */
 
-namespace Mojar\Translation\Facades;
+namespace Juzaweb\Translation\Facades;
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\Collection;
-use Mojar\Translation\Contracts\TranslationContract;
+use Juzaweb\Translation\Contracts\TranslationContract;
 
 /**
  * @method static Collection[] all()
@@ -21,7 +21,7 @@ use Mojar\Translation\Contracts\TranslationContract;
  * @method static array allLanguage(Collection|string $var)
  * @method static string publishPath(Collection|string $var, string $locale)
  * @method static array getAllTrans(Collection|string $var, string $locale)
- * @see \Mojar\Translation\Support\Locale
+ * @see \Juzaweb\Translation\Support\Locale
  */
 class Locale extends Facade
 {

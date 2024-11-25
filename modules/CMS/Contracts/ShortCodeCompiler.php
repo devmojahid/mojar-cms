@@ -9,6 +9,6 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Contracts;
+namespace Juzaweb\CMS\Contracts;
 
 interface ShortCodeCompiler {}

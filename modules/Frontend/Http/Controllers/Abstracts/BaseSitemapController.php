@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Frontend\Http\Controllers\Abstracts;
+namespace Juzaweb\Frontend\Http\Controllers\Abstracts;
 
 use Illuminate\Support\Facades\Cache;
-use Mojar\Backend\Models\Post;
-use Mojar\Backend\Models\Taxonomy;
-use Mojar\CMS\Http\Controllers\Controller;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Http\Controllers\Controller;
 
 abstract class BaseSitemapController extends Controller
 {

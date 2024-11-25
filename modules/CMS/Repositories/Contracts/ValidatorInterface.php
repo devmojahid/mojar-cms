@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Repositories\Contracts;
+namespace Juzaweb\CMS\Repositories\Contracts;
 
 use Illuminate\Contracts\Support\MessageBag;
-use Mojar\CMS\Repositories\Exceptions\ValidatorException;
+use Juzaweb\CMS\Repositories\Exceptions\ValidatorException;
 
 interface ValidatorInterface
 {

@@ -1,21 +1,21 @@
 <?php
 
-namespace Mojar\Backend\Models;
+namespace Juzaweb\Backend\Models;
 
-use Mojar\CMS\Models\Model;
+use Juzaweb\CMS\Models\Model;
 
 /**
- * Mojar\Backend\Models\PasswordReset
+ * Juzaweb\Backend\Models\PasswordReset
  *
  * @property string $email
  * @property string $token
  * @property \Illuminate\Support\Carbon|null $created_at
- * @method static \Illuminate\Database\Eloquent\Builder|\Mojar\Backend\Models\PasswordReset newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Mojar\Backend\Models\PasswordReset newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Mojar\Backend\Models\PasswordReset query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Mojar\Backend\Models\PasswordReset whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Mojar\Backend\Models\PasswordReset whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Mojar\Backend\Models\PasswordReset whereToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Juzaweb\Backend\Models\PasswordReset newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Juzaweb\Backend\Models\PasswordReset newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Juzaweb\Backend\Models\PasswordReset query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Juzaweb\Backend\Models\PasswordReset whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Juzaweb\Backend\Models\PasswordReset whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Juzaweb\Backend\Models\PasswordReset whereToken($value)
  * @mixin \Eloquent
  */
 class PasswordReset extends Model

@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Repositories\Exceptions;
+namespace Juzaweb\CMS\Repositories\Exceptions;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;

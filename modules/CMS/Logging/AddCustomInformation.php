@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Logging;
+namespace Juzaweb\CMS\Logging;
 
 use Illuminate\Http\Request;
 

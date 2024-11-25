@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
 use Countable;
 use Exception;
@@ -12,9 +12,9 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
-use Mojar\CMS\Contracts\LocalPluginRepositoryContract;
-use Mojar\CMS\Exceptions\InvalidAssetPath;
-use Mojar\CMS\Exceptions\PluginNotFoundException;
+use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
+use Juzaweb\CMS\Exceptions\InvalidAssetPath;
+use Juzaweb\CMS\Exceptions\PluginNotFoundException;
 
 class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
 {

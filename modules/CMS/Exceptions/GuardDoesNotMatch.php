@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Exceptions;
+namespace Juzaweb\CMS\Exceptions;
 
 use Illuminate\Support\Collection;
 use InvalidArgumentException;

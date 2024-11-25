@@ -9,16 +9,16 @@
  * @license    GNU V2
  */
 
-namespace Mojar\API\Http\Controllers;
+namespace Juzaweb\API\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Mojar\Backend\Http\Resources\PostCollection;
-use Mojar\Backend\Http\Resources\PostResource;
-use Mojar\Backend\Repositories\PostRepository;
-use Mojar\CMS\Http\Controllers\ApiController;
-use Mojar\CMS\Repositories\Criterias\FilterCriteria;
-use Mojar\CMS\Repositories\Criterias\SearchCriteria;
-use Mojar\CMS\Repositories\Criterias\SortCriteria;
+use Juzaweb\Backend\Http\Resources\PostCollection;
+use Juzaweb\Backend\Http\Resources\PostResource;
+use Juzaweb\Backend\Repositories\PostRepository;
+use Juzaweb\CMS\Http\Controllers\ApiController;
+use Juzaweb\CMS\Repositories\Criterias\FilterCriteria;
+use Juzaweb\CMS\Repositories\Criterias\SearchCriteria;
+use Juzaweb\CMS\Repositories\Criterias\SortCriteria;
 
 class PostController extends ApiController
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Mojar\CMS\Http\Middleware;
+namespace Juzaweb\CMS\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
-use Mojar\CMS\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\Action;
 
 class Admin
 {

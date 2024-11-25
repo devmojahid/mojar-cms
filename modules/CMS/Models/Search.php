@@ -9,17 +9,17 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Models;
+namespace Juzaweb\CMS\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Mojar\Backend\Models\Post;
-use Mojar\Backend\Models\Taxonomy;
-use Mojar\CMS\Facades\HookAction;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Facades\HookAction;
 
 /**
- * Mojar\CMS\Models\Search
+ * Juzaweb\CMS\Models\Search
  *
  * @property int $id
  * @property string $title
@@ -49,9 +49,9 @@ use Mojar\CMS\Facades\HookAction;
  * @method static Builder|Search whereTitle($value)
  * @method static Builder|Search whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\Taxonomy[] $taxonomies
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Taxonomy[] $taxonomies
  * @property-read int|null $taxonomies_count
- * @property-read \Mojar\Backend\Models\Post $post
+ * @property-read \Juzaweb\Backend\Models\Post $post
  */
 class Search extends Model
 {

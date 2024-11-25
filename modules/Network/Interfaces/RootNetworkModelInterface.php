@@ -9,7 +9,7 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Interfaces;
+namespace Juzaweb\Network\Interfaces;
 
 interface RootNetworkModelInterface
 {

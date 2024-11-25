@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\Backend\Http\Resources;
+namespace Juzaweb\Backend\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 

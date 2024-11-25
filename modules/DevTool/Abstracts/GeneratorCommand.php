@@ -1,10 +1,10 @@
 <?php
 
-namespace Mojar\DevTool\Abstracts;
+namespace Juzaweb\DevTool\Abstracts;
 
 use Illuminate\Console\Command;
-use Mojar\CMS\Exceptions\FileAlreadyExistException;
-use Mojar\CMS\Support\Generators\FileGenerator;
+use Juzaweb\CMS\Exceptions\FileAlreadyExistException;
+use Juzaweb\CMS\Support\Generators\FileGenerator;
 
 abstract class GeneratorCommand extends Command
 {
@@ -65,7 +65,7 @@ abstract class GeneratorCommand extends Command
     /**
      * Get class namespace.
      *
-     * @param \Mojar\CMS\Support\Plugin $module
+     * @param \Juzaweb\CMS\Support\Plugin $module
      *
      * @return string
      */

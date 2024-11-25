@@ -9,14 +9,14 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Facades;
+namespace Juzaweb\CMS\Facades;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Facade as FacadeAlias;
-use Mojar\CMS\Support\LocalThemeRepository;
-use Mojar\CMS\Support\Theme as ThemeSupport;
+use Juzaweb\CMS\Support\LocalThemeRepository;
+use Juzaweb\CMS\Support\Theme as ThemeSupport;
 
 /**
  * @method static ThemeSupport|null find(string $name)

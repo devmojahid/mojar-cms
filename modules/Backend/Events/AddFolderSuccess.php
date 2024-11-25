@@ -9,9 +9,9 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Events;
+namespace Juzaweb\Backend\Events;
 
-use Mojar\Backend\Models\MediaFolder;
+use Juzaweb\Backend\Models\MediaFolder;
 
 class AddFolderSuccess
 {

@@ -1,15 +1,15 @@
 <?php
 
-namespace Mojar\Backend\Repositories\Email;
+namespace Juzaweb\Backend\Repositories\Email;
 
-use Mojar\CMS\Repositories\BaseRepository;
-use Mojar\CMS\Repositories\Interfaces\FilterableInterface;
-use Mojar\CMS\Repositories\Interfaces\SearchableInterface;
+use Juzaweb\CMS\Repositories\BaseRepository;
+use Juzaweb\CMS\Repositories\Interfaces\FilterableInterface;
+use Juzaweb\CMS\Repositories\Interfaces\SearchableInterface;
 
 /**
  * Interface CommentRepository.
  *
- * @package namespace Mojar\Backend\Repositories;
+ * @package namespace Juzaweb\Backend\Repositories;
  */
 interface EmailTemplateRepository extends BaseRepository, FilterableInterface, SearchableInterface
 {

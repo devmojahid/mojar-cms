@@ -1,19 +1,19 @@
 <?php
 
-namespace Mojar\Backend\Models;
+namespace Juzaweb\Backend\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
-use Mojar\CMS\Contracts\HookActionContract;
-use Mojar\CMS\Models\Model;
-use Mojar\Network\Interfaces\RootNetworkModelInterface;
-use Mojar\Network\Traits\RootNetworkModel;
+use Juzaweb\CMS\Contracts\HookActionContract;
+use Juzaweb\CMS\Models\Model;
+use Juzaweb\Network\Interfaces\RootNetworkModelInterface;
+use Juzaweb\Network\Traits\RootNetworkModel;
 use TwigBridge\Facade\Twig;
 
 /**
- * Mojar\Backend\Models\EmailList
+ * Juzaweb\Backend\Models\EmailList
  *
  * @property int $id
  * @property string $email
@@ -26,7 +26,7 @@ use TwigBridge\Facade\Twig;
  * @property array|null $data
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Mojar\Backend\Models\EmailTemplate|null $template
+ * @property-read \Juzaweb\Backend\Models\EmailTemplate|null $template
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList query()

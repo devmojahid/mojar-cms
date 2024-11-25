@@ -17,16 +17,16 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
-use Mojar\Backend\Models\Comment;
-use Mojar\Backend\Models\Menu;
-use Mojar\Backend\Models\Post;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Facades\Plugin;
-use Mojar\CMS\Facades\Theme;
-use Mojar\CMS\Facades\ThemeLoader;
-use Mojar\CMS\Facades\ThemeConfig;
-use Mojar\CMS\Support\Theme\BackendMenuBuilder;
-use Mojar\CMS\Support\Theme\MenuBuilder;
+use Juzaweb\Backend\Models\Comment;
+use Juzaweb\Backend\Models\Menu;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Facades\Plugin;
+use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\ThemeLoader;
+use Juzaweb\CMS\Facades\ThemeConfig;
+use Juzaweb\CMS\Support\Theme\BackendMenuBuilder;
+use Juzaweb\CMS\Support\Theme\MenuBuilder;
 use TwigBridge\Facade\Twig;
 
 function body_class($class = ''): string

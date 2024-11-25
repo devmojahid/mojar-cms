@@ -9,7 +9,7 @@
  * @license    GNU General Public License v2.0
  */
 
-namespace Mojar\API\Support\Swagger;
+namespace Juzaweb\API\Support\Swagger;
 
 class SwaggerParameter
 {

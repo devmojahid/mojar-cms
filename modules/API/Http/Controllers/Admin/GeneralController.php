@@ -9,13 +9,13 @@
  * @license    MIT
  */
 
-namespace Mojar\API\Http\Controllers\Admin;
+namespace Juzaweb\API\Http\Controllers\Admin;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Models\User;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Models\User;
 use OpenApi\Annotations as OA;
 
 class GeneralController extends AdminApiController

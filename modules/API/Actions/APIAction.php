@@ -9,13 +9,13 @@
  * @license    GNU General Public License v2.0
  */
 
-namespace Mojar\API\Actions;
+namespace Juzaweb\API\Actions;
 
-use Mojar\API\Support\Documentation\AuthSwaggerDocumentation;
-use Mojar\API\Support\Documentation\PostTypeAdminSwaggerDocumentation;
-use Mojar\API\Support\Documentation\PostTypeSwaggerDocumentation;
-use Mojar\API\Support\Swagger\SwaggerDocument;
-use Mojar\CMS\Abstracts\Action;
+use Juzaweb\API\Support\Documentation\AuthSwaggerDocumentation;
+use Juzaweb\API\Support\Documentation\PostTypeAdminSwaggerDocumentation;
+use Juzaweb\API\Support\Documentation\PostTypeSwaggerDocumentation;
+use Juzaweb\API\Support\Swagger\SwaggerDocument;
+use Juzaweb\CMS\Abstracts\Action;
 
 class APIAction extends Action
 {

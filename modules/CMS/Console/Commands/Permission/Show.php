@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\CMS\Console\Commands\Permission;
+namespace Juzaweb\CMS\Console\Commands\Permission;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use Mojar\CMS\Contracts\Permission as PermissionContract;
-use Mojar\CMS\Contracts\Role as RoleContract;
+use Juzaweb\CMS\Contracts\Permission as PermissionContract;
+use Juzaweb\CMS\Contracts\Role as RoleContract;
 use Symfony\Component\Console\Helper\TableCell;
 
 class Show extends Command

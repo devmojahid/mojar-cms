@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Contracts;
+namespace Juzaweb\CMS\Contracts;
 
 interface CacheGroupContract
 {

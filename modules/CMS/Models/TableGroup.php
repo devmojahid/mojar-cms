@@ -9,10 +9,10 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Models;
+namespace Juzaweb\CMS\Models;
 
 /**
- * Mojar\CMS\Models\TableGroup
+ * Juzaweb\CMS\Models\TableGroup
  *
  * @method static \Illuminate\Database\Eloquent\Builder|TableGroup newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TableGroup newQuery()

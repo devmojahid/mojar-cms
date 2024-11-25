@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Providers;
+namespace Juzaweb\CMS\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Mojar\CMS\Support\BladeMinifyCompiler;
+use Juzaweb\CMS\Support\BladeMinifyCompiler;
 
 class PerformanceServiceProvider extends ServiceProvider
 {

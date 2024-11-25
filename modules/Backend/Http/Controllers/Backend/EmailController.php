@@ -9,14 +9,14 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Http\Controllers\Backend;
+namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Mojar\CMS\Http\Controllers\BackendController;
-use Mojar\CMS\Support\Email;
+use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Support\Email;
 
 class EmailController extends BackendController
 {

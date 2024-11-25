@@ -9,18 +9,18 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Support\Imports;
+namespace Juzaweb\CMS\Support\Imports;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
-use Mojar\Backend\Models\Post;
-use Mojar\Backend\Repositories\TaxonomyRepository;
-use Mojar\CMS\Contracts\HookActionContract;
-use Mojar\CMS\Contracts\PostManagerContract;
-use Mojar\CMS\Contracts\PostImporterContract;
-use Mojar\CMS\Models\User;
-use Mojar\CMS\Support\FileManager;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Repositories\TaxonomyRepository;
+use Juzaweb\CMS\Contracts\HookActionContract;
+use Juzaweb\CMS\Contracts\PostManagerContract;
+use Juzaweb\CMS\Contracts\PostImporterContract;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Support\FileManager;
 
 class PostImporter implements PostImporterContract
 {

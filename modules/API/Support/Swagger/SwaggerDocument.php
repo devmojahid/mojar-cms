@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\API\Support\Swagger;
+namespace Juzaweb\API\Support\Swagger;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Mojar\API\Support\Documentation\APISwaggerDocumentation;
+use Juzaweb\API\Support\Documentation\APISwaggerDocumentation;
 
 class SwaggerDocument implements Arrayable
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Mojar\Backend\Models;
+namespace Juzaweb\Backend\Models;
 
 use Illuminate\Support\Facades\Storage;
-use Mojar\CMS\Models\Model;
+use Juzaweb\CMS\Models\Model;
 
 /**
- * Mojar\Backend\Models\MediaFile
+ * Juzaweb\Backend\Models\MediaFile
  *
  * @property int $id
  * @property string $name

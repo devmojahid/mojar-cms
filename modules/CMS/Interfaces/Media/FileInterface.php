@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Interfaces\Media;
+namespace Juzaweb\CMS\Interfaces\Media;
 
 use League\Flysystem\FilesystemAdapter;
 use League\Flysystem\StorageAttributes;

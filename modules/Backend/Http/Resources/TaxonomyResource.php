@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Resources;
+namespace Juzaweb\Backend\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Str;
-use Mojar\Backend\Models\Taxonomy;
+use Juzaweb\Backend\Models\Taxonomy;
 
 class TaxonomyResource extends JsonResource
 {

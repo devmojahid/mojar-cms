@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @var \Mojar\CMS\Support\Theme\Customize $customize
+ * @var \Juzaweb\CMS\Support\Theme\Customize $customize
  */
 
-use Mojar\CMS\Support\Theme\CustomizeControl;
+use Juzaweb\CMS\Support\Theme\CustomizeControl;
 

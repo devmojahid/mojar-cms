@@ -1,15 +1,15 @@
 <?php
 
-namespace Mojar\CMS\Support\Activators;
+namespace Juzaweb\CMS\Support\Activators;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
-use Mojar\CMS\Contracts\ActivatorInterface;
-use Mojar\CMS\Exceptions\PluginNotFoundException;
-use Mojar\CMS\Support\Plugin;
+use Juzaweb\CMS\Contracts\ActivatorInterface;
+use Juzaweb\CMS\Exceptions\PluginNotFoundException;
+use Juzaweb\CMS\Support\Plugin;
 
 class FileActivator implements ActivatorInterface
 {

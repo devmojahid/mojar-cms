@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\CMS\Support\FileManager;
+namespace Juzaweb\CMS\Support\FileManager;
 
 use Illuminate\Container\Container;
 use Intervention\Image\Facades\Image;
-use Mojar\CMS\Support\FileManager\Events\ImageIsUploading;
-use Mojar\CMS\Support\FileManager\Events\ImageWasUploaded;
+use Juzaweb\CMS\Support\FileManager\Events\ImageIsUploading;
+use Juzaweb\CMS\Support\FileManager\Events\ImageWasUploaded;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class LfmPath

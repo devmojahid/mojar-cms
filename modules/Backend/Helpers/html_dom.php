@@ -1,6 +1,6 @@
 <?php
 
-use Mojar\CMS\Support\HtmlDom;
+use Juzaweb\CMS\Support\HtmlDom;
 
 define('HDOM_TYPE_ELEMENT', 1);
 define('HDOM_TYPE_COMMENT', 2);

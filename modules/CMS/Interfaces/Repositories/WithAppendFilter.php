@@ -9,7 +9,7 @@
  * @license    GNU General Public License v2.0
  */
 
-namespace Mojar\CMS\Interfaces\Repositories;
+namespace Juzaweb\CMS\Interfaces\Repositories;
 
 interface WithAppendFilter
 {

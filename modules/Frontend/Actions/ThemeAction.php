@@ -9,16 +9,16 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Frontend\Actions;
+namespace Juzaweb\Frontend\Actions;
 
 use Illuminate\Support\Arr;
-use Mojar\CMS\Abstracts\Action;
-use Mojar\CMS\Contracts\LocalThemeRepositoryContract;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Facades\ThemeLoader;
-use Mojar\CMS\Support\DefaultPageBlock;
-use Mojar\CMS\Support\DefaultWidget;
-use Mojar\Frontend\Http\Controllers\AjaxController;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Facades\ThemeLoader;
+use Juzaweb\CMS\Support\DefaultPageBlock;
+use Juzaweb\CMS\Support\DefaultWidget;
+use Juzaweb\Frontend\Http\Controllers\AjaxController;
 use TwigBridge\Facade\Twig;
 
 class ThemeAction extends Action

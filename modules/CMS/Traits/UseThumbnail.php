@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Traits;
+namespace Juzaweb\CMS\Traits;
 
 trait UseThumbnail
 {

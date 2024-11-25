@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\Backend\Models;
+namespace Juzaweb\Backend\Models;
 
-use Mojar\CMS\Models\Model;
+use Juzaweb\CMS\Models\Model;
 
 /**
- * Mojar\Backend\Models\PostRating
+ * Juzaweb\Backend\Models\PostRating
  *
  * @property int $id
  * @property int $post_id
@@ -13,7 +13,7 @@ use Mojar\CMS\Models\Model;
  * @property float $star
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Mojar\Backend\Models\Post $post
+ * @property-read \Juzaweb\Backend\Models\Post $post
  * @method static \Illuminate\Database\Eloquent\Builder|PostRating newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PostRating newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PostRating query()

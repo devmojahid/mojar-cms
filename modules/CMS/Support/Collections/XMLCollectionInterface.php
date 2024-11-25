@@ -9,7 +9,7 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Support\Collections;
+namespace Juzaweb\CMS\Support\Collections;
 
 use Illuminate\Support\Collection;
 

@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Policies;
+namespace Juzaweb\Backend\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Mojar\CMS\Models\Model;
-use Mojar\CMS\Models\User;
+use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Models\User;
 
 class PostPolicy
 {

@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Tests\Unit;
+namespace Juzaweb\Tests\Unit;
 
 use Illuminate\Support\Facades\File;
-use Mojar\CMS\Facades\Plugin;
-use Mojar\CMS\Support\Updater\PluginUpdater;
-use Mojar\Tests\TestCase;
+use Juzaweb\CMS\Facades\Plugin;
+use Juzaweb\CMS\Support\Updater\PluginUpdater;
+use Juzaweb\Tests\TestCase;
 
 class PluginUpdateTest extends TestCase
 {

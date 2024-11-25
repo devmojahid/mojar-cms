@@ -9,14 +9,14 @@
  * @license    GNU V2
  */
 
-namespace Mojar\DevTool\Http\Controllers;
+namespace Juzaweb\DevTool\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
-use Mojar\CMS\Contracts\LocalPluginRepositoryContract;
-use Mojar\CMS\Contracts\LocalThemeRepositoryContract;
+use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
+use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 
 class DevToolController extends Controller
 {

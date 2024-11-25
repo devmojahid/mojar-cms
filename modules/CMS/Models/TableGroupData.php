@@ -9,14 +9,14 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Models;
+namespace Juzaweb\CMS\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Mojar\CMS\Models\TableGroupData
+ * Juzaweb\CMS\Models\TableGroupData
  *
- * @property-read \Mojar\CMS\Models\TableGroupTable|null $tableGroupTable
+ * @property-read \Juzaweb\CMS\Models\TableGroupTable|null $tableGroupTable
  * @method static \Illuminate\Database\Eloquent\Builder|TableGroupData newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TableGroupData newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TableGroupData query()

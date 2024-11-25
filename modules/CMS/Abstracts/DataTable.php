@@ -13,7 +13,7 @@
  * Time: 9:55 PM
  */
 
-namespace Mojar\CMS\Abstracts;
+namespace Juzaweb\CMS\Abstracts;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\View\View;

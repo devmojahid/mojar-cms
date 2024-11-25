@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Http\Controllers;
+namespace Juzaweb\CMS\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

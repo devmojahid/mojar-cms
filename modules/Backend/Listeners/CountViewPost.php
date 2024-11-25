@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Listeners;
+namespace Juzaweb\Backend\Listeners;
 
 use Illuminate\Support\Facades\DB;
-use Mojar\Backend\Events\PostViewed;
+use Juzaweb\Backend\Events\PostViewed;
 use Illuminate\Session\Store;
-use Mojar\Backend\Models\PostView;
+use Juzaweb\Backend\Models\PostView;
 
 class CountViewPost
 {

@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Controllers\Backend;
+namespace Juzaweb\Backend\Http\Controllers\Backend;
 
-use Mojar\Backend\Http\Requests\Tool\ImportRequest;
-use Mojar\CMS\Http\Controllers\BackendController;
-use Mojar\CMS\Support\Imports\PostImportFromXml;
+use Juzaweb\Backend\Http\Requests\Tool\ImportRequest;
+use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Support\Imports\PostImportFromXml;
 
 class ImportController extends BackendController
 {

@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Frontend\Http\Controllers;
+namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Support\Facades\App;
-use Mojar\Frontend\Http\Controllers\Abstracts\BaseSitemapController;
+use Juzaweb\Frontend\Http\Controllers\Abstracts\BaseSitemapController;
 
 class PostSitemapController extends BaseSitemapController
 {

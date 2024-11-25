@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ asset('jw-styles/mojar/css/admin-bar.css') }}?v={{ \Mojar\CMS\Version::getVersion() }}">
+<link rel="stylesheet" href="{{ asset('jw-styles/mojar/css/admin-bar.css') }}?v={{ \Juzaweb\CMS\Version::getVersion() }}">
 
 <div id="jw-adminbar">
     <div id="jwadminbar" class="nojq nojs">

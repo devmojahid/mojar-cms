@@ -9,10 +9,10 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Contracts;
+namespace Juzaweb\CMS\Contracts;
 
 /**
- * @see \Mojar\CMS\Support\Translations\TranslationFinder
+ * @see \Juzaweb\CMS\Support\Translations\TranslationFinder
  */
 interface TranslationFinder
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Mojar\DevTool\Commands\Plugin;
+namespace Juzaweb\DevTool\Commands\Plugin;
 
 use Illuminate\Console\Command;
-use Mojar\Backend\Events\DumpAutoloadPlugin;
-use Mojar\CMS\Support\Plugin;
+use Juzaweb\Backend\Events\DumpAutoloadPlugin;
+use Juzaweb\CMS\Support\Plugin;
 use Symfony\Component\Console\Input\InputArgument;
 
 class EnableCommand extends Command

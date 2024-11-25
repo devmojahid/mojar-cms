@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\CMS\Repositories;
+namespace Juzaweb\CMS\Repositories;
 
 use Illuminate\Database\Eloquent\Builder;
-use Mojar\CMS\Repositories\Eloquent\BaseRepository as PackageBaseRepository;
+use Juzaweb\CMS\Repositories\Eloquent\BaseRepository as PackageBaseRepository;
 
 abstract class BaseRepositoryEloquent extends PackageBaseRepository
 {

@@ -9,9 +9,9 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Support\MojarAPI;
+namespace Juzaweb\CMS\Support\MojarAPI;
 
-use Mojar\CMS\Support\MojarApi;
+use Juzaweb\CMS\Support\MojarApi;
 
 class ThemeApi extends MojarApi
 {

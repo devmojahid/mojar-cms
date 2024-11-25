@@ -9,14 +9,14 @@
  * @license    GNU V2
  */
 
-use Mojar\CMS\Support\Route\Auth;
-use Mojar\Backend\Http\Controllers\Installer\AdminController;
-use Mojar\Backend\Http\Controllers\Installer\DatabaseController;
-use Mojar\Backend\Http\Controllers\Installer\EnvironmentController;
-use Mojar\Backend\Http\Controllers\Installer\FinalController;
-use Mojar\Backend\Http\Controllers\Installer\PermissionsController;
-use Mojar\Backend\Http\Controllers\Installer\RequirementsController;
-use Mojar\Backend\Http\Controllers\Installer\WelcomeController;
+use Juzaweb\CMS\Support\Route\Auth;
+use Juzaweb\Backend\Http\Controllers\Installer\AdminController;
+use Juzaweb\Backend\Http\Controllers\Installer\DatabaseController;
+use Juzaweb\Backend\Http\Controllers\Installer\EnvironmentController;
+use Juzaweb\Backend\Http\Controllers\Installer\FinalController;
+use Juzaweb\Backend\Http\Controllers\Installer\PermissionsController;
+use Juzaweb\Backend\Http\Controllers\Installer\RequirementsController;
+use Juzaweb\Backend\Http\Controllers\Installer\WelcomeController;
 
 Route::group(
     [
@@ -48,7 +48,7 @@ Route::group(
         'middleware' => 'guest',
         'as' => 'admin.',
         'prefix' => config('mojar.admin_prefix'),
-        'namespace' => 'Mojar\CMS\Http\Controllers',
+        'namespace' => 'Juzaweb\CMS\Http\Controllers',
     ],
     function () {
         Auth::routes();

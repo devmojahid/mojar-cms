@@ -9,20 +9,20 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Providers;
+namespace Juzaweb\CMS\Providers;
 
 use Illuminate\Support\Facades\Lang;
-use Mojar\CMS\Contracts\Theme\ThemeRender as ThemeRenderContract;
-use Mojar\CMS\Contracts\ThemeLoaderContract;
-use Mojar\CMS\Contracts\LocalThemeRepositoryContract;
-use Mojar\CMS\Facades\ActionRegister;
-use Mojar\CMS\Facades\ThemeLoader;
-use Mojar\CMS\Support\ServiceProvider;
-use Mojar\CMS\Support\Theme\Theme;
-use Mojar\CMS\Support\LocalThemeRepository;
-use Mojar\CMS\Support\Theme\ThemeRender;
-use Mojar\Frontend\Actions\FrontendAction;
-use Mojar\Frontend\Actions\ThemeAction;
+use Juzaweb\CMS\Contracts\Theme\ThemeRender as ThemeRenderContract;
+use Juzaweb\CMS\Contracts\ThemeLoaderContract;
+use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
+use Juzaweb\CMS\Facades\ActionRegister;
+use Juzaweb\CMS\Facades\ThemeLoader;
+use Juzaweb\CMS\Support\ServiceProvider;
+use Juzaweb\CMS\Support\Theme\Theme;
+use Juzaweb\CMS\Support\LocalThemeRepository;
+use Juzaweb\CMS\Support\Theme\ThemeRender;
+use Juzaweb\Frontend\Actions\FrontendAction;
+use Juzaweb\Frontend\Actions\ThemeAction;
 
 class ThemeServiceProvider extends ServiceProvider
 {

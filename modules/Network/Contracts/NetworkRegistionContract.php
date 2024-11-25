@@ -9,7 +9,7 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Contracts;
+namespace Juzaweb\Network\Contracts;
 
 interface NetworkRegistionContract
 {

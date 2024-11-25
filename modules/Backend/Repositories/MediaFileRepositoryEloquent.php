@@ -1,17 +1,17 @@
 <?php
 
-namespace Mojar\Backend\Repositories;
+namespace Juzaweb\Backend\Repositories;
 
-use Mojar\Backend\Models\MediaFile;
-use Mojar\CMS\Repositories\BaseRepositoryEloquent;
-use Mojar\CMS\Traits\Criterias\UseFilterCriteria;
-use Mojar\CMS\Traits\Criterias\UseSearchCriteria;
-use Mojar\CMS\Traits\Criterias\UseSortableCriteria;
+use Juzaweb\Backend\Models\MediaFile;
+use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
+use Juzaweb\CMS\Traits\Criterias\UseFilterCriteria;
+use Juzaweb\CMS\Traits\Criterias\UseSearchCriteria;
+use Juzaweb\CMS\Traits\Criterias\UseSortableCriteria;
 
 /**
  * Class MediaFileRepositoryEloquent.
  *
- * @package namespace Mojar\Backend\Repositories;
+ * @package namespace Juzaweb\Backend\Repositories;
  */
 class MediaFileRepositoryEloquent extends BaseRepositoryEloquent implements MediaFileRepository
 {

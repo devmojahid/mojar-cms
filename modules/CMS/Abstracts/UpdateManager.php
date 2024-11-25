@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Abstracts;
+namespace Juzaweb\CMS\Abstracts;
 
 use GuzzleHttp\Psr7\Utils;
 use Illuminate\Filesystem\FilesystemAdapter;
@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Mojar\CMS\Contracts\MojarApiContract;
-use Mojar\CMS\Support\Curl;
+use Juzaweb\CMS\Contracts\MojarApiContract;
+use Juzaweb\CMS\Support\Curl;
 
 /**
  * @method void beforeFinish()

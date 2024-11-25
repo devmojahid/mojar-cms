@@ -1,14 +1,14 @@
 <?php
 
-namespace Mojar\Backend\Repositories;
+namespace Juzaweb\Backend\Repositories;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
-use Mojar\Backend\Models\Taxonomy;
-use Mojar\CMS\Repositories\BaseRepositoryEloquent;
-use Mojar\CMS\Traits\Criterias\UseFilterCriteria;
-use Mojar\CMS\Traits\Criterias\UseSearchCriteria;
-use Mojar\CMS\Traits\Criterias\UseSortableCriteria;
+use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
+use Juzaweb\CMS\Traits\Criterias\UseFilterCriteria;
+use Juzaweb\CMS\Traits\Criterias\UseSearchCriteria;
+use Juzaweb\CMS\Traits\Criterias\UseSortableCriteria;
 
 /**
  * @property Taxonomy $model

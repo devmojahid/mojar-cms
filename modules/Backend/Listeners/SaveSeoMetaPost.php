@@ -1,10 +1,10 @@
 <?php
 
-namespace Mojar\Backend\Listeners;
+namespace Juzaweb\Backend\Listeners;
 
 use Illuminate\Support\Arr;
-use Mojar\Backend\Events\AfterPostSave;
-use Mojar\Backend\Models\SeoMeta;
+use Juzaweb\Backend\Events\AfterPostSave;
+use Juzaweb\Backend\Models\SeoMeta;
 
 class SaveSeoMetaPost
 {

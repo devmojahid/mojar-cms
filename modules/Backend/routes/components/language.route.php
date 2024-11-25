@@ -1,6 +1,6 @@
 <?php
 
-use Mojar\Multilang\Http\Controllers\LanguageController;
+use Juzaweb\Multilang\Http\Controllers\LanguageController;
 
 Route::group(
     ['prefix' => 'languages'],

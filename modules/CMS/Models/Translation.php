@@ -1,12 +1,12 @@
 <?php
 
-namespace Mojar\CMS\Models;
+namespace Juzaweb\CMS\Models;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * Mojar\Multisite\Models\Translation
+ * Juzaweb\Multisite\Models\Translation
  *
  * @property int $id
  * @property int $status

@@ -9,9 +9,9 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Abstracts;
+namespace Juzaweb\CMS\Abstracts;
 
-use Mojar\CMS\Traits\ResourceController as ResourceControllerTrait;
+use Juzaweb\CMS\Traits\ResourceController as ResourceControllerTrait;
 
 abstract class ResourceController
 {

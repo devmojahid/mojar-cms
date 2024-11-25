@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Tests\Unit;
+namespace Juzaweb\Tests\Unit;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Mojar\CMS\Support\Theme;
-use Mojar\Tests\TestCase;
+use Juzaweb\CMS\Support\Theme;
+use Juzaweb\Tests\TestCase;
 
 class ThemeTest extends TestCase
 {

@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
 class UriRewriter
 {

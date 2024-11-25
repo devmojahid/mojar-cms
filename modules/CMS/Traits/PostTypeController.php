@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Traits;
+namespace Juzaweb\CMS\Traits;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
@@ -20,12 +20,12 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
-use Mojar\Backend\Events\AfterPostSave;
-use Mojar\Backend\Http\Datatables\PostTypeDataTable;
-use Mojar\Backend\Models\Post;
-use Mojar\CMS\Abstracts\Action;
-use Mojar\CMS\Abstracts\DataTable;
-use Mojar\CMS\Facades\HookAction;
+use Juzaweb\Backend\Events\AfterPostSave;
+use Juzaweb\Backend\Http\Datatables\PostTypeDataTable;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\DataTable;
+use Juzaweb\CMS\Facades\HookAction;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 

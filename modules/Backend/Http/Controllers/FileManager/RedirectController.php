@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\Backend\Http\Controllers\FileManager;
+namespace Juzaweb\Backend\Http\Controllers\FileManager;
 
 use Illuminate\Support\Facades\Storage;
 

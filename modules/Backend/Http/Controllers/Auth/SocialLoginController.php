@@ -1,16 +1,16 @@
 <?php
 
-namespace Mojar\Backend\Http\Controllers\Auth;
+namespace Juzaweb\Backend\Http\Controllers\Auth;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Mojar\Backend\Events\RegisterSuccessful;
-use Mojar\CMS\Http\Controllers\FrontendController;
+use Juzaweb\Backend\Events\RegisterSuccessful;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Auth;
-use Mojar\CMS\Models\User;
-use Mojar\Backend\Models\SocialToken;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\Backend\Models\SocialToken;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\AbstractProvider;
 use Laravel\Socialite\Two\FacebookProvider;

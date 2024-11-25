@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use Mojar\CMS\Contracts\ActionRegisterContract;
+use Juzaweb\CMS\Contracts\ActionRegisterContract;
 
 class ServiceProvider extends BaseServiceProvider
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\Frontend\Http\Controllers;
+namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\File;
@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageCache;
-use Mojar\CMS\Contracts\TranslationManager;
-use Mojar\CMS\Facades\ThemeLoader;
-use Mojar\CMS\Http\Controllers\Controller;
+use Juzaweb\CMS\Contracts\TranslationManager;
+use Juzaweb\CMS\Facades\ThemeLoader;
+use Juzaweb\CMS\Http\Controllers\Controller;
 
 class AssetController extends Controller
 {

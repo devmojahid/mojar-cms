@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Http\Middleware;
+namespace Juzaweb\CMS\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 

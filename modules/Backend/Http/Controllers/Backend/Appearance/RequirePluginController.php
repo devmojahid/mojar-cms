@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Controllers\Backend\Appearance;
+namespace Juzaweb\Backend\Http\Controllers\Backend\Appearance;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
-use Mojar\CMS\Facades\ThemeLoader;
-use Mojar\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Facades\ThemeLoader;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class RequirePluginController extends BackendController
 {

@@ -1,9 +1,9 @@
 <?php
 
-use Mojar\API\Http\Controllers\Documentation\SwaggerAssetController;
-use Mojar\API\Http\Controllers\Documentation\SwaggerController;
-use Mojar\API\Http\Controllers\Documentation\SwaggerDocumentController;
-use Mojar\API\Http\Middleware\SwaggerApiDocumentation;
+use Juzaweb\API\Http\Controllers\Documentation\SwaggerAssetController;
+use Juzaweb\API\Http\Controllers\Documentation\SwaggerController;
+use Juzaweb\API\Http\Controllers\Documentation\SwaggerDocumentController;
+use Juzaweb\API\Http\Middleware\SwaggerApiDocumentation;
 
 Route::group(
     [

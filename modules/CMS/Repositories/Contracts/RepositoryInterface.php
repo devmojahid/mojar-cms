@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\CMS\Repositories\Contracts;
+namespace Juzaweb\CMS\Repositories\Contracts;
 
 use closure;
-use Mojar\CMS\Repositories\Contracts\ValidatorException;
+use Juzaweb\CMS\Repositories\Contracts\ValidatorException;
 
 /**
  * Interface RepositoryInterface

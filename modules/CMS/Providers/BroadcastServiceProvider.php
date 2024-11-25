@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Providers;
+namespace Juzaweb\CMS\Providers;
 
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\ServiceProvider;

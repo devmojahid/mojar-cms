@@ -1,17 +1,17 @@
 <?php
 
-namespace Mojar\Backend\Http\Controllers\Backend;
+namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Mojar\Backend\Http\Datatables\EmailTemplateDataTable;
-use Mojar\Backend\Models\EmailTemplate;
-use Mojar\CMS\Contracts\HookActionContract;
-use Mojar\CMS\Http\Controllers\BackendController;
+use Juzaweb\Backend\Http\Datatables\EmailTemplateDataTable;
+use Juzaweb\Backend\Models\EmailTemplate;
+use Juzaweb\CMS\Contracts\HookActionContract;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Illuminate\Database\Eloquent\Model;
-use Mojar\CMS\Traits\ResourceController;
+use Juzaweb\CMS\Traits\ResourceController;
 
 class EmailTemplateController extends BackendController
 {

@@ -9,11 +9,11 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Http\Datatables;
+namespace Juzaweb\Backend\Http\Datatables;
 
 use Illuminate\Database\Eloquent\Builder;
-use Mojar\Backend\Repositories\NotificationRepository;
-use Mojar\CMS\Abstracts\DataTable;
+use Juzaweb\Backend\Repositories\NotificationRepository;
+use Juzaweb\CMS\Abstracts\DataTable;
 
 class NotificationDatatable extends DataTable
 {
@@ -83,7 +83,7 @@ class NotificationDatatable extends DataTable
 
         $query = $this->notificationRepository->query();
 
-        $query->where('notifiable_type', '=', 'Mojar\CMS\Models\User');
+        $query->where('notifiable_type', '=', 'Juzaweb\CMS\Models\User');
 
         $query->where('notifiable_id', '=', $jw_user->id);
 

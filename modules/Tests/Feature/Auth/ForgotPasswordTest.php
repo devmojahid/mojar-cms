@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Tests\Feature\Auth;
+namespace Juzaweb\Tests\Feature\Auth;
 
-use Mojar\Backend\Models\EmailTemplate;
-use Mojar\Backend\Models\PasswordReset;
-use Mojar\CMS\Models\User;
-use Mojar\Tests\TestCase;
+use Juzaweb\Backend\Models\EmailTemplate;
+use Juzaweb\Backend\Models\PasswordReset;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\Tests\TestCase;
 
 class ForgotPasswordTest extends TestCase
 {

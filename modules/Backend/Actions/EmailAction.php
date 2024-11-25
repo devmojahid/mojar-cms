@@ -9,11 +9,11 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Actions;
+namespace Juzaweb\Backend\Actions;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
-use Mojar\CMS\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\Action;
 
 class EmailAction extends Action
 {

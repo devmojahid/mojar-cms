@@ -9,11 +9,11 @@
  * @license    MIT
  */
 
-namespace Mojar\DevTool\Commands\Theme;
+namespace Juzaweb\DevTool\Commands\Theme;
 
 use Illuminate\Console\Command;
-use Mojar\CMS\Facades\Theme;
-use Mojar\CMS\Support\Updater\ThemeUpdater;
+use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Support\Updater\ThemeUpdater;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 

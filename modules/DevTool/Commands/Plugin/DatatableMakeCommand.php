@@ -9,13 +9,13 @@
  * @license    GNU V2
  */
 
-namespace Mojar\DevTool\Commands\Plugin;
+namespace Juzaweb\DevTool\Commands\Plugin;
 
 use Illuminate\Support\Str;
-use Mojar\CMS\Support\Config\GenerateConfigReader;
-use Mojar\CMS\Support\Stub;
-use Mojar\CMS\Traits\ModuleCommandTrait;
-use Mojar\DevTool\Abstracts\GeneratorCommand;
+use Juzaweb\CMS\Support\Config\GenerateConfigReader;
+use Juzaweb\CMS\Support\Stub;
+use Juzaweb\CMS\Traits\ModuleCommandTrait;
+use Juzaweb\DevTool\Abstracts\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -57,7 +57,7 @@ class DatatableMakeCommand extends GeneratorCommand
     protected function getDataStub(): array
     {
         /**
-         * @var \Mojar\CMS\Support\Plugin $module
+         * @var \Juzaweb\CMS\Support\Plugin $module
          */
         $module = $this->laravel['plugins']->findOrFail($this->getModuleName());
 

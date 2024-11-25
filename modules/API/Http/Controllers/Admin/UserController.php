@@ -9,18 +9,18 @@
  * @license    MIT
  */
 
-namespace Mojar\API\Http\Controllers\Admin;
+namespace Juzaweb\API\Http\Controllers\Admin;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Mojar\Backend\Http\Requests\User\StoreUserRequest;
-use Mojar\Backend\Http\Requests\User\UpdateUserRequest;
-use Mojar\Backend\Repositories\UserRepository;
-use Mojar\CMS\Http\Controllers\ApiController;
-use Mojar\CMS\Models\User;
+use Juzaweb\Backend\Http\Requests\User\StoreUserRequest;
+use Juzaweb\Backend\Http\Requests\User\UpdateUserRequest;
+use Juzaweb\Backend\Repositories\UserRepository;
+use Juzaweb\CMS\Http\Controllers\ApiController;
+use Juzaweb\CMS\Models\User;
 use OpenApi\Annotations as OA;
 
 class UserController extends ApiController

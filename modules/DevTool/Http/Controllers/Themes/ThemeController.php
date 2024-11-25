@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\DevTool\Http\Controllers\Themes;
+namespace Juzaweb\DevTool\Http\Controllers\Themes;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -18,9 +18,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use Inertia\Response;
-use Mojar\CMS\Contracts\LocalThemeRepositoryContract;
-use Mojar\DevTool\Http\Controllers\Controller;
-use Mojar\DevTool\Http\Requests\Theme\StoreRequest;
+use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
+use Juzaweb\DevTool\Http\Controllers\Controller;
+use Juzaweb\DevTool\Http\Requests\Theme\StoreRequest;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 class ThemeController extends Controller

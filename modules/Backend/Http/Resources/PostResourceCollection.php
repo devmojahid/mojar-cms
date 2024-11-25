@@ -9,7 +9,7 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Http\Resources;
+namespace Juzaweb\Backend\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 

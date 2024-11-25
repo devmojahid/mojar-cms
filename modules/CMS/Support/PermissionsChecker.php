@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
 class PermissionsChecker
 {

@@ -2,7 +2,7 @@
 
 namespace $NAMESPACE$;
 
-use Mojar\CMS\Support\ServiceProvider;
+use Juzaweb\CMS\Support\ServiceProvider;
 
 class $CLASS$ extends ServiceProvider
 {

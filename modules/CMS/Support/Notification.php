@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
-use Mojar\CMS\Jobs\SendNotification as SendNotificationJob;
-use Mojar\Backend\Models\ManualNotification;
+use Juzaweb\CMS\Jobs\SendNotification as SendNotificationJob;
+use Juzaweb\Backend\Models\ManualNotification;
 use Illuminate\Foundation\Auth\User;
 
 class Notification
@@ -36,7 +36,7 @@ class Notification
     }
 
     /**
-     * @param array|int|\Mojar\CMS\Models\User $users
+     * @param array|int|\Juzaweb\CMS\Models\User $users
      * @return $this
      */
     public function setUsers($users)

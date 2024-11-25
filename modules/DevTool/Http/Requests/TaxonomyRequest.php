@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\DevTool\Http\Requests;
+namespace Juzaweb\DevTool\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

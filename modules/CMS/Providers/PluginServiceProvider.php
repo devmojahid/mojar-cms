@@ -1,13 +1,13 @@
 <?php
 
-namespace Mojar\CMS\Providers;
+namespace Juzaweb\CMS\Providers;
 
-use Mojar\CMS\Contracts\ActivatorInterface;
-use Mojar\CMS\Contracts\ConfigContract;
-use Mojar\CMS\Contracts\LocalPluginRepositoryContract;
-use Mojar\CMS\Exceptions\InvalidActivatorClass;
-use Mojar\CMS\Support\LocalPluginRepository;
-use Mojar\CMS\Support\ServiceProvider;
+use Juzaweb\CMS\Contracts\ActivatorInterface;
+use Juzaweb\CMS\Contracts\ConfigContract;
+use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
+use Juzaweb\CMS\Exceptions\InvalidActivatorClass;
+use Juzaweb\CMS\Support\LocalPluginRepository;
+use Juzaweb\CMS\Support\ServiceProvider;
 
 class PluginServiceProvider extends ServiceProvider
 {

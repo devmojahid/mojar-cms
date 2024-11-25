@@ -9,13 +9,13 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Datatables\Email;
+namespace Juzaweb\Backend\Http\Datatables\Email;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
-use Mojar\Backend\Models\EmailTemplate;
-use Mojar\Backend\Repositories\Email\EmailTemplateRepository;
-use Mojar\CMS\Abstracts\DataTable;
+use Juzaweb\Backend\Models\EmailTemplate;
+use Juzaweb\Backend\Repositories\Email\EmailTemplateRepository;
+use Juzaweb\CMS\Abstracts\DataTable;
 
 class EmailHookDataTable extends DataTable
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Mojar\CMS\Repositories\Transformer;
+namespace Juzaweb\CMS\Repositories\Transformer;
 
-use Mojar\CMS\Repositories\Contracts\Transformable;
+use Juzaweb\CMS\Repositories\Contracts\Transformable;
 use League\Fractal\TransformerAbstract;
 
 /**

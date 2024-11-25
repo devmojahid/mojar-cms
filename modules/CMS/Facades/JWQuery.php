@@ -9,10 +9,10 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Facades;
+namespace Juzaweb\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Mojar\CMS\Contracts\JWQueryContract;
+use Juzaweb\CMS\Contracts\JWQueryContract;
 
 /**
  * @method static array posts(string $type, array $options = [])
@@ -20,8 +20,8 @@ use Mojar\CMS\Contracts\JWQueryContract;
  * @method static array postTaxonomies($post, $taxonomy, $params)
  * @method static array relatedPosts($post, $taxonomy, $params)
  *
- * @see \Mojar\CMS\Support\JWQuery
- * @see \Mojar\CMS\Traits\Queries\PostQuery
+ * @see \Juzaweb\CMS\Support\JWQuery
+ * @see \Juzaweb\CMS\Traits\Queries\PostQuery
  */
 class JWQuery extends Facade
 {

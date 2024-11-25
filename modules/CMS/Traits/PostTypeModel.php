@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Traits;
+namespace Juzaweb\CMS\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -18,14 +18,14 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
-use Mojar\Backend\Http\Resources\TaxonomyResource;
-use Mojar\Backend\Models\Comment;
-use Mojar\Backend\Models\Post;
-use Mojar\Backend\Models\PostMeta;
-use Mojar\Backend\Models\Taxonomy;
-use Mojar\Backend\Support\PostContentParser;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Facades\ShortCode;
+use Juzaweb\Backend\Http\Resources\TaxonomyResource;
+use Juzaweb\Backend\Models\Comment;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Models\PostMeta;
+use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\Backend\Support\PostContentParser;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Facades\ShortCode;
 
 /**
  * @method Builder wherePublish()

@@ -9,15 +9,15 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Traits\Macroable;
-use Mojar\CMS\Contracts\JWQueryContract;
-use Mojar\CMS\Traits\Queries\PostQuery;
+use Juzaweb\CMS\Contracts\JWQueryContract;
+use Juzaweb\CMS\Traits\Queries\PostQuery;
 use Illuminate\Support\Collection;
 
 class JWQuery implements JWQueryContract

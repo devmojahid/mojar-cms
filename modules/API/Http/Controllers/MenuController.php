@@ -9,11 +9,11 @@
  * @license    GNU General Public License v2.0
  */
 
-namespace Mojar\API\Http\Controllers;
+namespace Juzaweb\API\Http\Controllers;
 
-use Mojar\API\Http\Resources\MenuResource;
-use Mojar\Backend\Repositories\MenuRepository;
-use Mojar\CMS\Http\Controllers\ApiController;
+use Juzaweb\API\Http\Resources\MenuResource;
+use Juzaweb\Backend\Repositories\MenuRepository;
+use Juzaweb\CMS\Http\Controllers\ApiController;
 
 class MenuController extends ApiController
 {

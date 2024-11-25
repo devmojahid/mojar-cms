@@ -9,13 +9,13 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Controllers\Backend;
+namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
-use Mojar\CMS\Abstracts\DataTable;
-use Mojar\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Abstracts\DataTable;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class DatatableController extends BackendController
 {

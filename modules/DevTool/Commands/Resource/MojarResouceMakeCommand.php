@@ -9,9 +9,9 @@
  * @license    GNU V2
  */
 
-namespace Mojar\DevTool\Commands\Resource;
+namespace Juzaweb\DevTool\Commands\Resource;
 
-use Mojar\DevTool\Abstracts\CRUD\ResourceCommand;
+use Juzaweb\DevTool\Abstracts\CRUD\ResourceCommand;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**

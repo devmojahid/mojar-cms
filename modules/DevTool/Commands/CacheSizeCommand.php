@@ -9,7 +9,7 @@
  * @license    MIT
  */
 
-namespace Mojar\DevTool\Commands;
+namespace Juzaweb\DevTool\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;

@@ -9,15 +9,15 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Models;
+namespace Juzaweb\Network\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Mojar\CMS\Models\Model;
-use Mojar\Network\Interfaces\RootNetworkModelInterface;
-use Mojar\Network\Traits\RootNetworkModel;
+use Juzaweb\CMS\Models\Model;
+use Juzaweb\Network\Interfaces\RootNetworkModelInterface;
+use Juzaweb\Network\Traits\RootNetworkModel;
 
 /**
- * Mojar\Network\Models\Site
+ * Juzaweb\Network\Models\Site
  *
  * @property int $id
  * @property string $domain
@@ -35,7 +35,7 @@ use Mojar\Network\Traits\RootNetworkModel;
  * @method static \Illuminate\Database\Eloquent\Builder|Site whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Site whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Network\Models\DomainMapping[] $domainMappings
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Network\Models\DomainMapping[] $domainMappings
  * @property-read int|null $domain_mappings_count
  */
 class Site extends Model implements RootNetworkModelInterface

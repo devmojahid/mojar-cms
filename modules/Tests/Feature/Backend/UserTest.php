@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Tests\Feature\Backend;
+namespace Juzaweb\Tests\Feature\Backend;
 
 use Faker\Generator as Faker;
-use Mojar\Tests\TestCase;
-use Mojar\CMS\Models\User;
+use Juzaweb\Tests\TestCase;
+use Juzaweb\CMS\Models\User;
 
 class UserTest extends TestCase
 {

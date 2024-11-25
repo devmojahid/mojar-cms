@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Interfaces\Theme;
+namespace Juzaweb\CMS\Interfaces\Theme;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
-use Mojar\CMS\Support\Plugin;
+use Juzaweb\CMS\Support\Plugin;
 
 /**
  * @see Plugin

@@ -9,16 +9,16 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
 use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Mojar\CMS\Contracts\TableGroupContract;
-use Mojar\CMS\Models\TableGroup;
-use Mojar\CMS\Models\TableGroupData;
-use Mojar\CMS\Models\TableGroupTable;
+use Juzaweb\CMS\Contracts\TableGroupContract;
+use Juzaweb\CMS\Models\TableGroup;
+use Juzaweb\CMS\Models\TableGroupData;
+use Juzaweb\CMS\Models\TableGroupTable;
 
 class DatabaseTableGroup implements TableGroupContract
 {

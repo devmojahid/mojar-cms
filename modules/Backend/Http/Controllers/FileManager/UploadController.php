@@ -1,14 +1,14 @@
 <?php
 
-namespace Mojar\Backend\Http\Controllers\FileManager;
+namespace Juzaweb\Backend\Http\Controllers\FileManager;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Mojar\Backend\Events\UploadFileSuccess;
-use Mojar\Backend\Http\Requests\FileManager\ImportRequest;
-use Mojar\CMS\Support\FileManager;
+use Juzaweb\Backend\Events\UploadFileSuccess;
+use Juzaweb\Backend\Http\Requests\FileManager\ImportRequest;
+use Juzaweb\CMS\Support\FileManager;
 use Pion\Laravel\ChunkUpload\Exceptions\UploadMissingFileException;
 use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;

@@ -9,14 +9,14 @@
  * @license    GNU General Public License v2.0
  */
 
-namespace Mojar\API\Http\Controllers;
+namespace Juzaweb\API\Http\Controllers;
 
 use Illuminate\Support\Arr;
-use Mojar\CMS\Contracts\ConfigContract;
-use Mojar\CMS\Contracts\HookActionContract;
-use Mojar\CMS\Contracts\ThemeConfigContract;
-use Mojar\CMS\Facades\Theme;
-use Mojar\CMS\Http\Controllers\ApiController;
+use Juzaweb\CMS\Contracts\ConfigContract;
+use Juzaweb\CMS\Contracts\HookActionContract;
+use Juzaweb\CMS\Contracts\ThemeConfigContract;
+use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Http\Controllers\ApiController;
 
 class SettingController extends ApiController
 {

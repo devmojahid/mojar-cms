@@ -9,13 +9,13 @@
  * @license    GNU V2
  */
 
-namespace Mojar\DevTool\Commands;
+namespace Juzaweb\DevTool\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Mojar\CMS\Models\User;
+use Juzaweb\CMS\Models\User;
 
 class MakeAdminCommand extends Command
 {

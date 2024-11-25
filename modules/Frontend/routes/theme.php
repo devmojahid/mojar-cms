@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-use Mojar\CMS\Support\Route\Auth;
+use Juzaweb\CMS\Support\Route\Auth;
 
 Auth::routes();
 

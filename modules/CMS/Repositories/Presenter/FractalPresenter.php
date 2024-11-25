@@ -1,13 +1,13 @@
 <?php
 
-namespace Mojar\CMS\Repositories\Presenter;
+namespace Juzaweb\CMS\Repositories\Presenter;
 
 use Exception;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
-use Mojar\CMS\Repositories\Contracts\PresenterInterface;
+use Juzaweb\CMS\Repositories\Contracts\PresenterInterface;
 use League\Fractal\Manager;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use League\Fractal\Resource\Collection;

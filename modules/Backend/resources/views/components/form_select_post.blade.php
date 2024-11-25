@@ -5,7 +5,7 @@
 
         $options = [];
         if ($value) {
-            $options = \Mojar\Backend\Models\Post::whereIn('id', $value)
+            $options = \Juzaweb\Backend\Models\Post::whereIn('id', $value)
                 ->get(['id', 'title'])
                 ->mapWithKeys(function ($item) {
                     return [

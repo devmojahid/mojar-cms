@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Tests\Unit;
+namespace Juzaweb\Tests\Unit;
 
 use Illuminate\Support\Facades\File;
-use Mojar\CMS\Facades\Theme;
-use Mojar\CMS\Support\Updater\ThemeUpdater;
-use Mojar\Tests\TestCase;
+use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Support\Updater\ThemeUpdater;
+use Juzaweb\Tests\TestCase;
 
 class ThemeUpdateTest extends TestCase
 {

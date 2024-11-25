@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Resources;
+namespace Juzaweb\Backend\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Mojar\Backend\Models\Comment;
+use Juzaweb\Backend\Models\Comment;
 
 /**
  * @property Comment $resource

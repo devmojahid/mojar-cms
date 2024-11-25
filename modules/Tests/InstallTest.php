@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Tests;
+namespace Juzaweb\Tests;
 
-use Mojar\CMS\Models\User;
-use Mojar\CMS\Support\Installer;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Support\Installer;
 
 class InstallTest extends TestCase
 {

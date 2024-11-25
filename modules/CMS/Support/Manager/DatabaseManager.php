@@ -1,13 +1,13 @@
 <?php
 
-namespace Mojar\CMS\Support\Manager;
+namespace Juzaweb\CMS\Support\Manager;
 
 use Exception;
 use Illuminate\Database\SQLiteConnection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
-use Mojar\CMS\Facades\Config as DbConfig;
+use Juzaweb\CMS\Facades\Config as DbConfig;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 class DatabaseManager

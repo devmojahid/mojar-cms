@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\DevTool\Commands\Plugin;
+namespace Juzaweb\DevTool\Commands\Plugin;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;

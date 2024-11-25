@@ -9,9 +9,9 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Contracts;
+namespace Juzaweb\Network\Contracts;
 
-use Mojar\CMS\Models\User;
+use Juzaweb\CMS\Models\User;
 
 interface NetworkSiteContract
 {

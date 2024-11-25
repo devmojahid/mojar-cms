@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Resources;
+namespace Juzaweb\Backend\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;

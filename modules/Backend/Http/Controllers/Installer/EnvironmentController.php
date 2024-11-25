@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\Backend\Http\Controllers\Installer;
+namespace Juzaweb\Backend\Http\Controllers\Installer;
 
 use Exception;
 use Illuminate\Http\Request;
@@ -8,8 +8,8 @@ use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Mojar\CMS\Events\EnvironmentSaved;
-use Mojar\CMS\Support\Manager\EnvironmentManager;
+use Juzaweb\CMS\Events\EnvironmentSaved;
+use Juzaweb\CMS\Support\Manager\EnvironmentManager;
 
 class EnvironmentController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Support\Validators;
+namespace Juzaweb\CMS\Support\Validators;
 
 use GuzzleHttp\Client;
 

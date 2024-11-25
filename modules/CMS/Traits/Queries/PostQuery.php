@@ -9,12 +9,12 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Traits\Queries;
+namespace Juzaweb\CMS\Traits\Queries;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
-use Mojar\Backend\Http\Resources\PostResourceCollection;
-use Mojar\Backend\Models\Post;
+use Juzaweb\Backend\Http\Resources\PostResourceCollection;
+use Juzaweb\Backend\Models\Post;
 
 trait PostQuery
 {

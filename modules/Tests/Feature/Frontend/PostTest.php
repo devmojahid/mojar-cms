@@ -9,13 +9,13 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Tests\Feature\Frontend;
+namespace Juzaweb\Tests\Feature\Frontend;
 
 use Faker\Generator as Faker;
 use Illuminate\Support\Collection;
-use Mojar\Backend\Models\Post;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\Tests\TestCase;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\Tests\TestCase;
 
 class PostTest extends TestCase
 {

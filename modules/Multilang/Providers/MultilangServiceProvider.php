@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\Multilang\Providers;
+namespace Juzaweb\Multilang\Providers;
 
 use Illuminate\Routing\Router;
-use Mojar\Multilang\Http\Middleware\Multilang;
-use Mojar\CMS\Support\ServiceProvider;
-use Mojar\Multilang\MultilangAction;
+use Juzaweb\Multilang\Http\Middleware\Multilang;
+use Juzaweb\CMS\Support\ServiceProvider;
+use Juzaweb\Multilang\MultilangAction;
 
 class MultilangServiceProvider extends ServiceProvider
 {

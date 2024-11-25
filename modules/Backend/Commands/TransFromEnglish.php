@@ -9,9 +9,9 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Commands;
+namespace Juzaweb\Backend\Commands;
 
-use Mojar\CMS\Contracts\TranslationManager;
+use Juzaweb\CMS\Contracts\TranslationManager;
 use Symfony\Component\Console\Input\InputOption;
 
 class TransFromEnglish extends TranslationCommand

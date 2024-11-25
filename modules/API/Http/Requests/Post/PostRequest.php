@@ -9,12 +9,12 @@
  * @license    MIT
  */
 
-namespace Mojar\API\Http\Requests\Post;
+namespace Juzaweb\API\Http\Requests\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Mojar\Backend\Models\Post;
-use Mojar\Backend\Repositories\PostRepository;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Repositories\PostRepository;
 
 class PostRequest extends FormRequest
 {

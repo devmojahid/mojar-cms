@@ -1,10 +1,10 @@
 <?php
 
-namespace Mojar\DevTool\Commands\Plugin\Publish;
+namespace Juzaweb\DevTool\Commands\Plugin\Publish;
 
 use Illuminate\Console\Command;
-use Mojar\CMS\Support\Migrations\Migrator;
-use Mojar\CMS\Support\Publishing\MigrationPublisher;
+use Juzaweb\CMS\Support\Migrations\Migrator;
+use Juzaweb\CMS\Support\Publishing\MigrationPublisher;
 use Symfony\Component\Console\Input\InputArgument;
 
 class PublishMigrationCommand extends Command
@@ -44,7 +44,7 @@ class PublishMigrationCommand extends Command
     /**
      * Publish migration for the specified plugin.
      *
-     * @param \Mojar\CMS\Support\Plugin $module
+     * @param \Juzaweb\CMS\Support\Plugin $module
      */
     public function publish($module)
     {

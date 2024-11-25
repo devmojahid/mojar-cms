@@ -1,10 +1,10 @@
 <?php
 
-namespace Mojar\CMS\Console\Commands;
+namespace Juzaweb\CMS\Console\Commands;
 
 use Illuminate\Console\Command;
-use Mojar\Backend\Models\ManualNotification;
-use Mojar\CMS\Support\SendNotification;
+use Juzaweb\Backend\Models\ManualNotification;
+use Juzaweb\CMS\Support\SendNotification;
 
 class SendNotifyCommand extends Command
 {

@@ -1,35 +1,35 @@
 <?php
 
-namespace Mojar\DevTool\Providers;
+namespace Juzaweb\DevTool\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Mojar\DevTool\Commands\CacheSizeCommand;
-use Mojar\DevTool\Commands\FindFillableColumnCommand;
-use Mojar\DevTool\Commands\MakeAdminCommand;
-use Mojar\DevTool\Commands\Plugin;
-use Mojar\DevTool\Commands\Plugin\ActionMakeCommand;
-use Mojar\DevTool\Commands\Plugin\CommandMakeCommand;
-use Mojar\DevTool\Commands\Plugin\ControllerMakeCommand;
-use Mojar\DevTool\Commands\Plugin\DisableCommand;
-use Mojar\DevTool\Commands\Plugin\EnableCommand;
-use Mojar\DevTool\Commands\Plugin\EventMakeCommand;
-use Mojar\DevTool\Commands\Plugin\InstallCommand as PluginInstallCommand;
-use Mojar\DevTool\Commands\Plugin\JobMakeCommand;
-use Mojar\DevTool\Commands\Plugin\ListCommand;
-use Mojar\DevTool\Commands\Plugin\ListenerMakeCommand;
-use Mojar\DevTool\Commands\Plugin\MiddlewareMakeCommand;
-use Mojar\DevTool\Commands\Plugin\ModelMakeCommand;
-use Mojar\DevTool\Commands\Plugin\ModuleDeleteCommand;
-use Mojar\DevTool\Commands\Plugin\ModuleMakeCommand;
-use Mojar\DevTool\Commands\Plugin\ProviderMakeCommand;
-use Mojar\DevTool\Commands\Plugin\Publish\PublishCommand;
-use Mojar\DevTool\Commands\Plugin\RequestMakeCommand;
-use Mojar\DevTool\Commands\Plugin\ResourceMakeCommand;
-use Mojar\DevTool\Commands\Plugin\RouteProviderMakeCommand;
-use Mojar\DevTool\Commands\Plugin\RuleMakeCommand;
-use Mojar\DevTool\Commands\Plugin\SeedCommand;
-use Mojar\DevTool\Commands\Resource;
-use Mojar\DevTool\Commands\Theme;
+use Juzaweb\DevTool\Commands\CacheSizeCommand;
+use Juzaweb\DevTool\Commands\FindFillableColumnCommand;
+use Juzaweb\DevTool\Commands\MakeAdminCommand;
+use Juzaweb\DevTool\Commands\Plugin;
+use Juzaweb\DevTool\Commands\Plugin\ActionMakeCommand;
+use Juzaweb\DevTool\Commands\Plugin\CommandMakeCommand;
+use Juzaweb\DevTool\Commands\Plugin\ControllerMakeCommand;
+use Juzaweb\DevTool\Commands\Plugin\DisableCommand;
+use Juzaweb\DevTool\Commands\Plugin\EnableCommand;
+use Juzaweb\DevTool\Commands\Plugin\EventMakeCommand;
+use Juzaweb\DevTool\Commands\Plugin\InstallCommand as PluginInstallCommand;
+use Juzaweb\DevTool\Commands\Plugin\JobMakeCommand;
+use Juzaweb\DevTool\Commands\Plugin\ListCommand;
+use Juzaweb\DevTool\Commands\Plugin\ListenerMakeCommand;
+use Juzaweb\DevTool\Commands\Plugin\MiddlewareMakeCommand;
+use Juzaweb\DevTool\Commands\Plugin\ModelMakeCommand;
+use Juzaweb\DevTool\Commands\Plugin\ModuleDeleteCommand;
+use Juzaweb\DevTool\Commands\Plugin\ModuleMakeCommand;
+use Juzaweb\DevTool\Commands\Plugin\ProviderMakeCommand;
+use Juzaweb\DevTool\Commands\Plugin\Publish\PublishCommand;
+use Juzaweb\DevTool\Commands\Plugin\RequestMakeCommand;
+use Juzaweb\DevTool\Commands\Plugin\ResourceMakeCommand;
+use Juzaweb\DevTool\Commands\Plugin\RouteProviderMakeCommand;
+use Juzaweb\DevTool\Commands\Plugin\RuleMakeCommand;
+use Juzaweb\DevTool\Commands\Plugin\SeedCommand;
+use Juzaweb\DevTool\Commands\Resource;
+use Juzaweb\DevTool\Commands\Theme;
 
 class ConsoleServiceProvider extends ServiceProvider
 {

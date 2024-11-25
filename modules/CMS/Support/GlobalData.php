@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
 use Illuminate\Support\Arr;
-use Mojar\CMS\Contracts\GlobalDataContract;
+use Juzaweb\CMS\Contracts\GlobalDataContract;
 
 class GlobalData implements GlobalDataContract
 {

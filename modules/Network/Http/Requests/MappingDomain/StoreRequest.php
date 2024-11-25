@@ -9,11 +9,11 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Http\Requests\MappingDomain;
+namespace Juzaweb\Network\Http\Requests\MappingDomain;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Mojar\Network\Models\DomainMapping;
+use Juzaweb\Network\Models\DomainMapping;
 
 class StoreRequest extends FormRequest
 {

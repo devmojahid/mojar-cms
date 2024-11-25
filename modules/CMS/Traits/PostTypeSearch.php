@@ -9,9 +9,9 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Traits;
+namespace Juzaweb\CMS\Traits;
 
-use Mojar\CMS\Models\Search;
+use Juzaweb\CMS\Models\Search;
 
 trait PostTypeSearch
 {

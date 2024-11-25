@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Contracts;
+namespace Juzaweb\CMS\Contracts;
 
 use Illuminate\Support\Collection;
-use Mojar\CMS\Models\Config;
-use Mojar\CMS\Models\Config as ConfigModel;
+use Juzaweb\CMS\Models\Config;
+use Juzaweb\CMS\Models\Config as ConfigModel;
 
 interface ConfigContract
 {

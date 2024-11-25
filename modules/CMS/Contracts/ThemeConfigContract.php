@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Contracts;
+namespace Juzaweb\CMS\Contracts;
 
 use Illuminate\Database\Eloquent\Model;
-use Mojar\CMS\Models\ThemeConfig as ConfigModel;
+use Juzaweb\CMS\Models\ThemeConfig as ConfigModel;
 
 interface ThemeConfigContract
 {

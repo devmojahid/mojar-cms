@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\DevTool\Commands\Plugin;
+namespace Juzaweb\DevTool\Commands\Plugin;
 
 use Illuminate\Console\Command;
-use Mojar\CMS\Console\Commands\PluginAutoloadCommand;
-use Mojar\CMS\Contracts\ActivatorInterface;
-use Mojar\CMS\Support\Generators\ModuleGenerator;
+use Juzaweb\CMS\Console\Commands\PluginAutoloadCommand;
+use Juzaweb\CMS\Contracts\ActivatorInterface;
+use Juzaweb\CMS\Support\Generators\ModuleGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 

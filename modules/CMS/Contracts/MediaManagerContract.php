@@ -9,10 +9,10 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Contracts;
+namespace Juzaweb\CMS\Contracts;
 
-use Mojar\CMS\Models\Model;
-use Mojar\CMS\Support\FileManager\Media;
+use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Support\FileManager\Media;
 
 interface MediaManagerContract
 {

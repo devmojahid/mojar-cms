@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
@@ -12,9 +12,9 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
-use Mojar\CMS\Interfaces\Theme\ThemeInterface;
+use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
 use Noodlehaus\Config as ReadConfig;
-use Mojar\CMS\Facades\Config;
+use Juzaweb\CMS\Facades\Config;
 
 class Theme implements ThemeInterface, Arrayable
 {

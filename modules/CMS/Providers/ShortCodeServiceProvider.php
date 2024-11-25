@@ -9,10 +9,10 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Providers;
+namespace Juzaweb\CMS\Providers;
 
-use Mojar\CMS\Facades\ShortCode;
-use Mojar\CMS\Support\ServiceProvider;
+use Juzaweb\CMS\Facades\ShortCode;
+use Juzaweb\CMS\Support\ServiceProvider;
 
 class ShortCodeServiceProvider extends ServiceProvider
 {

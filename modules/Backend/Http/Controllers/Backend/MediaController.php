@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Controllers\Backend;
+namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\View;
@@ -19,15 +19,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Mojar\Backend\Events\AddFolderSuccess;
-use Mojar\Backend\Http\Requests\Media\AddFolderRequest;
-use Mojar\Backend\Http\Requests\Media\UpdateRequest;
-use Mojar\Backend\Repositories\MediaFileRepository;
-use Mojar\Backend\Repositories\MediaFolderRepository;
-use Mojar\CMS\Facades\Facades;
-use Mojar\CMS\Http\Controllers\BackendController;
-use Mojar\Backend\Models\MediaFile;
-use Mojar\Backend\Models\MediaFolder;
+use Juzaweb\Backend\Events\AddFolderSuccess;
+use Juzaweb\Backend\Http\Requests\Media\AddFolderRequest;
+use Juzaweb\Backend\Http\Requests\Media\UpdateRequest;
+use Juzaweb\Backend\Repositories\MediaFileRepository;
+use Juzaweb\Backend\Repositories\MediaFolderRepository;
+use Juzaweb\CMS\Facades\Facades;
+use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\Backend\Models\MediaFile;
+use Juzaweb\Backend\Models\MediaFolder;
 
 class MediaController extends BackendController
 {

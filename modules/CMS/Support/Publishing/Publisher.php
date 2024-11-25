@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\CMS\Support\Publishing;
+namespace Juzaweb\CMS\Support\Publishing;
 
 use Illuminate\Console\Command;
-use Mojar\CMS\Contracts\LocalPluginRepositoryContract;
-use Mojar\CMS\Contracts\PublisherInterface;
-use Mojar\CMS\Support\Plugin;
+use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
+use Juzaweb\CMS\Contracts\PublisherInterface;
+use Juzaweb\CMS\Support\Plugin;
 
 abstract class Publisher implements PublisherInterface
 {
@@ -87,7 +87,7 @@ abstract class Publisher implements PublisherInterface
     /**
      * Get plugin instance.
      *
-     * @return \Mojar\CMS\Support\Plugin
+     * @return \Juzaweb\CMS\Support\Plugin
      */
     public function getModule()
     {

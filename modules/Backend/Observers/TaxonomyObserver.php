@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Observers;
+namespace Juzaweb\Backend\Observers;
 
 use Illuminate\Support\Facades\Cache;
-use Mojar\Backend\Models\Taxonomy;
+use Juzaweb\Backend\Models\Taxonomy;
 
 class TaxonomyObserver
 {

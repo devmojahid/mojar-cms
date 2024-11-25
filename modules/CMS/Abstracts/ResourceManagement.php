@@ -9,7 +9,7 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Abstracts;
+namespace Juzaweb\CMS\Abstracts;
 
 abstract class ResourceManagement
 {

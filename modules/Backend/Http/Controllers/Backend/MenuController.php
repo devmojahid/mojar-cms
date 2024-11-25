@@ -1,14 +1,14 @@
 <?php
 
-namespace Mojar\Backend\Http\Controllers\Backend;
+namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Mojar\Backend\Models\Menu;
-use Mojar\Backend\Models\MenuItem;
-use Mojar\CMS\Facades\GlobalData;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Http\Controllers\BackendController;
+use Juzaweb\Backend\Models\Menu;
+use Juzaweb\Backend\Models\MenuItem;
+use Juzaweb\CMS\Facades\GlobalData;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class MenuController extends BackendController
 {

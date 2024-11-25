@@ -1,10 +1,10 @@
 <?php
 
-namespace Mojar\DevTool\Commands\Plugin\Publish;
+namespace Juzaweb\DevTool\Commands\Plugin\Publish;
 
 use Illuminate\Console\Command;
-use Mojar\CMS\Console\Commands\Plugin\Module;
-use Mojar\CMS\Support\Publishing\LangPublisher;
+use Juzaweb\CMS\Console\Commands\Plugin\Module;
+use Juzaweb\CMS\Support\Publishing\LangPublisher;
 use Symfony\Component\Console\Input\InputArgument;
 
 class PublishTranslationCommand extends Command

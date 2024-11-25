@@ -9,13 +9,13 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Support\Html\Traits;
+namespace Juzaweb\CMS\Support\Html\Traits;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
-use Mojar\CMS\Models\User;
+use Juzaweb\CMS\Models\User;
 
 trait InputField
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\Backend\Http\Middleware;
+namespace Juzaweb\Backend\Http\Middleware;
 
 use Closure;
-use Mojar\CMS\Traits\MigrationsHelper;
+use Juzaweb\CMS\Traits\MigrationsHelper;
 
 class CanUpdate
 {

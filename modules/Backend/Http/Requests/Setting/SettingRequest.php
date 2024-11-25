@@ -9,10 +9,10 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Http\Requests\Setting;
+namespace Juzaweb\Backend\Http\Requests\Setting;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Mojar\CMS\Facades\HookAction;
+use Juzaweb\CMS\Facades\HookAction;
 use Illuminate\Validation\Rule;
 
 class SettingRequest extends FormRequest

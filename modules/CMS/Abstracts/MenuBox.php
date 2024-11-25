@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Abstracts;
+namespace Juzaweb\CMS\Abstracts;
 
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
-use Mojar\Backend\Models\MenuItem;
+use Juzaweb\Backend\Models\MenuItem;
 
 abstract class MenuBox
 {

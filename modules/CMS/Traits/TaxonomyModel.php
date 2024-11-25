@@ -9,13 +9,13 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Traits;
+namespace Juzaweb\CMS\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
-use Mojar\CMS\Facades\HookAction;
+use Juzaweb\CMS\Facades\HookAction;
 
 trait TaxonomyModel
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Mojar\CMS\Contracts;
+namespace Juzaweb\CMS\Contracts;
 
-use Mojar\CMS\Support\Plugin;
+use Juzaweb\CMS\Support\Plugin;
 
 interface ActivatorInterface
 {

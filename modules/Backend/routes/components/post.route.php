@@ -9,9 +9,9 @@
  * @license    GNU V2
  */
 
-use Mojar\Backend\Http\Controllers\Backend\CommentController;
-use Mojar\Backend\Http\Controllers\Backend\TaxonomyController;
-use Mojar\Backend\Http\Controllers\Backend\PostController;
+use Juzaweb\Backend\Http\Controllers\Backend\CommentController;
+use Juzaweb\Backend\Http\Controllers\Backend\TaxonomyController;
+use Juzaweb\Backend\Http\Controllers\Backend\PostController;
 
 Route::jwResource(
     'post-type/{type}/comments',

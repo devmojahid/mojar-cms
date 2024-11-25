@@ -1,14 +1,14 @@
 <?php
 
-namespace Mojar\CMS\Traits\Permission;
+namespace Juzaweb\CMS\Traits\Permission;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Mojar\CMS\Contracts\Permission;
-use Mojar\CMS\Contracts\Role;
-use Mojar\CMS\Support\Permission\PermissionRegistrar;
+use Juzaweb\CMS\Contracts\Permission;
+use Juzaweb\CMS\Contracts\Role;
+use Juzaweb\CMS\Support\Permission\PermissionRegistrar;
 
 trait HasRoles
 {
@@ -65,7 +65,7 @@ trait HasRoles
      * Scope the model query to certain roles only.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string|int|array|\Mojar\CMS\Contracts\Role|\Illuminate\Support\Collection $roles
+     * @param string|int|array|\Juzaweb\CMS\Contracts\Role|\Illuminate\Support\Collection $roles
      * @param string $guard
      *
      * @return \Illuminate\Database\Eloquent\Builder
@@ -96,7 +96,7 @@ trait HasRoles
     /**
      * Assign the given role to the model.
      *
-     * @param array|string|int|\Mojar\CMS\Contracts\Role|\Illuminate\Support\Collection ...$roles
+     * @param array|string|int|\Juzaweb\CMS\Contracts\Role|\Illuminate\Support\Collection ...$roles
      *
      * @return $this
      */
@@ -151,7 +151,7 @@ trait HasRoles
     /**
      * Revoke the given role from the model.
      *
-     * @param string|int|\Mojar\CMS\Contracts\Role $role
+     * @param string|int|\Juzaweb\CMS\Contracts\Role $role
      */
     public function removeRole($role)
     {
@@ -169,7 +169,7 @@ trait HasRoles
     /**
      * Remove all current roles and set the given ones.
      *
-     * @param  array|\Mojar\CMS\Contracts\Role|\Illuminate\Support\Collection|string|int  ...$roles
+     * @param  array|\Juzaweb\CMS\Contracts\Role|\Illuminate\Support\Collection|string|int  ...$roles
      *
      * @return $this
      */
@@ -183,7 +183,7 @@ trait HasRoles
     /**
      * Determine if the model has (one of) the given role(s).
      *
-     * @param string|int|array|\Mojar\CMS\Contracts\Role|\Illuminate\Support\Collection $roles
+     * @param string|int|array|\Juzaweb\CMS\Contracts\Role|\Illuminate\Support\Collection $roles
      * @param string|null $guard
      * @return bool
      */
@@ -230,7 +230,7 @@ trait HasRoles
      *
      * Alias to hasRole() but without Guard controls
      *
-     * @param string|int|array|\Mojar\CMS\Contracts\Role|\Illuminate\Support\Collection $roles
+     * @param string|int|array|\Juzaweb\CMS\Contracts\Role|\Illuminate\Support\Collection $roles
      *
      * @return bool
      */
@@ -242,7 +242,7 @@ trait HasRoles
     /**
      * Determine if the model has all of the given role(s).
      *
-     * @param  string|array|\Mojar\CMS\Contracts\Role|\Illuminate\Support\Collection  $roles
+     * @param  string|array|\Juzaweb\CMS\Contracts\Role|\Illuminate\Support\Collection  $roles
      * @param  string|null  $guard
      * @return bool
      */
@@ -276,7 +276,7 @@ trait HasRoles
     /**
      * Determine if the model has exactly all of the given role(s).
      *
-     * @param  string|array|\Mojar\CMS\Contracts\Role|\Illuminate\Support\Collection  $roles
+     * @param  string|array|\Juzaweb\CMS\Contracts\Role|\Illuminate\Support\Collection  $roles
      * @param  string|null  $guard
      * @return bool
      */

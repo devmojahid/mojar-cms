@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Jobs;
+namespace Juzaweb\Backend\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -17,8 +17,8 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
-use Mojar\Backend\Models\Post;
-use Mojar\Backend\Models\Taxonomy;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Models\Taxonomy;
 
 class AutoTagJob implements ShouldQueue
 {

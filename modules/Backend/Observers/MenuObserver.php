@@ -9,9 +9,9 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Observers;
+namespace Juzaweb\Backend\Observers;
 
-use Mojar\Backend\Models\Menu;
+use Juzaweb\Backend\Models\Menu;
 use Illuminate\Support\Facades\Cache;
 
 class MenuObserver

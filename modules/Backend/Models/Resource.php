@@ -9,18 +9,18 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Models;
+namespace Juzaweb\Backend\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
-use Mojar\CMS\Models\Model;
-use Mojar\CMS\Traits\UseSlug;
-use Mojar\CMS\Traits\UseUUIDColumn;
+use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Traits\UseSlug;
+use Juzaweb\CMS\Traits\UseUUIDColumn;
 
 /**
- * Mojar\Backend\Models\Resource
+ * Juzaweb\Backend\Models\Resource
  *
  * @property int $id
  * @property string $name
@@ -36,10 +36,10 @@ use Mojar\CMS\Traits\UseUUIDColumn;
  * @property int $display_order
  * @property-read \Illuminate\Database\Eloquent\Collection|Resource[] $children
  * @property-read int|null $children_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\ResourceMeta[] $metas
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\ResourceMeta[] $metas
  * @property-read int|null $metas_count
  * @property-read Resource|null $parent
- * @property-read \Mojar\Backend\Models\Post|null $post
+ * @property-read \Juzaweb\Backend\Models\Post|null $post
  * @method static Builder|Resource newModelQuery()
  * @method static Builder|Resource newQuery()
  * @method static Builder|Resource query()

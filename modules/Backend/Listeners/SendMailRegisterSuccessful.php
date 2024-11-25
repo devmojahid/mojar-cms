@@ -9,13 +9,13 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Listeners;
+namespace Juzaweb\Backend\Listeners;
 
 use Illuminate\Support\Str;
-use Mojar\Backend\Models\EmailTemplate;
-use Mojar\CMS\Events\EmailHook;
-use Mojar\Backend\Events\RegisterSuccessful;
-use Mojar\CMS\Support\Email;
+use Juzaweb\Backend\Models\EmailTemplate;
+use Juzaweb\CMS\Events\EmailHook;
+use Juzaweb\Backend\Events\RegisterSuccessful;
+use Juzaweb\CMS\Support\Email;
 
 class SendMailRegisterSuccessful
 {

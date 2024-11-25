@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Observers;
+namespace Juzaweb\Backend\Observers;
 
 use Illuminate\Support\Facades\DB;
-use Mojar\Backend\Models\Post;
+use Juzaweb\Backend\Models\Post;
 use Illuminate\Support\Facades\Cache;
 
 class PostObserver

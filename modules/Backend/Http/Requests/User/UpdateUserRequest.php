@@ -9,10 +9,10 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Http\Requests\User;
+namespace Juzaweb\Backend\Http\Requests\User;
 
 use Illuminate\Validation\Rule;
-use Mojar\CMS\Models\User;
+use Juzaweb\CMS\Models\User;
 
 class UpdateUserRequest extends UserRequest
 {

@@ -2,10 +2,10 @@
 
 namespace $CLASS_NAMESPACE$;
 
-use Mojar\CMS\Traits\ResourceController;
+use Juzaweb\CMS\Traits\ResourceController;
 use Illuminate\Support\Facades\Validator;
-use Mojar\Backend\Http\Controllers\Backend\PageController;
-use Mojar\CMS\Abstracts\DataTable;
+use Juzaweb\Backend\Http\Controllers\Backend\PageController;
+use Juzaweb\CMS\Abstracts\DataTable;
 use $MODULE_NAMESPACE$Http\Datatables\$DATATABLE$;
 use $MODULE_NAMESPACE$Models\$MODEL_NAME$;
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;

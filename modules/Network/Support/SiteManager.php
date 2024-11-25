@@ -9,15 +9,15 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Support;
+namespace Juzaweb\Network\Support;
 
 use Illuminate\Database\ConnectionResolverInterface;
 use Illuminate\Support\Arr;
-use Mojar\CMS\Models\User;
-use Mojar\Network\Contracts\NetworkSiteContract;
-use Mojar\Network\Contracts\SiteCreaterContract;
-use Mojar\Network\Contracts\SiteManagerContract;
-use Mojar\Network\Models\Site;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\Network\Contracts\NetworkSiteContract;
+use Juzaweb\Network\Contracts\SiteCreaterContract;
+use Juzaweb\Network\Contracts\SiteManagerContract;
+use Juzaweb\Network\Models\Site;
 
 class SiteManager implements SiteManagerContract
 {

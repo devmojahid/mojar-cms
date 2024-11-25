@@ -9,12 +9,12 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Support\Translations;
+namespace Juzaweb\CMS\Support\Translations;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
-use Mojar\CMS\Models\Translation;
+use Juzaweb\CMS\Models\Translation;
 
 class TranslationExporter
 {

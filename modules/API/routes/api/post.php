@@ -9,8 +9,8 @@
  * @license    GNU V2
  */
 
-use Mojar\API\Http\Controllers\PostController;
-use Mojar\API\Http\Controllers\CommentController;
+use Juzaweb\API\Http\Controllers\PostController;
+use Juzaweb\API\Http\Controllers\CommentController;
 
 Route::group(
     [

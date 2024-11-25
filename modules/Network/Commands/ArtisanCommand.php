@@ -9,7 +9,7 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Commands;
+namespace Juzaweb\Network\Commands;
 
 use Illuminate\Console\Command;
 

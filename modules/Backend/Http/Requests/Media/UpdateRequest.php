@@ -9,7 +9,7 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Http\Requests\Media;
+namespace Juzaweb\Backend\Http\Requests\Media;
 
 use Illuminate\Foundation\Http\FormRequest;
 

@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support\Html;
+namespace Juzaweb\CMS\Support\Html;
 
 class ActiveForm
 {

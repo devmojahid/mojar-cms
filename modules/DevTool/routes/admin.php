@@ -9,9 +9,9 @@
  * @license    GNU V2
  */
 
-use Mojar\DevTool\Http\Controllers\DevToolController;
-use Mojar\DevTool\Http\Controllers\Plugins;
-use Mojar\DevTool\Http\Controllers\Themes;
+use Juzaweb\DevTool\Http\Controllers\DevToolController;
+use Juzaweb\DevTool\Http\Controllers\Plugins;
+use Juzaweb\DevTool\Http\Controllers\Themes;
 
 Route::group(
     ['prefix' => 'dev-tools'],

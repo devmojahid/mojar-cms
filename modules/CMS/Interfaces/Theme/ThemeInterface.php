@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Interfaces\Theme;
+namespace Juzaweb\CMS\Interfaces\Theme;
 
 use Illuminate\Support\Collection;
-use Mojar\CMS\Support\Theme;
+use Juzaweb\CMS\Support\Theme;
 
 /**
  * @see Theme

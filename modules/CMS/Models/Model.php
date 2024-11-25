@@ -9,13 +9,13 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Models;
+namespace Juzaweb\CMS\Models;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Arr;
 
 /**
- * Mojar\CMS\Models\Model
+ * Juzaweb\CMS\Models\Model
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Model newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Model newQuery()

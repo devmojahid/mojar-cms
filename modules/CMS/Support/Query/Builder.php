@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\CMS\Support\Query;
+namespace Juzaweb\CMS\Support\Query;
 
 use Illuminate\Database\Query\Builder as BaseBuilder;
 use Illuminate\Support\Arr;
-use Mojar\CMS\Interfaces\QueryCacheModuleInterface;
-use Mojar\CMS\Traits\QueryCache\QueryCacheModule;
+use Juzaweb\CMS\Interfaces\QueryCacheModuleInterface;
+use Juzaweb\CMS\Traits\QueryCache\QueryCacheModule;
 
 class Builder extends BaseBuilder implements QueryCacheModuleInterface
 {

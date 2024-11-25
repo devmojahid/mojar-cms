@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Tests\Feature\Auth;
+namespace Juzaweb\Tests\Feature\Auth;
 
 use Faker\Generator as Faker;
-use Mojar\Backend\Models\EmailList;
-use Mojar\Backend\Models\EmailTemplate;
-use Mojar\Tests\TestCase;
+use Juzaweb\Backend\Models\EmailList;
+use Juzaweb\Backend\Models\EmailTemplate;
+use Juzaweb\Tests\TestCase;
 
 class RegisterTest extends TestCase
 {

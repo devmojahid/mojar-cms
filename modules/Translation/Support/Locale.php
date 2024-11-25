@@ -9,14 +9,14 @@
  * @license    MIT
  */
 
-namespace Mojar\Translation\Support;
+namespace Juzaweb\Translation\Support;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Collection;
-use Mojar\CMS\Facades\Plugin;
-use Mojar\CMS\Facades\ThemeLoader;
+use Juzaweb\CMS\Facades\Plugin;
+use Juzaweb\CMS\Facades\ThemeLoader;
 use Illuminate\Support\Facades\File;
-use Mojar\Translation\Contracts\TranslationContract;
+use Juzaweb\Translation\Contracts\TranslationContract;
 use Symfony\Component\Finder\SplFileInfo;
 
 class Locale implements TranslationContract

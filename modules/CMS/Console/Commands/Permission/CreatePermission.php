@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\CMS\Console\Commands\Permission;
+namespace Juzaweb\CMS\Console\Commands\Permission;
 
 use Illuminate\Console\Command;
-use Mojar\CMS\Contracts\Permission as PermissionContract;
+use Juzaweb\CMS\Contracts\Permission as PermissionContract;
 
 class CreatePermission extends Command
 {

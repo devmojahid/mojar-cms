@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Contracts;
+namespace Juzaweb\CMS\Contracts;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -21,7 +21,7 @@ interface Role
      *
      * @return \Spatie\Permission\Contracts\Role
      *
-     * @throws \Mojar\CMS\Exceptions\RoleDoesNotExist
+     * @throws \Juzaweb\CMS\Exceptions\RoleDoesNotExist
      */
     public static function findByName(string $name, $guardName): self;
 
@@ -33,7 +33,7 @@ interface Role
      *
      * @return \Spatie\Permission\Contracts\Role
      *
-     * @throws \Mojar\CMS\Exceptions\RoleDoesNotExist
+     * @throws \Juzaweb\CMS\Exceptions\RoleDoesNotExist
      */
     public static function findById(int $id, $guardName): self;
 
@@ -50,7 +50,7 @@ interface Role
     /**
      * Determine if the user may perform the given permission.
      *
-     * @param string|\Mojar\CMS\Contracts\Permission $permission
+     * @param string|\Juzaweb\CMS\Contracts\Permission $permission
      *
      * @return bool
      */

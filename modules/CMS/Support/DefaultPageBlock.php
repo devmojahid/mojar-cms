@@ -9,9 +9,9 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
-use Mojar\CMS\Abstracts\PageBlock;
+use Juzaweb\CMS\Abstracts\PageBlock;
 
 class DefaultPageBlock extends PageBlock
 {

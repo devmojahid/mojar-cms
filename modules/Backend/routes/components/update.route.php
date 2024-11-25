@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-use Mojar\Backend\Http\Controllers\Backend\UpdateController;
+use Juzaweb\Backend\Http\Controllers\Backend\UpdateController;
 
 Route::group(
     ['prefix' => 'updates'],

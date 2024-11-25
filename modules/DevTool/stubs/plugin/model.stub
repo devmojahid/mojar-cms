@@ -2,7 +2,7 @@
 
 namespace $NAMESPACE$;
 
-use Mojar\CMS\Models\Model;
+use Juzaweb\CMS\Models\Model;
 
 class $CLASS$ extends Model
 {

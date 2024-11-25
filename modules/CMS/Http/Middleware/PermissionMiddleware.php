@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\CMS\Http\Middleware;
+namespace Juzaweb\CMS\Http\Middleware;
 
 use Closure;
-use Mojar\CMS\Exceptions\UnauthorizedException;
+use Juzaweb\CMS\Exceptions\UnauthorizedException;
 
 class PermissionMiddleware
 {

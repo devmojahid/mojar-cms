@@ -9,10 +9,10 @@
  * @license    GNU General Public License v2.0
  */
 
-namespace Mojar\CMS\Console\Commands;
+namespace Juzaweb\CMS\Console\Commands;
 
 use Illuminate\Console\Command;
-use Mojar\CMS\Version;
+use Juzaweb\CMS\Version;
 
 class VersionCommand extends Command
 {

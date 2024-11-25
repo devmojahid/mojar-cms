@@ -9,15 +9,15 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Models;
+namespace Juzaweb\Backend\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Mojar\CMS\Models\Model;
-use Mojar\CMS\Models\User;
-use Mojar\Network\Traits\RootNetworkModel;
+use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\Network\Traits\RootNetworkModel;
 
 /**
- * Mojar\Backend\Models\SocialToken
+ * Juzaweb\Backend\Models\SocialToken
  *
  * @property int $id
  * @property int $user_id

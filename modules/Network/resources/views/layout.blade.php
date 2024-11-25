@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet" />
 
     @php
-        $version = \Mojar\CMS\Version::getVersion();
+        $version = \Juzaweb\CMS\Version::getVersion();
     @endphp
 
     <link rel="stylesheet" type="text/css"

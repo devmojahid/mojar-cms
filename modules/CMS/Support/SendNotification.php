@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
 use Illuminate\Support\Facades\DB;
-use Mojar\Backend\Models\ManualNotification;
+use Juzaweb\Backend\Models\ManualNotification;
 
 class SendNotification
 {

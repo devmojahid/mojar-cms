@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Support\ShortCode\Compilers;
+namespace Juzaweb\CMS\Support\ShortCode\Compilers;
 
 use Illuminate\Contracts\Support\Arrayable;
 

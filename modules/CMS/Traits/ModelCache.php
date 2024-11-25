@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Traits;
+namespace Juzaweb\CMS\Traits;
 
 //use Rennokki\QueryCache\Traits\QueryCacheable;
 

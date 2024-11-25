@@ -9,16 +9,16 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Http\Controllers\Backend\Module;
+namespace Juzaweb\Backend\Http\Controllers\Backend\Module;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Mojar\Backend\Http\Requests\Module\ActivateByCodeRequest;
-use Mojar\Backend\Http\Requests\Module\LoginJuzaWebRequest;
-use Mojar\CMS\Contracts\MojarApiContract as MojarApi;
-use Mojar\CMS\Http\Controllers\BackendController;
+use Juzaweb\Backend\Http\Requests\Module\ActivateByCodeRequest;
+use Juzaweb\Backend\Http\Requests\Module\LoginJuzaWebRequest;
+use Juzaweb\CMS\Contracts\MojarApiContract as MojarApi;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class BuyModuleController extends BackendController
 {

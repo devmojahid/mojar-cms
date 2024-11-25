@@ -4,7 +4,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Mojar\\Example\\Providers\\ExampleServiceProvider"
+                "Juzaweb\\Example\\Providers\\ExampleServiceProvider"
             ],
             "aliases": {}
         },
@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Mojar\\Example\\": "src/"
+            "Juzaweb\\Example\\": "src/"
         }
     }
 }

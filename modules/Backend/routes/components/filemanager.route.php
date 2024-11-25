@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-use Mojar\Backend\Http\Controllers\FileManager\FileManagerController;
-use Mojar\Backend\Http\Controllers\FileManager\UploadController;
-use Mojar\Backend\Http\Controllers\FileManager\ItemsController;
-use Mojar\Backend\Http\Controllers\FileManager\FolderController;
-use Mojar\Backend\Http\Controllers\FileManager\DeleteController;
+use Juzaweb\Backend\Http\Controllers\FileManager\FileManagerController;
+use Juzaweb\Backend\Http\Controllers\FileManager\UploadController;
+use Juzaweb\Backend\Http\Controllers\FileManager\ItemsController;
+use Juzaweb\Backend\Http\Controllers\FileManager\FolderController;
+use Juzaweb\Backend\Http\Controllers\FileManager\DeleteController;
 
 Route::group(
     ['prefix' => 'file-manager'],

@@ -9,7 +9,7 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Traits;
+namespace Juzaweb\CMS\Traits;
 
 trait ServerLoadChecker
 {

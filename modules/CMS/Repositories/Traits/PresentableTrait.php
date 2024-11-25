@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\CMS\Repositories\Traits;
+namespace Juzaweb\CMS\Repositories\Traits;
 
 use Illuminate\Support\Arr;
-use Mojar\CMS\Repositories\Contracts\PresenterInterface;
+use Juzaweb\CMS\Repositories\Contracts\PresenterInterface;
 
 /**
  * Class PresentableTrait
@@ -20,7 +20,7 @@ trait PresentableTrait
     protected $presenter = null;
 
     /**
-     * @param  \Mojar\CMS\Repositories\Contracts\PresenterInterface  $presenter
+     * @param  \Juzaweb\CMS\Repositories\Contracts\PresenterInterface  $presenter
      *
      * @return $this
      */

@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-use Mojar\CMS\Support\Activators\DbActivator;
+use Juzaweb\CMS\Support\Activators\DbActivator;
 
 return [
     /**

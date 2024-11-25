@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\DevTool\Http\Controllers\Themes;
+namespace Juzaweb\DevTool\Http\Controllers\Themes;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -18,10 +18,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Inertia\Response;
-use Mojar\CMS\Contracts\HookActionContract;
-use Mojar\CMS\Contracts\LocalThemeRepositoryContract;
-use Mojar\DevTool\Http\Controllers\Controller;
-use Mojar\DevTool\Http\Requests\PostTypeRequest;
+use Juzaweb\CMS\Contracts\HookActionContract;
+use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
+use Juzaweb\DevTool\Http\Controllers\Controller;
+use Juzaweb\DevTool\Http\Requests\PostTypeRequest;
 
 class PostTypeController extends Controller
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Mojar\CMS\Traits\Criterias;
+namespace Juzaweb\CMS\Traits\Criterias;
 
-use Mojar\CMS\Repositories\Criterias\SearchCriteria;
+use Juzaweb\CMS\Repositories\Criterias\SearchCriteria;
 
 /**
  * @property array $searchableFields

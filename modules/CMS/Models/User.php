@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Models;
+namespace Juzaweb\CMS\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -21,20 +21,20 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
-use Mojar\Backend\Models\Notification;
-use Mojar\Backend\Models\PasswordReset;
-use Mojar\Backend\Models\SocialToken;
-use Mojar\CMS\Abstracts\Action;
-use Mojar\CMS\Database\Factories\UserFactory;
-use Mojar\CMS\Traits\Permission\HasRoles;
-use Mojar\CMS\Traits\QueryCache\QueryCacheable;
-use Mojar\CMS\Traits\ResourceModel;
-use Mojar\Network\Facades\Network;
-use Mojar\Network\Traits\RootNetworkModel;
+use Juzaweb\Backend\Models\Notification;
+use Juzaweb\Backend\Models\PasswordReset;
+use Juzaweb\Backend\Models\SocialToken;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Database\Factories\UserFactory;
+use Juzaweb\CMS\Traits\Permission\HasRoles;
+use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
+use Juzaweb\CMS\Traits\ResourceModel;
+use Juzaweb\Network\Facades\Network;
+use Juzaweb\Network\Traits\RootNetworkModel;
 use Laravel\Passport\HasApiTokens;
 
 /**
- * Mojar\CMS\Models\User
+ * Juzaweb\CMS\Models\User
  *
  * @property int $id
  * @property string $name
@@ -52,7 +52,7 @@ use Laravel\Passport\HasApiTokens;
  * @property array|null $data
  * @property-read int|null $notifications_count
  * @method static Builder|User active()
- * @method static \Mojar\CMS\Database\Factories\UserFactory factory(...$parameters)
+ * @method static \Juzaweb\CMS\Database\Factories\UserFactory factory(...$parameters)
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User query()
@@ -76,9 +76,9 @@ use Laravel\Passport\HasApiTokens;
  * @property string|null $two_factor_recovery_codes
  * @method static Builder|User whereTwoFactorRecoveryCodes($value)
  * @method static Builder|User whereTwoFactorSecret($value)
- * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\Permission[] $permissions
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Permission[] $permissions
  * @property-read int|null $permissions_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\Role[] $roles
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Role[] $roles
  * @property-read int|null $roles_count
  * @method static Builder|User permission($permissions)
  * @method static Builder|User role($roles, $guard = null)
@@ -90,7 +90,7 @@ use Laravel\Passport\HasApiTokens;
  * @property array|null $json_metas
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
  * @property-read int|null $clients_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\CMS\Models\UserMeta[] $metas
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\CMS\Models\UserMeta[] $metas
  * @property-read int|null $metas_count
  * @property-read PasswordReset|null $passwordReset
  * @method static Builder|User whereJsonMetas($value)

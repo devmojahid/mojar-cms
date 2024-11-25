@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Http\Middleware;
+namespace Juzaweb\CMS\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode as Middleware;
 

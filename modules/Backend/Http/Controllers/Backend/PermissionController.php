@@ -1,8 +1,8 @@
 <?php
 
-namespace Mojar\Backend\Http\Controllers\Backend;
+namespace Juzaweb\Backend\Http\Controllers\Backend;
 
-use Mojar\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class PermissionController extends BackendController
 {

@@ -45,8 +45,8 @@ return [
     */
 
     'middleware' => [
-        'verify_csrf_token' => Mojar\CMS\Http\Middleware\VerifyCsrfToken::class,
-        'encrypt_cookies' => Mojar\CMS\Http\Middleware\EncryptCookies::class,
+        'verify_csrf_token' => Juzaweb\CMS\Http\Middleware\VerifyCsrfToken::class,
+        'encrypt_cookies' => Juzaweb\CMS\Http\Middleware\EncryptCookies::class,
     ],
 
 ];

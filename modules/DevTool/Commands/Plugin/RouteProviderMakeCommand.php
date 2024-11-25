@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\DevTool\Commands\Plugin;
+namespace Juzaweb\DevTool\Commands\Plugin;
 
-use Mojar\CMS\Support\Config\GenerateConfigReader;
-use Mojar\CMS\Support\Stub;
-use Mojar\CMS\Traits\ModuleCommandTrait;
-use Mojar\DevTool\Abstracts\GeneratorCommand;
+use Juzaweb\CMS\Support\Config\GenerateConfigReader;
+use Juzaweb\CMS\Support\Stub;
+use Juzaweb\CMS\Traits\ModuleCommandTrait;
+use Juzaweb\DevTool\Abstracts\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 

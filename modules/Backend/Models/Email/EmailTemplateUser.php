@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Models\Email;
+namespace Juzaweb\Backend\Models\Email;
 
-use Mojar\CMS\Models\Model;
+use Juzaweb\CMS\Models\Model;
 
 /**
- * Mojar\Backend\Models\Email\EmailTemplateUser
+ * Juzaweb\Backend\Models\Email\EmailTemplateUser
  *
  * @method static \Illuminate\Database\Eloquent\Builder|EmailTemplateUser newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|EmailTemplateUser newQuery()

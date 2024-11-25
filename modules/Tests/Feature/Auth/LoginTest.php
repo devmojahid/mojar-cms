@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Tests\Feature\Auth;
+namespace Juzaweb\Tests\Feature\Auth;
 
 use Illuminate\Support\Facades\Hash;
-use Mojar\CMS\Models\User;
-use Mojar\Tests\TestCase;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\Tests\TestCase;
 
 class LoginTest extends TestCase
 {

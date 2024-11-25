@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Providers;
+namespace Juzaweb\CMS\Providers;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Routing\Route;
@@ -8,9 +8,9 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
-use Mojar\CMS\Contracts\Permission as PermissionContract;
-use Mojar\CMS\Contracts\Role as RoleContract;
-use Mojar\CMS\Support\Permission\PermissionRegistrar;
+use Juzaweb\CMS\Contracts\Permission as PermissionContract;
+use Juzaweb\CMS\Contracts\Role as RoleContract;
+use Juzaweb\CMS\Support\Permission\PermissionRegistrar;
 
 class PermissionServiceProvider extends ServiceProvider
 {
@@ -71,11 +71,11 @@ class PermissionServiceProvider extends ServiceProvider
     {
         $this->commands(
             [
-                \Mojar\CMS\Console\Commands\Permission\CacheReset::class,
-                \Mojar\CMS\Console\Commands\Permission\CreateRole::class,
-                \Mojar\CMS\Console\Commands\Permission\CreatePermission::class,
-                \Mojar\CMS\Console\Commands\Permission\Show::class,
-                \Mojar\CMS\Console\Commands\Permission\UpgradeForTeams::class,
+                \Juzaweb\CMS\Console\Commands\Permission\CacheReset::class,
+                \Juzaweb\CMS\Console\Commands\Permission\CreateRole::class,
+                \Juzaweb\CMS\Console\Commands\Permission\CreatePermission::class,
+                \Juzaweb\CMS\Console\Commands\Permission\Show::class,
+                \Juzaweb\CMS\Console\Commands\Permission\UpgradeForTeams::class,
             ]
         );
     }

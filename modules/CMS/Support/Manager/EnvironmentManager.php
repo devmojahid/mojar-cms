@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Support\Manager;
+namespace Juzaweb\CMS\Support\Manager;
 
 use Exception;
 use Illuminate\Http\Request;
@@ -96,7 +96,7 @@ class EnvironmentManager
         $url = url('/');
 
         $envFileData =
-            "APP_NAME=Mojar\n" .
+            "APP_NAME=Juzaweb\n" .
             "APP_ENV=production\n" .
             "APP_KEY=base64:" . base64_encode(Str::random(32)) . "\n" .
             "APP_DEBUG=false\n" .

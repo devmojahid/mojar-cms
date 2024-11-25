@@ -9,18 +9,18 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Http\Controllers\Backend\Plugin;
+namespace Juzaweb\Backend\Http\Controllers\Backend\Plugin;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Mojar\Backend\Events\AfterUploadPlugin;
-use Mojar\Backend\Events\DumpAutoloadPlugin;
-use Mojar\Backend\Support\PluginUploader;
-use Mojar\CMS\Contracts\MojarApiContract;
-use Mojar\CMS\Facades\Plugin;
-use Mojar\CMS\Http\Controllers\BackendController;
+use Juzaweb\Backend\Events\AfterUploadPlugin;
+use Juzaweb\Backend\Events\DumpAutoloadPlugin;
+use Juzaweb\Backend\Support\PluginUploader;
+use Juzaweb\CMS\Contracts\MojarApiContract;
+use Juzaweb\CMS\Facades\Plugin;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Pion\Laravel\ChunkUpload\Exceptions\UploadMissingFileException;
 use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;

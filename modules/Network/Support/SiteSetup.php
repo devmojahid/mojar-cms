@@ -9,12 +9,12 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Support;
+namespace Juzaweb\Network\Support;
 
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Database\ConnectionResolverInterface;
 use Illuminate\Support\Facades\URL;
-use Mojar\Network\Contracts\SiteSetupContract;
+use Juzaweb\Network\Contracts\SiteSetupContract;
 
 class SiteSetup implements SiteSetupContract
 {

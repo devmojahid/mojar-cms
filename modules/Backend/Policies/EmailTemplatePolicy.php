@@ -9,9 +9,9 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Policies;
+namespace Juzaweb\Backend\Policies;
 
-use Mojar\CMS\Abstracts\ResourcePolicy;
+use Juzaweb\CMS\Abstracts\ResourcePolicy;
 
 class EmailTemplatePolicy extends ResourcePolicy
 {

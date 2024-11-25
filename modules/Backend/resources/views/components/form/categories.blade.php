@@ -9,7 +9,7 @@
     </label>
 
     @php
-        $items = \Mojar\Backend\Models\Taxonomy::with(['children'])
+        $items = \Juzaweb\Backend\Models\Taxonomy::with(['children'])
             ->whereNull('parent_id')
             ->where('taxonomy', '=', $taxonomy->get('taxonomy'))
             ->where('post_type', '=', $taxonomy->get('post_type'))

@@ -9,10 +9,10 @@
  * @license    MIT
  */
 
-namespace Mojar\DevTool\Commands\Plugin\Translation;
+namespace Juzaweb\DevTool\Commands\Plugin\Translation;
 
 use Illuminate\Console\Command;
-use Mojar\CMS\Contracts\TranslationManager;
+use Juzaweb\CMS\Contracts\TranslationManager;
 use Symfony\Component\Console\Input\InputArgument;
 
 class ImportTranslationCommand extends Command

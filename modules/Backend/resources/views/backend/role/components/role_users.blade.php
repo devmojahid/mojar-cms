@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-body">
         @php
-            use Mojar\Backend\Models\Role;
+            use Juzaweb\Backend\Models\Role;
             $options = Role::get()
                 ->mapWithKeys(function ($item) {
                     return [$item->id => $item->name];

@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\CMS\Facades;
+namespace Juzaweb\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Mojar\CMS\Contracts\ThemeLoaderContract;
+use Juzaweb\CMS\Contracts\ThemeLoaderContract;
 use Noodlehaus\Config;
 
 /**
@@ -22,7 +22,7 @@ use Noodlehaus\Config;
  * @method static array getTemplates(string $theme, string $template = null)
  * @method static \Noodlehaus\Config[] all($assoc = false)
  *
- * @see \Mojar\CMS\Support\Theme\Theme
+ * @see \Juzaweb\CMS\Support\Theme\Theme
  */
 class ThemeLoader extends Facade
 {

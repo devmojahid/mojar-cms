@@ -1,7 +1,7 @@
 <?php
 
-namespace Mojar\CMS\Contracts;
+namespace Juzaweb\CMS\Contracts;
 
-use Mojar\CMS\Repositories\Contracts\RepositoryInterface as BaseRepositoryInterface;
+use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface as BaseRepositoryInterface;
 
 interface RepositoryInterface extends BaseRepositoryInterface {}

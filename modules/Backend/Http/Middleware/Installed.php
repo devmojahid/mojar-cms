@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Middleware;
+namespace Juzaweb\Backend\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Route;
-use Mojar\CMS\Support\Installer;
+use Juzaweb\CMS\Support\Installer;
 
 class Installed
 {

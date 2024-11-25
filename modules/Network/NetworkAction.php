@@ -9,11 +9,11 @@
  * @license    MIT
  */
 
-namespace Mojar\Network;
+namespace Juzaweb\Network;
 
-use Mojar\CMS\Abstracts\Action;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\Network\Facades\Network;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\Network\Facades\Network;
 
 class NetworkAction extends Action
 {

@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Controllers\Backend;
+namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Arcanedev\LogViewer\Contracts\LogViewer;
 use Arcanedev\LogViewer\Entities\Log;
@@ -24,7 +24,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Mojar\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class LogViewerController extends BackendController
 {

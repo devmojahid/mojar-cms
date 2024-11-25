@@ -9,12 +9,12 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Support\Manager;
+namespace Juzaweb\CMS\Support\Manager;
 
 use Illuminate\Support\Arr;
-use Mojar\Backend\Models\Post;
-use Mojar\Backend\Repositories\PostRepository;
-use Mojar\CMS\Contracts\PostManagerContract;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Repositories\PostRepository;
+use Juzaweb\CMS\Contracts\PostManagerContract;
 
 class PostManager implements PostManagerContract
 {

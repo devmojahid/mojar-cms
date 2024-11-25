@@ -9,12 +9,12 @@
  * @license    GNU General Public License v2.0
  */
 
-namespace Mojar\API\Http\Controllers\Documentation;
+namespace Juzaweb\API\Http\Controllers\Documentation;
 
 use Illuminate\Http\JsonResponse;
-use Mojar\CMS\Abstracts\Action;
-use Mojar\CMS\Contracts\HookActionContract as HookAction;
-use Mojar\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Contracts\HookActionContract as HookAction;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class SwaggerDocumentController extends BackendController
 {

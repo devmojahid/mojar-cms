@@ -9,15 +9,15 @@
  * @license    GNU V2
  */
 
-namespace Mojar\DevTool\Abstracts\CRUD;
+namespace Juzaweb\DevTool\Abstracts\CRUD;
 
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
-use Mojar\CMS\Support\Config\GenerateConfigReader;
-use Mojar\CMS\Support\Plugin;
-use Mojar\CMS\Traits\ModuleCommandTrait;
+use Juzaweb\CMS\Support\Config\GenerateConfigReader;
+use Juzaweb\CMS\Support\Plugin;
+use Juzaweb\CMS\Traits\ModuleCommandTrait;
 
 abstract class ResourceCommand extends Command
 {

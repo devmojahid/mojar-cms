@@ -9,13 +9,13 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support\Theme;
+namespace Juzaweb\CMS\Support\Theme;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
-use Mojar\Backend\Http\Resources\MenuItemResource;
-use Mojar\Backend\Models\MenuItem;
-use Mojar\CMS\Facades\HookAction;
+use Juzaweb\Backend\Http\Resources\MenuItemResource;
+use Juzaweb\Backend\Models\MenuItem;
+use Juzaweb\CMS\Facades\HookAction;
 
 class MenuBuilder implements Arrayable
 {

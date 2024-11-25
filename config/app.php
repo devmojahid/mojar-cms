@@ -141,7 +141,7 @@ return [
     */
 
     'providers' => [
-        ...\Mojar\CMS\Facades\Facades::defaultServiceProviders(),
+        ...\Juzaweb\CMS\Facades\Facades::defaultServiceProviders(),
         /*
          * Application Service Providers...
         */

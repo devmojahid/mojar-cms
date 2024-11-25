@@ -9,10 +9,10 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Support\Translations;
+namespace Juzaweb\CMS\Support\Translations;
 
 use Illuminate\Support\Str;
-use Mojar\CMS\Contracts\TranslationFinder as TranslationFinderContract;
+use Juzaweb\CMS\Contracts\TranslationFinder as TranslationFinderContract;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 

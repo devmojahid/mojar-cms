@@ -1,10 +1,10 @@
 <?php
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
-use Mojar\CMS\Jobs\SendEmailJob;
-use Mojar\Backend\Models\EmailList;
-use Mojar\Backend\Models\EmailTemplate;
+use Juzaweb\CMS\Jobs\SendEmailJob;
+use Juzaweb\Backend\Models\EmailList;
+use Juzaweb\Backend\Models\EmailTemplate;
 
 class Email
 {

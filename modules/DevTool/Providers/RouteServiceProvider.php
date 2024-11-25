@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\DevTool\Providers;
+namespace Juzaweb\DevTool\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;

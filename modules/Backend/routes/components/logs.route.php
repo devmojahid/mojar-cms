@@ -1,7 +1,7 @@
 <?php
 
-use Mojar\Backend\Http\Controllers\Backend\EmailLogController;
-use Mojar\Backend\Http\Controllers\Backend\LogViewerController;
+use Juzaweb\Backend\Http\Controllers\Backend\EmailLogController;
+use Juzaweb\Backend\Http\Controllers\Backend\LogViewerController;
 
 Route::get('logs/email', [EmailLogController::class, 'index'])->name('admin.logs.email');
 

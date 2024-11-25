@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support\Theme;
+namespace Juzaweb\CMS\Support\Theme;
 
 use Illuminate\Support\Collection;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
 use Composer\Autoload\ClassLoader;
 use Illuminate\Cache\CacheManager;
@@ -17,9 +17,9 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\Translation\Translator;
 use Illuminate\View\ViewFinderInterface;
-use Mojar\CMS\Contracts\ActivatorInterface;
+use Juzaweb\CMS\Contracts\ActivatorInterface;
 use Illuminate\Contracts\Foundation\Application as ApplicationContract;
-use Mojar\CMS\Interfaces\Theme\PluginInterface;
+use Juzaweb\CMS\Interfaces\Theme\PluginInterface;
 use Noodlehaus\Config as ReadConfig;
 
 class Plugin implements PluginInterface

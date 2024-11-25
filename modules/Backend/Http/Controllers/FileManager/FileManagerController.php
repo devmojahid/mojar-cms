@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\Backend\Http\Controllers\FileManager;
+namespace Juzaweb\Backend\Http\Controllers\FileManager;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Mojar\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class FileManagerController extends BackendController
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Providers;
+namespace Juzaweb\CMS\Providers;
 
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Database\Eloquent\Model;
@@ -11,67 +11,67 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rule;
-use Mojar\API\Providers\APIServiceProvider;
-use Mojar\Backend\Providers\BackendServiceProvider;
-use Mojar\Backend\Repositories\PostRepository;
-use Mojar\Backend\Repositories\TaxonomyRepository;
-use Mojar\CMS\Contracts\ActionRegisterContract;
-use Mojar\CMS\Contracts\BackendMessageContract;
-use Mojar\CMS\Contracts\CacheGroupContract;
-use Mojar\CMS\Contracts\ConfigContract;
-use Mojar\CMS\Contracts\EventyContract;
-use Mojar\CMS\Contracts\Field;
-use Mojar\CMS\Contracts\GlobalDataContract;
-use Mojar\CMS\Contracts\GoogleTranslate as GoogleTranslateContract;
-use Mojar\CMS\Contracts\HookActionContract;
-use Mojar\CMS\Contracts\MojarApiContract;
-use Mojar\CMS\Contracts\JWQueryContract;
-use Mojar\CMS\Contracts\LocalPluginRepositoryContract;
-use Mojar\CMS\Contracts\LocalThemeRepositoryContract;
-use Mojar\CMS\Contracts\MacroableModelContract;
-use Mojar\CMS\Contracts\Media\Media as MediaContract;
-use Mojar\CMS\Contracts\OverwriteConfigContract;
-use Mojar\CMS\Contracts\PostImporterContract;
-use Mojar\CMS\Contracts\PostManagerContract;
-use Mojar\CMS\Contracts\ShortCode as ShortCodeContract;
-use Mojar\CMS\Contracts\ShortCodeCompiler as ShortCodeCompilerContract;
-use Mojar\CMS\Contracts\StorageDataContract;
-use Mojar\CMS\Contracts\TableGroupContract;
-use Mojar\CMS\Contracts\ThemeConfigContract;
-use Mojar\CMS\Contracts\TranslationFinder as TranslationFinderContract;
-use Mojar\CMS\Contracts\TranslationManager as TranslationManagerContract;
-use Mojar\CMS\Contracts\XssCleanerContract;
-use Mojar\CMS\Extension\Custom;
-use Mojar\CMS\Facades\OverwriteConfig;
-use Mojar\CMS\Support\ActionRegister;
-use Mojar\CMS\Support\CacheGroup;
-use Mojar\CMS\Support\Config as DbConfig;
-use Mojar\CMS\Support\DatabaseTableGroup;
-use Mojar\CMS\Support\GlobalData;
-use Mojar\CMS\Support\GoogleTranslate;
-use Mojar\CMS\Support\HookAction;
-use Mojar\CMS\Support\Html\Field as HtmlField;
-use Mojar\CMS\Support\Imports\PostImporter;
-use Mojar\CMS\Support\MojarApi;
-use Mojar\CMS\Support\JWQuery;
-use Mojar\CMS\Support\MacroableModel;
-use Mojar\CMS\Support\Manager\BackendMessageManager;
-use Mojar\CMS\Support\Manager\PostManager;
-use Mojar\CMS\Support\Manager\TranslationManager;
-use Mojar\CMS\Support\Media\Media;
-use Mojar\CMS\Support\ShortCode\Compilers\ShortCodeCompiler;
-use Mojar\CMS\Support\ShortCode\ShortCode;
-use Mojar\CMS\Support\StorageData;
-use Mojar\CMS\Support\Theme\ThemeConfig;
-use Mojar\CMS\Support\Translations\TranslationFinder;
-use Mojar\CMS\Support\Validators\ModelExists;
-use Mojar\CMS\Support\Validators\ModelUnique;
-use Mojar\CMS\Support\XssCleaner;
-use Mojar\DevTool\Providers\DevToolServiceProvider;
-use Mojar\Frontend\Providers\FrontendServiceProvider;
-use Mojar\Multilang\Providers\MultilangServiceProvider;
-use Mojar\Network\Providers\NetworkServiceProvider;
-use Mojar\Translation\Providers\TranslationServiceProvider;
+use Juzaweb\API\Providers\APIServiceProvider;
+use Juzaweb\Backend\Providers\BackendServiceProvider;
+use Juzaweb\Backend\Repositories\PostRepository;
+use Juzaweb\Backend\Repositories\TaxonomyRepository;
+use Juzaweb\CMS\Contracts\ActionRegisterContract;
+use Juzaweb\CMS\Contracts\BackendMessageContract;
+use Juzaweb\CMS\Contracts\CacheGroupContract;
+use Juzaweb\CMS\Contracts\ConfigContract;
+use Juzaweb\CMS\Contracts\EventyContract;
+use Juzaweb\CMS\Contracts\Field;
+use Juzaweb\CMS\Contracts\GlobalDataContract;
+use Juzaweb\CMS\Contracts\GoogleTranslate as GoogleTranslateContract;
+use Juzaweb\CMS\Contracts\HookActionContract;
+use Juzaweb\CMS\Contracts\MojarApiContract;
+use Juzaweb\CMS\Contracts\JWQueryContract;
+use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
+use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
+use Juzaweb\CMS\Contracts\MacroableModelContract;
+use Juzaweb\CMS\Contracts\Media\Media as MediaContract;
+use Juzaweb\CMS\Contracts\OverwriteConfigContract;
+use Juzaweb\CMS\Contracts\PostImporterContract;
+use Juzaweb\CMS\Contracts\PostManagerContract;
+use Juzaweb\CMS\Contracts\ShortCode as ShortCodeContract;
+use Juzaweb\CMS\Contracts\ShortCodeCompiler as ShortCodeCompilerContract;
+use Juzaweb\CMS\Contracts\StorageDataContract;
+use Juzaweb\CMS\Contracts\TableGroupContract;
+use Juzaweb\CMS\Contracts\ThemeConfigContract;
+use Juzaweb\CMS\Contracts\TranslationFinder as TranslationFinderContract;
+use Juzaweb\CMS\Contracts\TranslationManager as TranslationManagerContract;
+use Juzaweb\CMS\Contracts\XssCleanerContract;
+use Juzaweb\CMS\Extension\Custom;
+use Juzaweb\CMS\Facades\OverwriteConfig;
+use Juzaweb\CMS\Support\ActionRegister;
+use Juzaweb\CMS\Support\CacheGroup;
+use Juzaweb\CMS\Support\Config as DbConfig;
+use Juzaweb\CMS\Support\DatabaseTableGroup;
+use Juzaweb\CMS\Support\GlobalData;
+use Juzaweb\CMS\Support\GoogleTranslate;
+use Juzaweb\CMS\Support\HookAction;
+use Juzaweb\CMS\Support\Html\Field as HtmlField;
+use Juzaweb\CMS\Support\Imports\PostImporter;
+use Juzaweb\CMS\Support\MojarApi;
+use Juzaweb\CMS\Support\JWQuery;
+use Juzaweb\CMS\Support\MacroableModel;
+use Juzaweb\CMS\Support\Manager\BackendMessageManager;
+use Juzaweb\CMS\Support\Manager\PostManager;
+use Juzaweb\CMS\Support\Manager\TranslationManager;
+use Juzaweb\CMS\Support\Media\Media;
+use Juzaweb\CMS\Support\ShortCode\Compilers\ShortCodeCompiler;
+use Juzaweb\CMS\Support\ShortCode\ShortCode;
+use Juzaweb\CMS\Support\StorageData;
+use Juzaweb\CMS\Support\Theme\ThemeConfig;
+use Juzaweb\CMS\Support\Translations\TranslationFinder;
+use Juzaweb\CMS\Support\Validators\ModelExists;
+use Juzaweb\CMS\Support\Validators\ModelUnique;
+use Juzaweb\CMS\Support\XssCleaner;
+use Juzaweb\DevTool\Providers\DevToolServiceProvider;
+use Juzaweb\Frontend\Providers\FrontendServiceProvider;
+use Juzaweb\Multilang\Providers\MultilangServiceProvider;
+use Juzaweb\Network\Providers\NetworkServiceProvider;
+use Juzaweb\Translation\Providers\TranslationServiceProvider;
 use Laravel\Passport\Passport;
 use TwigBridge\Facade\Twig;
 
@@ -87,12 +87,12 @@ class CmsServiceProvider extends ServiceProvider
 
         Validator::extend(
             'recaptcha',
-            '\Mojar\CMS\Support\Validators\ReCaptchaValidator@validate'
+            '\Juzaweb\CMS\Support\Validators\ReCaptchaValidator@validate'
         );
 
         Validator::extend(
             'domain',
-            '\Mojar\CMS\Support\Validators\DomainValidator@validate'
+            '\Juzaweb\CMS\Support\Validators\DomainValidator@validate'
         );
 
         Rule::macro(

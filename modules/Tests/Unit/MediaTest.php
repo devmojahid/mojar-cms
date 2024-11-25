@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Tests\Unit;
+namespace Juzaweb\Tests\Unit;
 
 use Illuminate\Support\Facades\Storage;
-use Mojar\CMS\Models\User;
-use Mojar\CMS\Support\FileManager;
-use Mojar\Tests\TestCase;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Support\FileManager;
+use Juzaweb\Tests\TestCase;
 
 class MediaTest extends TestCase
 {

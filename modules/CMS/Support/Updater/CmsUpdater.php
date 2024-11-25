@@ -1,12 +1,12 @@
 <?php
 
-namespace Mojar\CMS\Support\Updater;
+namespace Juzaweb\CMS\Support\Updater;
 
 use Illuminate\Support\Facades\Artisan;
-use Mojar\Backend\Events\DumpAutoloadPlugin;
-use Mojar\CMS\Abstracts\UpdateManager;
-use Mojar\CMS\Console\Commands\ClearCacheCommand;
-use Mojar\CMS\Version;
+use Juzaweb\Backend\Events\DumpAutoloadPlugin;
+use Juzaweb\CMS\Abstracts\UpdateManager;
+use Juzaweb\CMS\Console\Commands\ClearCacheCommand;
+use Juzaweb\CMS\Version;
 
 class CmsUpdater extends UpdateManager
 {

@@ -9,14 +9,14 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Support\Translations;
+namespace Juzaweb\CMS\Support\Translations;
 
 use Closure;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
-use Mojar\CMS\Contracts\GoogleTranslate;
-use Mojar\CMS\Contracts\TranslationManager;
-use Mojar\CMS\Models\Translation;
+use Juzaweb\CMS\Contracts\GoogleTranslate;
+use Juzaweb\CMS\Contracts\TranslationManager;
+use Juzaweb\CMS\Models\Translation;
 
 class TranslationTranslate
 {

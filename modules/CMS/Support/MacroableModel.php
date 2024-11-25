@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Mojar\CMS\Contracts\MacroableModelContract;
+use Juzaweb\CMS\Contracts\MacroableModelContract;
 
 class MacroableModel implements MacroableModelContract
 {

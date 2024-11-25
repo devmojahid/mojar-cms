@@ -7,9 +7,9 @@
  * @license    GNU V2
  */
 
-use Mojar\Backend\Http\Controllers\Backend\Profile\ProfileController;
-use Mojar\Backend\Http\Controllers\Backend\RoleController;
-use Mojar\Backend\Http\Controllers\Backend\UserController;
+use Juzaweb\Backend\Http\Controllers\Backend\Profile\ProfileController;
+use Juzaweb\Backend\Http\Controllers\Backend\RoleController;
+use Juzaweb\Backend\Http\Controllers\Backend\UserController;
 
 Route::jwResource('users', UserController::class);
 

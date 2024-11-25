@@ -7,17 +7,17 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
-use Mojar\CMS\Contracts\EventyContract;
-use Mojar\CMS\Contracts\GlobalDataContract;
-use Mojar\CMS\Contracts\HookActionContract;
-use Mojar\CMS\Support\HookActions\Traits\MenuHookAction;
-use Mojar\CMS\Support\HookActions\Traits\StyleHookAction;
-use Mojar\CMS\Traits\HookAction\GetHookAction;
-use Mojar\CMS\Traits\HookAction\RegisterHookAction;
+use Juzaweb\CMS\Contracts\EventyContract;
+use Juzaweb\CMS\Contracts\GlobalDataContract;
+use Juzaweb\CMS\Contracts\HookActionContract;
+use Juzaweb\CMS\Support\HookActions\Traits\MenuHookAction;
+use Juzaweb\CMS\Support\HookActions\Traits\StyleHookAction;
+use Juzaweb\CMS\Traits\HookAction\GetHookAction;
+use Juzaweb\CMS\Traits\HookAction\RegisterHookAction;
 
 class HookAction implements HookActionContract
 {

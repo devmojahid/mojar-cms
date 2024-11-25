@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
 use Illuminate\Foundation\Application as BaseApplication;
 
@@ -21,6 +21,6 @@ class Application extends BaseApplication
             return $this->namespace;
         }
 
-        return $this->namespace = 'Mojar\\Backend\\';
+        return $this->namespace = 'Juzaweb\\Backend\\';
     }
 }

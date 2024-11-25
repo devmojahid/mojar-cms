@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Actions;
+namespace Juzaweb\Backend\Actions;
 
 use Illuminate\Support\Arr;
-use Mojar\CMS\Abstracts\Action;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Models\User;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Models\User;
 
 class PermissionAction extends Action
 {

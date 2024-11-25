@@ -9,19 +9,19 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Http\Controllers\Backend\Profile;
+namespace Juzaweb\Backend\Http\Controllers\Backend\Profile;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Mojar\Backend\Http\Datatables\NotificationDatatable;
-use Mojar\Backend\Http\Requests\User\ChangePasswordRequest;
-use Mojar\Backend\Http\Requests\User\ProfileUpdateRequest;
-use Mojar\Backend\Repositories\NotificationRepository;
-use Mojar\CMS\Http\Controllers\BackendController;
-use Mojar\CMS\Models\Language;
+use Juzaweb\Backend\Http\Datatables\NotificationDatatable;
+use Juzaweb\Backend\Http\Requests\User\ChangePasswordRequest;
+use Juzaweb\Backend\Http\Requests\User\ProfileUpdateRequest;
+use Juzaweb\Backend\Repositories\NotificationRepository;
+use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Models\Language;
 
 class ProfileController extends BackendController
 {

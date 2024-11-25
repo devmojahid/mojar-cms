@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
 use Illuminate\Container\Container;
 use Illuminate\Contracts\View\Factory;
@@ -17,10 +17,10 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Inertia\Response;
-use Mojar\CMS\Contracts\LocalThemeRepositoryContract;
-use Mojar\CMS\Contracts\Theme\ThemeRender;
-use Mojar\CMS\Exceptions\ThemeNotFoundException;
-use Mojar\CMS\Interfaces\Theme\ThemeInterface;
+use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
+use Juzaweb\CMS\Contracts\Theme\ThemeRender;
+use Juzaweb\CMS\Exceptions\ThemeNotFoundException;
+use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
 
 class LocalThemeRepository implements LocalThemeRepositoryContract
 {

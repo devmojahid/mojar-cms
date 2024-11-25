@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\Multilang\Http\Controllers;
+namespace Juzaweb\Multilang\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Mojar\Backend\Http\Controllers\Backend\PageController;
-use Mojar\Multilang\Http\Datatables\LanguageDatatable;
-use Mojar\CMS\Models\Language;
+use Juzaweb\Backend\Http\Controllers\Backend\PageController;
+use Juzaweb\Multilang\Http\Datatables\LanguageDatatable;
+use Juzaweb\CMS\Models\Language;
 
 class LanguageController extends PageController
 {

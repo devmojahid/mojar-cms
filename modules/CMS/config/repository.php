@@ -229,7 +229,7 @@ return [
     */
     'generator' => [
         'basePath' => base_path('modules/Backend'),
-        'rootNamespace' => 'Mojar\\Backend\\',
+        'rootNamespace' => 'Juzaweb\\Backend\\',
         'stubsOverridePath' => app()->path(),
         'paths' => [
             'models' => 'Models',

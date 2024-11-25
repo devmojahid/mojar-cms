@@ -9,11 +9,11 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Listeners;
+namespace Juzaweb\Backend\Listeners;
 
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use Mojar\Backend\Events\AfterPostSave;
+use Juzaweb\Backend\Events\AfterPostSave;
 
 class ResizeThumbnailPostListener
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\CMS\Database\Seeders;
+namespace Juzaweb\CMS\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Mojar\Backend\Models\Taxonomy;
+use Juzaweb\Backend\Models\Taxonomy;
 
 class TaxonomyTableSeeder extends Seeder
 {

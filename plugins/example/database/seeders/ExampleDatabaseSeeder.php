@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\Example\Database\Seeders;
+namespace Juzaweb\Example\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;

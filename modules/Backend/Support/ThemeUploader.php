@@ -9,14 +9,14 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Support;
+namespace Juzaweb\Backend\Support;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Mojar\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\Theme;
 
 class ThemeUploader
 {

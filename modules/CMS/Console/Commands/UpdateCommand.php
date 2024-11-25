@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Console\Commands;
+namespace Juzaweb\CMS\Console\Commands;
 
 use Illuminate\Console\Command;
-use Mojar\CMS\Support\Updater\CmsUpdater;
+use Juzaweb\CMS\Support\Updater\CmsUpdater;
 
 class UpdateCommand extends Command
 {

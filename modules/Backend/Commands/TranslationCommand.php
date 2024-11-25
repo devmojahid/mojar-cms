@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Commands;
+namespace Juzaweb\Backend\Commands;
 
 use Illuminate\Console\Command;
-use Mojar\CMS\Facades\Plugin;
-use Mojar\CMS\Facades\ThemeLoader;
+use Juzaweb\CMS\Facades\Plugin;
+use Juzaweb\CMS\Facades\ThemeLoader;
 use Illuminate\Support\Collection;
 
 abstract class TranslationCommand extends Command

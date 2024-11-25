@@ -9,14 +9,14 @@
  * @license    GNU V2
  */
 
-namespace Mojar\API\Http\Controllers\Auth;
+namespace Juzaweb\API\Http\Controllers\Auth;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Mojar\API\Http\Requests\Auth\LoginRequest;
-use Mojar\Backend\Http\Resources\UserResource;
-use Mojar\CMS\Http\Controllers\ApiController;
-use Mojar\CMS\Models\User;
+use Juzaweb\API\Http\Requests\Auth\LoginRequest;
+use Juzaweb\Backend\Http\Resources\UserResource;
+use Juzaweb\CMS\Http\Controllers\ApiController;
+use Juzaweb\CMS\Models\User;
 use Laravel\Passport\PersonalAccessTokenResult;
 use OpenApi\Annotations as OA;
 

@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Abstracts;
+namespace Juzaweb\CMS\Abstracts;
 
-use Mojar\CMS\Contracts\HookActionContract;
-use Mojar\CMS\Facades\Hook;
+use Juzaweb\CMS\Contracts\HookActionContract;
+use Juzaweb\CMS\Facades\Hook;
 
 abstract class Action
 {

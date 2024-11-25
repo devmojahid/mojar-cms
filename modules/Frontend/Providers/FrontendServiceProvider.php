@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Frontend\Providers;
+namespace Juzaweb\Frontend\Providers;
 
-use Mojar\CMS\Contracts\LocalThemeRepositoryContract;
-use Mojar\CMS\Support\ServiceProvider;
+use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
+use Juzaweb\CMS\Support\ServiceProvider;
 
 class FrontendServiceProvider extends ServiceProvider
 {

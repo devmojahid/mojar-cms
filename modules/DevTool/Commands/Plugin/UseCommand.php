@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\DevTool\Commands\Plugin;
+namespace Juzaweb\DevTool\Commands\Plugin;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;

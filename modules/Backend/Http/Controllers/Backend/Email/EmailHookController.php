@@ -9,16 +9,16 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Controllers\Backend\Email;
+namespace Juzaweb\Backend\Http\Controllers\Backend\Email;
 
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
-use Mojar\Backend\Http\Controllers\Backend\PageController;
-use Mojar\Backend\Http\Datatables\Email\EmailHookDataTable;
-use Mojar\Backend\Models\EmailTemplate;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Traits\ResourceController;
+use Juzaweb\Backend\Http\Controllers\Backend\PageController;
+use Juzaweb\Backend\Http\Datatables\Email\EmailHookDataTable;
+use Juzaweb\Backend\Models\EmailTemplate;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Traits\ResourceController;
 
 class EmailHookController extends PageController
 {

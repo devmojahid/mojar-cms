@@ -1,20 +1,20 @@
 <?php
 
-namespace Mojar\CMS\Models;
+namespace Juzaweb\CMS\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Mojar\CMS\Contracts\Role as RoleContract;
-use Mojar\CMS\Exceptions\GuardDoesNotMatch;
-use Mojar\CMS\Exceptions\RoleAlreadyExists;
-use Mojar\CMS\Exceptions\RoleDoesNotExist;
-use Mojar\CMS\Support\Permission\Guard;
-use Mojar\CMS\Support\Permission\PermissionRegistrar;
-use Mojar\CMS\Traits\Permission\HasPermissions;
-use Mojar\CMS\Traits\Permission\RefreshesPermissionCache;
+use Juzaweb\CMS\Contracts\Role as RoleContract;
+use Juzaweb\CMS\Exceptions\GuardDoesNotMatch;
+use Juzaweb\CMS\Exceptions\RoleAlreadyExists;
+use Juzaweb\CMS\Exceptions\RoleDoesNotExist;
+use Juzaweb\CMS\Support\Permission\Guard;
+use Juzaweb\CMS\Support\Permission\PermissionRegistrar;
+use Juzaweb\CMS\Traits\Permission\HasPermissions;
+use Juzaweb\CMS\Traits\Permission\RefreshesPermissionCache;
 
 /**
- * Mojar\CMS\Models\Role
+ * Juzaweb\CMS\Models\Role
  *
  * @property int $id
  * @property string $name
@@ -22,9 +22,9 @@ use Mojar\CMS\Traits\Permission\RefreshesPermissionCache;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $description
- * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\CMS\Models\Permission[] $permissions
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\CMS\Models\Permission[] $permissions
  * @property-read int|null $permissions_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\CMS\Models\User[] $users
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\CMS\Models\User[] $users
  * @property-read int|null $users_count
  * @method static \Illuminate\Database\Eloquent\Builder|Role newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Role newQuery()
@@ -111,9 +111,9 @@ class Role extends Model implements RoleContract
      * @param string $name
      * @param string|null $guardName
      *
-     * @return \Mojar\CMS\Contracts\Role|\Spatie\Permission\Models\Role
+     * @return \Juzaweb\CMS\Contracts\Role|\Spatie\Permission\Models\Role
      *
-     * @throws \Mojar\CMS\Exceptions\RoleDoesNotExist
+     * @throws \Juzaweb\CMS\Exceptions\RoleDoesNotExist
      */
     public static function findByName(string $name, $guardName = null): RoleContract
     {
@@ -134,7 +134,7 @@ class Role extends Model implements RoleContract
      * @param int $id
      * @param string|null $guardName
      *
-     * @return \Mojar\CMS\Contracts\Role|\Spatie\Permission\Models\Role
+     * @return \Juzaweb\CMS\Contracts\Role|\Spatie\Permission\Models\Role
      */
     public static function findById(int $id, $guardName = null): RoleContract
     {
@@ -155,7 +155,7 @@ class Role extends Model implements RoleContract
      * @param string $name
      * @param string|null $guardName
      *
-     * @return \Mojar\CMS\Contracts\Role|\Spatie\Permission\Models\Role
+     * @return \Juzaweb\CMS\Contracts\Role|\Spatie\Permission\Models\Role
      */
     public static function findOrCreate(string $name, $guardName = null): RoleContract
     {
@@ -202,7 +202,7 @@ class Role extends Model implements RoleContract
      *
      * @return bool
      *
-     * @throws \Mojar\CMS\Exceptions\GuardDoesNotMatch
+     * @throws \Juzaweb\CMS\Exceptions\GuardDoesNotMatch
      */
     public function hasPermissionTo($permission): bool
     {

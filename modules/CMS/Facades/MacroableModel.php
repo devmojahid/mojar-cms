@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Facades;
+namespace Juzaweb\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Mojar\CMS\Contracts\MacroableModelContract;
+use Juzaweb\CMS\Contracts\MacroableModelContract;
 
 /**
  * @method static void addMacro(string $model, string $name, \Closure $closure)

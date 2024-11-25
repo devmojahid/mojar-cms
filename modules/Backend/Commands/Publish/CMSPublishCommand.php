@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Commands\Publish;
+namespace Juzaweb\Backend\Commands\Publish;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;

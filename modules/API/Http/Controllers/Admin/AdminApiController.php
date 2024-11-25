@@ -9,10 +9,10 @@
  * @license    MIT
  */
 
-namespace Mojar\API\Http\Controllers\Admin;
+namespace Juzaweb\API\Http\Controllers\Admin;
 
-use Mojar\CMS\Abstracts\Action;
-use Mojar\CMS\Http\Controllers\ApiController;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Http\Controllers\ApiController;
 
 class AdminApiController extends ApiController
 {

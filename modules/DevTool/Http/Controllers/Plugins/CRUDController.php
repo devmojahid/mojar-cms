@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\DevTool\Http\Controllers\Plugins;
+namespace Juzaweb\DevTool\Http\Controllers\Plugins;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -19,8 +19,8 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Inertia\Response;
-use Mojar\CMS\Contracts\LocalPluginRepositoryContract;
-use Mojar\DevTool\Http\Controllers\Controller;
+use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
+use Juzaweb\DevTool\Http\Controllers\Controller;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 class CRUDController extends Controller

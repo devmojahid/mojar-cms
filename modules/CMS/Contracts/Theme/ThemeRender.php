@@ -9,13 +9,13 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Contracts\Theme;
+namespace Juzaweb\CMS\Contracts\Theme;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 
 /**
- * @see \Mojar\CMS\Support\Theme\ThemeRender
+ * @see \Juzaweb\CMS\Support\Theme\ThemeRender
  */
 interface ThemeRender
 {

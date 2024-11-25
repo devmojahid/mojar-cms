@@ -9,15 +9,15 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Tests\Feature\Backend;
+namespace Juzaweb\Tests\Feature\Backend;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use Mojar\Backend\Models\Taxonomy;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Models\Model;
-use Mojar\CMS\Models\User;
-use Mojar\Tests\TestCase;
+use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\Tests\TestCase;
 
 class TaxonomyTest extends TestCase
 {

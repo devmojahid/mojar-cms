@@ -9,12 +9,12 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Support;
+namespace Juzaweb\Network\Support;
 
 use Illuminate\Support\Str;
-use Mojar\CMS\Models\User;
-use Mojar\Network\Contracts\NetworkSiteContract;
-use Mojar\Network\Models\Site;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\Network\Contracts\NetworkSiteContract;
+use Juzaweb\Network\Models\Site;
 
 class NetworkSite implements NetworkSiteContract
 {

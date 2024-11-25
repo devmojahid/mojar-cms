@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Commands;
+namespace Juzaweb\Backend\Commands;
 
 use Illuminate\Console\Command;
-use Mojar\CMS\Abstracts\Action;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Models\Permission;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Models\Permission;
 
 class PermissionGenerateCommand extends Command
 {

@@ -12,15 +12,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Mojar\Backend\Models\Post;
-use Mojar\CMS\Contracts\BackendMessageContract;
-use Mojar\CMS\Contracts\ConfigContract;
-use Mojar\CMS\Facades\Config;
-use Mojar\CMS\Facades\Hook;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Facades\XssCleaner;
-use Mojar\CMS\Models\User;
-use Mojar\CMS\Support\Breadcrumb;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\CMS\Contracts\BackendMessageContract;
+use Juzaweb\CMS\Contracts\ConfigContract;
+use Juzaweb\CMS\Facades\Config;
+use Juzaweb\CMS\Facades\Hook;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Facades\XssCleaner;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Support\Breadcrumb;
 
 if (!function_exists('e_html')) {
     function e_html($str): string
@@ -90,9 +90,9 @@ if (!function_exists('set_config')) {
      *
      * @param string $key
      * @param mixed $value
-     * @return \Mojar\CMS\Models\Config
+     * @return \Juzaweb\CMS\Models\Config
      */
-    function set_config(string $key, mixed $value): \Mojar\CMS\Models\Config
+    function set_config(string $key, mixed $value): \Juzaweb\CMS\Models\Config
     {
         return Config::setConfig($key, $value);
     }
@@ -606,7 +606,7 @@ if (!function_exists('has_permission')) {
 if (!function_exists('collect_metas')) {
     function collect_metas(array $metas): Collection
     {
-        return \Mojar\CMS\Facades\Field::collect($metas);
+        return \Juzaweb\CMS\Facades\Field::collect($metas);
     }
 }
 

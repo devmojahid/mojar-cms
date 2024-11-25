@@ -9,10 +9,10 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Http\Controllers;
+namespace Juzaweb\Network\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
-use Mojar\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class DashboardController extends BackendController
 {

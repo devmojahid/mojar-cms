@@ -9,12 +9,12 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Commands;
+namespace Juzaweb\Backend\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
-use Mojar\Backend\Jobs\AutoTagJob;
-use Mojar\Backend\Models\Post;
+use Juzaweb\Backend\Jobs\AutoTagJob;
+use Juzaweb\Backend\Models\Post;
 
 class AutoTagCommand extends Command
 {

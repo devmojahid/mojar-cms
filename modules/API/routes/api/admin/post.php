@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-use Mojar\API\Http\Controllers\Admin\PostController;
+use Juzaweb\API\Http\Controllers\Admin\PostController;
 
 Route::group(
     [

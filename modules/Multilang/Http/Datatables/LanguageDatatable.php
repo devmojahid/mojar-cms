@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\Multilang\Http\Datatables;
+namespace Juzaweb\Multilang\Http\Datatables;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
-use Mojar\CMS\Abstracts\DataTable;
-use Mojar\CMS\Models\Language;
+use Juzaweb\CMS\Abstracts\DataTable;
+use Juzaweb\CMS\Models\Language;
 
 class LanguageDatatable extends DataTable
 {

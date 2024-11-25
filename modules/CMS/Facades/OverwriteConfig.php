@@ -1,14 +1,14 @@
 <?php
 
-namespace Mojar\CMS\Facades;
+namespace Juzaweb\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Mojar\CMS\Contracts\OverwriteConfigContract;
+use Juzaweb\CMS\Contracts\OverwriteConfigContract;
 
 /**
  * @method static void init()
  *
- * @see \Mojar\CMS\Support\Config\OverwriteConfig
+ * @see \Juzaweb\CMS\Support\Config\OverwriteConfig
  */
 class OverwriteConfig extends Facade
 {

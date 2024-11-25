@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Tests\Feature\Frontend;
+namespace Juzaweb\Tests\Feature\Frontend;
 
-use Mojar\Backend\Models\Taxonomy;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\Tests\TestCase;
+use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\Tests\TestCase;
 
 class TaxonomyTest extends TestCase
 {

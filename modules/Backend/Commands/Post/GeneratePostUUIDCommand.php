@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Commands\Post;
+namespace Juzaweb\Backend\Commands\Post;
 
 use Illuminate\Console\Command;
-use Mojar\Backend\Models\Post;
+use Juzaweb\Backend\Models\Post;
 
 class GeneratePostUUIDCommand extends Command
 {

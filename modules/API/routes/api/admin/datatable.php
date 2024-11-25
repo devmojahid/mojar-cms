@@ -9,7 +9,7 @@
  * @license    MIT
  */
 
-use Mojar\API\Http\Controllers\Admin\DataTableController;
+use Juzaweb\API\Http\Controllers\Admin\DataTableController;
 
 Route::group(
     [

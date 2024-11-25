@@ -9,10 +9,10 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Contracts;
+namespace Juzaweb\Network\Contracts;
 
 /**
- * @see \Mojar\Network\Support\SiteSetup
+ * @see \Juzaweb\Network\Support\SiteSetup
  */
 interface SiteSetupContract
 {

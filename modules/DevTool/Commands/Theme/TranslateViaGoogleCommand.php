@@ -9,10 +9,10 @@
  * @license    MIT
  */
 
-namespace Mojar\DevTool\Commands\Theme;
+namespace Juzaweb\DevTool\Commands\Theme;
 
 use Illuminate\Console\Command;
-use Mojar\CMS\Contracts\TranslationManager;
+use Juzaweb\CMS\Contracts\TranslationManager;
 use Symfony\Component\Console\Input\InputArgument;
 
 class TranslateViaGoogleCommand extends Command

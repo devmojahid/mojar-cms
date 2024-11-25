@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\Multilang\Http\Middleware;
+namespace Juzaweb\Multilang\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Routing\UrlGenerator;
@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cookie;
-use Mojar\CMS\Models\Language;
+use Juzaweb\CMS\Models\Language;
 
 class Multilang
 {

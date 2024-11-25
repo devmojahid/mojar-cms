@@ -9,7 +9,7 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Support\Converter;
+namespace Juzaweb\CMS\Support\Converter;
 
 use Illuminate\Support\Facades\Storage;
 

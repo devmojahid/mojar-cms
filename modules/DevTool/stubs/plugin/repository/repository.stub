@@ -2,7 +2,7 @@
 
 namespace $CLASS_NAMESPACE$;
 
-use Mojar\CMS\Repositories\BaseRepository;
+use Juzaweb\CMS\Repositories\BaseRepository;
 
 interface $CLASS$ extends BaseRepository
 {

@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="alert alert-success">
-                <p>{{ __('You are using Mojar CMS Version') }}: {{ \Mojar\CMS\Version::getVersion() }}</p>
+                <p>{{ __('You are using Mojar CMS Version') }}: {{ \Juzaweb\CMS\Version::getVersion() }}</p>
                 <p>
                     <a href="https://github.com/mojar/cms/releases" target="_blank">{{ __('View change logs here') }}</a>. <a
                         href="https://mojar.com/documentation/start/update"

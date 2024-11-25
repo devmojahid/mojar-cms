@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\API\Support\Swagger;
+namespace Juzaweb\API\Support\Swagger;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;

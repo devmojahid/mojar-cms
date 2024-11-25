@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Observers;
+namespace Juzaweb\CMS\Observers;
 
 use Exception;
 use Illuminate\Database\Eloquent\Collection;

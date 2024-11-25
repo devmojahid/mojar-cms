@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\CMS\Repositories\Generators;
+namespace Juzaweb\CMS\Repositories\Generators;
 
 use Illuminate\Support\Str;
-use Mojar\CMS\Repositories\Generators\Generator;
-use Mojar\CMS\Repositories\Generators\ValidatorGenerator;
-use Mojar\CMS\Repositories\Generators\RepositoryInterfaceGenerator;
+use Juzaweb\CMS\Repositories\Generators\Generator;
+use Juzaweb\CMS\Repositories\Generators\ValidatorGenerator;
+use Juzaweb\CMS\Repositories\Generators\RepositoryInterfaceGenerator;
 
 /**
  * Class ControllerGenerator

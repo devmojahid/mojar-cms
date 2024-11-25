@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\CMS\Repositories\Generators;
+namespace Juzaweb\CMS\Repositories\Generators;
 
-use Mojar\CMS\Repositories\Generators\Generator;
-use Mojar\CMS\Repositories\Generators\Migrations\SchemaParser;
+use Juzaweb\CMS\Repositories\Generators\Generator;
+use Juzaweb\CMS\Repositories\Generators\Migrations\SchemaParser;
 
 /**
  * Class ModelGenerator

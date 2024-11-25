@@ -1,10 +1,10 @@
 <?php
 
-namespace Mojar\Backend\Http\Controllers\Auth;
+namespace Juzaweb\Backend\Http\Controllers\Auth;
 
-use Mojar\CMS\Abstracts\Action;
-use Mojar\CMS\Http\Controllers\Controller;
-use Mojar\CMS\Traits\Auth\AuthLoginForm;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Http\Controllers\Controller;
+use Juzaweb\CMS\Traits\Auth\AuthLoginForm;
 
 class LoginController extends Controller
 {

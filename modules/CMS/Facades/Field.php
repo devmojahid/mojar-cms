@@ -9,13 +9,13 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Facades;
+namespace Juzaweb\CMS\Facades;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Facade;
-use Mojar\CMS\Contracts\Field as FieldContract;
+use Juzaweb\CMS\Contracts\Field as FieldContract;
 
 /**
  * @method static fieldByType($fields)
@@ -30,7 +30,7 @@ use Mojar\CMS\Contracts\Field as FieldContract;
  * @method static editor(string|Model $label, ?string $name, ?array $options = [])
  * @method static image(string|Model $label, ?string $name, ?array $options = [])
  * @method static checkbox(string|Model $label, ?string $name, ?array $options = [])
- * @see \Mojar\CMS\Support\Html\Field
+ * @see \Juzaweb\CMS\Support\Html\Field
  */
 class Field extends Facade
 {

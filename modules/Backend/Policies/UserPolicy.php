@@ -1,8 +1,8 @@
 <?php
 
-namespace Mojar\Backend\Policies;
+namespace Juzaweb\Backend\Policies;
 
-use Mojar\CMS\Abstracts\ResourcePolicy;
+use Juzaweb\CMS\Abstracts\ResourcePolicy;
 
 class UserPolicy extends ResourcePolicy
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Support\Permission;
+namespace Juzaweb\CMS\Support\Permission;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Contracts\Auth\Access\Authorizable;
@@ -8,8 +8,8 @@ use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Database\Eloquent\Collection;
-use Mojar\CMS\Contracts\Permission;
-use Mojar\CMS\Contracts\Role;
+use Juzaweb\CMS\Contracts\Permission;
+use Juzaweb\CMS\Contracts\Role;
 
 class PermissionRegistrar
 {
@@ -239,7 +239,7 @@ class PermissionRegistrar
     /**
      * Get an instance of the permission class.
      *
-     * @return \Mojar\CMS\Contracts\Permission
+     * @return \Juzaweb\CMS\Contracts\Permission
      */
     public function getPermissionClass(): Permission
     {
@@ -258,7 +258,7 @@ class PermissionRegistrar
     /**
      * Get an instance of the role class.
      *
-     * @return \Mojar\CMS\Contracts\Role
+     * @return \Juzaweb\CMS\Contracts\Role
      */
     public function getRoleClass(): Role
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Repositories\Generators\Commands;
+namespace Juzaweb\CMS\Repositories\Generators\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;

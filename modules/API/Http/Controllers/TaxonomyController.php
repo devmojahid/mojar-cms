@@ -9,19 +9,19 @@
  * @license    GNU General Public License v2.0
  */
 
-namespace Mojar\API\Http\Controllers;
+namespace Juzaweb\API\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Mojar\Backend\Http\Resources\PostCollection;
-use Mojar\Backend\Http\Resources\TaxonomyResource;
-use Mojar\Backend\Repositories\PostRepository;
-use Mojar\Backend\Repositories\TaxonomyRepository;
-use Mojar\CMS\Http\Controllers\ApiController;
-use Mojar\CMS\Repositories\Criterias\FilterCriteria;
-use Mojar\CMS\Repositories\Criterias\SearchCriteria;
-use Mojar\CMS\Repositories\Criterias\SortCriteria;
+use Juzaweb\Backend\Http\Resources\PostCollection;
+use Juzaweb\Backend\Http\Resources\TaxonomyResource;
+use Juzaweb\Backend\Repositories\PostRepository;
+use Juzaweb\Backend\Repositories\TaxonomyRepository;
+use Juzaweb\CMS\Http\Controllers\ApiController;
+use Juzaweb\CMS\Repositories\Criterias\FilterCriteria;
+use Juzaweb\CMS\Repositories\Criterias\SearchCriteria;
+use Juzaweb\CMS\Repositories\Criterias\SortCriteria;
 
 class TaxonomyController extends ApiController
 {

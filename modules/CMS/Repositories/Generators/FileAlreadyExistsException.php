@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Repositories\Generators;
+namespace Juzaweb\CMS\Repositories\Generators;
 
 use Exception;
 

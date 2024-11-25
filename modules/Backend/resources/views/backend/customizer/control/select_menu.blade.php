@@ -2,7 +2,7 @@
     <label class="next-label">{{ trans('cms::app.menu') }}</label>
     <select name="theme[{{ $args->get('settings') }}]" class="load-menu">
         @php
-            $menu = \Mojar\Backend\Models\Menu::find(get_theme_mod($args->get('settings')));
+            $menu = \Juzaweb\Backend\Models\Menu::find(get_theme_mod($args->get('settings')));
         @endphp
         @if ($menu)
             <option value="{{ $menu->id }}">{{ $menu->name }}</option>

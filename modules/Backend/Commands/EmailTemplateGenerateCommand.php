@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Commands;
+namespace Juzaweb\Backend\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
-use Mojar\Backend\Models\EmailTemplate;
+use Juzaweb\Backend\Models\EmailTemplate;
 
 class EmailTemplateGenerateCommand extends Command
 {

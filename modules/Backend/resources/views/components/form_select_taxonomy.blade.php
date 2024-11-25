@@ -5,7 +5,7 @@
 
         $options = [];
         if ($value) {
-            $options = \Mojar\Backend\Models\Taxonomy::whereIn('id', $value)
+            $options = \Juzaweb\Backend\Models\Taxonomy::whereIn('id', $value)
                 ->get(['id', 'name'])
                 ->mapWithKeys(function ($item) {
                     return [

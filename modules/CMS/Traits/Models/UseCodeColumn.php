@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Traits\Models;
+namespace Juzaweb\CMS\Traits\Models;
 
 use Illuminate\Support\Str;
 

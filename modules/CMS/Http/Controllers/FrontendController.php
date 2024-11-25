@@ -1,14 +1,14 @@
 <?php
 
-namespace Mojar\CMS\Http\Controllers;
+namespace Juzaweb\CMS\Http\Controllers;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View as ViewContract;
 use Illuminate\View\View;
-use Mojar\CMS\Abstracts\Action;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Facades\Theme;
-use Mojar\CMS\Traits\ResponseMessage;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Traits\ResponseMessage;
 use Symfony\Component\HttpFoundation\Response;
 
 class FrontendController extends Controller

@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\DevTool\Commands\Plugin;
+namespace Juzaweb\DevTool\Commands\Plugin;
 
 use Illuminate\Console\Command;
-use Mojar\CMS\Support\Updater\PluginUpdater;
+use Juzaweb\CMS\Support\Updater\PluginUpdater;
 use Symfony\Component\Console\Input\InputArgument;
 
 class InstallCommand extends Command

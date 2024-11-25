@@ -9,18 +9,18 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Http\Controllers;
+namespace Juzaweb\Network\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
-use Mojar\CMS\Abstracts\DataTable;
-use Mojar\CMS\Http\Controllers\BackendController;
-use Mojar\CMS\Traits\ResourceController;
-use Mojar\Network\Contracts\SiteManagerContract;
-use Mojar\Network\Http\Datatables\SiteDatatable;
-use Mojar\Network\Models\Site;
+use Juzaweb\CMS\Abstracts\DataTable;
+use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Traits\ResourceController;
+use Juzaweb\Network\Contracts\SiteManagerContract;
+use Juzaweb\Network\Http\Datatables\SiteDatatable;
+use Juzaweb\Network\Models\Site;
 
 class SiteController extends BackendController
 {

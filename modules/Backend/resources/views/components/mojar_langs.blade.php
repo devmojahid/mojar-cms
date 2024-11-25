@@ -1,10 +1,10 @@
 @php
     $langs = array_merge(trans('cms::app', [], 'en'), trans('cms::app'));
-    $plugins = \Mojar\CMS\Facades\Plugin::all(true)
+    $plugins = \Juzaweb\CMS\Facades\Plugin::all(true)
         ->map(fn($item) => Arr::only($item, ['name', 'description']))
         ->values();
     $themeKeys = get_config('theme_activation_codes', []);
-    $themes = \Mojar\CMS\Facades\Theme::all(true)
+    $themes = \Juzaweb\CMS\Facades\Theme::all(true)
         ->map(function ($item) use ($themeKeys) {
             $results = Arr::only($item, ['name', 'title', 'description', 'version']);
             $results['active'] = jw_current_theme() == $item['name'];

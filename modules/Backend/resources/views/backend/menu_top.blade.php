@@ -25,7 +25,7 @@
         <div class="dropdown me-3 d-none d-md-flex align-items-center">
             @php
                 $langs = \Illuminate\Support\Facades\Cache::remember('top_menu_languages', 3600, function () {
-                    return app(\Mojar\CMS\Support\Manager\TranslationManager::class)
+                    return app(\Juzaweb\CMS\Support\Manager\TranslationManager::class)
                         ->locale('cms')
                         ->languages();
                 });

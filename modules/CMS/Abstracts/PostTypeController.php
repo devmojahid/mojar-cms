@@ -9,9 +9,9 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Abstracts;
+namespace Juzaweb\CMS\Abstracts;
 
-use Mojar\CMS\Traits\PostTypeController as PostTypeControllerTrait;
+use Juzaweb\CMS\Traits\PostTypeController as PostTypeControllerTrait;
 
 abstract class PostTypeController
 {

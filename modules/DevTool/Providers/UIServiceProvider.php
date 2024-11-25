@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\DevTool\Providers;
+namespace Juzaweb\DevTool\Providers;
 
-use Mojar\CMS\Support\ServiceProvider;
-use Mojar\DevTool\Actions\MenuAction;
+use Juzaweb\CMS\Support\ServiceProvider;
+use Juzaweb\DevTool\Actions\MenuAction;
 
 class UIServiceProvider extends ServiceProvider
 {

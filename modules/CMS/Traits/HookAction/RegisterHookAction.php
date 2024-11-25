@@ -7,22 +7,22 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Traits\HookAction;
+namespace Juzaweb\CMS\Traits\HookAction;
 
 use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use JetBrains\PhpStorm\ArrayShape;
-use Mojar\API\Support\Swagger\SwaggerDocument;
-use Mojar\Backend\Models\Post;
-use Mojar\Backend\Models\Taxonomy;
-use Mojar\CMS\Models\User;
-use Mojar\CMS\Support\HookActions\Traits\ThemeHookAction;
-use Mojar\CMS\Support\Registers\ResourceRegister;
-use Mojar\CMS\Support\Theme\PostTypeMenuBox;
-use Mojar\CMS\Support\Theme\TaxonomyMenuBox;
-use Mojar\Frontend\Http\Controllers\PostController;
-use Mojar\Frontend\Http\Controllers\TaxonomyController;
+use Juzaweb\API\Support\Swagger\SwaggerDocument;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Support\HookActions\Traits\ThemeHookAction;
+use Juzaweb\CMS\Support\Registers\ResourceRegister;
+use Juzaweb\CMS\Support\Theme\PostTypeMenuBox;
+use Juzaweb\CMS\Support\Theme\TaxonomyMenuBox;
+use Juzaweb\Frontend\Http\Controllers\PostController;
+use Juzaweb\Frontend\Http\Controllers\TaxonomyController;
 
 trait RegisterHookAction
 {

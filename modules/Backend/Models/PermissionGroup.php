@@ -1,18 +1,18 @@
 <?php
 
-namespace Mojar\Backend\Models;
+namespace Juzaweb\Backend\Models;
 
-use Mojar\CMS\Models\Model;
+use Juzaweb\CMS\Models\Model;
 
 /**
- * Mojar\Backend\Models\PermissionGroup
+ * Juzaweb\Backend\Models\PermissionGroup
  *
  * @property int $id
  * @property string $name
  * @property string|null $plugin
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\Permission[] $permissions
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Permission[] $permissions
  * @property-read int|null $permissions_count
  * @method static \Illuminate\Database\Eloquent\Builder|PermissionGroup newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PermissionGroup newQuery()

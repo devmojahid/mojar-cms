@@ -1,13 +1,13 @@
 <?php
 
-namespace Mojar\Frontend\Http\Controllers;
+namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
-use Mojar\Backend\Models\Post;
-use Mojar\Backend\Models\Taxonomy;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\Frontend\Http\Controllers\Abstracts\BaseSitemapController;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\Frontend\Http\Controllers\Abstracts\BaseSitemapController;
 
 class SitemapController extends BaseSitemapController
 {

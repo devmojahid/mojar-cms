@@ -1,15 +1,15 @@
 <?php
 
-namespace Mojar\Frontend\Http\Controllers;
+namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
-use Mojar\Backend\Events\PostViewed;
-use Mojar\Backend\Models\Post;
-use Mojar\Backend\Repositories\PostRepository;
-use Mojar\CMS\Facades\ThemeLoader;
-use Mojar\CMS\Http\Controllers\FrontendController;
+use Juzaweb\Backend\Events\PostViewed;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Repositories\PostRepository;
+use Juzaweb\CMS\Facades\ThemeLoader;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
 
 class PageController extends FrontendController
 {

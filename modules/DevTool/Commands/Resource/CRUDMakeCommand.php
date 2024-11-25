@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\DevTool\Commands\Resource;
+namespace Juzaweb\DevTool\Commands\Resource;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
-use Mojar\CMS\Abstracts\Action;
-use Mojar\DevTool\Abstracts\CRUD\ResourceCommand;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\DevTool\Abstracts\CRUD\ResourceCommand;
 use Symfony\Component\Console\Input\InputArgument;
 
 class CRUDMakeCommand extends ResourceCommand

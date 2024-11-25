@@ -1,7 +1,7 @@
 <div class="page-block-content">
     @php
         $currentTheme = jw_current_theme();
-        $themePath = \Mojar\CMS\Facades\ThemeLoader::getThemePath($currentTheme);
+        $themePath = \Juzaweb\CMS\Facades\ThemeLoader::getThemePath($currentTheme);
     @endphp
     <div id="page-block-builder-nestable-{{ $key }}" class="dd jw-widget-builder">
         <ol class="dd-list">

@@ -9,13 +9,13 @@
  * @license    GNU V2
  */
 
-namespace Mojar\API\Http\Controllers\Auth;
+namespace Juzaweb\API\Http\Controllers\Auth;
 
 use Illuminate\Http\JsonResponse;
-use Mojar\Backend\Http\Resources\UserResource;
-use Mojar\Backend\Repositories\UserRepository;
-use Mojar\CMS\Http\Controllers\ApiController;
-use Mojar\CMS\Http\Requests\Auth\RegisterRequest;
+use Juzaweb\Backend\Http\Resources\UserResource;
+use Juzaweb\Backend\Repositories\UserRepository;
+use Juzaweb\CMS\Http\Controllers\ApiController;
+use Juzaweb\CMS\Http\Requests\Auth\RegisterRequest;
 use OpenApi\Annotations as OA;
 
 class RegisterController extends ApiController

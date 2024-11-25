@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Tests\Feature\Backend;
+namespace Juzaweb\Tests\Feature\Backend;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Mojar\Tests\TestCase;
+use Juzaweb\Tests\TestCase;
 
 class PluginTest extends TestCase
 {

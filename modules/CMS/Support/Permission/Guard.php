@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Support\Permission;
+namespace Juzaweb\CMS\Support\Permission;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;

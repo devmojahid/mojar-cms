@@ -1,5 +1,5 @@
 <?php
 
-namespace Mojar\CMS\Support\Generators;
+namespace Juzaweb\CMS\Support\Generators;
 
 abstract class Generator {}

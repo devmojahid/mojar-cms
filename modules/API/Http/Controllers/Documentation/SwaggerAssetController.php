@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\API\Http\Controllers\Documentation;
+namespace Juzaweb\API\Http\Controllers\Documentation;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;

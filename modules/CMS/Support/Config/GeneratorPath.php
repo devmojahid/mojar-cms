@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Support\Config;
+namespace Juzaweb\CMS\Support\Config;
 
 class GeneratorPath
 {

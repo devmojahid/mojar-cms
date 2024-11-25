@@ -1,10 +1,10 @@
 <?php
 
-namespace Mojar\CMS\Console\Commands;
+namespace Juzaweb\CMS\Console\Commands;
 
 use Illuminate\Console\Command;
-use Mojar\Backend\Models\EmailList;
-use Mojar\CMS\Support\SendEmail;
+use Juzaweb\Backend\Models\EmailList;
+use Juzaweb\CMS\Support\SendEmail;
 
 class SendMailCommand extends Command
 {

@@ -9,19 +9,19 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Models;
+namespace Juzaweb\Backend\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Mojar\CMS\Models\Model;
+use Juzaweb\CMS\Models\Model;
 
 /**
- * Mojar\Backend\Models\PostMeta
+ * Juzaweb\Backend\Models\PostMeta
  *
  * @property int $id
  * @property int $post_id
  * @property string $meta_key
  * @property string|null $meta_value
- * @property-read \Mojar\Backend\Models\Post $post
+ * @property-read \Juzaweb\Backend\Models\Post $post
  * @method static \Illuminate\Database\Eloquent\Builder|PostMeta newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PostMeta newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PostMeta query()

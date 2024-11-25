@@ -1,10 +1,10 @@
 <?php
 
-namespace Mojar\Tests\Unit;
+namespace Juzaweb\Tests\Unit;
 
-use Mojar\CMS\Contracts\ShortCode as ShortCodeContract;
-use Mojar\CMS\Support\ShortCode\ShortCode;
-use Mojar\Tests\TestCase;
+use Juzaweb\CMS\Contracts\ShortCode as ShortCodeContract;
+use Juzaweb\CMS\Support\ShortCode\ShortCode;
+use Juzaweb\Tests\TestCase;
 
 class ShortCodeTest extends TestCase
 {

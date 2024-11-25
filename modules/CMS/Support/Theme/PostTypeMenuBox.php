@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support\Theme;
+namespace Juzaweb\CMS\Support\Theme;
 
-use Mojar\CMS\Abstracts\MenuBox;
-use Mojar\CMS\Facades\HookAction;
+use Juzaweb\CMS\Abstracts\MenuBox;
+use Juzaweb\CMS\Facades\HookAction;
 
 class PostTypeMenuBox extends MenuBox
 {

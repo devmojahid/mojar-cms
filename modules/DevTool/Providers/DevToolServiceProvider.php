@@ -9,13 +9,13 @@
  * @license    GNU V2
  */
 
-namespace Mojar\DevTool\Providers;
+namespace Juzaweb\DevTool\Providers;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
-use Mojar\CMS\Providers\TelescopeServiceProvider;
-use Mojar\CMS\Support\ServiceProvider;
-use Mojar\CMS\Support\Stub;
+use Juzaweb\CMS\Providers\TelescopeServiceProvider;
+use Juzaweb\CMS\Support\ServiceProvider;
+use Juzaweb\CMS\Support\Stub;
 use Laravel\Telescope\TelescopeApplicationServiceProvider;
 
 class DevToolServiceProvider extends ServiceProvider

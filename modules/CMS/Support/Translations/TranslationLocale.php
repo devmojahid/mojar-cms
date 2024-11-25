@@ -9,7 +9,7 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Support\Translations;
+namespace Juzaweb\CMS\Support\Translations;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Collection;

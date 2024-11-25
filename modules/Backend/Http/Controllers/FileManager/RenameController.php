@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\Backend\Http\Controllers\FileManager;
+namespace Juzaweb\Backend\Http\Controllers\FileManager;
 
-use Mojar\Backend\Models\MediaFile;
-use Mojar\Backend\Models\MediaFolder;
+use Juzaweb\Backend\Models\MediaFile;
+use Juzaweb\Backend\Models\MediaFolder;
 
 class RenameController extends FileManagerController
 {

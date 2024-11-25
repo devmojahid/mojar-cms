@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\API\Http\Requests\Auth;
+namespace Juzaweb\API\Http\Requests\Auth;
 
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;

@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Facades;
+namespace Juzaweb\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Mojar\CMS\Contracts\BackendMessageContract;
+use Juzaweb\CMS\Contracts\BackendMessageContract;
 
 class BackendMessage extends Facade
 {

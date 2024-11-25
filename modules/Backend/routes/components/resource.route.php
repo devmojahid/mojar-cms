@@ -9,9 +9,9 @@
  * @license    GNU V2
  */
 
-use Mojar\Backend\Http\Controllers\Backend\ResourceController;
-use Mojar\Backend\Http\Controllers\Backend\ChildResourceController;
-use Mojar\Backend\Http\Controllers\Backend\PostResourceController;
+use Juzaweb\Backend\Http\Controllers\Backend\ResourceController;
+use Juzaweb\Backend\Http\Controllers\Backend\ChildResourceController;
+use Juzaweb\Backend\Http\Controllers\Backend\PostResourceController;
 
 Route::jwResource(
     'resources/{type}/{post}',

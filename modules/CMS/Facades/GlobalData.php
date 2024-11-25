@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Facades;
+namespace Juzaweb\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Mojar\CMS\Contracts\GlobalDataContract;
+use Juzaweb\CMS\Contracts\GlobalDataContract;
 
 /**
  * @method static void set($key, $value)
@@ -20,7 +20,7 @@ use Mojar\CMS\Contracts\GlobalDataContract;
  * @method static void registerAction(array $actions)
  * @method static void initAction()
  * @method static mixed get($key)
- * @see \Mojar\CMS\Support\GlobalData
+ * @see \Juzaweb\CMS\Support\GlobalData
  */
 class GlobalData extends Facade
 {

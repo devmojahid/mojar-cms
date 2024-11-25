@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Facades;
+namespace Juzaweb\CMS\Facades;
 
 /**
  * @method static void addFilter($tag, $callback, $priority = 20, $arguments = 1)

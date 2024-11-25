@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Exceptions;
+namespace Juzaweb\CMS\Exceptions;
 
 use Throwable;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

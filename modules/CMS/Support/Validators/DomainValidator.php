@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support\Validators;
+namespace Juzaweb\CMS\Support\Validators;
 
 class DomainValidator
 {

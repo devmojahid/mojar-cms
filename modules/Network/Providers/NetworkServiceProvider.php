@@ -9,25 +9,25 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Providers;
+namespace Juzaweb\Network\Providers;
 
 use Illuminate\Contracts\Console\Kernel;
-use Mojar\CMS\Facades\ActionRegister;
-use Mojar\CMS\Support\ServiceProvider;
-use Mojar\Network\Commands\ArtisanCommand;
-use Mojar\Network\Commands\MakeSiteCommand;
-use Mojar\Network\Contracts\NetworkRegistionContract;
-use Mojar\Network\Contracts\SiteCreaterContract;
-use Mojar\Network\Contracts\SiteManagerContract;
-use Mojar\Network\Contracts\SiteSetupContract;
-use Mojar\Network\Facades\Network;
-use Mojar\Network\Models\Site;
-use Mojar\Network\NetworkAction;
-use Mojar\Network\Observers\SiteModelObserver;
-use Mojar\Network\Support\NetworkRegistion;
-use Mojar\Network\Support\SiteCreater;
-use Mojar\Network\Support\SiteManager;
-use Mojar\Network\Support\SiteSetup;
+use Juzaweb\CMS\Facades\ActionRegister;
+use Juzaweb\CMS\Support\ServiceProvider;
+use Juzaweb\Network\Commands\ArtisanCommand;
+use Juzaweb\Network\Commands\MakeSiteCommand;
+use Juzaweb\Network\Contracts\NetworkRegistionContract;
+use Juzaweb\Network\Contracts\SiteCreaterContract;
+use Juzaweb\Network\Contracts\SiteManagerContract;
+use Juzaweb\Network\Contracts\SiteSetupContract;
+use Juzaweb\Network\Facades\Network;
+use Juzaweb\Network\Models\Site;
+use Juzaweb\Network\NetworkAction;
+use Juzaweb\Network\Observers\SiteModelObserver;
+use Juzaweb\Network\Support\NetworkRegistion;
+use Juzaweb\Network\Support\SiteCreater;
+use Juzaweb\Network\Support\SiteManager;
+use Juzaweb\Network\Support\SiteSetup;
 
 class NetworkServiceProvider extends ServiceProvider
 {

@@ -1,7 +1,7 @@
 <?php
 
-use Mojar\Backend\Http\Controllers\Backend\Setting\MediaController;
-use Mojar\Backend\Http\Controllers\Backend\Setting\SystemSettingController;
+use Juzaweb\Backend\Http\Controllers\Backend\Setting\MediaController;
+use Juzaweb\Backend\Http\Controllers\Backend\Setting\SystemSettingController;
 
 Route::group(
     ['prefix' => 'setting'],

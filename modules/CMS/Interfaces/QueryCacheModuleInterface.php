@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Interfaces;
+namespace Juzaweb\CMS\Interfaces;
 
 interface QueryCacheModuleInterface
 {

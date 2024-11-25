@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Tests\Unit;
+namespace Juzaweb\Tests\Unit;
 
-use Mojar\CMS\Support\Plugin;
-use Mojar\Tests\TestCase;
+use Juzaweb\CMS\Support\Plugin;
+use Juzaweb\Tests\TestCase;
 
 class PluginTest extends TestCase
 {

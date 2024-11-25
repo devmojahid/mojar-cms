@@ -9,13 +9,13 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Controllers\Backend\Setting;
+namespace Juzaweb\Backend\Http\Controllers\Backend\Setting;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
-use Mojar\Backend\Http\Requests\Setting\ReadingSettingRequest;
-use Mojar\CMS\Http\Controllers\BackendController;
+use Juzaweb\Backend\Http\Requests\Setting\ReadingSettingRequest;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class ReadingController extends BackendController
 {

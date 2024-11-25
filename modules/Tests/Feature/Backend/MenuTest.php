@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Tests\Feature\Backend;
+namespace Juzaweb\Tests\Feature\Backend;
 
 use Faker\Generator as Faker;
-use Mojar\Backend\Models\Menu;
-use Mojar\Tests\TestCase;
+use Juzaweb\Backend\Models\Menu;
+use Juzaweb\Tests\TestCase;
 
 class MenuTest extends TestCase
 {

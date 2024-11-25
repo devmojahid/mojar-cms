@@ -9,13 +9,13 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Support\FileManager;
+namespace Juzaweb\CMS\Support\FileManager;
 
-use Mojar\Backend\Repositories\MediaFileRepository;
-use Mojar\Backend\Repositories\MediaFolderRepository;
-use Mojar\CMS\Contracts\MediaManagerContract;
-use Mojar\CMS\Models\Model;
-use Mojar\CMS\Repositories\BaseRepository;
+use Juzaweb\Backend\Repositories\MediaFileRepository;
+use Juzaweb\Backend\Repositories\MediaFolderRepository;
+use Juzaweb\CMS\Contracts\MediaManagerContract;
+use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Repositories\BaseRepository;
 
 class MediaManager implements MediaManagerContract
 {

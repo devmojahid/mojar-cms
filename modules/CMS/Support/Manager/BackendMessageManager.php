@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support\Manager;
+namespace Juzaweb\CMS\Support\Manager;
 
 use Illuminate\Support\Str;
-use Mojar\CMS\Contracts\BackendMessageContract;
-use Mojar\CMS\Support\Config;
+use Juzaweb\CMS\Contracts\BackendMessageContract;
+use Juzaweb\CMS\Support\Config;
 
 class BackendMessageManager implements BackendMessageContract
 {

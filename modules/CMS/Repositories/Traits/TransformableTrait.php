@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Repositories\Traits;
+namespace Juzaweb\CMS\Repositories\Traits;
 
 /**
  * Class TransformableTrait

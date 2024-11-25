@@ -9,14 +9,14 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Datatables;
+namespace Juzaweb\Backend\Http\Datatables;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Mojar\CMS\Abstracts\DataTable;
-use Mojar\CMS\Facades\HookAction;
+use Juzaweb\CMS\Abstracts\DataTable;
+use Juzaweb\CMS\Facades\HookAction;
 
 class PostTypeDataTable extends DataTable
 {

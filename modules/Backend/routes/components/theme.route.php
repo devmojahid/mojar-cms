@@ -10,16 +10,16 @@
  * Github: https://mojar.com/cms
  */
 
-use Mojar\Backend\Http\Controllers\Backend\Appearance\CustomizerController;
-use Mojar\Backend\Http\Controllers\Backend\Appearance\EditorController;
-use Mojar\Backend\Http\Controllers\Backend\Appearance\RequirePluginController;
-use Mojar\Backend\Http\Controllers\Backend\Appearance\SettingController;
-use Mojar\Backend\Http\Controllers\Backend\Appearance\ThemeController;
-use Mojar\Backend\Http\Controllers\Backend\Appearance\ThemeInstallController;
-use Mojar\Backend\Http\Controllers\Backend\MenuController;
-use Mojar\Backend\Http\Controllers\Backend\Setting\PermalinkController;
-use Mojar\Backend\Http\Controllers\Backend\Setting\ReadingController;
-use Mojar\Backend\Http\Controllers\Backend\WidgetController;
+use Juzaweb\Backend\Http\Controllers\Backend\Appearance\CustomizerController;
+use Juzaweb\Backend\Http\Controllers\Backend\Appearance\EditorController;
+use Juzaweb\Backend\Http\Controllers\Backend\Appearance\RequirePluginController;
+use Juzaweb\Backend\Http\Controllers\Backend\Appearance\SettingController;
+use Juzaweb\Backend\Http\Controllers\Backend\Appearance\ThemeController;
+use Juzaweb\Backend\Http\Controllers\Backend\Appearance\ThemeInstallController;
+use Juzaweb\Backend\Http\Controllers\Backend\MenuController;
+use Juzaweb\Backend\Http\Controllers\Backend\Setting\PermalinkController;
+use Juzaweb\Backend\Http\Controllers\Backend\Setting\ReadingController;
+use Juzaweb\Backend\Http\Controllers\Backend\WidgetController;
 
 Route::group(
     ['prefix' => 'themes'],

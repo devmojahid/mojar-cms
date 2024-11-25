@@ -13,7 +13,7 @@
  * Configuration options for Twig.
  */
 
-use Mojar\CMS\Facades\Facades;
+use Juzaweb\CMS\Facades\Facades;
 
 return [
 

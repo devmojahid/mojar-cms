@@ -1,13 +1,13 @@
 <?php
 
-namespace Mojar\Frontend\Http\Controllers;
+namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Mojar\Backend\Http\Resources\PostResourceCollection;
-use Mojar\Backend\Models\Post;
-use Mojar\Backend\Repositories\PostRepository;
-use Mojar\CMS\Http\Controllers\FrontendController;
+use Juzaweb\Backend\Http\Resources\PostResourceCollection;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Repositories\PostRepository;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
 
 class SearchController extends FrontendController
 {

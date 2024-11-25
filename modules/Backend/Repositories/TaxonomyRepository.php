@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\Backend\Repositories;
+namespace Juzaweb\Backend\Repositories;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Mojar\Backend\Models\Taxonomy;
-use Mojar\CMS\Repositories\BaseRepository;
-use Mojar\CMS\Repositories\Exceptions\RepositoryException;
+use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Repositories\BaseRepository;
+use Juzaweb\CMS\Repositories\Exceptions\RepositoryException;
 
 interface TaxonomyRepository extends BaseRepository
 {

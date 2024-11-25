@@ -9,13 +9,13 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Actions;
+namespace Juzaweb\Backend\Actions;
 
-use Mojar\Backend\Http\Controllers\Backend\Setting\SeoController;
-use Mojar\Backend\Models\SeoMeta;
-use Mojar\CMS\Abstracts\Action;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Models\Model;
+use Juzaweb\Backend\Http\Controllers\Backend\Setting\SeoController;
+use Juzaweb\Backend\Models\SeoMeta;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Models\Model;
 
 class SeoAction extends Action
 {

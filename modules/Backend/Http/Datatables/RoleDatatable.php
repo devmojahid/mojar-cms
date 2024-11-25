@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\Backend\Http\Datatables;
+namespace Juzaweb\Backend\Http\Datatables;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
-use Mojar\CMS\Abstracts\DataTable;
-use Mojar\Backend\Models\Role;
+use Juzaweb\CMS\Abstracts\DataTable;
+use Juzaweb\Backend\Models\Role;
 
 class RoleDatatable extends DataTable
 {

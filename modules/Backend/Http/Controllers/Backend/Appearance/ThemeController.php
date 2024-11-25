@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\Backend\Http\Controllers\Backend\Appearance;
+namespace Juzaweb\Backend\Http\Controllers\Backend\Appearance;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -10,15 +10,15 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Inertia\Response;
-use Mojar\CMS\Contracts\BackendMessageContract;
-use Mojar\CMS\Contracts\MojarApiContract;
-use Mojar\CMS\Facades\CacheGroup;
-use Mojar\CMS\Facades\Plugin;
-use Mojar\CMS\Facades\Theme;
-use Mojar\CMS\Facades\ThemeLoader;
-use Mojar\CMS\Http\Controllers\BackendController;
-use Mojar\CMS\Support\ArrayPagination;
-use Mojar\CMS\Version;
+use Juzaweb\CMS\Contracts\BackendMessageContract;
+use Juzaweb\CMS\Contracts\MojarApiContract;
+use Juzaweb\CMS\Facades\CacheGroup;
+use Juzaweb\CMS\Facades\Plugin;
+use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\ThemeLoader;
+use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Support\ArrayPagination;
+use Juzaweb\CMS\Version;
 
 class ThemeController extends BackendController
 {
@@ -196,7 +196,7 @@ class ThemeController extends BackendController
         );
     }
 
-    protected function addRequireThemeActive(\Mojar\CMS\Support\Theme $theme): void
+    protected function addRequireThemeActive(\Juzaweb\CMS\Support\Theme $theme): void
     {
         $this->message->deleteGroup('require_plugins');
 

@@ -1,6 +1,6 @@
 <?php
 
-use Mojar\API\Http\Controllers\TaxonomyController;
+use Juzaweb\API\Http\Controllers\TaxonomyController;
 
 Route::group(
     [

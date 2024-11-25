@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\CMS\Support\Permission;
+namespace Juzaweb\CMS\Support\Permission;
 
 use Illuminate\Support\Collection;
-use Mojar\CMS\Exceptions\WildcardPermissionNotProperlyFormatted;
+use Juzaweb\CMS\Exceptions\WildcardPermissionNotProperlyFormatted;
 
 class WildcardPermission
 {

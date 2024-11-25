@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-use Mojar\API\Http\Controllers\Admin\UserController;
+use Juzaweb\API\Http\Controllers\Admin\UserController;
 
 Route::group(
     [],

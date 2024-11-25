@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Tests\Unit;
+namespace Juzaweb\Tests\Unit;
 
-use Mojar\CMS\Database\Seeders\DatabaseSeeder;
-use Mojar\Tests\TestCase;
+use Juzaweb\CMS\Database\Seeders\DatabaseSeeder;
+use Juzaweb\Tests\TestCase;
 
 class DatabaseTest extends TestCase
 {

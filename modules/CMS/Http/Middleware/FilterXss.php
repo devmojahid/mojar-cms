@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Http\Middleware;
+namespace Juzaweb\CMS\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\TransformsRequest;
-use Mojar\CMS\Support\XssCleaner;
+use Juzaweb\CMS\Support\XssCleaner;
 
 class FilterXss extends TransformsRequest
 {

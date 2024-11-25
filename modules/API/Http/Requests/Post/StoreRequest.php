@@ -9,7 +9,7 @@
  * @license    MIT
  */
 
-namespace Mojar\API\Http\Requests\Post;
+namespace Juzaweb\API\Http\Requests\Post;
 
 class StoreRequest extends PostRequest
 {

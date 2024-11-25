@@ -9,23 +9,23 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Controllers\Backend;
+namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Mojar\Backend\Events\DumpAutoloadPlugin;
-use Mojar\CMS\Abstracts\UpdateManager;
-use Mojar\CMS\Contracts\BackendMessageContract;
-use Mojar\CMS\Contracts\MojarApiContract;
-use Mojar\CMS\Facades\ThemeLoader;
-use Mojar\CMS\Http\Controllers\BackendController;
-use Mojar\CMS\Support\Plugin;
-use Mojar\CMS\Support\Updater\CmsUpdater;
-use Mojar\CMS\Support\Updater\PluginUpdater;
-use Mojar\CMS\Support\Updater\ThemeUpdater;
-use Mojar\CMS\Version;
+use Juzaweb\Backend\Events\DumpAutoloadPlugin;
+use Juzaweb\CMS\Abstracts\UpdateManager;
+use Juzaweb\CMS\Contracts\BackendMessageContract;
+use Juzaweb\CMS\Contracts\MojarApiContract;
+use Juzaweb\CMS\Facades\ThemeLoader;
+use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Support\Plugin;
+use Juzaweb\CMS\Support\Updater\CmsUpdater;
+use Juzaweb\CMS\Support\Updater\PluginUpdater;
+use Juzaweb\CMS\Support\Updater\ThemeUpdater;
+use Juzaweb\CMS\Version;
 
 class UpdateController extends BackendController
 {

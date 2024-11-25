@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\Tests\Unit;
+namespace Juzaweb\Tests\Unit;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;

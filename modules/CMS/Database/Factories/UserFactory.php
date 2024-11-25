@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\CMS\Database\Factories;
+namespace Juzaweb\CMS\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Mojar\CMS\Models\User;
+use Juzaweb\CMS\Models\User;
 
 class UserFactory extends Factory
 {

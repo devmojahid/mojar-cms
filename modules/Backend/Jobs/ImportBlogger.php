@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Jobs;
+namespace Juzaweb\Backend\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -20,9 +20,9 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Mojar\Backend\Models\Post;
-use Mojar\Backend\Models\Taxonomy;
-use Mojar\CMS\Support\FileManager;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Support\FileManager;
 
 class ImportBlogger implements ShouldQueue
 {

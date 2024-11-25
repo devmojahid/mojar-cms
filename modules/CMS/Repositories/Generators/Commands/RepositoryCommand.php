@@ -1,15 +1,15 @@
 <?php
 
-namespace Mojar\CMS\Repositories\Generators\Commands;
+namespace Juzaweb\CMS\Repositories\Generators\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Mojar\CMS\Repositories\Generators\FileAlreadyExistsException;
-use Mojar\CMS\Repositories\Generators\MigrationGenerator;
-use Mojar\CMS\Repositories\Generators\ModelGenerator;
-use Mojar\CMS\Repositories\Generators\RepositoryEloquentGenerator;
-use Mojar\CMS\Repositories\Generators\RepositoryInterfaceGenerator;
+use Juzaweb\CMS\Repositories\Generators\FileAlreadyExistsException;
+use Juzaweb\CMS\Repositories\Generators\MigrationGenerator;
+use Juzaweb\CMS\Repositories\Generators\ModelGenerator;
+use Juzaweb\CMS\Repositories\Generators\RepositoryEloquentGenerator;
+use Juzaweb\CMS\Repositories\Generators\RepositoryInterfaceGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 

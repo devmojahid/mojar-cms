@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Support\Hooks;
+namespace Juzaweb\CMS\Support\Hooks;
 
 class Action extends Event
 {

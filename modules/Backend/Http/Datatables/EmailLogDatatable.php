@@ -9,14 +9,14 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Datatables;
+namespace Juzaweb\Backend\Http\Datatables;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
-use Mojar\CMS\Abstracts\DataTable;
-use Mojar\CMS\Jobs\SendEmailJob;
-use Mojar\Backend\Models\EmailList;
-use Mojar\CMS\Support\SendEmail;
+use Juzaweb\CMS\Abstracts\DataTable;
+use Juzaweb\CMS\Jobs\SendEmailJob;
+use Juzaweb\Backend\Models\EmailList;
+use Juzaweb\CMS\Support\SendEmail;
 
 class EmailLogDatatable extends DataTable
 {

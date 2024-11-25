@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\CMS\Support\Media;
+namespace Juzaweb\CMS\Support\Media;
 
 use Illuminate\Contracts\Filesystem\Filesystem;
-use Mojar\CMS\Interfaces\Media\FolderInterface;
+use Juzaweb\CMS\Interfaces\Media\FolderInterface;
 
 class Folder implements FolderInterface
 {

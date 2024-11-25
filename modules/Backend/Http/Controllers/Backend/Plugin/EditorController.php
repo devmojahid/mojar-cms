@@ -9,7 +9,7 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Http\Controllers\Backend\Plugin;
+namespace Juzaweb\Backend\Http\Controllers\Backend\Plugin;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -17,9 +17,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
-use Mojar\Backend\Http\Requests\Theme\EditorRequest;
-use Mojar\CMS\Contracts\LocalPluginRepositoryContract;
-use Mojar\CMS\Http\Controllers\BackendController;
+use Juzaweb\Backend\Http\Requests\Theme\EditorRequest;
+use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class EditorController extends BackendController
 {

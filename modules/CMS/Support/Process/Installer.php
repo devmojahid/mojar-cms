@@ -1,10 +1,10 @@
 <?php
 
-namespace Mojar\CMS\Support\Process;
+namespace Juzaweb\CMS\Support\Process;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use Mojar\CMS\Contracts\LocalPluginRepositoryContract;
+use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Symfony\Component\Process\Process;
 
 class Installer
@@ -25,7 +25,7 @@ class Installer
 
     /**
      * The plugin repository instance.
-     * @var \Mojar\CMS\Contracts\LocalPluginRepositoryContract
+     * @var \Juzaweb\CMS\Contracts\LocalPluginRepositoryContract
      */
     protected $repository;
 
@@ -90,7 +90,7 @@ class Installer
 
     /**
      * Set the plugin repository instance.
-     * @param \Mojar\CMS\Contracts\LocalPluginRepositoryContract $repository
+     * @param \Juzaweb\CMS\Contracts\LocalPluginRepositoryContract $repository
      * @return $this
      */
     public function setRepository(LocalPluginRepositoryContract $repository)

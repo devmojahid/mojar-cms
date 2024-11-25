@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
 use Exception;
 use GuzzleHttp\Client;
@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
-use Mojar\Backend\Events\MediaWasUploaded;
-use Mojar\CMS\Exceptions\FileManagerException;
-use Mojar\Backend\Models\MediaFile;
+use Juzaweb\Backend\Events\MediaWasUploaded;
+use Juzaweb\CMS\Exceptions\FileManagerException;
+use Juzaweb\Backend\Models\MediaFile;
 use Spatie\ImageOptimizer\OptimizerChainFactory;
 use GuzzleHttp\Exception\RequestException;
 

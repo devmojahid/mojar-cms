@@ -1,13 +1,13 @@
 <?php
 
-namespace Mojar\Backend\Models;
+namespace Juzaweb\Backend\Models;
 
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Arr;
-use Mojar\CMS\Traits\QueryCache\QueryCacheable;
+use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
 
 /**
- * Mojar\Backend\Models\Notification
+ * Juzaweb\Backend\Models\Notification
  *
  * @property int $id
  * @property string $type

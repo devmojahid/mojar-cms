@@ -9,15 +9,15 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Models;
+namespace Juzaweb\Backend\Models;
 
 use Illuminate\Support\Collection;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Models\Model;
-use Mojar\CMS\Traits\QueryCache\QueryCacheable;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
 
 /**
- * Mojar\Backend\Models\MenuItem
+ * Juzaweb\Backend\Models\MenuItem
  *
  * @property int $id
  * @property int $menu_id
@@ -29,7 +29,7 @@ use Mojar\CMS\Traits\QueryCache\QueryCacheable;
  * @property string $type
  * @property string|null $icon
  * @property string $target
- * @property-read \Mojar\Backend\Models\Menu $menu
+ * @property-read \Juzaweb\Backend\Models\Menu $menu
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem query()
@@ -52,8 +52,8 @@ use Mojar\CMS\Traits\QueryCache\QueryCacheable;
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereBoxKey($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereLabel($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereNumOrder($value)
- * @property-read \Mojar\Backend\Models\Taxonomy|null $post
- * @property-read \Mojar\Backend\Models\Taxonomy|null $taxonomy
+ * @property-read \Juzaweb\Backend\Models\Taxonomy|null $post
+ * @property-read \Juzaweb\Backend\Models\Taxonomy|null $taxonomy
  * @property-read \Illuminate\Database\Eloquent\Collection|MenuItem[] $children
  * @property-read int|null $children_count
  * @property-read MenuItem|null $parent
@@ -96,7 +96,7 @@ class MenuItem extends Model
         return $this->belongsTo(Taxonomy::class, 'model_id', 'id')->where(
             'model_class',
             '=',
-            'Mojar\\Models\\Taxonomy'
+            'Juzaweb\\Models\\Taxonomy'
         );
     }
 
@@ -105,7 +105,7 @@ class MenuItem extends Model
         return $this->belongsTo(Taxonomy::class, 'model_id', 'id')->where(
             'model_class',
             '=',
-            'Mojar\\Models\\Post'
+            'Juzaweb\\Models\\Post'
         );
     }
 

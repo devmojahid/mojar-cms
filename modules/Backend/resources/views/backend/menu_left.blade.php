@@ -1,7 +1,7 @@
 <ul class="navbar-nav pt-lg-3">
     @php
-        use Mojar\CMS\Facades\HookAction;
-        use Mojar\CMS\Support\MenuCollection;
+        use Juzaweb\CMS\Facades\HookAction;
+        use Juzaweb\CMS\Support\MenuCollection;
 
         global $jw_user;
         $adminPrefix = config('mojar.admin_prefix');

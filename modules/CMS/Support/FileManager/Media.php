@@ -9,11 +9,11 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Support\FileManager;
+namespace Juzaweb\CMS\Support\FileManager;
 
-use Mojar\Backend\Repositories\MediaFileRepository;
-use Mojar\Backend\Repositories\MediaFolderRepository;
-use Mojar\CMS\Models\Model;
+use Juzaweb\Backend\Repositories\MediaFileRepository;
+use Juzaweb\Backend\Repositories\MediaFolderRepository;
+use Juzaweb\CMS\Models\Model;
 
 class Media
 {

@@ -1,13 +1,13 @@
 <?php
 
 use Illuminate\Support\Arr;
-use Mojar\Backend\Http\Resources\ResourceResource;
-use Mojar\Backend\Models\Taxonomy;
-use Mojar\Backend\Http\Resources\PostResource;
-use Mojar\Backend\Models\Post;
-use Mojar\Backend\Models\Resource;
-use Mojar\CMS\Facades\JWQuery;
-use Mojar\CMS\Facades\Theme;
+use Juzaweb\Backend\Http\Resources\ResourceResource;
+use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\Backend\Http\Resources\PostResource;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Models\Resource;
+use Juzaweb\CMS\Facades\JWQuery;
+use Juzaweb\CMS\Facades\Theme;
 
 function get_posts(string $type = null, array $options = []): array
 {

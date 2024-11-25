@@ -1,10 +1,10 @@
 <?php
 
-namespace Mojar\CMS\Traits\QueryCache;
+namespace Juzaweb\CMS\Traits\QueryCache;
 
 use Illuminate\Database\Eloquent\Collection;
-use Mojar\CMS\Observers\FlushQueryCacheObserver;
-use Mojar\CMS\Support\Query\Builder;
+use Juzaweb\CMS\Observers\FlushQueryCacheObserver;
+use Juzaweb\CMS\Support\Query\Builder;
 
 /**
  * @method static bool flushQueryCache(array $tags = [])

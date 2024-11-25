@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Models;
+namespace Juzaweb\CMS\Models;
 
-use Mojar\Network\Interfaces\RootNetworkModelInterface;
+use Juzaweb\Network\Interfaces\RootNetworkModelInterface;
 
 /**
- * Mojar\CMS\Models\Job
+ * Juzaweb\CMS\Models\Job
  *
  * @property int $id
  * @property string $queue

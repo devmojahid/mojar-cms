@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Support\Collections;
+namespace Juzaweb\CMS\Support\Collections;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;

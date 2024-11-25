@@ -9,9 +9,9 @@
  * @license    GNU V2
  */
 
-use Mojar\Backend\Http\Controllers\Backend\Plugin\EditorController;
-use Mojar\Backend\Http\Controllers\Backend\Plugin\PluginController;
-use Mojar\Backend\Http\Controllers\Backend\Plugin\PluginInstallController;
+use Juzaweb\Backend\Http\Controllers\Backend\Plugin\EditorController;
+use Juzaweb\Backend\Http\Controllers\Backend\Plugin\PluginController;
+use Juzaweb\Backend\Http\Controllers\Backend\Plugin\PluginInstallController;
 
 Route::group(
     ['prefix' => 'plugins'],

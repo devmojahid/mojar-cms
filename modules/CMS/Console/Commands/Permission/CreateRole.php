@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\CMS\Console\Commands\Permission;
+namespace Juzaweb\CMS\Console\Commands\Permission;
 
 use Illuminate\Console\Command;
-use Mojar\CMS\Contracts\Permission as PermissionContract;
-use Mojar\CMS\Contracts\Role as RoleContract;
-use Mojar\CMS\Support\Permission\PermissionRegistrar;
+use Juzaweb\CMS\Contracts\Permission as PermissionContract;
+use Juzaweb\CMS\Contracts\Role as RoleContract;
+use Juzaweb\CMS\Support\Permission\PermissionRegistrar;
 
 class CreateRole extends Command
 {

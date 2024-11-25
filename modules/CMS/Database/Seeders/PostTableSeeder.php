@@ -1,10 +1,10 @@
 <?php
 
-namespace Mojar\CMS\Database\Seeders;
+namespace Juzaweb\CMS\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Mojar\Backend\Models\Post;
-use Mojar\Backend\Models\Taxonomy;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Models\Taxonomy;
 
 class PostTableSeeder extends Seeder
 {

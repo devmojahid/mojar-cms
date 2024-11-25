@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Abstracts;
+namespace Juzaweb\CMS\Abstracts;
 
 use Illuminate\Support\Collection;
-use Mojar\CMS\Support\Theme\Customize;
+use Juzaweb\CMS\Support\Theme\Customize;
 
 abstract class CustomizeControl
 {

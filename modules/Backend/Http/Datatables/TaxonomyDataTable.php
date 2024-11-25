@@ -9,13 +9,13 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Datatables;
+namespace Juzaweb\Backend\Http\Datatables;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Mojar\CMS\Abstracts\DataTable;
-use Mojar\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Abstracts\DataTable;
+use Juzaweb\Backend\Models\Taxonomy;
 
 class TaxonomyDataTable extends DataTable
 {

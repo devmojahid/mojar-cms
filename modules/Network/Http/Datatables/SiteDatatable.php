@@ -9,14 +9,14 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Http\Datatables;
+namespace Juzaweb\Network\Http\Datatables;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Mojar\CMS\Abstracts\DataTable;
-use Mojar\Network\Contracts\SiteManagerContract;
-use Mojar\Network\Models\Site;
+use Juzaweb\CMS\Abstracts\DataTable;
+use Juzaweb\Network\Contracts\SiteManagerContract;
+use Juzaweb\Network\Models\Site;
 
 class SiteDatatable extends DataTable
 {

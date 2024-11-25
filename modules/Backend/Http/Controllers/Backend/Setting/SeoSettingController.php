@@ -1,10 +1,10 @@
 <?php
 
-namespace Mojar\Backend\Http\Controllers\Backend\Setting;
+namespace Juzaweb\Backend\Http\Controllers\Backend\Setting;
 
 use Illuminate\Http\Request;
-use Mojar\CMS\Http\Controllers\Controller;
-use Mojar\CMS\Models\Config;
+use Juzaweb\CMS\Http\Controllers\Controller;
+use Juzaweb\CMS\Models\Config;
 
 class SeoSettingController extends Controller
 {

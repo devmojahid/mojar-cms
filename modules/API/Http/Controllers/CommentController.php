@@ -9,18 +9,18 @@
  * @license    GNU General Public License v2.0
  */
 
-namespace Mojar\API\Http\Controllers;
+namespace Juzaweb\API\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Mojar\Backend\Http\Resources\CommentResource;
-use Mojar\Backend\Repositories\CommentRepository;
-use Mojar\Backend\Repositories\PostRepository;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Http\Controllers\ApiController;
-use Mojar\Frontend\Http\Requests\CommentRequest;
+use Juzaweb\Backend\Http\Resources\CommentResource;
+use Juzaweb\Backend\Repositories\CommentRepository;
+use Juzaweb\Backend\Repositories\PostRepository;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Http\Controllers\ApiController;
+use Juzaweb\Frontend\Http\Requests\CommentRequest;
 
 class CommentController extends ApiController
 {

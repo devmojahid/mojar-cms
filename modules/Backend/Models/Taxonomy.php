@@ -1,19 +1,19 @@
 <?php
 
-namespace Mojar\Backend\Models;
+namespace Juzaweb\Backend\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Mojar\CMS\Database\Factories\TaxonomyFactory;
+use Juzaweb\CMS\Database\Factories\TaxonomyFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Mojar\CMS\Traits\QueryCache\QueryCacheable;
-use Mojar\CMS\Traits\TaxonomyModel;
-use Mojar\CMS\Models\Model;
-use Mojar\CMS\Traits\UseUUIDColumn;
+use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
+use Juzaweb\CMS\Traits\TaxonomyModel;
+use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Traits\UseUUIDColumn;
 
 /**
- * Mojar\Backend\Models\Taxonomy
+ * Juzaweb\Backend\Models\Taxonomy
  *
  * @property int $id
  * @property string $name
@@ -29,10 +29,10 @@ use Mojar\CMS\Traits\UseUUIDColumn;
  * @property int $level
  * @property-read \Illuminate\Database\Eloquent\Collection|Taxonomy[] $children
  * @property-read int|null $children_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Mojar\Backend\Models\MenuItem[] $menuItems
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\MenuItem[] $menuItems
  * @property-read int|null $menu_items_count
  * @property-read Taxonomy|null $parent
- * @method static \Mojar\CMS\Database\Factories\TaxonomyFactory factory(...$parameters)
+ * @method static \Juzaweb\CMS\Database\Factories\TaxonomyFactory factory(...$parameters)
  * @method static Builder|Taxonomy newModelQuery()
  * @method static Builder|Taxonomy newQuery()
  * @method static Builder|Taxonomy query()
@@ -111,7 +111,7 @@ class Taxonomy extends Model
             ->where(
                 'model_class',
                 '=',
-                'Mojar\\Models\\Taxonomy'
+                'Juzaweb\\Models\\Taxonomy'
             );
     }
 

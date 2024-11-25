@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\Backend\Http\Controllers\Installer;
+namespace Juzaweb\Backend\Http\Controllers\Installer;
 
 use Illuminate\Routing\Controller;
-use Mojar\CMS\Support\PermissionsChecker;
+use Juzaweb\CMS\Support\PermissionsChecker;
 
 class PermissionsController extends Controller
 {

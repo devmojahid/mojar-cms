@@ -9,14 +9,14 @@
  * @license    MIT
  */
 
-namespace Mojar\API\Providers;
+namespace Juzaweb\API\Providers;
 
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
-use Mojar\API\Actions\APIAction;
-use Mojar\CMS\Facades\ActionRegister;
-use Mojar\CMS\Support\ServiceProvider;
+use Juzaweb\API\Actions\APIAction;
+use Juzaweb\CMS\Facades\ActionRegister;
+use Juzaweb\CMS\Support\ServiceProvider;
 
 class APIServiceProvider extends ServiceProvider
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\Backend\Policies;
+namespace Juzaweb\Backend\Policies;
 
-use Mojar\CMS\Models\Model;
-use Mojar\CMS\Models\User;
+use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TaxonomyPolicy

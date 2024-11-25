@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\CMS\Repositories\Generators\Commands;
+namespace Juzaweb\CMS\Repositories\Generators\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use Mojar\CMS\Repositories\Generators\FileAlreadyExistsException;
-use Mojar\CMS\Repositories\Generators\ValidatorGenerator;
+use Juzaweb\CMS\Repositories\Generators\FileAlreadyExistsException;
+use Juzaweb\CMS\Repositories\Generators\ValidatorGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 

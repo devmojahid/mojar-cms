@@ -9,11 +9,11 @@
  * @license    GNU General Public License v2.0
  */
 
-namespace Mojar\API\Support\Documentation;
+namespace Juzaweb\API\Support\Documentation;
 
-use Mojar\API\Support\Swagger\SwaggerDocument;
-use Mojar\API\Support\Swagger\SwaggerMethod;
-use Mojar\API\Support\Swagger\SwaggerPath;
+use Juzaweb\API\Support\Swagger\SwaggerDocument;
+use Juzaweb\API\Support\Swagger\SwaggerMethod;
+use Juzaweb\API\Support\Swagger\SwaggerPath;
 
 class AuthSwaggerDocumentation implements APISwaggerDocumentation
 {

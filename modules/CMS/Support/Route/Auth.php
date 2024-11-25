@@ -9,14 +9,14 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support\Route;
+namespace Juzaweb\CMS\Support\Route;
 
 use Illuminate\Support\Facades\Route;
-use Mojar\Backend\Http\Controllers\Auth\LoginController;
-use Mojar\Backend\Http\Controllers\Auth\RegisterController;
-use Mojar\Backend\Http\Controllers\Auth\ForgotPasswordController;
-use Mojar\Backend\Http\Controllers\Auth\ResetPasswordController;
-use Mojar\Backend\Http\Controllers\Auth\SocialLoginController;
+use Juzaweb\Backend\Http\Controllers\Auth\LoginController;
+use Juzaweb\Backend\Http\Controllers\Auth\RegisterController;
+use Juzaweb\Backend\Http\Controllers\Auth\ForgotPasswordController;
+use Juzaweb\Backend\Http\Controllers\Auth\ResetPasswordController;
+use Juzaweb\Backend\Http\Controllers\Auth\SocialLoginController;
 
 class Auth
 {

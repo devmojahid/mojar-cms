@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Controllers\Backend;
+namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
-use Mojar\Backend\Models\Post;
+use Juzaweb\Backend\Models\Post;
 
 class PostResourceController extends ResourceController
 {

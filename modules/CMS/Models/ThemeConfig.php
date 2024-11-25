@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\CMS\Models;
+namespace Juzaweb\CMS\Models;
 
 /**
- * Mojar\CMS\Models\ThemeConfig
+ * Juzaweb\CMS\Models\ThemeConfig
  *
  * @property int $id
  * @property string $code

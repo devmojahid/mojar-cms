@@ -9,15 +9,15 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Contracts;
+namespace Juzaweb\CMS\Contracts;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Inertia\Response;
-use Mojar\CMS\Exceptions\ThemeNotFoundException;
-use Mojar\CMS\Interfaces\Theme\ThemeInterface;
-use Mojar\CMS\Support\LocalThemeRepository;
+use Juzaweb\CMS\Exceptions\ThemeNotFoundException;
+use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
+use Juzaweb\CMS\Support\LocalThemeRepository;
 
 /**
  * @see LocalThemeRepository

@@ -1,8 +1,8 @@
 @php
-    $blocks = \Mojar\CMS\Facades\HookAction::getPageBlocks();
+    $blocks = \Juzaweb\CMS\Facades\HookAction::getPageBlocks();
     $templateBlocks = $templateData['blocks'] ?? [];
     $currentTheme = jw_current_theme();
-    $themePath = \Mojar\CMS\Facades\ThemeLoader::getThemePath($currentTheme);
+    $themePath = \Juzaweb\CMS\Facades\ThemeLoader::getThemePath($currentTheme);
     $key = \Illuminate\Support\Str::random(15);
 @endphp
 

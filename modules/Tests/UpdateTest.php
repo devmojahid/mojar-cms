@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\Tests;
+namespace Juzaweb\Tests;
 
 use Illuminate\Support\Facades\File;
 

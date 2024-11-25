@@ -9,10 +9,10 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Facades;
+namespace Juzaweb\Network\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Mojar\Network\Contracts\NetworkRegistionContract;
+use Juzaweb\Network\Contracts\NetworkRegistionContract;
 
 /**
  * @method static void init()
@@ -20,7 +20,7 @@ use Mojar\Network\Contracts\NetworkRegistionContract;
  * @method static string getCurrentDomain()
  * @method static object getCurrentSite()
  * @method static null|int getCurrentSiteId()
- * @see \Mojar\Network\Support\NetworkRegistion
+ * @see \Juzaweb\Network\Support\NetworkRegistion
  */
 class Network extends Facade
 {

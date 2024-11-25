@@ -316,7 +316,7 @@
                 false
             @endif ;
     </script>
-    <script src="{{ asset('jw-styles/mojar/js/filemanager.min.js') }}?v={{ \Mojar\CMS\Version::getVersion() }}"></script>
+    <script src="{{ asset('jw-styles/mojar/js/filemanager.min.js') }}?v={{ \Juzaweb\CMS\Version::getVersion() }}"></script>
 
     <script>
         Dropzone.options.uploadForm = {

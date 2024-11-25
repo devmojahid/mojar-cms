@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\CMS\Http\Middleware;
+namespace Juzaweb\CMS\Http\Middleware;
 
 use Closure;
-use Mojar\CMS\Support\Installer;
+use Juzaweb\CMS\Support\Installer;
 
 class XFrameHeadersMiddleware
 {

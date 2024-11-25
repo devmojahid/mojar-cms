@@ -9,10 +9,10 @@
  * @license    GNU General Public License v2.0
  */
 
-namespace Mojar\CMS\Traits;
+namespace Juzaweb\CMS\Traits;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Mojar\CMS\Repositories\Exceptions\RepositoryException;
+use Juzaweb\CMS\Repositories\Exceptions\RepositoryException;
 
 trait ResourceRepositoryEloquent
 {

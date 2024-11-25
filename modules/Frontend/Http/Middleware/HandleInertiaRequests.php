@@ -1,12 +1,12 @@
 <?php
 
-namespace Mojar\Frontend\Http\Middleware;
+namespace Juzaweb\Frontend\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
-use Mojar\Backend\Http\Resources\UserResource;
-use Mojar\Backend\Models\Menu;
-use Mojar\CMS\Support\Theme\MenuBuilder;
+use Juzaweb\Backend\Http\Resources\UserResource;
+use Juzaweb\Backend\Models\Menu;
+use Juzaweb\CMS\Support\Theme\MenuBuilder;
 
 class HandleInertiaRequests extends Middleware
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Mojar\Backend\Repositories;
+namespace Juzaweb\Backend\Repositories;
 
-use Mojar\Backend\Models\Menu;
-use Mojar\CMS\Repositories\BaseRepositoryEloquent;
+use Juzaweb\Backend\Models\Menu;
+use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
 
 /**
  * Class CommentRepositoryEloquent.
  *
- * @package namespace Mojar\Backend\Repositories;
+ * @package namespace Juzaweb\Backend\Repositories;
  */
 class MenuRepositoryEloquent extends BaseRepositoryEloquent implements MenuRepository
 {

@@ -9,9 +9,9 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Contracts;
+namespace Juzaweb\Network\Contracts;
 
-use Mojar\Network\Models\Site;
+use Juzaweb\Network\Models\Site;
 
 interface SiteCreaterContract
 {

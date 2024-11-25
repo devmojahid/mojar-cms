@@ -1,5 +1,5 @@
 @php
-    $taxonomies = \Mojar\CMS\Facades\HookAction::getTaxonomies($postType);
+    $taxonomies = \Juzaweb\CMS\Facades\HookAction::getTaxonomies($postType);
 @endphp
 
 @foreach ($taxonomies as $taxonomy)

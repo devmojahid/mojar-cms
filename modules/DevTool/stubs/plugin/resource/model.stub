@@ -2,8 +2,8 @@
 
 namespace $NAMESPACE$;
 
-use Mojar\CMS\Models\Model;
-use Mojar\CMS\Traits\ResourceModel;
+use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Traits\ResourceModel;
 
 class $CLASS$ extends Model
 {

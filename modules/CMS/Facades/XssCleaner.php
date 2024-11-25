@@ -9,15 +9,15 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Facades;
+namespace Juzaweb\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Mojar\CMS\Contracts\XssCleanerContract;
+use Juzaweb\CMS\Contracts\XssCleanerContract;
 
 /**
  * @method static string clean(string $value)
  *
- * @see \Mojar\CMS\Support\XssCleaner
+ * @see \Juzaweb\CMS\Support\XssCleaner
  */
 class XssCleaner extends Facade
 {

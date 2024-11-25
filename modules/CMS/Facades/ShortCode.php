@@ -1,13 +1,13 @@
 <?php
 
-namespace Mojar\CMS\Facades;
+namespace Juzaweb\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static static register(string $name, callable|string $callback)
  * @method static string compile(string $value)
- * @see \Mojar\CMS\Support\ShortCode\ShortCode
+ * @see \Juzaweb\CMS\Support\ShortCode\ShortCode
  */
 class ShortCode extends Facade
 {
@@ -19,6 +19,6 @@ class ShortCode extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return \Mojar\CMS\Contracts\ShortCode::class;
+        return \Juzaweb\CMS\Contracts\ShortCode::class;
     }
 }

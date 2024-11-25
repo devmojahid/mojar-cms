@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\CMS\Database\Factories;
+namespace Juzaweb\CMS\Database\Factories;
 
 use Illuminate\Support\Str;
-use Mojar\Backend\Models\Post;
+use Juzaweb\Backend\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Mojar\CMS\Models\User;
+use Juzaweb\CMS\Models\User;
 
 class PostFactory extends Factory
 {

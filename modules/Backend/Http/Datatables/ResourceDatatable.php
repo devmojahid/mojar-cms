@@ -9,20 +9,20 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Datatables;
+namespace Juzaweb\Backend\Http\Datatables;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Mojar\Backend\Models\Resource;
-use Mojar\CMS\Abstracts\DataTable;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Repositories\BaseRepository;
-use Mojar\CMS\Repositories\Criterias\FilterCriteria;
-use Mojar\CMS\Repositories\Criterias\SearchCriteria;
-use Mojar\CMS\Repositories\Criterias\SortCriteria;
+use Juzaweb\Backend\Models\Resource;
+use Juzaweb\CMS\Abstracts\DataTable;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Repositories\BaseRepository;
+use Juzaweb\CMS\Repositories\Criterias\FilterCriteria;
+use Juzaweb\CMS\Repositories\Criterias\SearchCriteria;
+use Juzaweb\CMS\Repositories\Criterias\SortCriteria;
 
 class ResourceDatatable extends DataTable
 {

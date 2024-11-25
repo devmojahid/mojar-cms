@@ -9,20 +9,20 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Actions;
+namespace Juzaweb\Backend\Actions;
 
 use Illuminate\Support\Facades\Cache;
-use Mojar\Backend\Models\Post;
-use Mojar\CMS\Abstracts\Action;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Facades\ThemeLoader;
-use Mojar\CMS\Models\User;
-use Mojar\CMS\Support\Notification;
-use Mojar\CMS\Support\Theme\CustomMenuBox;
-use Mojar\CMS\Support\Updater\CmsUpdater;
-use Mojar\CMS\Version;
-use Mojar\Frontend\Http\Controllers\PageController;
-use Mojar\Frontend\Http\Controllers\PostController;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Facades\ThemeLoader;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Support\Notification;
+use Juzaweb\CMS\Support\Theme\CustomMenuBox;
+use Juzaweb\CMS\Support\Updater\CmsUpdater;
+use Juzaweb\CMS\Version;
+use Juzaweb\Frontend\Http\Controllers\PageController;
+use Juzaweb\Frontend\Http\Controllers\PostController;
 
 class MenuAction extends Action
 {

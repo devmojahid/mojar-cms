@@ -1,13 +1,13 @@
 <?php
 
-namespace Mojar\Backend\Providers;
+namespace Juzaweb\Backend\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    protected $namespace = 'Mojar\Backend\Http\Controllers';
+    protected $namespace = 'Juzaweb\Backend\Http\Controllers';
 
     public function boot()
     {

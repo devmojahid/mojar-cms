@@ -1,8 +1,8 @@
 <?php
 
-namespace Mojar\CMS\Support\Manager;
+namespace Juzaweb\CMS\Support\Manager;
 
-use Mojar\CMS\Models\Translation;
+use Juzaweb\CMS\Models\Translation;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Symfony\Component\Finder\Finder;

@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-use Mojar\Frontend\Http\Controllers\AssetController;
+use Juzaweb\Frontend\Http\Controllers\AssetController;
 
 //Route::get('jw-styles/{lang}/langs.js', [AssetController::class, 'languageScript'])
 //    ->where('lang', '[a-z]+');

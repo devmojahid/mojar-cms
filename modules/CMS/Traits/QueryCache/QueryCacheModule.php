@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\CMS\Traits\QueryCache;
+namespace Juzaweb\CMS\Traits\QueryCache;
 
 use BadMethodCallException;
 use DateTime;
 use Illuminate\Cache\CacheManager;
-use Mojar\CMS\Facades\CacheGroup;
+use Juzaweb\CMS\Facades\CacheGroup;
 
 trait QueryCacheModule
 {

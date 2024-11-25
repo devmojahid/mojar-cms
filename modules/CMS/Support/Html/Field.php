@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support\Html;
+namespace Juzaweb\CMS\Support\Html;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -17,8 +17,8 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use Mojar\CMS\Contracts\Field as FieldContract;
-use Mojar\CMS\Support\Html\Traits\InputField;
+use Juzaweb\CMS\Contracts\Field as FieldContract;
+use Juzaweb\CMS\Support\Html\Traits\InputField;
 
 class Field implements FieldContract
 {

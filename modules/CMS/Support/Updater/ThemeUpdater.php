@@ -1,12 +1,12 @@
 <?php
 
-namespace Mojar\CMS\Support\Updater;
+namespace Juzaweb\CMS\Support\Updater;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
-use Mojar\CMS\Abstracts\UpdateManager;
-use Mojar\CMS\Facades\CacheGroup;
-use Mojar\CMS\Version;
+use Juzaweb\CMS\Abstracts\UpdateManager;
+use Juzaweb\CMS\Facades\CacheGroup;
+use Juzaweb\CMS\Version;
 
 class ThemeUpdater extends UpdateManager
 {

@@ -9,9 +9,9 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Events;
+namespace Juzaweb\Backend\Events;
 
-use Mojar\Backend\Models\Post;
+use Juzaweb\Backend\Models\Post;
 
 class PostViewed
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\Backend\Http\Requests\Plugin;
+namespace Juzaweb\Backend\Http\Requests\Plugin;
 
 use Illuminate\Foundation\Http\FormRequest;
 

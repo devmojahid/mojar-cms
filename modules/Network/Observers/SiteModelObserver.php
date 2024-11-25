@@ -9,9 +9,9 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Observers;
+namespace Juzaweb\Network\Observers;
 
-use Mojar\Network\Models\Site;
+use Juzaweb\Network\Models\Site;
 
 class SiteModelObserver
 {

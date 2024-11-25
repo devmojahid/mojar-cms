@@ -7,7 +7,7 @@
  * Time: 8:45 PM
  */
 
-namespace Mojar\CMS\Contracts;
+namespace Juzaweb\CMS\Contracts;
 
 /**
  * @deprecated

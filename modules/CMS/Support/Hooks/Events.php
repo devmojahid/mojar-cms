@@ -1,22 +1,22 @@
 <?php
 
-namespace Mojar\CMS\Support\Hooks;
+namespace Juzaweb\CMS\Support\Hooks;
 
-use Mojar\CMS\Contracts\EventyContract;
+use Juzaweb\CMS\Contracts\EventyContract;
 
 class Events implements EventyContract
 {
     /**
      * Holds all registered actions.
      *
-     * @var \Mojar\CMS\Support\Hooks\Action
+     * @var \Juzaweb\CMS\Support\Hooks\Action
      */
     protected $action;
 
     /**
      * Holds all registered filters.
      *
-     * @var \Mojar\CMS\Support\Hooks\Filter
+     * @var \Juzaweb\CMS\Support\Hooks\Filter
      */
     protected $filter;
 
@@ -32,7 +32,7 @@ class Events implements EventyContract
     /**
      * Get the action instance.
      *
-     * @return \Mojar\CMS\Support\Hooks\Action
+     * @return \Juzaweb\CMS\Support\Hooks\Action
      */
     public function getAction()
     {
@@ -42,7 +42,7 @@ class Events implements EventyContract
     /**
      * Get the action instance.
      *
-     * @return \Mojar\CMS\Support\Hooks\Filter
+     * @return \Juzaweb\CMS\Support\Hooks\Filter
      */
     public function getFilter()
     {

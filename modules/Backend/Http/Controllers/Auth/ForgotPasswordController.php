@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\Backend\Http\Controllers\Auth;
+namespace Juzaweb\Backend\Http\Controllers\Auth;
 
-use Mojar\CMS\Http\Controllers\Controller;
-use Mojar\CMS\Traits\Auth\AuthForgotPassword;
+use Juzaweb\CMS\Http\Controllers\Controller;
+use Juzaweb\CMS\Traits\Auth\AuthForgotPassword;
 
 class ForgotPasswordController extends Controller
 {

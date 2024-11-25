@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Commands;
+namespace Juzaweb\Backend\Commands;
 
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
-use Mojar\Backend\Models\Taxonomy;
+use Juzaweb\Backend\Models\Taxonomy;
 use Symfony\Component\Console\Input\InputOption;
 
 class PingFeedCommand extends Command

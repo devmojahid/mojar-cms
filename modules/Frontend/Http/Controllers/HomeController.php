@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\Frontend\Http\Controllers;
+namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Mojar\Backend\Repositories\PostRepository;
-use Mojar\CMS\Http\Controllers\FrontendController;
+use Juzaweb\Backend\Repositories\PostRepository;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
 
 class HomeController extends FrontendController
 {

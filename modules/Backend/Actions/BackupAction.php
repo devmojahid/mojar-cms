@@ -9,9 +9,9 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Actions;
+namespace Juzaweb\Backend\Actions;
 
-use Mojar\CMS\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\Action;
 
 class BackupAction extends Action
 {

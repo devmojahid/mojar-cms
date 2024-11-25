@@ -1,12 +1,12 @@
 <?php
 
-namespace Mojar\Backend\Commands;
+namespace Juzaweb\Backend\Commands;
 
 use Google\Service\Indexing;
 use GuzzleHttp\Client;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Mojar\Backend\Models\Post;
+use Juzaweb\Backend\Models\Post;
 
 class AutoSubmitCommand extends Command
 {

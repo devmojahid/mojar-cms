@@ -9,9 +9,9 @@
  * @license    GNU V2
  */
 
-namespace Mojar\DevTool\Actions;
+namespace Juzaweb\DevTool\Actions;
 
-use Mojar\CMS\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\Action;
 
 class MenuAction extends Action
 {

@@ -9,13 +9,13 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Mojar\CMS\Contracts\StorageDataContract;
+use Juzaweb\CMS\Contracts\StorageDataContract;
 
 class StorageData implements StorageDataContract
 {

@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support\Theme;
+namespace Juzaweb\CMS\Support\Theme;
 
 use Illuminate\Cache\CacheManager;
-use Mojar\CMS\Contracts\ThemeConfigContract;
-use Mojar\CMS\Models\ThemeConfig as ConfigModel;
+use Juzaweb\CMS\Contracts\ThemeConfigContract;
+use Juzaweb\CMS\Models\ThemeConfig as ConfigModel;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
 

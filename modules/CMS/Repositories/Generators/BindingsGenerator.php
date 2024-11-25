@@ -1,10 +1,10 @@
 <?php
 
-namespace Mojar\CMS\Repositories\Generators;
+namespace Juzaweb\CMS\Repositories\Generators;
 
-use Mojar\CMS\Repositories\Generators\Generator;
-use Mojar\CMS\Repositories\Generators\RepositoryEloquentGenerator;
-use Mojar\CMS\Repositories\Generators\RepositoryInterfaceGenerator;
+use Juzaweb\CMS\Repositories\Generators\Generator;
+use Juzaweb\CMS\Repositories\Generators\RepositoryEloquentGenerator;
+use Juzaweb\CMS\Repositories\Generators\RepositoryInterfaceGenerator;
 
 /**
  * Class BindingsGenerator

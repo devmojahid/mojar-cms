@@ -1,18 +1,18 @@
 <?php
 
-namespace Mojar\Backend\Http\Controllers\Backend;
+namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Mojar\Backend\Models\Menu;
-use Mojar\Backend\Models\Post;
-use Mojar\Backend\Models\Resource;
-use Mojar\Backend\Models\Taxonomy;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Http\Controllers\BackendController;
-use Mojar\CMS\Models\User;
-use Mojar\CMS\Support\ArrayPagination;
+use Juzaweb\Backend\Models\Menu;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Models\Resource;
+use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Support\ArrayPagination;
 
 class LoadDataController extends BackendController
 {

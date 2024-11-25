@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\DevTool\Http\Controllers;
+namespace Juzaweb\DevTool\Http\Controllers;
 
 use Illuminate\Support\Facades\File;
-use Mojar\CMS\Http\Controllers\BackendController;
-use Mojar\CMS\Interfaces\Theme\ThemeInterface;
-use Mojar\CMS\Interfaces\Theme\PluginInterface as Plugin;
+use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
+use Juzaweb\CMS\Interfaces\Theme\PluginInterface as Plugin;
 
 class Controller extends BackendController
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\API\Http\Controllers\Documentation;
+namespace Juzaweb\API\Http\Controllers\Documentation;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\Support\Facades\Response as ResponseFacade;
 use Illuminate\Support\Str;
-use Mojar\CMS\Abstracts\Action;
-use Mojar\CMS\Contracts\HookActionContract as HookAction;
-use Mojar\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Contracts\HookActionContract as HookAction;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use L5Swagger\Exceptions\L5SwaggerException;
 
 class SwaggerController extends BackendController

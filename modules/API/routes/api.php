@@ -9,9 +9,9 @@
  * @license    GNU V2
  */
 
-use Mojar\API\Http\Controllers\SettingController;
-use Mojar\API\Http\Controllers\SidebarController;
-use Mojar\API\Http\Middleware\Admin;
+use Juzaweb\API\Http\Controllers\SettingController;
+use Juzaweb\API\Http\Controllers\SidebarController;
+use Juzaweb\API\Http\Middleware\Admin;
 
 Route::group(
     [

@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Tests\Feature\Backend;
+namespace Juzaweb\Tests\Feature\Backend;
 
 use Illuminate\Support\Facades\Auth;
-use Mojar\CMS\Models\User;
-use Mojar\Tests\TestCase;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\Tests\TestCase;
 
 class DashboardTest extends TestCase
 {

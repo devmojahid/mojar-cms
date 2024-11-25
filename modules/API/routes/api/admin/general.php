@@ -1,6 +1,6 @@
 <?php
 
-use Mojar\API\Http\Controllers\Admin\GeneralController;
+use Juzaweb\API\Http\Controllers\Admin\GeneralController;
 
 Route::group(
     [

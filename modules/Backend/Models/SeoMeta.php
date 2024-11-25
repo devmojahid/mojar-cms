@@ -9,12 +9,12 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Models;
+namespace Juzaweb\Backend\Models;
 
-use Mojar\CMS\Models\Model;
+use Juzaweb\CMS\Models\Model;
 
 /**
- * Mojar\Seo\Models\SeoMeta
+ * Juzaweb\Seo\Models\SeoMeta
  *
  * @property int $id
  * @property string $object_type

@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Repositories\Abstracts;
+namespace Juzaweb\CMS\Repositories\Abstracts;
 
 use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Support\MessageBag;
-use Mojar\CMS\Repositories\Exceptions\ValidatorException;
+use Juzaweb\CMS\Repositories\Exceptions\ValidatorException;
 
 abstract class Validator
 {

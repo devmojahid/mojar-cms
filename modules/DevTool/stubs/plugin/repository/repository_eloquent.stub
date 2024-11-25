@@ -3,7 +3,7 @@
 namespace $CLASS_NAMESPACE$;
 
 use $MODULE_NAMESPACE$\Models\$MODEL_NAME$;
-use Mojar\CMS\Repositories\BaseRepositoryEloquent;
+use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
 
 class $CLASS$Eloquent extends BaseRepositoryEloquent implements $CLASS$
 {

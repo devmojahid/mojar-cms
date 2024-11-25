@@ -1,7 +1,7 @@
 <ul class="mojar__menuLeft__navigation">
     @php
-        use Mojar\CMS\Facades\HookAction;
-        use Mojar\CMS\Support\MenuCollection;
+        use Juzaweb\CMS\Facades\HookAction;
+        use Juzaweb\CMS\Support\MenuCollection;
 
         global $jw_user;
 

@@ -9,11 +9,11 @@
  * @license    MIT
  */
 
-use Mojar\Network\Http\Controllers\MappingDomainController;
-use Mojar\Network\Http\Controllers\PluginController;
-use Mojar\Network\Http\Controllers\DashboardController;
-use Mojar\Network\Http\Controllers\SiteController;
-use Mojar\Network\Http\Controllers\ThemeController;
+use Juzaweb\Network\Http\Controllers\MappingDomainController;
+use Juzaweb\Network\Http\Controllers\PluginController;
+use Juzaweb\Network\Http\Controllers\DashboardController;
+use Juzaweb\Network\Http\Controllers\SiteController;
+use Juzaweb\Network\Http\Controllers\ThemeController;
 
 Route::get('/', [DashboardController::class, 'index'])->name('admin.network.dashboard');
 

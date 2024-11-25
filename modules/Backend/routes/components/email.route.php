@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-use Mojar\Backend\Http\Controllers\Backend\Email\EmailHookController;
+use Juzaweb\Backend\Http\Controllers\Backend\Email\EmailHookController;
 
 Route::group(
     ['prefix' => 'email'],

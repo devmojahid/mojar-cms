@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\Backend\Http\Controllers\Backend\Plugin;
+namespace Juzaweb\Backend\Http\Controllers\Backend\Plugin;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -8,16 +8,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\URL;
-use Mojar\Backend\Events\AfterPluginBulkAction;
-use Mojar\Backend\Events\DumpAutoloadPlugin;
-use Mojar\Backend\Http\Requests\Plugin\BulkActionRequest;
-use Mojar\CMS\Contracts\MojarApiContract;
-use Mojar\CMS\Facades\CacheGroup;
-use Mojar\CMS\Facades\Plugin;
-use Mojar\CMS\Http\Controllers\BackendController;
-use Mojar\CMS\Support\ArrayPagination;
-use Mojar\CMS\Support\Plugin as SupportPlugin;
-use Mojar\CMS\Version;
+use Juzaweb\Backend\Events\AfterPluginBulkAction;
+use Juzaweb\Backend\Events\DumpAutoloadPlugin;
+use Juzaweb\Backend\Http\Requests\Plugin\BulkActionRequest;
+use Juzaweb\CMS\Contracts\MojarApiContract;
+use Juzaweb\CMS\Facades\CacheGroup;
+use Juzaweb\CMS\Facades\Plugin;
+use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Support\ArrayPagination;
+use Juzaweb\CMS\Support\Plugin as SupportPlugin;
+use Juzaweb\CMS\Version;
 
 class PluginController extends BackendController
 {

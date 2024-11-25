@@ -9,11 +9,11 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Http\Controllers\Backend\Setting;
+namespace Juzaweb\Backend\Http\Controllers\Backend\Setting;
 
 use Illuminate\Contracts\View\View;
-use Mojar\CMS\Contracts\HookActionContract as HookAction;
-use Mojar\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Contracts\HookActionContract as HookAction;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class MediaController extends BackendController
 {

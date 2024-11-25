@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\DevTool\Commands\Plugin\Migration;
+namespace Juzaweb\DevTool\Commands\Plugin\Migration;
 
 use Illuminate\Console\Command;
-use Mojar\CMS\Traits\ModuleCommandTrait;
+use Juzaweb\CMS\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Providers;
+namespace Juzaweb\CMS\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -43,15 +43,15 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->commands('Mojar\CMS\Repositories\Generators\Commands\RepositoryCommand');
-        $this->commands('Mojar\CMS\Repositories\Generators\Commands\TransformerCommand');
-        $this->commands('Mojar\CMS\Repositories\Generators\Commands\PresenterCommand');
-        $this->commands('Mojar\CMS\Repositories\Generators\Commands\EntityCommand');
-        $this->commands('Mojar\CMS\Repositories\Generators\Commands\ValidatorCommand');
-        $this->commands('Mojar\CMS\Repositories\Generators\Commands\ControllerCommand');
-        $this->commands('Mojar\CMS\Repositories\Generators\Commands\BindingsCommand');
-        $this->commands('Mojar\CMS\Repositories\Generators\Commands\CriteriaCommand');
-        $this->app->register('Mojar\CMS\Repositories\Providers\EventServiceProvider');
+        $this->commands('Juzaweb\CMS\Repositories\Generators\Commands\RepositoryCommand');
+        $this->commands('Juzaweb\CMS\Repositories\Generators\Commands\TransformerCommand');
+        $this->commands('Juzaweb\CMS\Repositories\Generators\Commands\PresenterCommand');
+        $this->commands('Juzaweb\CMS\Repositories\Generators\Commands\EntityCommand');
+        $this->commands('Juzaweb\CMS\Repositories\Generators\Commands\ValidatorCommand');
+        $this->commands('Juzaweb\CMS\Repositories\Generators\Commands\ControllerCommand');
+        $this->commands('Juzaweb\CMS\Repositories\Generators\Commands\BindingsCommand');
+        $this->commands('Juzaweb\CMS\Repositories\Generators\Commands\CriteriaCommand');
+        $this->app->register('Juzaweb\CMS\Repositories\Providers\EventServiceProvider');
     }
 
 

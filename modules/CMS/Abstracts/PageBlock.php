@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Abstracts;
+namespace Juzaweb\CMS\Abstracts;
 
 use Illuminate\View\View;
-use Mojar\CMS\Facades\ThemeLoader;
+use Juzaweb\CMS\Facades\ThemeLoader;
 use TwigBridge\Facade\Twig;
 
 abstract class PageBlock

@@ -1,13 +1,13 @@
 <?php
 
-namespace Mojar\CMS\Support\Notifications;
+namespace Juzaweb\CMS\Support\Notifications;
 
 abstract class NotificationAbstract
 {
     protected $notification;
     protected $users;
     /**
-     * @param \Mojar\Backend\Models\ManualNotification $notification
+     * @param \Juzaweb\Backend\Models\ManualNotification $notification
      * */
     public function __construct($notification)
     {

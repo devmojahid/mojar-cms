@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Controllers\Backend\Setting;
+namespace Juzaweb\Backend\Http\Controllers\Backend\Setting;
 
 use Illuminate\Http\Request;
-use Mojar\CMS\Abstracts\Action;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class PermalinkController extends BackendController
 {

@@ -9,13 +9,13 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Mojar\CMS\Contracts\ConfigContract;
-use Mojar\CMS\Models\Config as ConfigModel;
+use Juzaweb\CMS\Contracts\ConfigContract;
+use Juzaweb\CMS\Models\Config as ConfigModel;
 use Illuminate\Container\Container;
 
 class Config implements ConfigContract

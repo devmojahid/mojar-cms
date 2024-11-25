@@ -9,14 +9,14 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Console\Commands;
+namespace Juzaweb\CMS\Console\Commands;
 
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
-use Mojar\CMS\Support\Manager\DatabaseManager;
-use Mojar\CMS\Support\Manager\FinalInstallManager;
-use Mojar\CMS\Support\Manager\InstalledFileManager;
+use Juzaweb\CMS\Support\Manager\DatabaseManager;
+use Juzaweb\CMS\Support\Manager\FinalInstallManager;
+use Juzaweb\CMS\Support\Manager\InstalledFileManager;
 
 class InstallCommand extends Command
 {

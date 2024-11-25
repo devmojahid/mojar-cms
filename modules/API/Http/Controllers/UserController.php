@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\API\Http\Controllers;
+namespace Juzaweb\API\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Mojar\Backend\Http\Resources\UserResource;
-use Mojar\CMS\Http\Controllers\ApiController;
+use Juzaweb\Backend\Http\Resources\UserResource;
+use Juzaweb\CMS\Http\Controllers\ApiController;
 
 class UserController extends ApiController
 {

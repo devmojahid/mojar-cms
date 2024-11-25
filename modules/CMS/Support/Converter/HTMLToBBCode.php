@@ -9,9 +9,9 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Support\Converter;
+namespace Juzaweb\CMS\Support\Converter;
 
-use Mojar\CMS\Support\HtmlDom;
+use Juzaweb\CMS\Support\HtmlDom;
 
 class HTMLToBBCode
 {

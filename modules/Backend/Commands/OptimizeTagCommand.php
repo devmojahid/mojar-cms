@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Commands;
+namespace Juzaweb\Backend\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use Mojar\Backend\Http\Resources\TaxonomyResource;
-use Mojar\Backend\Models\Post;
+use Juzaweb\Backend\Http\Resources\TaxonomyResource;
+use Juzaweb\Backend\Models\Post;
 
 class OptimizeTagCommand extends Command
 {

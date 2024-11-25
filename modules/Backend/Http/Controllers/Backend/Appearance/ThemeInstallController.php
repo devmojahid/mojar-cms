@@ -9,17 +9,17 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Http\Controllers\Backend\Appearance;
+namespace Juzaweb\Backend\Http\Controllers\Backend\Appearance;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Mojar\Backend\Events\AfterUploadTheme;
-use Mojar\Backend\Support\ThemeUploader;
-use Mojar\CMS\Contracts\MojarApiContract;
-use Mojar\CMS\Facades\ThemeLoader;
-use Mojar\CMS\Http\Controllers\BackendController;
+use Juzaweb\Backend\Events\AfterUploadTheme;
+use Juzaweb\Backend\Support\ThemeUploader;
+use Juzaweb\CMS\Contracts\MojarApiContract;
+use Juzaweb\CMS\Facades\ThemeLoader;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Pion\Laravel\ChunkUpload\Exceptions\UploadMissingFileException;
 use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;

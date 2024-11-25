@@ -9,9 +9,9 @@
  * @license    GNU General Public License v2.0
  */
 
-namespace Mojar\CMS\Traits\Criterias;
+namespace Juzaweb\CMS\Traits\Criterias;
 
-use Mojar\CMS\Repositories\Criterias\SortCriteria;
+use Juzaweb\CMS\Repositories\Criterias\SortCriteria;
 
 trait UseSortableCriteria
 {

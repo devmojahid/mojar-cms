@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support\HookActions\Traits;
+namespace Juzaweb\CMS\Support\HookActions\Traits;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;

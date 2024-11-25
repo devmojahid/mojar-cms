@@ -9,9 +9,9 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Traits;
+namespace Juzaweb\Network\Traits;
 
-use Mojar\Network\Facades\Network;
+use Juzaweb\Network\Facades\Network;
 
 trait RootNetworkModel
 {

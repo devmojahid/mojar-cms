@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Mojar\CMS\Extension;
+namespace Juzaweb\CMS\Extension;
 
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;

@@ -9,12 +9,12 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Models;
+namespace Juzaweb\Network\Models;
 
-use Mojar\CMS\Models\Model;
+use Juzaweb\CMS\Models\Model;
 
 /**
- * Mojar\Network\Models\DomainMapping
+ * Juzaweb\Network\Models\DomainMapping
  *
  * @property int $id
  * @property string $domain

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Support\Notifications;
+namespace Juzaweb\CMS\Support\Notifications;
 
 use Illuminate\Notifications\Notification;
 

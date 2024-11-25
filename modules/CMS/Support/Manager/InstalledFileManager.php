@@ -1,8 +1,8 @@
 <?php
 
-namespace Mojar\CMS\Support\Manager;
+namespace Juzaweb\CMS\Support\Manager;
 
-use Mojar\CMS\Support\Installer;
+use Juzaweb\CMS\Support\Installer;
 
 class InstalledFileManager
 {

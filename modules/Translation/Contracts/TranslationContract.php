@@ -9,7 +9,7 @@
  * @license    MIT
  */
 
-namespace Mojar\Translation\Contracts;
+namespace Juzaweb\Translation\Contracts;
 
 use Illuminate\Support\Collection;
 

@@ -9,9 +9,9 @@
  * @license    GNU General Public License v2.0
  */
 
-namespace Mojar\CMS\Repositories\Abstracts;
+namespace Juzaweb\CMS\Repositories\Abstracts;
 
-use Mojar\CMS\Repositories\Contracts\RepositoryInterface;
+use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
 
 abstract class Criteria
 {

@@ -9,13 +9,13 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Support\Translations;
+namespace Juzaweb\CMS\Support\Translations;
 
 use Closure;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
-use Mojar\CMS\Contracts\TranslationManager;
-use Mojar\CMS\Contracts\TranslationFinder;
+use Juzaweb\CMS\Contracts\TranslationManager;
+use Juzaweb\CMS\Contracts\TranslationFinder;
 
 class TranslationImporter
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Mojar\CMS\Providers;
+namespace Juzaweb\CMS\Providers;
 
-use Mojar\CMS\Console\Commands\SendNotifyCommand;
-use Mojar\CMS\Support\Notification;
-use Mojar\CMS\Support\ServiceProvider;
-use Mojar\CMS\Support\Notifications\DatabaseNotification;
-use Mojar\CMS\Support\Notifications\EmailNotification;
+use Juzaweb\CMS\Console\Commands\SendNotifyCommand;
+use Juzaweb\CMS\Support\Notification;
+use Juzaweb\CMS\Support\ServiceProvider;
+use Juzaweb\CMS\Support\Notifications\DatabaseNotification;
+use Juzaweb\CMS\Support\Notifications\EmailNotification;
 
 class NotificationServiceProvider extends ServiceProvider
 {

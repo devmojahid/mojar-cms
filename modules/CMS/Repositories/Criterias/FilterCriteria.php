@@ -1,14 +1,14 @@
 <?php
 
-namespace Mojar\CMS\Repositories\Criterias;
+namespace Juzaweb\CMS\Repositories\Criterias;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
-use Mojar\CMS\Interfaces\Repositories\WithAppendFilter;
-use Mojar\CMS\Repositories\Abstracts\Criteria;
-use Mojar\CMS\Repositories\Contracts\CriteriaInterface;
-use Mojar\CMS\Repositories\Contracts\RepositoryInterface;
+use Juzaweb\CMS\Interfaces\Repositories\WithAppendFilter;
+use Juzaweb\CMS\Repositories\Abstracts\Criteria;
+use Juzaweb\CMS\Repositories\Contracts\CriteriaInterface;
+use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
 
 class FilterCriteria extends Criteria implements CriteriaInterface
 {

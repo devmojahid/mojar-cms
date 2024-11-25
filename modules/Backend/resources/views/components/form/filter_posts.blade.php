@@ -3,7 +3,7 @@
 @endphp
 @if (empty($options['type']))
     @php
-        $typeOptions = \Mojar\CMS\Facades\HookAction::getPostTypes()
+        $typeOptions = \Juzaweb\CMS\Facades\HookAction::getPostTypes()
             ->mapWithKeys(function ($item) {
                 return [$item->get('key') => $item->get('label')];
             })

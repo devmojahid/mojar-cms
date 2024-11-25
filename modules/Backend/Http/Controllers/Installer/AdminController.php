@@ -9,14 +9,14 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Controllers\Installer;
+namespace Juzaweb\Backend\Http\Controllers\Installer;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Mojar\CMS\Models\User;
+use Juzaweb\CMS\Models\User;
 
 class AdminController extends Controller
 {

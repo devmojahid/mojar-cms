@@ -9,9 +9,9 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Support;
+namespace Juzaweb\Backend\Support;
 
-use Mojar\Backend\Models\Post;
+use Juzaweb\Backend\Models\Post;
 
 class PostContentParser
 {

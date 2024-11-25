@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-use Mojar\Frontend\Http\Controllers\ProfileController;
+use Juzaweb\Frontend\Http\Controllers\ProfileController;
 
 Route::group(
     [

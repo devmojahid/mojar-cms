@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\DevTool\Commands\Theme;
+namespace Juzaweb\DevTool\Commands\Theme;
 
 use Illuminate\Support\Facades\File;
-use Mojar\CMS\Support\HtmlDom;
+use Juzaweb\CMS\Support\HtmlDom;
 
 class DownloadStyleCommand extends DownloadTemplateCommandAbstract
 {

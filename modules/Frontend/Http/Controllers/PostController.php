@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Frontend\Http\Controllers;
+namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -19,16 +19,16 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Response;
-use Mojar\Backend\Events\PostViewed;
-use Mojar\Backend\Http\Resources\CommentResource;
-use Mojar\Backend\Http\Resources\PostResourceCollection;
-use Mojar\Backend\Models\Comment;
-use Mojar\Backend\Models\Post;
-use Mojar\Backend\Repositories\PostRepository;
-use Mojar\CMS\Facades\Facades;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Http\Controllers\FrontendController;
-use Mojar\Frontend\Http\Requests\CommentRequest;
+use Juzaweb\Backend\Events\PostViewed;
+use Juzaweb\Backend\Http\Resources\CommentResource;
+use Juzaweb\Backend\Http\Resources\PostResourceCollection;
+use Juzaweb\Backend\Models\Comment;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Repositories\PostRepository;
+use Juzaweb\CMS\Facades\Facades;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
+use Juzaweb\Frontend\Http\Requests\CommentRequest;
 
 class PostController extends FrontendController
 {

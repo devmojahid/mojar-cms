@@ -9,16 +9,16 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Support;
+namespace Juzaweb\Network\Support;
 
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Database\ConnectionResolverInterface;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
-use Mojar\CMS\Facades\Config as DbConfig;
-use Mojar\Network\Contracts\SiteCreaterContract;
-use Mojar\Network\Contracts\SiteSetupContract;
-use Mojar\Network\Models\Site;
+use Juzaweb\CMS\Facades\Config as DbConfig;
+use Juzaweb\Network\Contracts\SiteCreaterContract;
+use Juzaweb\Network\Contracts\SiteSetupContract;
+use Juzaweb\Network\Models\Site;
 
 class SiteCreater implements SiteCreaterContract
 {

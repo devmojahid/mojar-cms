@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Exceptions;
+namespace Juzaweb\CMS\Exceptions;
 
 class FileManagerException extends \Exception
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Mojar\Backend\Http\Controllers\Backend;
+namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Support\Str;
-use Mojar\CMS\Http\Controllers\BackendController;
-use Mojar\Backend\Http\Datatables\CommentDatatable;
-use Mojar\Backend\Models\Comment;
-use Mojar\CMS\Traits\ResourceController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\Backend\Http\Datatables\CommentDatatable;
+use Juzaweb\Backend\Models\Comment;
+use Juzaweb\CMS\Traits\ResourceController;
 
 class CommentController extends BackendController
 {

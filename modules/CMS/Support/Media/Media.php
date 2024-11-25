@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\CMS\Support\Media;
+namespace Juzaweb\CMS\Support\Media;
 
 use Illuminate\Contracts\Filesystem\Factory;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Foundation\Application;
-use Mojar\CMS\Contracts\Media\Media as MediaContract;
+use Juzaweb\CMS\Contracts\Media\Media as MediaContract;
 
 class Media implements MediaContract
 {

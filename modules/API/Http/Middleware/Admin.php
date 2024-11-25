@@ -9,11 +9,11 @@
  * @license    MIT
  */
 
-namespace Mojar\API\Http\Middleware;
+namespace Juzaweb\API\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use Mojar\CMS\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\Action;
 
 class Admin
 {

@@ -9,16 +9,16 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Facades;
+namespace Juzaweb\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Mojar\CMS\Contracts\ThemeConfigContract;
+use Juzaweb\CMS\Contracts\ThemeConfigContract;
 
 /**
  * @method static mixed setConfig($key, $value)
  * @method static string|array getConfig($key, $default)
  *
- * @see \Mojar\CMS\Support\Theme\ThemeConfig
+ * @see \Juzaweb\CMS\Support\Theme\ThemeConfig
  */
 class ThemeConfig extends Facade
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\Frontend\Http\Controllers;
+namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -8,12 +8,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Mojar\Backend\Http\Resources\UserResource;
-use Mojar\Backend\Repositories\UserRepository;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Http\Controllers\FrontendController;
-use Mojar\Frontend\Http\Requests\ChangePasswordRequest;
-use Mojar\Frontend\Http\Requests\UpdateProfileRequest;
+use Juzaweb\Backend\Http\Resources\UserResource;
+use Juzaweb\Backend\Repositories\UserRepository;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
+use Juzaweb\Frontend\Http\Requests\ChangePasswordRequest;
+use Juzaweb\Frontend\Http\Requests\UpdateProfileRequest;
 
 class ProfileController extends FrontendController
 {

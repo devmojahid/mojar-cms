@@ -9,12 +9,12 @@
  * @license    MIT
  */
 
-namespace Mojar\API\Http\Controllers\Admin;
+namespace Juzaweb\API\Http\Controllers\Admin;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
-use Mojar\CMS\Contracts\ConfigContract;
-use Mojar\CMS\Http\Controllers\ApiController;
+use Juzaweb\CMS\Contracts\ConfigContract;
+use Juzaweb\CMS\Http\Controllers\ApiController;
 use OpenApi\Annotations as OA;
 
 class SettingController extends ApiController

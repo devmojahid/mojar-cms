@@ -9,7 +9,7 @@
  * @license    MIT
  */
 
-namespace Mojar\API\Providers;
+namespace Juzaweb\API\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;

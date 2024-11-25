@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\CMS\Repositories\Generators\Commands;
+namespace Juzaweb\CMS\Repositories\Generators\Commands;
 
 use Illuminate\Console\Command;
-use Mojar\CMS\Repositories\Generators\FileAlreadyExistsException;
-use Mojar\CMS\Repositories\Generators\PresenterGenerator;
-use Mojar\CMS\Repositories\Generators\TransformerGenerator;
+use Juzaweb\CMS\Repositories\Generators\FileAlreadyExistsException;
+use Juzaweb\CMS\Repositories\Generators\PresenterGenerator;
+use Juzaweb\CMS\Repositories\Generators\TransformerGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 

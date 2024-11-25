@@ -9,15 +9,15 @@
  * @license    GNU General Public License v2.0
  */
 
-namespace Mojar\API\Http\Controllers\Admin\Media;
+namespace Juzaweb\API\Http\Controllers\Admin\Media;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Mojar\Backend\Repositories\MediaFileRepository;
-use Mojar\CMS\Http\Controllers\ApiController;
-use Mojar\CMS\Repositories\Criterias\FilterCriteria;
-use Mojar\CMS\Repositories\Criterias\SearchCriteria;
-use Mojar\CMS\Repositories\Criterias\SortCriteria;
+use Juzaweb\Backend\Repositories\MediaFileRepository;
+use Juzaweb\CMS\Http\Controllers\ApiController;
+use Juzaweb\CMS\Repositories\Criterias\FilterCriteria;
+use Juzaweb\CMS\Repositories\Criterias\SearchCriteria;
+use Juzaweb\CMS\Repositories\Criterias\SortCriteria;
 
 class FileController extends ApiController
 {

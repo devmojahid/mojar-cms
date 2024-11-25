@@ -1,10 +1,10 @@
 <?php
 
-namespace Mojar\CMS\Traits\HookAction;
+namespace Juzaweb\CMS\Traits\HookAction;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Mojar\CMS\Facades\GlobalData;
+use Juzaweb\CMS\Facades\GlobalData;
 
 trait GetHookAction
 {

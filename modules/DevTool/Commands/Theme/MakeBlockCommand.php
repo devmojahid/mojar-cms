@@ -9,12 +9,12 @@
  * @license    MIT
  */
 
-namespace Mojar\DevTool\Commands\Theme;
+namespace Juzaweb\DevTool\Commands\Theme;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
-use Mojar\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\Theme;
 use Symfony\Component\Console\Input\InputArgument;
 
 class MakeBlockCommand extends Command

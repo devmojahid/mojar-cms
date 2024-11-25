@@ -9,7 +9,7 @@
  * @license    GNU General Public License v2.0
  */
 
-namespace Mojar\API\Http\Middleware;
+namespace Juzaweb\API\Http\Middleware;
 
 class SwaggerApiDocumentation
 {

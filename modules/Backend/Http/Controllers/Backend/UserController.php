@@ -1,17 +1,17 @@
 <?php
 
-namespace Mojar\Backend\Http\Controllers\Backend;
+namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
-use Mojar\CMS\Abstracts\DataTable;
-use Mojar\CMS\Http\Controllers\BackendController;
-use Mojar\Backend\Http\Datatables\UserDataTable;
-use Mojar\CMS\Models\Model;
-use Mojar\CMS\Models\User;
-use Mojar\CMS\Traits\ResourceController;
+use Juzaweb\CMS\Abstracts\DataTable;
+use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\Backend\Http\Datatables\UserDataTable;
+use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Traits\ResourceController;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends BackendController

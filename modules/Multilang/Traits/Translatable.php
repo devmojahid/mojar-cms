@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\Multilang\Traits;
+namespace Juzaweb\Multilang\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

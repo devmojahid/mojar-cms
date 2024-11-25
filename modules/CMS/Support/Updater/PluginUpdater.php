@@ -1,12 +1,12 @@
 <?php
 
-namespace Mojar\CMS\Support\Updater;
+namespace Juzaweb\CMS\Support\Updater;
 
-use Mojar\Backend\Events\DumpAutoloadPlugin;
-use Mojar\CMS\Abstracts\UpdateManager;
-use Mojar\CMS\Facades\CacheGroup;
-use Mojar\CMS\Support\Plugin;
-use Mojar\CMS\Version;
+use Juzaweb\Backend\Events\DumpAutoloadPlugin;
+use Juzaweb\CMS\Abstracts\UpdateManager;
+use Juzaweb\CMS\Facades\CacheGroup;
+use Juzaweb\CMS\Support\Plugin;
+use Juzaweb\CMS\Version;
 
 class PluginUpdater extends UpdateManager
 {

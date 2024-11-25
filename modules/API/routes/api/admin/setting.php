@@ -9,7 +9,7 @@
  * @license    MIT
  */
 
-use Mojar\API\Http\Controllers\Admin\SettingController;
+use Juzaweb\API\Http\Controllers\Admin\SettingController;
 
 Route::group(
     [

@@ -9,14 +9,14 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Http\Requests\Auth;
+namespace Juzaweb\CMS\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
-use Mojar\Backend\Events\RegisterSuccessful;
-use Mojar\CMS\Models\User;
+use Juzaweb\Backend\Events\RegisterSuccessful;
+use Juzaweb\CMS\Models\User;
 
 class RegisterRequest extends FormRequest
 {

@@ -9,9 +9,9 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
-use Mojar\CMS\Abstracts\Widget;
+use Juzaweb\CMS\Abstracts\Widget;
 
 class DefaultWidget extends Widget
 {

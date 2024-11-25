@@ -9,13 +9,13 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Support\Registers;
+namespace Juzaweb\CMS\Support\Registers;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Mojar\Backend\Models\Resource;
-use Mojar\CMS\Abstracts\BackendResource;
-use Mojar\CMS\Contracts\HookActionContract as HookAction;
+use Juzaweb\Backend\Models\Resource;
+use Juzaweb\CMS\Abstracts\BackendResource;
+use Juzaweb\CMS\Contracts\HookActionContract as HookAction;
 
 class ResourceRegister
 {

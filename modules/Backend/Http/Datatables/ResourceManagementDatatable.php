@@ -9,12 +9,12 @@
  * @license    MIT
  */
 
-namespace Mojar\Backend\Http\Datatables;
+namespace Juzaweb\Backend\Http\Datatables;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
-use Mojar\CMS\Abstracts\DataTable;
-use Mojar\CMS\Repositories\BaseRepository;
+use Juzaweb\CMS\Abstracts\DataTable;
+use Juzaweb\CMS\Repositories\BaseRepository;
 
 class ResourceManagementDatatable extends DataTable
 {

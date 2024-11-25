@@ -9,11 +9,11 @@
  * @license    MIT
  */
 
-namespace Mojar\Network\Commands;
+namespace Juzaweb\Network\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use Mojar\Network\Contracts\SiteManagerContract;
+use Juzaweb\Network\Contracts\SiteManagerContract;
 
 class MakeSiteCommand extends Command
 {

@@ -9,18 +9,18 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Models;
+namespace Juzaweb\Backend\Models;
 
-use Mojar\CMS\Models\Model;
+use Juzaweb\CMS\Models\Model;
 
 /**
- * Mojar\Backend\Models\ResourceMeta
+ * Juzaweb\Backend\Models\ResourceMeta
  *
  * @property int $id
  * @property int $resource_id
  * @property string $meta_key
  * @property string|null $meta_value
- * @property-read \Mojar\Backend\Models\Resource $resource
+ * @property-read \Juzaweb\Backend\Models\Resource $resource
  * @method static \Illuminate\Database\Eloquent\Builder|ResourceMeta newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ResourceMeta newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ResourceMeta query()

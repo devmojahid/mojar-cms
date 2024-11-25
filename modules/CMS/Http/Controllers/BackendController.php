@@ -13,15 +13,15 @@
  * Time: 10:10 PM
  */
 
-namespace Mojar\CMS\Http\Controllers;
+namespace Juzaweb\CMS\Http\Controllers;
 
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
-use Mojar\CMS\Abstracts\Action;
-use Mojar\CMS\Traits\ResponseMessage;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Traits\ResponseMessage;
 
 class BackendController extends Controller
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
-use Mojar\CMS\Contracts\GoogleTranslate as GoogleTranslateContract;
-use Mojar\CMS\Exceptions\GoogleTranslateException;
+use Juzaweb\CMS\Contracts\GoogleTranslate as GoogleTranslateContract;
+use Juzaweb\CMS\Exceptions\GoogleTranslateException;
 
 class GoogleTranslate implements GoogleTranslateContract
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Console\Commands\Permission;
+namespace Juzaweb\CMS\Console\Commands\Permission;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;

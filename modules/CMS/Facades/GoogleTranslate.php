@@ -9,10 +9,10 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Facades;
+namespace Juzaweb\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Mojar\CMS\Contracts\GoogleTranslate as GoogleTranslateContract;
+use Juzaweb\CMS\Contracts\GoogleTranslate as GoogleTranslateContract;
 
 class GoogleTranslate extends Facade
 {

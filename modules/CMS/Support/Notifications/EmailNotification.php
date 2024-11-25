@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\CMS\Support\Notifications;
+namespace Juzaweb\CMS\Support\Notifications;
 
 use Illuminate\Support\Arr;
-use Mojar\Backend\Models\EmailList;
-use Mojar\CMS\Models\User;
-use Mojar\CMS\Support\Email;
+use Juzaweb\Backend\Models\EmailList;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Support\Email;
 
 class EmailNotification extends NotificationAbstract
 {

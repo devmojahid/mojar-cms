@@ -1,9 +1,9 @@
 <?php
 
-namespace Mojar\CMS\Repositories\Events;
+namespace Juzaweb\CMS\Repositories\Events;
 
 use Illuminate\Database\Eloquent\Model;
-use Mojar\CMS\Repositories\Contracts\RepositoryInterface;
+use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
 
 /**
  * Class RepositoryEventBase

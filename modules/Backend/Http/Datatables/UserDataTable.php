@@ -9,12 +9,12 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Backend\Http\Datatables;
+namespace Juzaweb\Backend\Http\Datatables;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
-use Mojar\CMS\Abstracts\DataTable;
-use Mojar\CMS\Models\User;
+use Juzaweb\CMS\Abstracts\DataTable;
+use Juzaweb\CMS\Models\User;
 
 class UserDataTable extends DataTable
 {

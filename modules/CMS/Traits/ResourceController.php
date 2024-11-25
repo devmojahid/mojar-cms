@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Traits;
+namespace Juzaweb\CMS\Traits;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\View;
@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Response;
-use Mojar\CMS\Abstracts\DataTable;
+use Juzaweb\CMS\Abstracts\DataTable;
 
 /**
  * @method void getBreadcrumbPrefix(...$params)
@@ -376,7 +376,7 @@ trait ResourceController
      * After Save model
      *
      * @param  array  $data
-     * @param  \Mojar\CMS\Models\Model  $model
+     * @param  \Juzaweb\CMS\Models\Model  $model
      * @param  mixed  $params
      */
     protected function afterSave($data, $model, ...$params)
@@ -386,7 +386,7 @@ trait ResourceController
 
     /**
      * @param $params
-     * @return \Mojar\CMS\Models\ResourceModel
+     * @return \Juzaweb\CMS\Models\ResourceModel
      */
     protected function makeModel(...$params)
     {

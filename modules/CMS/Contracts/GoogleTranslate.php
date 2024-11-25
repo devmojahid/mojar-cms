@@ -9,10 +9,10 @@
  * @license    MIT
  */
 
-namespace Mojar\CMS\Contracts;
+namespace Juzaweb\CMS\Contracts;
 
 /**
- * @see \Mojar\CMS\Support\GoogleTranslate
+ * @see \Juzaweb\CMS\Support\GoogleTranslate
  */
 interface GoogleTranslate
 {

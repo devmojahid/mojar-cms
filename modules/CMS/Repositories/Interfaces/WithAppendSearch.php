@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Repositories\Interfaces;
+namespace Juzaweb\CMS\Repositories\Interfaces;
 
 interface WithAppendSearch
 {

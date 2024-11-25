@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-namespace Mojar\Frontend\Http\Controllers;
+namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Support\Facades\App;
-use Mojar\CMS\Http\Controllers\FrontendController;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
 
 class RouteController extends FrontendController
 {

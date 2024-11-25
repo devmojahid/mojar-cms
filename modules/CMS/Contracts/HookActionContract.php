@@ -9,16 +9,16 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Contracts;
+namespace Juzaweb\CMS\Contracts;
 
 use Exception;
 use Illuminate\Support\Collection;
-use Mojar\API\Support\Swagger\SwaggerDocument;
+use Juzaweb\API\Support\Swagger\SwaggerDocument;
 
 /**
- * @see \Mojar\CMS\Support\HookAction
- * @see \Mojar\CMS\Traits\HookAction\RegisterHookAction
- * @see \Mojar\CMS\Traits\HookAction\GetHookAction
+ * @see \Juzaweb\CMS\Support\HookAction
+ * @see \Juzaweb\CMS\Traits\HookAction\RegisterHookAction
+ * @see \Juzaweb\CMS\Traits\HookAction\GetHookAction
  */
 interface HookActionContract
 {

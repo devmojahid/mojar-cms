@@ -1,10 +1,10 @@
 <?php
 
-namespace Mojar\Multilang;
+namespace Juzaweb\Multilang;
 
-use Mojar\CMS\Abstracts\Action;
-use Mojar\CMS\Facades\HookAction;
-use Mojar\CMS\Models\Language;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Models\Language;
 
 class MultilangAction extends Action
 {

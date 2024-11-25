@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS;
+namespace Juzaweb\CMS;
 
 class Version
 {

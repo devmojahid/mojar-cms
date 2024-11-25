@@ -1,10 +1,10 @@
 <?php
 
-namespace Mojar\CMS\Support;
+namespace Juzaweb\CMS\Support;
 
 use Exception;
 use Illuminate\Support\Facades\Mail;
-use Mojar\Backend\Models\EmailList;
+use Juzaweb\Backend\Models\EmailList;
 
 class SendEmail
 {

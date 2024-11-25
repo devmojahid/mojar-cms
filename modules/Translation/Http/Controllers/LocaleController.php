@@ -9,16 +9,16 @@
  * @license    MIT
  */
 
-namespace Mojar\Translation\Http\Controllers;
+namespace Juzaweb\Translation\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Mojar\CMS\Contracts\TranslationManager;
-use Mojar\CMS\Http\Controllers\BackendController;
-use Mojar\CMS\Support\ArrayPagination;
+use Juzaweb\CMS\Contracts\TranslationManager;
+use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Support\ArrayPagination;
 use Spatie\TranslationLoader\LanguageLine;
 
 class LocaleController extends BackendController

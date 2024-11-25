@@ -1,10 +1,10 @@
 <?php
 
-namespace Mojar\Backend\Commands;
+namespace Juzaweb\Backend\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use Mojar\CMS\Facades\ThemeLoader;
+use Juzaweb\CMS\Facades\ThemeLoader;
 use Symfony\Component\Console\Input\InputArgument;
 
 class ThemePublishCommand extends Command

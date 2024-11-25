@@ -9,10 +9,10 @@
  * @license    GNU V2
  */
 
-use Mojar\Backend\Http\Controllers\Backend\DashboardController;
-use Mojar\Backend\Http\Controllers\Backend\LoadDataController;
-use Mojar\Backend\Http\Controllers\Backend\UpdateController;
-use Mojar\Backend\Http\Controllers\Backend\AjaxController;
+use Juzaweb\Backend\Http\Controllers\Backend\DashboardController;
+use Juzaweb\Backend\Http\Controllers\Backend\LoadDataController;
+use Juzaweb\Backend\Http\Controllers\Backend\UpdateController;
+use Juzaweb\Backend\Http\Controllers\Backend\AjaxController;
 
 Route::group(
     ['prefix' => '/'],

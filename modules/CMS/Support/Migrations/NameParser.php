@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Support\Migrations;
+namespace Juzaweb\CMS\Support\Migrations;
 
 class NameParser
 {

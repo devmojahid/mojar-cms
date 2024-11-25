@@ -1,8 +1,8 @@
 <?php
 
-namespace Mojar\CMS\Repositories\Generators;
+namespace Juzaweb\CMS\Repositories\Generators;
 
-use Mojar\CMS\Repositories\Generators\Generator;
+use Juzaweb\CMS\Repositories\Generators\Generator;
 
 /**
  * Class CriteriaGenerator

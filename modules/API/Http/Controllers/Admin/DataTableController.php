@@ -9,12 +9,12 @@
  * @license    MIT
  */
 
-namespace Mojar\API\Http\Controllers\Admin;
+namespace Juzaweb\API\Http\Controllers\Admin;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Mojar\Backend\Http\Datatables\UserDataTable;
-use Mojar\CMS\Http\Controllers\ApiController;
+use Juzaweb\Backend\Http\Datatables\UserDataTable;
+use Juzaweb\CMS\Http\Controllers\ApiController;
 
 class DataTableController extends ApiController
 {

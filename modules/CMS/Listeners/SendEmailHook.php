@@ -1,12 +1,12 @@
 <?php
 
-namespace Mojar\CMS\Listeners;
+namespace Juzaweb\CMS\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Arr;
-use Mojar\CMS\Events\EmailHook;
-use Mojar\Backend\Models\EmailTemplate;
-use Mojar\CMS\Support\Email;
+use Juzaweb\CMS\Events\EmailHook;
+use Juzaweb\Backend\Models\EmailTemplate;
+use Juzaweb\CMS\Support\Email;
 
 class SendEmailHook implements ShouldQueue
 {

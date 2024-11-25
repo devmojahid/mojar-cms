@@ -9,11 +9,11 @@
  * @license    GNU V2
  */
 
-namespace Mojar\CMS\Http\Requests\Auth;
+namespace Juzaweb\CMS\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Mojar\CMS\Models\User;
+use Juzaweb\CMS\Models\User;
 
 class ForgotPasswordRequest extends FormRequest
 {

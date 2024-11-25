@@ -9,10 +9,10 @@
  * @license    GNU General Public License v2.0
  */
 
-namespace Mojar\API\Http\Resources;
+namespace Juzaweb\API\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Mojar\Backend\Models\Menu;
+use Juzaweb\Backend\Models\Menu;
 
 /**
  * @property Menu $resource

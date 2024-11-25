@@ -1,11 +1,11 @@
 <?php
 
-namespace Mojar\CMS\Providers;
+namespace Juzaweb\CMS\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Mojar\CMS\Contracts\LocalPluginRepositoryContract;
-use Mojar\CMS\Facades\ActionRegister;
-use Mojar\Frontend\Providers\RouteServiceProvider;
+use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
+use Juzaweb\CMS\Facades\ActionRegister;
+use Juzaweb\Frontend\Providers\RouteServiceProvider;
 
 class BootstrapServiceProvider extends ServiceProvider
 {

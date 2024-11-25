@@ -9,14 +9,14 @@
  * @license    GNU General Public License v2.0
  */
 
-namespace Mojar\CMS\Repositories\Criterias;
+namespace Juzaweb\CMS\Repositories\Criterias;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
-use Mojar\CMS\Repositories\Abstracts\Criteria;
-use Mojar\CMS\Repositories\Contracts\CriteriaInterface;
-use Mojar\CMS\Repositories\Contracts\RepositoryInterface;
+use Juzaweb\CMS\Repositories\Abstracts\Criteria;
+use Juzaweb\CMS\Repositories\Contracts\CriteriaInterface;
+use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
 
 class SortCriteria extends Criteria implements CriteriaInterface
 {

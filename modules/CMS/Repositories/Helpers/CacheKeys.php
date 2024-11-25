@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojar\CMS\Repositories\Helpers;
+namespace Juzaweb\CMS\Repositories\Helpers;
 
 /**
  * Class CacheKeys

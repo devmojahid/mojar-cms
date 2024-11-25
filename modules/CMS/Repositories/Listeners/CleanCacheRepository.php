@@ -1,13 +1,13 @@
 <?php
 
-namespace Mojar\CMS\Repositories\Listeners;
+namespace Juzaweb\CMS\Repositories\Listeners;
 
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
-use Mojar\CMS\Repositories\Contracts\RepositoryInterface;
-use Mojar\CMS\Repositories\Events\RepositoryEventBase;
-use Mojar\CMS\Repositories\Helpers\CacheKeys;
+use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
+use Juzaweb\CMS\Repositories\Events\RepositoryEventBase;
+use Juzaweb\CMS\Repositories\Helpers\CacheKeys;
 
 /**
  * Class CleanCacheRepository
