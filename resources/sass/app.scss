@@ -1,3 +1,6 @@
 @forward 'dashboard/tailwind';
 @forward 'dashboard/theme';
 @forward 'dashboard/components';
+body{
+	display:none
+}

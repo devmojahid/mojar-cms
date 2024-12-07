@@ -18,7 +18,8 @@ mix.options(
         }
     }
 );
-
+mix.sass('resources/sass/app.scss', 'public/css')
+   .disableNotifications();
 if (process.env.npm_config_module) {
     require(`${modulePath}/mix.js`);
     return;

@@ -13,6 +13,7 @@
     @do_action('mojar_header')
 
     <link href="{{ asset('jw-styles/mojar/css/app.css') }}" rel="stylesheet" />
+	<link href="{{ asset('css/app.css') }}" rel="stylesheet" />
     <script src="{{ asset('jw-styles/mojar/js/app.js') }}" defer></script>
 
     @yield('header')
