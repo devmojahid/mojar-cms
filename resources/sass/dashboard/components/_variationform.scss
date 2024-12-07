@@ -1,0 +1,32 @@
+@media (max-width: 640px) {
+    .dialog-content {
+      margin: 0;
+      width: 100vw;
+      height: 100vh;
+      max-height: 100vh;
+      border-radius: 0;
+    }
+
+    .dialog-content > div {
+      padding: 16px;
+    }
+
+    .input, .select, .textarea {
+      font-size: 16px; /* Prevent zoom on iOS */
+    }
+
+    .button {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+  }
+
+  /* Custom breakpoint for extra small devices */
+  @media (min-width: 400px) {
+    .xs\\:inline {
+      display: inline;
+    }
+    .xs\\:hidden {
+      display: none;
+    }
+  }

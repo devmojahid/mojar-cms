@@ -1,0 +1,9 @@
+@use '../utils' as *;
+body {
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	color: var(--tp-text-body);
+	line-height: 26px;
+	background-color: #fff;
+}
