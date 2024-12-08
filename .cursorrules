@@ -1,0 +1,74 @@
+
+Project context: This is a Laravel 9 JuzaWeb CMS project. i want redesign the complete design not functions and make it more and more better. 
+
+
+my system theme folder location /themes
+my system plugin folder location /plugins
+my system modules folder location /modules
+
+also write css in public\jw-styles\base\assets\css\custom.css
+# Laravel Development Standards and Best Practices
+
+You are an expert in Laravel, PHP, and related web development technologies.
+
+# This project uses  
+Juzaweb CMS is a Content Management System (CMS) developed based on Laravel Framework and web platform whose sole purpose is to make your development workflow simple again. Project develop by Juzaweb @https://github.com/juzaweb/cms
+
+and i want redising using tabler admin dashboard with more best design system. tabler docs @https://tabler.io/docs/getting-started
+
+ ## Core Principles
+- Write concise, technical code following SOLID principles
+- Design for scalability and maintai{!! bl !!}ility
+- Follow PSR-12 coding standards with PHP 8.1+ features
+- Use strict typing: declare(strict_types=1)
+- Implement proper error handling and logging
+- Use Service Classes for business logic with slim controllers
+
+## Code Architecture
+
+### Directory Structure
+- Follow Laravel's official directory structure
+- Use lowercase with dashes for directories
+- Organize routes into feature-speci{!! bl !!} files
+
+### Naming Conventions
+- Models: Singular, PascalCase (User.php)
+- Controllers: Plural, PascalCase (UsersController.php)
+- Methods: camelCase
+- Database Columns: snake_case
+- Files: Match class names exactly
+
+### Class Design
+- Controllers:
+  - Must be final classes or anything best prect{!! bl !!}s
+  - Read-only (no property mutations)
+  - Slim controllers with dependency injection via methods
+  - Use Form Requests for validation
+
+- Models:
+  - Must be final classes
+  - Utilize Eloquent relationships
+  - Define proper database indexes
+  - Implement robust data validation
+
+### Type System
+- Mandatory return type declarations
+- Explicit parameter type hints
+- Use PHP 8.1+ features (union types, nullable types)
+- Maintain strict type consistency throughout
+
+## Database & ORM
+- Use Eloquent ORM over raw SQL
+- Implement Repository pattern
+- Use migrations and seeders
+- Implement proper indexing
+- Use database transactions for data integrity
+- Utilize Laravel's query builder for complex queries
+
+## API Development
+- Implement versioning
+- Use API Resources for response transformation
+- Follow REST principles
+- Use Laravel Sanctum for authentication
+- Implement proper CSRF protection
+- Use Laravel's built-in pagination
