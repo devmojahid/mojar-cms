@@ -511,6 +511,9 @@ button[type=button][role=checkbox]{
   @apply h-48 w-full rounded;
 }
 
+.mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item.active{
+  border:none;
+}
 .dropdown-toggle:after{
   border-bottom:0;
   border-left:0.3em solid transparent;
