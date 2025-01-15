@@ -7,3 +7,8 @@ body {
 	line-height: 26px;
 	background-color: #fff;
 }
+
+* {
+    scrollbar-color: unset !important; // Remove Tabler's default scrollbar color
+}
+  

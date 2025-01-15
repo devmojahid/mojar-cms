@@ -29,7 +29,7 @@
 
     <div class="page">
         <!-- Sidebar -->
-        <aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark">
+        <aside class="navbar navbar-vertical navbar-expand-lg mojar_cms_sidebar" data-bs-theme="dark">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu"
                     aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">

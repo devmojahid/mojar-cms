@@ -452,6 +452,7 @@ class MenuAction extends Action
         HookAction::enqueueStyle('tabler-payments', 'jw-styles/base/assets/css/tabler-payments.min.css', $ver);
         HookAction::enqueueStyle('tabler-vendors', 'jw-styles/base/assets/css/tabler-vendors.min.css', $ver);
         HookAction::enqueueStyle('base-custom', 'jw-styles/base/assets/css/custom.css', $ver);
+        HookAction::enqueueStyle('base-custom', 'css/app.css', $ver);
     }
 
     public function addDatatableSearchFieldTypes(): void

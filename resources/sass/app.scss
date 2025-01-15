@@ -1,6 +1,18 @@
 @forward 'dashboard/tailwind';
 @forward 'dashboard/theme';
 @forward 'dashboard/components';
-body{
-	display:none
+@forward 'dashboard/sections';
+
+.dropdown-toggle:after {
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+    border-right: .3em solid transparent;
+    border-top: .3em solid;
+    content: "";
+    display: inline-block;
+    margin-left: .255em;
+    vertical-align: .255em;
+	width: .36em;
+    height: .36em;
+	transform: rotate(0deg);
 }

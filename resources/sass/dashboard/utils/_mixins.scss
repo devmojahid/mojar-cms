@@ -164,4 +164,27 @@
         display: flex;
     }
         
-    
+    @mixin custom-scrollbar($width: 6px, $thumb-color: rgba(128, 128, 128, 0.5), $track-color: rgba(0, 0, 0, 0.1)) {
+        // Webkit browsers
+        &::-webkit-scrollbar {
+          width: $width;
+        }
+      
+        &::-webkit-scrollbar-track {
+          background: $track-color;
+          border-radius: $width * 0.5;
+        }
+      
+        &::-webkit-scrollbar-thumb {
+          background: $thumb-color;
+          border-radius: $width * 0.5;
+          
+          &:hover {
+            background: rgba(mix(black, $thumb-color, 20%), 0.7);
+          }
+        }
+      
+        // Firefox
+        scrollbar-width: thin;
+        scrollbar-color: $thumb-color $track-color;
+      }

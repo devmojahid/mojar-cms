@@ -1,0 +1,148 @@
+@use '../utils' as *;
+
+.mojar_cms_sidebar {
+  &.navbar {
+    // Sidebar base styles
+  }
+
+  // Brand/Logo section
+  .navbar-brand {
+    &-image {
+      // Logo image styles
+    }
+  }
+
+  // Mobile nav controls
+  .navbar-toggler {
+    // Mobile toggle button
+  }
+
+  // Top utility section (visible on mobile)
+  .navbar-nav.flex-row {
+    // GitHub & sponsor buttons
+    .btn-list {
+      .btn {
+        .icon {
+          // Button icons
+        }
+      }
+    }
+
+    // Theme toggles
+    .nav-link {
+      &.hide-theme-dark,
+      &.hide-theme-light {
+        .icon {
+          // Theme toggle icons
+        }
+      }
+    }
+
+    // Notifications dropdown
+    .dropdown {
+      .dropdown-menu {
+        .card {
+          // Notification card styles
+          
+          .list-group-item {
+            .status-dot {
+              &-animated {
+                // Animated status dots
+              }
+            }
+            
+            .text-truncate {
+              // Truncated text styles
+            }
+          }
+        }
+      }
+    }
+
+    // User profile section
+    .nav-item.dropdown {
+      .avatar {
+        // User avatar
+      }
+      
+      .dropdown-menu {
+        // User dropdown menu
+      }
+    }
+  }
+
+  // Main navigation menu
+  #sidebar-menu {
+    .navbar-nav {
+      // Menu items container
+      
+      .nav-item {
+        // Base nav item styles
+        
+        &.Have_children {
+          // Items with dropdowns
+        }
+
+        &.active {
+          // Active state
+        }
+
+        // Nav link styles
+        .nav-link {
+          &-icon {
+            // Menu icons
+          }
+
+          &-title {
+            // Menu text
+          }
+
+          &.dropdown-toggle {
+            // Dropdown arrows
+          }
+        }
+
+        // Dropdown menus
+        .dropdown-menu {
+          &-columns {
+            // Multi-column dropdowns
+          }
+
+          &-column {
+            // Single column
+          }
+
+          .dropdown-item {
+            // Dropdown items
+          }
+        }
+
+        // Specific menu sections
+        &.mojar__menuLeft {
+          &__item {
+            // Menu item variations
+            &-dashboard,
+            &-media,
+            &-post-type-posts,
+            &-post-type-pages,
+            &-appearance,
+            &-plugins,
+            &-setting,
+            &-managements,
+            &-tools {
+              // Section-specific styles
+            }
+          }
+
+          &__submenu {
+            // Submenu styles
+
+            &--toggled {
+              // Expanded state
+            }
+          }
+        }
+      }
+    }
+  }
+}
