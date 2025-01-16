@@ -588,4 +588,6 @@ return [
     'to_users' => 'To Users',
     'to_sender' => 'To Sender',
     'to_sender_description' => 'If selected, this email will be sent to the person submitting the form',
+    'post_create' => 'Post Create',
+    'post_update' => 'Post Update',
 ];

@@ -1,4 +1,4 @@
-<ul class="navbar-nav pt-lg-1">
+<ul class="navbar-nav">
     @php
         use Juzaweb\CMS\Facades\HookAction;
         use Juzaweb\CMS\Support\MenuCollection;
@@ -51,7 +51,11 @@
                 <a class="nav-link dropdown-toggle @if ($hasActive) active show @endif" href="#navbar-help"
                     data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="false">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
-                        <i class="{{ $item->get('icon') }}"></i>
+                        @if (str_contains($item->get('icon'), '<svg'))
+                            {!! $item->get('icon') !!}
+                        @else
+                            <i class="{{ $item->get('icon') }}"></i>
+                        @endif
                     </span>
                     <span class="nav-link-title">
                         {{ $item->get('title') }}

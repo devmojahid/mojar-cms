@@ -74,6 +74,7 @@ class ResourceRegister
         $menu = array_merge(
             [
                 'icon' => 'fa fa-list-ul',
+                'icon_type' => 'font-awesome',
                 'parent' => null,
                 'position' => 20,
             ],

@@ -1,6 +1,13 @@
 @if ($submenu_item == true)
     <a class="dropdown-item @if ($active)active @endif" href="{{ $adminUrl . $item->getUrl() }}"
         @if ($item->get('turbolinks') === false) data-turbolinks="false" @endif>
+        <span class="nav-link-icon d-md-none d-lg-inline-block">
+            @if (str_contains($item->get('icon'), '<svg'))
+                {!! $item->get('icon') !!}
+            @else
+                <i class="{{ $item->get('icon') }}"></i>
+            @endif
+        </span>
         {{ $item->get('title') }}
     </a>
 @else

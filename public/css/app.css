@@ -314,10 +314,11 @@
   --ms-text-4:#7D7F82;
   --ms-text-5:#888A8C;
   --ms-text-6:#90969B;
-  --ms-theme-primary:#0989FF;
+  --ms-theme-primary:#3b82f6;
   --ms-theme-secondary:#821F40;
   --ms-theme-brown:#BD844C;
   --ms-theme-green:#678E61;
+  --ms-theme-primary-menu-hover:rgba(255, 255, 255, 0.7);
   --ms-footer-grey-1:#F4F7F9;
   --ms-border-primary:#EAEBED;
   --ms-border-secondary:#F0F2F4;
@@ -325,13 +326,8 @@
   --ms-border-4:#E6E7E8;
 }
 
-body{
-  font-family:"Roboto", sans-serif;
-  font-size:14px;
-  font-weight:normal;
-  color:var(--tp-text-body);
-  line-height:26px;
-  background-color:#fff;
+.page-body{
+  margin-top:0px;
 }
 
 *{
@@ -510,7 +506,27 @@ button[type=button][role=checkbox]{
 .skeleton-image{
   @apply h-48 w-full rounded;
 }
+.breadcrumb{
+  display:flex;
+  flex-wrap:wrap;
+  margin-bottom:1.5rem;
+  list-style:none;
+  background-color:transparent;
+}
+.breadcrumb-arrows .breadcrumb-item.active{
+  color:#6c757d;
+}
+.breadcrumb-arrows .breadcrumb-item a{
+  color:#206bc4;
+  text-decoration:none;
+}
+.breadcrumb-arrows .breadcrumb-item a:hover{
+  text-decoration:underline;
+}
 
+.mojar_cms_sidebar{
+  overflow:auto !important;
+}
 .mojar_cms_sidebar .navbar-brand{
   padding:1.25rem 1.5rem;
   border-bottom:1px solid rgba(255, 255, 255, 0.08);
@@ -523,7 +539,6 @@ button[type=button][role=checkbox]{
   width:auto;
 }
 .mojar_cms_sidebar #sidebar-menu{
-  height:calc(100vh - 64px);
   overflow-y:auto;
   padding-top:1rem;
   padding-top:0px;
@@ -548,7 +563,7 @@ button[type=button][role=checkbox]{
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .nav-link{
   padding:0.45rem 1rem;
-  color:rgba(255, 255, 255, 0.7);
+  color:var(--ms-theme-primary-menu-hover);
   font-size:0.875rem;
   border-radius:4px;
   display:flex;
@@ -556,24 +571,24 @@ button[type=button][role=checkbox]{
   white-space:nowrap;
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .nav-link:hover{
-  color:#fff;
+  color:var(--ms-theme-primary-menu-hover);
   background:rgba(255, 255, 255, 0.05);
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .nav-link.active{
-  background:#3b82f6;
-  color:#fff;
+  background:var(--ms-theme-primary);
+  color:var(--ms-theme-primary-menu-hover);
   box-shadow:0 2px 6px rgba(59, 130, 246, 0.3);
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .nav-link.active:after{
   border:none;
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .nav-link.active .nav-link-icon{
-  color:#fff;
+  color:var(--ms-theme-primary-menu-hover);
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .nav-link-icon{
   width:18px;
   margin-right:10px;
-  color:rgba(255, 255, 255, 0.7);
+  color:var(--ms-theme-primary-menu-hover);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -591,43 +606,30 @@ button[type=button][role=checkbox]{
   opacity:0.5;
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .dropdown-menu{
-  margin:0 0 0 0.5rem;
-  padding:0.1rem 0;
+  margin:0;
+  padding:0;
   position:static;
   box-shadow:none;
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .dropdown-menu .dropdown-item{
-  padding:0.5rem 1rem;
-  color:rgba(255, 255, 255, 0.7);
+  padding:0.5rem 2.5rem;
+  color:var(--ms-theme-primary-menu-hover);
   font-size:0.875rem;
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .dropdown-menu .dropdown-item:hover{
   background:rgba(255, 255, 255, 0.05);
-  color:#fff;
+  color:var(--ms-theme-primary-menu-hover);
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .dropdown-menu .dropdown-item.active{
-  background:rgba(59, 130, 246, 0.1);
-  color:#3b82f6;
+  background:rgba(255, 255, 255, 0.05);
+  color:var(--ms-theme-primary-menu-hover);
+  border-radius:5px;
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item.mojar__menuLeft__submenu--toggled > .nav-link{
   color:#fff;
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item.mojar__menuLeft__submenu--toggled > .dropdown-menu{
   display:block;
-}
-.mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-header{
-  color:rgba(255, 255, 255, 0.4);
-  font-size:0.75rem;
-  font-weight:600;
-  text-transform:uppercase;
-  padding:1.5rem 1.5rem 0.5rem;
-}
-
-[data-bs-theme=dark] .mojar_cms_sidebar{
-  background:#1a2234;
-}
-[data-bs-theme=dark] .mojar_cms_sidebar .dropdown-menu{
-  background:#151b2d;
 }
 
 .dropdown-toggle:after{

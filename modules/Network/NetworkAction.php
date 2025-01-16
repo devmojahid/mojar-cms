@@ -80,6 +80,7 @@ class NetworkAction extends Action
             [
                 'parent' => 'tools',
                 'icon' => 'fa fa-history',
+                'icon_type' => 'font-awesome',
                 'position' => 99,
                 'turbolinks' => false,
             ]
@@ -90,6 +91,7 @@ class NetworkAction extends Action
             'logs.email',
             [
                 'icon' => 'fa fa-cogs',
+                'icon_type' => 'font-awesome',
                 'position' => 51,
                 'parent' => 'managements',
             ]
@@ -103,6 +105,7 @@ class NetworkAction extends Action
             'domains',
             [
                 'icon' => 'fa fa-server',
+                'icon_type' => 'font-awesome',
                 'position' => 20,
                 'parent' => 'setting'
             ]

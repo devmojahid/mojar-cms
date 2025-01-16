@@ -19,6 +19,7 @@ class ToolAction extends Action
             'tools',
             [
                 'icon' => 'fa fa-cogs',
+                'icon_type' => 'font-awesome',
                 'position' => 99,
             ]
         );
@@ -29,6 +30,7 @@ class ToolAction extends Action
                 'title' => trans('cms::app.import'),
                 'menu' => [
                     'icon' => 'fa fa-cogs',
+                    'icon_type' => 'font-awesome',
                     'position' => 1,
                     'parent' => 'tools',
                 ],
@@ -41,6 +43,7 @@ class ToolAction extends Action
                 'log-viewer',
                 [
                     'icon' => 'fa fa-history',
+                    'icon_type' => 'font-awesome',
                     'position' => 20,
                     'turbolinks' => false,
                     'parent' => 'tools',

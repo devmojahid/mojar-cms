@@ -1,0 +1,29 @@
+@use '../utils' as *;
+/*----------------------------------------*/
+/*  2.9 Breadcrumb
+/*----------------------------------------*/
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  list-style: none;
+  background-color: transparent;
+
+  &-arrows {
+    .breadcrumb-item {
+      &.active {
+        color: #6c757d;
+      }
+
+      a {
+        color: #206bc4;
+        text-decoration: none;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

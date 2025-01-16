@@ -515,6 +515,7 @@ trait RegisterHookAction
             [
                 'icon' => $args->get('menu_icon', 'fa fa-edit'),
                 'position' => $args->get('menu_position', 20),
+                'icon_type' => 'font-awesome',
                 'permissions' => [
                     "{$prefix}{$key}.index",
                     "{$prefix}{$key}.create",
@@ -529,6 +530,7 @@ trait RegisterHookAction
             $prefix . $key,
             [
                 'icon' => 'fa fa-list-ul',
+                'icon_type' => 'font-awesome',
                 'position' => 2,
                 'parent' => $prefix . $key,
                 'permissions' => [

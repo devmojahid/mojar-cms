@@ -31,7 +31,19 @@
                 });
                 $current = $jw_user->language ?? get_config('language', 'en');
             @endphp
-            <a href="javascript:void(0)" class="btn dropdown-toggle" data-bs-toggle="dropdown">{{ $current }}</a>
+            <a href="javascript:void(0)" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-language">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M4 5h7" />
+                    <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+                    <path d="M5 9c0 2.144 2.952 3.908 6.7 4" />
+                    <path d="M12 20l4 -9l4 9" />
+                    <path d="M19.1 18h-6.2" />
+                </svg>
+                {{ $current }}
+            </a>
             <div class="dropdown-menu">
                 @foreach ($langs as $lang)
                     @if ($current == $lang['code'])
@@ -47,7 +59,15 @@
         </div>
 
         <div class="dropdown me-3 d-none d-md-flex align-items-center">
-            <a href="#" class="btn dropdown-toggle" data-bs-toggle="dropdown">{{ trans('cms::app.new') }}</a>
+            <a href="#" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M12 5l0 14" />
+                    <path d="M18 13l-6 6" />
+                    <path d="M6 13l6 6" />
+                </svg>
+                {{ trans('cms::app.new') }}
+            </a>
             <div class="dropdown-menu">
                 <a class="dropdown-item"
                     href="{{ route('admin.posts.create', ['posts']) }}">{{ trans('cms::app.post') }}</a>
@@ -112,7 +132,26 @@
                         </div>
                         <div class="list-group list-group-flush list-group-hoverable">
                             @if ($items->isEmpty())
-                                <p>{{ trans('cms::app.no_notifications') }}</p>
+                                <div class="list-group-item">
+                                    <div class="row align-items-center justify-content-center py-4">
+                                        <div class="col-auto">
+                                            <!-- Empty inbox icon from tabler -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-lg text-muted mb-3" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+                                                <path d="M4 13h16" />
+                                                <path d="M8 4l0 9" />
+                                                <path d="M16 4l0 9" />
+                                                <path d="M9 14l0 .01" />
+                                                <path d="M12 14l0 .01" />
+                                                <path d="M15 14l0 .01" />
+                                            </svg>
+                                        </div>
+                                        <div class="col-12 text-center">
+                                            <h3 class="text-muted mb-2">{{ trans('cms::app.no_notifications') }}</h3>
+                                        </div>
+                                    </div>
+                                </div>
                             @else
                                 @foreach ($items as $notify)
                                     <div class="list-group-item">

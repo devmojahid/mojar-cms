@@ -1,9 +1,7 @@
 <div class="card {{ $class ?? '' }}">
     @if($label ?? false)
         <div class="card-header">
-            <div class="d-flex flex-column justify-content-center">
-                <h5 class="mb-0">{{ $label }}</h5>
-            </div>
+                <h4 class="card-title">{{ $label }}</h5>
         </div>
     @endif
     <div class="card-body">

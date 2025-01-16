@@ -261,9 +261,6 @@
                 <div class="container-xl">
                     <div class="row g-2 align-items-center">
                         <div class="col">
-                            <h2 class="page-title">
-                                {{ $title }}
-                            </h2>
                             @if (!request()->is(config('mojar.admin_prefix')))
                                 {{ jw_breadcrumb('admin', [
                                     [

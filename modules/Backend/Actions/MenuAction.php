@@ -46,7 +46,7 @@ class MenuAction extends Action
             trans('cms::app.dashboard'),
             'dashboard',
             [
-                'icon' => 'fa fa-dashboard',
+                'icon' => '<svg xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-home"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>',
                 'position' => 1,
             ]
         );
@@ -56,7 +56,7 @@ class MenuAction extends Action
                 trans('cms::app.dashboard'),
                 'dashboard',
                 [
-                    'icon' => 'fa fa-dashboard',
+                    'icon' => '<svg xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-home"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>',
                     'position' => 1,
                     'parent' => 'dashboard',
                 ]
@@ -66,7 +66,6 @@ class MenuAction extends Action
                 trans('cms::app.updates'),
                 'updates',
                 [
-                    'icon' => 'fa fa-arrow-circle-o-up',
                     'position' => 1,
                     'parent' => 'dashboard',
                 ]
@@ -78,6 +77,7 @@ class MenuAction extends Action
             'media',
             [
                 'icon' => 'fa fa-photo',
+                'icon_type' => 'font-awesome',
                 'position' => 2,
             ]
         );
@@ -87,6 +87,7 @@ class MenuAction extends Action
             'appearance',
             [
                 'icon' => 'fa fa-paint-brush',
+                'icon_type' => 'font-awesome',
                 'position' => 40,
             ]
         );
@@ -96,6 +97,7 @@ class MenuAction extends Action
             'themes',
             [
                 'icon' => 'fa fa-paint-brush',
+                'icon_type' => 'font-awesome',
                 'position' => 1,
                 'parent' => 'appearance',
                 'permissions' => [
@@ -113,6 +115,7 @@ class MenuAction extends Action
                 'theme.install',
                 [
                     'icon' => 'fa fa-plus',
+                    'icon_type' => 'font-awesome',
                     'position' => 1,
                     'parent' => 'appearance',
                     'permissions' => [
@@ -127,6 +130,7 @@ class MenuAction extends Action
                     'title' => trans('cms::app.editor'),
                     'menu' => [
                         'icon' => 'fa fa-plus',
+                        'icon_type' => 'font-awesome',
                         'position' => 99,
                         'parent' => 'appearance',
                         'permissions' => [
@@ -142,6 +146,7 @@ class MenuAction extends Action
             'widgets',
             [
                 'icon' => 'fa fa-list',
+                'icon_type' => 'font-awesome',
                 'position' => 2,
                 'parent' => 'appearance',
             ]
@@ -152,6 +157,7 @@ class MenuAction extends Action
             'menus',
             [
                 'icon' => 'fa fa-list',
+                'icon_type' => 'font-awesome',
                 'position' => 2,
                 'parent' => 'appearance',
             ]
@@ -162,6 +168,7 @@ class MenuAction extends Action
             'theme.setting',
             [
                 'icon' => 'fa fa-cogs',
+                'icon_type' => 'font-awesome',
                 'position' => 50,
                 'parent' => 'appearance',
             ]
@@ -172,6 +179,7 @@ class MenuAction extends Action
             'reading',
             [
                 'icon' => 'fa fa-book',
+                'icon_type' => 'font-awesome',
                 'position' => 10,
                 'parent' => 'setting',
             ]
@@ -182,6 +190,7 @@ class MenuAction extends Action
             'permalinks',
             [
                 'icon' => 'fa fa-link',
+                'icon_type' => 'font-awesome',
                 'position' => 15,
                 'parent' => 'setting',
             ]
@@ -192,6 +201,7 @@ class MenuAction extends Action
             'plugins',
             [
                 'icon' => 'fa fa-plug',
+                'icon_type' => 'font-awesome',
                 'position' => 50,
             ]
         );
@@ -202,6 +212,7 @@ class MenuAction extends Action
                 'plugins',
                 [
                     'icon' => 'fa fa-plug',
+                    'icon_type' => 'font-awesome',
                     'position' => 1,
                     'parent' => 'plugins',
                     'permissions' => [
@@ -218,6 +229,7 @@ class MenuAction extends Action
                 'plugin.install',
                 [
                     'icon' => 'fa fa-plus',
+                    'icon_type' => 'font-awesome',
                     'position' => 1,
                     'parent' => 'plugins',
                     'permissions' => [
@@ -232,6 +244,7 @@ class MenuAction extends Action
                     'title' => trans('cms::app.editor'),
                     'menu' => [
                         'icon' => 'fa fa-plus',
+                        'icon_type' => 'font-awesome',
                         'position' => 99,
                         'parent' => 'plugins',
                         'permissions' => [
@@ -247,6 +260,7 @@ class MenuAction extends Action
             'setting',
             [
                 'icon' => 'fa fa-cogs',
+                'icon_type' => 'font-awesome',
                 'position' => 70,
             ]
         );
@@ -256,6 +270,7 @@ class MenuAction extends Action
             'managements',
             [
                 'icon' => 'fa fa-cogs',
+                'icon_type' => 'font-awesome',
                 'position' => 75,
             ]
         );
@@ -265,6 +280,7 @@ class MenuAction extends Action
             'setting.system',
             [
                 'icon' => 'fa fa-cogs',
+                'icon_type' => 'font-awesome',
                 'position' => 1,
                 'parent' => 'setting',
             ]
@@ -275,6 +291,7 @@ class MenuAction extends Action
             'users',
             [
                 'icon' => 'fa fa-user-circle-o',
+                'icon_type' => 'font-awesome',
                 'position' => 40,
                 'parent' => 'managements',
                 'permissions' => [
@@ -291,6 +308,7 @@ class MenuAction extends Action
             'email-template',
             [
                 'icon' => 'fa fa-envelope',
+                'icon_type' => 'font-awesome',
                 'position' => 50,
                 'parent' => 'managements',
                 'permissions' => [
@@ -308,6 +326,7 @@ class MenuAction extends Action
                 'logs.email',
                 [
                     'icon' => 'fa fa-cogs',
+                    'icon_type' => 'font-awesome',
                     'position' => 51,
                     'parent' => 'managements',
                 ]
@@ -360,6 +379,7 @@ class MenuAction extends Action
                 'label' => trans('cms::app.pages'),
                 'model' => Post::class,
                 'menu_icon' => 'fa fa-edit',
+                'icon_type' => 'font-awesome',
                 'rewrite' => false,
                 'callback' => PageController::class,
                 'metas' => [
@@ -383,6 +403,7 @@ class MenuAction extends Action
                 'label' => trans('cms::app.posts'),
                 'model' => Post::class,
                 'menu_icon' => 'fa fa-edit',
+                'icon_type' => 'font-awesome',
                 'menu_position' => 15,
                 'callback' => PostController::class,
                 'supports' => [
