@@ -1,148 +1,347 @@
 @use '../utils' as *;
 
 .mojar_cms_sidebar {
-  &.navbar {
-    // Sidebar base styles
-  }
+  // background: #1d2433;
+  // width: 260px;
+  // min-height: 100vh;
+  // position: fixed;
+  // left: 0;
+  // top: 0;
+  // z-index: 99;
+  // transition: all 0.3s ease;
 
-  // Brand/Logo section
+  // Logo section
   .navbar-brand {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    
     &-image {
-      // Logo image styles
+      height: 32px;
+      width: auto;
     }
   }
 
-  // Mobile nav controls
-  .navbar-toggler {
-    // Mobile toggle button
-  }
+  // Main navigation
+  #sidebar-menu {
+    height: calc(100vh - 64px);
+    overflow-y: auto;
+    padding-top: 1rem;
+    padding-top: 0px;
 
-  // Top utility section (visible on mobile)
-  .navbar-nav.flex-row {
-    // GitHub & sponsor buttons
-    .btn-list {
-      .btn {
-        .icon {
-          // Button icons
-        }
-      }
+    &::-webkit-scrollbar {
+      width: 5px;
     }
 
-    // Theme toggles
-    .nav-link {
-      &.hide-theme-dark,
-      &.hide-theme-light {
-        .icon {
-          // Theme toggle icons
-        }
-      }
+    &::-webkit-scrollbar-track {
+      background: transparent;
     }
 
-    // Notifications dropdown
-    .dropdown {
-      .dropdown-menu {
-        .card {
-          // Notification card styles
-          
-          .list-group-item {
-            .status-dot {
-              &-animated {
-                // Animated status dots
-              }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+    }
+
+    .navbar-nav {
+      .nav-item {
+        // Badge styling
+        .badge {
+          padding: 0.35em 0.65em;
+          font-size: 11px;
+          font-weight: 500;
+          border-radius: 4px;
+          margin-left: 5px;
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link {
+          padding: 0.45rem 1rem;
+          color: rgba(255, 255, 255, 0.7);
+          font-size: 0.875rem;
+          border-radius: 4px;
+          display: flex;
+          align-items: center;
+          white-space: nowrap;
+
+          &:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+          }
+
+          &.active {
+            background: #3b82f6;
+            color: #fff;
+            box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
+            &:after {
+              border: none;
             }
-            
-            .text-truncate {
-              // Truncated text styles
+            .nav-link-icon {
+              color: #fff;
             }
           }
-        }
-      }
-    }
 
-    // User profile section
-    .nav-item.dropdown {
-      .avatar {
-        // User avatar
-      }
-      
-      .dropdown-menu {
-        // User dropdown menu
-      }
-    }
-  }
-
-  // Main navigation menu
-  #sidebar-menu {
-    .navbar-nav {
-      // Menu items container
-      
-      .nav-item {
-        // Base nav item styles
-        
-        &.Have_children {
-          // Items with dropdowns
-        }
-
-        &.active {
-          border: none;
-        }
-
-        // Nav link styles
-        .nav-link {
           &-icon {
-            // Menu icons
+            width: 18px;
+            margin-right: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            i {
+              font-size: 1.1rem;
+            }
           }
 
           &-title {
-            // Menu text
+            flex: 1;
+            font-weight: 400;
           }
 
           &.dropdown-toggle {
-            // Dropdown arrows
+            &:after {
+              margin-left: auto;
+              font-size: 0.75rem;
+              opacity: 0.5;
+            }
           }
         }
 
-        // Dropdown menus
+        // Dropdown menu
         .dropdown-menu {
-          &-columns {
-            // Multi-column dropdowns
-          }
-
-          &-column {
-            // Single column
-          }
-
+          margin: 0 0 0 0.5rem;
+          padding: 0.1rem 0;
+          position: static;
+          box-shadow: none;
+          
           .dropdown-item {
-            // Dropdown items
+            padding: 0.5rem 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+
+            &:hover {
+              background: rgba(255, 255, 255, 0.05);
+              color: #fff;
+            }
+
+            &.active {
+              background: rgba(59, 130, 246, 0.1);
+              color: #3b82f6;
+            }
           }
         }
 
-        // Specific menu sections
-        &.mojar__menuLeft {
-          &__item {
-            // Menu item variations
-            &-dashboard,
-            &-media,
-            &-post-type-posts,
-            &-post-type-pages,
-            &-appearance,
-            &-plugins,
-            &-setting,
-            &-managements,
-            &-tools {
-              // Section-specific styles
-            }
+        // Active submenu
+        &.mojar__menuLeft__submenu--toggled {
+          > .nav-link {
+            color: #fff;
           }
 
-          &__submenu {
-            // Submenu styles
-
-            &--toggled {
-              // Expanded state
-            }
+          > .dropdown-menu {
+            display: block;
           }
         }
       }
+
+      // Section headers
+      .nav-header {
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        padding: 1.5rem 1.5rem 0.5rem;
+      }
+    }
+  }
+
+  // Responsive styles
+  // @media (max-width: 991.98px) {
+  //   transform: translateX(-100%);
+    
+  //   &.show {
+  //     transform: translateX(0);
+  //   }
+
+  //   .navbar-collapse {
+  //     height: calc(100vh - 64px);
+  //   }
+  // }
+}
+
+// Dark mode overrides
+[data-bs-theme="dark"] {
+  .mojar_cms_sidebar {
+    background: #1a2234;
+    
+    .dropdown-menu {
+      background: #151b2d;
     }
   }
 }
+
+// Toggle button styles
+// .navbar-toggler {
+//   padding: 0.25rem 0.75rem;
+//   margin: 1rem;
+//   border: 1px solid rgba(255, 255, 255, 0.1);
+  
+//   &-icon {
+//     background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='rgba(255, 255, 255, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+//   }
+// }
+
+// .mojar_cms_sidebar {
+//   &.navbar {
+//     // Sidebar base styles
+//   }
+
+//   // Brand/Logo section
+//   .navbar-brand {
+//     &-image {
+//       // Logo image styles
+//       width: 110px;
+//       height: 32px;
+//     }
+//   }
+
+//   // Mobile nav controls
+//   .navbar-toggler {
+//     // Mobile toggle button
+//   }
+
+//   // Top utility section (visible on mobile)
+//   .navbar-nav.flex-row {
+//     // GitHub & sponsor buttons
+//     .btn-list {
+//       .btn {
+//         .icon {
+//           // Button icons
+//         }
+//       }
+//     }
+
+//     // Theme toggles
+//     .nav-link {
+//       &.hide-theme-dark,
+//       &.hide-theme-light {
+//         .icon {
+//           // Theme toggle icons
+//         }
+//       }
+//     }
+
+//     // Notifications dropdown
+//     .dropdown {
+//       .dropdown-menu {
+//         .card {
+//           // Notification card styles
+          
+//           .list-group-item {
+//             .status-dot {
+//               &-animated {
+//                 // Animated status dots
+//               }
+//             }
+            
+//             .text-truncate {
+//               // Truncated text styles
+//             }
+//           }
+//         }
+//       }
+//     }
+
+//     // User profile section
+//     .nav-item.dropdown {
+//       .avatar {
+//         // User avatar
+//       }
+      
+//       .dropdown-menu {
+//         // User dropdown menu
+//       }
+//     }
+//   }
+
+//   // Main navigation menu
+//   #sidebar-menu {
+//     .navbar-nav {
+//       // Menu items container
+      
+//       .nav-item {
+//         // Base nav item styles
+        
+//         &.Have_children {
+//           // Items with dropdowns
+//         }
+
+//         &.active {
+//           &:after {
+//             border: none;
+//           }
+//           background-color: var(--ms-theme-primary);
+//           border-radius: 5px;
+//         }
+
+//         // Nav link styles
+//         .nav-link {
+          
+//           &-icon {
+//             // Menu icons
+//           }
+
+//           &-title {
+//             // Menu text
+//           }
+
+//           &.dropdown-toggle {
+//             // Dropdown arrows
+//           }
+//         }
+
+//         // Dropdown menus
+//         .dropdown-menu {
+//           &-columns {
+//             // Multi-column dropdowns
+//           }
+
+//           &-column {
+//             // Single column
+//           }
+
+//           .dropdown-item {
+//             // Dropdown items
+//           }
+//         }
+
+//         // Specific menu sections
+//         &.mojar__menuLeft {
+//           &__item {
+//             // Menu item variations
+//             &-dashboard,
+//             &-media,
+//             &-post-type-posts,
+//             &-post-type-pages,
+//             &-appearance,
+//             &-plugins,
+//             &-setting,
+//             &-managements,
+//             &-tools {
+//               // Section-specific styles
+//             }
+//           }
+
+//           &__submenu {
+//             // Submenu styles
+
+//             &--toggled {
+//               // Expanded state
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }

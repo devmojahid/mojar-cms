@@ -1,4 +1,4 @@
-<ul class="navbar-nav pt-lg-3">
+<ul class="navbar-nav pt-lg-1">
     @php
         use Juzaweb\CMS\Facades\HookAction;
         use Juzaweb\CMS\Support\MenuCollection;
@@ -48,7 +48,7 @@
 
             <li
                 class="Have_children nav-item dropdown mojar__menuLeft__item mojar__menuLeft__submenu mojar__menuLeft__item-{{ $item->get('slug') }} @if ($hasActive) active mojar__menuLeft__submenu--toggled @endif">
-                <a class="nav-link dropdown-toggle @if ($hasActive) show @endif" href="#navbar-help"
+                <a class="nav-link dropdown-toggle @if ($hasActive) active show @endif" href="#navbar-help"
                     data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="false">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <i class="{{ $item->get('icon') }}"></i>

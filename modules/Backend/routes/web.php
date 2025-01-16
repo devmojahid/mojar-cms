@@ -17,6 +17,7 @@ use Juzaweb\Backend\Http\Controllers\Installer\FinalController;
 use Juzaweb\Backend\Http\Controllers\Installer\PermissionsController;
 use Juzaweb\Backend\Http\Controllers\Installer\RequirementsController;
 use Juzaweb\Backend\Http\Controllers\Installer\WelcomeController;
+// use Illuminate\Support\Facades\Route;
 
 Route::group(
     [

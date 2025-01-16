@@ -26,4 +26,5 @@ return [
     'upload_successfull' => 'Upload successfull',
     'change_password_successfully' => 'Change password successfully.',
     'invalid_disk' => 'Invalid disk.',
+    'admin_logo' => 'Admin Logo',
 ];

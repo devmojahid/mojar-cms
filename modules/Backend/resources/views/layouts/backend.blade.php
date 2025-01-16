@@ -37,8 +37,12 @@
                 </button>
                 <h1 class="navbar-brand navbar-brand-autodark">
                     <a href="/{{ config('mojar.admin_prefix') }}">
-                        <img src="{{ asset('jw-styles/base/assets/static/logo.svg') }}" width="110" height="32"
-                            alt="Tabler" class="navbar-brand-image">
+                    @if ($logo = get_config('admin_logo'))
+                        <img src="{{ upload_url(get_config('admin_logo')) }}" alt="{{ get_config('title', 'Mojar') }}">
+                    @else
+                        <img src="{{ asset('jw-styles/base/assets/static/logo.svg') }}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+                        {{-- {{ trans('cms::message.admin_logo', ['name' => get_config('title', 'Mojar')]) }} --}}
+                    @endif
                     </a>
                 </h1>
                 <div class="navbar-nav flex-row d-lg-none">
