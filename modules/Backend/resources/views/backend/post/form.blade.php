@@ -101,13 +101,14 @@
                     $meta['name'] = "meta[{$name}]";
                     $meta['data']['value'] = $model->getMeta($name);
                 @endphp
-
                 {{ Field::fieldByType($meta) }}
 
             @endforeach
 
             @do_action('post_types.form.right', $model)
 
+            {{-- show texonomies --}}
+            
             @do_action('post_type.'. $postType .'.form.right', $model)
         </div>
     </div>

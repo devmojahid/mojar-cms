@@ -1,0 +1,48 @@
+@use '../utils' as *;
+/*----------------------------------------*/
+/*  SEO Section
+/*----------------------------------------*/
+.box-custom-seo {
+    display: none;
+}
+
+.custom-seo{
+    span{
+        svg{
+            width: 30px !important;
+            height: 30px !important;
+        }
+    }
+}
+
+.seo-review {
+    .review-box {
+        background: #f9f9f9;
+        border: 1px solid #eaeaea;
+    }
+
+    .review-title {
+        font-size: 1rem;
+        color: #333;
+    }
+
+    .review-url {
+        font-size: 0.875rem;
+        color: #3b82f6;
+    }
+
+    .review-description {
+        font-size: 0.875rem;
+        color: #666;
+    }
+}
+
+/* Responsive Improvements */
+@media (max-width: 768px) {
+    .seo-review .review-box {
+        padding: 1rem;
+    }
+    .review-title, .review-url, .review-description {
+        font-size: 0.875rem;
+    }
+}

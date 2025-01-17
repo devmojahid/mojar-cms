@@ -1,0 +1,1 @@
+import{q as s,a as i,F as n,j as t,d as r}from"./app-aac88db0.js";function o({children:e}){const{title:a}=s().props;return i(n,{children:[t(r,{children:t("title",{children:(a||"")+" - Mojar CMS"})}),t("h4",{className:"font-weight-bold ml-3 text-capitalize",children:a||""}),t("div",{className:"mojar__utils__content",children:e})]})}export{o as A};

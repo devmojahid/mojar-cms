@@ -372,6 +372,10 @@ button[type=button][role=checkbox]{
   padding:0.3rem 0.75rem;
 }
 
+.form-taxonomy li{
+  list-style:none;
+}
+
 .link-button-primary{
   @apply inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors;
   @apply bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground;
@@ -721,10 +725,60 @@ button[type=button][role=checkbox]{
   border-color:rgba(255, 255, 255, 0.1);
   color:#fff;
 }
+.form-image{
+  position:relative;
+  min-height:200px;
+  background-color:var(--tblr-bg-surface);
+  border:2px dashed var(--tblr-border-color);
+  border-radius:0.5rem;
+  transition:all 0.3s ease;
+}
+
+.form-image:hover{
+  border-color:var(--tblr-primary);
+  background-color:var(--tblr-bg-surface-secondary);
+}
+
+.dropify-preview{
+  min-height:200px;
+  background-color:var(--tblr-bg-surface-secondary);
+}
+
+.dropify-preview.image-hidden{
+  display:none;
+}
+
+.dropify-render{
+  display:block;
+  height:200px;
+}
+
+.image-clear{
+  opacity:0;
+  transition:opacity 0.2s ease;
+  color:var(--tblr-primary);
+  background-color:var(--tblr-bg-surface);
+  border-radius:50%;
+  padding:4px;
+  text-decoration:none;
+  cursor:pointer;
+}
+.image-clear:hover{
+  background-color:var(--tblr-bg-surface-secondary);
+}
+.image-clear svg{
+  width:30px;
+  height:30px;
+}
+
+.form-image:hover .image-clear{
+  opacity:1;
+}
+
 .icon-wrapper{
-  width:80px;
-  height:80px;
-  margin:0 auto;
+  width:48px;
+  height:48px;
+  color:var(--tblr-primary);
 }
 .icon-wrapper svg{
   width:100%;
@@ -732,42 +786,77 @@ button[type=button][role=checkbox]{
   color:#6c757d;
 }
 
-.form-image{
-  position:relative;
-  border:1px dashed #ddd;
-  padding:15px;
-  border-radius:8px;
-  background-color:#f8f9fa;
+.upload-area{
+  min-height:200px;
+  cursor:pointer;
+}
+.dropify-preview{
   transition:all 0.3s ease;
 }
-.form-image:hover{
-  border-color:#3b82f6;
-  background-color:#e9f5ff;
+.dropify-filename{
+  font-size:0.875rem;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
-.form-image.previewing{
-  border-color:#28a745;
-  background-color:#eaffea;
+@media (max-width: 768px){
+  .form-image{
+    min-height:150px;
+  }
+  .dropify-preview, .dropify-render{
+    height:150px;
+  }
+  .upload-area{
+    min-height:150px;
+    padding:1rem;
+  }
 }
-.form-image .image-clear{
-  transition:color 0.3s ease;
+.form-image.previewing .upload-area{
+  display:none;
 }
-.form-image .image-clear:hover{
-  color:#dc3545;
+.form-image.is-dragover{
+  border-color:var(--tblr-primary);
+  background-color:var(--tblr-bg-surface-secondary);
 }
-.form-image img{
-  max-height:100%;
-  border-radius:5px;
+.dropify-render img{
+  -o-object-fit:cover;
+     object-fit:cover;
+  width:100%;
+  height:100%;
 }
-.form-image .dropify-render img{
-  max-height:120px;
-  margin:auto;
-  display:block;
-}
-.form-image .dropify-infos .dropify-filename{
-  font-size:0.85rem;
-  color:#6c757d;
+.box-custom-seo{
+  display:none;
 }
 
+.custom-seo span svg{
+  width:30px !important;
+  height:30px !important;
+}
+
+.seo-review .review-box{
+  background:#f9f9f9;
+  border:1px solid #eaeaea;
+}
+.seo-review .review-title{
+  font-size:1rem;
+  color:#333;
+}
+.seo-review .review-url{
+  font-size:0.875rem;
+  color:#3b82f6;
+}
+.seo-review .review-description{
+  font-size:0.875rem;
+  color:#666;
+}
+@media (max-width: 768px){
+  .seo-review .review-box{
+    padding:1rem;
+  }
+  .review-title, .review-url, .review-description{
+    font-size:0.875rem;
+  }
+}
 .mojar_cms_sidebar{
   overflow:auto !important;
 }

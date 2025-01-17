@@ -15,9 +15,9 @@
     <link rel="stylesheet" href="{{ asset('jw-styles/mojar/css/filemanager.min.css') }}">
 </head>
 
-<body>
+<body class="mojar-cms-filemanager">
 
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark" id="nav">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark mojar-cms-filemanager-navbar" id="nav">
         <a class="navbar-brand invisible-lg d-none d-lg-inline" id="to-previous">
             <i class="fa fa-arrow-left fa-fw"></i>
             <span class="d-none d-lg-inline">{{ trans('cms::filemanager.nav-back') }}</span>
