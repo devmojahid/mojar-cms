@@ -15,7 +15,7 @@
                 ->toArray();
         }
     @endphp
-    <label class="col-form-label" for="{{ $id ?? $name }}">{{ $label ?? $name }}</label>
+    <label class="form-label" for="{{ $id ?? $name }}">{{ $label ?? $name }}</label>
     <select name="{{ $multiple ?? false ? "{$name}[]" : $name }}" id="{{ $id ?? $name }}"
         class="form-control load-posts" data-type="{{ $type ?? '' }}" {{ $multiple ?? false ? 'multiple' : '' }}>
         @foreach ($options as $key => $tname)

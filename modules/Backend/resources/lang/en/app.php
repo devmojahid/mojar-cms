@@ -277,6 +277,7 @@ return [
     'general_setting' => 'General setting',
     'translations' => 'Translations',
     'publish' => 'Publish',
+    'content_publish' => 'Content publish',
     'save_successfully' => 'Save successfully',
     'send_mail_successfully' => 'Send email successfully',
     'click_here_to_select_file' => 'Click here to select file',

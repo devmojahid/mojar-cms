@@ -1,5 +1,5 @@
 <div class="form-group form-taxonomy">
-    <label class="col-form-label w-100">
+    <label class="form-label w-100">
         {{ $taxonomy->get('label') }}
         <span>
             <a href="javascript:void(0)" class="float-right add-new">
@@ -34,13 +34,13 @@
 
     <div class="form-add mt-2 form-add-taxonomy box-hidden">
         <div class="form-group mb-1">
-            <label class="col-form-label">{{ trans('cms::app.name') }}</label>
+            <label class="form-label">{{ trans('cms::app.name') }}</label>
             <input type="text" class="form-control taxonomy-name" autocomplete="off">
         </div>
 
         @if(in_array('hierarchical', $taxonomy->get('supports', [])))
             <div class="form-group mb-1">
-                <label class="col-form-label">{{ trans('cms::app.parent') }}</label>
+                <label class="form-label">{{ trans('cms::app.parent') }}</label>
                 <select type="text" class="form-control taxonomy-parent load-taxonomies" autocomplete="off" data-post-type="{{ $taxonomy->get('post_type') }}" data-taxonomy="{{ $taxonomy->get('taxonomy') }}">
                 </select>
             </div>

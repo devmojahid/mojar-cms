@@ -1,11 +1,11 @@
 <div class="form-group">
-    <label class="col-form-label" for="{{ $id ?? $name }}">
+    <label class="form-label" for="{{ $id ?? $name }}">
         {{ $label ?? $name }} @if($required ?? false) <abbr>*</abbr> @endif
     </label>
     <select
         name="{{ ($multiple ?? false) ? "{$name}[]" : $name }}"
         id="{{ $id ?? $name }}"
-        class="form-control {{ $class ?? 'select2-default' }}"
+        class="form-select {{ $class ?? 'select2-default' }}"
         {{ ($multiple ?? false) ? 'multiple' : '' }}
         {{ ($disabled ?? false) ? 'disabled' : '' }}
         {{ ($readonly ?? false) ? 'readonly' : '' }}

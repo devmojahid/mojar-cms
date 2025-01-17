@@ -1,5 +1,5 @@
 <div class="form-group">
-    <label class="col-form-label" for="{{ $id ?? $name }}">{{ $label ?? $name }}</label>
+    <label class="form-label" for="{{ $id ?? $name }}">{{ $label ?? $name }}</label>
     <select
             name="{{ ($multiple ?? false) ? "{$name}[]" : $name }}"
             id="{{ $id ?? $name }}"

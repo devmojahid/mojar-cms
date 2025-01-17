@@ -1,5 +1,5 @@
 <div class="form-group">
-    <label class="col-form-label" for="{{ $id ?? $name }}">
+    <label class="form-label" for="{{ $id ?? $name }}">
         {{ $label ?? $name }} @if ($required ?? false)
             <abbr>*</abbr>
         @endif

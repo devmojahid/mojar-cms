@@ -1,8 +1,6 @@
 <div class="form-group">
-    <label class="col-form-label" for="{{ $id  ?? $name }}">
-        {{ $label ?? $name }} @if($required ?? false)
-            <abbr>*</abbr>
-        @endif
+    <label class="form-label @if($required ?? false)required @endif" for="{{ $id  ?? $name }}">
+        {{ $label ?? $name }}
     </label>
 
     @if(isset($prefix) || isset($suffix))

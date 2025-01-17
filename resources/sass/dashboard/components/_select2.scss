@@ -1,0 +1,236 @@
+.select2-container {
+    .select2-selection {
+      min-height: 36px;
+      border: 1px solid rgba(98, 105, 118, 0.16) !important;
+      border-radius: 4px;
+      background-color: #fff;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  
+      // Single select
+      &--single {
+        padding: 0.4375rem 0.75rem;
+        
+        .select2-selection__rendered {
+          color: #1e293b;
+          line-height: 1.4285714;
+          padding: 0 !important;
+        }
+  
+        .select2-selection__arrow {
+          height: 36px;
+          width: 30px;
+          right: 3px;
+          
+          b {
+            background-image: url(https://cdn4.iconfinder.com/data/icons/user-interface-174/32/UIF-76-512.png);
+            border-color: #626976 transparent transparent transparent;
+            border-width: 5px 4px 0;
+            background-color: transparent;
+            background-size: contain;
+            border: none !important;
+            height: 20px !important;
+            width: 20px !important;
+            margin: auto !important;
+            top: 17% !important;
+            left: auto !important;
+          }
+        }
+  
+        .select2-selection__placeholder {
+          color: #626976;
+        }
+  
+        .select2-selection__clear {
+          color: #626976;
+          font-size: 1.25rem;
+          line-height: 1;
+          margin-right: 10px;
+          padding: 0 2px;
+          
+          &:hover {
+            color: #1e293b;
+          }
+        }
+      }
+  
+      // Multiple select
+      &--multiple {
+        min-height: 36px;
+        padding: 2px 6px;
+        
+        .select2-selection__rendered {
+          padding: 0;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 4px;
+        }
+  
+        .select2-selection__choice {
+          background-color: #f1f5f9;
+          border: 1px solid rgba(98, 105, 118, 0.16);
+          border-radius: 3px;
+          padding: 2px 8px;
+          margin: 2px 0;
+          font-size: 0.875rem;
+          display: flex;
+          align-items: center;
+  
+          &__remove {
+            color: #626976;
+            margin-right: 5px;
+            font-size: 1rem;
+            line-height: 1;
+            
+            &:hover {
+              color: #1e293b;
+            }
+          }
+        }
+  
+        .select2-search__field {
+          margin: 0;
+          min-height: 28px;
+          
+          &::placeholder {
+            color: #626976;
+          }
+        }
+      }
+    }
+  
+    // Dropdown styles
+    &--open {
+      .select2-selection {
+        border-color: #206bc4 !important;
+        box-shadow: 0 0 0 0.25rem rgba(32, 107, 196, 0.1);
+      }
+    }
+  }
+  
+  // Dropdown menu
+  .select2-dropdown {
+    border: 1px solid rgba(98, 105, 118, 0.16);
+    border-radius: 4px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    background: #fff;
+    
+    // Search box
+    .select2-search--dropdown {
+      padding: 0.5rem;
+      
+      .select2-search__field {
+        border: 1px solid rgba(98, 105, 118, 0.16);
+        border-radius: 4px;
+        padding: 0.4375rem 0.75rem;
+        
+        &:focus {
+          border-color: #206bc4;
+          box-shadow: 0 0 0 0.25rem rgba(32, 107, 196, 0.1);
+          outline: none;
+        }
+      }
+    }
+  
+    // Results list
+    .select2-results {
+      padding: 0.25rem;
+      
+      .select2-results__options {
+        max-height: 200px;
+        overflow-y: auto;
+        
+        &::-webkit-scrollbar {
+          width: 6px;
+        }
+        
+        &::-webkit-scrollbar-track {
+          background: #f1f5f9;
+          border-radius: 3px;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+          background: #cbd5e1;
+          border-radius: 3px;
+        }
+      }
+  
+      .select2-results__option {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+        color: #1e293b;
+        border-radius: 3px;
+        margin: 1px 0;
+        
+        &[aria-selected=true] {
+          background-color: #f1f5f9;
+        }
+        
+        &--highlighted[aria-selected] {
+          background-color: #206bc4;
+          color: #fff;
+        }
+  
+        &[aria-disabled=true] {
+          color: #626976;
+          opacity: 0.65;
+        }
+      }
+  
+      .select2-results__group {
+        padding: 0.5rem 0.75rem;
+        font-weight: 600;
+        color: #1e293b;
+      }
+    }
+  }
+  
+  // Dark mode support
+  [data-bs-theme="dark"] {
+    .select2-container {
+      .select2-selection {
+        background-color: #1a2234;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+        
+        &--single {
+          .select2-selection__rendered {
+            color: #fff;
+          }
+          
+          .select2-selection__placeholder {
+            color: rgba(255, 255, 255, 0.6);
+          }
+        }
+  
+        &--multiple {
+          .select2-selection__choice {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+          }
+        }
+      }
+    }
+  
+    .select2-dropdown {
+      background-color: #1a2234;
+      border-color: rgba(255, 255, 255, 0.1);
+      
+      .select2-results__option {
+        color: #fff;
+        
+        &[aria-selected=true] {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        &--highlighted[aria-selected] {
+          background-color: #206bc4;
+        }
+      }
+      
+      .select2-search__field {
+        background-color: #1a2234;
+        border-color: rgba(255, 255, 255, 0.1);
+        color: #fff;
+      }
+    }
+  }

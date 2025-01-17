@@ -1,5 +1,5 @@
 <div class="form-group form-taxonomy">
-    <label class="col-form-label w-100">
+    <label class="form-label w-100">
         {{ $setting->get('label') }}
         <span><a href="javascript:void(0)" class="float-right"><i class="fa fa-plus"></i> @lang('tadcms::app.add-new')</a></span>
     </label>
@@ -19,12 +19,12 @@
 
     <div class="form-add">
         <div class="form-group">
-            <label class="col-form-label">{{ trans('tadcms::app.name') }} <abbr>*</abbr></label>
+            <label class="form-label">{{ trans('tadcms::app.name') }} <abbr>*</abbr></label>
             <input type="text" class="form-control" autocomplete="off">
         </div>
 
         <div class="form-group">
-            <label class="col-form-label">{{ trans('tadcms::app.parent') }}</label>
+            <label class="form-label">{{ trans('tadcms::app.parent') }}</label>
             <select type="text" class="form-control load-taxonomy" data-type="{{ $setting->get('type') }}" data-taxonomy="{{ $taxonomy }}">
             </select>
         </div>

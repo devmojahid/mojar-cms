@@ -1,5 +1,5 @@
 <div class="form-group">
-    <label class="col-form-label" for="{{ $id }}">{{ $label ?? $name }}</label>
+    <label class="form-label" for="{{ $id }}">{{ $label ?? $name }}</label>
     {{-- <ul class="nav nav-tabs" id="content-{{ $name }}-tab" role="tablist">
         <li class="nav-item">
             <a class="nav-link @if (request()->query('e', 'editor') == 'editor') active @endif" id="editor-tab" href="?e=editor">Editor</a>

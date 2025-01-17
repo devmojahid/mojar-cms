@@ -1,0 +1,60 @@
+@use '../utils' as *;
+/*----------------------------------------*/
+/*  Icon Wrapper for post type image
+/*----------------------------------------*/
+.icon-wrapper {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    svg {
+        width: 100%;
+        height: 100%;
+        color: #6c757d; // Bootstrap muted color
+    }
+}
+
+.form-image {
+    position: relative;
+    border: 1px dashed #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f8f9fa; // Light gray background
+    transition: all 0.3s ease;
+
+    &:hover {
+        border-color: #3b82f6; // Matches your primary color
+        background-color: #e9f5ff;
+    }
+
+    &.previewing {
+        border-color: #28a745; // Green border for preview state
+        background-color: #eaffea; // Light green background
+    }
+
+    .image-clear {
+        transition: color 0.3s ease;
+        &:hover {
+            color: #dc3545; // Darker red on hover
+        }
+    }
+
+    img {
+        max-height: 100%;
+        border-radius: 5px;
+    }
+
+    .dropify-render {
+        img {
+            max-height: 120px;
+            margin: auto;
+            display: block;
+        }
+    }
+
+    .dropify-infos {
+        .dropify-filename {
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+    }
+}

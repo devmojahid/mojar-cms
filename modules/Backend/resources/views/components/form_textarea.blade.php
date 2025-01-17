@@ -1,5 +1,5 @@
 <div class="form-group @if($hidden ?? false) box-hidden @endif">
-    <label class="col-form-label" for="{{ $id ?? $name }}">{{ $label ?? $name }}</label>
+    <label class="form-label" for="{{ $id ?? $name }}">{{ $label ?? $name }}</label>
     <textarea
         class="form-control"
         name="{{ $name }}"

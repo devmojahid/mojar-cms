@@ -1,9 +1,6 @@
-@component('cms::components.card', [
-    'label' => $label ?? $name
-])
-    @php
-        $paths = $value ?? [];
-    @endphp
+@php
+    $paths = $value ?? [];
+@endphp
 
     <div class="form-images">
         <input type="hidden" class="input-name" value="{{ $name }}[]">
@@ -25,5 +22,3 @@
             </div>
         </div>
     </div>
-
-@endcomponent
