@@ -51,7 +51,7 @@ return [
         'enabled'    => false,
 
         'attributes' => [
-            'prefix'     => 'admin-cp/log-viewer',
+            'prefix'     => 'app/log-viewer',
 
             'middleware' => 'admin',
         ],

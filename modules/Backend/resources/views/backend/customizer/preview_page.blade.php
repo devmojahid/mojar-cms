@@ -1,7 +1,7 @@
 <section class="theme-editor__preview te-preview__container" component="UI.Preview">
     <header class="te-context-bar">
         <div class="te-top-bar__branding desktop-only hide" bind-show="">
-            <a title="Navigate to themes" aria_label="Navigate to themes" class="te-brand-link" data-no-turbolink="true" href="/admin-cp/themes">
+            <a title="Navigate to themes" aria_label="Navigate to themes" class="te-brand-link" data-no-turbolink="true" href="/app/themes">
                 <svg class="ui-inline-svg te-brand-logo" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 42">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logo-sapo"></use>
                 </svg>

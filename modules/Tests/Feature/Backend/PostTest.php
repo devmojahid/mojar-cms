@@ -49,14 +49,14 @@ class PostTest extends TestCase
 
     protected function indexTest($key): void
     {
-        $response = $this->get("/admin-cp/post-type/{$key}");
+        $response = $this->get("/app/post-type/{$key}");
 
         $response->assertStatus(200);
     }
 
     protected function createTest($key, $postType): void
     {
-        $index = "/admin-cp/post-type/{$key}/create";
+        $index = "/app/post-type/{$key}/create";
         $response = $this->get($index);
 
         $this->printText("Test {$index}");
@@ -64,7 +64,7 @@ class PostTest extends TestCase
         $response->assertStatus(200);
 
         if ($post = $this->makerData($postType)) {
-            $create = "/admin-cp/post-type/{$key}";
+            $create = "/app/post-type/{$key}";
             $this->printText("Test post create {$create}");
 
             $data = $post;
@@ -91,13 +91,13 @@ class PostTest extends TestCase
     {
         if ($post = $this->makerData($postType)) {
             $model = app($postType->get('model'))->first(['id']);
-            $url = "/admin-cp/post-type/{$key}/{$model->id}/edit";
+            $url = "/app/post-type/{$key}/{$model->id}/edit";
 
             $response = $this->get($url);
 
             $response->assertStatus(200);
 
-            $this->put("/admin-cp/post-type/{$key}/{$model->id}", $post);
+            $this->put("/app/post-type/{$key}/{$model->id}", $post);
 
             $model = app($postType->get('model'))
                 ->where('id', '=', $model->id)

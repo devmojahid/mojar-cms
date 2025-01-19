@@ -31,14 +31,14 @@ class DashboardTest extends TestCase
 
     public function testIndex()
     {
-        $response = $this->get('/admin-cp');
+        $response = $this->get('/app');
 
         $response->assertStatus(200);
     }
 
     public function testChartData()
     {
-        $url = '/admin-cp/dashboard/views-chart';
+        $url = '/app/dashboard/views-chart';
 
         $response = $this->get($url);
 
@@ -47,7 +47,7 @@ class DashboardTest extends TestCase
 
     public function testDataUser()
     {
-        $url = '/admin-cp/dashboard/users?sort=id&order=desc&offset=0&limit=5';
+        $url = '/app/dashboard/users?sort=id&order=desc&offset=0&limit=5';
 
         $response = $this->get($url);
 

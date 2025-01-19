@@ -125,7 +125,7 @@ class TaxonomyTest extends TestCase
 
     protected function getUrlTaxonomy($taxonomy)
     {
-        return '/admin-cp/' . str_replace(
+        return '/app/' . str_replace(
             '.',
             '/',
             $taxonomy->get('menu_slug')

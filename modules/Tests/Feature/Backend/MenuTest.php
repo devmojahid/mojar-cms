@@ -29,14 +29,14 @@ class MenuTest extends TestCase
         $faker = app(Faker::class);
         $data = ['name' => $faker->sentence(5)];
 
-        $response = $this->post("/admin-cp/menus/store", $data);
+        $response = $this->post("/app/menus/store", $data);
 
         $response->assertStatus(302);
 
         $this->assertDatabaseHas('menus', $data);
 
         $data = ['name' => ''];
-        $response = $this->post("/admin-cp/menus/store", $data);
+        $response = $this->post("/app/menus/store", $data);
         $response->assertStatus(302);
 
         $response->assertSessionHasErrors('name');
@@ -46,7 +46,7 @@ class MenuTest extends TestCase
     {
         $menu = Menu::first();
 
-        $this->get("/admin-cp/menus/{$menu->id}")
+        $this->get("/app/menus/{$menu->id}")
             ->assertStatus(200);
     }
 }

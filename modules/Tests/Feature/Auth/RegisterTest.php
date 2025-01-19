@@ -20,7 +20,7 @@ class RegisterTest extends TestCase
 {
     public function testIndex()
     {
-        $this->get('admin-cp/register')->assertStatus(200);
+        $this->get('app/register')->assertStatus(200);
     }
 
     public function testRegister()
@@ -31,7 +31,7 @@ class RegisterTest extends TestCase
 
         $this->json(
             'POST',
-            'admin-cp/register',
+            'app/register',
             [
                 'name' => $faker->name,
                 'email' => $faker->email,
@@ -52,7 +52,7 @@ class RegisterTest extends TestCase
 
         $this->json(
             'POST',
-            'admin-cp/register',
+            'app/register',
             [
                 'name' => $faker->name,
                 'email' => $email,
@@ -79,7 +79,7 @@ class RegisterTest extends TestCase
             ->where('template_code', '=', 'verification')
             ->first();
 
-        $this->get("admin-cp/verification/{$email}/{$token->params['verifyToken']}")
+        $this->get("app/verification/{$email}/{$token->params['verifyToken']}")
             ->assertStatus(302)
             ->assertRedirect(route('login'));
 

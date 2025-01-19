@@ -19,7 +19,7 @@ class LoginTest extends TestCase
 {
     public function testIndex()
     {
-        $this->get('admin-cp/login')->assertStatus(200);
+        $this->get('app/login')->assertStatus(200);
     }
 
     public function testLogin()
@@ -28,7 +28,7 @@ class LoginTest extends TestCase
 
         $this->json(
             'POST',
-            '/admin-cp/login',
+            '/app/login',
             [
                 'email' => $user->email,
                 'password' => '12345678',

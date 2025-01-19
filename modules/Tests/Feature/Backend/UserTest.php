@@ -26,13 +26,13 @@ class UserTest extends TestCase
 
     public function testIndexAccess()
     {
-        $this->get("/admin-cp/users")
+        $this->get("/app/users")
             ->assertStatus(200);
     }
 
     public function testCreateAccess()
     {
-        $this->get("/admin-cp/users/create")
+        $this->get("/app/users/create")
             ->assertStatus(200);
     }
 
@@ -45,7 +45,7 @@ class UserTest extends TestCase
             'status' => 'active',
         ];
 
-        $response = $this->post("/admin-cp/users", $data)
+        $response = $this->post("/app/users", $data)
             ->assertStatus(302);
 
         $response->assertSessionHasErrors(['password']);
@@ -58,7 +58,7 @@ class UserTest extends TestCase
             'password_confirmation' => '123456123',
         ];
 
-        $response = $this->post("/admin-cp/users", $data)
+        $response = $this->post("/app/users", $data)
             ->assertStatus(302);
 
         $response->assertSessionHasErrors(['password']);
@@ -71,7 +71,7 @@ class UserTest extends TestCase
             'password_confirmation' => '123456@123',
         ];
 
-        $this->post("/admin-cp/users", $data)
+        $this->post("/app/users", $data)
             ->assertStatus(302)
             ->assertSessionHasNoErrors();
 
@@ -95,7 +95,7 @@ class UserTest extends TestCase
             'id' => $user->id,
         ];
 
-        $this->put("/admin-cp/users/{$user->id}", $data)
+        $this->put("/app/users/{$user->id}", $data)
             ->assertStatus(302)
             ->assertSessionHasNoErrors();
 
@@ -114,7 +114,7 @@ class UserTest extends TestCase
             'password_confirmation' => 'juzacms@123',
         ];
 
-        $this->put("/admin-cp/users/{$user->id}", $data)
+        $this->put("/app/users/{$user->id}", $data)
             ->assertStatus(302)
             ->assertSessionHasNoErrors();
 

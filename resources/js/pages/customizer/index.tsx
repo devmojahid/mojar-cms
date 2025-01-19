@@ -49,7 +49,7 @@ export default function Index({ panels }) {
                 <header className="te-context-bar">
                     <div className="te-top-bar__branding desktop-only hide" bind-show="">
                         <a title="Navigate to themes" aria_label="Navigate to themes" className="te-brand-link"
-                           data-no-turbolink="true" href="/admin-cp/themes">
+                           data-no-turbolink="true" href="/app/themes">
                             <svg className="ui-inline-svg te-brand-logo" role="img" xmlns="http://www.w3.org/2000/svg"
                                  viewBox="0 0 36 42">
                                 <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#logo-sapo"></use>

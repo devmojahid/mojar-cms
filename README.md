@@ -15,7 +15,7 @@ MojarCms - Laravel CMS for Your Project
 - Demo Site: 
     - Frontend: https://cms.mojar.com
     - Admin: 
-        - https://cms.mojar.com/admin-cp 
+        - https://cms.mojar.com/app 
         - User/Pass: demo@mojar.com / demo@mojar.com
 - Video Tutorial: https://www.youtube.com/@mojar/videos
 

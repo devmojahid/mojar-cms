@@ -29,14 +29,14 @@ class ForgotPasswordTest extends TestCase
 
     public function testIndex()
     {
-        $this->get('admin-cp/forgot-password')->assertStatus(200);
+        $this->get('app/forgot-password')->assertStatus(200);
     }
 
     public function testSubmit()
     {
         $this->json(
             'POST',
-            'admin-cp/forgot-password',
+            'app/forgot-password',
             ['email' => $this->user->email]
         )->assertJson(['status' => true]);
 
@@ -54,7 +54,7 @@ class ForgotPasswordTest extends TestCase
     {
         $passwordReset = PasswordReset::whereEmail($this->user->email)->first();
 
-        $uri = "admin-cp/reset-password/{$passwordReset->email}/{$passwordReset->token}";
+        $uri = "app/reset-password/{$passwordReset->email}/{$passwordReset->token}";
 
         $this->get($uri)->assertStatus(200);
 

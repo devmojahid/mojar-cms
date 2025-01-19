@@ -26,7 +26,7 @@ class UpdateTest extends TestCase
         for ($i = 1; $i <= 6; $i++) {
             $this->printText("Test update step {$i}");
 
-            $response = $this->json('POST', "admin-cp/update/cms/{$i}");
+            $response = $this->json('POST', "app/update/cms/{$i}");
 
             $this->printText($response->getContent());
 

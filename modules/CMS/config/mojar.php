@@ -6,9 +6,9 @@ return [
     /**
      * Admin url prefix
      *
-     * Default: admin-cp
+     * Default: app
      */
-    'admin_prefix' => env('ADMIN_PREFIX', 'admin-cp'),
+    'admin_prefix' => env('ADMIN_PREFIX', 'app'),
 
 
     'adminbar' => [

@@ -151,7 +151,7 @@ interface HookActionContract
      * that the user has the required capability as well.
      *
      * @param string $menuTitle The trans key to be used for the menu.
-     * @param string $menuSlug The url name to refer to this menu by. not include admin-cp
+     * @param string $menuSlug The url name to refer to this menu by. not include app
      * @param array $args
      * - string $icon Url icon or fa icon fonts
      * - string $parent The parent of menu. Default null

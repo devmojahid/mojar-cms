@@ -19,7 +19,7 @@ export function upload_url(path: string): string {
 }
 
 export function admin_url(path: string): string {
-    return '/admin-cp/' + path;
+    return '/app/' + path;
 }
 
 export async function post_request(

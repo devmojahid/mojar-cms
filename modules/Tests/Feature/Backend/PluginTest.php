@@ -26,7 +26,7 @@ class PluginTest extends TestCase
 
     public function testIndexPlugin()
     {
-        $this->get("/admin-cp/plugins")
+        $this->get("/app/plugins")
             ->assertStatus(200);
     }
 
@@ -34,7 +34,7 @@ class PluginTest extends TestCase
     {
         $this->json(
             'POST',
-            'admin-cp/plugins/bulk-actions',
+            'app/plugins/bulk-actions',
             [
                 'ids' => ['mojar/example'],
                 'action' => 'activate'
@@ -47,7 +47,7 @@ class PluginTest extends TestCase
     {
         $this->json(
             'POST',
-            'admin-cp/plugins/bulk-actions',
+            'app/plugins/bulk-actions',
             [
                 'ids' => ['mojar/example'],
                 'action' => 'deactivate'
@@ -70,7 +70,7 @@ class PluginTest extends TestCase
 
         $this->json(
             'POST',
-            'admin-cp/plugins/bulk-actions',
+            'app/plugins/bulk-actions',
             [
                 'ids' => [$pluginName],
                 'action' => 'delete'
