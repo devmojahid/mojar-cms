@@ -287,6 +287,23 @@ class MenuAction extends Action
         );
 
         HookAction::addAdminMenu(
+            trans('cms::app.managements'),
+            'managements',
+            [
+                'icon' => 'fa fa-user-circle-o',
+                'icon_type' => 'font-awesome',
+                'position' => 40,
+                'parent' => 'managements',
+                'permissions' => [
+                    'users.index',
+                    'users.edit',
+                    'users.create',
+                    'users.delete',
+                ],
+            ]
+        );
+
+        HookAction::addAdminMenu(
             trans('cms::app.users'),
             'users',
             [

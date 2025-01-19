@@ -1,4 +1,272 @@
-@use '../utils' as *;
-/*----------------------------------------*/
-/*  Settings
-/*----------------------------------------*/
+
+@use '../utils' as *; // includes colors, mixins, breakpoints, etc.
+
+.settings-page {
+    padding: 0 !important;
+
+    // .settings-card {
+    //     border: 1px solid map-get(map-get($colors, 'border'), 'primary');
+    //     border-radius: 0.5rem;
+    //     // If you want a subtle box-shadow:
+    //     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+    //     .settings-card-header {
+    //     background-color: map-get(map-get($colors, 'theme'), 'background-tertiary');
+    //     border-bottom: 1px solid map-get(map-get($colors, 'border'), '3');
+    //     padding: 1rem 1.5rem;
+
+    //     .page-title {
+    //         color: map-get(map-get($colors, 'heading'), 'primary');
+    //         font-size: 1.25rem;
+    //         font-weight: 600;
+    //     }
+    //     p {
+    //         margin-bottom: 0;
+    //         color: map-get(map-get($colors, 'theme'), 'text-tertiary');
+    //     }
+    //     svg {
+    //         stroke: map-get(map-get($colors, 'theme'), 'primary');
+    //     }
+    //     }
+
+    //     .settings-sidebar {
+    //     background-color: map-get(map-get($colors, 'theme'), 'background-secondary');
+    //     min-height: 100%;
+    //     .list-group-item {
+    //         padding: 0.75rem 1rem;
+    //         border: none;
+    //         &.active {
+    //         background-color: map-get(map-get($colors, 'theme'), 'primary');
+    //         color: map-get(map-get($colors, 'common'), 'white');
+    //         }
+    //         &:hover {
+    //         background-color: mix(
+    //             map-get(map-get($colors, 'theme'), 'primary'),
+    //             map-get(map-get($colors, 'common'), 'white'),
+    //             15%
+    //         );
+    //         color: map-get(map-get($colors, 'common'), 'white');
+    //         }
+    //     }
+    //     }
+
+    //     // Main body area
+    //     .card-body {
+    //     padding: 1.5rem;
+    //     // Example: style form controls
+    //     input[type="text"],
+    //     input[type="number"],
+    //     input[type="email"],
+    //     select,
+    //     textarea {
+    //         margin-bottom: 1rem;
+    //         border-radius: 0.25rem;
+    //         border: 1px solid map-get(map-get($colors, 'border'), '3');
+    //     }
+    //     label {
+    //         font-weight: 500;
+    //     }
+    //     }
+
+    //     // Footer styling
+    //     .settings-footer {
+    //     border-top: 1px solid map-get(map-get($colors, 'border'), 'primary');
+    //     padding: 1rem 1.5rem;
+    //     background-color: map-get(map-get($colors, 'theme'), 'background');
+    //     button {
+    //         &.btn-tabler {
+    //         display: inline-flex;
+    //         align-items: center;
+    //         svg {
+    //             margin-right: 0.25rem;
+    //         }
+    //         }
+    //         &.btn-primary {
+    //         background-color: map-get(map-get($colors, 'theme'), 'primary');
+    //         border-color: map-get(map-get($colors, 'theme'), 'primary');
+    //         &:hover {
+    //             background-color: mix(
+    //             map-get(map-get($colors, 'theme'), 'primary'),
+    //             #fff,
+    //             15%
+    //             );
+    //         }
+    //         }
+    //         &.btn-secondary {
+    //         background-color: map-get(map-get($colors, 'theme'), 'background-tertiary');
+    //         border-color: map-get(map-get($colors, 'border'), '3');
+    //         color: map-get(map-get($colors, 'theme'), 'text-primary');
+    //         }
+    //     }
+    //     }
+    // }
+
+    // .settings-sidebar {
+    //     background-color: map-get(map-get($colors, 'theme'), 'background-secondary');
+    //     /* Ensure the sidebar fills available vertical space if desired:
+    //     min-height: 100%; */
+    
+    //     .card-body {
+    //     /* If you want a fixed height with scroll:
+    //         max-height: calc(100vh - 200px);
+    //         overflow-y: auto; */
+    //     }
+    
+    //     .list-group-item {
+    //     /* Remove default list-group borders, if not already done: */
+    //     border: none;
+    //     transition: background-color 0.2s ease, color 0.2s ease;
+    
+    //     &.active {
+    //         background-color: map-get(map-get($colors, 'theme'), 'primary');
+    //         color: map-get(map-get($colors, 'common'), 'white');
+    //         font-weight: 600; /* Slight emphasis */
+    //         position: relative;
+    
+    //         /* Optional: A small left highlight bar for the active item */
+    //         &::before {
+    //         content: "";
+    //         display: block;
+    //         position: absolute;
+    //         left: 0;
+    //         top: 0;
+    //         height: 100%;
+    //         width: 4px;
+    //         background-color: map-get(map-get($colors, 'theme'), 'secondary');
+    //         }
+    //     }
+    
+    //     &:hover {
+    //         background-color: mix(
+    //         map-get(map-get($colors, 'theme'), 'primary'),
+    //         #fff,
+    //         15%
+    //         );
+    //         color: map-get(map-get($colors, 'common'), 'white');
+    //         text-decoration: none;
+    //     }
+    //     }
+    // }
+  
+}
+// Settings Panel Variables
+$settings-card-transition-duration: 180ms;
+$settings-card-active-duration: 80ms;
+$icon-wrapper-size-desktop: 48px;
+$icon-wrapper-size-mobile: 40px;
+$icon-size-desktop: 1.5rem;
+$icon-size-mobile: 1.25rem;
+
+.settings-card {
+  border: 1px solid var(--tblr-border-color);
+  transition: transform $settings-card-transition-duration ease-out,
+              box-shadow $settings-card-transition-duration ease-out,
+              border-color $settings-card-transition-duration ease-out;
+  will-change: transform, box-shadow, border-color;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border-color: var(--tblr-primary);
+
+    .settings-icon-wrapper {
+      background-color: var(--tblr-primary);
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .settings-description {
+      color: var(--tblr-secondary) !important;
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+    transition-duration: $settings-card-active-duration;
+  }
+}
+
+.settings-icon-wrapper {
+  width: $icon-wrapper-size-desktop;
+  height: $icon-wrapper-size-desktop;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background-color: var(--tblr-primary-lt);
+  color: var(--tblr-primary);
+  transition: background-color $settings-card-transition-duration ease-out,
+              transform $settings-card-transition-duration ease-out;
+
+  i,
+  svg {
+    font-size: $icon-size-desktop;
+    width: $icon-size-desktop;
+    height: $icon-size-desktop;
+  }
+}
+
+.settings-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+
+  a {
+    color: var(--tblr-primary);
+    transition: color $settings-card-transition-duration ease-out;
+
+    &:hover {
+      color: var(--tblr-primary-darken);
+    }
+  }
+}
+
+.settings-description {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  transition: color $settings-card-transition-duration ease-out;
+}
+
+// Touch Device Optimizations
+@media (hover: none) {
+  .settings-card {
+    &:hover {
+      transform: none;
+      box-shadow: none;
+    }
+    
+    &:active {
+      transform: translateY(1px);
+      background-color: var(--tblr-gray-50);
+    }
+  }
+}
+
+// Responsive Adjustments
+@media (max-width: 767.98px) {
+  .settings-icon-wrapper {
+    width: $icon-wrapper-size-mobile;
+    height: $icon-wrapper-size-mobile;
+
+    i,
+    svg {
+      font-size: $icon-size-mobile;
+      width: $icon-size-mobile;
+      height: $icon-size-mobile;
+    }
+  }
+
+  .settings-title {
+    font-size: 0.95rem;
+  }
+}
+
+// Reduce Motion Preferences
+@media (prefers-reduced-motion: reduce) {
+  .settings-card,
+  .settings-icon-wrapper,
+  .settings-title a,
+  .settings-description {
+    transition: none;
+  }
+}

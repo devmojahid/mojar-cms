@@ -12,4 +12,7 @@ mix
         //...webpackConfig,
         target: 'node',
         externals: [nodeExternals()],
+        stats: {
+            children: true,
+        },
     });

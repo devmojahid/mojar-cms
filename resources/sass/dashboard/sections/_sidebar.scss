@@ -38,6 +38,11 @@
     .navbar-nav {
       .nav-item {
         // Badge styling
+        &.active {
+          &:after {
+            border: none;
+          }
+        }
         .badge {
           padding: 0.35em 0.65em;
           font-size: 11px;
