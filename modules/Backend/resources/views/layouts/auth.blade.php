@@ -20,6 +20,7 @@
     @include('cms::components.mojar_langs')
 
     <script src="{{ asset('jw-styles/mojar/js/vendor.min.js') }}"></script>
+    <script src="{{ asset('jw-styles/mojar/js/custom-main.min.js') }}"></script>
     <script src="{{ asset('jw-styles/mojar/js/backend.min.js') }}"></script>
 
     @if (get_config('captcha'))
@@ -30,6 +31,7 @@
     @endif
 
     <script src="{{ asset('jw-styles/mojar/js/custom.min.js') }}"></script>
+    <script src="{{ asset('jw-styles/mojar/js/custom-main.min.js') }}"></script>
 
     @yield('header')
 

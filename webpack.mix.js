@@ -3,6 +3,9 @@ const modulePath = `${__dirname}/modules/Backend/resources/assets`;
 const pluginPath = `${__dirname}/plugins`;
 const themePath = `${__dirname}/themes`;
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 mix.disableNotifications();
 mix.options(
     {
@@ -20,9 +23,20 @@ mix.options(
 );
 mix.sass('resources/sass/app.scss', 'public/css')
    .disableNotifications();
-if (process.env.npm_config_module) {
-    require(`${modulePath}/mix.js`);
-    return;
+// if (process.env.npm_config_module) {
+//     require(`${modulePath}/mix.js`);
+//     return;
+// }
+const selectedModule = process.env.MODULE;
+
+if (selectedModule) {
+    try {
+        require(`${modulePath}/mix.js`);
+        console.log(`Loaded module: ${selectedModule}`);
+    } catch (err) {
+        console.error(`Failed to load module: ${selectedModule}`);
+        console.error(err.message);
+    }
 }
 
 if (process.env.npm_config_theme) {

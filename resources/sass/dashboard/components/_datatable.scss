@@ -1,0 +1,51 @@
+@use "../utils" as *;
+/*----------------------------------------*/
+/*   Datatable
+/*----------------------------------------*/
+.bootstrap-table {
+    .fixed-table-container {
+        .fixed-table-body {
+            table {
+                border-left: none;
+                border-right: none;
+                thead {
+                    tr {
+                        th {
+                            border-left: none;
+                            border-right: none;
+                        }
+                        th.bs-checkbox {
+                            padding: 0;
+                            input {
+                                background-color: var(--ms-common-white);
+                                border: 1px solid var(--ms-border-primary);
+                                border-radius: 4px;
+                                height: 1rem;
+                                vertical-align: top;
+                                width: 1rem;
+                                &:checked {
+                                    background-color: var(--ms-theme-primary);
+                                    border-color: var(--ms-theme-primary);
+                                }
+                            }
+                        }
+                        label {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+                tbody {
+                    tr {
+                        td {
+                            border-left: none;
+                            border-right: none;
+                        }
+                        td.bs-checkbox {
+                           
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

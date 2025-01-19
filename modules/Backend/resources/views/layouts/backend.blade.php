@@ -37,12 +37,14 @@
                 </button>
                 <h1 class="navbar-brand navbar-brand-autodark">
                     <a href="/{{ config('mojar.admin_prefix') }}">
-                    @if ($logo = get_config('admin_logo'))
-                        <img src="{{ upload_url(get_config('admin_logo')) }}" alt="{{ get_config('title', 'Mojar') }}">
-                    @else
-                        <img src="{{ asset('jw-styles/base/assets/static/logo.svg') }}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
-                        {{-- {{ trans('cms::message.admin_logo', ['name' => get_config('title', 'Mojar')]) }} --}}
-                    @endif
+                        @if ($logo = get_config('admin_logo'))
+                            <img src="{{ upload_url(get_config('admin_logo')) }}"
+                                alt="{{ get_config('title', 'Mojar') }}">
+                        @else
+                            <img src="{{ asset('jw-styles/base/assets/static/logo.svg') }}" width="110"
+                                height="32" alt="Tabler" class="navbar-brand-image">
+                            {{-- {{ trans('cms::message.admin_logo', ['name' => get_config('title', 'Mojar')]) }} --}}
+                        @endif
                     </a>
                 </h1>
                 <div class="navbar-nav flex-row d-lg-none">
@@ -259,7 +261,7 @@
             <!-- Page header -->
             <div class="page-header d-print-none">
                 <div class="container-xl">
-                    <div class="row g-2 align-items-center">
+                    <div class="row align-items-center justify-content-between">
                         <div class="col">
                             @if (!request()->is(config('mojar.admin_prefix')))
                                 {{ jw_breadcrumb('admin', [
@@ -271,6 +273,7 @@
                                 <div class="mb-3"></div>
                             @endif
                         </div>
+                        @yield('breadcrumb-right')
                     </div>
                 </div>
             </div>
@@ -284,13 +287,23 @@
                     @endphp
 
                     @foreach ($messages as $message)
-                        <div
-                            class="alert alert-{{ $message['status'] == 'error' ? 'danger' : $message['status'] }} jw-message">
-                            <button type="button" class="close close-message" data-dismiss="alert"
-                                aria-label="Close" data-id="{{ $message['id'] }}">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                            {!! e_html($message['message']) !!}
+                        <div class="alert alert-{{ $message['status'] == 'error' ? 'danger' : $message['status'] }} alert-dismissible jw-message"
+                            role="alert">
+                            <div class="d-flex">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24"
+                                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M5 12l5 5l10 -10" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    {!! e_html($message['message']) !!}
+                                </div>
+                            </div>
+                            <a class="btn-close" data-bs-dismiss="alert" aria-label="close"
+                                data-id="{{ $message['id'] }}"></a>
                         </div>
                     @endforeach
 

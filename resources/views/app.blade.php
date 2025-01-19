@@ -81,19 +81,32 @@
 
                     @foreach ($messages as $message)
                         <div
-                            class="alert alert-{{ $message['status'] == 'error' ? 'danger' : $message['status'] }} jw-message">
-                            <button type="button" class="close close-message" data-dismiss="alert" aria-label="Close"
-                                data-id="{{ $message['id'] }}">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                            {!! e_html($message['message']) !!}
+                            class="alert alert-{{ $message['status'] == 'error' ? 'danger' : $message['status'] }} alert-dismissible jw-message" role="alert">
+                            <div class="d-flex">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
+                                </div>
+                                <div>
+                                    {!! e_html($message['message']) !!}
+                                </div>
+                            </div>
+                            <a class="btn-close" data-bs-dismiss="alert" aria-label="close" data-id="{{ $message['id'] }}"></a>
                         </div>
                     @endforeach
 
                     @if (session()->has('message'))
                         <div
-                            class="alert alert-{{ session()->get('status') == 'error' ? 'danger' : 'success' }} jw-message">
-                            {{ session()->get('message') }}</div>
+                            class="alert alert-{{ session()->get('status') == 'error' ? 'danger' : 'success' }} alert-dismissible jw-message" role="alert">
+                            <div class="d-flex">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
+                                </div>
+                                <div>
+                                    {{ session()->get('message') }}
+                                </div>
+                            </div>
+                            <a class="btn-close" data-bs-dismiss="alert" aria-label="close" data-id="{{ $message['id'] }}"></a>
+                        </div>
                     @endif
 
                     @inertia

@@ -470,6 +470,7 @@ class MenuAction extends Action
         HookAction::enqueueScript('core-backend', 'jw-styles/mojar/js/backend.min.js', $ver);
         HookAction::enqueueScript('core-tinymce', 'jw-styles/mojar/tinymce/tinymce.min.js', $ver);
         HookAction::enqueueScript('core-custom', 'jw-styles/mojar/js/custom.min.js', $ver);
+        HookAction::enqueueScript('custom-main-js', 'jw-styles/mojar/js/custom-main.min.js', $ver);
         // Tabler js
         HookAction::enqueueScript('tabler-apexcharts', 'jw-styles/base/assets/libs/apexcharts/dist/apexcharts.min.js', $ver);
         HookAction::enqueueScript('tabler-jsvectormap', 'jw-styles/base/assets/libs/jsvectormap/dist/js/jsvectormap.min.js', $ver);

@@ -3,6 +3,8 @@ const mix = require('laravel-mix');
 const baseAsset = 'modules/Backend/resources/assets';
 const basePublish = baseAsset + '/public';
 
+const publicPath = 'public/jw-styles/mojar';
+
 mix.combine(
     [
         'modules/Backend/resources/assets/vendors/mdb.min.js',
@@ -71,3 +73,11 @@ mix.combine(
     ],
     `${basePublish}/js/custom.min.js`
 );
+
+mix.combine(
+    [
+        baseAsset + '/js/custom-main.js',
+    ],
+    `${publicPath}/js/custom-main.min.js`
+);
+
