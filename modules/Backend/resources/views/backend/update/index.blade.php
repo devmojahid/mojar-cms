@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="alert alert-success">
+            <div class="alert alert-success alert-dismissible">
                 <p>{{ __('You are using Mojar CMS Version') }}: {{ \Juzaweb\CMS\Version::getVersion() }}</p>
                 <p>
                     <a href="https://github.com/mojar/cms/releases" target="_blank">{{ __('View change logs here') }}</a>. <a

@@ -19,7 +19,7 @@
       a {
         color: var(--ms-theme-primary);
         text-decoration: none;
-        
+        font-weight: var(--tblr-breadcrumb-item-active-font-weight) !important;
         &:hover {
           text-decoration: underline;
         }

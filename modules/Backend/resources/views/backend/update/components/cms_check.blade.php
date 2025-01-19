@@ -1,5 +1,5 @@
 @if($checkUpdate)
-    <div class="alert alert-success">Version {{ $versionAvailable }} ready to update.</div>
+    <div class="alert alert-success alert-dismissible">Version {{ $versionAvailable }} ready to update.</div>
 @else
     <div class="alert alert-secondary">{{ trans('cms::app.no_new_version_available') }}</div>
 @endif

@@ -1,5 +1,7 @@
-<div class="row">
-    @if ($actions)
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            @if ($actions)
         <div class="col-md-2">
             <form method="post" class="form-inline">
                 @csrf
@@ -38,30 +40,32 @@
                 <button type="submit" class="btn btn-primary mb-2">
                     <i class="fa fa-search"></i> {{ trans('cms::app.search') }}
                 </button>
-            </form>
+                </form>
+            </div>
+        @endif
+    </div>
+    </div>
+    <div class="card-table">
+        <div class="table-responsive">
+            <table class="table jw-table" id="{{ $uniqueId }}"
+                @if ($hasDetailFormater) data-detail-view="true"
+            data-detail-formatter="detailFormater" @endif>
+            <thead>
+                <tr>
+                    <th data-width="3%" data-checkbox="true"></th>
+                    @foreach ($columns as $key => $column)
+                        <th data-width="{{ $column['width'] ?? 'auto' }}" data-align="{{ $column['align'] ?? 'left' }}"
+                            data-field="{{ $key }}" data-sortable="{{ $column['sortable'] ?? true }}"
+                            @if (in_array($key, $escapes)) data-escape="true" @endif>
+                            {{ $column['label'] ?? strtoupper($key) }}
+                        </th>
+                    @endforeach
+                </tr>
+            </thead>
+            </table>
         </div>
-    @endif
+    </div>
 </div>
-
-<div class="table-responsive">
-    <table class="table jw-table" id="{{ $uniqueId }}"
-        @if ($hasDetailFormater) data-detail-view="true"
-        data-detail-formatter="detailFormater" @endif>
-        <thead>
-            <tr>
-                <th data-width="3%" data-checkbox="true"></th>
-                @foreach ($columns as $key => $column)
-                    <th data-width="{{ $column['width'] ?? 'auto' }}" data-align="{{ $column['align'] ?? 'left' }}"
-                        data-field="{{ $key }}" data-sortable="{{ $column['sortable'] ?? true }}"
-                        @if (in_array($key, $escapes)) data-escape="true" @endif>
-                        {{ $column['label'] ?? strtoupper($key) }}
-                    </th>
-                @endforeach
-            </tr>
-        </thead>
-    </table>
-</div>
-
 @php
     if (!isset($dataUrl)) {
         $data = [

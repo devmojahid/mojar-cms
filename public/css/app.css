@@ -505,6 +505,7 @@ button[type=button][role=checkbox]{
 .breadcrumb-arrows .breadcrumb-item a{
   color:var(--ms-theme-primary);
   text-decoration:none;
+  font-weight:var(--tblr-breadcrumb-item-active-font-weight) !important;
 }
 .breadcrumb-arrows .breadcrumb-item a:hover{
   text-decoration:underline;

@@ -252,7 +252,7 @@
             </div>
         </aside>
         <!-- Navbar -->
-        <header class="navbar navbar-expand-md sticky-top d-none d-lg-flex d-print-none">
+        <header class="navbar navbar-expand-md sticky-top d-none d-lg-flex d-print-none" data-bs-theme="dark">
             @include('cms::backend.menu_top')
         </header>
         <div class="page-wrapper">

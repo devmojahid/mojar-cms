@@ -32,10 +32,11 @@
 
     <div class="row mb-2">
         <div class="col-md-6"></div>
-
         <div class="col-md-6">
             <div class="btn-group float-right">
-                <button type="submit" class="btn btn-success px-5"><i class="fa fa-save"></i> {{ trans('cms::app.save') }}</button>
+                <button type="submit" class="btn btn-tabler px-5">
+                    <i class="fa fa-save">
+                </i> {{ trans('cms::app.save') }}</button>
 
                 <button type="button" class="btn btn-warning cancel-button px-3"><i class="fa fa-refresh"></i> {{ trans('cms::app.reset') }}</button>
             </div>
