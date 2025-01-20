@@ -17,8 +17,10 @@
             href="{{ $adminUrl . $item->getUrl() }}" @if ($item->get('turbolinks') === false) data-turbolinks="false" @endif>
 
             <span class="nav-link-icon d-md-none d-lg-inline-block">
-                @if ($icon ?? true)
-                    <i class="mojar__menuLeft__item__icon {{ $item->get('icon') }}"></i>
+                @if (str_contains($item->get('icon'), '<svg'))
+                {!! $item->get('icon') !!}
+                @else
+                    <i class="{{ $item->get('icon') }}"></i>
                 @endif
             </span>
 

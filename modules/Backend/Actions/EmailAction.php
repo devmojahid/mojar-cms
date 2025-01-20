@@ -25,23 +25,7 @@ class EmailAction extends Action
 
     public function addPages(): void
     {
-        $this->hookAction->registerAdminPage(
-            'email-hooks',
-            [
-                'title' => trans('cms::app.email_hooks'),
-                'menu' => [
-                    'icon' => 'fa fa-envelope',
-                    'position' => 60,
-                    'parent' => 'managements',
-                    'permissions' => [
-                        'email_hooks.index',
-                        'email_hooks.edit',
-                        'email_hooks.create',
-                        'email_hooks.delete',
-                    ],
-                ]
-            ]
-        );
+        //
     }
 
     /**

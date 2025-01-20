@@ -13,6 +13,54 @@
         </div>
     </div>
 
+    
+    <div class="row row-cards">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-status-top bg-green"></div>
+                <div class="card-header">
+                  <h3 class="card-title">
+                    Configuration
+                  </h3>
+                  <div class="card-actions">
+                    <a href="#">
+                      Edit configuration<!-- Download SVG icon from http://tabler-icons.io/i/edit -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
+                    </a>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <dl class="row">
+                    <dt class="col-5">Date:</dt>
+                    <dd class="col-7">2020-01-05 16:42:29 UTC</dd>
+                    <dt class="col-5">Account:</dt>
+                    <dd class="col-7">tabler</dd>
+                    <dt class="col-5">Location:</dt>
+                    <dd class="col-7"><span class="flag flag-country-pl"></span>
+                      Poland</dd>
+                    <dt class="col-5">IP Address:</dt>
+                    <dd class="col-7">46.113.11.3</dd>
+                    <dt class="col-5">Operating system:</dt>
+                    <dd class="col-7">OS X 10.15.2 64-bit</dd>
+                    <dt class="col-5">Browser:</dt>
+                    <dd class="col-7">Chrome</dd>
+                  </dl>
+                </div>
+                <div class="card-header">
+                    <h3 class="card-title">
+                      Configuration
+                    </h3>
+                    <div class="card-actions">
+                      <a href="#">
+                        Edit configuration<!-- Download SVG icon from http://tabler-icons.io/i/edit -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
+                      </a>
+                    </div>
+                  </div>
+              </div>
+        </div>
+    </div>
+
     <div class="row" id="theme-list">
         @if ($currentTheme)
             <div class="col-md-4 p-2 theme-list-item">

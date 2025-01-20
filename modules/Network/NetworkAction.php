@@ -85,17 +85,6 @@ class NetworkAction extends Action
                 'turbolinks' => false,
             ]
         );
-
-        HookAction::addAdminMenu(
-            trans('cms::app.email_logs'),
-            'logs.email',
-            [
-                'icon' => 'fa fa-cogs',
-                'icon_type' => 'font-awesome',
-                'position' => 51,
-                'parent' => 'managements',
-            ]
-        );
     }
 
     public function registerMenus(): void

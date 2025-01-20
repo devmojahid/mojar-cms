@@ -27,16 +27,17 @@ class MultilangAction extends Action
 
     public function addBackendMenu(): void
     {
-        HookAction::registerAdminPage(
-            'languages',
-            [
-                'title' => trans('cms::app.languages'),
-                'menu' => [
-                    'position' => 30,
-                    'parent' => 'managements',
-                ]
-            ]
-        );
+        //
+        // HookAction::registerAdminPage(
+        //     'languages',
+        //     [
+        //         'title' => trans('cms::app.languages'),
+        //         'menu' => [
+        //             'position' => 30,
+        //             'parent' => 'managements',
+        //         ]
+        //     ]
+        // );
     }
 
     public function addSelectLangPost($model): void

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="{{ session('theme', 'light') }}">
 
 <head>
     <meta charset="UTF-8">
@@ -9,7 +9,8 @@
 
     <title>{{ $title ?? '' }}</title>
     <link rel="icon" href="{{ asset('jw-styles/mojar/images/favicon.ico') }}" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,400i,700&display=swap" />
+    {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,400i,700&display=swap" /> --}}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
 
 
     @include('cms::components.mojar_langs')
@@ -17,6 +18,24 @@
     @do_action('mojar_header')
 
     @yield('header')
+
+    <style>
+        :root[data-bs-theme="dark"] {
+            --mojar-sidebar-bg: #1a2234;
+            --mojar-sidebar-color: #9ba6b6;
+            --mojar-sidebar-hover: rgba(255,255,255,0.1);
+            --mojar-topbar-bg: #1a2234;
+            --mojar-card-bg: #1e293b;
+        }
+
+        :root[data-bs-theme="light"] {
+            --mojar-sidebar-bg: #ffffff;
+            --mojar-sidebar-color: #1e293b;
+            --mojar-sidebar-hover: rgba(0,0,0,0.04);
+            --mojar-topbar-bg: #ffffff;
+            --mojar-card-bg: #ffffff;
+        }
+    </style>
 
 </head>
 
@@ -29,7 +48,7 @@
 
     <div class="page">
         <!-- Sidebar -->
-        <aside class="navbar navbar-vertical navbar-expand-lg mojar_cms_sidebar" data-bs-theme="dark">
+        <aside class="navbar navbar-vertical navbar-expand-lg mojar_cms_sidebar" data-bs-theme="{{ session('theme', 'light') }}">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu"
                     aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -254,7 +273,7 @@
             </div>
         </aside>
         <!-- Navbar -->
-        <header class="navbar navbar-expand-md sticky-top d-none d-lg-flex d-print-none" data-bs-theme="dark">
+        <header class="navbar navbar-expand-md sticky-top d-none d-lg-flex d-print-none mojar_cms_topbar" data-bs-theme="{{ session('theme', 'light') }}">
             @include('cms::backend.menu_top')
         </header>
         <div class="page-wrapper">

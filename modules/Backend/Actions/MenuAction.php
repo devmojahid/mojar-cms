@@ -266,16 +266,6 @@ class MenuAction extends Action
         );
 
         HookAction::addAdminMenu(
-            trans('cms::app.managements'),
-            'managements',
-            [
-                'icon' => 'fa fa-cogs',
-                'icon_type' => 'font-awesome',
-                'position' => 75,
-            ]
-        );
-
-        HookAction::addAdminMenu(
             trans('cms::app.general_setting'),
             'setting.system',
             [
@@ -290,65 +280,10 @@ class MenuAction extends Action
             trans('cms::app.managements'),
             'managements',
             [
-                'icon' => 'fa fa-user-circle-o',
-                'icon_type' => 'font-awesome',
+                'icon' => '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-tournament"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M20 10m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M4 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M4 20m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M6 12h3a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-3" /><path d="M6 4h7a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-2" /><path d="M14 10h4" /></svg>',
                 'position' => 40,
-                'parent' => 'managements',
-                'permissions' => [
-                    'users.index',
-                    'users.edit',
-                    'users.create',
-                    'users.delete',
-                ],
             ]
         );
-
-        HookAction::addAdminMenu(
-            trans('cms::app.users'),
-            'users',
-            [
-                'icon' => 'fa fa-user-circle-o',
-                'icon_type' => 'font-awesome',
-                'position' => 40,
-                'parent' => 'managements',
-                'permissions' => [
-                    'users.index',
-                    'users.edit',
-                    'users.create',
-                    'users.delete',
-                ],
-            ]
-        );
-
-        HookAction::addAdminMenu(
-            trans('cms::app.email_templates'),
-            'email-template',
-            [
-                'icon' => 'fa fa-envelope',
-                'icon_type' => 'font-awesome',
-                'position' => 50,
-                'parent' => 'managements',
-                'permissions' => [
-                    'email_templates.index',
-                    'email_templates.edit',
-                    'email_templates.create',
-                    'email_templates.delete',
-                ],
-            ]
-        );
-
-        if (!config('network.enable')) {
-            HookAction::addAdminMenu(
-                trans('cms::app.email_logs'),
-                'logs.email',
-                [
-                    'icon' => 'fa fa-cogs',
-                    'icon_type' => 'font-awesome',
-                    'position' => 51,
-                    'parent' => 'managements',
-                ]
-            );
-        }
     }
 
     public function addSettingPage(): void

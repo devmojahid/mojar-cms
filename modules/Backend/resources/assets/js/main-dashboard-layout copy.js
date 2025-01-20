@@ -3,7 +3,6 @@
  *
  */
 
-
 document.addEventListener('DOMContentLoaded', function() {
     // Enhanced Theme Switcher
     const themeSwitcher = {
@@ -170,11 +169,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize all managers
     themeSwitcher.init();
-    // sidebarManager.init();
-    // dropdownManager.init();
+    sidebarManager.init();
+    dropdownManager.init();
     
     // Add smooth scrolling to the sidebar
-    const sidebarContent = document.querySelector('.mojar_cms_sidebar');
+    const sidebarContent = document.querySelector('.mojar-sidebar');
     if (sidebarContent) {
         new PerfectScrollbar(sidebarContent, {
             wheelSpeed: 2,
