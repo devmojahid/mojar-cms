@@ -4,6 +4,6 @@
  */
 
 $(document).ready(function () {
-    console.log('data-table-enhanced.js 2.0');
+    // console.log('data-table-enhanced.js 2.0');
 });
 

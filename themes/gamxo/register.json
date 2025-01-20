@@ -1,11 +1,11 @@
 {
     "styles": {
         "js": [
-            "assets/js/main.js"
+            "assets\/js\/main.js"
         ],
         "css": [
-            "assets/css/main.css",
-            "https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,700&display=swap"
+            "assets\/css\/main.css",
+            "https:\/\/fonts.googleapis.com\/css?family=Rubik:300,300i,400,400i,500,700&display=swap"
         ]
     },
     "sidebars": {
@@ -73,6 +73,12 @@
             "label": "Most Games",
             "description": "Most Games",
             "view": "theme::components.blocks.most_games"
+        }
+    },
+    "configs": {
+        "adasd": {
+            "label": "Adasd",
+            "type": "text"
         }
     }
 }
