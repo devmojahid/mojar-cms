@@ -1,0 +1,15 @@
+{
+    "post_types": {
+        "new-post-types": {
+            "key": "new-post-type",
+            "label": "New Post-type",
+            "description": "asdadas",
+            "supports": [
+                "1",
+                "1",
+                "1"
+            ],
+            "menu_position": 20
+        }
+    }
+}

@@ -1,4 +1,3 @@
-
 /*
  * Mojar CMS 1.0 - Data Table Enhanced
  *

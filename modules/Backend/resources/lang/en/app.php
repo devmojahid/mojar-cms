@@ -143,6 +143,7 @@ return [
     'all_users' => 'All users',
     'logs' => 'Logs',
     'action' => 'Action',
+    'operations' => 'Operations',
     'edit' => 'Edit',
     'editor' => 'Editor',
     'home_title' => 'Home page title',

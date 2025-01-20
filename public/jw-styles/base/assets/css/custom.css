@@ -142,3 +142,23 @@ table.dataTable thead .sorting_desc:after {
     color: #6c757d;
     padding-top: 1rem;
 }
+
+/* Datatable item styling */
+.dropdown-toggle.align-text-top {
+    padding: 0.25rem 0.5rem;
+    background: transparent;
+    border: none;
+}
+
+.dropdown-toggle.align-text-top:hover {
+    background: rgba(0,0,0,0.04);
+}
+
+.dropdown-item {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(32,107,196,0.06);
+}
