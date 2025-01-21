@@ -1,0 +1,10 @@
+@use '../utils' as *;
+
+.navbar-vertical.navbar-expand-lg~.page-wrapper {
+    @media #{$common-medium-screen} {
+        margin-left: 0px !important;
+    }
+}
+
+
+

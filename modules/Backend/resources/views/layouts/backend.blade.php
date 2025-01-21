@@ -51,14 +51,15 @@
             @include('cms::backend.menu_top')
          </header>
         <!-- Sidebar -->
-        <aside class="navbar navbar-vertical navbar-expand-lg mojar_cms_sidebar" data-bs-theme="{{ session('theme') }}">
-            <div class="container-fluid">
+        <div class="d-block d-lg-flex">
+            <aside class="navbar navbar-vertical navbar-expand-lg mojar_cms_sidebar" data-bs-theme="{{ session('theme') }}">
+                <div class="container-xl">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu"
                     aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <h1 class="navbar-brand navbar-brand-autodark">
-                    <a href="/{{ config('mojar.admin_prefix') }}">
+                    <a href="/{{ config('mojar.admin_prefix') }}" class="d-lg-none d-block">
                         @if ($logo = get_config('admin_logo'))
                             <img src="{{ upload_url(get_config('admin_logo')) }}"
                                 alt="{{ get_config('title', 'Mojar') }}">
@@ -71,7 +72,7 @@
                 </h1>
                 <div class="navbar-nav flex-row d-lg-none">
                     <div class="nav-item d-none d-lg-flex me-3">
-                        <div class="btn-list">
+                        {{-- <div class="btn-list">
                             <a href="https://github.com/tabler/tabler" class="btn" target="_blank" rel="noreferrer">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/brand-github -->
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -95,10 +96,10 @@
                                 </svg>
                                 Sponsor
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="d-none d-lg-flex">
-                        <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Enable dark mode"
+                        {{-- <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Enable dark mode"
                             data-bs-toggle="tooltip" data-bs-placement="bottom">
                             <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -120,9 +121,9 @@
                                 <path
                                     d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
                             </svg>
-                        </a>
+                        </a> --}}
                         <div class="nav-item dropdown d-none d-md-flex me-3">
-                            <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1"
+                            {{-- <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1"
                                 aria-label="Show notifications">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -247,7 +248,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="nav-item dropdown">
@@ -275,7 +276,7 @@
                 </div>
             </div>
         </aside>
-   
+
         <div class="page-wrapper">
             <!-- Page header -->
             <div class="page-header d-print-none">
@@ -357,6 +358,7 @@
                     </div>
                 </div>
             </footer>
+        </div>
         </div>
     </div>
 
