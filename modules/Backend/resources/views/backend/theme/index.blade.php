@@ -1,67 +1,89 @@
 @extends('cms::layouts.backend')
 
-@section('content')
-    <div class="row mb-4">
-        <div class="col-md-6"></div>
-        <div class="col-md-6">
-            <div class="btn-group float-right">
-                @if (config('mojar.theme.enable_upload'))
-                    <a href="{{ route('admin.theme.install') }}" class="btn btn-success" data-turbolinks="false"><i
-                            class="fa fa-plus-circle"></i> {{ trans('cms::app.add_new') }}</a>
-                @endif
-            </div>
+@section('breadcrumb-right')
+    <div class="col-auto mb-3">
+        <div class="btn-group float-right">
+            @if (config('mojar.theme.enable_upload'))
+                <a href="{{ route('admin.theme.install') }}" class="btn btn-tabler">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M12 5l0 14" />
+                        <path d="M5 12l14 0" />
+                    </svg>
+                    {{ trans('cms::app.add_new') }}</a>
+            @endif
         </div>
     </div>
+@endsection
 
-    
-    <div class="row row-cards">
-        <div class="col-lg-4">
+@section('content')
+    <div class="row row-cards" id="theme-list">
+        @if ($currentTheme)
+        <div class="col-lg-4 theme-list-item" >
             <div class="card">
                 <div class="card-status-top bg-green"></div>
                 <div class="card-header">
-                  <h3 class="card-title">
-                    Configuration
-                  </h3>
-                  <div class="card-actions">
-                    <a href="#">
-                      Edit configuration<!-- Download SVG icon from http://tabler-icons.io/i/edit -->
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
-                    </a>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <dl class="row">
-                    <dt class="col-5">Date:</dt>
-                    <dd class="col-7">2020-01-05 16:42:29 UTC</dd>
-                    <dt class="col-5">Account:</dt>
-                    <dd class="col-7">tabler</dd>
-                    <dt class="col-5">Location:</dt>
-                    <dd class="col-7"><span class="flag flag-country-pl"></span>
-                      Poland</dd>
-                    <dt class="col-5">IP Address:</dt>
-                    <dd class="col-7">46.113.11.3</dd>
-                    <dt class="col-5">Operating system:</dt>
-                    <dd class="col-7">OS X 10.15.2 64-bit</dd>
-                    <dt class="col-5">Browser:</dt>
-                    <dd class="col-7">Chrome</dd>
-                  </dl>
-                </div>
-                <div class="card-header">
                     <h3 class="card-title">
-                      Configuration
+                        {{ $currentTheme->get('title') }}
                     </h3>
                     <div class="card-actions">
-                      <a href="#">
-                        Edit configuration<!-- Download SVG icon from http://tabler-icons.io/i/edit -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
-                      </a>
+                        <button class="btn btn-tabler" disabled>
+                            {{ trans('cms::app.activated') }}
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24"
+                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                                <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                                <path d="M16 5l3 3" />
+                            </svg>
+                        </button>
                     </div>
-                  </div>
-              </div>
+                </div>
+                <div class="card-body">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                        data-src="{{ $currentTheme->get('screenshot') }}" alt="{{ $currentTheme->get('title') }}"
+                        class="lazyload w-100 h-100">
+                </div>
+                <div class="card-footer">
+                    <div class="mb-3">
+                        <div class="text-muted">
+                            <div class="d-flex align-items-center mb-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                </svg>
+                                <span>{{ $currentTheme->get('author') }}</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M10 20.777a8.942 8.942 0 0 1 -2.48 -.969" />
+                                    <path d="M14 3.223a9.003 9.003 0 0 1 0 17.554" />
+                                    <path d="M4.579 17.093a8.961 8.961 0 0 1 -1.227 -2.592" />
+                                    <path d="M3.124 10.5c.16 -.95 .468 -1.85 .9 -2.675l.169 -.305" />
+                                    <path d="M6.907 4.579a8.954 8.954 0 0 1 3.093 -1.356" />
+                                </svg>
+                                <span>v{{ $currentTheme->get('version') }}</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 21v-13a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-9l-4 4" />
+                                    <line x1="8" y1="9" x2="16" y2="9" />
+                                    <line x1="8" y1="13" x2="14" y2="13" />
+                                </svg>
+                                <span>{{ $currentTheme->get('description') }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        @endif
     </div>
 
-    <div class="row" id="theme-list">
+    {{-- <div class="row" id="theme-list">
         @if ($currentTheme)
             <div class="col-md-4 p-2 theme-list-item">
                 <div class="card">
@@ -86,10 +108,10 @@
                 </div>
             </div>
         @endif
-    </div>
+    </div> --}}
 
     <template id="theme-template">
-        <div class="col-md-4 p-2 theme-list-item">
+        <div class="col-md-4 theme-list-item">
             {content}
         </div>
     </template>
