@@ -13,7 +13,7 @@
   --sidebar-icon-color: var(--tblr-secondary-color);
   --sidebar-scrollbar-thumb: var(--tblr-gray-300);
   --dropdown-bg: var(--tblr-white);
-  --dropdown-hover-bg: var(--tblr-gray-100);
+  --dropdown-hover-bg: var(--tblr-gray-400);
   --dropdown-border: var(--tblr-border-color);
 }
 
@@ -31,174 +31,151 @@
   --dropdown-hover-bg: var(--tblr-tertiary-bg);
   --dropdown-border: var(--tblr-border-color);
 }
+
 .mojar_cms_sidebar {
+  /* Sidebar Base */
   background-color: var(--sidebar-bg);
   border-right: 1px solid var(--sidebar-border);
-  .navbar-brand {
-    display: none;
-    padding: 1.25rem 1.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    height: 64px;
-    display: flex;
-    align-items: center;
-
-    &-image {
-        height: 32px;
-        width: auto;
-    }
-}
-
+  /* Subtle box-shadow for a more polished look */
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.05);
+  /* Smooth transitions on color changes (light/dark modes) */
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  // Main navigation
   #sidebar-menu {
+    /* Make sure scrolling also feels smoother */
+    transition: all 0.3s ease;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+    }
+
     .navbar-nav {
-        .nav-item {
-            margin: 2px 0px;
+      margin: 0;
+      padding: 0;
+
+      .nav-item {
+        /* Remove default list styling, ensure spacing */
+        list-style: none;
+        margin: 0;
+
+        // Active parent item
+        &.active {
+          &:after {
+            // border: none;
+          }
         }
+
+        // Example badge styling
+        .badge {
+          background-color: var(--badge-bg, #ff5b5b);
+          color: var(--badge-color, #fff);
+          font-size: 0.75rem;
+          border-radius: 0.25rem;
+          padding: 0.25rem 0.5rem;
+          transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-link {
+          /* Flex alignment for icon + text */
+          display: flex;
+          align-items: center;
+          padding: 0.5rem 1rem;
+          border-radius: 0.25rem;
+          color: var(--sidebar-text, #6c757d);
+          text-decoration: none;
+          /* Smooth color & background changes */
+          transition: background-color 0.3s ease, color 0.3s ease;
+
+          /* Hover state */
+          &:hover {
+            color: var(--sidebar-hover-text, #495057);
+            background-color: var(--sidebar-hover-bg, rgba(255, 255, 255, 0.05));
+          }
+
+          /* Active link state */
+          &.active {
+            color: var(--sidebar-active-text, #212529);
+            background-color: var(--sidebar-active-bg, rgba(255, 255, 255, 0.1));
+            &:after {
+              // border: none;
+            }
+          }
+
+          &-icon {
+            i {
+              font-size: 1rem;
+              /* Optional subtle icon animation on hover */
+              transition: transform 0.3s ease;
+            }
+          }
+
+          &-title {
+            font-size: 0.875rem;
+            font-weight: 400;
+            transition: color 0.2s ease;
+          }
+
+          &.dropdown-toggle {
+            /* Arrow styling (using :after or a built-in icon) */
+            &:after {
+              margin-left: auto;
+              transform: rotate(0deg);
+              transition: transform 0.3s ease;
+            }
+          }
+        }
+
+        // Dropdown menu
+        .dropdown-menu {
+          position: relative; /* Or absolute if you prefer */
+          background-color: var(--sidebar-bg, #fff);
+          // border: 1px solid var(--sidebar-border, #ddd);
+          transition: all 0.3s ease;
+          /* If you want it hidden until toggled, ensure display is handled by JavaScript or a class toggle */
+
+          .dropdown-item {
+            padding-left: 2.8rem;
+            padding-right: 0.5rem;
+            padding-bottom: 0.5rem;
+            color: var(--sidebar-text, #6c757d);
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border-radius: 0.25rem;
+            &:hover {
+              color: var(--sidebar-hover-text, #495057);
+              background-color: var(--sidebar-hover-bg, rgba(255, 255, 255, 0.05));
+            }
+
+            &.active {
+              color: var(--sidebar-active-text, #212529);
+              background-color: var(--dropdown-hover-bg);
+              border-radius: 0.25rem;
+            }
+          }
+        }
+
+        // Active submenu state
+        &.mojar__menuLeft__submenu--toggled {
+          > .nav-link {
+            &.dropdown-toggle {
+              /* Rotate arrow icon on submenu toggle */
+              &:after {
+                transform: rotate(90deg);
+              }
+            }
+          }
+          > .dropdown-menu {
+            display: block;
+          }
+        }
+      }
     }
   }
 }
-
-// .mojar_cms_sidebar {
-//   overflow: auto !important;
-//   // Logo section
-//   .navbar-brand {
-//     padding: 1.25rem 1.5rem;
-//     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-//     height: 64px;
-//     display: flex;
-//     align-items: center;
-
-//     &-image {
-//       height: 32px;
-//       width: auto;
-//     }
-//   }
-
-//   // Main navigation
-//   #sidebar-menu {
-//     overflow-y: auto;
-//     padding-top: 1rem;
-//     padding-top: 0px;
-
-//     &::-webkit-scrollbar {
-//       width: 5px;
-//     }
-
-//     &::-webkit-scrollbar-track {
-//       background: transparent;
-//     }
-
-//     &::-webkit-scrollbar-thumb {
-//       background: rgba(255, 255, 255, 0.2);
-//       border-radius: 10px;
-//     }
-
-//     .navbar-nav {
-//       .nav-item {
-//         // Badge styling
-//         &.active {
-//           &:after {
-//             border: none;
-//           }
-//         }
-//         .badge {
-//           padding: 0.35em 0.65em;
-//           font-size: 11px;
-//           font-weight: 500;
-//           border-radius: 4px;
-//           margin-left: 5px;
-//           background: rgba(255, 255, 255, 0.1);
-//         }
-
-//         .nav-link {
-//           padding: 0.45rem 1rem;
-//           color: var(--ms-theme-primary-menu-hover);
-//           font-size: 0.875rem;
-//           border-radius: 4px;
-//           display: flex;
-//           align-items: center;
-//           white-space: nowrap;
-
-//           &:hover {
-//             color: var(--ms-theme-primary-menu-hover);
-//             background: rgba(255, 255, 255, 0.05);
-//           }
-
-//           &.active {
-//             background: var(--ms-theme-primary);
-//             color: var(--ms-theme-primary-menu-hover);
-//             box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
-//             &:after {
-//               border: none;
-//             }
-//             .nav-link-icon {
-//               color: var(--ms-theme-primary-menu-hover);
-//             }
-//           }
-
-//           &-icon {
-//             width: 18px;
-//             margin-right: 10px;
-//             color: var(--ms-theme-primary-menu-hover);
-//             display: flex;
-//             align-items: center;
-//             justify-content: center;
-
-//             i {
-//               font-size: 1.1rem;
-//             }
-//           }
-
-//           &-title {
-//             flex: 1;
-//             font-weight: 400;
-//           }
-
-//           &.dropdown-toggle {
-//             &:after {
-//               margin-left: auto;
-//               font-size: 0.75rem;
-//               opacity: 0.5;
-//             }
-//           }
-//         }
-
-//         // Dropdown menu
-//         .dropdown-menu {
-//           margin: 0;
-//           padding: 0;
-//           position: static;
-//           box-shadow: none;
-
-//           .dropdown-item {
-//             padding: 0.5rem 2.5rem;
-//             color: var(--ms-theme-primary-menu-hover);
-//             font-size: 0.875rem;
-
-//             &:hover {
-//               background: rgba(255, 255, 255, 0.05);
-//               color: var(--ms-theme-primary-menu-hover);
-//             }
-
-//             &.active {
-//               background: rgba(255, 255, 255, 0.05);
-//               color: var(--ms-theme-primary-menu-hover);
-//               border-radius: 5px;
-//             }
-//           }
-//         }
-
-//         // Active submenu
-//         &.mojar__menuLeft__submenu--toggled {
-//           > .nav-link {
-//             color: #fff;
-//           }
-
-//           > .dropdown-menu {
-//             display: block;
-//           }
-//         }
-//       }
-
-//     }
-//   }
-// }

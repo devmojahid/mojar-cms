@@ -46,6 +46,10 @@
     </div>
 
     <div class="page">
+        <!-- Navbar -->
+        <header class="navbar navbar-expand-md sticky-top d-none d-lg-flex d-print-none mojar_cms_topbar" data-bs-theme="{{ session('theme') }}">
+            @include('cms::backend.menu_top')
+         </header>
         <!-- Sidebar -->
         <aside class="navbar navbar-vertical navbar-expand-lg mojar_cms_sidebar" data-bs-theme="{{ session('theme') }}">
             <div class="container-fluid">
@@ -271,10 +275,7 @@
                 </div>
             </div>
         </aside>
-        <!-- Navbar -->
-        <header class="navbar navbar-expand-md sticky-top d-none d-lg-flex d-print-none mojar_cms_topbar" data-bs-theme="{{ session('theme') }}">
-            @include('cms::backend.menu_top')
-        </header>
+   
         <div class="page-wrapper">
             <!-- Page header -->
             <div class="page-header d-print-none">
