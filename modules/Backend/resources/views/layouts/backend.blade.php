@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="{{ session('theme', 'light') }}">
+<html lang="en" data-bs-theme="{{ session('theme') }}">
 
 <head>
     <meta charset="UTF-8">
@@ -9,7 +9,6 @@
 
     <title>{{ $title ?? '' }}</title>
     <link rel="icon" href="{{ asset('jw-styles/mojar/images/favicon.ico') }}" />
-    {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,400i,700&display=swap" /> --}}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
 
 
@@ -19,7 +18,7 @@
 
     @yield('header')
 
-    <style>
+    {{-- <style>
         :root[data-bs-theme="dark"] {
             --mojar-sidebar-bg: #1a2234;
             --mojar-sidebar-color: #9ba6b6;
@@ -35,11 +34,11 @@
             --mojar-topbar-bg: #ffffff;
             --mojar-card-bg: #ffffff;
         }
-    </style>
+    </style> --}}
 
 </head>
 
-<body class="mojar__menuLeft--dark mojar__menuLeft--unfixed mojar__menuLeft--shadow">
+<body class="mojar__menuLeft--dark mojar__menuLeft--unfixed mojar__menuLeft--shadow" data-bs-theme="{{ session('theme') }}">
     <div id="admin-overlay">
         <div class="cv-spinner">
             <span class="spinner"></span>
@@ -48,7 +47,7 @@
 
     <div class="page">
         <!-- Sidebar -->
-        <aside class="navbar navbar-vertical navbar-expand-lg mojar_cms_sidebar" data-bs-theme="{{ session('theme', 'light') }}">
+        <aside class="navbar navbar-vertical navbar-expand-lg mojar_cms_sidebar" data-bs-theme="{{ session('theme') }}">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu"
                     aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -273,7 +272,7 @@
             </div>
         </aside>
         <!-- Navbar -->
-        <header class="navbar navbar-expand-md sticky-top d-none d-lg-flex d-print-none mojar_cms_topbar" data-bs-theme="{{ session('theme', 'light') }}">
+        <header class="navbar navbar-expand-md sticky-top d-none d-lg-flex d-print-none mojar_cms_topbar" data-bs-theme="{{ session('theme') }}">
             @include('cms::backend.menu_top')
         </header>
         <div class="page-wrapper">

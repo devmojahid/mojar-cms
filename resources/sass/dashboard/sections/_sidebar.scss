@@ -1,147 +1,204 @@
 @use '../utils' as *;
 
+// Define theme variables
+:root,
+[data-bs-theme="light"] {
+  --sidebar-bg: var(--tblr-gray-200);
+  --sidebar-border: var(--tblr-border-color);
+  --sidebar-text: var(--tblr-body-color);
+  --sidebar-muted: var(--tblr-secondary-color);
+  --sidebar-hover-bg: var(--tblr-gray-200);
+  --sidebar-active-bg: var(--ms-theme-primary);
+  --sidebar-active-text: #ffffff;
+  --sidebar-icon-color: var(--tblr-secondary-color);
+  --sidebar-scrollbar-thumb: var(--tblr-gray-300);
+  --dropdown-bg: var(--tblr-white);
+  --dropdown-hover-bg: var(--tblr-gray-100);
+  --dropdown-border: var(--tblr-border-color);
+}
+
+[data-bs-theme="dark"] {
+  --sidebar-bg: var(--tblr-dark);
+  --sidebar-border: var(--tblr-border-color);
+  --sidebar-text: var(--tblr-body-color);
+  --sidebar-muted: var(--tblr-secondary-color);
+  --sidebar-hover-bg: var(--tblr-tertiary-bg);
+  --sidebar-active-bg: var(--ms-theme-primary);
+  --sidebar-active-text: #ffffff;
+  --sidebar-icon-color: var(--tblr-secondary-color);
+  --sidebar-scrollbar-thumb: var(--tblr-gray-700);
+  --dropdown-bg: var(--tblr-dark);
+  --dropdown-hover-bg: var(--tblr-tertiary-bg);
+  --dropdown-border: var(--tblr-border-color);
+}
 .mojar_cms_sidebar {
-  overflow: auto !important;
-  // Logo section
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-border);
   .navbar-brand {
+    display: none;
     padding: 1.25rem 1.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     height: 64px;
     display: flex;
     align-items: center;
-    
+
     &-image {
-      height: 32px;
-      width: auto;
+        height: 32px;
+        width: auto;
     }
-  }
+}
 
-  // Main navigation
   #sidebar-menu {
-    overflow-y: auto;
-    padding-top: 1rem;
-    padding-top: 0px;
-
-    &::-webkit-scrollbar {
-      width: 5px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 10px;
-    }
-
     .navbar-nav {
-      .nav-item {
-        // Badge styling
-        &.active {
-          &:after {
-            border: none;
-          }
+        .nav-item {
+            margin: 2px 0px;
         }
-        .badge {
-          padding: 0.35em 0.65em;
-          font-size: 11px;
-          font-weight: 500;
-          border-radius: 4px;
-          margin-left: 5px;
-          background: rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-link {
-          padding: 0.45rem 1rem;
-          color: var(--ms-theme-primary-menu-hover);
-          font-size: 0.875rem;
-          border-radius: 4px;
-          display: flex;
-          align-items: center;
-          white-space: nowrap;
-
-          &:hover {
-            color: var(--ms-theme-primary-menu-hover);
-            background: rgba(255, 255, 255, 0.05);
-          }
-
-          &.active {
-            background: var(--ms-theme-primary);
-            color: var(--ms-theme-primary-menu-hover);
-            box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
-            &:after {
-              border: none;
-            }
-            .nav-link-icon {
-              color: var(--ms-theme-primary-menu-hover);
-            }
-          }
-
-          &-icon {
-            width: 18px;
-            margin-right: 10px;
-            color: var(--ms-theme-primary-menu-hover);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            i {
-              font-size: 1.1rem;
-            }
-          }
-
-          &-title {
-            flex: 1;
-            font-weight: 400;
-          }
-
-          &.dropdown-toggle {
-            &:after {
-              margin-left: auto;
-              font-size: 0.75rem;
-              opacity: 0.5;
-            }
-          }
-        }
-
-        // Dropdown menu
-        .dropdown-menu {
-          margin: 0;
-          padding: 0;
-          position: static;
-          box-shadow: none;
-          
-          .dropdown-item {
-            padding: 0.5rem 2.5rem;
-            color: var(--ms-theme-primary-menu-hover);
-            font-size: 0.875rem;
-
-            &:hover {
-              background: rgba(255, 255, 255, 0.05);
-              color: var(--ms-theme-primary-menu-hover);
-            }
-
-            &.active {
-              background: rgba(255, 255, 255, 0.05);
-              color: var(--ms-theme-primary-menu-hover);
-              border-radius: 5px;
-            }
-          }
-        }
-
-        // Active submenu
-        &.mojar__menuLeft__submenu--toggled {
-          > .nav-link {
-            color: #fff;
-          }
-
-          > .dropdown-menu {
-            display: block;
-          }
-        }
-      }
-
     }
   }
 }
+
+// .mojar_cms_sidebar {
+//   overflow: auto !important;
+//   // Logo section
+//   .navbar-brand {
+//     padding: 1.25rem 1.5rem;
+//     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+//     height: 64px;
+//     display: flex;
+//     align-items: center;
+
+//     &-image {
+//       height: 32px;
+//       width: auto;
+//     }
+//   }
+
+//   // Main navigation
+//   #sidebar-menu {
+//     overflow-y: auto;
+//     padding-top: 1rem;
+//     padding-top: 0px;
+
+//     &::-webkit-scrollbar {
+//       width: 5px;
+//     }
+
+//     &::-webkit-scrollbar-track {
+//       background: transparent;
+//     }
+
+//     &::-webkit-scrollbar-thumb {
+//       background: rgba(255, 255, 255, 0.2);
+//       border-radius: 10px;
+//     }
+
+//     .navbar-nav {
+//       .nav-item {
+//         // Badge styling
+//         &.active {
+//           &:after {
+//             border: none;
+//           }
+//         }
+//         .badge {
+//           padding: 0.35em 0.65em;
+//           font-size: 11px;
+//           font-weight: 500;
+//           border-radius: 4px;
+//           margin-left: 5px;
+//           background: rgba(255, 255, 255, 0.1);
+//         }
+
+//         .nav-link {
+//           padding: 0.45rem 1rem;
+//           color: var(--ms-theme-primary-menu-hover);
+//           font-size: 0.875rem;
+//           border-radius: 4px;
+//           display: flex;
+//           align-items: center;
+//           white-space: nowrap;
+
+//           &:hover {
+//             color: var(--ms-theme-primary-menu-hover);
+//             background: rgba(255, 255, 255, 0.05);
+//           }
+
+//           &.active {
+//             background: var(--ms-theme-primary);
+//             color: var(--ms-theme-primary-menu-hover);
+//             box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
+//             &:after {
+//               border: none;
+//             }
+//             .nav-link-icon {
+//               color: var(--ms-theme-primary-menu-hover);
+//             }
+//           }
+
+//           &-icon {
+//             width: 18px;
+//             margin-right: 10px;
+//             color: var(--ms-theme-primary-menu-hover);
+//             display: flex;
+//             align-items: center;
+//             justify-content: center;
+
+//             i {
+//               font-size: 1.1rem;
+//             }
+//           }
+
+//           &-title {
+//             flex: 1;
+//             font-weight: 400;
+//           }
+
+//           &.dropdown-toggle {
+//             &:after {
+//               margin-left: auto;
+//               font-size: 0.75rem;
+//               opacity: 0.5;
+//             }
+//           }
+//         }
+
+//         // Dropdown menu
+//         .dropdown-menu {
+//           margin: 0;
+//           padding: 0;
+//           position: static;
+//           box-shadow: none;
+
+//           .dropdown-item {
+//             padding: 0.5rem 2.5rem;
+//             color: var(--ms-theme-primary-menu-hover);
+//             font-size: 0.875rem;
+
+//             &:hover {
+//               background: rgba(255, 255, 255, 0.05);
+//               color: var(--ms-theme-primary-menu-hover);
+//             }
+
+//             &.active {
+//               background: rgba(255, 255, 255, 0.05);
+//               color: var(--ms-theme-primary-menu-hover);
+//               border-radius: 5px;
+//             }
+//           }
+//         }
+
+//         // Active submenu
+//         &.mojar__menuLeft__submenu--toggled {
+//           > .nav-link {
+//             color: #fff;
+//           }
+
+//           > .dropdown-menu {
+//             display: block;
+//           }
+//         }
+//       }
+
+//     }
+//   }
+// }

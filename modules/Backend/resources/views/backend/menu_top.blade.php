@@ -78,8 +78,8 @@
         </div>
 
         <div class="d-none d-md-flex">
-            <a href="javascript:void(0)" class="nav-link px-0 {{ session('theme') == 'dark' ? 'hide-theme-dark' : ''}}" title="Enable dark mode"
-                data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-theme-value="dark">
+            <a href="javascript:void(0)" class="nav-link px-0 hide-theme-dark " title="Enable dark mode"
+                data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-theme="dark" data-bs-theme-value="dark">
                 <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -88,8 +88,8 @@
                     <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
                 </svg>
             </a>
-            <a href="javascript:void(0)" class="nav-link px-0 {{ session('theme') == 'light' ? 'hide-theme-light' : ''}}" title="Enable light mode"
-                data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-theme-value="light">
+            <a href="javascript:void(0)" class="nav-link px-0 hide-theme-light" title="Enable light mode"
+                data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-theme="light" data-bs-theme-value="light">
                 <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"

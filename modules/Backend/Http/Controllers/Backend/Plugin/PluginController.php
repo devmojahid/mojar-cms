@@ -39,6 +39,7 @@ class PluginController extends BackendController
             'cms::backend.plugin.index',
             [
                 'title' => trans('cms::app.plugins'),
+                'data' => $this->getDataTable($request),
             ]
         );
     }
@@ -59,7 +60,6 @@ class PluginController extends BackendController
         $data = ArrayPagination::make($plugins);
         $data = $data->paginate($limit, $page);
         $updates = $this->getDataUpdates($data->getCollection());
-
         $results = [];
         foreach ($data as $plugin) {
             /**
@@ -73,6 +73,7 @@ class PluginController extends BackendController
                 'setting' => $plugin->getSettingUrl(),
                 'version' => $plugin->getVersion(),
                 'update' => $updates->{$plugin->get('name')}->update ?? false,
+                'screenshot' => $plugin->getScreenshot(),
             ];
         }
 
