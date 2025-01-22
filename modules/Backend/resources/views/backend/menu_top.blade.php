@@ -1,12 +1,47 @@
-<div class="container-xl">
+<div class="container-fluid">
     @php
         global $jw_user;
     @endphp
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu"
+        aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <h1 class="navbar-brand navbar-brand-autodark">
+        <a href="/{{ config('mojar.admin_prefix') }}">
+            @if ($logo = get_config('admin_logo'))
+                <img src="{{ upload_url(get_config('admin_logo')) }}" alt="{{ get_config('title', 'Mojar') }}">
+            @else
+                <img src="{{ asset('jw-styles/base/assets/static/logo.svg') }}" width="110" height="32"
+                    alt="Tabler" class="navbar-brand-image">
+                {{-- {{ trans('cms::message.admin_logo', ['name' => get_config('title', 'Mojar')]) }} --}}
+            @endif
+        </a>
+    </h1>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
         aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-nav flex-row order-md-last">
+        <div class="d-flex align-items-center me-3">
+            <form action="./" method="get" autocomplete="off" novalidate>
+                <div class="input-icon">
+                    <span class="input-icon-addon">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/search -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                            <path d="M21 21l-6 -6" />
+                        </svg>
+                    </span>
+                    <input type="text" value="" class="form-control" placeholder="Search…"
+                        aria-label="Search in website">
+                </div>
+            </form>
+        </div>
         <div class="d-flex align-items-center me-3">
             <a class="btn" type="button" href="{{ url('/') }}" target="_blank">
                 <svg class="icon icon-left svg-icon-ti-ti-world" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -60,8 +95,10 @@
 
         <div class="dropdown me-3 d-none d-md-flex align-items-center">
             <a href="#" class="btn dropdown-toggle" data-bs-toggle="dropdown">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M12 5l0 14" />
                     <path d="M18 13l-6 6" />
                     <path d="M6 13l6 6" />
@@ -89,11 +126,12 @@
                 </svg>
             </a>
             <a href="javascript:void(0)" class="nav-link px-0 hide-theme-light" title="Enable light mode"
-                data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-theme="light" data-bs-theme-value="light">
+                data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-theme="light"
+                data-bs-theme-value="light">
                 <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                    stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
                     <path
@@ -105,8 +143,8 @@
                     aria-label="Show notifications">
                     <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                        stroke-linejoin="round">
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <path
                             d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
@@ -136,9 +174,13 @@
                                     <div class="row align-items-center justify-content-center py-4">
                                         <div class="col-auto">
                                             <!-- Empty inbox icon from tabler -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-lg text-muted mb-3" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-lg text-muted mb-3" width="40" height="40"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path
+                                                    d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
                                                 <path d="M4 13h16" />
                                                 <path d="M8 4l0 9" />
                                                 <path d="M16 4l0 9" />
@@ -217,26 +259,6 @@
                 <a href="./settings.html" class="dropdown-item">Settings</a>
                 <a href="javascript:void(0)" class="dropdown-item auth-logout">{{ trans('cms::app.logout') }}</a>
             </div>
-        </div>
-    </div>
-    <div class="collapse navbar-collapse" id="navbar-menu">
-        <div>
-            <form action="./" method="get" autocomplete="off" novalidate>
-                <div class="input-icon">
-                    <span class="input-icon-addon">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/search -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-                            <path d="M21 21l-6 -6" />
-                        </svg>
-                    </span>
-                    <input type="text" value="" class="form-control" placeholder="Search…"
-                        aria-label="Search in website">
-                </div>
-            </form>
         </div>
     </div>
 </div>

@@ -9,6 +9,12 @@ $sm: 'only screen and (min-width: 576px) and (max-width: 767px)';
 $xs:'(max-width: 575px)';
 
 
-// responsive variable for wordpress admin bar
-$wp-sm: '@media (max-width: 782px)';
-$wp-xs: '@media (max-width: 600px)';
+// responsive variable for common big screen
+$common-big-screen: '(min-width: 1200px)';
+// min-width: 992px
+$common-medium-screen: '(min-width: 992px)';
+// min-width: 768px
+$common-small-screen: '(min-width: 768px)';
+// min-width: 576px
+$common-xsmall-screen: '(min-width: 576px)';
+

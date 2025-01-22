@@ -40,6 +40,12 @@
   box-shadow: 2px 0 6px rgba(0, 0, 0, 0.05);
   /* Smooth transitions on color changes (light/dark modes) */
   transition: background-color 0.3s ease, border-color 0.3s ease;
+  @media #{$common-medium-screen} {
+  position: static !important;
+    padding-top: 5px !important;
+    overflow-y: auto !important;
+  }
+
   // Main navigation
   #sidebar-menu {
     /* Make sure scrolling also feels smoother */
@@ -55,6 +61,17 @@
       background: rgba(255, 255, 255, 0.2);
       border-radius: 10px;
     }
+
+    // @media (min-width: 992px) {
+    //     .navbar-vertical.navbar-expand-lg {
+    //         bottom: unset !important;
+    //         flex-shrink: 0;
+    //         min-height: calc(100vh - 60px) !important;
+    //         overflow: hidden;
+    //         position: static !important;
+    //         top: unset !important;
+    //     }
+    // }
 
     .navbar-nav {
       margin: 0;
