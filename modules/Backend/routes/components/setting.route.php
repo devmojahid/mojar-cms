@@ -2,6 +2,7 @@
 
 use Juzaweb\Backend\Http\Controllers\Backend\Setting\MediaController;
 use Juzaweb\Backend\Http\Controllers\Backend\Setting\SystemSettingController;
+use Illuminate\Support\Facades\Route;
 
 Route::group(
     ['prefix' => 'setting'],

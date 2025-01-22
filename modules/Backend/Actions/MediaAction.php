@@ -23,17 +23,17 @@ class MediaAction extends Action
 
     public function addAdminMenu()
     {
-        $this->hookAction->registerAdminPage(
-            'options-media',
-            [
-                'title' => trans('cms::app.media'),
-                'menu' => [
-                    'icon' => 'fa fa-list',
-                    'position' => 30,
-                    'parent' => 'setting'
-                ]
-            ]
-        );
+        // $this->hookAction->registerAdminPage(
+        //     'options-media',
+        //     [
+        //         'title' => trans('cms::app.media'),
+        //         'menu' => [
+        //             'icon' => 'fa fa-list',
+        //             'position' => 30,
+        //             'parent' => 'setting'
+        //         ]
+        //     ]
+        // );
     }
 
     public function addMediaConfigs()

@@ -12,6 +12,7 @@
 use Juzaweb\DevTool\Http\Controllers\DevToolController;
 use Juzaweb\DevTool\Http\Controllers\Plugins;
 use Juzaweb\DevTool\Http\Controllers\Themes;
+use Illuminate\Support\Facades\Route;
 
 Route::group(
     ['prefix' => 'dev-tools'],

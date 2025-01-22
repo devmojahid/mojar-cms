@@ -3,6 +3,7 @@
 use Juzaweb\Translation\Http\Controllers\LocaleController;
 use Juzaweb\Translation\Http\Controllers\ModuleController;
 use Juzaweb\Translation\Http\Controllers\TranslationController;
+use Illuminate\Support\Facades\Route;
 
 Route::group(
     ['prefix' => 'translations'],

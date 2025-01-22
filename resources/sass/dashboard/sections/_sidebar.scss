@@ -44,7 +44,9 @@
   position: static !important;
     padding-top: 5px !important;
     overflow-y: auto !important;
+    min-height: 100vh;
   }
+
 
   // Main navigation
   #sidebar-menu {
@@ -61,17 +63,6 @@
       background: rgba(255, 255, 255, 0.2);
       border-radius: 10px;
     }
-
-    // @media (min-width: 992px) {
-    //     .navbar-vertical.navbar-expand-lg {
-    //         bottom: unset !important;
-    //         flex-shrink: 0;
-    //         min-height: calc(100vh - 60px) !important;
-    //         overflow: hidden;
-    //         position: static !important;
-    //         top: unset !important;
-    //     }
-    // }
 
     .navbar-nav {
       margin: 0;
@@ -120,9 +111,6 @@
           &.active {
             color: var(--sidebar-active-text, #212529);
             background-color: var(--sidebar-active-bg, rgba(255, 255, 255, 0.1));
-            &:after {
-              // border: none;
-            }
           }
 
           &-icon {
@@ -131,6 +119,9 @@
               /* Optional subtle icon animation on hover */
               transition: transform 0.3s ease;
             }
+            // svg {
+            //   color: var(--sidebar-active-text, #212529);
+            // }
           }
 
           &-title {

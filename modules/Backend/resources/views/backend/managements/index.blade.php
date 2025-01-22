@@ -35,6 +35,18 @@
                             'url' => route('admin.roles.index'),
                             'priority' => -9990,
                         ],
+                        [
+                            'id' => 'media',
+                            'title' => trans('cms::app.managements-area.media'),
+                            'description' => trans('cms::app.managements-area.media_settings_description'),
+                            'icon' => [
+                                'type' => 'svg',
+                                'value' => 'media',
+                                'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-photo"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 8h.01" /><path d="M3 6a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-14z" /><path d="M3 13l4 0a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1l-4 0a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1z" /></svg>',
+                            ],
+                            'url' => route('admin.setting.media'),
+                            'priority' => -9980,
+                        ]
                     ]
                 ],
                 'email' => [
@@ -100,6 +112,42 @@
                             ],
                             'url' => route('admin.email-template.index'),
                             'priority' => -9980,
+                        ],
+                        [
+                            'id' => 'log-viewer',
+                            'title' => trans('cms::app.log_viewer'),
+                            'description' => trans('cms::app.log_viewer_settings_description'),
+                            'url' => route('admin.logs.error.index'),
+                            'icon' => [
+                                'type' => 'svg',
+                                'value' => 'email-template',
+                                'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail-code"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 19h-6a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v6" /><path d="M3 7l9 6l9 -6" /><path d="M20 21l2 -2l-2 -2" /><path d="M17 17l-2 2l2 2" /></svg>',
+                            ],
+                            'priority' => -9950,
+                        ],
+                        [
+                            'id' => 'dev-tools',
+                            'title' => trans('cms::app.dev_tools'),
+                            'description' => trans('cms::app.dev_tools_settings_description'),
+                            'url' => route('admin.dev-tool'),
+                            'icon' => [
+                                'type' => 'svg',
+                                'value' => 'email-template',
+                                'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail-code"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 19h-6a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v6" /><path d="M3 7l9 6l9 -6" /><path d="M20 21l2 -2l-2 -2" /><path d="M17 17l-2 2l2 2" /></svg>',
+                            ],
+                            'priority' => -9940,
+                        ],
+                        [
+                            'id' => 'translations',
+                            'title' => trans('cms::app.translations'),
+                            'description' => trans('cms::app.translations_settings_description'),
+                            'url' => route('admin.translations.index'),
+                            'icon' => [
+                                'type' => 'svg',
+                                'value' => 'email-template',
+                                'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail-code"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 19h-6a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v6" /><path d="M3 7l9 6l9 -6" /><path d="M20 21l2 -2l-2 -2" /><path d="M17 17l-2 2l2 2" /></svg>',
+                            ],
+                            'priority' => -9930,
                         ],
                     ]
                 ],

@@ -14,16 +14,16 @@ class TranslationAction extends Action
 
     public function addBackendMenu(): void
     {
-        HookAction::registerAdminPage(
-            'translations',
-            [
-                'title' => trans('cms::app.translations'),
-                'menu' => [
-                    'icon' => 'fa fa-language',
-                    'position' => 90,
-                    'parent' => 'tools',
-                ],
-            ]
-        );
+        // HookAction::registerAdminPage(
+        //     'translations',
+        //     [
+        //         'title' => trans('cms::app.translations'),
+        //         'menu' => [
+        //             'icon' => 'fa fa-language',
+        //             'position' => 90,
+        //             'parent' => 'tools',
+        //         ],
+        //     ]
+        // );
     }
 }

@@ -14,41 +14,41 @@ class ToolAction extends Action
 
     public function addAdminMenu()
     {
-        HookAction::addAdminMenu(
-            trans('cms::app.tools'),
-            'tools',
-            [
-                'icon' => 'fa fa-cogs',
-                'icon_type' => 'font-awesome',
-                'position' => 99,
-            ]
-        );
+        // HookAction::addAdminMenu(
+        //     trans('cms::app.tools'),
+        //     'tools',
+        //     [
+        //         'icon' => 'fa fa-cogs',
+        //         'icon_type' => 'font-awesome',
+        //         'position' => 99,
+        //     ]
+        // );
 
-        HookAction::registerAdminPage(
-            'imports',
-            [
-                'title' => trans('cms::app.import'),
-                'menu' => [
-                    'icon' => 'fa fa-cogs',
-                    'icon_type' => 'font-awesome',
-                    'position' => 1,
-                    'parent' => 'tools',
-                ],
-            ]
-        );
+        // HookAction::registerAdminPage(
+        //     'imports',
+        //     [
+        //         'title' => trans('cms::app.import'),
+        //         'menu' => [
+        //             'icon' => 'fa fa-cogs',
+        //             'icon_type' => 'font-awesome',
+        //             'position' => 1,
+        //             'parent' => 'tools',
+        //         ],
+        //     ]
+        // );
 
-        if (!config('network.enable')) {
-            HookAction::addAdminMenu(
-                'Log Viewer',
-                'log-viewer',
-                [
-                    'icon' => 'fa fa-history',
-                    'icon_type' => 'font-awesome',
-                    'position' => 20,
-                    'turbolinks' => false,
-                    'parent' => 'tools',
-                ]
-            );
-        }
+        // if (!config('network.enable')) {
+        //     HookAction::addAdminMenu(
+        //         'Log Viewer',
+        //         'log-viewer',
+        //         [
+        //             'icon' => 'fa fa-history',
+        //             'icon_type' => 'font-awesome',
+        //             'position' => 20,
+        //             'turbolinks' => false,
+        //             'parent' => 'tools',
+        //         ]
+        //     );
+        // }
     }
 }

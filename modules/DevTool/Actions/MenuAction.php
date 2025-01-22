@@ -22,12 +22,12 @@ class MenuAction extends Action
 
     public function addAdminMenus(): void
     {
-        $this->hookAction->addAdminMenu(
-            'Dev Tools',
-            'dev-tools',
-            [
-                'parent' => 'tools',
-            ]
-        );
+        // $this->hookAction->addAdminMenu(
+        //     'Dev Tools',
+        //     'dev-tools',
+        //     [
+        //         'parent' => 'tools',
+        //     ]
+        // );
     }
 }
