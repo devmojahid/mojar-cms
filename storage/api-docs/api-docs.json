@@ -9,7 +9,7 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/admin/menus/admin-menu": {
+        "/api/admin/menu-left": {
             "get": {
                 "tags": [
                     "Admin / Menus"
@@ -407,96 +407,6 @@
                 }
             }
         },
-        "/api/auth/login": {
-            "post": {
-                "tags": [
-                    "Auth"
-                ],
-                "summary": "User login",
-                "operationId": "api.auth.login",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "email",
-                                    "password"
-                                ],
-                                "properties": {
-                                    "email": {
-                                        "description": "email",
-                                        "type": "string",
-                                        "example": "string@gmail.com"
-                                    },
-                                    "password": {
-                                        "description": "password",
-                                        "type": "string",
-                                        "example": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "$ref": "#/components/responses/success_detail"
-                    },
-                    "422": {
-                        "$ref": "#/components/responses/error_422"
-                    },
-                    "500": {
-                        "$ref": "#/components/responses/error_500"
-                    }
-                }
-            }
-        },
-        "/api/auth/access-token": {
-            "post": {
-                "tags": [
-                    "Auth"
-                ],
-                "summary": "User validate access token",
-                "operationId": "api.auth.access_token",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "access_token"
-                                ],
-                                "properties": {
-                                    "access_token": {
-                                        "description": "Access token",
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "$ref": "#/components/responses/success_detail"
-                    },
-                    "422": {
-                        "$ref": "#/components/responses/error_422"
-                    },
-                    "500": {
-                        "$ref": "#/components/responses/error_500"
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
-            }
-        },
         "/api/auth/logout": {
             "post": {
                 "tags": [
@@ -573,72 +483,6 @@
                     },
                     "422": {
                         "$ref": "#/components/responses/error_422"
-                    },
-                    "500": {
-                        "$ref": "#/components/responses/error_500"
-                    }
-                }
-            }
-        },
-        "/api/post-type/{type}": {
-            "get": {
-                "tags": [
-                    "Post Type"
-                ],
-                "summary": "Get list post type items",
-                "operationId": "v1.post-type.type.index",
-                "parameters": [
-                    {
-                        "name": "type",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "$ref": "#/components/parameters/query_limit"
-                    },
-                    {
-                        "$ref": "#/components/parameters/query_keyword"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "$ref": "#/components/responses/success_list"
-                    },
-                    "500": {
-                        "$ref": "#/components/responses/error_500"
-                    }
-                }
-            }
-        },
-        "/api/post-type/{type}/{id}": {
-            "get": {
-                "tags": [
-                    "Post Type"
-                ],
-                "summary": "Get post type data by id",
-                "operationId": "v1.post-type.type.show",
-                "parameters": [
-                    {
-                        "name": "type",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "$ref": "#/components/parameters/id_in_path"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "$ref": "#/components/responses/success_detail"
-                    },
-                    "404": {
-                        "$ref": "#/components/responses/error_404"
                     },
                     "500": {
                         "$ref": "#/components/responses/error_500"
@@ -945,5 +789,27 @@
                 }
             }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "Admin / Menus",
+            "description": "Admin / Menus"
+        },
+        {
+            "name": "Admin / Post Type",
+            "description": "Admin / Post Type"
+        },
+        {
+            "name": "Admin / Setting",
+            "description": "Admin / Setting"
+        },
+        {
+            "name": "Admin / Users",
+            "description": "Admin / Users"
+        },
+        {
+            "name": "Auth",
+            "description": "Auth"
+        }
+    ]
 }
