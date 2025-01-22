@@ -123,22 +123,6 @@ class MenuAction extends Action
                     ],
                 ]
             );
-
-            HookAction::registerAdminPage(
-                'theme.editor',
-                [
-                    'title' => trans('cms::app.editor'),
-                    'menu' => [
-                        'icon' => 'fa fa-plus',
-                        'icon_type' => 'font-awesome',
-                        'position' => 99,
-                        'parent' => 'appearance',
-                        'permissions' => [
-                            'themes.edit',
-                        ],
-                    ]
-                ]
-            );
         }
 
         HookAction::addAdminMenu(
@@ -235,22 +219,6 @@ class MenuAction extends Action
                     'permissions' => [
                         'plugins.create',
                     ],
-                ]
-            );
-
-            HookAction::registerAdminPage(
-                'plugin.editor',
-                [
-                    'title' => trans('cms::app.editor'),
-                    'menu' => [
-                        'icon' => 'fa fa-plus',
-                        'icon_type' => 'font-awesome',
-                        'position' => 99,
-                        'parent' => 'plugins',
-                        'permissions' => [
-                            'plugins.edit',
-                        ],
-                    ]
                 ]
             );
         }
