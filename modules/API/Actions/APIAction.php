@@ -47,15 +47,15 @@ class APIAction extends Action
 
     public function addAdminMenu()
     {
-        $this->hookAction->registerAdminPage(
-            'api.documentation',
-            [
-                'title' => trans('cms::app.api_documentation'),
-                'menu' => [
-                    'icon' => 'fa fa-book',
-                    'position' => 95,
-                ],
-            ]
-        );
+        // $this->hookAction->registerAdminPage(
+        //     'api.documentation',
+        //     [
+        //         'title' => trans('cms::app.api_documentation'),
+        //         'menu' => [
+        //             'icon' => 'fa fa-book',
+        //             'position' => 95,
+        //         ],
+        //     ]
+        // );
     }
 }

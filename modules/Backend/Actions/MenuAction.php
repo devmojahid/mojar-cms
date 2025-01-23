@@ -51,27 +51,6 @@ class MenuAction extends Action
             ]
         );
 
-        if (config('mojar.plugin.enable_upload')) {
-            HookAction::addAdminMenu(
-                trans('cms::app.dashboard'),
-                'dashboard',
-                [
-                    'icon' => '<svg xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-home"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>',
-                    'position' => 1,
-                    'parent' => 'dashboard',
-                ]
-            );
-
-            HookAction::addAdminMenu(
-                trans('cms::app.updates'),
-                'updates',
-                [
-                    'position' => 1,
-                    'parent' => 'dashboard',
-                ]
-            );
-        }
-
         HookAction::addAdminMenu(
             trans('cms::app.media'),
             'media',
@@ -88,7 +67,7 @@ class MenuAction extends Action
             [
                 'icon' => 'fa fa-paint-brush',
                 'icon_type' => 'font-awesome',
-                'position' => 40,
+                'position' => 45,
             ]
         );
 
@@ -159,28 +138,6 @@ class MenuAction extends Action
         );
 
         HookAction::addAdminMenu(
-            trans('cms::app.reading'),
-            'reading',
-            [
-                'icon' => 'fa fa-book',
-                'icon_type' => 'font-awesome',
-                'position' => 10,
-                'parent' => 'setting',
-            ]
-        );
-
-        HookAction::addAdminMenu(
-            trans('cms::app.permalinks'),
-            'permalinks',
-            [
-                'icon' => 'fa fa-link',
-                'icon_type' => 'font-awesome',
-                'position' => 15,
-                'parent' => 'setting',
-            ]
-        );
-
-        HookAction::addAdminMenu(
             trans('cms::app.plugins'),
             'plugins',
             [
@@ -225,22 +182,11 @@ class MenuAction extends Action
 
         HookAction::addAdminMenu(
             trans('cms::app.setting'),
-            'setting',
-            [
-                'icon' => 'fa fa-cogs',
-                'icon_type' => 'font-awesome',
-                'position' => 70,
-            ]
-        );
-
-        HookAction::addAdminMenu(
-            trans('cms::app.general_setting'),
             'setting.system',
             [
                 'icon' => 'fa fa-cogs',
                 'icon_type' => 'font-awesome',
-                'position' => 1,
-                'parent' => 'setting',
+                'position' => 40,
             ]
         );
 
@@ -249,7 +195,7 @@ class MenuAction extends Action
             'managements',
             [
                 'icon' => '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-tournament"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M20 10m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M4 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M4 20m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M6 12h3a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-3" /><path d="M6 4h7a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-2" /><path d="M14 10h4" /></svg>',
-                'position' => 40,
+                'position' => 55,
             ]
         );
     }
@@ -273,6 +219,33 @@ class MenuAction extends Action
                 'header' => false,
                 'footer' => false,
                 'priority' => 50,
+            ]
+        );
+
+        HookAction::addSettingForm(
+            'permalink',
+            [
+                'name' => trans('cms::app.permalinks'),
+                'view' => view(
+                     'cms::backend.permalink.index',[
+                            'title' => trans('cms::app.permalinks'),
+                            'permalinks' => HookAction::getPermalinks(),
+                        ]
+                     ),
+                'priority' => 50,
+            ]
+        );
+
+        HookAction::addSettingForm(
+            'reading',
+            [
+                'name' => trans('cms::app.reading_settings'),
+                'view' => view(
+                     'cms::backend.reading.index',[
+                            'title' => trans('cms::app.reading_settings'),
+                        ]
+                     ),
+                'priority' => 60,
             ]
         );
     }
