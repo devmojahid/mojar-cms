@@ -10,7 +10,7 @@
  */
 
 use Juzaweb\Backend\Http\Controllers\Backend\UpdateController;
-
+use Illuminate\Support\Facades\Route;
 Route::group(
     ['prefix' => 'updates'],
     function () {
