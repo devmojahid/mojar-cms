@@ -42,7 +42,6 @@ class PostController extends FrontendController
 
         $title = get_config('title');
         $posts = $this->postRepository->frontendListPaginate(get_config('posts_per_page', 12));
-
         $posts->appends(request()?->query());
 
         if ($this->template === 'twig') {
