@@ -26,6 +26,7 @@ return [
     'cancel' => 'Cancel',
     'choose_image' => 'Choose image',
     'avatar' => 'Avatar',
+    'theme_options' => 'Theme options',
     'choose_avatar' => 'Choose avatar',
     'saved_successfully' => 'Saved successfully.',
     'created_successfully' => 'Created successfully.',
