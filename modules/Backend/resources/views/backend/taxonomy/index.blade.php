@@ -29,32 +29,6 @@
             @endif
         </div>
     </div>
-    <div class="row row-cards mb-3">
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="subheader">Currently up for</div>
-                    <div class="h3 m-0">14 days 2 hours 54 mins 34 seconds</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="subheader">Last checked at</div>
-                    <div class="h3 m-0">27 seconds ago</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="subheader">Incidents</div>
-                    <div class="h3 m-0">3</div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="row mb-3">
         @if ($canCreate)
             <div class="form-group add-new-form d-none">

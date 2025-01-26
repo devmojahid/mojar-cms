@@ -131,7 +131,7 @@ class PostTypeDataTable extends DataTable
             },
         ];
 
-        $columns['actions'] = [
+        $columns['operations'] = [
             'label' => trans('cms::app.operations'),
             'width' => '10%',
             'align' => 'center',

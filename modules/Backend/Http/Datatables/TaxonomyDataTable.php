@@ -31,7 +31,20 @@ class TaxonomyDataTable extends DataTable
         $columns = [
             'name' => [
                 'label' => trans('cms::app.name'),
-                'formatter' => [$this, 'rowActionsFormatter'],
+                'formatter' => function ($value, $row, $index) {
+                    return view(
+                        'cms::backend.items.datatable_item',
+                        [
+                            'value' => $row->{$row->getFieldName()},
+                            'row' => $row,
+                            'actions' => $this->rowAction($row),
+                            'editUrl' => $this->currentUrl . '/' . $row->id . '/edit',
+                            'title_hidden' => false,
+                            'actions_hidden' => true,
+                        ]
+                    )
+                    ->render();
+                },
             ]
         ];
 
@@ -58,6 +71,27 @@ class TaxonomyDataTable extends DataTable
             'align' => 'center',
             'formatter' => function ($value, $row, $index) {
                 return jw_date_format($row->created_at);
+            },
+        ];
+
+        $columns['operations'] = [
+            'label' => trans('cms::app.operations'),
+            'width' => '10%',
+            'align' => 'center',
+            'sortable' => false,
+            'formatter' => function ($value, $row, $index) {
+                return view(
+                    'cms::backend.items.datatable_item',
+                    [
+                        'value' => $row->{$row->getFieldName()},
+                        'row' => $row,
+                        'actions' => $this->rowAction($row),
+                        'editUrl' => $this->currentUrl . '/' . $row->id . '/edit',
+                        'title_hidden' => true,
+                        'actions_hidden' => false,
+                    ]
+                )
+                ->render();
             },
         ];
 

@@ -1,13 +1,13 @@
 <div class="d-flex align-items-center">
     {{-- Title with link --}}
-    @if(!$title_hidden)
+    @if(!isset($title_hidden) || !$title_hidden)
     <div class="flex-grow-1">
         <a href="{{ $editUrl }}" class="text-reset text-decoration-none fw-bold">{{ $value }}</a>
     </div>
     @endif
 
     {{-- Actions Dropdown --}}
-    @if(!$actions_hidden && count($actions) > 0)
+    @if(!isset($actions_hidden) || !$actions_hidden && count($actions) > 0)
     <div class="dropdown">
         <button class="btn btn-tabler dropdown-toggle align-text-top" 
                 data-bs-toggle="dropdown" 

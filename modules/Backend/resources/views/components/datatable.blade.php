@@ -5,20 +5,10 @@
                 <form method="post" class="form-inline">
                     @csrf
                     <div class="dropdown d-inline-block mb-2 mr-2">
-                        {{-- <button type="button" class="btn btn-primary dropdown-toggle bulk-actions-button"
-                        data-toggle="dropdown" aria-expanded="false">
-                        {{ trans('cms::app.bulk_actions') }}
-                    </button> --}}
-                        {{-- <div class="dropdown-menu bulk-actions-actions" role="menu" x-placement="bottom-start">
-                        @foreach ($actions as $key => $action)
-                            <a class="dropdown-item select-action action-{{ $key }} @if ($key == 'delete') text-danger @endif"
-                                href="javascript:void(0)"
-                                data-action="{{ $key }}">{{ is_array($action) ? $action['label'] : $action }}
-                            </a>
-                        @endforeach
-                    </div> --}}
                         <div class="dropdown">
-                            <button href="#" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+                            <button class="btn btn-primary dropdown-toggle bulk-actions-button" 
+                                    data-bs-toggle="dropdown" 
+                                    aria-expanded="false">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round"
@@ -33,10 +23,7 @@
                                 </svg>
                                 {{ trans('cms::app.bulk_actions') }}
                             </button>
-                            <div class="dropdown-menu dropdown-menu-arrow">
-                                <span class="dropdown-header">
-                                    {{ trans('cms::app.bulk_actions') }}
-                                </span>
+                            <div class="dropdown-menu bulk-actions-actions" role="menu" x-placement="bottom-start">
                                 @foreach ($actions as $key => $action)
                                     <a class="dropdown-item select-action action-{{ $key }} @if ($key == 'delete') text-danger @endif"
                                         href="javascript:void(0)"

@@ -11,7 +11,7 @@
     ])
     
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
 
                 {{ Field::text($model, 'name', [
                     'required' => true
