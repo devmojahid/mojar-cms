@@ -1,122 +1,6 @@
 <link rel="stylesheet" href="{{ asset('jw-styles/mojar/css/admin-bar.css') }}?v={{ \Juzaweb\CMS\Version::getVersion() }}">
 <script src="{{ asset('jw-styles/mojar/js/admin-bar.js') }}?v={{ \Juzaweb\CMS\Version::getVersion() }}"></script>
 
-{{-- <div id="jw-adminbar">
-    <div id="jwadminbar" class="nojq nojs">
-        <div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
-            <ul id="wp-admin-bar-root-default" class="ab-top-menu">
-                <li id="wp-admin-bar-wp-logo" class="menupop">
-                    <a class="ab-item" aria-haspopup="true">
-                        JuzaWeb
-                        <span class="screen-reader-text">About JuzaWeb</span>
-                    </a>
-
-                    <div class="ab-sub-wrapper">
-                        <ul id="wp-admin-bar-wp-logo-default" class="ab-submenu">
-                            <li id="wp-admin-bar-about">
-                                <a class="ab-item" href="">About JuzaWeb</a>
-                            </li>
-                        </ul>
-
-                        <ul id="wp-admin-bar-wp-logo-external" class="ab-sub-secondary ab-submenu">
-                            <li id="wp-admin-bar-wporg">
-                                <a class="ab-item" href="https://mojar.com" target="_blank">JuzaWeb.com</a>
-                            </li>
-                            <li id="wp-admin-bar-documentation">
-                                <a class="ab-item" href="https://mojar.com/docs" target="_blank">Documentation</a>
-                            </li>
-                            <li id="wp-admin-bar-support-forums">
-                                <a class="ab-item" href="https://mojar.com/support" target="_blank">Support</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li id="wp-admin-bar-my-sites" class="menupop">
-                    <a class="ab-item" aria-haspopup="true" href="">{{ trans('cms::app.my_sites') }}</a>
-                    <div class="ab-sub-wrapper">
-                        <ul id="wp-admin-bar-blog-1-default" class="ab-submenu">
-                            <li id="wp-admin-bar-blog-1-d"><a class="ab-item" href="{{ admin_url() }}"
-                                    data-turbolinks="false">{{ trans('cms::app.dashboard') }}</a>
-                            </li>
-                            <li id="wp-admin-bar-blog-1-n"><a class="ab-item"
-                                    href="{{ admin_url('post-type/posts/create') }}"
-                                    data-turbolinks="false">{{ trans('cms::app.new_post') }}</a></li>
-                            <li id="wp-admin-bar-blog-1-c"><a class="ab-item"
-                                    href="{{ admin_url('post-type/post/comments') }}"
-                                    data-turbolinks="false">{{ trans('cms::app.manage_comments') }}</a></li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li id="wp-admin-bar-new-content" class="menupop">
-                    <a class="ab-item" aria-haspopup="true" href="">
-                        <span class="ab-label">{{ trans('cms::app.new') }}</span>
-                    </a>
-
-                    <div class="ab-sub-wrapper">
-                        <ul id="wp-admin-bar-new-content-default" class="ab-submenu">
-                            <li id="wp-admin-bar-new-post"><a class="ab-item"
-                                    href="{{ admin_url('post-type/posts/create') }}"
-                                    data-turbolinks="false">{{ trans('cms::app.post') }}</a>
-                            </li>
-
-                            <li id="wp-admin-bar-new-page"><a class="ab-item"
-                                    href="{{ admin_url('post-type/pages/create') }}"
-                                    data-turbolinks="false">{{ trans('cms::app.page') }}</a>
-                            </li>
-
-                            <li id="wp-admin-bar-new-user"><a class="ab-item" href="{{ admin_url('users/create') }}"
-                                    data-turbolinks="false">{{ trans('cms::app.user') }}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                @if (isset($post))
-                    <li id="wp-admin-bar-edit">
-                        <a class="ab-item" href="">Edit Post</a>
-                    </li>
-                @endif
-            </ul>
-
-            <ul id="wp-admin-bar-top-secondary" class="ab-top-secondary ab-top-menu">
-
-                <li id="wp-admin-bar-my-account" class="menupop with-avatar">
-                    <a class="ab-item" aria-haspopup="true" href="">
-                        {{ trans('cms::app.howdy') }}, <span class="display-name">{{ $user['name'] }}</span>
-                        <img alt="" src="{{ $user['avatar'] }}" srcset="{{ $user['avatar'] }}"
-                            class="avatar avatar-26 photo" height="26" width="26" loading="lazy" />
-                    </a>
-
-                    <div class="ab-sub-wrapper">
-                        <ul id="wp-admin-bar-user-actions" class="ab-submenu">
-                            <li id="wp-admin-bar-user-info">
-                                <a class="ab-item" tabindex="-1" href="" data-turbolinks="false">
-
-                                    <img alt="" src="{{ $user['avatar'] }}" srcset="{{ $user['avatar'] }}"
-                                        class="avatar avatar-64 photo" height="64" width="64"
-                                        loading="lazy" />
-                                    <span class="display-name">{{ $user['name'] }}</span>
-                                </a>
-                            </li>
-
-                            <li id="wp-admin-bar-logout">
-                                <a class="ab-item" href="javascript:void(0)"
-                                    onclick="document.getElementsByClassName('form-logout')[0].submit()">
-                                    {{ trans('cms::app.logout') }}
-                                </a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div> --}}
-
-
 @php
     $speedDialItems = [
         [
@@ -143,48 +27,36 @@
 @endphp
 
 
-<div class="jw-speed-dial" id="jwSpeedDial" role="region" aria-label="Quick Actions Menu">
-    <!-- Main Toggle Button (Speed Dial FAB) -->
-    <button class="jw-speed-dial-toggle" 
-            id="jwSpeedDialToggle" 
-            aria-label="Open Speed Dial" 
-            aria-haspopup="true" 
-            aria-expanded="false">
-        <!-- Example “Plus” icon -->
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" 
-             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<div id="jwSpeedDial" class="jw-speed-dial" draggable="true">
+    <button id="jwSpeedDialToggle" class="jw-speed-dial-toggle" aria-label="Toggle Speed Dial" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
         </svg>
     </button>
-
-    <!-- Speed Dial Actions (draggable + removable) -->
-    <ul class="jw-speed-dial-actions" id="jwSpeedDialActions" role="menu" aria-hidden="true">
-        @foreach($speedDialItems as $index => $item)
-            <li class="jw-speed-dial-item" 
-                draggable="true" 
-                role="menuitem"
-                tabindex="0"  <!-- Allows focusing via Tab key -->
-                data-item-id="speed_dial_item_{{ $index }}">
-
-                <a href="{{ $item['url'] }}" data-turbolinks="false">
-                    <!-- Using the path portion of an SVG for a streamlined look -->
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" 
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    
+    <ul id="jwSpeedDialActions" class="jw-speed-dial-actions" aria-hidden="true">
+        <div class="jw-speed-dial-search-wrapper">
+            <input type="text" class="jw-speed-dial-search" placeholder="Search actions...">
+        </div>
+        
+        @foreach($speedDialItems as $item)
+        <li class="jw-speed-dial-item" data-item-id="{{ $loop->index }}" tabindex="0">
+            <a href="{{ $item['url'] }}" class="jw-speed-dial-link" data-turbolinks="false">
+                <div class="jw-speed-dial-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="{{ $item['icon'] }}"></path>
                     </svg>
-                    {{ $item['label'] }}
-                </a>
-
-                <!-- Close button (removes the item) -->
-                <button class="jw-close-item" aria-label="Close Item">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" 
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-            </li>
+                </div>
+                <span class="jw-speed-dial-label">{{ $item['label'] }}</span>
+            </a>
+            <button class="jw-close-item" aria-label="Remove {{ $item['label'] }}">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </li>
         @endforeach
     </ul>
 </div>

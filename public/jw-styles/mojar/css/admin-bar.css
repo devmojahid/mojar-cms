@@ -6,11 +6,34 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  /* The floating action button (FAB) */
-  .jw-speed-dial-toggle {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: move;
+}
+
+/* Search input styling */
+.jw-speed-dial-search-wrapper {
+    padding: 8px;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 8px;
+}
+
+.jw-speed-dial-search {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.jw-speed-dial-search:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+/* Enhanced FAB button */
+.jw-speed-dial-toggle {
     border: none;
     border-radius: 50%;
     width: 56px;
@@ -21,136 +44,195 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: background-color 0.2s ease, transform 0.2s ease;
-  }
-  .jw-speed-dial-toggle:focus {
-    outline: 2px solid rgba(59, 130, 246, 0.5);
-  }
-  .jw-speed-dial-toggle:hover {
-    background-color: #2563eb;
-  }
-  .jw-speed-dial-toggle:active {
-    transform: scale(0.95);
-  }
-  
-  /* Speed Dial Actions container */
-  .jw-speed-dial-actions {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
-    margin-bottom: 1rem;
-    max-height: 0; /* collapsed by default */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
     overflow: hidden;
-  }
-  
-  .jw-speed-dial.open .jw-speed-dial-actions {
+}
+
+.jw-speed-dial-toggle:hover {
+    background-color: #2563eb;
+    transform: scale(1.05);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.jw-speed-dial-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Enhanced menu items */
+.jw-speed-dial-actions {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    min-width: 240px;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    background: white;
+    border-radius: 12px;
+    padding: 0;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    scrollbar-width: thin;
+}
+
+.jw-speed-dial.open .jw-speed-dial-actions {
     opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    max-height: 1000px; /* large enough to show all items */
-    overflow: visible;
-  }
-  
-  /* Each Speed Dial item */
-  .jw-speed-dial-item {
-    background-color: #f8f9fa;
-    color: #333;
-    margin-bottom: 0.5rem;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.jw-speed-dial-item {
+    position: relative;
+    margin: 4px 8px;
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    transition: all 0.2s ease;
+}
+
+.jw-speed-dial-link {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    cursor: grab; /* indicates draggable item */
-    padding: 0.5rem 0.75rem;
-    transition: background-color 0.2s ease;
-    min-width: 160px;
-    position: relative;
-    outline: none; /* We'll handle focus state below */
-  }
-  
-  .jw-speed-dial-item a {
-    display: inline-flex;
-    align-items: center;
-    color: inherit;
+    padding: 12px;
+    color: #374151;
     text-decoration: none;
-  }
-  .jw-speed-dial-item a svg {
-    margin-right: 6px;
-  }
-  .jw-speed-dial-item:focus {
-    outline: 2px solid #94a3b8; /* a mild focus ring for accessibility */
-  }
-  .jw-speed-dial-item:hover {
-    background-color: #e9ecef;
-  }
-  
-  /* Close button inside each item */
-  .jw-close-item {
-    background: transparent;
-    border: none;
-    color: #999;
-    cursor: pointer;
-    padding: 0;
-    margin-left: 0.5rem;
-    display: inline-flex;
+    gap: 12px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.jw-speed-dial-icon {
+    display: flex;
     align-items: center;
-  }
-  .jw-close-item:hover {
-    color: #ff4d4f;
-  }
-  
-  /* Draggable Hide Class (when dragging) */
-  .jw-speed-dial-item.hide {
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: #f3f4f6;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.jw-speed-dial-label {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.jw-speed-dial-item:hover .jw-speed-dial-link {
+    background-color: #f3f4f6;
+    color: #2563eb;
+}
+
+.jw-speed-dial-item:hover .jw-speed-dial-icon {
+    background-color: #e5e7eb;
+}
+
+/* Scrollbar styling */
+.jw-speed-dial-actions::-webkit-scrollbar {
+    width: 4px;
+}
+
+.jw-speed-dial-actions::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.jw-speed-dial-actions::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 2px;
+}
+
+/* Position indicator when moving */
+.jw-speed-dial.moving {
+    opacity: 0.8;
+}
+
+.jw-speed-dial.moving::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 2px dashed #3b82f6;
+    border-radius: 50%;
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Enhanced close button */
+.jw-close-item {
     opacity: 0;
-  }
-  
-  /* ================================
-     Light / Dark Mode Adjustments
-     ================================ */
-  @media (prefers-color-scheme: dark) {
-    .jw-speed-dial-item {
-      background-color: #2e2e2e;
-      color: #f2f2f2;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    color: #9ca3af;
+    padding: 4px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.jw-speed-dial-item:hover .jw-close-item {
+    opacity: 1;
+}
+
+.jw-close-item:hover {
+    background-color: #fee2e2;
+    color: #dc2626;
+}
+
+/* Drag and drop visual feedback */
+.jw-speed-dial-item.dragging {
+    opacity: 0.5;
+    background-color: #f3f4f6;
+}
+
+.jw-speed-dial-item.drag-over {
+    border-top: 2px solid #3b82f6;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .jw-speed-dial-actions {
+        background: #1f2937;
     }
+
+    .jw-speed-dial-item {
+        color: #e5e7eb;
+    }
+
     .jw-speed-dial-item:hover {
-      background-color: #3a3a3a;
+        background-color: #374151;
+        color: #60a5fa;
     }
-    .jw-speed-dial-toggle {
-      background-color: #6366f1;
+
+    .jw-close-item {
+        color: #6b7280;
     }
-    .jw-speed-dial-toggle:hover {
-      background-color: #4f46e5;
+
+    .jw-close-item:hover {
+        background-color: #991b1b;
+        color: #fecaca;
     }
-  }
-  /* Alternatively, if you have .dark-mode on <body> or <html>:
-  .dark-mode .jw-speed-dial-item {
-    background-color: #2e2e2e;
-    color: #f2f2f2;
-  }
-  .dark-mode .jw-speed-dial-item:hover {
-    background-color: #3a3a3a;
-  }
-  .dark-mode .jw-speed-dial-toggle {
-    background-color: #6366f1;
-  }
-  */
-  
-  /* =========================================
-     Responsiveness for smaller screens
-     ========================================= */
-  @media (max-width: 768px) {
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
     .jw-speed-dial {
-      bottom: 1rem;
-      right: 1rem;
+        bottom: 1.5rem;
+        right: 1.5rem;
     }
+
+    .jw-speed-dial-actions {
+        min-width: 180px;
+    }
+
     .jw-speed-dial-item {
-      min-width: 140px;
-      font-size: 0.9rem;
+        padding: 10px;
     }
-  }
+}
