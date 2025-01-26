@@ -1,7 +1,7 @@
 <?php
 
 /**
- * JUZAWEB CMS - Laravel CMS for Your Project
+ * Mojar - Laravel CMS for Your Project
  *
  * @package    mojar/cms
  * @author     The Anh Dang
@@ -23,7 +23,7 @@ class MojarApi implements MojarApiContract
 
     protected ConfigContract $config;
 
-    protected string $apiUrl = 'https://mojar.com/api';
+    protected string $apiUrl = 'http://mojar-cms.test/api';
 
     protected ?string $accessToken = null;
 

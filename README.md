@@ -1,6 +1,6 @@
 MojarCms - Laravel CMS for Your Project
 =====================================
-### This Is the main cms from JuzaWeb cms. there have lots of error why not i am find and replace any place make sure you solve every issue you rename the file name and folder name
+### This Is the main cms from Mojar. there have lots of error why not i am find and replace any place make sure you solve every issue you rename the file name and folder name
 
 
 ## About
@@ -10,8 +10,8 @@ MojarCms - Laravel CMS for Your Project
 [![GitHub followers](https://img.shields.io/github/followers/mojar?style=social)](https://github.com/mojar)
 [![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UCo6Dz9HjjBOJpgWsxkln0-A?style=social)](https://www.youtube.com/@mojar)
 
-- [JuzaWeb CMS](https://mojar.com) is a Content Management System (CMS) like WordPress developed based on Laravel Framework 9 and web platform whose sole purpose is to make your development workflow simple again. 
-- JuzaWeb CMS is a [Laravel CMS](https://mojar.com) was engineered to be easy — for both developers and users. Project develop by Mojar Team.
+- [Mojar](https://mojar.com) is a Content Management System (CMS) like WordPress developed based on Laravel Framework 9 and web platform whose sole purpose is to make your development workflow simple again. 
+- Mojar is a [Laravel CMS](https://mojar.com) was engineered to be easy — for both developers and users. Project develop by Mojar Team.
 - Demo Site: 
     - Frontend: https://cms.mojar.com
     - Admin: 
@@ -38,7 +38,7 @@ php artisan juzacms:install
 ```
 
 ## Documentation
-View all [JuzaWeb CMS documentation](https://mojar.com/documentation/plugin/cms/start/installation)
+View all [Mojar documentation](https://mojar.com/documentation/plugin/cms/start/installation)
 
 ## Contributing
 - Contributions are welcome, and are accepted via pull requests. Please review these guidelines before submitting any pull requests.

@@ -250,7 +250,7 @@ return [
 
     'api' => [
         'enable' => env('JW_ALLOW_API', true),
-
+        'external-service' => env('JW_ALLOW_EXTERNAL_SERVICE', true),
         /**
          * Frontend API configs
          */

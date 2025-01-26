@@ -2582,7 +2582,7 @@
             "license": [
                 "MIT"
             ],
-            "description": "Juzaweb CMS packages",
+            "description": "Mojar packages",
             "support": {
                 "issues": "https://github.com/juzaweb/packages/issues",
                 "source": "https://github.com/juzaweb/packages/tree/v1.2.2"

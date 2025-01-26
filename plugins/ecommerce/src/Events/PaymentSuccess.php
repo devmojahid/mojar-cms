@@ -1,6 +1,6 @@
 <?php
 /**
- * JUZAWEB CMS - The Best CMS for Laravel Project
+ * Mojar - The Best CMS for Laravel Project
  *
  * @package    juzaweb/cms
  * @author     Juzaweb Team <admin@juzaweb.com>

@@ -1,0 +1,20 @@
+{
+    "name": "mojarsoft/dev-tool",
+    "description": "This is Dev Tool Plugin",
+    "extra": {
+        "mojar": {
+            "name": "Dev Tool",
+            "domain": "mojarsoft_dev_tool",
+            "cms_min": "3.3",
+            "version": "1.0",
+            "providers": [
+                "Mojarsoft\\DevTool\\Providers\\DevToolServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Mojarsoft\\DevTool\\": "src/"
+        }
+    }
+}

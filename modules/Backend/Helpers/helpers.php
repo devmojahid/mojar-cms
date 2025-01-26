@@ -287,7 +287,7 @@ if (!function_exists('is_json')) {
 
 if (!function_exists('do_action')) {
     /**
-     * JUZAWEB CMS: Do action hook
+     * Mojar: Do action hook
      *
      * @param string $tag
      * @param mixed ...$args Additional parameters to pass to the callback functions.
@@ -301,7 +301,7 @@ if (!function_exists('do_action')) {
 
 if (!function_exists('add_action')) {
     /**
-     * JUZAWEB CMS: Add action to hook
+     * Mojar: Add action to hook
      *
      * @param string $tag The name of the filter to hook the $function_to_add callback to.
      * @param callable $callback The callback to be run when the filter is applied.
@@ -321,7 +321,7 @@ if (!function_exists('add_action')) {
 
 if (!function_exists('apply_filters')) {
     /**
-     * JUZAWEB CMS: Apply filters to value
+     * Mojar: Apply filters to value
      *
      * @param string $tag The name of the filter hook.
      * @param mixed $value The value to filter.

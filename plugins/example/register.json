@@ -10,6 +10,17 @@
                 "1"
             ],
             "menu_position": 20
+        },
+        "themes": {
+            "key": "theme",
+            "label": "Theme",
+            "description": "this is theme post type",
+            "supports": [
+                "1",
+                "1",
+                "1"
+            ],
+            "menu_position": 20
         }
     }
 }

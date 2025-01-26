@@ -1,5 +1,5 @@
 /*
- * JUZAWEB CMS 1.0 - Form Ajax support
+ * Mojar 1.0 - Form Ajax support
  *
  *
  * Copyright JS Foundation and other contributors

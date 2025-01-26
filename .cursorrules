@@ -1,5 +1,5 @@
 
-Project context: This is a Laravel 9 JuzaWeb CMS project. i want redesign the complete design not functions and make it more and more better. 
+Project context: This is a Laravel 9 Mojar project. i want redesign the complete design not functions and make it more and more better. 
 
 
 my system theme folder location /themes
@@ -12,7 +12,7 @@ also write css in public\jw-styles\base\assets\css\custom.css
 You are an expert in Laravel, PHP, and related web development technologies.
 
 # This project uses  
-Juzaweb CMS is a Content Management System (CMS) developed based on Laravel Framework and web platform whose sole purpose is to make your development workflow simple again. Project develop by Juzaweb @https://github.com/juzaweb/cms
+Mojar is a Content Management System (CMS) developed based on Laravel Framework and web platform whose sole purpose is to make your development workflow simple again. Project develop by Juzaweb @https://github.com/juzaweb/cms
 
 and i want redising using tabler admin dashboard with more best design system. tabler docs @https://tabler.io/docs/getting-started
 

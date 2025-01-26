@@ -1,7 +1,7 @@
 <?php
 
 /**
- * JUZAWEB CMS - Laravel CMS for Your Project
+ * Mojar - Laravel CMS for Your Project
  *
  * @package    mojar/cms
  * @author     The Anh Dang
@@ -11,7 +11,8 @@
 
 use Juzaweb\API\Http\Controllers\Auth\LoginController;
 use Juzaweb\API\Http\Controllers\Auth\RegisterController;
+use Juzaweb\API\Http\Controllers\ThemeController;
+use Juzaweb\API\Http\Controllers\PluginController;
 
-Route::get('themes', function () {
-    return response()->json(['message' => 'Hello World']);
-});
+Route::get('themes', [ThemeController::class, 'index']);
+Route::get('plugins', [PluginController::class, 'index']);

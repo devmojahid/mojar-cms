@@ -18,7 +18,7 @@
 @endphp
 <script type="text/javascript">
     /**
-     * JUZAWEB CMS - THE BEST CMS FOR LARAVEL PROJECT
+     * Mojar - THE BEST CMS FOR LARAVEL PROJECT
      *
      * @package    mojar/cms
      * @link       https://mojar.com

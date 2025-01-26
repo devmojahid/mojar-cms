@@ -1,7 +1,7 @@
 <?php
 
 /**
- * JUZAWEB CMS - Laravel CMS for Your Project
+ * Mojar - Laravel CMS for Your Project
  *
  * @package    mojar/juzacms
  * @author     The Anh Dang

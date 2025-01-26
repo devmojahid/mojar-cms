@@ -1,7 +1,7 @@
 <?php
 
 /**
- * JUZAWEB CMS - The Best CMS for Laravel Project
+ * Mojar - The Best CMS for Laravel Project
  *
  * @package    mojar/laravel-cms
  * @author     The Anh Dang <dangtheanh16@gmail.com>

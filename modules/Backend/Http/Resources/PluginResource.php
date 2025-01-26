@@ -3,6 +3,7 @@
 namespace Juzaweb\Backend\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Carbon\Carbon;
 
 class PluginResource extends JsonResource
 {
@@ -15,11 +16,16 @@ class PluginResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'code' => $this->getMeta('code'),
-            'title' => $this->title,
-            'thumbnail' => $this->getThumbnail(),
-            'banner' => upload_url($this->getMeta('banner')),
-            'description' => $this->description,
+            'name' => $this->resource['name'],
+            'title' => $this->resource['title'],
+            'description' => $this->resource['description'],
+            'screenshot' => $this->resource['screenshot'] ?? null,
+            'banner' => $this->resource['banner'] ?? null,
+            'url' => $this->resource['url'] ?? null,
+            'is_paid' => $this->resource['is_paid'] ?? null,
+            'price' => $this->resource['price'] ?? null,
+            'created_at' => Carbon::parse($this->resource['created_at'])->format('M j, Y g:i a'),
+            'updated_at' => Carbon::parse($this->resource['updated_at'])->format('M j, Y g:i a'),
         ];
     }
 }

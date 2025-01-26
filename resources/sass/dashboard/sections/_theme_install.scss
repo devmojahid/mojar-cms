@@ -1,0 +1,235 @@
+@use '../utils' as *;
+/* Theme Installation Page Styles */
+.theme-list-item {
+    transition: all 0.3s ease;
+}
+
+.theme-list-item:hover {
+    transform: translateY(-5px);
+}
+
+.theme-list-item .card {
+    height: 100%;
+    border: 1px solid rgba(98, 105, 118, 0.16);
+    box-shadow: rgba(35, 46, 60, 0.04) 0 2px 4px 0;
+}
+
+.theme-list-item .card-body img {
+    border-radius: 4px;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+}
+
+.theme-list-item .card-footer {
+    background: transparent;
+    border-top: 1px solid rgba(98, 105, 118, 0.16);
+}
+
+.dropzone {
+    border: 2px dashed rgba(98, 105, 118, 0.16) !important;
+    opacity: 1;
+    border-radius: 8px;
+    padding: 2rem !important;
+    min-height: 150px !important;
+    background: rgba(98, 105, 118, 0.04);
+    transition: opacity 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.dropzone:hover {
+    border-color: var(--tblr-primary) !important;
+    background: rgba(var(--tblr-primary-rgb), 0.04);
+}
+
+.theme-upload-form {
+    transition: opacity 0.2s ease;
+    margin-bottom: 2rem;
+}
+
+#form-theme-upload {
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .theme-list-item {
+        width: 100%;
+    }
+    
+    .nav-tabs .nav-link {
+        padding: 0.5rem;
+    }
+}
+
+/* Enhanced Upload Area Styles */
+.upload-wrapper {
+    position: relative;
+    padding: 2.5rem;
+}
+
+.upload-content {
+    position: relative;
+    z-index: 2;
+}
+
+.upload-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(var(--tblr-primary-rgb), 0.1);
+    color: var(--tblr-primary);
+}
+
+.upload-icon .icon-lg {
+    width: 32px;
+    height: 32px;
+    stroke-width: 1.5;
+}
+
+.upload-title {
+    font-weight: 600;
+    color: var(--tblr-body-color);
+}
+
+.dropzone {
+    border: 2px dashed rgba(var(--tblr-primary-rgb), 0.2) !important;
+    background: rgba(var(--tblr-primary-rgb), 0.02) !important;
+    transition: all 0.3s ease;
+}
+
+.dropzone:hover, .dropzone.dz-drag-hover {
+    opacity: 0.95;
+    border-color: var(--tblr-primary) !important;
+    background: rgba(var(--tblr-primary-rgb), 0.05) !important;
+}
+
+.dropzone.dz-drag-hover .upload-content {
+    opacity: 0.6;
+}
+
+.dropzone.dz-drag-hover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    border: 2px solid var(--tblr-primary);
+    pointer-events: none;
+}
+
+/* Upload Progress Styles */
+.upload-progress {
+    margin-top: 1.5rem;
+}
+
+.progress-wrapper {
+    background: var(--tblr-bg-surface);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress {
+    height: 0.5rem;
+}
+
+/* Dropzone Preview Template */
+.dz-preview {
+    background: var(--tblr-bg-surface) !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--tblr-border-color) !important;
+}
+
+.dz-filename {
+    color: var(--tblr-body-color) !important;
+}
+
+.dz-success-mark, .dz-error-mark {
+    background: var(--tblr-bg-surface) !important;
+    border-radius: 50% !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .upload-wrapper {
+        padding: 1.5rem;
+    }
+    
+    .upload-icon {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .upload-icon .icon-lg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .card-header-tabs {
+        margin: 0;
+    }
+    
+    .theme-list-item {
+        width: 100%;
+    }
+    
+    .upload-wrapper {
+        padding: 1rem;
+    }
+    
+    #theme-upload-button {
+        width: auto !important;
+    }
+}
+
+/* Animation for Upload Area */
+@keyframes uploadPulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.02);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.dropzone.dz-drag-hover .upload-icon {
+    animation: uploadPulse 1s ease infinite;
+}
+
+// in mid screen
+@media (min-width: 992px) {
+    #upload-theme{
+        margin-top: -3px;
+    }
+}
