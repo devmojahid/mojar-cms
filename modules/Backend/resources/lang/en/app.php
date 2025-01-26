@@ -39,6 +39,7 @@ return [
     'are_you_sure_delete_items' => 'Are you sure you want to delete the selected items?',
     'approve' => 'Approve',
     'approved' => 'Approved',
+    'media_management' => 'Media Management',
     'deny' => 'Deny',
     'there_is_no_data' => 'There is no data',
     'this_field_is_required' => 'This field is required',

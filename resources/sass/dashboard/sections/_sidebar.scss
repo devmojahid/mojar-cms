@@ -130,6 +130,22 @@
             background-color: var(--sidebar-active-bg);
             // Highlight the active item with a left border
             border-left-color: var(--sidebar-active-text);
+
+            &-icon {
+                i,
+                svg {
+                  font-size: 1rem;
+                  color: var(--sidebar-active-text);
+                  transition: transform var(--transition-speed) ease,
+                    color var(--transition-speed) ease;
+                }
+
+                // Slight icon scale on hover
+                .nav-link:hover & i,
+                .nav-link:hover & svg {
+                  transform: scale(1.05);
+                }
+            }
           }
 
           &-icon {
