@@ -2,182 +2,249 @@
 
 @section('content')
 <div class="page page-center">
-  @if (get_config('auth_layout') == 'with_illustration')
+    @if (get_config('auth_layout') == 'with_illustration')
     <div class="container container-normal py-4">
-      <div class="row align-items-center g-4">
-        <div class="col-lg">
-          <div class="container-tight">
-            <div class="text-center mb-4">
-              <a href="{{ route('home') }}" class="navbar-brand navbar-brand-autodark">
+        <div class="row align-items-center g-4">
+            <div class="col-lg">
+                <div class="container-tight">
+                    <div class="text-center mb-4">
+                        <a href="{{ route('home') }}" class="navbar-brand navbar-brand-autodark">
+                            @if ($logo = get_config('logo'))
+                                <img src="{{ upload_url(get_config('logo')) }}" height="36" alt="{{ get_config('title', 'Mojar') }}">
+                            @else
+                                <h1 class="mb-5 px-3">
+                                    <strong>{{ trans('cms::message.login_form.welcome', ['name' => get_config('title', 'Mojar')]) }}</strong>
+                                </h1>
+                            @endif
+                        </a>
+                    </div>
+                    <div class="card card-md">
+                        <div class="card-body">
+                            <h2 class="h2 text-center mb-4">{{ __('Create your account') }}</h2>
+                            <form action="{{ route('register') }}" method="post" class="form-ajax">
+                                @do_action('register_form')
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">{{ trans('cms::app.full_name') }}</label>
+                                    <input type="text" name="name" class="form-control" placeholder="{{ trans('cms::app.full_name') }}" autocomplete="off" required />
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">{{ trans('cms::app.email_address') }}</label>
+                                    <input type="email" name="email" class="form-control" placeholder="{{ trans('cms::app.email_address') }}" autocomplete="off" required />
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">{{ trans('cms::app.password') }}</label>
+                                    <div class="input-group input-group-flat">
+                                        <input type="password" name="password" class="form-control" placeholder="{{ trans('cms::app.password') }}" autocomplete="off" required />
+                                        <span class="input-group-text">
+                                            <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">{{ trans('cms::app.password_confirmation') }}</label>
+                                    <div class="input-group input-group-flat">
+                                        <input type="password" name="password_confirmation" class="form-control" placeholder="{{ trans('cms::app.password_confirmation') }}" autocomplete="off" required />
+                                        <span class="input-group-text">
+                                            <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-footer">
+                                    <button type="submit" class="btn btn-primary w-100" data-loading-text="{{ trans('cms::app.please_wait') }}">
+                                        <strong>{{ __('Sign Up') }}</strong>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        @if(!empty($socialites))
+                        <div class="hr-text">{{ __('or') }}</div>
+                        <div class="card-body">
+                            <div class="row">
+                                @foreach($socialites as $key => $social)
+                                    @continue(($social['enable'] ?? 0) != 1)
+                                    <div class="col">
+                                        <a href="{{ url("auth/{$key}/redirect") }}" class="btn w-100">
+                                            <i class="fa fa-{{ $key }} me-2"></i>
+                                            {{ trans('cms::app.socials.login_with', ['name' => ucfirst($key)]) }}
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                    <div class="text-center text-secondary mt-3">
+                        {{ __('Already have an account?') }} <a href="{{ route('admin.login') }}" class="text-decoration-none">{{ __('Sign in') }}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg d-none d-lg-block">
+                <img src="{{ asset('static/illustrations/undraw_secure_login_pdn4.svg') }}" height="300" class="d-block mx-auto" alt="">
+            </div>
+        </div>
+    </div>
+
+    @elseif (get_config('auth_layout') == 'with_cover')
+    <div class="row g-0 flex-fill">
+        <div class="col-12 col-lg-6 col-xl-4 border-top-wide border-primary d-flex flex-column justify-content-center">
+            <div class="container container-tight my-5 px-lg-5">
+                <div class="text-center mb-4">
+                    <a href="{{ route('home') }}" class="navbar-brand navbar-brand-autodark">
+                        @if ($logo = get_config('logo'))
+                            <img src="{{ upload_url(get_config('logo')) }}" height="36" alt="{{ get_config('title', 'Mojar') }}">
+                        @else
+                            <h1 class="mb-5 px-3">
+                                <strong>{{ trans('cms::message.login_form.welcome', ['name' => get_config('title', 'Mojar')]) }}</strong>
+                            </h1>
+                        @endif
+                    </a>
+                </div>
+                <h2 class="h3 text-center mb-3">{{ __('Create your account') }}</h2>
+                <form action="{{ route('register') }}" method="post" class="form-ajax">
+                    @do_action('register_form')
+                    
+                    <div class="mb-3">
+                        <label class="form-label">{{ trans('cms::app.full_name') }}</label>
+                        <input type="text" name="name" class="form-control" placeholder="{{ trans('cms::app.full_name') }}" autocomplete="off" required />
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">{{ trans('cms::app.email_address') }}</label>
+                        <input type="email" name="email" class="form-control" placeholder="{{ trans('cms::app.email_address') }}" autocomplete="off" required />
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">{{ trans('cms::app.password') }}</label>
+                        <div class="input-group input-group-flat">
+                            <input type="password" name="password" class="form-control" placeholder="{{ trans('cms::app.password') }}" autocomplete="off" required />
+                            <span class="input-group-text">
+                                <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">{{ trans('cms::app.password_confirmation') }}</label>
+                        <div class="input-group input-group-flat">
+                            <input type="password" name="password_confirmation" class="form-control" placeholder="{{ trans('cms::app.password_confirmation') }}" autocomplete="off" required />
+                            <span class="input-group-text">
+                                <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="submit" class="btn btn-primary w-100" data-loading-text="{{ trans('cms::app.please_wait') }}">
+                            <strong>{{ __('Sign Up') }}</strong>
+                        </button>
+                    </div>
+                </form>
+                <div class="text-center text-secondary mt-3">
+                    {{ __('Already have an account?') }} <a href="{{ route('admin.login') }}" class="text-decoration-none">{{ __('Sign in') }}</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6 col-xl-8 d-none d-lg-block">
+            <div class="bg-cover h-100 min-vh-100" style="background-image: url({{ asset('static/photos/finances-us-dollars-and-bitcoins-currency-money-2.jpg') }})"></div>
+        </div>
+    </div>
+
+    @else
+    <div class="container container-tight py-4">
+        <div class="text-center mb-4">
+            <a href="{{ route('home') }}" class="navbar-brand navbar-brand-autodark">
                 @if ($logo = get_config('logo'))
-                    <img src="{{ upload_url(get_config('logo')) }}" alt="{{ get_config('title', 'Mojar') }}">
+                    <img src="{{ upload_url(get_config('logo')) }}" height="36" alt="{{ get_config('title', 'Mojar') }}">
                 @else
                     <h1 class="mb-5 px-3">
                         <strong>{{ trans('cms::message.login_form.welcome', ['name' => get_config('title', 'Mojar')]) }}</strong>
                     </h1>
                 @endif
-              </a>
-            </div>
-            <div class="card card-md">
-              <div class="card-body">
+            </a>
+        </div>
+        <div class="card card-md">
+            <div class="card-body">
                 <h2 class="h2 text-center mb-4">{{ __('Create your account') }}</h2>
-                <form action="{{ route('register') }}" method="post" autocomplete="off" novalidate>
-                  <div class="mb-3">
-                    <label class="form-label">{{ trans('cms::app.full_name') }}</label>
-                    <input type="text" name="name" class="form-control" placeholder="{{ trans('cms::app.full_name') }}" autocomplete="off" required />
-                  </div>
-                  <div class="mb-3">
-                    <label class="form-label">{{ trans('cms::app.email_address') }}</label>
-                    <input type="email" name="email" class="form-control" placeholder="{{ trans('cms::app.email_address') }}" autocomplete="off" required />
-                  </div>
-                  <div class="mb-2">
-                    <label class="form-label">
-                      {{ trans('cms::app.password') }}
-                      <span class="form-label-description">
-                        <a href="{{ route('forgot_password') }}">I forgot password</a>
-                      </span>
-                    </label>
-                    <div class="input-group input-group-flat">
-                      <input type="password" class="form-control" name="password" placeholder="{{ trans('cms::app.password') }}" autocomplete="off" required>
-                      <span class="input-group-text">
-                        <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-                        </a>
-                      </span>
+                <form action="{{ route('register') }}" method="post" class="form-ajax">
+                    @do_action('register_form')
+                    
+                    <div class="mb-3">
+                        <label class="form-label">{{ trans('cms::app.full_name') }}</label>
+                        <input type="text" name="name" class="form-control" placeholder="{{ trans('cms::app.full_name') }}" autocomplete="off" required />
                     </div>
-                  </div>
-                  <div class="mb-3">
-                    <label class="form-label">{{ trans('cms::app.password_confirmation') }}</label>
-                    <div class="input-group input-group-flat">
-                      <input type="password" name="password_confirmation" class="form-control" placeholder="{{ trans('cms::app.password_confirmation') }}" autocomplete="off" required />
-                      <span class="input-group-text">
-                        <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-                        </a>
-                      </span>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">{{ trans('cms::app.email_address') }}</label>
+                        <input type="email" name="email" class="form-control" placeholder="{{ trans('cms::app.email_address') }}" autocomplete="off" required />
                     </div>
-                  </div>
-                  <div class="form-footer">
-                    <button type="submit" class="btn btn-primary w-100" data-loading-text="{{ trans('cms::app.please_wait') }}">
-                        <strong>{{ __('Sign Up') }}</strong>
-                    </button>
-                  </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">{{ trans('cms::app.password') }}</label>
+                        <div class="input-group input-group-flat">
+                            <input type="password" name="password" class="form-control" placeholder="{{ trans('cms::app.password') }}" autocomplete="off" required />
+                            <span class="input-group-text">
+                                <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">{{ trans('cms::app.password_confirmation') }}</label>
+                        <div class="input-group input-group-flat">
+                            <input type="password" name="password_confirmation" class="form-control" placeholder="{{ trans('cms::app.password_confirmation') }}" autocomplete="off" required />
+                            <span class="input-group-text">
+                                <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="submit" class="btn btn-primary w-100" data-loading-text="{{ trans('cms::app.please_wait') }}">
+                            <strong>{{ __('Sign Up') }}</strong>
+                        </button>
+                    </div>
                 </form>
-              </div>
-              <div class="hr-text">or</div>
-              <div class="card-body">
+            </div>
+            
+            @if(!empty($socialites))
+            <div class="hr-text">{{ __('or') }}</div>
+            <div class="card-body">
                 <div class="row">
-                  <div class="col"><a href="#" class="btn w-100">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon text-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" /></svg>
-                      Login with Github
-                    </a></div>
-                  <div class="col"><a href="#" class="btn w-100">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon text-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c0 -.249 1.51 -2.772 1.818 -4.013z" /></svg>
-                      Login with Twitter
-                    </a></div>
+                    @foreach($socialites as $key => $social)
+                        @continue(($social['enable'] ?? 0) != 1)
+                        <div class="col">
+                            <a href="{{ url("auth/{$key}/redirect") }}" class="btn w-100">
+                                <i class="fa fa-{{ $key }} me-2"></i>
+                                {{ trans('cms::app.socials.login_with', ['name' => ucfirst($key)]) }}
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
-              </div>
             </div>
-            <div class="text-center text-secondary mt-3">
-              {{ __('Already have an account?') }} <a href="{{ route('admin.login') }}" tabindex="-1">{{ __('Sign in') }}</a>
-            </div>
-          </div>
+            @endif
         </div>
-        <div class="col-lg d-none d-lg-block">
-          <img src="./static/illustrations/undraw_secure_login_pdn4.svg" height="300" class="d-block mx-auto" alt="">
+        <div class="text-center text-secondary mt-3">
+            {{ __('Already have an account?') }} <a href="{{ route('admin.login') }}" class="text-decoration-none">{{ __('Sign in') }}</a>
         </div>
-      </div>
     </div>
-    @elseif (get_config('auth_layout') == 'with_cover')
-    <div class="mojar__layout__content">
-    </div>
-    @else
-    <h1>Default</h1>
     @endif
 </div>
-    <div class="mojar__layout__content">
-        <div class="mojar__utils__content">
-            <div class="mojar__auth__authContainer">
-                <div class="mojar__auth__containerInner">
-                    <div class="text-center mb-5">
-                        @if ($logo = get_config('logo'))
-                            <img src="{{ upload_url(get_config('logo')) }}" alt="{{ get_config('title', 'JUZAWEB') }}">
-                        @else
-                            <h1 class="mb-5 px-3">
-                                <strong>{{ trans('cms::message.login_form.welcome', ['name' => get_config('title', 'JUZAWEB')]) }}</strong>
-                            </h1>
-                        @endif
-                    </div>
-
-                    <div class="card mojar__auth__boxContainer">
-                        <div class="text-dark font-size-24 mb-4">
-                            <strong>{{ __('Create your account') }}</strong>
-                        </div>
-
-                        <div class="mb-4">
-                            <p>
-                                {{ __('And start spending more time on your projects and less time managing your infrastructure.') }}
-                            </p>
-                        </div>
-
-                        <form action="{{ route('register') }}" method="post" class="mb-4 form-ajax">
-                            @do_action('register_form')
-
-                            <div class="form-group mb-4">
-                                <input type="text" name="name" class="form-control"
-                                    placeholder="{{ trans('cms::app.full_name') }}" autocomplete="off" required />
-                            </div>
-
-                            <div class="form-group mb-4">
-                                <input type="text" name="email" class="form-control"
-                                    placeholder="{{ trans('cms::app.email_address') }}" autocomplete="off" required />
-                            </div>
-
-                            <div class="form-group mb-4">
-                                <input type="password" name="password" class="form-control"
-                                    placeholder="{{ trans('cms::app.password') }}" autocomplete="off" required />
-                            </div>
-
-                            <div class="form-group mb-4">
-                                <input type="password" name="password_confirmation" class="form-control"
-                                    placeholder="{{ trans('cms::app.password_confirmation') }}" autocomplete="off"
-                                    required />
-                            </div>
-
-                            <button type="submit" class="btn btn-primary text-center w-100"
-                                data-loading-text="{{ trans('cms::app.please_wait') }}">
-                                <strong>{{ __('Sign Up') }}</strong>
-                            </button>
-                        </form>
-
-                        <div class="social-login mt-3">
-                            @foreach ($socialites as $key => $social)
-                                @continue(($social['enable'] ?? 0) != 1)
-
-                                <a class="btn btn-lg btn-{{ $key }} btn-block text-uppercase"
-                                    href="{{ url("auth/{$key}/redirect") }}">
-                                    <i class="fa fa-{{ $key }} mr-2"></i>
-                                    {{ trans('cms::app.socials.login_with', ['name' => ucfirst($key)]) }}
-                                </a>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <div class="text-center pt-2 mb-auto">
-                        <span class="mr-2">{{ __('Already have an account?') }}</span>
-                        <a href="{{ route('admin.login') }}" class="jw__utils__link font-size-16" data-turbolinks="false">
-                            {{ __('Sign in') }}
-                        </a>
-                    </div>
-
-                </div>
-                <div class="mt-auto pb-5 pt-5">
-                    <div class="text-center">
-                        Copyright © {{ date('Y') }} {{ get_config('title') }} - Provided by Mojar
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
 @endsection

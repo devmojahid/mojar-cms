@@ -25,7 +25,7 @@
     </button>
     <div class="navbar-nav flex-row order-md-last">
         <div class="d-flex align-items-center me-3">
-            <form action="./" method="get" autocomplete="off" novalidate>
+            <form action="javascript:void(0);" method="get" autocomplete="off" class="navbar-search-form">
                 <div class="input-icon">
                     <span class="input-icon-addon">
                         <!-- Download SVG icon from http://tabler-icons.io/i/search -->
@@ -37,8 +37,8 @@
                             <path d="M21 21l-6 -6" />
                         </svg>
                     </span>
-                    <input type="text" value="" class="form-control" placeholder="Search…"
-                        aria-label="Search in website">
+                    <input type="text" class="form-control" placeholder="Search…"
+                        aria-label="Search in website" id="topbarSearchInput">
                 </div>
             </form>
         </div>

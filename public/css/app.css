@@ -995,6 +995,7 @@ button[type=button][role=checkbox]{
   --sidebar-bg:var(--tblr-gray-200);
   --sidebar-border:var(--tblr-border-color);
   --sidebar-text:var(--tblr-body-color);
+  --sidebar-hover-text:#495057;
   --sidebar-muted:var(--tblr-secondary-color);
   --sidebar-hover-bg:var(--tblr-gray-200);
   --sidebar-active-bg:var(--ms-theme-primary);
@@ -1004,12 +1005,14 @@ button[type=button][role=checkbox]{
   --dropdown-bg:var(--tblr-white);
   --dropdown-hover-bg:var(--tblr-gray-400);
   --dropdown-border:var(--tblr-border-color);
+  --transition-speed:0.3s;
 }
 
 [data-bs-theme=dark]{
   --sidebar-bg:var(--tblr-dark);
   --sidebar-border:var(--tblr-border-color);
   --sidebar-text:var(--tblr-body-color);
+  --sidebar-hover-text:#e2e2e2;
   --sidebar-muted:var(--tblr-secondary-color);
   --sidebar-hover-bg:var(--tblr-tertiary-bg);
   --sidebar-active-bg:var(--ms-theme-primary);
@@ -1019,24 +1022,25 @@ button[type=button][role=checkbox]{
   --dropdown-bg:var(--tblr-dark);
   --dropdown-hover-bg:var(--tblr-tertiary-bg);
   --dropdown-border:var(--tblr-border-color);
+  --transition-speed:0.3s;
 }
 
 .mojar_cms_sidebar{
   background-color:var(--sidebar-bg);
   border-right:1px solid var(--sidebar-border);
   box-shadow:2px 0 6px rgba(0, 0, 0, 0.05);
-  transition:background-color 0.3s ease, border-color 0.3s ease;
+  transition:background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
 }
 @media (min-width: 992px){
   .mojar_cms_sidebar{
     position:static !important;
-    padding-top:5px !important;
-    overflow-y:auto !important;
     min-height:100vh;
+    overflow-y:auto !important;
+    padding-top:5px !important;
   }
 }
 .mojar_cms_sidebar #sidebar-menu{
-  transition:all 0.3s ease;
+  transition:all var(--transition-speed) ease;
 }
 .mojar_cms_sidebar #sidebar-menu::-webkit-scrollbar{
   width:5px;
@@ -1045,7 +1049,7 @@ button[type=button][role=checkbox]{
   background:transparent;
 }
 .mojar_cms_sidebar #sidebar-menu::-webkit-scrollbar-thumb{
-  background:rgba(255, 255, 255, 0.2);
+  background:var(--sidebar-scrollbar-thumb);
   border-radius:10px;
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav{
@@ -1062,65 +1066,70 @@ button[type=button][role=checkbox]{
   font-size:0.75rem;
   border-radius:0.25rem;
   padding:0.25rem 0.5rem;
-  transition:background-color 0.3s ease, color 0.3s ease;
+  transition:background-color var(--transition-speed) ease, color var(--transition-speed) ease;
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .nav-link{
   display:flex;
   align-items:center;
-  padding:0.5rem 1rem;
+  gap:0.6rem;
+  padding:0.6rem 1rem;
   border-radius:0.25rem;
   color:var(--sidebar-text, #6c757d);
   text-decoration:none;
-  transition:background-color 0.3s ease, color 0.3s ease;
+  border-left:3px solid transparent;
+  transition:background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease;
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .nav-link:hover{
-  color:var(--sidebar-hover-text, #495057);
-  background-color:var(--sidebar-hover-bg, rgba(255, 255, 255, 0.05));
+  color:var(--sidebar-hover-text);
+  background-color:var(--sidebar-hover-bg);
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .nav-link.active{
-  color:var(--sidebar-active-text, #212529);
-  background-color:var(--sidebar-active-bg, rgba(255, 255, 255, 0.1));
+  color:var(--sidebar-active-text);
+  background-color:var(--sidebar-active-bg);
+  border-left-color:var(--sidebar-active-text);
 }
-.mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .nav-link-icon i{
+.mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .nav-link-icon i,
+.mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .nav-link-icon svg{
   font-size:1rem;
-  transition:transform 0.3s ease;
+  color:var(--sidebar-icon-color);
+  transition:transform var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+.nav-link:hover .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .nav-link-icon i, .nav-link:hover .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .nav-link-icon svg{
+  transform:scale(1.05);
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .nav-link-title{
   font-size:0.875rem;
   font-weight:400;
-  transition:color 0.2s ease;
-}
-.mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .nav-link.dropdown-toggle{
+  line-height:1.2;
+  transition:color var(--transition-speed) ease;
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .nav-link.dropdown-toggle:after{
   margin-left:auto;
   transform:rotate(0deg);
-  transition:transform 0.3s ease;
+  transition:transform var(--transition-speed) ease;
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .dropdown-menu{
   position:relative;
-  background-color:var(--sidebar-bg, #fff);
-  transition:all 0.3s ease;
+  background-color:var(--dropdown-bg);
+  border:1px solid var(--dropdown-border);
+  border-radius:0.25rem;
+  margin-top:0.25rem;
+  transition:all var(--transition-speed) ease;
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .dropdown-menu .dropdown-item{
-  padding-left:2.8rem;
-  padding-right:0.5rem;
-  padding-bottom:0.5rem;
-  color:var(--sidebar-text, #6c757d);
+  padding:0.5rem 0.5rem 0.5rem 2.8rem;
+  color:var(--sidebar-text);
   text-decoration:none;
-  transition:background-color 0.3s ease, color 0.3s ease;
   border-radius:0.25rem;
+  transition:background-color var(--transition-speed) ease, color var(--transition-speed) ease;
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .dropdown-menu .dropdown-item:hover{
-  color:var(--sidebar-hover-text, #495057);
-  background-color:var(--sidebar-hover-bg, rgba(255, 255, 255, 0.05));
+  color:var(--sidebar-hover-text);
+  background-color:var(--sidebar-hover-bg);
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item .dropdown-menu .dropdown-item.active{
-  color:var(--sidebar-active-text, #212529);
+  color:var(--sidebar-active-text);
   background-color:var(--dropdown-hover-bg);
-  border-radius:0.25rem;
-}
-.mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item.mojar__menuLeft__submenu--toggled > .nav-link.dropdown-toggle{
 }
 .mojar_cms_sidebar #sidebar-menu .navbar-nav .nav-item.mojar__menuLeft__submenu--toggled > .nav-link.dropdown-toggle:after{
   transform:rotate(90deg);
@@ -1659,6 +1668,152 @@ button[type=button][role=checkbox]{
 .menu-management-wrap #menu-container .alert-light{
   border:1px solid #e2e5e9;
   color:#5a5a5a;
+}
+
+.widgets-management-page{
+  padding:1rem;
+}
+.widgets-management-page .page-header{
+  border-bottom:1px solid #dee2e6;
+  margin-bottom:1.5rem;
+}
+.widgets-management-page .page-header .page-title{
+  font-weight:700;
+  font-size:1.25rem;
+  margin:0 0 0.25rem 0;
+  color:#343a40;
+}
+.widgets-management-page .page-header small{
+  font-size:0.9rem;
+  color:#6c757d;
+}
+.widgets-management-page .btn-add-new{
+  padding:0.5rem 1rem;
+  font-weight:500;
+  display:inline-flex;
+  align-items:center;
+}
+.widgets-management-page .btn-add-new i{
+  font-size:1rem;
+}
+.widgets-management-page .card{
+  border:1px solid #e2e2e2;
+  border-radius:6px;
+  transition:box-shadow 0.2s ease, transform 0.2s ease;
+}
+.widgets-management-page .card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 2px 8px rgba(0, 0, 0, 0.06);
+}
+.widgets-management-page .card .card-header{
+  background-color:#f8f9fa;
+  padding:0.75rem 1rem;
+  border-bottom:1px solid #dee2e6;
+}
+.widgets-management-page .card .card-body{
+  padding:1rem;
+}
+.widgets-management-page .sidebar-item .right-actions .toggle-collapse{
+  color:#6c757d;
+}
+.widgets-management-page .sidebar-item .right-actions .toggle-collapse:hover{
+  color:#495057;
+}
+.widgets-management-page .widget-block .widget-block-body{
+  padding:1rem;
+}
+.widgets-management-page .widget-block .widget-block-body .widget-title{
+  font-size:1rem;
+  font-weight:600;
+  color:#495057;
+}
+.widgets-management-page .widget-block .widget-block-body .widget-description{
+  color:#6c757d;
+}
+.widgets-management-page .widget-block .widget-block-body .dropdown-action{
+  transition:color 0.2s ease;
+}
+.widgets-management-page .widget-block .widget-block-body .dropdown-action:hover{
+  color:#495057;
+}
+.widgets-management-page .widget-sidebar-item{
+  border-bottom:1px solid #e9ecef;
+  color:#495057;
+  padding:0.6rem 1rem;
+  transition:background-color 0.2s ease;
+  cursor:pointer;
+}
+.widgets-management-page .widget-sidebar-item:hover{
+  background-color:#eceff1;
+}
+.widgets-management-page .widget-sidebar-item:last-child{
+  border-bottom:none;
+}
+.widgets-management-page .sidebar-widget-item{
+  margin:0.5rem 0;
+  border:1px solid #ddd;
+  border-radius:4px;
+  background-color:#fff;
+}
+.widgets-management-page .sidebar-widget-item .dd-handle{
+  padding:0.5rem 1rem;
+  background-color:#f1f3f5;
+  border-bottom:1px solid #ddd;
+  cursor:move;
+  display:flex;
+  align-items:center;
+}
+.widgets-management-page .sidebar-widget-item .dd-handle .widget-label{
+  font-weight:500;
+}
+.widgets-management-page .sidebar-widget-item .dd-handle:hover{
+  background-color:#e9ecef;
+}
+.widgets-management-page .sidebar-widget-item .form-item-edit{
+  padding:0.75rem 1rem;
+}
+.widgets-management-page .sidebar-widget-item .form-item-edit .delete-item-form{
+  font-weight:500;
+  color:#dc3545;
+  cursor:pointer;
+}
+.widgets-management-page .sidebar-widget-item .form-item-edit .delete-item-form:hover{
+  text-decoration:underline;
+}
+.widgets-management-page .collapse:not(.show){
+  display:none;
+}
+.widgets-management-page .collapse.show{
+  -webkit-animation:fadeInUp 0.3s ease forwards;
+          animation:fadeInUp 0.3s ease forwards;
+}
+@-webkit-keyframes fadeInUp{
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+@keyframes fadeInUp{
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+@media (max-width: 767px){
+  .widgets-management-page .page-header{
+    margin-bottom:1rem;
+  }
+  .widgets-management-page .card{
+    margin-bottom:1rem;
+  }
 }
 
 .dropdown-toggle:after{

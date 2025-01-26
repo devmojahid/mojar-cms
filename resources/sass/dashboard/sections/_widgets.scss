@@ -1,0 +1,169 @@
+.widgets-management-page {
+    // Root padding & spacing
+    padding: 1rem;
+  
+    // PAGE HEADER
+    .page-header {
+      border-bottom: 1px solid #dee2e6;
+      margin-bottom: 1.5rem;
+  
+      .page-title {
+        font-weight: 700;
+        font-size: 1.25rem;
+        margin: 0 0 0.25rem 0;
+        color: #343a40;
+      }
+      small {
+        font-size: 0.9rem;
+        color: #6c757d;
+      }
+    }
+  
+    // ADD NEW BUTTON
+    .btn-add-new {
+      padding: 0.5rem 1rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      i {
+        font-size: 1rem;
+      }
+    }
+  
+    // WIDGET BLOCKS & CARDS
+    .card {
+      border: 1px solid #e2e2e2;
+      border-radius: 6px;
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+  
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+  
+      .card-header {
+        background-color: #f8f9fa;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #dee2e6;
+      }
+      .card-body {
+        padding: 1rem;
+      }
+    }
+  
+    // SIDEBAR ITEM
+    .sidebar-item {
+      .right-actions {
+        .toggle-collapse {
+          color: #6c757d;
+          &:hover {
+            color: #495057;
+          }
+        }
+      }
+    }
+  
+    // WIDGET ITEM STYLING
+    .widget-block {
+      .widget-block-body {
+        padding: 1rem;
+        .widget-title {
+          font-size: 1rem;
+          font-weight: 600;
+          color: #495057;
+        }
+        .widget-description {
+          color: #6c757d;
+        }
+        .dropdown-action {
+          transition: color 0.2s ease;
+          &:hover {
+            color: #495057;
+          }
+        }
+      }
+    }
+  
+    // FOR THE LIST OF CHECKBOXES
+    .widget-sidebar-item {
+      border-bottom: 1px solid #e9ecef;
+      color: #495057;
+      padding: 0.6rem 1rem;
+      transition: background-color 0.2s ease;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: #eceff1;
+      }
+  
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  
+    // DRAGGABLE SIDEBAR WIDGET ITEMS
+    .sidebar-widget-item {
+      margin: 0.5rem 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: #fff;
+  
+      .dd-handle {
+        padding: 0.5rem 1rem;
+        background-color: #f1f3f5;
+        border-bottom: 1px solid #ddd;
+        cursor: move;
+        display: flex;
+        align-items: center;
+        .widget-label {
+          font-weight: 500;
+        }
+        &:hover {
+          background-color: #e9ecef;
+        }
+      }
+      .form-item-edit {
+        padding: 0.75rem 1rem;
+        .delete-item-form {
+          font-weight: 500;
+          color: #dc3545;
+          cursor: pointer;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  
+    // COLLAPSE TRANSITIONS
+    // If using Bootstrap 5, you get default transitions. You can override or add more flair:
+    .collapse:not(.show) {
+      display: none; // fallback for older browsers
+    }
+    .collapse.show {
+      animation: fadeInUp 0.3s ease forwards;
+    }
+  
+    // KEYFRAME ANIMATION FOR COLLAPSES
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  
+    // MEDIA QUERIES FOR RESPONSIVENESS
+    @media (max-width: 767px) {
+      // More compact spacing on mobile
+      .page-header {
+        margin-bottom: 1rem;
+      }
+      .card {
+        margin-bottom: 1rem;
+      }
+    }
+  }
