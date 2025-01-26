@@ -4,7 +4,6 @@
     <div class="mojar__layout__content">
         <div class="mojar__utils__content">
             <div class="mojar__auth__authContainer">
-
                 <div class="mojar__auth__containerInner">
                     <div class="text-center mb-5">
                         @if ($logo = get_config('logo'))

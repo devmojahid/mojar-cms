@@ -32,6 +32,19 @@
         <div class="card-body">
 
             <div class="row">
+                <div class="auth-setting">
+                    <div class="form-group">
+                        <label class="col-form-label" for="auth_layout">{{ trans('cms::app.auth_layout') }}</label>
+                        <select name="auth_layout" id="auth_layout" class="form-control select2">
+                            @foreach ($authLayouts as $key => $authLayout)
+                                <option value="{{ $key }}" @if ($key == get_config('auth_layout')) selected @endif>
+                                    {{ $authLayout }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <p class="description mt-2">{{ trans('cms::app.auth_layout_description') }}</p>
+                    </div>
+                </div>
                 @foreach($socials as $social)
                     <div class="col-md-6">
                         <h5>{{ trans("cms::app.socials.{$social}") }}</h5>

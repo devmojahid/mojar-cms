@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="page page-center">
+  @if (get_config('auth_layout') == 'with_illustration')
     <div class="container container-normal py-4">
       <div class="row align-items-center g-4">
         <div class="col-lg">
@@ -87,6 +88,12 @@
         </div>
       </div>
     </div>
+    @elseif (get_config('auth_layout') == 'with_cover')
+    <div class="mojar__layout__content">
+    </div>
+    @else
+    <h1>Default</h1>
+    @endif
 </div>
     <div class="mojar__layout__content">
         <div class="mojar__utils__content">

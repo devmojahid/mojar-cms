@@ -19,6 +19,7 @@
         'g:i A' => now()->format('g:i A'),
         'H:i' => now()->format('H:i'),
     ];
+
 @endphp
 <form action="{{ route('admin.setting.save') }}" method="post" class="form-ajax">
     <input type="hidden" name="form" value="{{ $component }}">
@@ -90,14 +91,15 @@
                         <select name="timezone" id="timezone" class="form-control select2">
                             @foreach ($timezones as $timezone)
                                 <option value="{{ $timezone }}" @if ($sitetimezone == $timezone) selected @endif>
-                                    {{ $timezone }}</option>
+                                    {{ $timezone }}
+                                </option>
                             @endforeach
                         </select>
                         <p class="description">{{ trans('cms::app.timezone_description') }}</p>
                         <p class="description">{{ trans('cms::app.current_time') }} {{ now()->format('Y-m-d H:i:s') }}
                         </p>
                     </div>
-
+                
                     <div class="form-group">
                         <label class="col-form-label" for="language">{{ trans('cms::app.site_language') }}</label>
                         <select name="language" id="language" class="form-control load-locales">
@@ -133,10 +135,6 @@
                             <input type="text" name="date_format_custom" id="date_format_custom"
                                 value="{{ get_config('date_format_custom', 'F j, Y') }}" class="form-control w-25">
                             <br>
-                            {{--
-                    <p><strong>Preview:</strong>
-                        <span class="example">September 2, 2021</span><span class="spinner"></span>
-                    </p> --}}
                         </fieldset>
                     </div>
 
@@ -163,11 +161,6 @@
                                 value="{{ get_config('time_format_custom', 'g:i a') }}" class="form-control w-25" />
 
                             <br />
-
-                            {{-- <p>
-                    <strong>Preview:</strong>
-                    <span class="example">6:47 am</span><span class="spinner"></span>
-                </p> --}}
 
                             <p class="date-time-doc"><a
                                     href="https://wordpress.org/support/article/formatting-date-and-time/"

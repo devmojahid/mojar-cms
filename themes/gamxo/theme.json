@@ -3,8 +3,5 @@
     "title": "Gamxo",
     "description": "Gamxo description",
     "author": "Gamxo",
-    "version": "1.0.1",
-    "require": {
-        "mojar/image-slider": "^1.0.1"
-    }
+    "version": "1.0.1"
 }

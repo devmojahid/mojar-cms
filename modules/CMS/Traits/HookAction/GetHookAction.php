@@ -76,7 +76,6 @@ trait GetHookAction
         $configs = collect($this->globalData->get('configs'))
             ->mapWithKeys(fn($item, $key) => $this->mapConfigFields($item, $key))
             ->merge($globals);
-
         if ($key) {
             $configs = [$configs[$key]];
         }

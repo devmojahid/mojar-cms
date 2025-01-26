@@ -79,6 +79,11 @@
         "adasd": {
             "label": "Adasd",
             "type": "text"
+        },
+        "adasd-3": {
+            "parent": "adasd",
+            "label": "Adasd 2",
+            "type": "text"
         }
     }
 }

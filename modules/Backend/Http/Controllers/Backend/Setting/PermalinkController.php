@@ -58,7 +58,6 @@ class PermalinkController extends BackendController
         return $this->success(
             [
                 'message' => trans('cms::app.save_successfully'),
-                'redirect' => route('admin.permalink'),
             ]
         );
     }

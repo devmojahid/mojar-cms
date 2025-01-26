@@ -51,7 +51,7 @@ class SystemSettingController extends BackendController
     {
         $locales = config('locales');
         $configs = $request->only($this->hookAction->getConfigs()->keys()->toArray());
-
+        
         foreach ($configs as $key => $config) {
             if ($request->has($key)) {
                 if ($key == 'google_captcha' && empty($config['secret_key'])) {

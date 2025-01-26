@@ -334,6 +334,10 @@ return [
     'site_description_note' => 'In a few words, explain what this site is about.',
     'timezone_description' => 'Choose either a city in the same timezone as you or '.
         'a UTC (Coordinated Universal Time) time offset.',
+    'auth_layout' => 'Auth layout',
+    'auth_layout_description' => 'Choose the layout for the login page',
+    'with_illustration' => 'With illustration',
+    'with_cover' => 'With cover',
     'universal_time_is' => 'Universal time is',
     'date_format' => 'Date Format',
     'time_format' => 'Time Format',
