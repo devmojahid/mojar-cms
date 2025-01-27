@@ -1,0 +1,16 @@
+@media (max-width: 576px) {
+  .bulk-action form,
+  .search-action form {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .bulk-action form .form-select,
+  .bulk-action form .btn-tabler,
+  .search-action form .form-control,
+  .search-action form .btn {
+    width: 100% !important;
+    margin-bottom: 0.5rem;
+  }
+}

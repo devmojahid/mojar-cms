@@ -71,7 +71,7 @@ mix.combine(
         baseAsset + '/js/setting.js',
         baseAsset + '/js/page.js',
     ],
-    `${basePublish}/js/custom.min.js`
+    `${publicPath}/js/custom.min.js`
 );
 
 mix.combine(
@@ -79,6 +79,7 @@ mix.combine(
         baseAsset + '/js/custom-main.js',
         baseAsset + '/js/data-table-enhanced.js',
         baseAsset + '/js/main-dashboard-layout.js',
+        baseAsset + '/js/custom-alert.js',
     ],
     `${publicPath}/js/custom-main.min.js`
 );

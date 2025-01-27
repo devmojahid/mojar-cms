@@ -23,7 +23,7 @@ class MojarApi implements MojarApiContract
 
     protected ConfigContract $config;
 
-    protected string $apiUrl = 'http://mojar-cms.test/api';
+    protected string $apiUrl = 'https://juzaweb.com/api';
 
     protected ?string $accessToken = null;
 

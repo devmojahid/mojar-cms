@@ -4,7 +4,7 @@
     "license": "MIT",
     "description": "Create a demo website",
     "extra": {
-        "mojar": {
+        "juzaweb": {
             "providers": [
                 "Juzaweb\\DemoSite\\Providers\\DemoSiteServiceProvider"
             ],

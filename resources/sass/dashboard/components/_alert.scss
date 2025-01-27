@@ -17,3 +17,93 @@
 .swal2-container .swal2-popup {
     z-index: 2000 !important;
 }
+
+
+/* Toast Container: top-right by default */
+.custom-toast-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; /* space between toasts */
+  }
+  
+  /* Individual toast styling */
+  .custom-toast {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-left-width: 5px;
+    min-width: 250px;
+    max-width: 350px;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0;           /* start invisible */
+    transform: translateX(50px); /* start slightly offscreen */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* When we show the toast, fade/slide it in */
+  .custom-toast.show-toast {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .custom-toast-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+  }
+  
+  .custom-toast-title {
+    font-weight: 600;
+    margin-right: 1rem;
+  }
+  
+  .custom-toast-message {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-top: 0.25rem;
+  }
+  
+  /* Type-based coloring on the left border */
+  .custom-toast.border-success {
+    border-left-color: #198754;
+  }
+  .custom-toast.border-danger {
+    border-left-color: #dc3545;
+  }
+  .custom-toast.border-warning {
+    border-left-color: #ffc107;
+  }
+  .custom-toast.border-info {
+    border-left-color: #0dcaf0;
+  }
+  
+  /* Close (X) button */
+  .custom-toast-close {
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #aaa;
+  }
+  
+  /* Responsive tweak for smaller screens (optional) */
+  @media (max-width: 576px) {
+    .custom-toast-container {
+      top: 0.5rem;
+      right: 0.5rem;
+      left: 0.5rem;  /* let them span the screen if needed */
+      align-items: flex-end;
+    }
+    .custom-toast {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
