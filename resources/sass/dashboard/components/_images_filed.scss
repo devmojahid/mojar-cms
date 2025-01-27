@@ -1,0 +1,165 @@
+// Container for multiple images
+.form-images {
+  padding: 1rem;
+  background: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  .images-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+}
+
+// Individual image item styling
+.image-item {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: #f8fafc;
+  border: 2px dashed #e2e8f0 !important;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  // Remove button styling
+  .remove-image-item {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 10;
+    opacity: 0;
+    transition: all 0.2s ease;
+    background: #fff;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    i {
+      font-size: 1rem;
+      color: #ef4444;
+    }
+
+    &:hover {
+      background: #fee2e2;
+      transform: scale(1.1);
+    }
+  }
+
+  &:hover .remove-image-item {
+    opacity: 1;
+  }
+
+  // Image preview styling
+  .image-preview {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover .image-preview {
+    transform: scale(1.05);
+  }
+
+  // Add image button styling
+  &:last-child {
+    border: 2px dashed #e2e8f0 !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: #94a3b8 !important;
+      background-color: #f1f5f9;
+    }
+
+    .add-image-images {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      svg {
+        transition: transform 0.2s ease;
+        color: #94a3b8;
+      }
+
+      &:hover svg {
+        transform: scale(1.1);
+        color: #64748b;
+      }
+    }
+  }
+}
+
+// Loading state
+.image-item.loading {
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .form-images .images-list {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .image-item .remove-image-item {
+    opacity: 1;
+    width: 1.75rem;
+    height: 1.75rem;
+    
+    i {
+      font-size: 0.875rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .form-images .images-list {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .form-images {
+    padding: 0.5rem;
+  }
+}
+
+// Touch device optimizations
+@media (hover: none) {
+  .image-item {
+    .remove-image-item {
+      opacity: 1;
+    }
+
+    &:hover {
+      transform: none;
+    }
+
+    &:hover .image-preview {
+      transform: none;
+    }
+  }
+}

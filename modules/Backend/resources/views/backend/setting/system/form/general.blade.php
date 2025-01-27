@@ -95,7 +95,7 @@
                                 </option>
                             @endforeach
                         </select>
-                        <p class="description">{{ trans('cms::app.timezone_description') }}</p>
+                        <p class="description mt-2 mb-2">{{ trans('cms::app.timezone_description') }}</p>
                         <p class="description">{{ trans('cms::app.current_time') }} {{ now()->format('Y-m-d H:i:s') }}
                         </p>
                     </div>
@@ -112,19 +112,19 @@
 
                     <div class="form-group">
                         <label class="col-form-label" for="date_format">{{ trans('cms::app.date_format') }}</label>
-                        <fieldset>
+                        <fieldset class="ml-4">
                             @foreach ($dateFormats as $key => $item)
                                 <label class="mb-2">
-                                    <input type="radio" name="date_format" value="{{ $key }}"
+                                    <input type="radio" name="date_format" class="form-check-input"  value="{{ $key }}"
                                         @if ($key == $dateFormat) checked="checked" @endif>
                                     <span
-                                        class="date-time-text format-i18n mr-2">{{ $item }}</span><code>{{ $key }}</code>
+                                        class="date-time-text format-i18n mr-2 form-check-label">{{ $item }}</span><code>{{ $key }}</code>
                                 </label><br>
                             @endforeach
 
                             <label>
-                                <input type="radio" name="date_format" id="date_format_custom_radio" value="custom">
-                                <span class="date-time-text date-time-custom-text">{{ trans('cms::app.custom') }}:
+                                <input type="radio" name="date_format" class="form-check-input" id="date_format_custom_radio" value="custom">
+                                <span class="date-time-text date-time-custom-text form-check-label">{{ trans('cms::app.custom') }}:
                                     <span class="screen-reader-text ml-1">
                                         {{ trans('cms::app.general_settings.enter_a_custom_date') }}</span>
                                 </span>
@@ -140,33 +140,25 @@
 
                     <div class="form-group">
                         <label class="col-form-label" for="time_format">{{ trans('cms::app.time_format') }}</label>
-                        <fieldset>
+                        <fieldset class="ml-4">
                             @foreach ($timeFormats as $key => $item)
                                 <label>
-                                    <input type="radio" name="time_format" value="{{ $key }}"
+                                    <input type="radio" name="time_format" class="form-check-input" value="{{ $key }}"
                                         @if ($key == $timeFormat) checked="checked" @endif />
-                                    <span class="date-time-text format-i18n mr-2">{{ $item }}</span>
+                                    <span class="date-time-text format-i18n mr-2 form-check-label">{{ $item }}</span>
                                     <code>{{ $key }}</code>
                                 </label>
                                 <br />
                             @endforeach
 
                             <label class="screen-reader-text">
-                                <input type="radio" name="time_format" value="custom"
+                                <input type="radio" name="time_format" class="form-check-input" value="custom" 
                                     @if ($timeFormat == 'custom') checked="checked" @endif />
                                 {{ trans('cms::app.general_settings.custom_time_format') }}:
                             </label>
 
-                            <input type="text" name="time_format_custom" id="time_format_custom"
-                                value="{{ get_config('time_format_custom', 'g:i a') }}" class="form-control w-25" />
-
-                            <br />
-
-                            <p class="date-time-doc"><a
-                                    href="https://wordpress.org/support/article/formatting-date-and-time/"
-                                    target="_blank"
-                                    rel="nofollow">{{ trans('cms::app.general_settings.time_formatting_documentation') }}</a>.
-                            </p>
+                            <input type="text" name="time_format_custom" id="time_format_custom" class="form-control w-25"
+                                value="{{ get_config('time_format_custom', 'g:i a') }}" />
 
                         </fieldset>
                     </div>

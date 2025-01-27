@@ -1,9 +1,9 @@
 <div class="form-group">
-    <label class="jw__utils__control jw__utils__control__checkbox">
+    <label class="jw__utils__control jw__utils__control__checkbox form-label">
         <input
             type="checkbox"
             name="{{ $name }}"
-            class="{{ $class ?? '' }}"
+            class="{{ $class ?? '' }} form-check-input"
             id="{{ $id ?? $name }}"
             value="{{ $value ?? $default ?? '1' }}"
             autocomplete="off"
@@ -22,7 +22,7 @@
 
         @if($description ?? false)
         <br>
-        <small class="text-muted">{!! $description !!}</small>
+        <small class="form-hint">{!! $description !!}</small>
         @endif
     </label>
 </div>
