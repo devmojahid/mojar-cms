@@ -10,7 +10,113 @@
 @endsection
 
 @section('container')
-    <form method="post" action="{{ route('installer.environment.save') }}" class="tabs-wrap" autocomplete="off">
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Environment Configuration</h2>
+    </div>
+    <div class="card-content">
+        <div class="space-y-8">
+            <div class="grid gap-6">
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label for="app-name" class="text-sm font-medium">Application Name</label>
+                        <input type="text" id="app-name" class="input" placeholder="My Application">
+                    </div>
+                    <div class="space-y-2">
+                        <label for="app-url" class="text-sm font-medium">Application URL</label>
+                        <input type="text" id="app-url" class="input" placeholder="https://example.com">
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium">Database Configuration</h3>
+                    <div class="space-y-2">
+                        <label for="db-type" class="text-sm font-medium">Database Type</label>
+                        <select id="db-type" class="select">
+                            <option value="mysql">MySQL</option>
+                            <option value="postgresql">PostgreSQL</option>
+                            <option value="sqlite">SQLite</option>
+                            <option value="sqlserver">SQL Server</option>
+                        </select>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label for="db-host" class="text-sm font-medium">Database Host</label>
+                            <input type="text" id="db-host" class="input" placeholder="localhost">
+                        </div>
+                        <div class="space-y-2">
+                            <label for="db-port" class="text-sm font-medium">Database Port</label>
+                            <input type="text" id="db-port" class="input" placeholder="3306">
+                        </div>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label for="db-name" class="text-sm font-medium">Database Name</label>
+                            <input type="text" id="db-name" class="input" placeholder="my_database">
+                        </div>
+                        <div class="space-y-2">
+                            <label for="db-prefix" class="text-sm font-medium">Table Prefix</label>
+                            <input type="text" id="db-prefix" class="input" placeholder="app_">
+                        </div>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label for="db-username" class="text-sm font-medium">Username</label>
+                            <input type="text" id="db-username" class="input" placeholder="database_user">
+                        </div>
+                        <div class="space-y-2">
+                            <label for="db-password" class="text-sm font-medium">Password</label>
+                            <input type="password" id="db-password" class="input" placeholder="••••••••">
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium">Mail Configuration</h3>
+                    <div class="space-y-2">
+                        <label for="mail-driver" class="text-sm font-medium">Mail Driver</label>
+                        <select id="mail-driver" class="select">
+                            <option value="smtp">SMTP</option>
+                            <option value="sendmail">Sendmail</option>
+                            <option value="mailgun">Mailgun</option>
+                            <option value="ses">Amazon SES</option>
+                        </select>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label for="smtp-host" class="text-sm font-medium">SMTP Host</label>
+                            <input type="text" id="smtp-host" class="input" placeholder="smtp.mailtrap.io">
+                        </div>
+                        <div class="space-y-2">
+                            <label for="smtp-port" class="text-sm font-medium">SMTP Port</label>
+                            <input type="text" id="smtp-port" class="input" placeholder="2525">
+                        </div>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label for="smtp-username" class="text-sm font-medium">SMTP Username</label>
+                            <input type="text" id="smtp-username" class="input" placeholder="smtp_user">
+                        </div>
+                        <div class="space-y-2">
+                            <label for="smtp-password" class="text-sm font-medium">SMTP Password</label>
+                            <input type="password" id="smtp-password" class="input" placeholder="••••••••">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-blue">
+                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <div>
+                    <p class="font-medium">Important Note</p>
+                    <p class="mt-1">Make sure your database credentials are correct. The installation process will attempt to create tables and seed initial data.</p>
+                </div>
+            </div>
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <a href="requirements.html" class="button button-outline w-full sm:w-auto">Previous</a>
+                <a href="theme.html" class="button w-full sm:w-auto">Continue</a>
+            </div>
+        </div>
+    </div>
+</div>
+    {{-- <form method="post" action="{{ route('installer.environment.save') }}" class="tabs-wrap" autocomplete="off">
         @csrf
 
         <div class="form-group">
@@ -117,7 +223,7 @@
                 <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
             </button>
         </div>
-    </form>
+    </form> --}}
 @endsection
 
 @section('scripts')

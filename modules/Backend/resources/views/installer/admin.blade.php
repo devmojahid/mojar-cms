@@ -10,8 +10,42 @@
 @endsection
 
 @section('container')
-
-    <form method="post" action="{{ route('installer.admin.save') }}" autocomplete="off">
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Create Admin Account</h2>
+    </div>
+    <div class="card-content">
+        <div class="space-y-8">
+            <div class="max-w-md mx-auto space-y-6">
+                <div class="space-y-2">
+                    <label for="full-name" class="text-sm font-medium">Full Name</label>
+                    <input type="text" id="full-name" class="input" placeholder="John Doe">
+                </div>
+                <div class="space-y-2">
+                    <label for="email" class="text-sm font-medium">Email Address</label>
+                    <input type="email" id="email" class="input" placeholder="john@example.com">
+                </div>
+                <div class="space-y-2">
+                    <label for="username" class="text-sm font-medium">Username</label>
+                    <input type="text" id="username" class="input" placeholder="johndoe">
+                </div>
+                <div class="space-y-2">
+                    <label for="password" class="text-sm font-medium">Password</label>
+                    <input type="password" id="password" class="input" placeholder="••••••••">
+                </div>
+                <div class="space-y-2">
+                    <label for="confirm-password" class="text-sm font-medium">Confirm Password</label>
+                    <input type="password" id="confirm-password" class="input" placeholder="••••••••">
+                </div>
+            </div>
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <a href="theme.html" class="button button-outline w-full sm:w-auto">Previous</a>
+                <a href="license.html" class="button w-full sm:w-auto">Continue</a>
+            </div>
+        </div>
+    </div>
+</div>
+    {{-- <form method="post" action="{{ route('installer.admin.save') }}" autocomplete="off">
         @csrf
 
         <div class="form-group {{ $errors->has('name') ? ' has-error ' : '' }}">
@@ -72,7 +106,7 @@
                 <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
             </button>
         </div>
-    </form>
+    </form> --}}
 @endsection
 
 @section('scripts')

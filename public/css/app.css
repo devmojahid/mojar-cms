@@ -129,13 +129,11 @@
 }
 
 .CollapsibleContent[data-state=open]{
-  -webkit-animation:slideDown 300ms ease-out;
-          animation:slideDown 300ms ease-out;
+  animation:slideDown 300ms ease-out;
 }
 
 .CollapsibleContent[data-state=closed]{
-  -webkit-animation:slideUp 300ms ease-out;
-          animation:slideUp 300ms ease-out;
+  animation:slideUp 300ms ease-out;
 }
 
 .input-group :not(:first-child) input{
@@ -171,15 +169,6 @@
   height:calc(var(--vh, 1vh) * 100);
 }
 
-@-webkit-keyframes slideDown{
-  from{
-    height:0;
-  }
-  to{
-    height:var(--radix-collapsible-content-height);
-  }
-}
-
 @keyframes slideDown{
   from{
     height:0;
@@ -188,28 +177,12 @@
     height:var(--radix-collapsible-content-height);
   }
 }
-@-webkit-keyframes slideUp{
-  from{
-    height:var(--radix-collapsible-content-height);
-  }
-  to{
-    height:0;
-  }
-}
 @keyframes slideUp{
   from{
     height:var(--radix-collapsible-content-height);
   }
   to{
     height:0;
-  }
-}
-@-webkit-keyframes progress-bar-stripes{
-  0%{
-    background-position:1rem 0;
-  }
-  to{
-    background-position:0 0;
   }
 }
 @keyframes progress-bar-stripes{
@@ -221,8 +194,7 @@
   }
 }
 .animate-stripes{
-  -webkit-animation:progress-bar-stripes 1s linear infinite;
-          animation:progress-bar-stripes 1s linear infinite;
+  animation:progress-bar-stripes 1s linear infinite;
 }
 
 .dash-tail-app .leaflet-control{
@@ -391,20 +363,6 @@ button[type=button][role=checkbox]{
     display:none;
   }
 }
-@-webkit-keyframes foodPlate{
-  0%{
-    transform:translateY(0px) rotate(0deg) scale(1);
-  }
-  25%{
-    transform:translateY(-10px) rotate(5deg) scale(1.05);
-  }
-  75%{
-    transform:translateY(10px) rotate(-5deg) scale(0.95);
-  }
-  100%{
-    transform:translateY(0px) rotate(0deg) scale(1);
-  }
-}
 @keyframes foodPlate{
   0%{
     transform:translateY(0px) rotate(0deg) scale(1);
@@ -419,16 +377,6 @@ button[type=button][role=checkbox]{
     transform:translateY(0px) rotate(0deg) scale(1);
   }
 }
-@-webkit-keyframes pulse{
-  0%, 100%{
-    opacity:1;
-    transform:scale(1);
-  }
-  50%{
-    opacity:0.7;
-    transform:scale(0.98);
-  }
-}
 @keyframes pulse{
   0%, 100%{
     opacity:1;
@@ -437,14 +385,6 @@ button[type=button][role=checkbox]{
   50%{
     opacity:0.7;
     transform:scale(0.98);
-  }
-}
-@-webkit-keyframes shimmer{
-  0%{
-    background-position:-200% 0;
-  }
-  100%{
-    background-position:200% 0;
   }
 }
 @keyframes shimmer{
@@ -456,18 +396,15 @@ button[type=button][role=checkbox]{
   }
 }
 .loading-pulse{
-  -webkit-animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-          animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 .loading-food-plate{
-  -webkit-animation:foodPlate 2s ease-in-out infinite;
-          animation:foodPlate 2s ease-in-out infinite;
+  animation:foodPlate 2s ease-in-out infinite;
 }
 .loading-shimmer{
   background:linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 100%);
   background-size:200% 100%;
-  -webkit-animation:shimmer 1.5s infinite;
-          animation:shimmer 1.5s infinite;
+  animation:shimmer 1.5s infinite;
 }
 
 .skeleton{
@@ -477,8 +414,7 @@ button[type=button][role=checkbox]{
   @apply absolute inset-0;
   content:"";
   background:linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
-  -webkit-animation:shimmer 1.5s infinite;
-          animation:shimmer 1.5s infinite;
+  animation:shimmer 1.5s infinite;
 }
 .skeleton-text{
   @apply h-4 w-full rounded;
@@ -591,9 +527,6 @@ button[type=button][role=checkbox]{
   min-height:28px;
 }
 .select2-container .select2-selection--multiple .select2-search__field::-moz-placeholder{
-  color:#626976;
-}
-.select2-container .select2-selection--multiple .select2-search__field:-ms-input-placeholder{
   color:#626976;
 }
 .select2-container .select2-selection--multiple .select2-search__field::placeholder{
@@ -993,8 +926,7 @@ button[type=button][role=checkbox]{
   margin-bottom:1rem;
   font-size:0.9rem;
   opacity:0;
-  -webkit-animation:fadeIn 0.3s ease forwards;
-          animation:fadeIn 0.3s ease forwards;
+  animation:fadeIn 0.3s ease forwards;
 }
 .bootstrap-table .fixed-table-container .fixed-table-body .fixed-table-loading .loading-wrap .loading-spinner{
   display:inline-block;
@@ -1010,16 +942,7 @@ button[type=button][role=checkbox]{
   border-radius:50%;
   border:3px solid var(--ms-theme-primary);
   border-color:var(--ms-theme-primary) transparent var(--ms-theme-primary) transparent;
-  -webkit-animation:spinner 1.2s linear infinite;
-          animation:spinner 1.2s linear infinite;
-}
-@-webkit-keyframes spinner{
-  0%{
-    transform:rotate(0deg);
-  }
-  100%{
-    transform:rotate(360deg);
-  }
+  animation:spinner 1.2s linear infinite;
 }
 @keyframes spinner{
   0%{
@@ -1027,16 +950,6 @@ button[type=button][role=checkbox]{
   }
   100%{
     transform:rotate(360deg);
-  }
-}
-@-webkit-keyframes fadeIn{
-  from{
-    opacity:0;
-    transform:translateY(10px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
   }
 }
 @keyframes fadeIn{
@@ -1957,7 +1870,6 @@ button[type=button][role=checkbox]{
 }
 
 .card-header{
-  position:-webkit-sticky;
   position:sticky;
   top:0;
   z-index:10;
@@ -2293,8 +2205,7 @@ button[type=button][role=checkbox]{
 }
 
 #form-theme-upload{
-  -webkit-animation:fadeIn 0.2s ease;
-          animation:fadeIn 0.2s ease;
+  animation:fadeIn 0.2s ease;
 }
 
 @keyframes fadeIn{
@@ -2429,20 +2340,6 @@ button[type=button][role=checkbox]{
     width:auto !important;
   }
 }
-@-webkit-keyframes uploadPulse{
-  0%{
-    transform:scale(1);
-    opacity:1;
-  }
-  50%{
-    transform:scale(1.02);
-    opacity:0.8;
-  }
-  100%{
-    transform:scale(1);
-    opacity:1;
-  }
-}
 @keyframes uploadPulse{
   0%{
     transform:scale(1);
@@ -2466,8 +2363,7 @@ button[type=button][role=checkbox]{
   }
 }
 .dropzone.dz-drag-hover .upload-icon{
-  -webkit-animation:uploadPulse 1s ease infinite;
-          animation:uploadPulse 1s ease infinite;
+  animation:uploadPulse 1s ease infinite;
 }
 
 @media (min-width: 992px){
@@ -2646,18 +2542,7 @@ button[type=button][role=checkbox]{
   display:none;
 }
 .widgets-management-page .collapse.show{
-  -webkit-animation:fadeInUp 0.3s ease forwards;
-          animation:fadeInUp 0.3s ease forwards;
-}
-@-webkit-keyframes fadeInUp{
-  from{
-    opacity:0;
-    transform:translateY(10px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  animation:fadeInUp 0.3s ease forwards;
 }
 @keyframes fadeInUp{
   from{
