@@ -51,59 +51,13 @@
                     </ol>
                 </div>
 
-                <button type="submit" class="btn btn-success mt-3">
-                    <i class="fa fa-save"></i> {{ trans('cms::app.save') }}
+                <button type="submit" class="btn btn-tabler mt-3">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2"></path><path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path><path d="M14 4l0 4l-6 0l0 -4"></path> </svg>
+                    </span>
+                    {{ trans('cms::app.save') }}
                 </button>
             </div>
         </div>
     </form>
 </div>
-
-
-{{-- <div class="card sidebar-item" id="sidebar-{{ $item->get('key') }}">
-    <form action="{{ route('admin.widget.update', [$item->get('key')]) }}" method="post" class="form-ajax">
-        @method('PUT')
-
-        <div class="card-header">
-            <h5>{{ $item->get('label') }}</h5>
-
-            <div class="text-right right-actions">
-                <a href="javascript:void(0)" class="show-edit-form">
-                    <i class="fa fa-sort-down fa-2x"></i>
-                </a>
-            </div>
-        </div>
-
-        <div class="card-body @if (empty($show)) box-hidden @endif">
-            <div class="dd jw-widget-builder" data-key="{{ $item->get('key') }}">
-                @php
-                    $widgets = jw_get_widgets_sidebar($item->get('key'));
-                @endphp
-                <ol class="dd-list">
-                    @foreach ($widgets as $key => $widget)
-                        @php
-                            $widgetData = \Juzaweb\CMS\Facades\HookAction::getWidgets($widget['widget'] ?? 'null');
-                        @endphp
-
-                        @if (empty($widgetData))
-                            @continue
-                        @endif
-
-                        @component('cms::backend.widget.components.sidebar_widget_item', [
-                            'widget' => $widgetData,
-                            'sidebar' => $item,
-                            'key' => $key,
-                            'data' => $widget,
-                        ])
-                        @endcomponent
-                    @endforeach
-                </ol>
-            </div>
-
-            <button type="submit" class="btn btn-success">
-                <i class="fa fa-save"></i> {{ trans('cms::app.save') }}
-            </button>
-
-        </div>
-    </form>
-</div> --}}
