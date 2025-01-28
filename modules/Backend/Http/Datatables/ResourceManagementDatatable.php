@@ -30,7 +30,20 @@ class ResourceManagementDatatable extends DataTable
         return [
             'name' => [
                 'label' => trans('cms::app.name'),
-                'formatter' => [$this, 'rowActionsFormatter'],
+                'formatter' => function ($value, $row, $index) {
+                    return view(
+                        'cms::backend.items.datatable_item',
+                        [
+                            'value' => $row->{$row->getFieldName()},
+                            'row' => $row,
+                            'actions' => $this->rowAction($row),
+                            'editUrl' => $this->currentUrl . '/' . $row->id . '/edit',
+                            'title_hidden' => false,
+                            'actions_hidden' => true,
+                        ]
+                    )
+                    ->render();
+                },
             ],
             'created_at' => [
                 'label' => trans('cms::app.created_at'),
@@ -40,6 +53,26 @@ class ResourceManagementDatatable extends DataTable
                     return jw_date_format($row->created_at);
                 }
             ],
+            'operations' => [
+                'label' => trans('cms::app.operations'),
+                'width' => '10%',
+                'align' => 'center',
+                'sortable' => false,
+                'formatter' => function ($value, $row, $index) {
+                    return view(
+                        'cms::backend.items.datatable_item',
+                        [
+                            'value' => $row->{$row->getFieldName()},
+                            'row' => $row,
+                            'actions' => $this->rowAction($row),
+                            'editUrl' => $this->currentUrl . '/' . $row->id . '/edit',
+                            'title_hidden' => true,
+                            'actions_hidden' => false,
+                        ]
+                    )
+                    ->render();
+                },
+            ]
         ];
     }
 

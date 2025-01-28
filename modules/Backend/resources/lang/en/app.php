@@ -347,6 +347,7 @@ return [
     'with_illustration' => 'With illustration',
     'with_cover' => 'With cover',
     'universal_time_is' => 'Universal time is',
+    'filters' => 'Filters',
     'date_format' => 'Date Format',
     'time_format' => 'Time Format',
     'site_language' => 'Site language',

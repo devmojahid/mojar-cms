@@ -7,7 +7,7 @@
     ])
         <div class="row">
             <div class="col-md-8">
-                <div class="card">
+                <div class="card mb-3">
                     <div class="card-body">
 
                         {{ Field::text($model, 'name', [
@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card mb-3">
                     <div class="card-body">
                         <div class="form-group">
                             <label class="col-form-label" for="password">{{ trans('cms::app.password') }}</label>
@@ -39,7 +39,7 @@
             </div>
 
             <div class="col-md-4">
-                <div class="card">
+                <div class="card mb-3">
                     <div class="card-body">
                         <div class="form-group">
                             <label class="col-form-label" for="status">{{ trans('cms::app.status') }}</label>

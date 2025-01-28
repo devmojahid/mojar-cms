@@ -1,10 +1,11 @@
-<div class="card">
-    <div class="card-header justify-content-between align-items-center" style="border-bottom: none">
+<div class="card data-table-wrapper">
+    <div class="card-header d-flex flex-wrap gap-2 justify-content-between align-items-center">
         @if ($actions)
-            <div>
+        <div class="d-flex flex-wrap gap-2 align-items-center">
+            <div class="bulk-actions-wrapper">
                 <form method="post" class="form-inline">
                     @csrf
-                    <div class="dropdown d-inline-block mb-2 mr-2">
+                    <div class="dropdown d-inline-block mb-2 mr-2 data-table-bulk-actions">
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle bulk-actions-button" 
                                     data-bs-toggle="dropdown" 
@@ -35,6 +36,14 @@
                     </div>
                 </form>
             </div>
+            <button type="button" class="btn btn-outline-primary d-block d-md-none mb-2 data-table-filters" data-bs-toggle="collapse" data-bs-target="#form-search" aria-expanded="false" aria-controls="form-search">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-filter">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.414 -4.414a2 2 0 0 1 -.586 -1.414v-2.172z" />
+                </svg>
+                {{ trans('cms::app.filters') }}
+            </button>
+        </div>
         @endif
 
         @php
@@ -42,25 +51,27 @@
         @endphp
 
         @if ($searchable)
-            <div>
-                <form method="get" class="form-inline" id="form-search">
-                    @foreach ($searchFields as $name => $field)
-                        {{ $searchFieldTypes[$field['type']]['view']->with([
-                            'name' => $name,
-                            'field' => $field,
-                        ]) }}
-                    @endforeach
+            <div class="search-wrapper">
+                    <form method="get" class="form-inline collapse d-md-block" id="form-search">
+                    <div class="d-flex flex-wrap gap-2 align-items-center">
+                        @foreach ($searchFields as $name => $field)
+                            {{ $searchFieldTypes[$field['type']]['view']->with([
+                                'name' => $name,
+                                'field' => $field,
+                            ]) }}
+                        @endforeach
 
-                    <button type="submit" class="btn btn-primary mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-                            <path d="M21 21l-6 -6" />
-                        </svg>
-                        {{ trans('cms::app.search') }}
-                    </button>
+                        <button type="submit" class="btn btn-primary mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                                <path d="M21 21l-6 -6" />
+                            </svg>
+                            {{ trans('cms::app.search') }}
+                        </button>
+                    </div>
                 </form>
             </div>
         @endif

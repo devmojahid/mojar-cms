@@ -31,8 +31,20 @@ class EmailTemplateDataTable extends DataTable
         return [
             'code' => [
                 'label' => trans('cms::app.email'),
-                'formatter' => [$this, 'rowActionsFormatter'],
-                'width' => '30%',
+                'formatter' => function ($value, $row, $index) {
+                    return view(
+                        'cms::backend.items.datatable_item',
+                        [
+                            'value' => $row->{$row->getFieldName()},
+                            'row' => $row,
+                            'actions' => $this->rowAction($row),
+                            'editUrl' => $this->currentUrl . '/' . $row->id . '/edit',
+                            'title_hidden' => false,
+                            'actions_hidden' => true,
+                        ]
+                    )
+                    ->render();
+                },
             ],
             'subject' => [
                 'label' => trans('cms::app.subject'),
@@ -45,6 +57,26 @@ class EmailTemplateDataTable extends DataTable
                     return jw_date_format($row->created_at);
                 },
             ],
+            'operations' => [
+                'label' => trans('cms::app.operations'),
+                'width' => '10%',
+                'align' => 'center',
+                'sortable' => false,
+                'formatter' => function ($value, $row, $index) {
+                    return view(
+                        'cms::backend.items.datatable_item',
+                        [
+                            'value' => $row->{$row->getFieldName()},
+                            'row' => $row,
+                            'actions' => $this->rowAction($row),
+                            'editUrl' => $this->currentUrl . '/' . $row->id . '/edit',
+                            'title_hidden' => true,
+                            'actions_hidden' => false,
+                        ]
+                    )
+                    ->render();
+                },
+            ]
         ];
     }
 

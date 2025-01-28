@@ -182,6 +182,7 @@ function initSelect2(parent = 'body') {
                 };
             }
         },
+        containerCssClass: 'form-select1',
     });
 
     $(parent + ' .load-select2').select2({

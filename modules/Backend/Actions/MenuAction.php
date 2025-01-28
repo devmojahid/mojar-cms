@@ -238,6 +238,22 @@ class MenuAction extends Action
                 'priority' => 60,
             ]
         );
+
+        HookAction::addSettingForm(
+            'media',
+            [
+                'name' => trans('cms::app.media_setting.title'),
+                'view' => view(
+                     'cms::backend.setting.media',[
+                            'title' => trans('cms::app.media_setting.title'),
+                            'postTypes' => HookAction::getPostTypes(),
+                            'thumbnailDefaults' => get_config('thumbnail_defaults', []),
+                            'thumbnailSizes' => HookAction::getThumbnailSizes()->toArray(),
+                        ]
+                     ),
+                'priority' => 70,
+            ]
+        );
     }
 
     public function addPostTypes(): void

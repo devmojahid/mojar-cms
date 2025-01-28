@@ -54,7 +54,20 @@ class ResourceDatatable extends DataTable
         $columns = [
             'name' => [
                 'label' => trans('cms::app.name'),
-                'formatter' => [$this, 'rowActionsFormatter'],
+                'formatter' => function ($value, $row, $index) {
+                    return view(
+                        'cms::backend.items.datatable_item',
+                        [
+                            'value' => $row->{$row->getFieldName()},
+                            'row' => $row,
+                            'actions' => $this->rowAction($row),
+                            'editUrl' => $this->currentUrl . '/' . $row->id . '/edit',
+                            'title_hidden' => false,
+                            'actions_hidden' => true,
+                        ]
+                    )
+                    ->render();
+                },
             ],
             'display_order' => [
                 'label' => trans('cms::app.display_order'),
@@ -68,6 +81,26 @@ class ResourceDatatable extends DataTable
                     return jw_date_format($row->created_at);
                 }
             ],
+            'operations' => [
+                'label' => trans('cms::app.operations'),
+                'width' => '10%',
+                'align' => 'center',
+                'sortable' => false,
+                'formatter' => function ($value, $row, $index) {
+                    return view(
+                        'cms::backend.items.datatable_item',
+                        [
+                            'value' => $row->{$row->getFieldName()},
+                            'row' => $row,
+                            'actions' => $this->rowAction($row),
+                            'editUrl' => $this->currentUrl . '/' . $row->id . '/edit',
+                            'title_hidden' => true,
+                            'actions_hidden' => false,
+                        ]
+                    )
+                    ->render();
+                },
+            ]
         ];
 
         if (isset($this->childs)) {

@@ -14,10 +14,6 @@
                             'placeholder' => 'Enter title here...'
                         ]) }}
 
-                        {{ Field::images($model, 'content', [
-                            'required' => true,
-                            'placeholder' => 'Enter content here...'
-                        ]) }}
                     </div>
                 </div>
 
