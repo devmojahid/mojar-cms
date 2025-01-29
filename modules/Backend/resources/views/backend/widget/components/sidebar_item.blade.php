@@ -5,13 +5,8 @@
         <div class="card-header d-flex align-items-center justify-content-between">
             <h5 class="mb-0">{{ $item->get('label') }}</h5>
             <div class="right-actions">
-                <!-- 
-                  Instead of a direct JavaScript-driven toggle, 
-                  use Bootstrap’s collapse:
-                  data-bs-toggle="collapse" data-bs-target="#sidebar-collapse-{{ $item->get('key') }}"
-                -->
-                <a 
-                  href="javascript:void(0)" 
+                <a
+                  href="javascript:void(0)"
                   class="toggle-collapse"
                   data-bs-toggle="collapse"
                   data-bs-target="#sidebar-collapse-{{ $item->get('key') }}"
@@ -24,7 +19,7 @@
         </div>
 
         <!-- Collapse Body -->
-        <div 
+        <div
           id="sidebar-collapse-{{ $item->get('key') }}"
           class="collapse @if(!empty($show)) show @endif"
         >

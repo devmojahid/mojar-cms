@@ -1,12 +1,12 @@
 .widgets-management-page {
     // Root padding & spacing
     padding: 1rem;
-  
+
     // PAGE HEADER
     .page-header {
       border-bottom: 1px solid #dee2e6;
       margin-bottom: 1.5rem;
-  
+
       .page-title {
         font-weight: 700;
         font-size: 1.25rem;
@@ -18,7 +18,7 @@
         color: #6c757d;
       }
     }
-  
+
     // ADD NEW BUTTON
     .btn-add-new {
       padding: 0.5rem 1rem;
@@ -29,17 +29,17 @@
         font-size: 1rem;
       }
     }
-  
+
     // WIDGET BLOCKS & CARDS
     .card {
       border: 1px solid #e2e2e2;
       border-radius: 6px;
       transition: box-shadow 0.2s ease, transform 0.2s ease;
-  
+
       &:hover {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
       }
-  
+
       .card-header {
         background-color: #f8f9fa;
         padding: 0.75rem 1rem;
@@ -49,7 +49,7 @@
         padding: 1rem;
       }
     }
-  
+
     // SIDEBAR ITEM
     .sidebar-item {
       .right-actions {
@@ -61,7 +61,7 @@
         }
       }
     }
-  
+
     // WIDGET ITEM STYLING
     .widget-block {
       .widget-block-body {
@@ -82,30 +82,30 @@
         }
       }
     }
-  
+
     // FOR THE LIST OF CHECKBOXES
     .widget-sidebar-item {
       border-bottom: 1px solid #e9ecef;
       color: #495057;
       padding: 0.6rem 1rem;
       cursor: pointer;
-  
+
       &:hover {
         background-color: #eceff1;
       }
-  
+
       &:last-child {
         border-bottom: none;
       }
     }
-  
+
     // DRAGGABLE SIDEBAR WIDGET ITEMS
     .sidebar-widget-item {
       margin: 0.5rem 0;
       border: 1px solid #ddd;
       border-radius: 4px;
       background-color: #fff;
-  
+
       .dd-handle {
         padding: 0.5rem 1rem;
         background-color: #f1f3f5;
@@ -132,7 +132,7 @@
         }
       }
     }
-  
+
     // MEDIA QUERIES FOR RESPONSIVENESS
     @media (max-width: 767px) {
       // More compact spacing on mobile
@@ -161,12 +161,17 @@
   cursor: move;
   transition: all 0.2s ease;
   margin: 0;
-  padding: 0;  
+  padding: 0;
   border: none;
+  background: rgba(32, 107, 196, 0.06);
+  padding-top: 0px;
+  padding-bottom: 35px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .dd-handle:hover {
-  background: rgba(32, 107, 196, 0.06);
+  background: rgba(32, 107, 196, 0.09);
 }
 
 .widget-title {
@@ -239,7 +244,7 @@
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-  
+
   .form-item-edit {
       padding: 0 0.5rem 0.5rem;
   }

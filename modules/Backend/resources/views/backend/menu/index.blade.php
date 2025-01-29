@@ -20,7 +20,8 @@
                                 </div>
                             @endif
                             <div class="btn-group">
-                                <a href="javascript:void(0)" class="btn btn-tabler btn-add-menu">
+                                <a href="javascript:void(0)" class="btn btn-tabler btn-add-menu" data-toggle="modal"
+                                    data-target="#add-menu-modal">
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -41,7 +42,7 @@
                         {{-- <div class="col-md-6 form-add-menu box-hidden d-flex justify-content-end">
                         <form action="{{ route('admin.menu.store') }}"
                               method="post"
-                              class="form-ajax form-inline">
+                              class="form-ajax">
                             @csrf
                             <div class="form-group mr-2">
                                 <input type="text"
@@ -59,6 +60,25 @@
                     </div> --}}
                         <!-- /Add New Menu Form -->
                     </div>
+                    @if (empty($menu))
+                        <div class="empty">
+                            <div class="empty-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2"
+                                    width="50" height="50" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M4 6l16 0"></path>
+                                    <path d="M4 12l16 0"></path>
+                                    <path d="M4 18l16 0"></path>
+                                </svg>
+                            </div>
+                            <p class="empty-title">No menus found</p>
+                            <p class="empty-subtitle text-muted">
+                                Start by creating your first menu to organize your site's navigation structure.
+                            </p>
+
+                        </div>
+                    @endif
                 </div>
             </div>
             <!-- /Selection / Creation Section -->
@@ -101,7 +121,17 @@
                                         <!-- The "Save" button will submit the form below via JS or direct submit -->
                                         <button form="menu-structure-form" type="submit" class="btn btn-primary">
                                             <span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy"> <path stroke="none" d="M0 0h24v24H0z" fill="none"></path> <path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2"></path> <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path> <path d="M14 4l0 4l-6 0l0 -4"></path> </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path
+                                                        d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2">
+                                                    </path>
+                                                    <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                                                    <path d="M14 4l0 4l-6 0l0 -4"></path>
+                                                </svg>
                                             </span>
                                             {{ trans('cms::app.save') }}
                                         </button>
@@ -162,7 +192,18 @@
                                         </a>
                                         <button type="submit" class="btn btn-primary">
                                             <span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" <svg="" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy"> <path stroke="none" d="M0 0h24v24H0z" fill="none"></path> <path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2"></path> <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path> <path d="M14 4l0 4l-6 0l0 -4"></path> </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" <svg="" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path
+                                                        d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2">
+                                                    </path>
+                                                    <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                                                    <path d="M14 4l0 4l-6 0l0 -4"></path>
+                                                </svg>
                                             </span>
                                             {{ trans('cms::app.save') }}
                                         </button>
@@ -176,6 +217,7 @@
                     <!-- /Right Column: Menu Structure & Settings -->
                 </div>
             @endif
+
         </div>
     </div>
 
@@ -187,7 +229,13 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="add-menu-modal-label">
                         <span class="me-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus"> <path stroke="none" d="M0 0h24v24H0z" fill="none"></path> <path d="M12 5l0 14"></path> <path d="M5 12l14 0"></path> </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M12 5l0 14"></path>
+                                <path d="M5 12l14 0"></path>
+                            </svg>
                         </span>
                         {{ trans('cms::app.add_menu') }}
                     </h5>
@@ -195,9 +243,9 @@
                         aria-label="{{ trans('cms::app.close') }}"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="form-add-menu">
-                        {{-- Existing form content will be moved here via JavaScript --}}
-                        <form action="{{ route('admin.menu.store') }}" method="post" class="form-ajax form-inline">
+                    <form action="{{ route('admin.menu.store') }}" method="post" class="form-ajax">
+                        <div id="form-add-menu">
+                            {{-- Existing form content will be moved here via JavaScript --}}
                             <div class="form-group">
                                 <input type="text" name="name" class="form-control" autocomplete="off" required
                                     placeholder="{{ trans('cms::app.menu_name') }}">
@@ -215,15 +263,16 @@
                                 </span>
                                 {{ trans('cms::app.add_menu') }}
                             </button>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
 
 
-    {{-- @extends('cms::layouts.backend')
+{{-- @extends('cms::layouts.backend')
 
 @section('content')
     <div id="menu-container">
@@ -246,7 +295,7 @@
             </div>
 
             <div class="col-md-6 form-add-menu box-hidden">
-                <form action="{{ route('admin.menu.store') }}" method="post" class="form-ajax form-inline">
+                <form action="{{ route('admin.menu.store') }}" method="post" class="form-ajax">
                     <div class="form-group">
                         <input type="text" name="name" class="form-control" autocomplete="off" required
                             placeholder="{{ trans('cms::app.menu_name') }}">

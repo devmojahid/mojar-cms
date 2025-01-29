@@ -9,23 +9,7 @@
     </div>
 
     <div class="row" id="widget-container">
-        <!-- LEFT COLUMN: Widget List + Search/Filter -->
         <div class="col-12 col-lg-4">
-            <!-- FILTER / SEARCH BAR -->
-            <div class="card mb-4">
-                <div class="card-body">
-                    <div class="form-group mb-0">
-                        <label for="widget-search" class="form-label">{{ __('Search Widgets') }}</label>
-                        <input 
-                            type="text" 
-                            class="form-control" 
-                            id="widget-search" 
-                            placeholder="{{ __('Type to filter widgets...') }}"
-                        >
-                    </div>
-                </div>
-            </div>
-
             <!-- WIDGET LIST -->
             @foreach($widgets as $key => $widget)
                 @component('cms::backend.widget.components.widget_item', [
