@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs" role="tablist">
+{{-- <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item">
         <a class="nav-link active"
            id="box-{{ $key }}-latest-label"
@@ -83,11 +83,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 
 
-{{-- <ul class="nav nav-tabs" role="tablist">
+ <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item">
         <a class="nav-link active" id="box-{{ $key }}-latest-label" href="#box-{{ $key }}-latest-tab" data-toggle="tab">{{ trans('cms::app.latest') }}</a>
     </li>
@@ -140,4 +140,4 @@
 
     </div>
 
-</div> --}}
+</div>

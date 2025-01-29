@@ -1,5 +1,5 @@
 <?php
-
+    
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -11,3 +11,12 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+use Mojarsoft\DevTool\Http\Controllers\ThemeController;
+use Mojarsoft\DevTool\Http\Controllers\PluginController;
+
+Route::get('/themes2', [ThemeController::class, 'getThemes']);
+Route::get('/plugins2', [PluginController::class, 'getPlugins']);
+
+
+    

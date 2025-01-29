@@ -80,6 +80,7 @@ mix.combine(
         baseAsset + '/js/data-table-enhanced.js',
         baseAsset + '/js/main-dashboard-layout.js',
         baseAsset + '/js/custom-alert.js',
+        baseAsset + '/js/menu-modify.js',
     ],
     `${publicPath}/js/custom-main.min.js`
 );

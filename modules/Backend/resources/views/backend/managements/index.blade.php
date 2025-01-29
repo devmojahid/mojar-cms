@@ -74,19 +74,6 @@
                             'url' => route('admin.logs.email'),
                             'priority' => -9970,
                         ],
-                        // [
-                        //     'id' => 'email_hooks',
-                        //     'title' => trans('cms::app.managements-area.email_hooks'),
-                        //     'description' => trans('cms::app.managements-area.email_hooks_settings_description'),
-                        //     'icon' => [
-                        //         'type' => 'svg',
-                        //         'value' => 'email-hooks',
-                        //         'svg' =>
-                        //             '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail-code"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 19h-6a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v6" /><path d="M3 7l9 6l9 -6" /><path d="M20 21l2 -2l-2 -2" /><path d="M17 17l-2 2l2 2" /></svg>',
-                        //     ],
-                        //     'url' => "email-hooks ",
-                        //     'priority' => -9960,
-                        // ],
                     ],
                 ],
                 'tools' => [
@@ -112,8 +99,8 @@
                         ],
                         [
                             'id' => 'log-viewer',
-                            'title' => trans('cms::app.log_viewer'),
-                            'description' => trans('cms::app.log_viewer_settings_description'),
+                            'title' => trans('cms::app.managements-area.log_viewer'),
+                            'description' => trans('cms::app.managements-area.log_viewer_settings_description'),
                             'url' => route('admin.logs.error.index'),
                             'icon' => [
                                 'type' => 'svg',
@@ -125,8 +112,8 @@
                         ],
                         [
                             'id' => 'dev-tools',
-                            'title' => trans('cms::app.dev_tools'),
-                            'description' => trans('cms::app.dev_tools_settings_description'),
+                            'title' => trans('cms::app.managements-area.dev_tools'),
+                            'description' => trans('cms::app.managements-area.dev_tools_settings_description'),
                             'url' => route('admin.dev-tool'),
                             'icon' => [
                                 'type' => 'svg',
@@ -139,7 +126,7 @@
                         [
                             'id' => 'translations',
                             'title' => trans('cms::app.translations'),
-                            'description' => trans('cms::app.translations_settings_description'),
+                            'description' => trans('cms::app.managements-area.translations_settings_description'),
                             'url' => route('admin.translations.index'),
                             'icon' => [
                                 'type' => 'svg',
@@ -162,7 +149,7 @@
                         [
                             'id' => 'api-documentation',
                             'title' => trans('cms::app.api_documentation'),
-                            'description' => trans('cms::app.api_documentation_settings_description'),
+                            'description' => trans('cms::app.managements-area.api_documentation_settings_description'),
                             'icon' => [
                                 'type' => 'svg',
                                 'value' => 'api-documentation',
@@ -175,7 +162,7 @@
                         [
                             'id' => 'updates',
                             'title' => trans('cms::app.updates'),
-                            'description' => trans('cms::app.updates_settings_description'),
+                            'description' => trans('cms::app.managements-area.updates_settings_description'),
                             'icon' => [
                                 'type' => 'svg',
                                 'value' => 'api-documentation',

@@ -170,6 +170,7 @@
         </div>
     </div>
 
+    @include('cms::components.custom-alert')
     <template id="form-images-template">
         @component('cms::components.image-item', [
             'name' => '{name}',
