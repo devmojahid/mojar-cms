@@ -256,7 +256,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                 <a href="{{ route('admin.profile') }}" class="dropdown-item">{{ trans('cms::app.profile') }}</a>
-                <a href="./settings.html" class="dropdown-item">Settings</a>
+                <a href="{{ url('app/setting/system') }}" class="dropdown-item">Settings</a>
                 <a href="javascript:void(0)" class="dropdown-item auth-logout">{{ trans('cms::app.logout') }}</a>
             </div>
         </div>

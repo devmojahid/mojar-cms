@@ -1,26 +1,13 @@
 @extends('cms::layouts.backend')
 
 @section('content')
-    <div class="col-md-12 col-lg-12">
+    <div class="col-md-12 col-lg-12 plugin-install-container">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header p-0 p-sm-2">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
                         <a class="nav-link active" href="#">
-                            Free Plugins
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon nav-link-icon" width="24" height="24"
-                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path
-                                    d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-                            </svg>
-                            Premium Plugins
+                            <span>Free Plugins</span>
                         </a>
                     </li>
                     <li class="nav-item ms-auto">
@@ -46,15 +33,6 @@
                             <form action="{{ route('admin.plugin.install.upload') }}" role="form" id="pluginUploadForm"
                                 name="pluginUploadForm" method="post" class="dropzone dropzone-plugin"
                                 enctype="multipart/form-data">
-                                {{-- <div class="form-group">
-                                <div class="controls text-center">
-                                    <div class="input-group w-100">
-                                        <a class="btn btn-primary w-100 text-white"
-                                            id="plugin-upload-button">{{ trans('cms::filemanager.message-choose') }}</a>
-                                    </div>
-                                </div>
-                            </div> --}}
-
                                 <div class="upload-wrapper">
                                     <div class="upload-content text-center">
                                         <div class="upload-icon mb-3">
@@ -116,28 +94,31 @@
         </div>
     </div>
 
-
     <template id="plugin-template">
-        <div class="col-lg-6 mb-3">
-            <div class="card">
+        <div class="col-12 col-md-6 mb-3">
+            <div class="card h-100">
                 <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col-3">
+                    <div class="row g-3 align-items-center">
+                        <!-- Thumbnail -->
+                        <div class="col-4 col-sm-3">
                             <img src="{thumbnail}"
                                 onerror="this.onerror=null; this.src='{{ asset('jw-styles/mojar/images/screenshot.svg') }}'"
-                                alt="{title}" class="rounded img-fluid">
+                                alt="{title}" class="rounded img-fluid w-100">
                         </div>
-                        <div class="col">
-                            <h3 class="card-title mb-1">
+
+                        <!-- Content -->
+                        <div class="col-8 col-sm-7">
+                            <h3 class="card-title h4 mb-1 text-truncate">
                                 {title}
                             </h3>
-                            <div class="text-secondary">
+                            <div class="text-secondary mb-2 text-wrap"
+                                style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
                                 {description}
                             </div>
-                            <div class="mt-3">
+                            <div class="mt-2">
                                 <div class="row g-2 align-items-center">
                                     <div class="col-auto">
-                                        {version}
+                                        <span class="text-muted">{version}</span>
                                     </div>
                                     <div class="col">
                                         <div class="progress progress-sm">
@@ -149,8 +130,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-auto">
-                            <button class="btn btn-primary install-plugin" data-plugin="{name}">
+
+                        <!-- Action Button -->
+                        <div
+                            class="col-12 col-sm-2 d-flex justify-content-start justify-content-sm-end align-items-center mt-2 mt-sm-0">
+                            <button class="btn btn-primary install-plugin w-100 w-sm-auto" data-plugin="{name}">
                                 {{ trans('cms::app.install') }}
                             </button>
                         </div>
@@ -173,35 +157,15 @@
             if (typeof juzaweb !== 'undefined' && typeof juzaweb.message !== 'undefined') {
                 juzaweb.message(response);
             } else {
-                const toastHtml = `
-                    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="3000">
-                        <div class="toast-header">
-                            <span class="avatar avatar-xs me-2 ${response.status ? 'bg-success' : 'bg-danger'}">
-                                <i class="fas fa-${response.status ? 'check' : 'times'} text-white"></i>
-                            </span>
-                            <strong class="me-auto">${response.status ? 'Success' : 'Error'}</strong>
-                            <small>just now</small>
-                            <button type="button" class="ms-2 btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                        </div>
-                        <div class="toast-body">
-                            ${response.message}
-                        </div>
-                    </div>
-                `;
-
-                let toastContainer = document.querySelector('.toast-container');
-                if (!toastContainer) {
-                    toastContainer = document.createElement('div');
-                    toastContainer.className = 'toast-container position-fixed top-0 end-0 p-3';
-                    document.body.appendChild(toastContainer);
-                }
-
-                const toastElement = $(toastHtml).appendTo(toastContainer)[0];
-                const toast = new bootstrap.Toast(toastElement);
-                toast.show();
-
-                $(toastElement).on('hidden.bs.toast', function() {
-                    $(this).remove();
+                CustomToast.show({
+                    title: response.status ? 'Success!' : 'Error!',
+                    message: response.message,
+                    type: response.status ? 'success' : 'error',
+                    duration: 4000,
+                    onClose: function() {
+                        // Optional callback when toast is closed
+                        //
+                    }
                 });
             }
         }

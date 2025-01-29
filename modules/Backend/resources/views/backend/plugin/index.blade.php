@@ -295,36 +295,15 @@
                 if (typeof juzaweb !== 'undefined' && typeof juzaweb.message !== 'undefined') {
                     juzaweb.message(response);
                 } else {
-                    const toastHtml = `
-              <div class="toast show" role="alert" aria-live="assertive"
-                   aria-atomic="true" data-bs-autohide="true" data-bs-delay="3000">
-                <div class="toast-header">
-                  <span class="avatar avatar-xs me-2 ${response.status ? 'bg-success' : 'bg-danger'}">
-                    <i class="fas fa-${response.status ? 'check' : 'times'} text-white"></i>
-                  </span>
-                  <strong class="me-auto">${response.status ? 'Success' : 'Error'}</strong>
-                  <small>just now</small>
-                  <button type="button" class="ms-2 btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body">
-                  ${response.message}
-                </div>
-              </div>
-            `;
-
-                    let toastContainer = document.querySelector('.toast-container');
-                    if (!toastContainer) {
-                        toastContainer = document.createElement('div');
-                        toastContainer.className = 'toast-container position-fixed top-0 end-0 p-3';
-                        document.body.appendChild(toastContainer);
-                    }
-
-                    const toastElement = $(toastHtml).appendTo(toastContainer)[0];
-                    const toast = new bootstrap.Toast(toastElement);
-                    toast.show();
-
-                    $(toastElement).on('hidden.bs.toast', function() {
-                        $(this).remove();
+                    CustomToast.show({
+                        title: response.status ? 'Success!' : 'Error!',
+                        message: response.message,
+                        type: response.status ? 'success' : 'error',
+                        duration: 4000,
+                        onClose: function() {
+                            // Optional callback when toast is closed
+                            //
+                        }
                     });
                 }
             }
