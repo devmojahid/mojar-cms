@@ -1,20 +1,43 @@
 {
     "styles": {
         "js": [
-            "assets/js/main.js"
+           "assets\/js\/main.js"
         ],
         "css": [
-            "assets/css/main.css"
+            "assets\/css\/main.css"
         ]
     },
-    "sidebars": {
-        "sidebar": {
-            "label": "Sidebar"
+    "templates": {
+        "home": {
+            "label": "Home",
+            "view": "theme::templates.home",
+            "blocks": {
+                "content": {
+                    "label": "Content"
+                }
+            }
         }
     },
-    "nav_menus": {
-        "primary": {
-            "label": "Primary Menu"
+    "blocks": {
+        "slider": {
+            "label": "Slider Image",
+            "description": "Slider Home page",
+            "view": "theme::components.blocks.slider"
+        },
+        "featured_games": {
+            "label": "Featured Games",
+            "description": "Featured Games",
+            "view": "theme::components.blocks.featured_games"
+        },
+        "most_viewed": {
+            "label": "Most viewed Games",
+            "description": "Most viewed Games",
+            "view": "theme::components.blocks.most_viewed"
+        },
+        "most_games": {
+            "label": "Most Games",
+            "description": "Most Games",
+            "view": "theme::components.blocks.most_games"
         }
     }
 }

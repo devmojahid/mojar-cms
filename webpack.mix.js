@@ -39,11 +39,11 @@ if (selectedModule) {
     }
 }
 
-if (selectedTheme) {
-    console.log(`Selected theme: ${selectedTheme}`);
-    require(`${themePath}/${selectedTheme}/assets/mix.js`);
-    return;
-}
+// if (selectedTheme) {
+//     console.log(`Selected theme: ${selectedTheme}`);
+//     require(`${themePath}/${selectedTheme}/assets/mix.js`);
+//     return;
+// }
 
 if (process.env.npm_config_plugin) {
     require(`${pluginPath}/${process.env.npm_config_plugin}/assets/mix.js`);
