@@ -28,19 +28,20 @@ mix.sass('resources/sass/app.scss', 'public/css')
 //     return;
 // }
 const selectedModule = process.env.MODULE;
+const selectedTheme = process.env.THEME;
+
 
 if (selectedModule) {
     try {
         require(`${modulePath}/mix.js`);
-        console.log(`Loaded module: ${selectedModule}`);
     } catch (err) {
         console.error(`Failed to load module: ${selectedModule}`);
-        console.error(err.message);
     }
 }
 
-if (process.env.npm_config_theme) {
-    require(`${themePath}/${process.env.npm_config_theme}/assets/mix.js`);
+if (selectedTheme) {
+    console.log(`Selected theme: ${selectedTheme}`);
+    require(`${themePath}/${selectedTheme}/assets/mix.js`);
     return;
 }
 
