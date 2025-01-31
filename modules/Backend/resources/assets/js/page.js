@@ -42,9 +42,20 @@ $(document).ready(function () {
             'content_key': contentKey,
         });
 
-        item.closest('.page-block-content').find('.dd-empty').remove();
-        item.closest('.page-block-content').find('.dd-list').append(template);
 
+        // hide modal
+        $('.page-block-content-modal').modal('hide');
+
+
+        item.closest('.page-block-content').find('.dd-empty').remove();
+        // item.closest('.page-block-content').find('.dd-list').append(template);
+
+        // Open modal and append template
+        let modal = $('#pageBlockContentModal-' + contentKey);
+        modal.modal('show');
+        modal.find('.dd-list').append(template);
+
+        // refresh modal
         initSelect2('#page-block-' + marker);
     });
 });

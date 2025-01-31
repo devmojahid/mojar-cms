@@ -1,0 +1,101 @@
+.page-block-content {
+    .block-grid {
+        max-height: 60vh;
+        overflow-y: auto;
+
+        .block-item {
+            margin-bottom: 1rem;
+
+            .block-card {
+                cursor: pointer;
+                transition: all 0.3s ease;
+                border: 1px solid var(--tblr-border-color);
+
+                &:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+                    border-color: var(--tblr-primary);
+                }
+
+                .avatar {
+                    width: 48px;
+                    height: 48px;
+
+                    svg {
+                        width: 24px;
+                        height: 24px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Nestable styles
+.dd {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    .dd-list {
+        display: block;
+        position: relative;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        .dd-item {
+            display: block;
+            position: relative;
+            margin: 0.5rem 0;
+            padding: 0;
+            min-height: 2rem;
+
+            &:hover {
+                > .dd-handle {
+                    border-color: var(--tblr-primary);
+                }
+            }
+        }
+
+        .dd-handle {
+            display: block;
+            position: relative;
+            margin: 0;
+            padding: 0.5rem;
+            background: #fff;
+            border: 1px solid var(--tblr-border-color);
+            border-radius: 0.25rem;
+            cursor: move;
+
+            &:hover {
+                background: var(--tblr-light);
+            }
+        }
+    }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+    .block-grid {
+        .col-sm-6 {
+            width: 100%;
+        }
+    }
+
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+}
+
+
+.page-block-content-modal {
+    z-index: 1200;
+    .modal-dialog {
+        max-width: 90vw;
+        max-height: 90vh;
+    }
+
+}

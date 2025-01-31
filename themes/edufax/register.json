@@ -38,6 +38,11 @@
             "label": "Most Games",
             "description": "Most Games",
             "view": "theme::components.blocks.most_games"
+        },
+        "test":{
+            "label": "Test",
+            "description": "Test",
+            "view": "theme::components.blocks.test"
         }
     }
 }

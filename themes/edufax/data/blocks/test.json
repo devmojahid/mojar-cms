@@ -1,0 +1,14 @@
+{
+    "label": "Test",
+    "description": "Test",
+    "form": [
+        {
+            "type": "resource",
+            "label": "Slider",
+            "name": "slider",
+            "data": {
+                "type": "sliders"
+            }
+        }
+    ]
+}

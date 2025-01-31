@@ -33,7 +33,12 @@
     "templates": {
         "home": {
             "label": "Home",
-            "view": "theme::templates.home"
+            "view": "theme::templates.home",
+            "blocks": {
+                "content-l": {
+                    "label": "Content Layout"
+                }
+            }
         }
     },
     "widgets": {
