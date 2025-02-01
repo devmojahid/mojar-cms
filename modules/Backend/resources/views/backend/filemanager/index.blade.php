@@ -11,336 +11,166 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ trans('cms::filemanager.title-page') }}</title>
     <link rel="shortcut icon" type="image/png" href="{{ asset('jw-styles/mojar/images/favicon.ico') }}">
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.css"> --}}
     <link rel="stylesheet" href="{{ asset('jw-styles/mojar/css/filemanager.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('jw-styles/base/assets/css/tabler.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('jw-styles/base/assets/css/tabler-vendors.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('jw-styles/base/assets/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 
-<body class="mojar-cms-filemanager">
 
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark mojar-cms-filemanager-navbar" id="nav">
-        <a class="navbar-brand invisible-lg d-none d-lg-inline" id="to-previous">
-            <i class="fa fa-arrow-left fa-fw"></i>
-            <span class="d-none d-lg-inline">{{ trans('cms::filemanager.nav-back') }}</span>
-        </a>
-        <a class="navbar-brand d-block d-lg-none" id="show_tree">
-            <i class="fa fa-bars fa-fw"></i>
-        </a>
-        <a class="navbar-brand d-block d-lg-none" id="current_folder"></a>
-        <a id="loading" class="navbar-brand"><i class="fa fa-spinner fa-spin"></i></a>
-        <div class="ml-auto px-2">
-            {{-- <a class="navbar-link d-none" id="multi_selection_toggle">
-            <i class="fa fa-check-double fa-fw"></i>
-            <span class="d-none d-lg-inline">{{ trans('cms::filemanager.menu-multiple') }}</span>
-        </a> --}}
-        </div>
-        <a class="navbar-toggler collapsed border-0 px-1 py-2 m-0" data-toggle="collapse" data-target="#nav-buttons">
-            <i class="fa fa-cog fa-fw"></i>
-        </a>
-        <div class="collapse navbar-collapse flex-grow-0" id="nav-buttons">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-display="grid">
-                        <i class="fa fa-th-large fa-fw"></i>
-                        <span>{{ trans('cms::filemanager.nav-thumbnails') }}</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-display="list">
-                        <i class="fa fa-list-ul fa-fw"></i>
-                        <span>{{ trans('cms::filemanager.nav-list') }}</span>
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                        aria-expanded="false">
-                        <i class="fa fa-sort fa-fw"></i>{{ trans('cms::filemanager.nav-sort') }}
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right border-0"></div>
-                </li>
-            </ul>
-        </div>
-    </nav>
+<body>
+    <div class="card" id="media-container">
+        {{-- Card Header --}}
+        <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
+            <div class="d-flex align-items-center mb-2 mb-md-0">
+                <h3 class="card-title text-capitalize mb-0 me-3">
+                    {{ trans('cms::app.media_management') }}
+                </h3>
 
-    <nav class="bg-light fixed-bottom border-top d-none" id="actions">
-        <a data-action="open" data-multiple="false"><i
-                class="fa fa-folder-open"></i>{{ trans('cms::filemanager.btn-open') }}
-        </a>
-        <a data-action="preview" data-multiple="true"><i
-                class="fa fa-images"></i>{{ trans('cms::filemanager.menu-view') }}
-        </a>
-        <a data-action="use" data-multiple="true"><i
-                class="fa fa-check"></i>{{ trans('cms::filemanager.btn-confirm') }}
-        </a>
-    </nav>
-
-    <div class="d-flex flex-row">
-        <div id="tree"></div>
-
-        <div id="main">
-            <div id="alerts"></div>
-
-            <nav aria-label="breadcrumb" class="d-none d-lg-block" id="breadcrumbs">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item invisible">Home</li>
-                </ol>
-            </nav>
-
-            <div id="empty" class="d-none">
-                <i class="fa fa-folder-open"></i>
-                {{ trans('cms::filemanager.message-empty') }}
+                {{-- Example: Optional Breadcrumb (only if you have this logic/data) --}}
+                @if (!empty($breadcrumb) && is_array($breadcrumb))
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            @foreach ($breadcrumb as $crumb)
+                                <li class="breadcrumb-item">
+                                    <a href="{{ $crumb['url'] }}">{{ $crumb['name'] }}</a>
+                                </li>
+                            @endforeach
+                        </ol>
+                    </nav>
+                @endif
             </div>
 
-            <div id="content"></div>
-            <div id="pagination"></div>
+            <div class="d-flex align-items-center">
+                <form action="" method="get" class="d-flex align-items-center" style="gap: .5rem;">
+                    <input type="text" class="form-control" name="search"
+                        placeholder="{{ trans('cms::app.search_by_name') }}" autocomplete="off"
+                        style="max-width: 180px;">
 
-            <a id="item-template" class="d-none">
-                <div class="square"></div>
+                    <select name="type" class="form-select">
+                        <option value="">{{ trans('cms::app.all_type') }}</option>
+                        {{-- @foreach ($fileTypes as $key => $val)
+                            <option value="{{ $key }}" {{ $type == $key ? 'selected' : '' }}>
+                                {{ strtoupper($key) }}
+                            </option>
+                        @endforeach --}}
+                    </select>
 
-                <div class="info">
-                    <div class="item_name text-truncate"></div>
-                    <time class="text-muted font-weight-light text-truncate"></time>
-                </div>
-            </a>
-        </div>
-
-        <div id="fab"></div>
-    </div>
-
-    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active text-capitalize" id="upload-tab" data-toggle="tab"
-                                    href="#upload-form" role="tab" aria-controls="upload-form"
-                                    aria-selected="true">{{ trans('cms::app.upload_media') }}</a>
-                            </li>
-                            @if (config('mojar.filemanager.upload_from_url'))
-                                <li class="nav-item">
-                                    <a class="nav-link text-capitalize" id="import-tab" data-toggle="tab"
-                                        href="#import-form" role="tab" aria-controls="import-form"
-                                        aria-selected="false">{{ trans('cms::app.file_manager.upload_from_url') }}</a>
-                                </li>
-                            @endif
-                        </ul>
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aia-hidden="true">&times;</span>
+                    <button type="submit" class="btn btn-tabler">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                                <path d="M21 21l-6 -6" />
+                            </svg>
+                        </span>
+                        {{ trans('cms::app.search') }}
                     </button>
-                </div>
-                <div class="modal-body">
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="upload-form" role="tabpanel"
-                            aria-labelledby="upload-tab">
-                            <form action="{{ route('filemanager.upload') }}" role='form' id='uploadForm'
-                                name='uploadForm' method='post' enctype='multipart/form-data' class="dropzone">
-                                <div class="form-group" id="attachment">
-                                    <div class="controls text-center">
-                                        <div class="input-group w-100">
-                                            <a class="btn btn-primary w-100 text-white"
-                                                id="upload-button">{{ trans('cms::filemanager.message-choose') }}</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <input type='hidden' name='working_dir' class='working_dir'>
-                                <input type='hidden' name='type' class='type' value='{{ request('type') }}'>
-                                <input type='hidden' name='disk' class='disk'
-                                    value='{{ request()->get('disk') }}'>
-                                <input type='hidden' name='_token' value='{{ csrf_token() }}'>
-                            </form>
-                        </div>
-
-                        <div class="tab-pane fade" id="import-form" role="tabpanel" aria-labelledby="import-tab">
-                            <form action="{{ route('filemanager.import') }}" role="form" method="post"
-                                id="import-url">
-
-                                {{ Field::text(trans('cms::app.url'), 'url', ['required' => true]) }}
-
-                                <div class="form-check">
-                                    <input type="checkbox" name="download" class="form-check-input" value="1"
-                                        id="download-checkbox" checked>
-                                    <label class="form-check-label"
-                                        for="download-checkbox">{{ trans('cms::app.file_manager.download_to_server') }}</label>
-                                </div>
-
-                                <input type="hidden" name="working_dir" class='working_dir'>
-                                <input type="hidden" name="type" class="type" value="{{ request('type') }}">
-                                <input type='hidden' name='disk' value='{{ request()->get('disk') }}'>
-
-                                <button type="submit" class="btn btn-success mt-2">
-                                    <i class="fa fa-cloud-upload"></i>
-                                    {{ trans('cms::app.file_manager.upload_file') }}
-                                </button>
-                            </form>
+                </form>
+                <div class="btn-group mr-2 ml-2">
+                    <div class="dropdown" data-bs-toggle="tooltip" title="{{ trans('cms::app.upload') }}">
+                        <a href="#" class="btn dropdown-toggle btn-tabler" data-bs-toggle="dropdown">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="icon icon-tabler icons-tabler-outline icon-tabler-upload">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+                                    <path d="M7 9l5 -5l5 5" />
+                                    <path d="M12 4l0 12" />
+                                </svg>
+                            </span>
+                            {{ trans('cms::app.upload') }}
+                        </a>
+                        <div class="dropdown-menu">
+                            <label class="dropdown-item mb-0" for="local-file-upload">
+                                <span class="me-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-upload">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+                                        <path d="M7 9l5 -5l5 5" />
+                                        <path d="M12 4l0 12" />
+                                    </svg>
+                                </span>
+                                Upload from local
+                            </label>
+                            <input type="file" id="local-file-upload" style="display: none;" multiple
+                                accept="{{ implode(',', $mimeTypes) }}">
+                            <a class="dropdown-item" href="#" data-toggle="modal"
+                                data-target="#import-url-modal">
+                                <span class="me-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-link-plus">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M9 15l6 -6" />
+                                        <path d="M11 6l.463 -.536a5 5 0 0 1 7.072 0a4.993 4.993 0 0 1 -.001 7.072" />
+                                        <path
+                                            d="M12.603 18.534a5.07 5.07 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" />
+                                        <path d="M16 19h6" />
+                                        <path d="M19 16v6" />
+                                    </svg>
+                                </span>
+                                Import from URL
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary w-100" data-dismiss="modal">
-                        {{ trans('cms::filemanager.btn-close') }}
+                <div class="btn-group">
+                    <button type="button" class="btn btn-tabler" data-toggle="modal"
+                        data-target="#add-folder-modal" data-bs-toggle="tooltip"
+                        title="{{ trans('cms::app.add_folder') }}">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-folder">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path
+                                    d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+                            </svg>
+                        </span>
+                        {{ trans('cms::app.add_folder') }}
                     </button>
                 </div>
+
+
             </div>
         </div>
-    </div>
 
-    <div class="modal fade" id="notify" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-body"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary w-100"
-                        data-dismiss="modal">{{ trans('cms::filemanager.btn-close') }}</button>
-                    <button type="button" class="btn btn-primary w-100"
-                        data-dismiss="modal">{{ trans('cms::filemanager.btn-confirm') }}</button>
+        {{-- Card Body --}}
+        <div class="card-body">
+            <div class="row">
+                {{-- Media List Section --}}
+              
+
+                {{-- Preview Panel --}}
+                <div class="col-md-3">
+                    <div id="preview-file" class="jw-preview-file">
+                        <div class="jw-preview-placeholder">
+                            <i class="fa fa-file-image-o"></i>
+                        </div>
+                        <p class="text-center">
+                            {{ trans('cms::app.media_setting.click_file_to_view_info') }}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="dialog" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title"></h4>
-                </div>
-                <div class="modal-body">
-                    <input type="text" class="form-control" />
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary w-100"
-                        data-dismiss="modal">{{ trans('cms::filemanager.btn-close') }}</button>
-                    <button type="button" class="btn btn-primary w-100"
-                        data-dismiss="modal">{{ trans('cms::filemanager.btn-confirm') }}</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div id="carouselTemplate" class="d-none carousel slide bg-light" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#previewCarousel" data-slide-to="0" class="active"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <a class="carousel-label"></a>
-                <div class="carousel-image"></div>
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#previewCarousel" role="button" data-slide="prev">
-            <div class="carousel-control-background" aria-hidden="true">
-                <i class="fa fa-chevron-left"></i>
-            </div>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#previewCarousel" role="button" data-slide="next">
-            <div class="carousel-control-background" aria-hidden="true">
-                <i class="fa fa-chevron-right"></i>
-            </div>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-
-    <script>
-        var lang = @json(trans('cms::filemanager'));
-        var actions = [
-            // {
-            //   name: 'use',
-            //   icon: 'check',
-            //   label: 'Confirm',
-            //   multiple: true
-            // },
-            /*{
-                name: 'rename',
-                icon: 'edit',
-                label: lang['menu-rename'],
-                multiple: false
-            },
-            {
-                name: 'download',
-                icon: 'download',
-                label: lang['menu-download'],
-                multiple: true
-            },*/
-            // {
-            //   name: 'preview',
-            //   icon: 'image',
-            //   label: lang['menu-view'],
-            //   multiple: true
-            // },
-            /* {
-                 name: 'move',
-                 icon: 'paste',
-                 label: lang['menu-move'],
-                 multiple: true
-             },
-             {
-                 name: 'resize',
-                 icon: 'arrows-alt',
-                 label: lang['menu-resize'],
-                 multiple: false
-             },
-             {
-                 name: 'crop',
-                 icon: 'crop',
-                 label: lang['menu-crop'],
-                 multiple: false
-             },*/
-            {
-                name: 'trash',
-                icon: 'trash',
-                label: lang['menu-delete'],
-                multiple: true
-            },
-        ];
-
-        const sortings = [{
-                by: 'alphabetic',
-                icon: 'sort-alpha-down',
-                label: lang['nav-sort-alphabetic']
-            },
-            {
-                by: 'time',
-                icon: 'sort-numeric-down',
-                label: lang['nav-sort-time']
-            }
-        ];
-
-        let multi_selection_enabled =
-            @if ($multiChoose == 1)
-                true
-            @else
-                false
-            @endif ;
-    </script>
-    <script src="{{ asset('jw-styles/mojar/js/filemanager.min.js') }}?v={{ \Juzaweb\CMS\Version::getVersion() }}"></script>
-
-    <script>
-        Dropzone.options.uploadForm = {
-            paramName: "upload",
-            uploadMultiple: false,
-            parallelUploads: 5,
-            timeout: 0,
-            clickable: '#upload-button',
-            dictDefaultMessage: lang['message-drop'],
-            init: function() {
-                this.on('success', function(file, response) {
-                    loadFolders();
-                });
-            },
-            headers: {
-                'Authorization': 'Bearer ' + getUrlParam('token')
-            },
-            acceptedFiles: "{{ implode(',', $mimeTypes) }}",
-            maxFilesize: parseInt("{{ $maxSize }}"),
-            chunking: true,
-            forceChunking: true,
-            chunkSize: 1048576,
-        }
-    </script>
+    <script src="{{ asset('jw-styles/mojar/js/vendor.min.js') }}"></script>
+    <script src="{{ asset('jw-styles/base/assets/js/tabler.min.js') }}"></script>
 </body>
 
 </html>

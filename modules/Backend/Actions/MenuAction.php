@@ -369,8 +369,6 @@ class MenuAction extends Action
         // HookAction::enqueueStyle('core-custom', 'jw-styles/mojar/css/custom.min.css', $ver);
         // Tabler css
         HookAction::enqueueStyle('tabler-main', 'jw-styles/base/assets/css/tabler.min.css', $ver);
-        HookAction::enqueueStyle('tabler-flags', 'jw-styles/base/assets/css/tabler-flags.min.css', $ver);
-        HookAction::enqueueStyle('tabler-payments', 'jw-styles/base/assets/css/tabler-payments.min.css', $ver);
         HookAction::enqueueStyle('tabler-vendors', 'jw-styles/base/assets/css/tabler-vendors.min.css', $ver);
         HookAction::enqueueStyle('base-custom', 'jw-styles/base/assets/css/custom.css', $ver);
         HookAction::enqueueStyle('base-custom', 'css/app.css', $ver);

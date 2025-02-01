@@ -18,6 +18,14 @@
             }
         }
     },
+    "nav_menus": {
+        "primary": {
+            "label": "Primary menu"
+        },
+        "sidebar": {
+            "label": "Sidebar menu"
+        }
+    },
     "blocks": {
         "slider": {
             "label": "Slider Image",
