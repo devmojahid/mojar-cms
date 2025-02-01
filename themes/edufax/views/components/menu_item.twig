@@ -1,18 +1,31 @@
 {% for item in items %}
-    {% if item.children %}
-        <li>
-            <a href="#">{{ item.label }}</a>
-            <ul class="dropdown-menu-col-1">
+    <li class="nav-item {% if item.children %}dropdown{% endif %} {% if item.active %}active{% endif %}">
+        {% if item.children %}
+            <a class="nav-link" href="{{ item.link|default('#') }}" 
+               {% if item.target == '_blank' %}target="_blank"{% endif %}
+            >
+                {{ item.label }} <i class="far fa-angle-down"></i>
+            </a>
+            <ul class="tf__droap_menu">
                 {% for child in item.children %}
-                <li>
-                    <a href="{{ child.link }}" {% if child.target == '_blank' %} target="_blank" {% endif %}>{{ child.label }}</a>
-                </li>
+                    <li class="{% if child.active %}active{% endif %}">
+                        <a href="{{ child.link }}" 
+                           {% if child.target == '_blank' %}target="_blank"{% endif %}
+                           {% if child.active %}aria-current="page"{% endif %}
+                        >
+                            {{ child.label }}
+                        </a>
+                    </li>
                 {% endfor %}
             </ul>
-        </li>
-    {% else %}
-        <li>
-            <a href="{{ item.link }}" {% if item.target == '_blank' %} target="_blank" {% endif %}>{{ item.label }}</a>
-        </li>
-    {% endif %}
+        {% else %}
+            <a class="nav-link" 
+               href="{{ item.link }}" 
+               {% if item.target == '_blank' %}target="_blank"{% endif %}
+               {% if item.active %}aria-current="page"{% endif %}
+            >
+                {{ item.label }}
+            </a>
+        {% endif %}
+    </li>
 {% endfor %}

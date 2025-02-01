@@ -1,5 +1,45 @@
-{% extends 'cms::layouts.frontend' %}
+{# <div class="post-list-layout3 align-items-center">
+    <div class="item-img">
+        <img src="{{ post.thumbnail }}" alt="Post">
+        <div class="item-tag bg-blueviolet">{{ post.category }}</div>
+    </div>
+    <div class="item-content">
+        <div class="post-meta">
+            <ul>
+                <li><i class="flaticon-clock"></i> {{ post.created_at }}</li>
+                <li class="item-author"><i class="flaticon-user bg-green"></i><span>{{ __('By') }}</span><a href="#">{{ post.author.name }}</a></li>
+            </ul>
+        </div>
 
-{% block content %}
+        <h3 class="item-title"><a href="{{ post.url }}"> {{ post.title }}</a></h3>
+        <p>{{ post.description }}</p>
+        <a href="{{ post.url }}" class="btn-fill-md">{{ __('READ MORE') }}</a>
+    </div>
+</div> #}
 
-{% endblock %}
+
+<div class="col-xl-4 col-md-6 wow fadeInUp" data-wow-duration="1s">
+    <div class="tf__single_blog">
+        <div class="tf__single_blog_img">
+            <img src="{{ post.thumbnail }}" alt="blog" class="img-fluid w-100">
+        </div>
+        <div class="tf__single_blog_text">
+            <ul>
+                <li>
+                    <span>
+                        <img src="{{ post.author.avatar }}" alt="bloger" class="img-fluid w-100">
+                    </span>
+                    {{ post.author.name }}
+                </li>
+                <li><i class="fal fa-calendar-alt"></i> {{ post.created_at }}</li>
+            </ul>
+            <a class="title" href="{{ post.url }}">
+                {{ post.title }}
+            </a>
+            <div class="tf__single_blog_footer">
+                <a href="{{ post.url }}">View Details <i class="far fa-long-arrow-right"></i></a>
+                <span><i class="far fa-eye"></i> {{ post.category }}</span>
+            </div>
+        </div>
+    </div>
+</div>

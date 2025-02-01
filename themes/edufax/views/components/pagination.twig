@@ -1,7 +1,29 @@
-{% if data.meta.last_page > 1 %}
+{# {% if data.meta.last_page > 1 %}
     <ul>
         {% for index,page in data.meta.links %}
         <li><a href="{{ page.url }}" {% if page.active %} class="active" {% endif %}>{{ page.label }}</a></li>
         {% endfor %}
     </ul>
+{% endif %} #}
+
+{% if data.meta.last_page > 1 %}
+ <nav aria-label="Page navigation example">
+    <ul class="pagination">
+        {% if data.meta.current_page > 1 %}
+        <li class="page-item"> <a class="page-link" href="#" aria-label="Previous">
+                <i class="far fa-chevron-left"></i>
+            </a>
+        </li>
+        {% endif %}
+        {% for page in data.meta.links %}
+        <li class="page-item"><a class="page-link" href="{{ page.url }}">{{ page.label }}</a></li>
+        {% endfor %}
+        {% if data.meta.current_page < data.meta.last_page %}
+        <li class="page-item"><a class="page-link" href="{{ data.meta.next_url }}" aria-label="Next">
+                <i class="far fa-chevron-right"></i>
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
 {% endif %}

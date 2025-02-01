@@ -21,67 +21,43 @@
     ===============================-->
     <nav class="navbar navbar-expand-lg tf__main_menu">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <img src="images/logo.png" alt="EduFax" class="img-fluid w-100">
+            <a class="navbar-brand" href="{{ home_url() }}">
+                <img src="{{ get_logo() }}" alt="EduFax" class="img-fluid w-100" style="max-width: 100px; max-height: 80px;">
             </a>
+
+
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="far fa-bars menu_bar_icon"></i>
                 <i class="far fa-times menu_close_icon"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="courses.html">Courses</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="event.html">event</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="blog.html">blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">pages <i class="far fa-angle-down"></i></a>
-                        <ul class="tf__droap_menu">
-                            <li><a href="become_an_instructor.html">become an instructor</a></li>
-                            <li><a href="blog_details.html">blog details</a></li>
-                            <li><a href="courses_details.html">courses details</a></li>
-                            <li><a href="event_details.html">event details</a></li>
-                            <li><a href="instructor.html">instructor</a></li>
-                            <li><a href="instructor_details.html">instructor details</a></li>
-                            <li><a href="dashboard.html">dashboard</a></li>
-                            <li><a href="faq.html">FAQs</a></li>
-                            <li><a href="forgot_password.html">forgot password</a></li>
-                            <li><a href="payment.html">payment</a></li>
-                            <li><a href="terms_condition.html">terms and condition</a></li>
-                            <li><a href="privacy_policy.html">privacy policy</a></li>
-                            <li><a href="404.html">404</a></li>
-                            <li><a href="courses_video.html">courses video</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">contact</a>
-                    </li>
-                </ul>
+                    {{  jw_nav_menu({
+                        'container_before': '<ul class="navbar-nav ms-auto">',
+                        'container_after': '</ul>',
+                        'theme_location': 'primary',
+                        'item_view': 'theme::components.menu_item'
+                    }) }}
+               
                 <ul class="tf__right_menu d-flex flex-wrap">
                     <li><a class="menu_search_icon"><i class="far fa-search"></i></a></li>
-                    <li><a class="signin" href="sign_up.html">sign up</a></li>
+                    {% if auth %}
+                    <li><a class="signin" href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a></li>
+                    {% else %}
+                    <li><a class="signin" href="{{ url('login') }}">{{ __('sign up') }}</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
     <div class="menu_search">
-        <form>
-            <input type="text" placeholder="Search">
-            <button class="tf__common_btn" type="submit"><i class="far fa-search"></i> Search</button>
+        <form action="{{ url('search') }}">
+            <input type="search" name="q" placeholder="{{ __('Search here...') }}" />
+            <button class="tf__common_btn" type="submit search-btn"><i class="far fa-search"></i> Search</button>
             <span class="close_search"><i class="far fa-times"></i></span>
         </form>
+
     </div>
     <!--==============================
         MENU END

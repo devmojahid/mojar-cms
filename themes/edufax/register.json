@@ -1,7 +1,7 @@
 {
     "styles": {
         "js": [
-           "assets\/js\/main.js"
+            "assets\/js\/main.js"
         ],
         "css": [
             "assets\/css\/main.css"
@@ -39,10 +39,16 @@
             "description": "Most Games",
             "view": "theme::components.blocks.most_games"
         },
-        "test":{
+        "test": {
             "label": "Test",
             "description": "Test",
             "view": "theme::components.blocks.test"
+        }
+    },
+    "configs": {
+        "footer_bg_image": {
+            "label": "Footer Bg Image",
+            "type": "image"
         }
     }
 }

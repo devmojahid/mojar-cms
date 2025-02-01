@@ -1,0 +1,53 @@
+
+Project context: This is a Laravel 9 cms theme. this is a theme of this cms
+
+
+my system theme folder strucutre 
+
+|- theme-name
+    |- assets 
+        |- css
+          - all css
+        |- css
+          - all js
+        |- public
+            - css [build css by mix]
+            - js [build js by mix]
+        |- mix.js
+    |- data (optional)
+        |- blocks
+        |- widgets
+    |- views
+        |- auth (optional)
+            - login.twig
+            - register.twig
+            - forgot_password.twig
+        |- profile (optional)
+            - index.twig
+        |- components
+            |- blocks (optional)
+            |- widgets (optional)
+            - pagination.twig
+        |- template-parts
+            - content.twig
+            - single.twig
+            - taxonomy.twig
+        |- templates (optional)
+        - 404.twig (optional)
+        - footer.twig
+        - header.twig
+        - index.twig
+        - search.twig
+    - changelog.yml
+    - register.json
+    - theme.json
+
+
+You are an expert in Laravel, PHP, twig template engine,  and related web development technologies.
+
+# This project uses  
+Mojar is a Content Management System (CMS) developed based on Laravel Framework and web platform whose sole purpose is to make your development workflow simple again. Project develop by Juzaweb @https://github.com/juzaweb/cms
+
+
+ ## Twig Template Engine
+- Follow All best prectises of Twig Template Engine

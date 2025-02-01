@@ -1,0 +1,63 @@
+{# 
+  Breadcrumb Component
+  @param string title - Page title (optional if post is provided)
+  @param string background_image - Background image URL (optional)
+  @param array items - Static breadcrumb items array [{'label': 'Home', 'url': '/'}, {'label': 'Blog'}] (optional)
+  @param object post - Post object for dynamic content (optional)
+  @param boolean is_dynamic - Whether to use dynamic breadcrumb (default: false)
+#}
+
+<section class="tf__breadcrumb" 
+    {% if background_image %}
+        style="background: url({{ background_image }});"
+    {% else %}
+        style="background: url({{ 'images/breadcrumb_bg.jpg' }});"
+    {% endif %}
+>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="tf__breadcrumb_text">
+                    {# Dynamic or Static Title #}
+                    <h1>
+                        {% if is_dynamic and post is defined %}
+                            {{ post.title }}
+                        {% else %}
+                            {{ title|title }}
+                        {% endif %}
+                    </h1>
+
+                    {# Breadcrumb Navigation #}
+                    <ul>
+                        {% if is_dynamic and post is defined %}
+                            {# Dynamic Breadcrumb #}
+                            <li>
+                                <a href="{{ home_url() }}">{{ __('Home') }}</a>
+                            </li>
+                            {% if post.category is defined and post.category %}
+                                <li>
+                                    <a href="{{ post.category.url }}">{{ post.category.name }}</a>
+                                </li>
+                            {% endif %}
+                            <li>{{ post.title }}</li>
+                        {% else %}
+                            {# Static Breadcrumb #}
+                            {% if items %}
+                                {% for item in items %}
+                                    <li>
+                                        {% if item.url %}
+                                            <a href="{{ item.url }}">{{ item.label }}</a>
+                                        {% else %}
+                                            {{ item.label }}
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
