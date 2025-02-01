@@ -42,13 +42,13 @@ $(document).ready(function () {
             'content_key': contentKey,
         });
 
-
         // hide modal
         $('.page-block-content-modal').modal('hide');
 
+        item.closest('.page-block-content').find('.dd-empty').remove();
+        item.closest('.page-block-content').find('.dd-list').append(template);
 
         item.closest('.page-block-content').find('.dd-empty').remove();
-        // item.closest('.page-block-content').find('.dd-list').append(template);
 
         // Open modal and append template
         let modal = $('#pageBlockContentModal-' + contentKey);
@@ -59,3 +59,4 @@ $(document).ready(function () {
         initSelect2('#page-block-' + marker);
     });
 });
+

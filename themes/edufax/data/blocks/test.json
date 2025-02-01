@@ -3,12 +3,9 @@
     "description": "Test",
     "form": [
         {
-            "type": "resource",
-            "label": "Slider",
-            "name": "slider",
-            "data": {
-                "type": "sliders"
-            }
+            "type": "text",
+            "label": "Give A Title",
+            "name": "title"
         }
     ]
 }
