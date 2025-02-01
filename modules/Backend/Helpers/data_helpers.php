@@ -8,6 +8,8 @@ use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Resource;
 use Juzaweb\CMS\Facades\JWQuery;
 use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\Backend\Models\Menu;
+
 
 function get_posts(string $type = null, array $options = []): array
 {
@@ -299,4 +301,16 @@ function get_page_url(string|int|Post|null $page): null|string
         ->first(['id', 'slug', 'type']);
 
     return $data?->getLink();
+}
+
+function get_custom_menus(int $id = null): \Illuminate\Database\Eloquent\Collection
+{
+    $query = Menu::selectFrontendBuilder()
+            ->with('items');
+
+    if ($id) {
+        $query->where('id', '=', $id);
+    }
+
+    return $query->get();
 }

@@ -1,0 +1,11 @@
+<div class="tf__sidebar_search">
+    <h3>{{ data.title }}</h3>
+
+
+    {% set items = get_custom_menus(data.custom_menu) %}
+    {{ dump(items) }}
+    {# {% for item in items %}
+    <a href="{{ item.url }}">{{ item.name }}</a>
+    {% endfor %} #}
+</div>
+

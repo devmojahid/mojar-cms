@@ -149,4 +149,11 @@ trait InputField
 
         return view('cms::components.form.filter_posts', compact('name', 'options'));
     }
+
+    public function customMenu(string|Model $label, ?string $name, ?array $options = []): Factory|View
+    {
+        $options = $this->mapOptions($label, $name, $options);
+
+        return view('cms::components.form.custom_menu', $options);
+    }
 }

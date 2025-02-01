@@ -6,152 +6,8 @@
             is_dynamic: true,
             post: post,
             background_image: post.thumbnail ?? 'images/breadcrumb_bg.jpg'
-        } 
+        }
     %}
-
-
-    
-
-    <section class="inner-section">
-        <div class="container">
-            <div class="row gutters-40">
-                <div class="col-xl-9 col-lg-8">
-                    <div class="single-post-layout1">
-                        <div class="post-details">
-                            <div class="post-img text-center">
-                                <img src="{{ post.thumbnail }}" alt="Post">
-                            </div>
-
-                            <div class="post-date"><i class="flaticon-clock"></i> {{ post.created_at }}</div>
-                            <h2 class="post-title">{{ post.title }}</h2>
-                            <div class="entry-meta">
-                                <div class="row align-items-center">
-                                    <div class="col-md-6">
-                                        <div class="post-meta-dark">
-                                            <ul>
-                                                <li class="post-author">
-                                                    <div class="author-icon bg-green">
-                                                        <i class="flaticon-user"></i>
-                                                    </div>
-                                                    <div class="author-content">
-                                                        <div class="item-text">{{ __('Posted by') }}</div>
-                                                        <div class="author-name"><a href="#">{{ post.author.name }}</a></div>
-                                                    </div>
-                                                </li>
-
-                                                <li class="meta-action"><i class="flaticon-heart"></i>{{ post.views }}</li>
-                                                <li class="meta-action"><i class="flaticon-comment-white-oval-bubble"></i>{{ post.total_comment }}</li>
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="social-share">
-                                            <label>{{ __('Share') }}</label>
-                                            <ul>
-                                                <li><a href="#" class="bg-fb"><i class="fab fa-facebook-f"></i></a></li>
-                                                <li><a href="#" class="bg-twitter"><i class="fab fa-twitter"></i></a></li>
-                                                <li><a href="#" class="bg-linked"><i class="fab fa-linkedin-in"></i></a></li>
-                                                <li><a href="#" class="bg-google-plus"><i class="fab fa-google-plus-g"></i></a></li>
-                                                <li><a href="#" class="bg-pinterst"><i class="fab fa-pinterest-square"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{ post.content|raw }}
-
-                            <ul class="related-tag">
-                                {% for tag in tags %}
-                                <li><a href="{{ tag.url }}">{{ tag.name }}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-
-                        {#<div class="item-author">
-                            <div class="media">
-                                <div class="item-img">
-                                    <img src="media/post/author.jpg" alt="Author">
-                                </div>
-                                <div class="media-body">
-                                    <h3 class="item-title">Mark Willy</h3>
-                                    <div class="item-subtitle">CEO</div>
-                                    <p>Dorem Ipsum is simply dummy text of the printing and type area aawin gustry has been the industry's standardt.</p>
-                                    <ul class="item-social">
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-pinterest-square"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>#}
-
-                        <div class="post-comments">
-                            {{ comment_template(post, 'theme::components.comments') }}
-                        </div>
-
-                        <div class="comment-form">
-                            <div class="heading-layout3">
-                                <h3 class="heading-title-md">{{ __('Leave a Comment') }}</h3>
-                            </div>
-
-                            {% if errors %}
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        {% for error in errors %}
-                                            <li>{{ error }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            {% endif %}
-
-                            {% if message %}
-                                <div class="alert alert-success">
-                                    {{ message }}
-                                </div>
-                            {% endif %}
-
-                            <form action="" method="post" id="comment-form">
-                                {{ csrf_field() }}
-
-                                <div class="row guuters-25">
-                                    {% if guest %}
-                                    <div class="col-lg-4 form-group">
-                                        <input type="text" class="form-control" name="name" placeholder="Name *">
-                                    </div>
-                                    <div class="col-lg-4 form-group">
-                                        <input type="email" class="form-control" name="email" placeholder="Email *">
-                                    </div>
-                                    <div class="col-lg-4 form-group">
-                                        <input type="text" class="form-control" name="website" placeholder="Website *">
-                                    </div>
-                                    {% endif %}
-
-                                    <div class="col-lg-12 form-group">
-                                        <textarea placeholder="Message" class="textarea form-control" name="content" rows="7" cols="20" required></textarea>
-                                    </div>
-
-                                    <div class="col-lg-12 form-group">
-                                        <button type="submit" class="submit-btn disabled">{{ __('SUBMIT NOW') }}</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-3 col-lg-4 sidebar-widget">
-
-                    {{ dynamic_sidebar('sidebar') }}
-
-                </div>
-            </div>
-        </div>
-    </section>
-
 
  <section class="tf__blog_details_page pt_120 xs_pt_80 pb_120 xs_pb_80">
         <div class="container">
@@ -204,10 +60,11 @@
                         </div>
                         <div class="tf__blog_comment_area">
                             {{ comment_template(post, 'theme::components.comments') }}
-                            <div class="tf__input_comment_area">
+                            <div class="tf__input_comment_area comment-form">
                                 <h3>{{ __('Leave a Reply') }}</h3>
                                 <p>{{ __('Your email address will not be published.') }}</p>
-                                {% if errors %}
+
+                                {% if errors is not empty %}
                                     <div class="alert alert-danger">
                                         <ul>
                                             {% for error in errors %}
@@ -226,26 +83,34 @@
                                 <form action="" method="post" id="comment-form">
                                     {{ csrf_field() }}
                                     <div class="row">
-
-                                        <div class="col-xl-6">
-                                            <div class="tf__single_comment_input">
-                                                <label>{{ __('Name') }}</label>
-                                                <input type="text" placeholder="Name">
+                                        {% if guest %}
+                                            <div class="col-xl-6">
+                                                <div class="tf__single_comment_input">
+                                                    <label>{{ __('Name') }}</label>
+                                                    <input type="text" placeholder="Name" name="name">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-xl-6">
-
-                                            <div class="tf__single_comment_input">
-                                                <label>{{ __('E-mail') }}</label>
-                                                <input type="email" placeholder="Email">
+                                            <div class="col-xl-6">
+                                                <div class="tf__single_comment_input">
+                                                    <label>{{ __('E-mail') }}</label>
+                                                    <input type="email" placeholder="Email" name="email">
+                                                </div>
                                             </div>
-                                        </div>
+
+                                            <div class="col-xl-12">
+                                                <div class="tf__single_comment_input">
+                                                    <label>{{ __('Website') }}</label>
+                                                    <input type="text" placeholder="Website" name="website">
+                                                </div>
+                                            </div>
+
+                                        {% endif %}
                                         <div class="col-xl-12">
                                             <div class="tf__single_comment_input">
-                                                <label>Your comment</label>
-                                                <textarea rows="5" placeholder="Type here"></textarea>
+                                                <label>{{ __('Your comment') }}</label>
+                                                <textarea rows="5" placeholder="Type here" name="content" required></textarea>
                                             </div>
-                                            <button class="tf__common_btn" type="submit">submit</button>
+                                            <button class="tf__common_btn" type="submit">{{ __('submit') }}</button>
                                         </div>
                                     </div>
                                 </form>
@@ -254,71 +119,7 @@
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-4">
-                    <div class="tf__sidebar" id="sticky_sidebar">
-                        <div class="tf__sidebar_search">
-                            <h3>Search Here</h3>
-                            <form>
-                                <input type="text" placeholder="Search">
-                                <button type="submit"><i class="far fa-search"></i></button>
-                            </form>
-                        </div>
-                        <div class="tf__sidebar_categories">
-                            <h3>Categories</h3>
-                            <ul>
-                                <li><a href="#">Finance <span>32</span></a></li>
-                                <li><a href="#">Web Design <span>20</span></a></li>
-                                <li><a href="#">Marketing <span>11</span></a></li>
-                                <li><a href="#">App Development <span>27</span></a></li>
-                                <li><a href="#">Data Entry <span>12</span></a></li>
-                                <li><a href="#">Digital MArketing <span>42</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="tf__sidebar_post">
-                            <h3>Popular Posts</h3>
-                            <ul>
-                                <li>
-                                    <div class="img">
-                                        <img src="images/sidebar_img_1.jpg" alt="popular post" class="img-fluid w-100">
-                                    </div>
-                                    <div class="text">
-                                        <a href="blog_details.html">How do I Sell Affiliate Products
-                                            to My Customers</a>
-                                        <p><i class="fal fa-calendar-alt"></i> 01 May, 2023</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="img">
-                                        <img src="images/sidebar_img_2.jpg" alt="popular post" class="img-fluid w-100">
-                                    </div>
-                                    <div class="text">
-                                        <a href="blog_details.html">How do I Sell Affiliate Products
-                                            to My Customers</a>
-                                        <p><i class="fal fa-calendar-alt"></i> 21 May, 2023</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="img">
-                                        <img src="images/sidebar_img_3.jpg" alt="popular post" class="img-fluid w-100">
-                                    </div>
-                                    <div class="text">
-                                        <a href="blog_details.html">How do I Sell Affiliate Products
-                                            to My Customers</a>
-                                        <p><i class="fal fa-calendar-alt"></i> 05 May, 2023</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="img">
-                                        <img src="images/sidebar_img_4.jpg" alt="popular post" class="img-fluid w-100">
-                                    </div>
-                                    <div class="text">
-                                        <a href="blog_details.html">How do I Sell Affiliate Products
-                                            to My Customers</a>
-                                        <p><i class="fal fa-calendar-alt"></i> 29 May, 2023</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    {{ dynamic_sidebar('sidebar') }}
                 </div>
             </div>
         </div>

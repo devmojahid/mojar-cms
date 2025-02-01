@@ -147,9 +147,15 @@ class Field implements FieldContract
                 $data['name'],
                 Arr::get($data, 'data', [])
             ),
+            'custom_menu' => $this->customMenu(
+                $data['label'],
+                $data['name'],
+                Arr::get($data, 'data', [])
+            ),
             default => '',
         };
     }
+
 
     public function mapOptions(string|Model $label, ?string $name, ?array $options = []): ?array
     {

@@ -25,8 +25,6 @@
                 <img src="{{ get_logo() }}" alt="EduFax" class="img-fluid w-100" style="max-width: 100px; max-height: 80px;">
             </a>
 
-
-
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="far fa-bars menu_bar_icon"></i>
@@ -39,7 +37,7 @@
                         'theme_location': 'primary',
                         'item_view': 'theme::components.menu_item'
                     }) }}
-               
+
                 <ul class="tf__right_menu d-flex flex-wrap">
                     <li><a class="menu_search_icon"><i class="far fa-search"></i></a></li>
                     {% if auth %}
@@ -47,6 +45,15 @@
                     {% else %}
                     <li><a class="signin" href="{{ url('login') }}">{{ __('sign up') }}</a></li>
                     {% endif %}
+                {% if auth %}
+                <form action="{{ url('logout') }}"
+                    method="post"
+                        class="form-logout"
+                    >
+                        {{ csrf_field() }}
+                        <li><button class="signin" type="submit">{{ __('Logout') }}</button></li>
+                    </form>
+                {% endif %}
                 </ul>
             </div>
         </div>

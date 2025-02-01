@@ -1,0 +1,14 @@
+{
+    "form": [
+        {
+            "type": "text",
+            "name": "title",
+            "label": "Title"
+        },
+        {
+            "type": "custom_menu",
+            "name": "custom_menu",
+            "label": "Custom Menu"
+        }
+    ]
+}

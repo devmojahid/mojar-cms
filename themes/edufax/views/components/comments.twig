@@ -1,7 +1,3 @@
-<div class="heading-layout3">
-    <h3 class="heading-title-md">{{ total }} {{ __('Comments') }}</h3>
-</div>
-
 <div class="comment-box">
     {% for comment in comments.data  %}
     <div class="media">
@@ -18,45 +14,21 @@
 </div>
 
 
-<h3>2 Comments</h3>
+<h3>{{ total }} {{ __('Comments') }}</h3>
+{% for comment in comments.data  %}
     <div class="tf__single_comment">
         <div class="tf__single_comment_img">
-            <img src="images/bloger_1.jpg" alt="comment" class="img-fluid w-100">
+            <img src="{{ comment.avatar }}" alt="comment" class="img-fluid w-100">
         </div>
         <div class="tf__single_comment_text">
-            <h4>Cameron Williamson</h4>
-            <p class="comment_time">Nov 23, 2024 at 12:23 pm <a href="#">reply</a></p>
-            <p class="main_comment">Mollis porta eget mus volutpat nunc porttitor scelerisque
-                nec feugiat. Ut sed vel malesuada sed viverra est nisi magna sed. Faucibus
-                imperdiet nulla accumsan mi dictum velit leo. Risus ultrices ornare etiam
-                volutpat dui et risus cras.</p>
+            <h4>{{ comment.name }}</h4>
+            <p class="comment_time">{{ comment.created_at }} <a href="#">reply</a></p>
+            <p class="main_comment">{{ comment.content }}</p>
         </div>
     </div>
-    <div class="tf__single_comment">
-        <div class="tf__single_comment_img">
-            <img src="images/bloger_1.jpg" alt="comment" class="img-fluid w-100">
-        </div>
-        <div class="tf__single_comment_text">
-            <h4>Cameron Williamson</h4>
-            <p class="comment_time">Nov 23, 2024 at 12:23 pm <a href="#">reply</a></p>
-            <p class="main_comment">Risus ultrices ornare etiam volutpat dui et risus cras.
-                Fermentum mattis dolor tempus vel elit. Tellus scelerisque tortor vulputate
-                euismod ac.</p>
-        </div>
-    </div>
-    <div class="tf__single_comment">
-        <div class="tf__single_comment_img">
-            <img src="images/bloger_1.jpg" alt="comment" class="img-fluid w-100">
-        </div>
-        <div class="tf__single_comment_text">
-            <h4>Cameron Williamson</h4>
-            <p class="comment_time">Nov 23, 2024 at 12:23 pm <a href="#">reply</a></p>
-            <p class="main_comment">Mollis porta eget mus volutpat nunc porttitor scelerisque
-                nec feugiat. Ut sed vel malesuada sed viverra est nisi magna sed. Faucibus
-                imperdiet nulla accumsan mi dictum velit leo.</p>
-        </div>
-    </div>
-    <div class="tf__pagination mt_35">
+{% endfor %}
+
+    {# <div class="tf__pagination mt_35">
         <div class="row">
             <div class="col-12">
                 <nav aria-label="Page navigation example">
@@ -77,4 +49,4 @@
                 </nav>
             </div>
         </div>
-    </div>
+    </div> #}

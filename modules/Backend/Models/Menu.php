@@ -20,6 +20,7 @@ use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
 use Juzaweb\CMS\Traits\UseUUIDColumn;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Juzaweb\Backend\Models\Menu
@@ -129,5 +130,10 @@ class Menu extends Model
         return [
             'menus',
         ];
+    }
+
+    public static function selectFrontendBuilder(): Builder
+    {
+        return self::query();
     }
 }

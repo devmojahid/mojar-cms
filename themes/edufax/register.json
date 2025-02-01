@@ -53,6 +53,23 @@
             "view": "theme::components.blocks.test"
         }
     },
+    "sidebars": {
+        "sidebar": {
+            "label": "Sidebar"
+        }
+    },
+    "widgets": {
+        "search_area": {
+            "label": "Search Area",
+            "description": "Search Area",
+            "view": "theme::components.widgets.search_area"
+        },
+        "categories_list": {
+            "label": "Categories List",
+            "description": "Categories List",
+            "view": "theme::components.widgets.categories_list"
+        }
+    },
     "configs": {
         "footer_bg_image": {
             "label": "Footer Bg Image",
