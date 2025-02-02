@@ -143,4 +143,8 @@ return [
     'import' => 'Import',
     'subtitles' => 'Subtitles',
     'movie_reports' => 'Reports',
+    'item_num' => 'Item %s',
+    'add_item' => 'Add item',
+    'remove_item' => 'Remove item',
+    'confirm_remove' => 'Are you sure you want to remove this item?',
 ];

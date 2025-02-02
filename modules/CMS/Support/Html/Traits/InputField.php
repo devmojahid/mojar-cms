@@ -156,4 +156,30 @@ trait InputField
 
         return view('cms::components.form.custom_menu', $options);
     }
+
+    /**
+     * Renders a repeater field group.
+     */
+    public function repeater(string|Model $label, ?string $name, ?array $fields = [], ?array $options = []): Factory|View
+    {
+        // Map common options (label, name, id, etc.)
+        $options = $this->mapOptions($label, $name, $options);
+        
+        // Save the subfields configuration
+        $options['fields'] = $fields;
+        
+        // Set sensible defaults for repeater options
+        $options['min_items'] = $options['min_items'] ?? 0;
+        $options['max_items'] = $options['max_items'] ?? null;
+        $options['add_button_text'] = $options['add_button_text'] ?? 'Add Item';
+        $options['remove_button_text'] = $options['remove_button_text'] ?? 'Remove';
+        
+        // If the value is stored as a JSON string, decode it to an array
+        if (isset($options['value']) && is_string($options['value'])) {
+            $options['value'] = json_decode($options['value'], true) ?? [];
+        }
+        
+        // Render the repeater field Blade view
+        return view('cms::components.form_repeater', $options);
+    }
 }

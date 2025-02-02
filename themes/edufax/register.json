@@ -16,6 +16,15 @@
                     "label": "Content"
                 }
             }
+        },
+        "about": {
+            "label": "About",
+            "view": "theme::templates.about",
+            "blocks": {
+                "content": {
+                    "label": "Content"
+                }
+            }
         }
     },
     "nav_menus": {
@@ -51,6 +60,11 @@
             "label": "Test",
             "description": "Test",
             "view": "theme::components.blocks.test"
+        },
+        "about_area": {
+            "label": "About Area",
+            "description": "About Area",
+            "view": "theme::components.blocks.about_area"
         }
     },
     "sidebars": {

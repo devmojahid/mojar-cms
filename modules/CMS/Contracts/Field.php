@@ -214,4 +214,15 @@ interface Field
      * @return Factory|View The generated view.
      */
     public function security(string|Model $label, ?string $name, ?array $options = []): Factory|View;
+
+       /**
+     * Creates a repeater field that can contain multiple groups of subfields
+     *
+     * @param string|Model $label The label for the repeater group
+     * @param string|null $name The name for the repeater field
+     * @param array|null $fields Array of subfields configurations
+     * @param array|null $options Additional options for the repeater
+     * @return Factory|View The rendered repeater field
+     */
+    public function repeater(string|Model $label, ?string $name, ?array $fields = [], ?array $options = []): Factory|View;
 }

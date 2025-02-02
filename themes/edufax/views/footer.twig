@@ -3,7 +3,7 @@
     <!--==============================
         FOOTER START
     ===============================-->
-    <section class="tf__footer" style="background: url({{ theme_config('footer_bg_image') }}) no-repeat center center; background-size: cover;">
+    <section class="tf__footer" style="background: url({{ url(theme_config('footer_bg_image')|trim('/','left')) }}) no-repeat center center; background-size: cover;">
         <div class="tf__footer_overlay pt_120 xs_pt_80">
             <div class="container">
                 <div class="row justify-content-between">

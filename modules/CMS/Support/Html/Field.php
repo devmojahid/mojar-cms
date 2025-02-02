@@ -152,6 +152,12 @@ class Field implements FieldContract
                 $data['name'],
                 Arr::get($data, 'data', [])
             ),
+            'repeater' => $this->repeater(
+                $data['label'],
+                $data['name'],
+                Arr::get($data, 'fields', []),
+                Arr::get($data, 'data', [])
+            ),
             default => '',
         };
     }
@@ -194,4 +200,41 @@ class Field implements FieldContract
 
         return $options;
     }
+
+    public function repeater(string|Model $label, ?string $name, ?array $fields = [], ?array $options = []): Factory|View
+    {
+        $options = $this->mapOptions($label, $name, $options);
+        
+        // Handle field configuration
+        if (empty($fields) && isset($options['fields'])) {
+            $fields = $options['fields'];
+        }
+
+        $repeaterConfig = array_merge($options, [
+            'type' => 'repeater',
+            'label' => $options['label'],
+            'name' => $name,
+            'fields' => $fields,
+        ]);
+
+        $repeater = new RepeaterField($repeaterConfig);
+
+        // Handle existing values
+        if (isset($options['value'])) {
+            $values = is_string($options['value']) 
+                ? json_decode($options['value'], true) 
+                : $options['value'];
+            
+            if (is_array($values)) {
+                $repeater->setItems($values);
+            }
+        }
+
+        return view('cms::components.form_repeater', [
+            'repeater' => $repeater,
+            'id' => $options['id'],
+            'required' => $options['required'] ?? false,
+        ]);
+    }
+    
 }
