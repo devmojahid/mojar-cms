@@ -88,6 +88,7 @@ class Custom extends AbstractExtension
             new TwigFunction('do_action', 'do_action'),
             new TwigFunction('strip_tags', 'strip_tags'),
             new TwigFunction('get_custom_menus', 'get_custom_menus'),
+            new TwigFunction('get_menu_items_by_menu', 'get_menu_items_by_menu'),
         ];
     }
 }

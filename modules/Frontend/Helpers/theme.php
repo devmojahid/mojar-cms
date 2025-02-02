@@ -560,3 +560,18 @@ if (!function_exists('has_media_image_size')) {
         return Storage::disk(config('mojar.filemanager.disk'))->exists($path);
     }
 }
+
+
+// if ($menu && $menu = Menu::find($menu)) {
+//     $items = jw_menu_items($menu);
+//     $menuBuilder = new MenuBuilder($items);
+//     $primaryMenuItems = $menuBuilder->toArray();
+// }
+if(!function_exists('get_menu_items_by_menu')){
+    function get_menu_items_by_menu($menu){
+        $menu = Menu::find($menu);
+        $items = jw_menu_items($menu);
+        $menuBuilder = new MenuBuilder($items);
+        return $menuBuilder->toArray();
+    }
+}

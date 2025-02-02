@@ -6,7 +6,10 @@
             "type": "text",
             "name": "title",
             "label": "Section Title",
-            "value": "We do great things together"
+            "data": {
+                "value": "We do great things together"
+            }
+
         },
         {
             "type": "textarea",
