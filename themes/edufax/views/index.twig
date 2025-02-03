@@ -21,14 +21,13 @@
 
     <section class="tf__blog_page pt_120 xs_pt_80 pb_120 xs_pb_80">
         <div class="container">
-            <form class="tf__blog_search_area">
-
+            <form class="tf__blog_search_area" id="post-filter-form">
                 <div class="row justify-content-between wow fadeInUp" data-wow-duration="1s">
                     <div class="col-xl-4 col-md-6 col-lg-5">
                         <div class="tf__blog_search_item">
                             <label>Search Here</label>
                             <div class="tf__blog_search_input">
-                                <input type="text" placeholder="Type here">
+                                <input type="text" name="keyword" placeholder="Type here" class="post-filter">
                                 <button type="submit"><i class="far fa-search"></i></button>
                             </div>
                         </div>
@@ -37,28 +36,26 @@
                         <div class="tf__blog_search_item">
                             <label>By Category</label>
                             <div class="tf__blog_search_input">
-                                <select class="select_js">
+                                <select class="select_js post-filter" name="category">
                                     <option value=""> Please Select </option>
-                                    <option value="">English</option>
-                                    <option value="">finance</option>
-                                    <option value="">design</option>
-                                    <option value="">marketing</option>
-                                    <option value="">development</option>
+                                    {% for category in get_taxonomies('categories') %}
+                                        <option value="{{ category.id }}">{{ category.name }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
-            <div class="row mt_35">
+            <div class="row mt_35" id="post-list">
                 {% for post in page.data %}
-                        {{ get_template_part(post, 'content') }}
-                    {% endfor %}
+                    {{ get_template_part(post, 'content') }}
+                {% endfor %}
             </div>
             <div class="tf__pagination mt_60">
                 <div class="row">
-                    <div class="col-12">
-                    {{ paginate_links(page, 'theme::components.pagination') }}
+                    <div class="col-12" id="pagination">
+                        {{ paginate_links(page, 'theme::components.pagination') }}
                     </div>
                 </div>
             </div>

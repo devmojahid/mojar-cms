@@ -1,0 +1,23 @@
+{
+    "name": "mojahid/event-management",
+    "description": "This plugin Developed For Maintain Events",
+    "extra": {
+        "mojar": {
+            "name": "Event Management",
+            "domain": "mojahid_event_management",
+            "cms_min": "3.3",
+            "version": "1.0.0",
+            "providers": [
+                "Mojahid\\EventManagement\\Providers\\EventManagementServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Mojahid\\EventManagement\\": "src/"
+        },
+        "files": [
+            "helpers/helpers.php"
+        ]
+    }
+}

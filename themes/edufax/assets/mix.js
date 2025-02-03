@@ -23,5 +23,6 @@ mix.combine([
     'themes/edufax/assets/js/venobox.min.js',
     'themes/edufax/assets/js/wow.min.js',
     'themes/edufax/assets/js/videoPlayer.min.js',
-    'themes/edufax/assets/js/main.js'
+    'themes/edufax/assets/js/main.js',
+    'themes/edufax/assets/js/custom/post_filter.js'
 ], 'themes/edufax/assets/public/js/main.js');
