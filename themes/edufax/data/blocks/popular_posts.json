@@ -1,0 +1,51 @@
+{
+    "label": "Popular Posts",
+    "description": "Display popular blog posts with thumbnails",
+    "form": [
+        {
+            "type": "text",
+            "name": "title",
+            "label": "Widget Title",
+            "data": {
+                "value": "Popular Posts"
+            }
+        },
+        {
+            "type": "select",
+            "name": "post_type",
+            "label": "Post Type",
+            "data": {
+                "value": "posts"
+            }
+        },
+        {
+            "type": "number",
+            "name": "number_posts",
+            "label": "Number of Posts",
+            "data": {
+                "value": 4
+            }
+        },
+        {
+            "type": "select",
+            "name": "order_by",
+            "label": "Order By",
+            "data": {
+                "options": {
+                    "views": "Most Viewed",
+                    "created_at": "Latest Posts",
+                    "comments": "Most Commented"
+                },
+                "value": "views"
+            }
+        },
+        {
+            "type": "taxonomy",
+            "name": "taxonomy",
+            "label": "Category Filter (Optional)",
+            "data": {
+                "post_type": "posts"
+            }
+        }
+    ]
+} 

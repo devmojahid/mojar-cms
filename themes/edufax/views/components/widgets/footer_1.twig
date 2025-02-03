@@ -1,0 +1,11 @@
+<div class="tf__footer_content">
+    <a href="{{ url('/') }}" class="footer_logo">
+        <img src="{{ upload_url(data.logo) }}" alt="{{ data.logo_alt }}" class="img-fluid w-100">
+    </a>
+    <p class="footer_description">{{ data.description }}</p>
+    <ul class="social_link d-flex flex-wrap">
+        {% for social in data.social_links %}
+            <li><a href="{{ social.url }}"><i class="{{ social.icon }}"></i></a></li>
+        {% endfor %}
+    </ul>
+</div> 

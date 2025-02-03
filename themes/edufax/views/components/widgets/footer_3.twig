@@ -1,0 +1,17 @@
+<div class="tf__footer_content tf__footer_location">
+    <h3>{{ data.title }}</h3>
+    <p>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>{{ data.address }}</span>
+    </p>
+    <p>
+        <i class="fas fa-phone-alt"></i>
+        {% for phone in data.phones %}
+            <span>{{ phone.number }}</span>
+        {% endfor %}
+    </p>
+    <p>
+        <i class="fas fa-envelope"></i>
+        <span>{{ data.email }}</span>
+    </p>
+</div> 

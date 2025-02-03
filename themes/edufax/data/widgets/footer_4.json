@@ -1,0 +1,38 @@
+{
+    "name": "Footer Subscribe",
+    "description": "Footer newsletter subscription form",
+    "form": [
+        {
+            "type": "text",
+            "name": "title",
+            "label": "Widget Title",
+            "data": {
+                "value": "Subscribe"
+            }
+        },
+        {
+            "type": "textarea",
+            "name": "description",
+            "label": "Description",
+            "data": {
+                "value": "You made it so simple. My new site is so much faster and easier to work with than my old site. I just choose the page, make the change."
+            }
+        },
+        {
+            "type": "text",
+            "name": "placeholder",
+            "label": "Input Placeholder Text",
+            "data": {
+                "value": "Subscribe"
+            }
+        },
+        {
+            "type": "text",
+            "name": "button_text",
+            "label": "Button Text",
+            "data": {
+                "value": "Subscribe"
+            }
+        }
+    ]
+} 

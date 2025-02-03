@@ -1,0 +1,60 @@
+{
+    "name": "Related Posts",
+    "description": "Display related blog posts in slider",
+    "form": [
+        {
+            "type": "text",
+            "name": "title",
+            "label": "Section Title",
+            "data": {
+                "value": "Latest News Feed"
+            }
+        },
+        {
+            "type": "select",
+            "name": "post_type",
+            "label": "Post Type",
+            "data": {
+                "options": {
+                    "posts": "Blog Posts",
+                    "news": "News"
+                },
+                "value": "posts"
+            }
+        },
+        {
+            "type": "number",
+            "name": "limit",
+            "label": "Number of Posts to Show",
+            "data": {
+                "min": 3,
+                "max": 12,
+                "value": 4,
+                "description": "How many posts to display in the slider"
+            }
+        },
+        {
+            "type": "select",
+            "name": "sort_by",
+            "label": "Sort Posts By",
+            "data": {
+                "options": {
+                    "views": "Most Viewed",
+                    "created_at": "Latest Posts",
+                    "comments_count": "Most Commented",
+                    "related": "Related Posts"
+                },
+                "value": "related"
+            }
+        },
+        {
+            "type": "taxonomy",
+            "name": "category",
+            "label": "Filter by Category",
+            "data": {
+                "post_type": "posts",
+                "taxonomy": "categories"
+            }
+        }
+    ]
+} 

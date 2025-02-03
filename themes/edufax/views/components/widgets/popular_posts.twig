@@ -1,0 +1,27 @@
+{% set posts = get_posts(widget.post_type, {
+    'limit': widget.limit|default(4),
+    'order_by': widget.sort_by,
+    'order': 'DESC',
+    'taxonomy': widget.category ? {
+        'category': widget.category
+    } : null
+}) %}
+
+<div class="tf__sidebar_post">
+    <h3>{{ widget.title }}</h3>
+    <ul>
+        {% for post in posts %}
+            <li>
+                <div class="img">
+                    <img src="{{ post.thumbnail }}" alt="{{ post.title }}" class="img-fluid w-100">
+                </div>
+                <div class="text">
+                    <a href="{{ post.url }}">{{ post.title }}</a>
+                    <p><i class="fal fa-calendar-alt"></i> {{ post.created_at|date('d M, Y') }}</p>
+                </div>
+            </li>
+        {% else %}
+            <li>No posts found</li>
+        {% endfor %}
+    </ul>
+</div> 

@@ -1,0 +1,72 @@
+{
+    "name": "Footer Widget 1",
+    "description": "Footer logo, description and social links",
+    "form": [
+        {
+            "type": "image",
+            "name": "logo",
+            "label": "Footer Logo",
+            "data": {
+                "value": "images/footer_logo.png"
+            }
+        },
+        {
+            "type": "text",
+            "name": "logo_alt",
+            "label": "Logo Alt Text",
+            "data": {
+                "value": "EduFax"
+            }
+        },
+        {
+            "type": "textarea",
+            "name": "description",
+            "label": "Footer Description",
+            "data": {
+                "value": "You made it so simple. My new site is so much faster and easier to work with than my old site. I just choose the page, make the change."
+            }
+        },
+        {
+            "type": "repeater",
+            "name": "social_links",
+            "label": "Social Links",
+            "fields": [
+                {
+                    "type": "text",
+                    "name": "icon",
+                    "label": "Icon Class",
+                    "description": "FontAwesome icon class (e.g. fab fa-facebook-f)"
+                },
+                {
+                    "type": "text",
+                    "name": "url",
+                    "label": "Social Link URL"
+                }
+            ],
+            "options": {
+                "min_items": 1,
+                "max_items": 6,
+                "add_button_text": "Add Social Link",
+                "remove_button_text": "Remove Link",
+                "value": [
+                    {
+                        "icon": "fab fa-facebook-f",
+                        "url": "#"
+                    },
+                    {
+                        "icon": "fab fa-linkedin-in",
+                        "url": "#"
+                    },
+                    {
+                        "icon": "fab fa-twitter",
+                        "url": "#"
+                    },
+                    {
+                        "icon": "fab fa-pinterest-p",
+                        "url": "#"
+                    }
+                ]
+            }
+        }
+    ]
+} 

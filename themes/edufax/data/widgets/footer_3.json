@@ -1,0 +1,56 @@
+{
+    "name": "Footer Contact Info",
+    "description": "Footer contact information with location, phone and email",
+    "form": [
+        {
+            "type": "text",
+            "name": "title",
+            "label": "Widget Title",
+            "data": {
+                "value": "Get in touch"
+            }
+        },
+        {
+            "type": "text",
+            "name": "address",
+            "label": "Address",
+            "data": {
+                "value": "4543 Washington. Manchester,mukly 545322 USA"
+            }
+        },
+        {
+            "type": "repeater",
+            "name": "phones",
+            "label": "Phone Numbers",
+            "fields": [
+                {
+                    "type": "text",
+                    "name": "number",
+                    "label": "Phone Number"
+                }
+            ],
+            "options": {
+                "min_items": 1,
+                "max_items": 3,
+                "add_button_text": "Add Phone Number",
+                "remove_button_text": "Remove Number",
+                "value": [
+                    {
+                        "number": "+088 (246) 642-27"
+                    },
+                    {
+                        "number": "+088 (246) 342-27"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "text",
+            "name": "email",
+            "label": "Email Address",
+            "data": {
+                "value": "mail@example.com"
+            }
+        }
+    ]
+} 

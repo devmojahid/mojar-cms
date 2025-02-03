@@ -1,0 +1,52 @@
+{% set posts = get_posts(widget.post_type, {
+    'limit': widget.limit|default(4),
+    'order_by': widget.sort_by,
+    'order': 'DESC',
+    'taxonomy': widget.category ? {
+        'category': widget.category
+    } : null
+}) %}
+
+<section class="tf__related_item pt_110 xs_pt_70 pb_100 xs_pb_60">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-7 m-auto">
+                <div class="tf__section_heading heading_center mb_5">
+                    <h2>{{ widget.title }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row blog_slider">
+            {% for post in posts %}
+                <div class="col-xl-4 wow fadeInUp" data-wow-duration="1s">
+                    <div class="tf__single_blog">
+                        <div class="tf__single_blog_img">
+                            <img src="{{ post.thumbnail }}" alt="{{ post.title }}" class="img-fluid w-100">
+                        </div>
+                        <div class="tf__single_blog_text">
+                            <ul>
+                                <li>
+                                    <span>
+                                        <img src="{{ post.author.avatar }}" alt="{{ post.author.name }}" class="img-fluid w-100">
+                                    </span>
+                                    {{ post.author.name }}
+                                </li>
+                                <li><i class="fal fa-calendar-alt"></i> {{ post.created_at|date('d M, Y') }}</li>
+                            </ul>
+                            <a class="title" href="{{ post.url }}">{{ post.title }}</a>
+                            <div class="tf__single_blog_footer">
+                                <a href="{{ post.url }}">View Details <i class="far fa-long-arrow-right"></i></a>
+                                <span><i class="far fa-eye"></i> {{ post.views }} View</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <p class="text-center">No related posts found</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section> 

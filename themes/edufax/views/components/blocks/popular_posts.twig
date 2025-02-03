@@ -1,0 +1,26 @@
+{% set posts = get_posts({
+    'post_type': data.post_type,
+    'limit': data.number_posts,
+    'order_by': data.order_by,
+    'taxonomy': data.taxonomy
+}) %}
+
+<div class="tf__sidebar_post">
+    <h3>{{ data.title }}</h3>
+    <ul>
+        {% for post in posts %}
+            {% set thumbnail = get_thumbnail(post) %}
+            <li>
+                <div class="img">
+                    <img src="{{ thumbnail }}" alt="{{ post.title }}" class="img-fluid w-100">
+                </div>
+                <div class="text">
+                    <a href="{{ post.url }}">{{ post.title }}</a>
+                    <p><i class="fal fa-calendar-alt"></i> {{ post.created_at|date('d M, Y') }}</p>
+                </div>
+            </li>
+        {% else %}
+            <li>No posts found</li>
+        {% endfor %}
+    </ul>
+</div> 

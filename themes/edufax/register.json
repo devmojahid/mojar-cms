@@ -33,6 +33,9 @@
         },
         "sidebar": {
             "label": "Sidebar menu"
+        },
+        "footer_2": {
+            "label": "Footer 2 menu"
         }
     },
     "blocks": {
@@ -70,6 +73,18 @@
     "sidebars": {
         "sidebar": {
             "label": "Sidebar"
+        },
+        "post_single": {
+            "label": "Post Single"
+        },
+        "footer_1": {
+            "label": "Footer 1"
+        },
+        "footer_3": {
+            "label": "Footer 3"
+        },
+        "footer_4": {
+            "label": "Footer 4"
         }
     },
     "widgets": {
@@ -82,6 +97,31 @@
             "label": "Categories List",
             "description": "Categories List",
             "view": "theme::components.widgets.categories_list"
+        },
+        "popular_posts": {
+            "label": "Popular Posts",
+            "description": "Display popular blog posts in sidebar",
+            "view": "theme::components.widgets.popular_posts"
+        },
+        "related_posts": {
+            "label": "Related Posts",
+            "description": "Display Related blog posts in sidebar",
+            "view": "theme::components.widgets.related_posts"
+        },
+        "footer_1": {
+            "label": "Footer 1",
+            "description": "Display info in your footer 1",
+            "view": "theme::components.widgets.footer_1"
+        },
+        "footer_3": {
+            "label": "Footer 3",
+            "description": "Display info in your footer 3",
+            "view": "theme::components.widgets.footer_3"
+        },
+        "footer_4": {
+            "label": "Footer 4",
+            "description": "Display info in your footer 4",
+            "view": "theme::components.widgets.footer_4"
         }
     },
     "configs": {
