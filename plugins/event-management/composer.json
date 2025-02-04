@@ -4,7 +4,7 @@
     "extra": {
         "mojar": {
             "name": "Event Management",
-            "domain": "mojahid_event_management",
+            "domain": "evman",
             "cms_min": "3.3",
             "version": "1.0.0",
             "providers": [
