@@ -34,12 +34,8 @@
             <line x1="5" y1="12" x2="19" y2="12"></line>
         </svg>
     </button>
-    
+
     <ul id="jwSpeedDialActions" class="jw-speed-dial-actions" aria-hidden="true">
-        <div class="jw-speed-dial-search-wrapper">
-            <input type="text" class="jw-speed-dial-search" placeholder="Search actions...">
-        </div>
-        
         @foreach($speedDialItems as $item)
         <li class="jw-speed-dial-item" data-item-id="{{ $loop->index }}" tabindex="0">
             <a href="{{ $item['url'] }}" class="jw-speed-dial-link" data-turbolinks="false">
