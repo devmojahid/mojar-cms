@@ -24,3 +24,4 @@ require __DIR__ . '/components/logs.route.php';
 require __DIR__ . '/components/management.route.php';
 require __DIR__ . '/components/resource.route.php';
 require __DIR__ . '/components/language.route.php';
+require __DIR__ . '/components/paymentmethod.route.php';
