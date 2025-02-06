@@ -2,92 +2,83 @@
 
 @section('content')
     @component('cms::components.form_resource', [
-        'model' => $model
+        'model' => $model,
     ])
-
         <input type="hidden" name="id" value="{{ $model->id }}">
 
         <div class="row">
             <div class="col-md-8">
-                @component('cms::components.card', [
-                    'label' => trans('cms::app.general')
-                ])
-                    {{ Field::select($model, 'type', [
-                        'disabled' => $model->id ? true : false,
-                        'required' => true,
-                        'label' => trans('ecom::content.method'),
-                        'options' => array_merge(
-                            ['' => '--- '.trans('ecom::content.payment_method').' ---'],
-                            [
-                                'paypal' => 'Paypal',
-                                'custom' => 'Custom',
-                            ]
-                        )
-                    ]) }}
-
-
-                    {{
-                        Field::text($model, 'name', [
+                <div class="form-group">
+                    @component('cms::components.card', [
+                        'label' => trans('cms::app.general'),
+                    ])
+                        {{ Field::select($model, 'type', [
+                            'disabled' => $model->id ? true : false,
                             'required' => true,
-                        ])
-                    }}
+                            'label' => trans('cms::app.method'),
+                            'options' => array_merge(
+                                ['' => '--- ' . trans('cms::app.payment_method') . ' ---'],
+                                [
+                                    'paypal' => 'Paypal',
+                                    'custom' => 'Custom',
+                                ],
+                            ),
+                        ]) }}
 
-                    {{ Field::textarea($model, 'description') }}
-                @endcomponent
+                        {{ Field::text($model, 'name', [
+                            'required' => true,
+                        ]) }}
 
-                @component('cms::components.card', [
-                    'label' => trans('cms::app.config'),
-                    'class' => $model->data ? 'box-data': 'box-hidden box-data'
-                ])
-                    @if($model->type == 'paypal')
-                        @component('cms::backend.payment-method.components.paypal_template', [
-                        'data' => $model->data
+                        {{ Field::textarea($model, 'description') }}
+                    @endcomponent
+                </div>
+                <div class="form-group">
+                    @component('cms::components.card', [
+                        'label' => trans('cms::app.config'),
+                        'class' => $model->data ? 'box-data' : 'box-hidden box-data',
                     ])
+                        @if ($model->type == 'paypal')
+                            @component('cms::backend.payment-method.components.paypal_template', [
+                                'data' => $model->data,
+                            ])
+                            @endcomponent
+                        @endif
 
-
-                        @endcomponent
-                    @endif
-
-                    @if($model->type == 'custom')
-                        @component('cms::backend.payment-method.components.custom_template', [
-                        'data' => $model->data
-                    ])
-
-
-                        @endcomponent
-                    @endif
-                @endcomponent
+                        @if ($model->type == 'custom')
+                            @component('cms::backend.payment-method.components.custom_template', [
+                                'data' => $model->data,
+                            ])
+                            @endcomponent
+                        @endif
+                    @endcomponent
+                </div>
             </div>
+
 
             <div class="col-md-4">
                 @component('cms::components.card', [
                     'label' => trans('cms::app.status'),
                 ])
                     {{ Field::checkbox($model, 'active', [
-                        'checked' => $model->active == 1 || is_null($model->active)
+                        'checked' => $model->active == 1 || is_null($model->active),
                     ]) }}
                 @endcomponent
             </div>
         </div>
-
     @endcomponent
 
     <template id="data-custom">
         @component('cms::backend.payment-method.components.custom_template')
-
-
         @endcomponent
     </template>
 
     <template id="data-paypal">
         @component('cms::backend.payment-method.components.paypal_template')
-
-
         @endcomponent
     </template>
 
     <script type="text/javascript">
-        $('select[name=type]').on('change', function () {
+        $('select[name=type]').on('change', function() {
             let type = $(this).val();
             let name = $(this).find('option:selected').text().trim();
 
