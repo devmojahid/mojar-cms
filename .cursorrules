@@ -72,3 +72,63 @@ and i want redising using tabler admin dashboard with more best design system. t
 - Use Laravel Sanctum for authentication
 - Implement proper CSRF protection
 - Use Laravel's built-in pagination
+application strucutre 
+
+Project context: This is a Laravel 9 Mojar project. i want redesign the complete design not functions and make it more and more better. 
+
+
+my system theme folder location /themes
+my system plugin folder location /plugins
+my system modules folder location /modules
+in modules we have our cms core and full application logic strucutre like 
+    -> API 
+        -> Actions
+        -> Http
+        -> Providers
+        -> resources
+        -> routes
+        -> Support
+    -> Backend
+        -> Actions
+        -> Commands
+        -> Events
+        -> Helpers
+        -> Http
+        -> Models
+        -> Providers
+        -> Repositories
+        -> resources [all dashboard style and layout]
+        -> routes
+        -> Support
+    -> CMS
+        -> Abstracts
+        -> config
+        -> Console
+        -> Contracts
+        -> Database
+        -> Exceptions
+        -> Extension
+        -> Facades
+        -> Events
+        -> Helpers
+        -> Http
+        -> Interfaces
+        -> Models
+        -> Providers
+        -> Repositories
+        -> resources
+        -> routes
+        -> Support
+            -> Activators
+            -> Collections
+            -> FileManager
+            -> Imports
+            -> Media
+            -> Permission
+            -> Updater
+            etc many more
+        -> Trait
+    -> DevTool
+    -> Frontend
+    -> Multilang
+    and more
