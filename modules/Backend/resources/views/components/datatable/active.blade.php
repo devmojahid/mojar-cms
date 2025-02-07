@@ -1,5 +1,5 @@
 @if($row->active)
-    <span class="text-success">{{ trans('cms::app.active') }}</span>
+    <span class="badge bg-blue text-blue-fg">{{ trans('cms::app.active') }}</span>
 @else
-    <span class="text-secondary">{{ trans('cms::app.inactive') }}</span>
+    <span class="badge bg-teal text-teal-fg">{{ trans('cms::app.inactive') }}</span>
 @endif

@@ -18,14 +18,27 @@ class PaymentMethodDatatable extends DataTable
     {
         return [
             'name' => [
-                'label' => trans('ecom::content.name'),
-                'formatter' => [$this, 'rowActionsFormatter'],
+                'label' => trans('cms::app.name'),
+                'formatter' => function ($value, $row, $index) {
+                    return view(
+                        'cms::backend.items.datatable_item',
+                        [
+                            'value' => $row->{$row->getFieldName()},
+                            'row' => $row,
+                            'actions' => $this->rowAction($row),
+                            'editUrl' => $this->currentUrl . '/' . $row->id . '/edit',
+                            'title_hidden' => false,
+                            'actions_hidden' => true,
+                        ]
+                    )
+                    ->render();
+                }
             ],
             'type' => [
-                'label' => trans('ecom::content.method'),
+                'label' => trans('cms::app.method'),
                 'width' => '20%',
                 'formatter' => function ($value, $row, $index) {
-                    return trans("ecom::content.data.payment_methods.{$value}");
+                    return trans("cms::app.data.payment_methods.{$value}");
                 }
             ],
             'active' => [
@@ -46,6 +59,26 @@ class PaymentMethodDatatable extends DataTable
                 'formatter' => function ($value, $row, $index) {
                     return jw_date_format($row->created_at);
                 }
+            ],
+            'operations' => [
+                'label' => trans('cms::app.operations'),
+                'width' => '10%',
+                'align' => 'center',
+                'sortable' => false,
+                'formatter' => function ($value, $row, $index) {
+                    return view(
+                        'cms::backend.items.datatable_item',
+                        [
+                            'value' => $row->{$row->getFieldName()},
+                            'row' => $row,
+                            'actions' => $this->rowAction($row),
+                            'editUrl' => $this->currentUrl . '/' . $row->id . '/edit',
+                            'title_hidden' => true,
+                            'actions_hidden' => false,
+                        ]
+                    )
+                    ->render();
+                },
             ]
         ];
     }

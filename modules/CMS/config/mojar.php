@@ -24,6 +24,12 @@ return [
         'enable' => env('JW_FRONTEND_ENABLE', true),
     ],
 
+    'payment_methods' => [
+        'cod' => 'Cash on delivery',
+        'paypal' => 'Paypal',
+        'custom' => 'Custom',
+    ],
+
     /**
      * Cache prefix
      *
