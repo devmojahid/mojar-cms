@@ -13,18 +13,13 @@ class EventManagementAction extends Action
             Action::INIT_ACTION,
             [$this, 'registerPostTypes']
         );
-
-        // $this->addAction(
-        //     Action::INIT_ACTION,
-        //     [$this, 'registerConfigs']
-        // );
         
         $this->addAction(
             'post_type.events.form.left',
             [$this, 'addFormEvent']
         );
-
     }
+
 
 
     /**
@@ -60,26 +55,6 @@ class EventManagementAction extends Action
                     ->toArray(),
             ]
         );
-
-        HookAction::registerTaxonomy(
-            'event_spicker',
-            'events',
-            [
-                'label' => trans('evman::content.event_spicker'),
-                'menu_position' => 11,
-                'supports' => [
-                    'thumbnail'
-                ],
-                'metas' => [
-                    'poster' => [
-                        'label' => trans('evman::app.poster'),
-                        'type' => 'image',
-                        'sidebar' => false,
-                    ],
-                ]
-            ]
-        );
-
     }
 
     public function addFormEvent($model): void
@@ -94,6 +69,7 @@ class EventManagementAction extends Action
         );
 
     }
+
 
     
 }

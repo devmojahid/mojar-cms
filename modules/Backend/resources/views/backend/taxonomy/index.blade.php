@@ -39,6 +39,7 @@
                         @php
                             $type = $setting->get('type');
                             $postType = $setting->get('post_type');
+                            $metas = $setting->get('metas');
                         @endphp
 
                         <form method="post" action="{{ route('admin.taxonomies.store', [$postType, $taxonomy]) }}"
@@ -70,6 +71,30 @@
                                     </select>
                                 </div>
                             @endif
+
+                            @if(in_array('thumbnail', $setting->get('supports', [])))
+                            <div class="col-md-4">
+                                @component('cms::components.form_image', [
+                                    'name' => 'thumbnail',
+                                    'label' => trans('cms::app.thumbnail')
+                                ])@endcomponent
+                            </div>
+                            @endif
+
+                            @if (!empty($metas))
+                                @foreach ($metas as $meta => $metaArgs)
+                                    @component('cms::components.form_input', [
+                                        'name' => $meta,
+                                        'label' => $metaArgs['label'], 
+                                        'value' => '',
+                                        'required' => true,
+                                    ])
+
+                                    @endcomponent
+                                @endforeach
+                            @endif
+
+
 
                             <input type="hidden" name="post_type" value="{{ $postType }}">
                             <input type="hidden" name="taxonomy" value="{{ $taxonomy }}">

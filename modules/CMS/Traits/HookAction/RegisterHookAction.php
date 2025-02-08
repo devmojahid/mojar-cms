@@ -167,6 +167,7 @@ trait RegisterHookAction
                 'supports' => [
                     'hierarchical',
                 ],
+                'metas' => [],
             ];
 
             $args['type'] = $type;
@@ -184,8 +185,31 @@ trait RegisterHookAction
                 Str::ucfirst($type) . ' ' . $argsCollection->get('label')
             );
 
+            $supports = $argsCollection->get('supports', []);
+
+            if (in_array('thumbnail', $supports)) {
+                // $this->registerMeta(
+                //     $taxonomy,
+                //     'thumbnail',
+                //     [
+                //         'label' => trans('cms::app.thumbnail'),
+                //         'type' => 'image',
+                //         'sidebar' => false,
+                //     ]
+                // );
+            }
+
+            $metas = $argsCollection->get('metas', []);
+
+            if (!empty($metas)) {
+                // You could do something here like:
+                // $this->registerTaxonomyMetas($taxonomy, $objectType, $metas);
+                // Or just rely on the data stored in globalData
+            }          
+
             if ($argsCollection->get('show_in_menu')) {
                 $this->addAdminMenu(
+
                     $argsCollection->get('label'),
                     $menuSlug,
                     [

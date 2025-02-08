@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
+use Juzaweb\Backend\Models\TaxonomyMeta;
 use Juzaweb\CMS\Facades\HookAction;
 
 trait TaxonomyModel
@@ -87,6 +88,17 @@ trait TaxonomyModel
             );
         }
 
+        if ($metas = Arr::get($params, 'meta')) {
+            foreach ($metas as $key => $val) {
+                if (is_null($metas[$key])) {
+                    continue;
+                }
+
+                $builder->whereMeta($key, $val);
+            }
+        }
+
+
         return $builder;
     }
 
@@ -136,5 +148,152 @@ trait TaxonomyModel
         recursive_level_model($level, $this);
 
         return $level;
+    }
+
+    public function metas(): HasMany
+    {
+        return $this->hasMany(TaxonomyMeta::class, 'taxonomy_id', 'id');
+    }
+
+    public function getMeta($key, $default = null): mixed
+    {
+        return $this->json_metas[$key] ?? $default;
+    }
+
+    public function getMetas(): ?array
+    {
+        return $this->json_metas;
+    }
+
+    public function scopeWhereMeta(Builder $builder, string $key, string|array|int $value): Builder
+    {
+        return $builder->whereHas(
+            'metas',
+            function (Builder $q) use ($key, $value) {
+                $q->where('meta_key', '=', $key);
+                if (is_array($value)) {
+                    $q->whereIn('meta_value', $value);
+                } else {
+                    $q->where('meta_value', '=', $value);
+                }
+            }
+        );
+    }
+
+    public function scopeWhereMetaIn($builder, $key, $values)
+    {
+        return $builder->whereHas(
+            'metas',
+            function (Builder $q) use ($key, $values) {
+                $q->where('meta_key', '=', $key);
+                $q->whereIn('meta_value', $values);
+            }
+        );
+    }
+
+    public function scopeWhereMetaNot($builder, $key, $value)
+    {
+        return $builder->whereHas(
+            'metas',
+            function (Builder $q) use ($key, $value) {
+                $q->where('meta_key', '=', $key);
+                $q->where('meta_value', '!=', $value);
+            }
+        );
+    }
+
+    public function setMeta($key, $value): void
+    {
+        $metas = $this->getMetas();
+        $this->metas()->updateOrCreate(
+            [
+                'meta_key' => $key
+            ],
+            [
+                'meta_value' => is_array($value) ? json_encode($value) : $value
+            ]
+        );
+
+        $metas[$key] = $value;
+
+        $this->update(
+            [
+                'json_metas' => $metas
+            ]
+        );
+    }
+
+    // public function deleteMeta($key): bool
+    // {
+    //     $this->metas()->where('meta_key', $key)->delete();
+
+    //     return true;
+    // }
+
+    public function deleteMeta($key): bool
+    {
+        $this->metas()->where('meta_key', $key)->delete();
+
+        $metas = $this->getMetas();
+
+        unset($metas[$key]);
+
+        $this->update(
+            [
+                'json_metas' => $metas
+            ]
+        );
+
+        return true;
+    }
+
+    public function deleteMetas(array $keys): bool
+    {
+        $this->metas()->whereIn('meta_key', $keys)->delete();
+
+        $metas = $this->getMetas();
+
+        foreach ($keys as $key) {
+            unset($metas[$key]);
+        }
+
+        $this->update(
+            [
+                'json_metas' => $metas
+            ]
+        );
+
+        return true;
+    }
+
+    public function syncMetas(array $data = []): void
+    {
+        $this->syncMetasWithoutDetaching($data);
+
+        $this->metas()->whereNotIn('meta_key', array_keys($data))->delete();
+    }
+
+    public function syncMetasWithoutDetaching(array $data = []): void
+    {
+        $metas = $this->json_metas;
+
+        foreach ($data as $key => $val) {
+            $this->metas()->updateOrCreate(
+                [
+                    'meta_key' => $key
+                ],
+                [
+                    'meta_value' => is_array($val) ? json_encode($val) : $val
+                ]
+            );
+
+            $metas[$key] = $val;
+        }
+
+        $this->update(
+            [
+                'json_metas' => $metas
+            ]
+        );
     }
 }
