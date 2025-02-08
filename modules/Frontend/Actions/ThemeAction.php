@@ -83,6 +83,7 @@ class ThemeAction extends Action
         $types = $this->getRegister('taxonomies');
         foreach ($types as $key => $type) {
             $this->hookAction->registerTaxonomy($key, $type['post_types'], $type);
+            $this->hookAction->addMetaPostTypes($key, $type['metas']);
         }
     }
 

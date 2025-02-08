@@ -26,7 +26,6 @@ class PaymentMethodController extends BackendController
         {
             $types = config('mojar.payment_methods');
 
-            // dd($types);
             $types = array_keys($types);
 
             return Validator::make(
