@@ -29,7 +29,6 @@
             <li class="nav-item">
                 <a href="#tabs-brand-area" class="nav-link" data-bs-toggle="tab">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2" width="24" height="24"
-
                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -42,15 +41,13 @@
             <li class="nav-item">
                 <a href="#tabs-tickets" class="nav-link" data-bs-toggle="tab">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2" width="24" height="24"
-
-
                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <circle cx="12" cy="7" r="4" />
                         <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                     </svg>
-                   Tickets
+                    Tickets
                 </a>
             </li>
             <li class="nav-item">
@@ -63,7 +60,7 @@
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <circle cx="12" cy="7" r="4" />
                         <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                    </svg> 
+                    </svg>
                     Social Information
                 </a>
             </li>
@@ -78,7 +75,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             {{ Field::text(trans('evman::content.start_date'), 'meta[start_date]', [
-                                'value' => $model->getMeta('start_date') ? number_format($model->getMeta('start_date')) : '',
+                                'value' => $model->getMeta('start_date') ? $model->getMeta('start_date') : '',
                                 'class' => 'form-control',
                                 'type' => 'datetime-local',
                                 'id' => 'datepicker-default',
@@ -88,79 +85,81 @@
 
                         <div class="col-md-6">
                             {{ Field::text(trans('evman::content.end_date'), 'meta[end_date]', [
-                                'value' => $model->getMeta('end_date') ? number_format($model->getMeta('end_date')) : '',
+                                'value' => $model->getMeta('end_date') ? $model->getMeta('end_date') : '',
                                 'class' => 'is-number number-format',
                                 'type' => 'datetime-local',
                                 'id' => 'datepicker-default',
                             ]) }}
-                        </div>
-                    </div>
-
-                    <h4>Bookings</h4>
-                    
-                    <div class="row">
-                        <div class="col-md-6">
-
-                            {{ Field::text(trans('evman::content.price'), 'meta[price]', [
-                                'value' => $model->getMeta('price') ? number_format($model->getMeta('price')) : '',
-                                'class' => 'is-number number-format',
-                                'prefix' => '$',
-                            ]) }}
-                        </div>
-
-                        <div class="col-md-6">
-                            {{ Field::text(trans('evman::content.compare_price'), 'meta[compare_price]', [
-                                'value' => $model->getMeta('compare_price') ? number_format($model->getMeta('compare_price')) : '',
-                                'class' => 'is-number number-format',
-                                'prefix' => '$',
-                            ]) }}
 
                         </div>
                     </div>
+                </div>
 
+                <h4>Event Location & Venue</h4>
+                <div>
                     <div class="row">
                         <div class="col-md-6">
-                            {{ Field::text(trans('evman::content.sku_code'), 'meta[sku_code]', [
-                                'value' => $model->getMeta('sku_code') ?? '',
+                            {{ Field::text(trans('evman::content.venue'), 'meta[venue]', [
+                                'value' => $model->getMeta('venue'),
                             ]) }}
                         </div>
-
-
                         <div class="col-md-6">
-                            {{ Field::text(trans('evman::content.barcode'), 'meta[barcode]', [
-                                'value' => $model->getMeta('barcode') ?? '',
+
+                            {{ Field::text(trans('evman::content.venue_address'), 'meta[venue_address]', [
+                                'value' => $model->getMeta('venue_address'),
                             ]) }}
                         </div>
-
-                    </div>
-
-                    <div class="row">
                         <div class="col-md-6">
-                            {{ Field::checkbox(trans('evman::content.inventory_management'), 'meta[inventory_management]', [
-                                'checked' => $model->getMeta('inventory_management') == 1,
+                            {{ Field::text(trans('evman::content.latitude'), 'meta[latitude]', [
+                                'value' => $model->getMeta('latitude'),
                             ]) }}
-
-                            {{ Field::text(trans('evman::content.quantity'), 'meta[quantity]', [
-                                'value' => $model->getMeta('quantity') ?? '',
-                                'class' => 'is-number number-format',
+                        </div>
+                        <div class="col-md-6">
+                            {{ Field::text(trans('evman::content.longitude'), 'meta[longitude]', [
+                                'value' => $model->getMeta('longitude'),
                             ]) }}
-
-                            {{ Field::checkbox(trans('evman::content.allows_ordering_out_of_stock'), 'meta[disable_out_of_stock]', [
-                                'checked' => $model->getMeta('disable_out_of_stock') == 1,
+                        </div>
+                        <div class="col-md-6">
+                            {{ Field::text(trans('evman::content.map_url'), 'meta[map_url]', [
+                                'value' => $model->getMeta('map_url'),
+                            ]) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ Field::text(trans('evman::content.map_embed_code'), 'meta[map_embed_code]', [
+                                'value' => $model->getMeta('map_embed_code'),
                             ]) }}
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="tab-pane" id="tabs-brand-area">
                 <h4>Brand Area tab</h4>
-                <div>
 
-                    {{ Field::images(trans('evman::content.images'), 'meta[images]', [
-                        'value' => $model->getMeta('images', []),
-                    ]) }}
+                <div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ Field::image(trans('evman::content.event_logo'), 'meta[event_logo]', [
+                                'value' => $model->getMeta('event_logo'),
+                                'data' => [
+                                    'show_label' => true,
+                                ],
+                            ]) }}
+                        </div>
+                        <div class="col-md-6">
+
+                            {{ Field::image(trans('evman::content.event_banner'), 'meta[event_banner]', [
+                                'value' => $model->getMeta('event_banner'),
+                                'data' => [
+                                    'show_label' => true,
+                                ],
+                            ]) }}
+                        </div>
+                    </div>
+
                 </div>
             </div>
+
 
             <div class="tab-pane" id="tabs-tickets">
                 <h4>Tickets tab</h4>
@@ -173,30 +172,54 @@
             <div class="tab-pane" id="tabs-social-information">
                 <h4>Social Information tab</h4>
                 <div>
+                    @php
+                        $socialLinks = $model->getMeta('social_links');
+                        
+                        // Debug the raw value
+                        // dd('Raw Meta:', $socialLinks);
+                        
+                        // Ensure proper array structure
+                        if (empty($socialLinks)) {
+                            $socialLinks = [
+                                [
+                                    'icon' => 'fab fa-facebook-f',
+                                    'url' => '#',
+                                ],
+                            ];
+                        } elseif (!is_array(reset($socialLinks))) {
+                            // If the data is not properly nested, restructure it
+                            $socialLinks = [$socialLinks];
+                        }
+                    @endphp
+                
                     {{ Field::repeater(
-                        trans('evman::content.social_links'), 
-                        'meta[social_links]', 
+                        trans('evman::content.social_links'),
+                        'meta[social_links]',
                         [
                             [
                                 'name' => 'icon',
                                 'type' => 'text',
                                 'label' => 'Icon Class',
                                 'description' => 'FontAwesome icon class (e.g. fab fa-facebook-f)',
-                                'placeholder' => 'fab fa-facebook-f'
+                                'placeholder' => 'fab fa-facebook-f',
                             ],
                             [
                                 'name' => 'url',
                                 'type' => 'text',
                                 'label' => 'Social Link URL',
-                                'placeholder' => 'https://'
-                            ]
+                                'placeholder' => 'https://',
+                            ],
                         ],
                         [
                             'min_items' => 1,
                             'max_items' => 6,
                             'add_button_text' => 'Add Social Link',
-                            'remove_button_text' => 'Remove Link'
-                        ]
+                            'remove_button_text' => 'Remove Link',
+                            'collapsible' => true,
+                            'sortable' => true,
+                            'value' => $socialLinks, // Try adding value here as well
+                        ],
+                        $socialLinks
                     ) }}
                 </div>
             </div>

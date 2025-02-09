@@ -18,13 +18,22 @@ return [
     'phones' => 'Phones',
     'setting' => 'Setting',
     'code' => 'Code',
-
+    'event_logo' => 'Event Logo',
+    'event_banner' => 'Event Banner',
     'phone' => 'Phone',
     'email' => 'Email',
     'total' => 'Total',
     'payment_methods' => 'Payment Methods',
     'payment_method' => 'Payment Method',
     'ecommerce' => 'E-Commerce',
+    'venue' => 'Venue',
+    'venue_address' => 'Venue Address',
+    'latitude' => 'Latitude',
+    'longitude' => 'Longitude',
+    'map_url' => 'Map URL',
+    'map_embed_code' => 'Map Embed Code',
+
+
     'price' => 'Price',
     'compare_price' => 'Compare price',
     'sku_code' => 'Sku code',

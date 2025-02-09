@@ -28,14 +28,21 @@ class EventManagementAction extends Action
     public function registerPostTypes(): void
     {
         $eventInvisibleMetas = [
-            'price',
-            'sku_code',
-            'barcode',
-            'quantity',
-            'inventory_management',
-            'disable_out_of_stock',
-            'downloadable',
+            'start_date',
+            'end_date',
+            'event_logo',
+            'event_banner',
+            'images',
+            'social_links',
+            'venue',
+            'venue_address',
+            'latitude',
+            'longitude',
+            'map_url',
+            'map_embed_code',
         ];
+
+
 
         HookAction::registerPostType(
             'events',
