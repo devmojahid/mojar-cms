@@ -1,0 +1,24 @@
+{% set date = post.metas.start_date|date('d') %}
+{% set month = post.metas.start_date|date('F') %}
+{% set year = post.metas.start_date|date('Y') %}
+
+<div class="col-xl-6 col-lg-6 wow fadeInUp" data-wow-duration="1s">
+    <div class="tf__single_event">
+        <div class="tf__single_event_date">
+
+            <img src="{{ post.thumbnail }}" alt="{{ post.title }}" class="img-fluid w-100">
+            <h2>{{ date }} <span>{{ month }}, {{ year }}</span></h2>
+        </div>
+
+
+        <div class="tf__single_event_text">
+            <h3>{{ post.title }}</h3>
+            <ul>
+                <li><i class="fal fa-stopwatch"></i> {{ post.created_at }}</li>
+                <li><i class="far fa-map-marker-alt"></i> {{ post.metas.venue }}</li>
+            </ul>
+            <p>{{ post.description }}</p>
+            <a href="{{ post.url }}">View Details <i class="far fa-long-arrow-right"></i></a>
+        </div>
+    </div>
+</div>

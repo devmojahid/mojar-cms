@@ -1,0 +1,40 @@
+{% extends 'cms::layouts.frontend' %}
+
+{% block content %}
+    {% include 'theme::components.breadcrumb' with {
+        title: 'Event List',
+        background_image: 'images/breadcrumb_bg.jpg',
+        items: [
+
+            {'label': 'Home', 'url': '/'},
+            {'label': 'Event'}
+        ]
+    } %}
+
+    {% if input_get('page') is empty %}
+        {{ dynamic_block(post, 'content') }}
+    {% endif %}
+
+    {% set items = get_posts('events', {
+        'paginate': 10
+    }) %}
+
+
+    <section class="tf__event_page pt_95 xs_pt_55 pb_120 xs_pb_80">
+        <div class="container">
+            <div class="row mt_35" id="post-list">
+                {% for post in items.data %}
+                    {{ get_template_part(post, 'event-item') }}
+                {% endfor %}
+            </div>
+            <div class="tf__pagination mt_60">
+                <div class="row">
+
+                    <div class="col-12" id="pagination">
+                        {{ paginate_links(items, 'theme::components.pagination') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
