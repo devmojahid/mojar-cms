@@ -41,6 +41,7 @@ class HomeController extends FrontendController
             ->scopeQuery(fn($q) => $q->where(['type' => 'posts']))
             ->frontendListPaginate(get_config('posts_per_page', 12));
 
+
         /*if ($this->template === 'twig') {
             $page = PostResourceCollection::make($posts)->response()->getData(true);
 
