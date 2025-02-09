@@ -135,7 +135,6 @@
 
             <div class="tab-pane" id="tabs-brand-area">
                 <h4>Brand Area tab</h4>
-
                 <div>
                     <div class="row">
                         <div class="col-md-6">
@@ -163,22 +162,82 @@
 
             <div class="tab-pane" id="tabs-tickets">
                 <h4>Tickets tab</h4>
-                <div>
-                    {{ Field::images(trans('evman::content.images'), 'meta[images]', [
-                        'value' => $model->getMeta('images', []),
-                    ]) }}
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ Field::text(trans('evman::content.name'), 'meta[name]', [
+                            'value' => $eventTicket->name ?? '',
+                        ]) }}
+                    </div>
+
+                    <div class="col-md-6">
+
+                        {{ Field::textarea(trans('evman::content.description'), 'meta[description]', [
+                            'value' => $eventTicket->description ?? '',
+                        ]) }}
+                    </div>
+
+
+                    <div class="col-md-6">
+                        {{ Field::text(trans('evman::content.price'), 'meta[price]', [
+                            'value' => $eventTicket->price ? number_format($eventTicket->price) : '',
+                            'type' => 'number',
+                            'prefix' => '$'
+                        ]) }}
+
+                    </div>
+
+                    <div class="col-md-6">
+                        {{ Field::text(trans('evman::content.capacity'), 'meta[capacity]', [
+                            'value' => $eventTicket->capacity ?? '',
+                            'type' => 'number',
+                        ]) }}
+
+                    </div>
+
+                    <div class="col-md-6">
+                        {{ Field::text(trans('evman::content.min_ticket_number'), 'meta[min_ticket_number]', [
+                            'value' => $eventTicket->min_ticket_number ?? '',
+                            'type' => 'number',
+                        ]) }}
+
+
+                    </div>
+                    
+                    <div class="col-md-6">
+                        {{ Field::text(trans('evman::content.max_ticket_number'), 'meta[max_ticket_number]', [
+                            'value' => $eventTicket->max_ticket_number ?? '',
+                            'type' => 'number',
+                        ]) }}
+
+
+                    </div>
+
+                    <div class="col-md-6">
+                        {{ Field::text(trans('evman::content.start_date'), 'meta[start_date]', [
+                            'value' => $eventTicket->start_date ?? '',
+                            'type' => 'datetime-local',
+                        ]) }}
+
+
+                    </div>
+
+                    <div class="col-md-6">
+                        {{ Field::text(trans('evman::content.end_date'), 'meta[end_date]', [
+                            'value' => $eventTicket->end_date ?? '',
+                            'type' => 'datetime-local',
+                        ]) }}
+
+
+                    </div>
                 </div>
             </div>
+
             <div class="tab-pane" id="tabs-social-information">
                 <h4>Social Information tab</h4>
+
                 <div>
                     @php
                         $socialLinks = $model->getMeta('social_links');
-                        
-                        // Debug the raw value
-                        // dd('Raw Meta:', $socialLinks);
-                        
-                        // Ensure proper array structure
                         if (empty($socialLinks)) {
                             $socialLinks = [
                                 [
@@ -187,7 +246,6 @@
                                 ],
                             ];
                         } elseif (!is_array(reset($socialLinks))) {
-                            // If the data is not properly nested, restructure it
                             $socialLinks = [$socialLinks];
                         }
                     @endphp

@@ -2,10 +2,13 @@
 
 namespace Mojahid\EventManagement\Actions;
 
+use Mojahid\EventManagement\Models\EventTicket;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
+use Illuminate\Support\Arr;
 
 class EventManagementAction extends Action
+
 {
     public function handle(): void
     {
@@ -18,9 +21,20 @@ class EventManagementAction extends Action
             'post_type.events.form.left',
             [$this, 'addFormEvent']
         );
+        
+        $this->addAction(
+            'post_type.events.after_save',
+            [$this, 'afterSaveEvent'],
+            10,
+            2
+        );
+        
+        $this->addFilter(
+            'post_type.events.parseDataForSave',
+            [$this, 'parseDataForSave']
+        );
+
     }
-
-
 
     /**
      * Register post types
@@ -41,8 +55,6 @@ class EventManagementAction extends Action
             'map_url',
             'map_embed_code',
         ];
-
-
 
         HookAction::registerPostType(
             'events',
@@ -66,17 +78,63 @@ class EventManagementAction extends Action
 
     public function addFormEvent($model): void
     {
+        $eventTicket = EventTicket::findByEvent($model->id);
+        
+        if ($eventTicket === null) {
+            $eventTicket = new EventTicket();
+        }
+
         echo e(
             view(
                 'evman::backend.event.form',
+
                 [   
-                    'model' => $model
+                    'model' => $model,
+                    'eventTicket' => $eventTicket
                 ]
             )
         );
 
     }
 
+    public function parseDataForSave($data)
+    {
+        $metas = (array) $data['meta'];
+        if ($metas['price']) {
+            $metas['price'] = parse_price_format($metas['price']);
+        }
 
-    
+        if ($metas['capacity']) {
+            $metas['capacity'] = (int) $metas['capacity'];
+            $metas['capacity'] = max($metas['capacity'], 0);
+        }
+        
+        if ($metas['min_ticket_number']) {
+            $metas['min_ticket_number'] = (int) $metas['min_ticket_number'];
+        }
+        
+        if ($metas['max_ticket_number']) {
+            $metas['max_ticket_number'] = (int) $metas['max_ticket_number'];
+        }
+
+        $data['meta'] = $metas;
+        return $data;
+    }
+
+    public function afterSaveEvent($model, $data): void
+    {
+        if (Arr::has($data, 'meta')) {
+            $eventTicket = EventTicket::findByEvent($model->id);
+            $metas = (array) $data['meta'];
+            $metas['description'] = seo_string(strip_tags($data['content']), 320);
+
+            if( $eventTicket ){
+                $eventTicket->update($metas);
+            } else {
+                $metas['event_id'] = $model->id;
+                $eventTicket = EventTicket::create($metas);
+            }
+        }
+    }
+
 }

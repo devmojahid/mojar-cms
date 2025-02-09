@@ -32,13 +32,23 @@ return [
     'longitude' => 'Longitude',
     'map_url' => 'Map URL',
     'map_embed_code' => 'Map Embed Code',
+    'ticket_price' => 'Ticket Price',
+    'capacity' => 'Capacity',
+    'min_tickets' => 'Min Tickets',
+    'max_tickets' => 'Max Tickets',
+    'ticket_start_date' => 'Ticket Start Date',
+    'ticket_end_date' => 'Ticket End Date',
 
-
+    'min_ticket_number' => 'Minimum Ticket Number',
+    'max_ticket_number' => 'Maximum Ticket Number',
+    'description' => 'Description',
     'price' => 'Price',
     'compare_price' => 'Compare price',
     'sku_code' => 'Sku code',
+
     'barcode' => 'Barcode',
     'images' => 'Images',
+
     'mode' => 'Mode',
     'sandbox' => 'Sandbox',
     'live' => 'Live',

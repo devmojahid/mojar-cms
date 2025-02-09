@@ -25,6 +25,15 @@
                     "label": "Content"
                 }
             }
+        },
+        "event": {
+            "label": "Event",
+            "view": "theme::templates.event",
+            "blocks": {
+                "content": {
+                    "label": "Content"
+                }
+            }
         }
     },
     "nav_menus": {
@@ -58,11 +67,6 @@
             "label": "Most Games",
             "description": "Most Games",
             "view": "theme::components.blocks.most_games"
-        },
-        "test": {
-            "label": "Test",
-            "description": "Test",
-            "view": "theme::components.blocks.test"
         },
         "about_area": {
             "label": "About Area",
