@@ -2,9 +2,11 @@
 
 namespace Mojahid\EventManagement\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Juzaweb\Backend\Http\Controllers\Backend\PageController;
 
 class SettingController extends PageController
+
 
 {
     public function index()

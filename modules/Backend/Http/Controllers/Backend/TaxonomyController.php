@@ -13,14 +13,18 @@ use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Http\Datatables\TaxonomyDataTable;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Traits\ResourceController;
+use Illuminate\Support\Arr;
+use Juzaweb\Backend\Events\AfterPostSave;
 
 class TaxonomyController extends BackendController
 {
     use ResourceController {
+        afterSave as traitAfterSave;
         getDataForForm as DataForForm;
         getDataForIndex as DataForIndex;
         store as TraitStore;
     }
+
 
     protected string $viewPrefix = 'cms::backend.taxonomy';
 
@@ -179,4 +183,18 @@ class TaxonomyController extends BackendController
         $response = Gate::inspect($ability, $arguments);
         return $response->allowed();
     }
+
+    /**
+     * @param array $data
+     * @param Post $model
+     * @param mixed ...$params
+     * @return void
+     * @throws Exception
+     */
+    protected function afterSave($data, $model, ...$params): void
+    {
+        $model->syncMetas($data['meta']);
+    }
+
+
 }

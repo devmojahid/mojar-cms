@@ -11,6 +11,7 @@ use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
 use Juzaweb\CMS\Traits\TaxonomyModel;
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Traits\UseUUIDColumn;
+use Illuminate\Support\Arr;
 
 /**
  * Juzaweb\Backend\Models\Taxonomy
@@ -120,5 +121,15 @@ class Taxonomy extends Model
         return [
             'taxonomies',
         ];
+    }
+
+    public function metas(): HasMany
+    {
+        return $this->hasMany(TaxonomyMeta::class, 'taxonomy_id', 'id');
+    }
+
+    public function getMeta($key, $default = null)
+    {
+        return $this->metas()->where('meta_key', $key)->first()->meta_value ?? $default;
     }
 }

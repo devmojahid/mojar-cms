@@ -55,5 +55,26 @@ class MenuAction extends Action
                 ]
             ]
         );
+
+         // 1) Register the post type but don't create a top-level menu
+        //  HookAction::registerPostType('my_events', [
+        //     'label'        => 'My Events',
+        //     'show_in_menu' => true,
+        //     'menu_box'     => false,
+        //     // ...
+        // ]);
+
+        // HookAction::registerAdminPage(
+        //     'post-type.my_events.edit',
+        //     [
+        //         'title' => trans('cms::app.edit'),
+        //         'menu' => [
+        //             'parent'   => 'post-type.my_events',
+        //             'icon'     => 'fa fa-edit',
+        //             'position' => 3,
+        //         ],
+        //     ]
+        // );
+
     }
 }

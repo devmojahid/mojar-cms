@@ -6,6 +6,8 @@ use Mojahid\EventManagement\Models\EventTicket;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
 use Illuminate\Support\Arr;
+use Juzaweb\CMS\Http\Resources\PaymentMethodCollectionResource;
+use Juzaweb\CMS\Models\PaymentMethod;
 
 class EventManagementAction extends Action
 
@@ -15,6 +17,17 @@ class EventManagementAction extends Action
         $this->addAction(
             Action::INIT_ACTION,
             [$this, 'registerPostTypes']
+        );
+
+        // $this->addAction(
+        //     Action::INIT_ACTION,
+        //     [$this, 'registerCustomEntities']
+        // );
+
+
+        $this->addAction(
+            Action::INIT_ACTION,
+            [$this, 'registerConfigs']
         );
         
         $this->addAction(
@@ -32,6 +45,21 @@ class EventManagementAction extends Action
         $this->addFilter(
             'post_type.events.parseDataForSave',
             [$this, 'parseDataForSave']
+        );
+
+
+        $this->addFilter(
+            'theme.get_view_page',
+            [$this, 'addCheckoutPage'],
+            20,
+            2
+        );
+
+        $this->addFilter(
+            'theme.get_params_page',
+            [$this, 'addCheckoutParams'],
+            20,
+            2
         );
 
     }
@@ -137,4 +165,119 @@ class EventManagementAction extends Action
         }
     }
 
+    public function registerConfigs(): void
+    {
+        HookAction::registerConfig(
+            [
+                'evman_checkout_page',
+                'evman_thanks_page',
+            ]
+
+        );
+    }
+
+    public function addCheckoutPage($view, $page): string
+    {
+        $checkoutPage = get_config('evman_checkout_page');
+        $thanksPage = get_config('evman_thanks_page');
+
+
+        if ($checkoutPage == $page->id) {
+            return 'evman::frontend.checkout.index';
+        }
+
+        if ($thanksPage == $page->id) {
+            return 'evman::frontend.checkout.thankyou';
+        }
+
+        return $view;
+    }
+
+    public function addCheckoutParams($params, $page)
+    {
+        $checkoutPage = get_config('evman_checkout_page');
+        $thanksPage = get_config('evman_thanks_page');
+
+        if ($checkoutPage == $page->id) {
+            $methods = PaymentMethod::active()->get();
+
+            $params['payment_methods'] = (new PaymentMethodCollectionResource($methods))->toArray(request());
+        }
+
+        // if ($thanksPage == $page->id) {
+        //     $orderToken = request()?->segment(2);
+
+        //     abort_if($orderToken === null, 404);
+
+        //     $order = Order::findByToken($orderToken);
+
+        //     abort_if($order === null, 404);
+
+        //     $order->load(['orderItems', 'paymentMethod']);
+        //     $order->loadExists(['downloadableProducts']);
+
+        //     $params['order'] = OrderResource::make($order)->toArray(request());
+        // }
+
+        return $params;
+    }
+
+
+
+
+    public function registerCustomEntities()
+    {
+        // Register a custom post type called "my_events"
+        HookAction::registerPostType('my_events', [
+            'label'          => 'My Events',
+            'supports'       => ['category','tag', 'comment'], 
+            'rewrite'        => true,
+            'menu_box'       => false,
+            'menu_position'  => 6,
+            'show_in_menu'   => false,
+            // Metas for the post type (automatically displayed in form.blade.php)
+
+            'metas' => [
+                'event_location' => [
+                    'label'   => 'Event Location',
+                    'type'    => 'text',
+                    'visible' => true,
+                    'sidebar' => false, // show in main area
+                ],
+                'event_date' => [
+                    'label'   => 'Event Date',
+                    'type'    => 'date',
+                    'visible' => true,
+                    'sidebar' => false,
+                ],
+            ],
+        ]);
+
+        // Register a taxonomy "industries" for "my_events"
+        // This won't automatically display meta fields unless we handle it ourselves
+        HookAction::registerTaxonomy('industries', 'my_events', [
+            'label'        => 'Industries',
+            'hierarchical' => true,
+            'supports'     => ['hierarchical'], 
+            'rewrite'      => true,
+            'menu_box'     => true,
+            // We can define metas here, but we must handle form rendering and saving
+            'metas' => [
+                'industry_icon' => [
+                    'label'   => 'Industry Icon (URL)',
+                    'type'    => 'image',
+                    'visible' => true,
+                ],
+            ],
+        ]);
+
+        // Example of registering a config key for your plugin
+        HookAction::registerConfig([
+            'example_full_plugin_setting' => [
+                'label'    => 'Example Plugin Setting',
+                'type'     => 'text',
+                'show_api' => true,
+            ],
+        ]);
+    }
 }
