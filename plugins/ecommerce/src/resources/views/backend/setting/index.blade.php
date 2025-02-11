@@ -6,6 +6,7 @@
             'tabs' => [
                 'general' => trans('cms::app.general'),
                 'shop' => trans('ecomm::content.shop'),
+                'multi_currency' => trans('ecomm::content.multi_currency'),
             ]
         ])
             @slot('tab_general')
@@ -14,6 +15,10 @@
 
             @slot('tab_shop')
                 @include('ecomm::backend.setting.components.setting.shop')
+            @endslot
+
+            @slot('tab_multi_currency')
+                @include('ecomm::backend.setting.components.setting.multi_currency')
             @endslot
         @endcomponent
 

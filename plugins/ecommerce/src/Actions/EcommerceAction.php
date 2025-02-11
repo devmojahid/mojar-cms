@@ -8,6 +8,7 @@ use Juzaweb\CMS\Facades\HookAction;
 use Illuminate\Support\Arr;
 use Juzaweb\CMS\Http\Resources\PaymentMethodCollectionResource;
 use Juzaweb\CMS\Models\PaymentMethod;
+use Mojahid\Ecommerce\Supports\Manager\CurrencyManager;
 
 class EcommerceAction extends Action
 {
@@ -53,6 +54,16 @@ class EcommerceAction extends Action
             [$this, 'addCheckoutParams'],
             20,
             2
+        );
+
+        /**
+         * Convert and format price
+         */
+        $this->addFilter(
+             'ecommerce.format_price',
+             [$this, 'convertAndFormatPrice'],
+             20,
+             2
         );
 
     }
@@ -217,5 +228,15 @@ class EcommerceAction extends Action
         // }
 
         return $params;
+    }
+
+    /**
+     * Convert and format price
+     */
+    public function convertAndFormatPrice($formatted, $basePrice = null)
+    {
+        return app(CurrencyManager::class)->formatPrice(
+            app(CurrencyManager::class)->convertPrice($basePrice)
+        );
     }
 }

@@ -11,19 +11,18 @@
 |
 */
 
-use Mojahid\EventManagement\Http\Controllers\EventBookingController;
-use Mojahid\EventManagement\Http\Controllers\SettingController;
+use Mojahid\Ecommerce\Http\Controllers\Backend\OrderController;
+use Mojahid\Ecommerce\Http\Controllers\Backend\SettingController;
 
 
 use Illuminate\Support\Facades\Route;
 
-
 Route::jwResource(
-    'event-management/event-bookings',
-    EventBookingController::class,
+    'ecommerce/orders',
+    OrderController::class,
     [
-        'name' => 'event-bookings'
+        'name' => 'orders'
     ]
 );
 
-Route::get('event-management/settings', [SettingController::class, 'index'])->name('admin.event-management.setting');
+Route::get('ecommerce/settings', [SettingController::class, 'index'])->name('admin.ecommerce.setting');

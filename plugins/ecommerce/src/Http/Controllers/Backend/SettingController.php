@@ -1,6 +1,6 @@
 <?php
 
-namespace Mojahid\Ecommerce\Http\Controllers;
+namespace Mojahid\Ecommerce\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Juzaweb\Backend\Http\Controllers\Backend\PageController;
