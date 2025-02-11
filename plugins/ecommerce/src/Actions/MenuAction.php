@@ -121,7 +121,7 @@ class MenuAction extends Action
             'orders',
             [
                 'title' => __('Orders'),
-                'contents' => 'ecom::frontend.profile.orders.index',
+                'contents' => 'ecomm::frontend.profile.orders.index',
                 'icon' => 'shopping-cart',
                 'data' => [
                     'orders' => fn () => OrderResource::collection(
