@@ -118,7 +118,7 @@ class MenuAction extends Action
     public function addProfilePages(): void
     {
         HookAction::registerProfilePage(
-            'ecommerce.orders',
+            'orders',
             [
                 'title' => __('Orders'),
                 'contents' => 'ecom::frontend.profile.orders.index',

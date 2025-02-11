@@ -22,7 +22,7 @@ class ProfileController extends FrontendController
     public function index($slug = null)
     {
         $pages = HookAction::getProfilePages()->toArray();
-        // dd($pages);
+    
         $page = $pages[$slug ?? 'index'];
 
         abort_unless($page, 404);
@@ -31,7 +31,7 @@ class ProfileController extends FrontendController
         if ($callback = Arr::get($page, 'callback')) {
             return app()->call("{$callback[0]}@{$callback[1]}", ['page' => $page]);
         }
-
+        
         return $this->view(
             'theme::profile.index',
             compact(
