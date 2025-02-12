@@ -126,38 +126,16 @@ class MenuAction extends Action
                 'icon' => 'fa fa-shopping-cart',
                 'position' => 10,
                 'data' => [
-                    'orders' => fn () => OrderResource::collection(
+                    'orders' => OrderResource::collection(
                         Order::with(['paymentMethod'])
-                            ->withExists(['downloadableProducts'])
-                            ->where('user_id', auth()->id())
+                            // ->where('user_id', auth()->id())
                             ->paginate(10)
-                    ),
-                    'thank_page' => function () {
-                        $thanksPage = get_config('ecom_thanks_page');
-                        return $thanksPage ? get_page_url($thanksPage) : null;
-                    }
+                    )->response()->getData(true), // Convert to array format
+                    'thank_page' => get_config('ecom_thanks_page') 
+                        ? get_page_url(get_config('ecom_thanks_page')) 
+                        : null
                 ]
             ]
         );
-
-        // $this->registerProfilePage(
-        //     'ecommerce.download',
-        //     [
-        //         'title' => __('Download'),
-        //         'contents' => 'ecom::frontend.profile.download.index',
-        //         'icon' => 'download',
-        //         'data' => [
-        //             'purchased' => fn () => Product::select(['title', 'id'])
-        //                 ->whereIn(
-        //                     'id',
-        //                     Order::select(['order_items.product_id'])
-        //                         ->join('order_items', 'order_items.order_id', 'orders.id')
-        //                         ->where('orders.user_id', auth()->id())
-        //                         ->where('orders.payment_status', Order::PAYMENT_STATUS_COMPLETED)
-        //                 )
-        //                 ->paginate(10)
-        //         ]
-        //     ]
-        // );
     }
 }
