@@ -57,11 +57,6 @@ class ThemeAction extends Action
         }
 
         HookAction::addAction(Action::INIT_ACTION, [$this, 'templates']);
-        HookAction::addAction(
-            Action::FRONTEND_INIT,
-            [$this, 'addProfilePages']
-        );
-
         $this->addAction(Action::FRONTEND_INIT, [$this, 'addFrontendAjax']);
     }
 

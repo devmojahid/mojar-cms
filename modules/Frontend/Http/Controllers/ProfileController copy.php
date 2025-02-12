@@ -120,28 +120,28 @@ class ProfileController extends FrontendController
         );
     }
 
-    public function changePassword(Request $request)
-    {
-        $title = trans('cms::app.change_password');
-        $user = UserResource::make($request->user())->toArray($request);
-        $pages = HookAction::getProfilePages();
+    // public function changePassword(Request $request)
+    // {
+    //     $title = trans('cms::app.change_password');
+    //     $user = UserResource::make($request->user())->toArray($request);
+    //     $pages = HookAction::getProfilePages();
         
-        $page = [
-            'title' => $title,
-            'contents' => 'theme::profile.change_password',
-            'key' => 'change_password'
-        ];
+    //     $page = [
+    //         'title' => $title,
+    //         'contents' => 'theme::profile.change_password',
+    //         'key' => 'change_password',
+    //     ];
 
-        return $this->view(
-            'theme::profile.index',
-            compact(
-                'title',
-                'pages',
-                'page',
-                'user'
-            )
-        );
-    }
+    //     return $this->view(
+    //         'theme::profile.index',
+    //         compact(
+    //             'title',
+    //             'pages',
+    //             'page',
+    //             'user',
+    //         )
+    //     );
+    // }
 
     public function notification()
     {

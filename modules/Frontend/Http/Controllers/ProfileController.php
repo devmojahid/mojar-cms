@@ -22,11 +22,16 @@ class ProfileController extends FrontendController
     public function index($slug = null)
     {
         $pages = HookAction::getProfilePages();
+        global $jw_user;
 
-        
+        $user = $jw_user;
+
         if ($slug) {
             $page = $pages->where('key', $slug)->first();
-            abort_unless($page, 404);
+
+            if (!$page) {
+                    throw new \Exception(__('Profile page not found'), 404);
+            }
             
             $title = $page['title'];
             
@@ -39,7 +44,8 @@ class ProfileController extends FrontendController
                 compact(
                     'title',
                     'pages',
-                    'page'
+                    'page',
+                    'user'
                 )
             );
         }
@@ -56,7 +62,8 @@ class ProfileController extends FrontendController
             compact(
                 'title',
                 'pages',
-                'page'
+                'page',
+                'user'
             )
         );
     }
@@ -90,12 +97,21 @@ class ProfileController extends FrontendController
     {
         $title = trans('cms::app.change_password');
         $user = UserResource::make($request->user())->toArray($request);
+        $pages = HookAction::getProfilePages();
+        
+        $page = [
+            'title' => $title,
+            'contents' => 'theme::profile.change_password',
+            'key' => 'change_password',
+        ];
 
         return $this->view(
-            'theme::profile.change_password',
+            'theme::profile.index',
             compact(
                 'title',
-                'user'
+                'pages',
+                'page',
+                'user',
             )
         );
     }

@@ -444,3 +444,104 @@ table.dataTable thead .sorting_desc:after {
     border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
+
+/* Dashboard Styles */
+.tf__dashboard {
+    padding: 60px 0;
+}
+
+.tf__dashboard_area {
+    background: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.tf__dashboard_menu {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 5px;
+}
+
+.dasboard_header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.dasboard_header_img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    position: relative;
+}
+
+.dasboard_header_img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.dasboard_header_img label {
+    width: 35px;
+    height: 35px;
+    background: #0071dc;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dasboard_header_img label i {
+    color: #fff;
+    font-size: 14px;
+}
+
+.dasboard_header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.tf__dashboard_menu ul li a {
+    padding: 12px 20px;
+    display: block;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: all linear .3s;
+    margin-bottom: 10px;
+}
+
+.tf__dashboard_menu ul li a i {
+    margin-right: 10px;
+    width: 20px;
+}
+
+.tf__dashboard_menu ul li a:hover,
+.tf__dashboard_menu ul li a.active {
+    background: #0071dc;
+    color: #fff;
+}
+
+.tf__dashboard_body {
+    background: #fff;
+    padding: 25px;
+    border-radius: 5px;
+}
+
+.tf__dashboard_body h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.tf__dashboard_body_content {
+    min-height: 400px;
+}
