@@ -411,3 +411,36 @@ table.dataTable thead .sorting_desc:after {
 #post-list.loading {
     opacity: 0.6;
 }
+
+/* Profile Page Styles */
+.profile-sidebar {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.profile-sidebar .nav-link {
+    color: #495057;
+    padding: 8px 15px;
+    border-radius: 4px;
+}
+
+.profile-sidebar .nav-link:hover,
+.profile-sidebar .nav-link.active {
+    background: #e9ecef;
+    color: #212529;
+}
+
+.profile-sidebar .nav-link i {
+    width: 20px;
+    text-align: center;
+    margin-right: 8px;
+}
+
+.profile-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}

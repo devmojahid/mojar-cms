@@ -120,9 +120,11 @@ class MenuAction extends Action
         HookAction::registerProfilePage(
             'orders',
             [
-                'title' => __('Orders'),
+                'title' => trans('ecomm::content.orders'),
+                'key' => 'orders',
                 'contents' => 'ecomm::frontend.profile.orders.index',
-                'icon' => 'shopping-cart',
+                'icon' => 'fa fa-shopping-cart',
+                'position' => 10,
                 'data' => [
                     'orders' => fn () => OrderResource::collection(
                         Order::with(['paymentMethod'])
@@ -132,7 +134,6 @@ class MenuAction extends Action
                     ),
                     'thank_page' => function () {
                         $thanksPage = get_config('ecom_thanks_page');
-
                         return $thanksPage ? get_page_url($thanksPage) : null;
                     }
                 ]

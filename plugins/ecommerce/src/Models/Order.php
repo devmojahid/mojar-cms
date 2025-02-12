@@ -20,13 +20,18 @@ use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\CMS\Traits\ResourceModel;
 use Juzaweb\CMS\Models\PaymentMethod;
+use Juzaweb\CMS\Traits\UseMetaData;
+use Juzaweb\Backend\Models\Post;
 
 /**
  * Juzaweb\Ecommerce\Models\Order
  *
  * @property int $id
- * @property string $key
+ * @property string $title
+ * @property string $type
+ * @property string $status
  * @property string $code
+ * @property string $token
  * @property string $name
  * @property string|null $phone
  * @property string|null $email
@@ -42,9 +47,10 @@ use Juzaweb\CMS\Models\PaymentMethod;
  * @property string $payment_method_name
  * @property string|null $notes
  * @property int $other_address
- * @property string $payment_status pending
- * @property string $delivery_status pending
+ * @property string $payment_status
+ * @property string $delivery_status
  * @property int|null $user_id
+ * @property int $site_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read PaymentMethod|null $paymentMethod
@@ -76,9 +82,8 @@ use Juzaweb\CMS\Models\PaymentMethod;
  * @method static Builder|Order whereUpdatedAt($value)
  * @method static Builder|Order whereUserId($value)
  * @method static Builder|Order whereToken($value)
- * @property string $token
- * @property int $site_id
  * @property-read string $payment_status_text
+ * @property-read string $delivery_status_text
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Juzaweb\Ecommerce\Models\OrderItem> $orderItems
  * @property-read int|null $order_items_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Juzaweb\Ecommerce\Models\Product> $products
@@ -90,10 +95,14 @@ use Juzaweb\CMS\Models\PaymentMethod;
 class Order extends Model
 {
     use ResourceModel;
+    use UseMetaData;
 
-    protected $table = 'ecomm_orders';
+    protected $table = 'orders';
 
     protected $fillable = [
+        'title',
+        'type',
+        'status',
         'code',
         'token',
         'name',
@@ -109,30 +118,49 @@ class Order extends Model
         'discount_target_type',
         'payment_method_id',
         'payment_method_name',
-        'notes',
-        'other_address',
         'payment_status',
         'delivery_status',
+        'notes',
         'user_id',
+        'site_id'
     ];
 
-    protected string $fieldName = 'name';
+    protected string $fieldName = 'title';
 
     protected $appends = [
         'payment_status_text',
+        'delivery_status_text'
     ];
+
+    public const STATUS_PENDING = 'pending';
+    public const STATUS_PROCESSING = 'processing';
+    public const STATUS_COMPLETED = 'completed';
+    public const STATUS_CANCELLED = 'cancelled';
 
     public const PAYMENT_STATUS_PENDING = 'pending';
     public const PAYMENT_STATUS_COMPLETED = 'completed';
+    public const PAYMENT_STATUS_FAILED = 'failed';
+
+    public const DELIVERY_STATUS_PENDING = 'pending';
+    public const DELIVERY_STATUS_PROCESSING = 'processing';
+    public const DELIVERY_STATUS_SHIPPED = 'shipped';
+    public const DELIVERY_STATUS_DELIVERED = 'delivered';
+
+    protected $casts = [
+        'total_price' => 'float',
+        'total' => 'float',
+        'discount' => 'float',
+        'quantity' => 'integer'
+    ];
 
     public static function findByCode(string $code, array $columns = ['*']): null|static
     {
-        return Order::whereCode($code)->first($columns);
+        return static::whereCode($code)->first($columns);
     }
 
     public static function findByToken(string $token, array $columns = ['*']): null|static
     {
-        return Order::whereToken($token)->first($columns);
+        return static::whereToken($token)->first($columns);
     }
 
     public function orderItems(): HasMany
@@ -150,21 +178,21 @@ class Order extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function products(): BelongsToMany
+    public function posts(): BelongsToMany
     {
         return $this->belongsToMany(
-            Product::class,
+            Post::class,
             'order_items',
             'order_id',
-            'product_id',
+            'post_id',
             'id',
             'id'
         );
     }
 
-    public function downloadableProducts()
+    public function downloadableItems()
     {
-        return $this->products()->whereMeta('downloadable', 1);
+        return $this->posts()->whereMeta('downloadable', 1);
     }
 
     public function isPaymentCompleted(): bool
@@ -176,7 +204,39 @@ class Order extends Model
     {
         return match ($this->payment_status) {
             self::PAYMENT_STATUS_COMPLETED => trans('ecom::content.completed'),
+            self::PAYMENT_STATUS_FAILED => trans('ecom::content.failed'),
             default => trans('ecom::content.pending'),
         };
+    }
+
+    public function getDeliveryStatusTextAttribute(): string
+    {
+        return match ($this->delivery_status) {
+            self::DELIVERY_STATUS_PROCESSING => trans('ecom::content.processing'),
+            self::DELIVERY_STATUS_SHIPPED => trans('ecom::content.shipped'),
+            self::DELIVERY_STATUS_DELIVERED => trans('ecom::content.delivered'),
+            default => trans('ecom::content.pending'),
+        };
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (empty($model->title)) {
+                $model->title = "Order #{$model->code}";
+            }
+        });
+    }
+
+    protected function getMetaModel(): string 
+    {
+        return OrderMeta::class;
+    }
+
+    protected function getMetaForeignKey(): string
+    {
+        return 'order_id';
     }
 }

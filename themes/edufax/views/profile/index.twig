@@ -3,23 +3,40 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <h1>{{ title|default('Profile') }}</h1>
-                <div class="content">
-                    {% if pages is defined and pages is not empty %}
-                        {% for key, page in pages %}
-                            {% if page is not null and page.title is defined %}
-                                <h3>{{ page.title }}</h3>
-                                {% if page.contents is defined %}
-                                    {% include page.contents|default('theme::profile.default') with {
-                                        data: page.data|default([]),
-                                    } %}
-                                {% endif %}
-                            {% endif %}
+            <div class="col-md-3">
+                <div class="profile-sidebar">
+                    <h4>{{ __('Menu') }}</h4>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {% if page.key is not defined %}active{% endif %}" 
+                               href="{{ route('profile') }}">
+                                <i class="fa fa-user"></i> {{ __('Profile') }}
+                            </a>
+                        </li>
+                        {% for menu_page in pages %}
+                            <li class="nav-item">
+                                <a class="nav-link {% if page.key is defined and page.key == menu_page.key %}active{% endif %}" 
+                                   href="{{ route('profile', [menu_page.key]) }}">
+                                    <i class="{{ menu_page.icon }}"></i> {{ menu_page.title }}
+                                </a>
+                            </li>
                         {% endfor %}
-                    {% else %}
-                        <p>No profile sections available.</p>
-                    {% endif %}
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-md-9">
+                <div class="profile-content">
+                    <h1>{{ page.title }}</h1>
+                    
+                    <div class="content">
+                        {% if page.contents is defined %}
+                            {% include page.contents with {
+                                data: page.data|default([]),
+                                orders: orders|default([])
+                            } %}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

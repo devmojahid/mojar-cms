@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Traits\UseMetaData;
+use Juzaweb\Backend\Models\Post;
 
 /**
  * Juzaweb\Ecommerce\Models\OrderItem
@@ -55,9 +57,13 @@ use Juzaweb\CMS\Models\Model;
  */
 class OrderItem extends Model
 {
-    protected $table = 'ecomm_order_items';
+    use UseMetaData;
+
+    protected $table = 'order_items';
+
     protected $fillable = [
         'title',
+        'type',
         'thumbnail',
         'price',
         'line_price',
@@ -66,12 +72,34 @@ class OrderItem extends Model
         'sku_code',
         'barcode',
         'order_id',
-        'product_id',
-        'variant_id',
+        'post_id'
     ];
 
-    public function product(): BelongsTo
+    protected $casts = [
+        'price' => 'float',
+        'line_price' => 'float',
+        'compare_price' => 'float',
+        'quantity' => 'integer'
+    ];
+
+    public function order(): BelongsTo
     {
-        return $this->belongsTo(Product::class, 'product_id', 'id');
+        return $this->belongsTo(Order::class, 'order_id', 'id');
+    }
+
+    public function post(): BelongsTo
+    {
+        return $this->belongsTo(Post::class, 'post_id', 'id');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (empty($model->type)) {
+                $model->type = 'product';
+            }
+        });
     }
 }
