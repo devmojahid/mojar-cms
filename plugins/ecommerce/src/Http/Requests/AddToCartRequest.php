@@ -13,6 +13,7 @@ namespace Mojahid\Ecommerce\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Juzaweb\Backend\Models\Post;
+use Illuminate\Support\Facades\Log;
 
 class AddToCartRequest extends FormRequest
 {
@@ -22,15 +23,13 @@ class AddToCartRequest extends FormRequest
             'post_id' => [
                 'bail',
                 'required',
-                'integer',
-                'min:1',
-                Rule::exists(Post::class, 'id')->where('type', 'product'),
+                'integer'
             ],
             'type' => [
                 'bail', 
                 'required',
                 'string',
-                'in:product,event'
+                'in:products,events'
             ],
             'quantity' => [
                 'bail',
@@ -44,8 +43,15 @@ class AddToCartRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'post_id.exists' => trans('ecomm::content.product_not_found'),
-            'quantity.min' => trans('ecomm::content.quantity_must_be_at_least_1'),
+            'post_id.exists' => 'Product not found or not available',
+            'post_id.required' => 'Product ID is required',
+            'quantity.min' => 'Quantity must be at least 1',
+            'type.in' => 'Invalid product type specified'
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        Log::info('AddToCart Request Data:', $this->all());
     }
 }

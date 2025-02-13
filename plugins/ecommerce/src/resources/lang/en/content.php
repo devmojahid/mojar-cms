@@ -144,4 +144,6 @@ return [
     'cart_remove_error' => 'Failed to remove item from cart',
     'cart_add_success' => 'Item added to cart successfully',
     'cart_add_error' => 'Failed to add item to cart',
+    'product_not_found' => 'Product not found',
+    'quantity_must_be_at_least_1' => 'Quantity must be at least 1',
 ];

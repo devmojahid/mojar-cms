@@ -8,7 +8,7 @@
  * @license    GNU V2
  */
 
-namespace Juzaweb\Ecommerce\Http\Resources;
+namespace Mojahid\Ecommerce\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 

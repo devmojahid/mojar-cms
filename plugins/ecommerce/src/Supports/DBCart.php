@@ -10,6 +10,7 @@ use Mojahid\Ecommerce\Models\ProductVariant;
 use Illuminate\Support\Facades\Cookie;
 use Mojahid\Ecommerce\Repositories\CartRepository;
 use Juzaweb\Backend\Models\Post;
+use Illuminate\Support\Facades\Log;
 
 class DBCart implements CartContract
 {
@@ -52,36 +53,54 @@ class DBCart implements CartContract
         return $this->addOrUpdate($postId, $type, $quantity);
     }
 
-    public function addOrUpdate(int $postId, string $type, int $quantity) : bool
+    public function addOrUpdate(int $postId, string $type, int $quantity): bool
     {
-        $post = Post::where('id', $postId)
-            ->where('type', $type)
-            ->firstOrFail();
+        try {
 
-        $items = $this->cart->items;
-        $key = "{$type}_{$postId}";
+            $post = Post::where('id', $postId)
+                ->where('type', 'products')
+                ->where('status', 'publish')
+                ->first();
 
-        $price = (float) $post->getMeta('price', 0);
-        $comparePrice = (float) $post->getMeta('compare_price');
-        $skuCode = $post->getMeta('sku_code');
-        $barcode = $post->getMeta('barcode');
+            if (!$post) {
+                Log::error('Post not found:', [
+                    'post_id' => $postId,
+                    'type' => $type
+                ]);
+                throw new \Exception('Product not found');
+            }
 
-        $items[$key] = [
-            'post_id' => $post->id,
-            'type' => $post->type,
-            'quantity' => $quantity,
-            'price' => $price,
-            'title' => $post->title,
-            'thumbnail' => $post->thumbnail,
-            'sku_code' => $skuCode,
-            'barcode' => $barcode,
-            'compare_price' => $comparePrice,
-        ];
+            $items = is_array($this->cart->items) ? $this->cart->items : [];
+            $key = "{$type}_{$postId}";
 
-        $this->cart->items = $items;
-        $this->cart->save();
+            $price = (float) ($post->getMeta('price') ?? 0);
+            $comparePrice = (float) ($post->getMeta('compare_price') ?? 0);
+            $skuCode = (string) ($post->getMeta('sku_code') ?? '');
+            $barcode = (string) ($post->getMeta('barcode') ?? '');
 
-        return true;
+            $items[$key] = [
+                'post_id' => $post->id,
+                'type' => $type,
+                'quantity' => (int) $quantity,
+                'price' => $price,
+                'title' => (string) $post->title,
+                'thumbnail' => (string) $post->thumbnail,
+                'sku_code' => $skuCode,
+                'barcode' => $barcode,
+                'compare_price' => $comparePrice,
+            ];
+
+            $this->cart->items = $items;
+            $this->cart->save();
+
+            return true;
+        } catch (\Exception $e) {
+            Log::error('Error in addOrUpdate:', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            throw $e;
+        }
     }
 
     public function bulkUpdate(array $items) : bool
