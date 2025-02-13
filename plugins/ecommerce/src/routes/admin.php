@@ -14,7 +14,6 @@
 use Mojahid\Ecommerce\Http\Controllers\Backend\OrderController;
 use Mojahid\Ecommerce\Http\Controllers\Backend\SettingController;
 
-
 use Illuminate\Support\Facades\Route;
 
 Route::jwResource(

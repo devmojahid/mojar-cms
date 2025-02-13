@@ -1,14 +1,7 @@
 <?php
-/**
- * JUZAWEB CMS - The Best CMS for Laravel Project
- *
- * @package    juzaweb/cms
- * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://juzaweb.com/cms
- * @license    MIT
- */
 
-namespace Juzaweb\Ecommerce\Http\Controllers\Frontend;
+
+namespace Mojahid\Ecommerce\Http\Controllers\Frontend;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -20,12 +13,12 @@ use Juzaweb\Backend\Events\Users\RegisterSuccessful;
 use Juzaweb\CMS\Events\EmailHook;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Juzaweb\CMS\Models\User;
-use Juzaweb\Ecommerce\Contracts\CartManagerContract;
-use Juzaweb\Ecommerce\Contracts\OrderManagerContract;
-use Juzaweb\Ecommerce\Events\OrderSuccess;
-use Juzaweb\Ecommerce\Events\PaymentSuccess;
-use Juzaweb\Ecommerce\Http\Requests\CheckoutRequest;
-use Juzaweb\Ecommerce\Models\Order;
+use Mojahid\Ecommerce\Models\Order;
+use Mojahid\Ecommerce\Contracts\CartManagerContract;
+use Mojahid\Ecommerce\Contracts\OrderManagerContract;
+use Mojahid\Ecommerce\Events\OrderSuccess;
+use Mojahid\Ecommerce\Events\PaymentSuccess;
+use Mojahid\Ecommerce\Http\Requests\CheckoutRequest;
 
 class CheckoutController extends FrontendController
 {
@@ -107,7 +100,7 @@ class CheckoutController extends FrontendController
             return $this->success(
                 [
                     'redirect' => $redirect,
-                    'message' => trans('ecom::content.order_thanks'),
+                    'message' => trans('ecomm::content.order_thanks'),
                 ]
             );
         } catch (\Exception $e) {

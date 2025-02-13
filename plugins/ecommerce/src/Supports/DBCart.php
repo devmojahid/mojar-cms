@@ -1,12 +1,4 @@
 <?php
-/**
- * JUZAWEB CMS - The Best CMS for Laravel Project
- *
- * @package    juzaweb/juzacms
- * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://juzaweb.com/cms
- * @license    MIT
- */
 
 namespace Mojahid\Ecommerce\Supports;
 
@@ -17,6 +9,7 @@ use Mojahid\Ecommerce\Models\Cart;
 use Mojahid\Ecommerce\Models\ProductVariant;
 use Illuminate\Support\Facades\Cookie;
 use Mojahid\Ecommerce\Repositories\CartRepository;
+use Juzaweb\Backend\Models\Post;
 
 class DBCart implements CartContract
 {
@@ -24,7 +17,7 @@ class DBCart implements CartContract
 
     protected Cart $cart;
 
-    protected float $totalPrice;
+    protected float $totalPrice = 0;
 
     public function __construct(
         CartRepository $cartRepository
@@ -49,34 +42,40 @@ class DBCart implements CartContract
         return $this;
     }
 
-    public function add(int|ProductVariant $variant, int $quantity): bool
+    public function add(int $postId, string $type, int $quantity): bool
     {
-        return $this->addOrUpdate($variant, $quantity);
+        return $this->addOrUpdate($postId, $type, $quantity);
     }
 
-    public function update(int|ProductVariant $variant, int $quantity): bool
+    public function update(int $postId, string $type, int $quantity): bool
     {
-        return $this->addOrUpdate($variant, $quantity);
+        return $this->addOrUpdate($postId, $type, $quantity);
     }
 
-    public function addOrUpdate(int|ProductVariant $variant, int $quantity) : bool
+    public function addOrUpdate(int $postId, string $type, int $quantity) : bool
     {
-        $variant = is_numeric($variant) ? ProductVariant::find($variant) : $variant;
-
-        if (empty($variant)) {
-            throw new \Exception(
-                __(
-                    'Product Variant ID :variant not found.',
-                    ['variant' => $variant]
-                )
-            );
-        }
+        $post = Post::where('id', $postId)
+            ->where('type', $type)
+            ->firstOrFail();
 
         $items = $this->cart->items;
+        $key = "{$type}_{$postId}";
 
-        $items[$variant->id] = [
-            'variant_id' => $variant->id,
+        $price = (float) $post->getMeta('price', 0);
+        $comparePrice = (float) $post->getMeta('compare_price');
+        $skuCode = $post->getMeta('sku_code');
+        $barcode = $post->getMeta('barcode');
+
+        $items[$key] = [
+            'post_id' => $post->id,
+            'type' => $post->type,
             'quantity' => $quantity,
+            'price' => $price,
+            'title' => $post->title,
+            'thumbnail' => $post->thumbnail,
+            'sku_code' => $skuCode,
+            'barcode' => $barcode,
+            'compare_price' => $comparePrice,
         ];
 
         $this->cart->items = $items;
@@ -87,38 +86,46 @@ class DBCart implements CartContract
 
     public function bulkUpdate(array $items) : bool
     {
-        $variantIds = collect($items)->pluck('variant_id')->toArray();
-        $variants = ProductVariant::whereIn('id', $variantIds)
-            ->get()
-            ->keyBy('id');
-
-        $items = $this->cart->items;
+        $newItems = [];
         foreach ($items as $item) {
-            $variant = $variants->get($item['variant_id']);
-            if (empty($variant)) {
+            $post = Post::where('id', $item['post_id'])
+                ->where('type', $item['type'])
+                ->first();
+
+            if (!$post) {
                 continue;
             }
 
-            $items[$variant->id] = Arr::only(
-                $item,
-                [
-                    'variant_id',
-                    'quantity',
-                ]
-            );
+            $key = "{$item['type']}_{$item['post_id']}";
+            $newItems[$key] = [
+                'post_id' => $post->id,
+                'type' => $post->type,
+                'quantity' => $item['quantity'],
+                'price' => (float) $post->getMeta('price', 0),
+                'title' => $post->title,
+                'thumbnail' => $post->thumbnail,
+                'sku_code' => $post->getMeta('sku_code'),
+                'barcode' => $post->getMeta('barcode'),
+                'compare_price' => (float) $post->getMeta('compare_price'),
+            ];
         }
 
-        $this->cart->items = $items;
+        $this->cart->items = $newItems;
         $this->cart->save();
         return true;
     }
 
-    public function removeItem(int $variantId) : bool
+    public function removeItem(int $postId, string $type) : bool
     {
-        $items = $this->cart->items;
-        unset($items[$variantId]);
-        $this->cart->items = $items;
-        $this->cart->save();
+        $items = $this->cart->items ?? [];
+        $key = "{$type}_{$postId}";
+        
+        if (isset($items[$key])) {
+            unset($items[$key]);
+            $this->cart->items = $items;
+            $this->cart->save();
+        }
+
         return true;
     }
 
@@ -146,28 +153,12 @@ class DBCart implements CartContract
 
     public function getCollectionItems(): Collection
     {
-        $variantIds = collect($this->cart->items)
-            ->pluck('variant_id')
-            ->toArray();
-
-        $variants = ProductVariant::with(['product'])
-            ->whereIn('id', $variantIds)
-            ->get()
-            ->map(
-                function ($item) {
-                    $item->quantity = $this->cart->items[$item->id]['quantity'];
-                    $item->line_price = $item->price * $item->quantity;
-                    return $item;
-                }
-            );
-
-        if (empty($variants)) {
-            throw new \Exception('Product items is empty.');
-        }
-
-        $this->totalPrice = $variants->sum('line_price');
-
-        return $variants;
+        $items = $this->cart->items ?? [];
+        
+        return collect($items)->map(function($item) {
+            $item['line_price'] = $item['price'] * $item['quantity'];
+            return $item;
+        });
     }
 
     public function getCode(): string
@@ -177,22 +168,12 @@ class DBCart implements CartContract
 
     public function totalPrice(): float
     {
-        if (isset($this->totalPrice)) {
-            return $this->totalPrice;
-        }
-
-        $this->getCollectionItems();
-
-        return $this->totalPrice;
+        return $this->getCollectionItems()->sum('line_price');
     }
 
-    public function totalItems() : int
+    public function totalItems(): int
     {
-        if ($this->cart->items) {
-            return count($this->cart->items);
-        }
-
-        return 0;
+        return count($this->cart->items ?? []);
     }
 
     public function toArray(): array

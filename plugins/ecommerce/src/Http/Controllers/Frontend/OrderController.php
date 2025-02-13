@@ -1,14 +1,6 @@
 <?php
-/**
- * JUZAWEB CMS - Laravel CMS for Your Project
- *
- * @package    juzaweb/cms
- * @author     The Anh Dang
- * @link       https://juzaweb.com
- * @license    GNU V2
- */
 
-namespace Juzaweb\Ecommerce\Http\Controllers\Frontend;
+namespace Mojahid\Ecommerce\Http\Controllers\Frontend;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -18,9 +10,9 @@ use Illuminate\Support\Facades\Storage;
 use Inertia\Response;
 use Juzaweb\CMS\Contracts\HookActionContract;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
-use Juzaweb\Ecommerce\Http\Resources\OrderResource;
-use Juzaweb\Ecommerce\Models\DownloadLink;
-use Juzaweb\Ecommerce\Models\Order;
+use Mojahid\Ecommerce\Http\Resources\OrderResource;
+use Mojahid\Ecommerce\Models\DownloadLink;
+use Mojahid\Ecommerce\Models\Order;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class OrderController extends FrontendController
@@ -46,7 +38,7 @@ class OrderController extends FrontendController
 
         $page = [
             'title' => $title,
-            'contents' => 'ecom::frontend.profile.orders.download',
+            'contents' => 'ecomm::frontend.profile.orders.download',
         ];
 
         $order->load([
@@ -66,24 +58,4 @@ class OrderController extends FrontendController
         );
     }
 
-    public function doDownload(Order $order, string $token): StreamedResponse|RedirectResponse
-    {
-        abort_unless($order->isPaymentCompleted(), 403);
-
-        $decode = decrypt(urldecode($token));
-
-        if (Carbon::make($decode['expire_at'])?->isPast()) {
-            abort(404, __('Download link has been expired'));
-        }
-
-        $downloadLink = DownloadLink::findOrFail($decode['id']);
-
-        //$downloadLink->increment('download_count');
-
-        if (is_url($downloadLink->url)) {
-            return redirect()->to($downloadLink->url);
-        }
-
-        return Storage::disk('protected')->download($downloadLink->url);
-    }
 }

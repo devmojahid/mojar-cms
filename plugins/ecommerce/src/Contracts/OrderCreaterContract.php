@@ -8,10 +8,10 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Ecommerce\Contracts;
+namespace Mojahid\Ecommerce\Contracts;
 
 use Juzaweb\CMS\Models\User;
-use Juzaweb\Ecommerce\Models\Order;
+use Mojahid\Ecommerce\Models\Order;
 
 interface OrderCreaterContract
 {

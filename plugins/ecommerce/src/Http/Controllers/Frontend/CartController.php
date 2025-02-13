@@ -8,107 +8,158 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Ecommerce\Http\Controllers\Frontend;
+namespace Mojahid\Ecommerce\Http\Controllers\Frontend;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
-use Juzaweb\Ecommerce\Contracts\CartContract;
-use Juzaweb\Ecommerce\Contracts\CartManagerContract;
-use Juzaweb\Ecommerce\Http\Requests\AddToCartRequest;
-use Juzaweb\Ecommerce\Http\Requests\BulkUpdateCartRequest;
-use Juzaweb\Ecommerce\Http\Requests\RemoveItemCartRequest;
+use Mojahid\Ecommerce\Contracts\CartContract;
+use Mojahid\Ecommerce\Contracts\CartManagerContract;
+use Mojahid\Ecommerce\Http\Requests\AddToCartRequest;
+use Mojahid\Ecommerce\Http\Requests\BulkUpdateCartRequest;
+use Mojahid\Ecommerce\Http\Requests\RemoveItemCartRequest;
+use Mojahid\Ecommerce\Http\Resources\CartResource;
+use Juzaweb\CMS\Abstracts\Action;
 
 class CartController extends FrontendController
 {
     protected CartManagerContract $cartManager;
+    protected bool $themeView = false;
+    protected const VIEW_PATH = 'ecomm::frontend.cart.index';
+    protected const THEME_VIEW_PATH = 'theme::frontend.cart.index';
 
     public function __construct(CartManagerContract $cartManager)
     {
         $this->cartManager = $cartManager;
     }
 
+    public function index(): View
+    {
+        $this->initializeThemeView();
+        $cart = $this->cartManager->find();
+
+        return view($this->getViewPath(), $this->getViewData($cart));
+    }
+
+    protected function initializeThemeView(): void 
+    {
+        if ($this->isCartRoute() && $this->themeViewExists()) {
+            $this->themeView = true;
+            $this->initializeThemeActions();
+        }
+    }
+
+    protected function isCartRoute(): bool
+    {
+        return request()->route()->getName() === 'ecomm.cart';
+    }
+
+    protected function themeViewExists(): bool
+    {
+        return view()->exists(self::THEME_VIEW_PATH);
+    }
+
+    protected function initializeThemeActions(): void
+    {
+        do_action('ecomm.cart.index');
+        do_action(Action::WIDGETS_INIT);
+        do_action(Action::BLOCKS_INIT);
+    }
+
+    protected function getViewPath(): string
+    {
+        return $this->themeView ? self::THEME_VIEW_PATH : self::VIEW_PATH;
+    }
+
+    protected function getViewData(CartContract $cart): array
+    {
+        return [
+            'title' => trans('ecomm::content.shopping_cart'),
+            'cart' => $cart,
+            'items' => new CartResource($cart),
+            'total_items' => $cart->totalItems(),
+            'total_price' => ecom_price_with_unit($cart->totalPrice())
+        ];
+    }
+
     public function addToCart(AddToCartRequest $request): HttpResponse|JsonResponse|RedirectResponse
     {
-        $variantId = $request->input('variant_id');
+        $postId = $request->input('post_id');
+        $type = $request->input('type', 'product');
         $quantity = $request->input('quantity');
 
         $cart = $this->cartManager->find();
 
         DB::beginTransaction();
         try {
-            $cart->addOrUpdate($variantId, $quantity);
+            $cart->addOrUpdate($postId, $type, $quantity);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
             report($e);
-            return $this->error(
-                [
-                    'message' => $e->getMessage(),
-                ]
-            );
+            return $this->error([
+                'message' => $e->getMessage(),
+            ]);
         }
 
         return $this->responseCartWithCookie(
             $cart,
-            'Add to cart successfully.'
+            trans('ecomm::content.added_to_cart_successfully')
         );
     }
 
     public function removeItem(RemoveItemCartRequest $request): JsonResponse|RedirectResponse
     {
-        $variantId = $request->input('variant_id');
+        $postId = $request->input('post_id');
+        $type = $request->input('type', 'product');
 
         $cart = $this->cartManager->find();
 
         DB::beginTransaction();
         try {
-            $cart->removeItem($variantId);
+            $cart->removeItem($postId, $type);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
             report($e);
-            return $this->error(
-                [
-                    'message' => $e->getMessage(),
-                ]
-            );
+            return $this->error([
+                'message' => $e->getMessage(),
+            ]);
         }
 
         return $this->responseCartWithCookie(
             $cart,
-            'Remove item cart successfully.'
+            trans('ecomm::content.item_removed_successfully')
         );
     }
 
     public function bulkUpdate(
-        BulkUpdateCartRequest $request,
-        CartContract $cart
+        BulkUpdateCartRequest $request
     ): HttpResponse|JsonResponse|RedirectResponse {
         $items = (array) $request->input('items');
+        $cart = $this->cartManager->find();
 
         DB::beginTransaction();
         try {
-            $cart = $cart->bulkUpdate($items);
+            $cart->bulkUpdate($items);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
             report($e);
-            return $this->error(
-                [
-                    'message' => $e->getMessage(),
-                ]
-            );
+            return $this->error([
+                'message' => $e->getMessage(),
+            ]);
         }
 
         return $this->responseCartWithCookie(
             $cart,
-            'Add to cart successfully.'
+            trans('ecomm::content.cart_updated_successfully')
         );
     }
 
@@ -123,64 +174,36 @@ class CartController extends FrontendController
         } catch (\Exception $e) {
             DB::rollBack();
             report($e);
-            return $this->error(
-                [
-                    'message' => $e->getMessage(),
-                ]
-            );
+            return $this->error([
+                'message' => $e->getMessage(),
+            ]);
         }
 
-        return $this->success(
-            [
-                'message' => __('Add to cart successfully.'),
-                'cart' => $cart,
-            ]
-        );
+        return $this->success([
+            'message' => trans('ecomm::content.cart_cleared_successfully'),
+            'cart' => new CartResource($cart),
+        ]);
     }
 
     public function getCartItems(): JsonResponse
     {
         $cart = $this->cartManager->find();
 
-        $items = $cart->getCollectionItems()
-            ->map(
-                function ($item) {
-                    return Arr::only(
-                        $item->toArray(),
-                        [
-                            'sku_code',
-                            'barcode',
-                            'title',
-                            'thumbnail',
-                            'description',
-                            'names',
-                            'images',
-                            'price',
-                            'compare_price',
-                            'stock',
-                            'type',
-                        ]
-                    );
-                }
-            );
-
-        return response()->json(
-            [
-                'code' => $cart->getCode(),
-                'items' => $items
-            ]
-        );
+        return response()->json([
+            'code' => $cart->getCode(),
+            'total_items' => $cart->totalItems(),
+            'total_price' => ecom_price_with_unit($cart->totalPrice()),
+            'items' => new CartResource($cart)
+        ]);
     }
 
     protected function responseCartWithCookie(CartContract $cart, string $message): JsonResponse|RedirectResponse
     {
         $cookie = Cookie::make('jw_cart', $cart->getCode(), 43200);
 
-        return $this->success(
-            [
-                'cart' => $cart->toArray(),
-                'message' => __($message),
-            ]
-        )->withCookie($cookie);
+        return $this->success([
+            'cart' => new CartResource($cart),
+            'message' => $message,
+        ])->withCookie($cookie);
     }
 }

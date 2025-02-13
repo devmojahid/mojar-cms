@@ -8,9 +8,9 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Ecommerce\Contracts;
+namespace Mojahid\Ecommerce\Contracts;
 
-use Juzaweb\Ecommerce\Models\Cart;
+use Mojahid\Ecommerce\Models\Cart;
 
 interface CartManagerContract
 {

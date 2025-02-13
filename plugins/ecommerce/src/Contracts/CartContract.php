@@ -1,48 +1,25 @@
 <?php
-/**
- * JUZAWEB CMS - The Best CMS for Laravel Project
- *
- * @package    juzaweb/cms
- * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://juzaweb.com/cms
- * @license    MIT
- */
 
 namespace Mojahid\Ecommerce\Contracts;
 
 use Illuminate\Support\Collection;
 use Mojahid\Ecommerce\Models\Cart;
-use Mojahid\Ecommerce\Models\ProductVariant;
 
 interface CartContract
 {
     public function make(string|Cart $cart): static;
-
-    public function add(int|ProductVariant $variant, int $quantity): bool;
-
-    public function update(int|ProductVariant $variant, int $quantity): bool;
-
-    public function addOrUpdate(int|ProductVariant $variant, int $quantity) : bool;
-
-    public function bulkUpdate(array $items) : bool;
-
-    public function removeItem(int $variantId) : bool;
-
-    public function remove() : bool;
-
-    public function getItems() : array;
-
+    public function add(int $postId, string $type, int $quantity): bool;
+    public function update(int $postId, string $type, int $quantity): bool;
+    public function addOrUpdate(int $postId, string $type, int $quantity): bool;
+    public function bulkUpdate(array $items): bool;
+    public function removeItem(int $postId, string $type): bool;
+    public function remove(): bool;
+    public function getItems(): array;
     public function isEmpty(): bool;
-
     public function isNotEmpty(): bool;
-
-    public function totalItems() : int;
-
-    public function totalPrice() : float;
-
+    public function totalItems(): int;
+    public function totalPrice(): float;
     public function getCollectionItems(): Collection;
-
     public function getCode(): string;
-
     public function toArray(): array;
 }

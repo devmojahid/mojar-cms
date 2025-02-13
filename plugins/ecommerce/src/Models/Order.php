@@ -203,19 +203,19 @@ class Order extends Model
     public function getPaymentStatusTextAttribute(): string
     {
         return match ($this->payment_status) {
-            self::PAYMENT_STATUS_COMPLETED => trans('ecom::content.completed'),
-            self::PAYMENT_STATUS_FAILED => trans('ecom::content.failed'),
-            default => trans('ecom::content.pending'),
+            self::PAYMENT_STATUS_COMPLETED => trans('ecomm::content.completed'),
+            self::PAYMENT_STATUS_FAILED => trans('ecomm::content.failed'),
+            default => trans('ecomm::content.pending'),
         };
     }
 
     public function getDeliveryStatusTextAttribute(): string
     {
         return match ($this->delivery_status) {
-            self::DELIVERY_STATUS_PROCESSING => trans('ecom::content.processing'),
-            self::DELIVERY_STATUS_SHIPPED => trans('ecom::content.shipped'),
-            self::DELIVERY_STATUS_DELIVERED => trans('ecom::content.delivered'),
-            default => trans('ecom::content.pending'),
+            self::DELIVERY_STATUS_PROCESSING => trans('ecomm::content.processing'),
+            self::DELIVERY_STATUS_SHIPPED => trans('ecomm::content.shipped'),
+            self::DELIVERY_STATUS_DELIVERED => trans('ecomm::content.delivered'),
+            default => trans('ecomm::content.pending'),
         };
     }
 

@@ -1,15 +1,10 @@
 <?php
 
-namespace Juzaweb\Ecommerce\Repositories;
+namespace Mojahid\Ecommerce\Repositories;
 
 use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
-use Juzaweb\Ecommerce\Models\Cart;
+use Mojahid\Ecommerce\Models\Cart;
 
-/**
- * Class TaxonomyRepositoryEloquentEloquent.
- *
- * @package namespace Juzaweb\Backend\Repositories;
- */
 class CartRepositoryEloquent extends BaseRepositoryEloquent implements CartRepository
 {
     /**

@@ -2,22 +2,11 @@
 
 namespace Mojahid\Ecommerce\Http\Resources;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Mojahid\Ecommerce\Models\Order;
 use Mojahid\Ecommerce\Http\Resources\OrderItemCollection;
 
-/**
- * @property-read Order $resource
- */
 class OrderResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param Request $request
-     * @return array
-     */
     public function toArray($request): array
     {
         $resource = [

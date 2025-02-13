@@ -8,30 +8,44 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Ecommerce\Http\Requests;
+namespace Mojahid\Ecommerce\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Juzaweb\Ecommerce\Models\ProductVariant;
+use Juzaweb\Backend\Models\Post;
 
 class AddToCartRequest extends FormRequest
 {
     public function rules(): array
     {
         return [
-            'variant_id' => [
+            'post_id' => [
                 'bail',
                 'required',
                 'integer',
                 'min:1',
-                Rule::modelExists(ProductVariant::class, 'id'),
+                Rule::exists(Post::class, 'id')->where('type', 'product'),
+            ],
+            'type' => [
+                'bail', 
+                'required',
+                'string',
+                'in:product,event'
             ],
             'quantity' => [
                 'bail',
                 'required',
                 'integer',
-                'min:0',
+                'min:1',
             ],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'post_id.exists' => trans('ecomm::content.product_not_found'),
+            'quantity.min' => trans('ecomm::content.quantity_must_be_at_least_1'),
         ];
     }
 }

@@ -1,0 +1,160 @@
+{% extends 'cms::layouts.frontend' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3>{{ trans('ecomm::content.shopping_cart') }}</h3>
+                </div>
+                <div class="card-body">
+                    {% if cart.total_items > 0 %}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>{{ trans('ecomm::content.product') }}</th>
+                                    <th>{{ trans('ecomm::content.price') }}</th>
+                                    <th>{{ trans('ecomm::content.quantity') }}</th>
+                                    <th>{{ trans('ecomm::content.total') }}</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in cart.items %}
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex">
+                                                <img src="{{ item.thumbnail }}" alt="{{ item.title }}" class="img-thumbnail mr-3" style="width: 80px">
+                                                <div>
+                                                    <h5>{{ item.title }}</h5>
+                                                    {% if item.sku_code %}
+                                                        <small>SKU: {{ item.sku_code }}</small>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>{{ item.price }}</td>
+                                        <td>
+                                            <div class="input-group" style="width: 130px">
+                                                <button class="btn btn-outline-secondary btn-sm quantity-decrease" type="button">-</button>
+                                                <input type="number" class="form-control form-control-sm text-center quantity-input" value="{{ item.quantity }}" min="1" data-id="{{ item.id }}">
+                                                <button class="btn btn-outline-secondary btn-sm quantity-increase" type="button">+</button>
+                                            </div>
+                                        </td>
+                                        <td>{{ item.line_price }}</td>
+                                        <td>
+                                            <button class="btn btn-danger btn-sm remove-item" data-id="{{ item.id }}">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <div class="text-center py-5">
+                            <i class="fa fa-shopping-cart fa-3x text-muted mb-3"></i>
+                            <h4>{{ trans('ecomm::content.cart_empty') }}</h4>
+                            <a href="/" class="btn btn-primary mt-3">
+                                {{ trans('ecomm::content.continue_shopping') }}
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3>{{ trans('ecomm::content.order_summary') }}</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>{{ trans('ecomm::content.subtotal') }}</td>
+                            <td class="text-right">{{ cart.total_price }}</td>
+                        </tr>
+                        {% if cart.discount %}
+                            <tr>
+                                <td>{{ trans('ecomm::content.discount') }}</td>
+                                <td class="text-right">-{{ cart.discount }}</td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <td><strong>{{ trans('ecomm::content.total') }}</strong></td>
+                            <td class="text-right"><strong>{{ cart.total_price }}</strong></td>
+                        </tr>
+                    </table>
+
+                    {% if cart.total_items > 0 %}
+                        <a href="{{ route('checkout') }}" class="btn btn-primary btn-block">
+                            {{ trans('ecomm::content.proceed_to_checkout') }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    // Update quantity
+    $('.quantity-input').change(function() {
+        let id = $(this).data('id');
+        let quantity = $(this).val();
+        
+        $.ajax({
+            url: '#',
+            type: 'POST',
+            data: {
+                id: id,
+                quantity: quantity,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    location.reload();
+                }
+            }
+        });
+    });
+
+    // Remove item
+    $('.remove-item').click(function() {
+        let id = $(this).data('id');
+        
+        $.ajax({
+            url: '#',
+            type: 'DELETE',
+            data: {
+                id: id,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    location.reload();
+                }
+            }
+        });
+    });
+
+    // Quantity buttons
+    $('.quantity-decrease').click(function() {
+        let input = $(this).next('.quantity-input');
+        let value = parseInt(input.val());
+        if (value > 1) {
+            input.val(value - 1).change();
+        }
+    });
+
+    $('.quantity-increase').click(function() {
+        let input = $(this).prev('.quantity-input');
+        input.val(parseInt(input.val()) + 1).change();
+    });
+});
+</script> 
+
+{% endblock %} 
