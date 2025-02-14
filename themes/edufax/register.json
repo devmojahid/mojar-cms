@@ -34,6 +34,15 @@
                     "label": "Content"
                 }
             }
+        },
+        "products": {
+            "label": "Products",
+            "view": "theme::templates.products",
+            "blocks": {
+                "content": {
+                    "label": "Content"
+                }
+            }
         }
     },
     "nav_menus": {

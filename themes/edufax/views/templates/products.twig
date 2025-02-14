@@ -1,0 +1,125 @@
+{% extends 'cms::layouts.frontend' %}
+
+{% block content %}
+    {% include 'theme::components.breadcrumb' with {
+        title: 'Products',
+        background_image: 'images/breadcrumb_bg.jpg',
+        items: [
+
+            {'label': 'Home', 'url': '/'},
+            {'label': 'products'}
+        ]
+    } %}
+
+    {% if input_get('page') is empty %}
+        {{ dynamic_block(post, 'content') }}
+    {% endif %}
+
+    {% set items = get_posts('products', {
+        'paginate': 10
+    }) %}
+
+
+    <section class="tf__event_page pt_95 xs_pt_55 pb_120 xs_pb_80">
+        <div class="container">
+            <div class="row mt_35" id="post-list">
+                {% for post in items.data %}
+                    <div class="col-xl-4 col-md-6 wow fadeInUp" data-wow-duration="1s">
+                        <div class="tf__single_event">
+                            <div class="tf__single_event_img">
+                                <img src="{{ upload_url(post.thumbnail) }}" alt="{{ post.title }}" class="img-fluid w-100">
+                                {% if post.metas.price %}
+                                    {# <span class="price">{{ ecom_price_with_unit(post.metas.price) }}</span> #}
+                                    <span class="price">{{ post.metas.price }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="tf__single_event_text">
+                                <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+                                <p>{{ str_limit(post.description, 120) }}</p>
+                                <div class="tf__single_event_footer">
+                                    <div class="tf__single_event_footer_left">
+                                        {% if post.metas.sku_code %}
+                                            <span><i class="fas fa-barcode"></i> SKU: {{ post.metas.sku_code }}</span>
+                                        {% endif %}
+                                        {% if post.metas.quantity %}
+                                            <span><i class="fas fa-layer-group"></i> Stock: {{ post.metas.quantity }}</span>
+                                        {% endif %}
+                                    </div>
+                                    <a class="common_btn" href="javascript:void(0)" 
+                                       onclick="addToCart({{ post.id }}, 'products', 1); return false;">
+                                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="tf__pagination mt_60">
+                <div class="row">
+
+                    <div class="col-12" id="pagination">
+                        {{ paginate_links(items, 'theme::components.pagination') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        });
+        
+        function addToCart(postId, type, quantity) {
+            console.log('Sending data:', {
+                post_id: postId,
+                type: type,
+                quantity: quantity
+            });
+            
+            $.ajax({
+                url: '{{ url('ajax/cart/add-to-cart') }}',
+                type: 'POST',
+                data: {
+                    post_id: postId,
+                    type: type,
+                    quantity: quantity
+                },
+                beforeSend: function() {
+                    console.log('Request payload:', {
+                        post_id: postId,
+                        type: type,
+                        quantity: quantity
+                    });
+                },
+                success: function(response) {
+                    console.log('Full response:', response);
+                    if (response.status === 'success') {
+                        console.log('Success:', response.message);
+                        updateCartCount();
+                    } else {
+                        console.log('Error:', response.data ? response.data.message : response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log('Error status:', status);
+                    console.log('Error message:', error);
+                    console.log('Response:', xhr.responseJSON);
+                }
+            });
+        }
+
+        function updateCartCount() {
+            $.ajax({
+                url: '{{ url('ajax/cart/get-items') }}',
+                type: 'GET',
+                success: function(response) {
+                    $('.cart-count').text(response.total_items);
+                }
+            });
+        }
+    </script>
+{% endblock %}

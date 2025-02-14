@@ -21,22 +21,49 @@ class ProfileController extends FrontendController
 
     public function index($slug = null)
     {
-        $pages = HookAction::getProfilePages()->toArray();
-        $page = $pages[$slug ?? 'index'];
+        $pages = HookAction::getProfilePages();
+        global $jw_user;
 
-        abort_unless($page, 404);
+        $user = $jw_user;
 
-        $title = $page['title'];
-        if ($callback = Arr::get($page, 'callback')) {
-            return app()->call("{$callback[0]}@{$callback[1]}", ['page' => $page]);
+        if ($slug) {
+            $page = $pages->where('key', $slug)->first();
+
+            if (!$page) {
+                    throw new \Exception(__('Profile page not found'), 404);
+            }
+            
+            $title = $page['title'];
+            
+            if ($callback = Arr::get($page, 'callback')) {
+                return app()->call("{$callback[0]}@{$callback[1]}", ['page' => $page]);
+            }
+
+            return $this->view(
+                'theme::profile.index',
+                compact(
+                    'title',
+                    'pages',
+                    'page',
+                    'user'
+                )
+            );
         }
+
+        // Default profile page
+        $title = trans('cms::app.profile');
+        $page = [
+            'title' => $title,
+            'contents' => 'theme::profile.default'
+        ];
 
         return $this->view(
             'theme::profile.index',
             compact(
                 'title',
-                'slug',
-                'pages'
+                'pages',
+                'page',
+                'user'
             )
         );
     }
@@ -70,12 +97,21 @@ class ProfileController extends FrontendController
     {
         $title = trans('cms::app.change_password');
         $user = UserResource::make($request->user())->toArray($request);
+        $pages = HookAction::getProfilePages();
+        
+        $page = [
+            'title' => $title,
+            'contents' => 'theme::profile.change_password',
+            'key' => 'change_password',
+        ];
 
         return $this->view(
-            'theme::profile.change_password',
+            'theme::profile.index',
             compact(
                 'title',
-                'user'
+                'pages',
+                'page',
+                'user',
             )
         );
     }

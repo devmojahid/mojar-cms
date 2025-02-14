@@ -80,17 +80,24 @@
                                 ])@endcomponent
                             </div>
                             @endif
-
+                            
                             @if (!empty($metas))
-                                @foreach ($metas as $meta => $metaArgs)
-                                    @component('cms::components.form_input', [
-                                        'name' => $meta,
-                                        'label' => $metaArgs['label'], 
-                                        'value' => '',
-                                        'required' => true,
-                                    ])
-
-                                    @endcomponent
+                                @foreach($metas as $meta => $metaArgs)
+                                    @if($metaArgs['visible'] ?? true)
+                                        {{ Field::fieldByType([
+                                            'type' => $metaArgs['type'] ?? 'text',
+                                            'name' => 'meta[' . $meta . ']',
+                                            'label' => $metaArgs['label'],
+                                            'value' => old('meta.' . $meta, ''),
+                                            'placeholder' => $metaArgs['placeholder'] ?? '',
+                                            'description' => $metaArgs['description'] ?? '',
+                                            'required' => $metaArgs['required'] ?? false,
+                                            'options' => $metaArgs['options'] ?? [],
+                                            'data' => [
+                                                'value' => old('meta.' . $meta, '')
+                                            ]
+                                        ]) }}
+                                    @endif
                                 @endforeach
                             @endif
 

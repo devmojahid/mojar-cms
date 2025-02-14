@@ -657,4 +657,5 @@ return [
         'dev_tools' => 'Dev Tools',
         'dev_tools_settings_description' => 'View and update your dev tools settings',
     ],
+    'add_repeater_item' => 'Add :label',
 ];

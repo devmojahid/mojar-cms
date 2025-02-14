@@ -19,5 +19,8 @@
         "files": [
             "helpers/helpers.php"
         ]
+    },
+    "require": {
+        "mojahid/ecommerce": "*"
     }
 }
