@@ -27,6 +27,8 @@ use Mojahid\Ecommerce\Actions\EcommercePostTypeAction;
 use Mojahid\Ecommerce\Models\Order;
 use Mojahid\Ecommerce\Models\OrderItem;
 use Mojahid\Ecommerce\Models\ProductVariant;
+use Mojahid\Ecommerce\Http\Middleware\EcommerceTheme;
+use Illuminate\Support\Facades\Route;
 
 class EcommerceServiceProvider extends ServiceProvider
 {
@@ -38,6 +40,9 @@ class EcommerceServiceProvider extends ServiceProvider
 
     public function boot()
     {
+
+        Route::pushMiddlewareToGroup('theme', EcommerceTheme::class);
+
         ActionRegister::register([
             EcommerceAction::class,
             MenuAction::class,
@@ -50,9 +55,9 @@ class EcommerceServiceProvider extends ServiceProvider
             ]);
         }
 
-        $addonManager = app(AddonManager::class);
-        $addonManager->loadAddons();
-        $addonManager->initAddons();
+        // $addonManager = app(AddonManager::class);
+        // $addonManager->loadAddons();
+        // $addonManager->initAddons();
 
         MacroableModel::addMacro(
             Post::class,

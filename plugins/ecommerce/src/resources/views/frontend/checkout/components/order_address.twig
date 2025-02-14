@@ -1,5 +1,5 @@
 
-{#@if($order_address)
+@if($order_address)
     <div class="form-group">
         <div class="field__input-wrapper" bind-class="{ 'js-is-filled': billing_address.address1 }">
         <span class="field__label" bind-event-click="handleClick(this)">

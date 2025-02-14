@@ -9,19 +9,23 @@ class CartItemResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id' => $this->id,
-            'post_id' => $this->post_id,
-            'type' => $this->type,
-            'title' => $this->title,
-            'thumbnail' => upload_url($this->thumbnail),
-            'price' => ecom_price_with_unit($this->price),
-            'price_without_unit' => $this->price,
-            'quantity' => (int)$this->quantity,
-            'line_price' => ecom_price_with_unit($this->line_price),
-            'line_price_without_unit' => $this->line_price,
-            'sku_code' => $this->sku_code,
-            'barcode' => $this->barcode,
-            'url' => $this->url,
+            'key' => $this['type'] . '_' . $this['post_id'],
+            'post_id' => $this['post_id'],
+            'type' => $this['type'],
+            'quantity' => (int) $this['quantity'],
+            'title' => (string) $this['title'],
+            'thumbnail' => upload_url($this['thumbnail']),
+            'compare_price' => (float) ($this['compare_price'] ?? 0),
+            'compare_price_formatted' => ecom_price_with_unit($this['compare_price'] ?? 0),
+            'pricing' => [
+                'unit_price' => (float) $this['price'],
+                'unit_price_formatted' => ecom_price_with_unit($this['price']),
+                'line_price' => (float) ($this['price'] * $this['quantity']),
+                'line_price_formatted' => ecom_price_with_unit($this['price'] * $this['quantity']),
+                'compare_price' => (float) ($this['compare_price'] ?? 0),
+                'compare_price_formatted' => ecom_price_with_unit($this['compare_price'] ?? 0),
+            ],
+            'metadata' => $this['metadata'],
         ];
     }
-} 
+}

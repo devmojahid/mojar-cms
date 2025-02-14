@@ -47,7 +47,7 @@ class CartController extends FrontendController
         return view($this->getViewPath(), $this->getViewData($cart));
     }
 
-    protected function initializeThemeView(): void 
+    protected function initializeThemeView(): void
     {
         if ($this->isCartRoute() && $this->themeViewExists()) {
             $this->themeView = true;

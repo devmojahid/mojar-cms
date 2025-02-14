@@ -22,4 +22,7 @@ interface CartContract
     public function getCollectionItems(): Collection;
     public function getCode(): string;
     public function toArray(): array;
+    public function getDiscount(): float;
+    public function getDiscountCodes(): array;
+    public function getItemMetadata(array $item): array;
 }

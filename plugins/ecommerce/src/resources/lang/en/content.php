@@ -137,7 +137,7 @@ return [
     'total_items' => 'Total items',
     'cart_empty' => 'Cart is empty',
     'cart_empty_message' => 'Your cart is empty. Add some products to your cart to continue.',
-    'cart_empty_button' => 'Continue shopping',  
+    'cart_empty_button' => 'Continue shopping',
     'cart_update_success' => 'Cart updated successfully',
     'cart_update_error' => 'Failed to update cart',
     'cart_remove_success' => 'Item removed from cart successfully',
@@ -146,4 +146,5 @@ return [
     'cart_add_error' => 'Failed to add item to cart',
     'product_not_found' => 'Product not found',
     'quantity_must_be_at_least_1' => 'Quantity must be at least 1',
+    'added_to_cart_successfully' => 'Added to cart successfully',
 ];

@@ -53,24 +53,27 @@ class DBCart implements CartContract
         return $this->addOrUpdate($postId, $type, $quantity);
     }
 
-    public function addOrUpdate(int $postId, string $type, int $quantity): bool
+    public function addOrUpdate(int $postId, string $type = 'products', int $quantity): bool
     {
         try {
-
             $post = Post::where('id', $postId)
-                ->where('type', 'products')
+                ->where('type', $type)
                 ->where('status', 'publish')
                 ->first();
 
             if (!$post) {
-                Log::error('Post not found:', [
+                Log::error('Item not found:', [
                     'post_id' => $postId,
                     'type' => $type
                 ]);
-                throw new \Exception('Product not found');
+                throw new \Exception('Item not found');
             }
 
-            $items = is_array($this->cart->items) ? $this->cart->items : [];
+            // Get current items and decode if it's a JSON string
+            $items = is_string($this->cart->items)
+                ? json_decode($this->cart->items, true)
+                : (is_array($this->cart->items) ? $this->cart->items : []);
+
             $key = "{$type}_{$postId}";
 
             $price = (float) ($post->getMeta('price') ?? 0);
@@ -90,7 +93,8 @@ class DBCart implements CartContract
                 'compare_price' => $comparePrice,
             ];
 
-            $this->cart->items = $items;
+            // Encode items as JSON before saving
+            $this->cart->items = json_encode($items);
             $this->cart->save();
 
             return true;
@@ -103,7 +107,7 @@ class DBCart implements CartContract
         }
     }
 
-    public function bulkUpdate(array $items) : bool
+    public function bulkUpdate(array $items): bool
     {
         $newItems = [];
         foreach ($items as $item) {
@@ -129,19 +133,19 @@ class DBCart implements CartContract
             ];
         }
 
-        $this->cart->items = $newItems;
+        $this->cart->items = json_encode($newItems);
         $this->cart->save();
         return true;
     }
 
-    public function removeItem(int $postId, string $type) : bool
+    public function removeItem(int $postId, string $type): bool
     {
-        $items = $this->cart->items ?? [];
+        $items = $this->getItems();
         $key = "{$type}_{$postId}";
-        
+
         if (isset($items[$key])) {
             unset($items[$key]);
-            $this->cart->items = $items;
+            $this->cart->items = json_encode($items);
             $this->cart->save();
         }
 
@@ -155,9 +159,40 @@ class DBCart implements CartContract
         return true;
     }
 
-    public function getItems() : array
+    public function getItems(): array
     {
-        return $this->cart->items ?? [];
+        if (empty($this->cart->items)) {
+            return [];
+        }
+
+        $items = $this->cart->items;
+
+        // If it's already an array, return it
+        if (is_array($items)) {
+            return $items;
+        }
+
+        // Clean up the string by removing extra quotes and newlines
+        if (is_string($items)) {
+            $items = trim($items); // Remove whitespace
+            $items = trim($items, '"'); // Remove surrounding quotes
+            $items = str_replace('\\"', '"', $items); // Fix escaped quotes
+            $items = str_replace("\\n", "", $items); // Remove newlines
+            $items = str_replace("\\", "", $items); // Remove remaining backslashes
+        }
+
+        // Decode JSON
+        $decoded = json_decode($items, true);
+
+        // Return empty array if decode fails
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            \Log::error('Cart items JSON decode error: ' . json_last_error_msg(), [
+                'items' => $items
+            ]);
+            return [];
+        }
+
+        return $decoded ?? [];
     }
 
     public function isEmpty(): bool
@@ -172,10 +207,11 @@ class DBCart implements CartContract
 
     public function getCollectionItems(): Collection
     {
-        $items = $this->cart->items ?? [];
-        
+        $items = $this->getItems();
+
         return collect($items)->map(function($item) {
             $item['line_price'] = $item['price'] * $item['quantity'];
+            $item['metadata'] = $this->getItemMetadata($item);
             return $item;
         });
     }
@@ -192,7 +228,8 @@ class DBCart implements CartContract
 
     public function totalItems(): int
     {
-        return count($this->cart->items ?? []);
+        $items = $this->getItems();
+        return count($items);
     }
 
     public function toArray(): array
@@ -200,6 +237,30 @@ class DBCart implements CartContract
         return [
             'code' => $this->getCode(),
             'items' => $this->getItems(),
+        ];
+    }
+
+    public function getDiscount(): float
+    {
+        return (float) ($this->cart->discount ?? 0);
+    }
+
+    public function getDiscountCodes(): array
+    {
+        if (empty($this->cart->discount_codes)) {
+            return [];
+        }
+
+        return is_string($this->cart->discount_codes)
+            ? json_decode($this->cart->discount_codes, true)
+            : (is_array($this->cart->discount_codes) ? $this->cart->discount_codes : []);
+    }
+
+    public function getItemMetadata(array $item): array
+    {
+        return [
+            'sku_code' => $item['sku_code'],
+            'barcode' => $item['barcode'],
         ];
     }
 }

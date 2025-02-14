@@ -9,7 +9,7 @@
                     <h3>{{ trans('ecomm::content.shopping_cart') }}</h3>
                 </div>
                 <div class="card-body">
-                    {% if cart.total_items > 0 %}
+                    {% if cart.items > 0 %}
                         <table class="table">
                             <thead>
                                 <tr>
@@ -25,7 +25,7 @@
                                     <tr>
                                         <td>
                                             <div class="d-flex">
-                                                <img src="{{ item.thumbnail }}" alt="{{ item.title }}" class="img-thumbnail mr-3" style="width: 80px">
+                                                <img  style="width: 120px !important; height: auto !important; margin-right: 10px;" src="{{ upload_url(item.thumbnail) }}" alt="{{ item.title }}" class="img-thumbnail mr-3">
                                                 <div>
                                                     <h5>{{ item.title }}</h5>
                                                     {% if item.sku_code %}
@@ -84,7 +84,7 @@
                         {% endif %}
                         <tr>
                             <td><strong>{{ trans('ecomm::content.total') }}</strong></td>
-                            <td class="text-right"><strong>{{ cart.total_price }}</strong></td>
+                            <td class="text-right"><strong>{{ cart.totalPrice }}</strong></td>
                         </tr>
                     </table>
 
@@ -105,9 +105,9 @@ $(document).ready(function() {
     $('.quantity-input').change(function() {
         let id = $(this).data('id');
         let quantity = $(this).val();
-        
+
         $.ajax({
-            url: '#',
+            url: '{{ url('ajax/cart/update') }}',
             type: 'POST',
             data: {
                 id: id,
@@ -125,9 +125,9 @@ $(document).ready(function() {
     // Remove item
     $('.remove-item').click(function() {
         let id = $(this).data('id');
-        
+
         $.ajax({
-            url: '#',
+            url: '{{ url('ajax/cart/remove-item') }}',
             type: 'DELETE',
             data: {
                 id: id,
@@ -155,6 +155,6 @@ $(document).ready(function() {
         input.val(parseInt(input.val()) + 1).change();
     });
 });
-</script> 
+</script>
 
-{% endblock %} 
+{% endblock %}
