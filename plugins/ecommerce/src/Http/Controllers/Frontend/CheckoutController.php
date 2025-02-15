@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Mojahid\Ecommerce\Http\Controllers\Frontend;
 
 use Illuminate\Http\JsonResponse;
@@ -19,6 +18,7 @@ use Mojahid\Ecommerce\Contracts\OrderManagerContract;
 use Mojahid\Ecommerce\Events\OrderSuccess;
 use Mojahid\Ecommerce\Events\PaymentSuccess;
 use Mojahid\Ecommerce\Http\Requests\CheckoutRequest;
+use Juzaweb\CMS\Models\PaymentMethod;
 
 class CheckoutController extends FrontendController
 {
@@ -204,5 +204,109 @@ class CheckoutController extends FrontendController
         }
 
         return "{$thanksPage}/{$order->token}";
+    }
+
+    public function index()
+    {
+        $cart = $this->cartManager->find();
+
+        if ($cart->isEmpty()) {
+            return redirect()->route('ecomm.cart');
+        }
+
+        $methods = PaymentMethod::active()->get();
+
+        return view('ecomm::frontend.checkout.index', [
+            'cart' => $cart,
+            'requires_shipping' => true,
+            'user' => auth()->user(),
+            'countrys' => $this->getCountries(),
+            'provinces' => $this->getProvinces(),
+            'payment_methods' => $methods->map(function($method) {
+                return [
+                    'id' => $method->id,
+                    'type' => $method->type,
+                    'name' => $method->name,
+                    'description' => $method->description
+                ];
+            })->toArray()
+        ]);
+    }
+
+    public function store(Request $request): JsonResponse
+    {
+        try {
+            $cart = $this->cartManager->find();
+
+            if ($cart->isEmpty()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => trans('ecomm::content.cart_empty')
+                ], 422);
+            }
+
+            DB::beginTransaction();
+            try {
+                $user = $this->getOrderUser($request);
+
+                $orderSupport = $this->orderManager->createByCart(
+                    $cart,
+                    $request->all(),
+                    $user
+                );
+
+                $order = $orderSupport->getOrder();
+
+                $cart->remove();
+
+                DB::commit();
+
+                return response()->json([
+                    'status' => 'success',
+                    'message' => trans('ecomm::content.order_placed_successfully'),
+                    'redirect' => $this->getThanksPageURL($order)
+                ]);
+
+            } catch (\Exception $e) {
+                DB::rollBack();
+                throw $e;
+            }
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 422);
+        }
+    }
+
+    public function update(Request $request): JsonResponse
+    {
+        try {
+            // Handle address/shipping updates here
+            return response()->json([
+                'status' => 'success',
+                'data' => [
+                    // Return updated data
+                ]
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 422);
+        }
+    }
+
+    protected function getCountries(): array
+    {
+        // Implement your country fetching logic
+        return [];
+    }
+
+    protected function getProvinces(): array
+    {
+        // Implement your province fetching logic
+        return [];
     }
 }

@@ -206,4 +206,19 @@ class CartController extends FrontendController
             'message' => $message,
         ])->withCookie($cookie);
     }
+
+    protected function formatCartItem($post, $quantity = 1): array
+    {
+        return [
+            'post_id' => $post->id,
+            'title' => $post->title,
+            'thumbnail' => $post->thumbnail,
+            'price' => (float) ($post->getMeta('price') ?? 0),
+            'compare_price' => (float) ($post->getMeta('compare_price') ?? 0),
+            'quantity' => (int) $quantity,
+            'sku_code' => (string) ($post->getMeta('sku_code') ?? ''),
+            'barcode' => (string) ($post->getMeta('barcode') ?? ''),
+            'type' => 'product'
+        ];
+    }
 }

@@ -12,11 +12,20 @@
 
     <script> var Juzaweb = Juzaweb || {}; Juzaweb.store = ''; Juzaweb.theme = {"id":606449,"role":"main","name":"{{ shop_name }}"}; Juzaweb.template = ''; </script>
 
-    <script type="text/javascript">if (typeof Juzaweb == 'undefined') { Juzaweb = {}; }
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        if (typeof Juzaweb == 'undefined') { Juzaweb = {}; }
         Juzaweb.Checkout = {};
         Juzaweb.Checkout.token = "{{ cart.token }}";
         Juzaweb.Checkout.apiHost = "";
+        Juzaweb.Checkout.submitInProgress = false;
     </script>
+
+    {% block javascripts %}
+        <script src="{{ asset('jw-styles/plugins/juzaweb/ecommerce/assets/js/checkout.js') }}"></script>
+    {% endblock %}
+
+    <meta name="robots" content="noindex, nofollow">
 </head>
 <body class="body--custom-background-color ">
 <div class="banner" data-header="">
@@ -81,7 +90,7 @@
                                             <td>
                                                 <div class="product-thumbnail">
                                                     <div class="product-thumbnail__wrapper">
-                                                        <img src="{{ item.thumbnail }}" class="product-thumbnail__image" alt="" />
+                                                        <img src="{{ upload_url(item.thumbnail) }}" class="product-thumbnail__image" alt="" />
                                                     </div>
                                                     <span class="product-thumbnail__quantity" aria-hidden="true">{{ item.quantity }}</span>
                                                 </div>
@@ -177,7 +186,11 @@
                             <i class="fa fa-angle-left fa-lg" aria-hidden="true"></i>
                             <span>{{ trans('ecomm::content.back_to_cart') }}</span>
                         </a>
-                        <input class="btn btn-primary btn-checkout" data-loading-text="{{ trans('ecomm::content.please_wait') }}" type="button" bind-event-click="paymentCheckout('AIzaSyAjQYbV19v7UMDVk0cDZ54yKh3OP1hQhbk;AIzaSyCLd-YkfOzBXlNGfS_FNLnpolyME1tRAJI;AIzaSyDdvilzaJlb50t2IRC3PrfSb1lNzf6n3pQ')" value="{{ trans('ecomm::content.order')|upper }}" />
+                        <input class="btn btn-primary btn-checkout"
+                               type="button"
+                               value="{{ trans('ecomm::content.order') }}"
+                               data-loading-text="{{ trans('ecomm::content.processing') }}"
+                               bind-event-click="submitCheckout()" />
                     </div>
                 </div>
                 <div class="form-group has-error">
@@ -265,6 +278,12 @@
                             </div>
                         </div>
 
+                        {% if app.environment == 'local' %}
+                            <div class="debug-info" style="display:none;">
+                                <pre>{{ dump(payment_methods) }}</pre>
+                            </div>
+                        {% endif %}
+
                         {% include 'ecomm::frontend.checkout.components.shipping_to_other_address' %}
 
                         <div class="section" bind-class="{ 'pt0': otherAddress, 'pt10': !otherAddress}">
@@ -289,7 +308,7 @@
                     </div>
                     <div class="col-md-6 col-lg-6">
 
-                        {#<div class="section shipping-method hide" bind-show="shippingMethodsLoading || shippingMethods.length > 0">
+                        <div class="section shipping-method hide" bind-show="shippingMethodsLoading || shippingMethods.length > 0">
                             <div class="section__header">
                                 <h2 class="section__title">
                                     <i class="fa fa-truck fa-lg section__title--icon hidden-md hidden-lg" aria-hidden="true"></i>
@@ -308,7 +327,7 @@
 
                                 </div>
                             </div>
-                        </div>#}
+                        </div>
 
                         <div class="section payment-methods" bind-class="{'p0--desktop': shippingMethods.length == 0}">
                             <div class="section__header">

@@ -87,12 +87,20 @@ class EcommerceAction extends Action
     public function addCheckoutParams($params, $page)
     {
         $checkoutPage = get_config('_checkout_page');
-        $thanksPage = get_config('_thanks_page');
 
         if ($checkoutPage == $page->id) {
             $methods = PaymentMethod::active()->get();
 
-            $params['payment_methods'] = (new PaymentMethodCollectionResource($methods))->toArray(request());
+            return array_merge($params, [
+                'payment_methods' => $methods->map(function($method) {
+                    return [
+                        'id' => $method->id,
+                        'type' => $method->type,
+                        'name' => $method->name,
+                        'description' => $method->description
+                    ];
+                })->toArray()
+            ]);
         }
 
         return $params;
