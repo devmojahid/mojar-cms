@@ -1,10 +1,10 @@
 <?php
 
-use Juzaweb\Ecommerce\Contracts\CartManagerContract;
-use Juzaweb\Ecommerce\Http\Resources\CartItemCollectionResource;
-use Juzaweb\Ecommerce\Http\Resources\PaymentMethodCollectionResource;
-use Juzaweb\Ecommerce\Models\PaymentMethod;
-use Juzaweb\Ecommerce\Contracts\CartContract;
+use Mojahid\Ecommerce\Contracts\CartManagerContract;
+use Mojahid\Ecommerce\Http\Resources\CartItemCollectionResource;
+use Mojahid\Ecommerce\Http\Resources\PaymentMethodCollectionResource;
+use Mojahid\Ecommerce\Models\PaymentMethod;
+use Mojahid\Ecommerce\Contracts\CartContract;
 
 if (!function_exists('ecom_get_cart')) {
     function ecom_get_cart(): array

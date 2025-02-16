@@ -198,7 +198,7 @@ return [
          *
          * @see https://mojar.com/documentation/start/image-optimizer
          */
-        'image-optimizer' => (bool) env('IMAGE_OPTIMIZER', false),
+        'image-optimizer' => (bool) env('IMAGE_OPTIMIZER', true),
 
         'svg_mimetypes' => [
             ...Facades::defaultSVGMimetypes(),
@@ -210,7 +210,7 @@ return [
          *
          * Default: true
          */
-        'image_resizer' => env('JW_IMAGE_RESIZER', false),
+        'image_resizer' => env('JW_IMAGE_RESIZER', true),
 
         /**
          * File type

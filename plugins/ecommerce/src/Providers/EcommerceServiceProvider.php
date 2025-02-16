@@ -27,6 +27,8 @@ use Mojahid\Ecommerce\Actions\EcommercePostTypeAction;
 use Mojahid\Ecommerce\Models\Order;
 use Mojahid\Ecommerce\Models\OrderItem;
 use Mojahid\Ecommerce\Models\ProductVariant;
+use Mojahid\Ecommerce\Http\Middleware\EcommerceTheme;
+use Illuminate\Support\Facades\Route;
 
 class EcommerceServiceProvider extends ServiceProvider
 {
@@ -38,6 +40,8 @@ class EcommerceServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        Route::pushMiddlewareToGroup('theme', EcommerceTheme::class);
+
         ActionRegister::register([
             EcommerceAction::class,
             MenuAction::class,
@@ -50,9 +54,9 @@ class EcommerceServiceProvider extends ServiceProvider
             ]);
         }
 
-        $addonManager = app(AddonManager::class);
-        $addonManager->loadAddons();
-        $addonManager->initAddons();
+        // $addonManager = app(AddonManager::class);
+        // $addonManager->loadAddons();
+        // $addonManager->initAddons();
 
         MacroableModel::addMacro(
             Post::class,
@@ -99,6 +103,26 @@ class EcommerceServiceProvider extends ServiceProvider
                 );
             }
         );
+
+        $this->publishes([
+            __DIR__.'/../resources/assets' => public_path('jw-styles/plugins/juzaweb/ecommerce/assets'),
+            __DIR__.'/../resources/assets/css/images' => public_path('jw-styles/plugins/juzaweb/ecommerce/assets/css/images'),
+        ], 'ecommerce-assets');
+
+        // Ensure the directory exists
+        if (!file_exists(public_path('jw-styles/plugins/juzaweb/ecommerce/assets/css/images'))) {
+            mkdir(public_path('jw-styles/plugins/juzaweb/ecommerce/assets/css/images'), 0755, true);
+        }
+
+        add_action('theme.header', function() {
+            echo '<script>window.ecommerceConfig = ' . json_encode([
+                'routes' => [
+                    'checkout' => route('ecomm.checkout.store'),
+                    'update' => route('ecomm.checkout.update'),
+                ],
+                'csrf_token' => csrf_token(),
+            ]) . ';</script>';
+        });
     }
 
     /**

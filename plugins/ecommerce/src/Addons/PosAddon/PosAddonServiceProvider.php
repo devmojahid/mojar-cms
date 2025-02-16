@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Mojahid\Ecommerce\Addons\PosAddon;
 

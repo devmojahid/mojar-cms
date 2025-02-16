@@ -19,6 +19,17 @@ class Cart extends Model
         'site_id'
     ];
 
+    protected $casts = [
+        'items' => 'array',
+        'discount' => 'float',
+        'discount_codes' => 'array',
+        'site_id' => 'integer'
+    ];
+
+    protected $attributes = [
+        'discount' => 0,
+        'site_id' => 0
+    ];
 
     public function user(): BelongsTo
     {

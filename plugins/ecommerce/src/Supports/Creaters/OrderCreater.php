@@ -56,21 +56,19 @@ class OrderCreater
         $order->save();
 
         foreach ($items as $item) {
-            $order->orderItems()->create(
-                [
-                    'title' => $item->product->title,
-                    'variant_title' => $item->title,
-                    'thumbnail' => $item->getThumbnail(),
-                    'quantity' => (int) $item->quantity,
-                    'line_price' => $item->line_price,
-                    'price' => $item->price,
-                    'compare_price' => $item->compare_price,
-                    'sku_code' => $item->sku_code,
-                    'barcode' => $item->barcode,
-                    'product_id' => $item->post_id,
-                    'variant_id' => $item->id,
-                ]
-            );
+            $order->orderItems()->create([
+                'title' => $item['title'],
+                'type' => 'product',
+                'thumbnail' => $item['thumbnail'],
+                'price' => (float) $item['price'],
+                'line_price' => (float) ($item['price'] * $item['quantity']),
+                'quantity' => (int) $item['quantity'],
+                'compare_price' => (float) ($item['compare_price'] ?? 0),
+                'sku_code' => $item['sku_code'] ?? null,
+                'barcode' => $item['barcode'] ?? null,
+                'post_id' => $item['post_id'] ?? null,
+                'order_id' => $order->id
+            ]);
         }
 
         return $order;

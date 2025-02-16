@@ -11,6 +11,8 @@ use Juzaweb\CMS\Models\PaymentMethod;
 use Mojahid\Ecommerce\Supports\Manager\CurrencyManager;
 use Mojahid\Ecommerce\Http\Controllers\Frontend\CartController as FrontendCartController;
 use Mojahid\Ecommerce\Http\Controllers\Frontend\CheckoutController as FrontendCheckoutController;
+use Mojahid\Ecommerce\Http\Resources\CartResource;
+use Mojahid\Ecommerce\Supports\Manager\CartManager;
 
 class EcommerceAction extends Action
 {
@@ -20,7 +22,7 @@ class EcommerceAction extends Action
             Action::INIT_ACTION,
             [$this, 'registerConfigs']
         );
-        
+
 
         $this->addFilter(
             'theme.get_view_page',
@@ -85,12 +87,20 @@ class EcommerceAction extends Action
     public function addCheckoutParams($params, $page)
     {
         $checkoutPage = get_config('_checkout_page');
-        $thanksPage = get_config('_thanks_page');
 
         if ($checkoutPage == $page->id) {
             $methods = PaymentMethod::active()->get();
 
-            $params['payment_methods'] = (new PaymentMethodCollectionResource($methods))->toArray(request());
+            return array_merge($params, [
+                'payment_methods' => $methods->map(function($method) {
+                    return [
+                        'id' => $method->id,
+                        'type' => $method->type,
+                        'name' => $method->name,
+                        'description' => $method->description
+                    ];
+                })->toArray()
+            ]);
         }
 
         return $params;

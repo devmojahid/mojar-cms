@@ -55,7 +55,7 @@
                     <div class="help-block with-errors"></div>
                 </div>
 
-                @if($countrys !== false)
+                {% if countrys is defined and countrys is not empty %}
                 <div class="form-group">
                     <div class="field__input-wrapper field__input-wrapper--select">
                         <label class="field__label" for="ShippingCountryId">
@@ -63,9 +63,9 @@
                         </label>
                         <select class="field__input field__input--select form-control filter-dropdown" name="ShippingCountryId" id="shippingCountry"  bind-event-change="shippingCountryChange('')" bind="ShippingCountryId">
                             <option value="">--- {{ trans('ecomm::content.choose_country') }} ---</option>
-                            @foreach($countrys as $country)
-                            <option value='{{ country.code }}' @if($selected_country == $country->code) selected @endif>{{ country.name }}</option>
-                            @endforeach
+                            {% for country in countrys %}
+                            <option value='{{ country.code }}' @if(selected_country == country.code) selected @endif>{{ country.name }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="help-block with-errors"></div>
@@ -78,9 +78,9 @@
                         </label>
                         <select class="field__input field__input--select form-control filter-dropdown" name="ShippingProvinceId" id="shippingProvince" data-error="{{ trans('ecomm::content.please_choose', {'name': trans('ecomm::content.province')}) }}" bind-event-change="shippingProviceChange('')" bind="ShippingProvinceId">
                             <option value=''>--- {{ trans('ecomm::content.choose_province') }} ---</option>
-                            @foreach(provinces as province)
+                            {% for province in provinces %}
                             <option value='{{ province.id }}'>{{ province.name }}</option>
-                            @endforeach
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="help-block with-errors"></div>
@@ -91,7 +91,7 @@
                         <label>{{ trans('ecomm::content.area_not_support_shipping') }}</label>
                     </div>
                 </div>
-                @endif
+                {% endif %}
             </div>
         </div>
     </div>
