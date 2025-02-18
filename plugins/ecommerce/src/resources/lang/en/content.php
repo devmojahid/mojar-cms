@@ -117,6 +117,13 @@ return [
     'shipping_method' => 'Shipping method',
     'payment_instruction' => 'Payment instruction',
     'store_address' => 'Store address',
+    'multi_currency' => 'Multi Currency',
+    'product_info' => 'Product info',
+    'dashboard' => 'Dashboard',
+    'total_orders' => 'Total orders',
+    'total_products' => 'Total products',
+    'total_customers' => 'Total customers',
+    'total_earnings' => 'Total earnings',
 
 
     // Ecommerce Management

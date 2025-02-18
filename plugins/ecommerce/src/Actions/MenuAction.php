@@ -98,7 +98,7 @@ class MenuAction extends Action
                 ]
             ]
         );
-        
+
 
         HookAction::registerAdminPage(
             'ecommerce.settings',
@@ -131,10 +131,21 @@ class MenuAction extends Action
                             // ->where('user_id', auth()->id())
                             ->paginate(10)
                     )->response()->getData(true), // Convert to array format
-                    'thank_page' => get_config('ecom_thanks_page') 
-                        ? get_page_url(get_config('ecom_thanks_page')) 
+                    'thank_page' => get_config('ecom_thanks_page')
+                        ? get_page_url(get_config('ecom_thanks_page'))
                         : null
                 ]
+            ]
+        );
+
+        HookAction::registerProfilePage(
+            'dashboard',
+            [
+                'title' => trans('ecomm::content.dashboard'),
+                'key' => 'dashboard',
+                'contents' => 'ecomm::frontend.profile.dashboard.index',
+                'icon' => 'fa fa-home',
+                'position' => 10,
             ]
         );
     }
