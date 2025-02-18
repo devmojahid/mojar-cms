@@ -106,23 +106,9 @@ class EcommerceServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../resources/assets' => public_path('jw-styles/plugins/juzaweb/ecommerce/assets'),
-            __DIR__.'/../resources/assets/css/images' => public_path('jw-styles/plugins/juzaweb/ecommerce/assets/css/images'),
+            __DIR__.'/../resources/assets/js/toast.js' => public_path('jw-styles/plugins/juzaweb/ecommerce/assets/js/toast.js'),
         ], 'ecommerce-assets');
 
-        // Ensure the directory exists
-        if (!file_exists(public_path('jw-styles/plugins/juzaweb/ecommerce/assets/css/images'))) {
-            mkdir(public_path('jw-styles/plugins/juzaweb/ecommerce/assets/css/images'), 0755, true);
-        }
-
-        add_action('theme.header', function() {
-            echo '<script>window.ecommerceConfig = ' . json_encode([
-                'routes' => [
-                    'checkout' => route('ecomm.checkout.store'),
-                    'update' => route('ecomm.checkout.update'),
-                ],
-                'csrf_token' => csrf_token(),
-            ]) . ';</script>';
-        });
     }
 
     /**
