@@ -1,0 +1,81 @@
+{% extends 'cms::layouts.frontend' %}
+
+{% block content %}
+    <section class="tf__shop_page pt_120 xs_pt_80 pb_120 xs_pb_80">
+        <div class="container">
+            <div class="row">
+                <!-- Filters Sidebar -->
+                <div class="col-xl-3 col-lg-4">
+                    <div class="tf__shop_sidebar">
+                        <!-- Categories -->
+                        <div class="tf__shop_sidebar_item">
+                            <h3>{{ trans('ecomm::content.categories') }}</h3>
+                            <ul>
+                                {% for category in categories %}
+                                    <li>
+                                        <a href="{{ current_url({'category': category.id}) }}" 
+                                           class="{% if category.id == request.get('category') %}active{% endif %}">
+                                            {{ category.name }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <!-- Sort Options -->
+                        <div class="tf__shop_sidebar_item">
+                            <h3>{{ trans('ecomm::content.sort_by') }}</h3>
+                            <select class="form-select" onchange="window.location.href=this.value">
+                                {% for key, label in sort_options %}
+                                    <option value="{{ current_url({'sort': key}) }}" 
+                                            {% if key == request.get('sort', 'latest') %}selected{% endif %}>
+                                        {{ label }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="col-xl-9 col-lg-8">
+                    <div class="row">
+                        {% for product in products %}
+                            <div class="col-xl-4 col-md-6 wow fadeInUp" data-wow-duration="1s">
+                                <div class="tf__shop_item">
+                                    <div class="tf__shop_item_img">
+                                        <img src="{{ product.thumbnail }}" alt="{{ product.title }}" class="img-fluid w-100">
+                                        <ul class="tf__shop_item_actions">
+                                            <li>
+                                                <a href="#" class="add-to-cart" 
+                                                   data-product-id="{{ product.id }}">
+                                                    <i class="fas fa-shopping-cart"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ product.url }}">
+                                                    <i class="far fa-eye"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tf__shop_item_text">
+                                        <h4>
+                                            <a href="{{ product.url }}">{{ product.title }}</a>
+                                        </h4>
+                                        <p class="price">{{ product.price|price_format }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="tf__pagination mt_50">
+                        {{ paginate_links(products) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %} 
