@@ -10,11 +10,17 @@ use Mojahid\Ecommerce\Models\Product;
 use Mojahid\Ecommerce\Models\ProductVariant;
 use Juzaweb\Backend\Models\Post;
 use Mojahid\Ecommerce\Http\Resources\ProductVariantResource;
+use Juzaweb\Backend\Models\Taxonomy;
 
 class EcommercePostTypeAction extends Action
 {
     public function handle(): void
     {
+        $this->addAction(
+            Action::INIT_ACTION,
+            [$this, 'registerConfigs']
+        );
+
         $this->addAction(
             Action::INIT_ACTION,
             [$this, 'registerPostTypes']
@@ -40,8 +46,31 @@ class EcommercePostTypeAction extends Action
         $this->addFilter('post.withFrontendDetailBuilder', [$this, 'addWithVariantsProductDetail']);
 
         $this->addFilter('jw.resource.post.products', [$this, 'addVariantsProductDetail'], 20, 2);
+
+        
+        // Add shop page filter
+        $this->addFilter(
+            'theme.get_view_page',
+            [$this, 'addShopPage'],
+            20,
+            2
+        );
+
+        $this->addFilter(
+            'theme.get_params_page',
+            [$this, 'addShopParams'],
+            20,
+            2
+        );
     }
 
+    public function registerConfigs(): void
+    {
+        HookAction::registerConfig([
+            '_shop_page',
+            '_shop_params',
+        ]);
+    }
     /**
      * Register post types
     */
@@ -193,6 +222,101 @@ class EcommercePostTypeAction extends Action
             ->response()
             ->getData(true)['data'];
         return $data;
+    }
+
+    
+    // Add new method for shop page view
+    public function addShopPage($view, $page): string
+    {
+        $shopPage = get_config('_shop_page');
+
+        if ($shopPage == $page->id) {
+            return 'ecomm::frontend.shop.index';
+        }
+
+        return $view;
+    }
+
+    // Add new method for shop page parameters
+    public function addShopParams($params, $page)
+    {
+        $shopPage = get_config('_shop_page');
+
+        if ($shopPage == $page->id) {
+            return array_merge($params, [
+                'products' => $this->getShopProducts(),
+                'categories' => $this->getProductCategories(),
+                'filters' => $this->getProductFilters(),
+                'sort_options' => $this->getSortOptions()
+            ]);
+        }
+
+        return $params;
+    }
+
+    protected function getShopProducts()
+    {
+        $query = Post::wherePostType('products')
+            ->wherePublish()
+            ->with(['taxonomies', 'metas']);
+
+        // Apply filters from request
+        if ($category = request('category')) {
+            $query->whereTaxonomy('categories', $category);
+        }
+
+        if ($search = request('search')) {
+            $query->where('title', 'LIKE', "%{$search}%");
+        }
+
+        // Apply sorting
+        $sort = request('sort', 'latest');
+        switch ($sort) {
+            case 'price_low':
+                $query->orderByMeta('price', 'asc');
+                break;
+            case 'price_high':
+                $query->orderByMeta('price', 'desc');
+                break;
+            case 'popularity':
+                $query->orderBy('views', 'desc');
+                break;
+            default:
+                $query->orderBy('created_at', 'desc');
+        }
+
+        return $query->paginate(12);
+    }
+
+    protected function getProductCategories()
+    {
+        return Taxonomy::where('taxonomy', 'categories')
+            ->where('post_type', 'products')
+            ->whereHas('posts', function($q) {
+                $q->wherePublish();
+            })
+            ->get();
+    }
+
+    protected function getProductFilters()
+    {
+        return [
+            'price_range' => [
+                'min' => Post::wherePostType('products')->min('price') ?? 0,
+                'max' => Post::wherePostType('products')->max('price') ?? 1000
+            ],
+            // Add more filters as needed
+        ];
+    }
+
+    protected function getSortOptions()
+    {
+        return [
+            'latest' => trans('ecomm::content.latest'),
+            'price_low' => trans('ecomm::content.price_low_to_high'),
+            'price_high' => trans('ecomm::content.price_high_to_low'),
+            'popularity' => trans('ecomm::content.most_popular')
+        ];
     }
 
 }
