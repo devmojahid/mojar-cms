@@ -10,7 +10,7 @@
     </thead>
     <tbody>
     {% for order in data.orders.data %}
-
+    
         <tr>
             <td>
                 <div class="dropdown show">
@@ -53,4 +53,3 @@
 </table>
 
 {{ paginate_links(orders, 'theme::components.pagination') }}
-

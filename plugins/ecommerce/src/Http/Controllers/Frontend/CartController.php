@@ -26,6 +26,7 @@ use Mojahid\Ecommerce\Http\Requests\BulkUpdateCartRequest;
 use Mojahid\Ecommerce\Http\Requests\RemoveItemCartRequest;
 use Mojahid\Ecommerce\Http\Resources\CartResource;
 use Juzaweb\CMS\Abstracts\Action;
+use Illuminate\Http\Request;
 
 class CartController extends FrontendController
 {
@@ -184,6 +185,19 @@ class CartController extends FrontendController
             'cart' => new CartResource($cart),
         ]);
     }
+    public function update(Request $request)
+    {
+        $key = $request->input('key');
+        $quantity = $request->input('quantity');
+        // TODO: Your logic. Example if using session
+        $cart = $this->cartManager->find();
+        $cart->update($key, $quantity);
+        return $this->success([
+            'message' => trans('ecomm::content.cart_updated_successfully'),
+            'cart' => new CartResource($cart),
+        ]);
+    }
+
 
     public function getCartItems(): JsonResponse
     {
