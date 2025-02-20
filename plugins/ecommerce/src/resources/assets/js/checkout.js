@@ -135,3 +135,160 @@ window.Juzaweb = window.Juzaweb || {};
         }
     };
 })(window.jQuery);
+
+
+(function($) {
+    "use strict";
+
+    // Define our Checkout class that manages the checkout form submission.
+    var Checkout = function(formSelector, options) {
+        this.$form = $(formSelector);
+        this.options = options || {};
+        this.submitInProgress = false;
+        this.$ajax = null;
+        this.ajaxAbandonedTimeout = null;
+        this.init();
+    };
+
+    Checkout.prototype.init = function() {
+        var self = this;
+        // Prevent default auto submission on form submit.
+        this.$form.on('submit', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Bind click event only on the checkout button.
+        this.$form.find('.btn-checkout').on('click', function(e) {
+            e.preventDefault();
+            self.returnCheckout();
+        });
+
+        // OPTIONAL: If you want to use abandonedCheckout (to save user data in case of idle time)
+        // You may set a flag so that it does not trigger on initial page load.
+        // For instance, only start abandonedCheckout after the user has interacted with the form.
+        // Here we are not auto-calling it on page load.
+    };
+
+    // This function submits the checkout form via AJAX when the user clicks the Place Order button.
+    Checkout.prototype.returnCheckout = function() {
+        var self = this;
+        var $form = this.$form;
+        
+        // Validate the form; if there are errors, do not proceed.
+        $form.validator("validate");
+        if ($(".help-block.with-errors > ul").length > 0) {
+            // Form has errors; do not submit.
+            this.resetButton();
+            return;
+        }
+
+        var actionUrl = $form.attr("action");
+        var method = "POST";
+
+        this.submitInProgress = true;
+        $.ajax({
+            url: actionUrl,
+            type: method,
+            global: true,
+            data: $form.serialize()
+        })
+        .done(function(response) {
+            if (response.status == "success" && response.data.redirect) {
+                self.showToast('success', response.message || 'Order placed successfully!');
+                // Redirect after a short delay
+                setTimeout(function() {
+                    window.location.href = response.data.redirect;
+                }, 1000);
+            } else {
+                var errorHtml = "";
+                if (response.errors && response.errors.length > 0) {
+                    for (var i = 0; i < response.errors.length; i++) {
+                        errorHtml += "<li>" + response.errors[i] + "</li>";
+                    }
+                } else {
+                    errorHtml += "<li>" + response.message + "</li>";
+                }
+                $(".sidebar__content .has-error .help-block > ul").html(errorHtml);
+                self.resetButton();
+            }
+            self.submitInProgress = false;
+            return false;
+        })
+        .fail(function(xhr) {
+            var response = xhr.responseJSON;
+            var errorHtml = "";
+            if (response && response.errors && response.errors.length > 0) {
+                for (var i = 0; i < response.errors.length; i++) {
+                    errorHtml += "<li>" + response.errors[i] + "</li>";
+                }
+            } else if(response && response.message) {
+                errorHtml += "<li>" + response.message + "</li>";
+            } else {
+                errorHtml += "<li>An unexpected error occurred.</li>";
+            }
+            $(".sidebar__content .has-error .help-block > ul").html(errorHtml);
+            self.resetButton();
+            self.submitInProgress = false;
+            return false;
+        });
+    };
+
+    // Resets the checkout button text and state.
+    Checkout.prototype.resetButton = function() {
+        var $btn = this.$form.find('.btn-checkout');
+        $btn.prop("disabled", false).text(this.options.buttonText || "Place Order");
+    };
+
+    // A helper to show toast notifications using Bootstrap Toasts.
+    Checkout.prototype.showToast = function(type, message) {
+        var toastClass = (type === 'error') ? 'bg-danger' : 'bg-success';
+        var $toast = $(
+            '<div class="toast ' + toastClass + ' text-white" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">' +
+                '<div class="toast-body">' + message + '</div>' +
+            '</div>'
+        );
+
+        if ($('#toast-container').length === 0) {
+            $('body').append('<div id="toast-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>');
+        }
+        $('#toast-container').append($toast);
+        $toast.toast('show').on('hidden.bs.toast', function() {
+            $(this).remove();
+        });
+    };
+
+    // OPTIONAL: If you want to implement an "abandonedCheckout" feature,
+    // you could call this function after some user interaction (not on page load).
+    Checkout.prototype.abandonedCheckout = function() {
+        var $form = this.$form;
+        var currentUrl = window.location.href;
+
+        if (this.$ajax) {
+            this.$ajax.abort();
+        }
+        if (this.ajaxAbandonedTimeout) {
+            clearTimeout(this.ajaxAbandonedTimeout);
+        }
+        var self = this;
+        // Only trigger after a user has interacted (you can adjust the timeout)
+        this.ajaxAbandonedTimeout = setTimeout(function() {
+            self.$ajax = $.ajax({
+                url: currentUrl,
+                type: "POST",
+                global: false,
+                data: $form.serialize() + "&_method=patch",
+                success: function(response) {
+                    // No UI feedback required here.
+                }
+            });
+        }, 3000);
+    };
+
+    // Initialize checkout functionality when document is ready.
+    $(document).ready(function() {
+        new Checkout("#checkout-form", {
+            buttonText: "{{ trans('ecomm::content.place_order') }}"
+        });
+    });
+})(jQuery);
