@@ -63,7 +63,6 @@ class EcommerceAction extends Action
                 '_checkout_page',
                 '_thanks_page',
             ]
-
         );
     }
 
@@ -87,7 +86,7 @@ class EcommerceAction extends Action
     public function addCheckoutParams($params, $page)
     {
         $checkoutPage = get_config('_checkout_page');
-
+        $thanksPage = get_config('_thanks_page');
         if ($checkoutPage == $page->id) {
             $methods = PaymentMethod::active()->get();
 
@@ -101,6 +100,10 @@ class EcommerceAction extends Action
                     ];
                 })->toArray()
             ]);
+        }
+        // add title
+        if ($thanksPage == $page->id) {
+            $params['title'] = 'Thank you';
         }
 
         return $params;

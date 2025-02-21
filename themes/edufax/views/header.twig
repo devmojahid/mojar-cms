@@ -41,7 +41,7 @@
                 <ul class="tf__right_menu d-flex flex-wrap">
                     <li><a class="menu_search_icon"><i class="far fa-search"></i></a></li>
                     {% if auth %}
-                    <li><a class="signin" href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a></li>
+                    <li><a class="signin" href="{{ url('profile/dashboard') }}">{{ __('Dashboard') }}</a></li>
                     {% else %}
                     <li><a class="signin" href="{{ url('login') }}">{{ __('sign up') }}</a></li>
                     {% endif %}

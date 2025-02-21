@@ -124,6 +124,7 @@ return [
     'total_products' => 'Total products',
     'total_customers' => 'Total customers',
     'total_earnings' => 'Total earnings',
+    'shipping_to_other_address' => 'Shipping to other address',
 
 
     // Ecommerce Management

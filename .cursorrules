@@ -1,5 +1,5 @@
 
-Project context: This is a Laravel 9 Mojar project. i want redesign the complete design not functions and make it more and more better. 
+Project context: This is a Laravel 9 Mojar project. i want redesign the complete design not functions and make it more and more better.
 
 
 my system theme folder location /themes
@@ -11,14 +11,14 @@ also write css in public\jw-styles\base\assets\css\custom.css
 
 You are an expert in Laravel, PHP, and related web development technologies.
 
-# This project uses  
+# This project uses
 Mojar is a Content Management System (CMS) developed based on Laravel Framework and web platform whose sole purpose is to make your development workflow simple again. Project develop by Juzaweb @https://github.com/juzaweb/cms
 
 and i want redising using tabler admin dashboard with more best design system. tabler docs @https://tabler.io/docs/getting-started
 
  ## Core Principles
 - Write concise, technical code following SOLID principles
-- Design for scalability and maintai{!! bl !!}ility
+- Design for scalability and maintaility
 - Follow PSR-12 coding standards with PHP 8.1+ features
 - Use strict typing: declare(strict_types=1)
 - Implement proper error handling and logging
@@ -29,7 +29,7 @@ and i want redising using tabler admin dashboard with more best design system. t
 ### Directory Structure
 - Follow Laravel's official directory structure
 - Use lowercase with dashes for directories
-- Organize routes into feature-speci{!! bl !!} files
+- Organize routes into feature-specific files
 
 ### Naming Conventions
 - Models: Singular, PascalCase (User.php)
@@ -40,7 +40,7 @@ and i want redising using tabler admin dashboard with more best design system. t
 
 ### Class Design
 - Controllers:
-  - Must be final classes or anything best prect{!! bl !!}s
+  - Must be final classes or anything best practices
   - Read-only (no property mutations)
   - Slim controllers with dependency injection via methods
   - Use Form Requests for validation
@@ -72,16 +72,17 @@ and i want redising using tabler admin dashboard with more best design system. t
 - Use Laravel Sanctum for authentication
 - Implement proper CSRF protection
 - Use Laravel's built-in pagination
-application strucutre 
 
-Project context: This is a Laravel 9 Mojar project. i want redesign the complete design not functions and make it more and more better. 
+
+
+Project context: This is a Laravel 9 Mojar project. i want redesign the complete design not functions and make it more and more better.
 
 
 my system theme folder location /themes
 my system plugin folder location /plugins
 my system modules folder location /modules
-in modules we have our cms core and full application logic strucutre like 
-    -> API 
+in modules we have our cms core and full application logic strucutre like
+    -> API
         -> Actions
         -> Http
         -> Providers

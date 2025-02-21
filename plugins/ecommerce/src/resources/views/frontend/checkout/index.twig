@@ -9,10 +9,19 @@
     <link rel="shortcut icon" href="{{ upload_url(config('icon')) }}" type="image/x-icon" />
 
     <link rel="stylesheet" href="{{ asset('jw-styles/plugins/juzaweb/ecommerce/assets/css/checkout.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('jw-styles/base/assets/libs/nprogress/nprogress.css') }}">
 
     <script> var Juzaweb = Juzaweb || {}; Juzaweb.store = ''; Juzaweb.theme = {"id":606449,"role":"main","name":"{{ shop_name }}"}; Juzaweb.template = ''; </script>
 
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
+    <script src="{{ asset('jw-styles/base/assets/js/jquery-3.7.1.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('jw-styles/base/assets/js/twine.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('jw-styles/base/assets/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+
+    <script src="{{ asset('jw-styles/base/assets/libs/jquery-validation/jquery.validate.min.js') }}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('jw-styles/base/assets/libs/nprogress/nprogress.js') }}"></script>
+
     <script type="text/javascript">
         if (typeof Juzaweb == 'undefined') { Juzaweb = {}; }
         Juzaweb.Checkout = {};
@@ -20,10 +29,6 @@
         Juzaweb.Checkout.apiHost = "";
         Juzaweb.Checkout.submitInProgress = false;
     </script>
-
-    {% block javascripts %}
-        <script src="{{ asset('jw-styles/plugins/juzaweb/ecommerce/assets/js/checkout.js') }}"></script>
-    {% endblock %}
 
     <meta name="robots" content="noindex, nofollow">
 </head>
@@ -63,10 +68,9 @@
 
 </div>
 <form
-        method="post"
-        action="{{ route('ajax', ['checkout']) }}"
-        data-toggle="validator"
-        class="content stateful-form formCheckout"
+        class="formCheckout"
+        action="{{ route('ecomm.checkout.store') }}"
+        method="POST"
 >
 
     {{ csrf_field() }}
@@ -402,8 +406,7 @@
     </svg>
 </div>
 <script>var code_langs = {'choose_province': '{{ trans('ecomm::content.choose_province') }}'};</script>
-<script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
-<script src="{{ asset('jw-styles/plugins/juzaweb/ecommerce/assets/js/checkout.min.js') }}" type="text/javascript"></script>
+{# <script src="{{ asset('jw-styles/plugins/juzaweb/ecommerce/assets/js/checkout.min.js') }}" type="text/javascript"></script> #}
 
 <script type="text/javascript">
     $(document).ajaxStart(function () {
@@ -436,6 +439,16 @@
 
     });
 </script>
+
+<script type="text/javascript">
+    window.ecommerceConfig = {
+        routes: {
+            checkout: '{{ route('ecomm.checkout.store') }}',
+        }
+    };
+</script>
+
+<script src="{{ asset('jw-styles/plugins/juzaweb/ecommerce/assets/js/checkout.js') }}"></script>
 
 </body>
 </html>

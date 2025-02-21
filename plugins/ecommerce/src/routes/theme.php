@@ -10,7 +10,7 @@ Route::middleware('web')->name('ecomm.')->group(function () {
     Route::post('/ajax/cart/remove-item', [CartController::class, 'removeItem'])->name('cart.remove-item');
 
     // Checkout routes
-    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+    // Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
     Route::match(['post', 'patch'], '/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
     Route::post('/checkout/update', [CheckoutController::class, 'update'])->name('checkout.update');
 });
