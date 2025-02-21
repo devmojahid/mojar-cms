@@ -7,6 +7,7 @@
     <meta name="description" content="{{ title }} - {{ trans('ecomm::content.payment_order') }}" />
     <title>{{ title }} - {{ trans('ecomm::content.payment_order') }}</title>
     <link rel="shortcut icon" href="{{ upload_url(config('icon')) }}" type="image/x-icon" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="{{ asset('jw-styles/plugins/juzaweb/ecommerce/assets/css/checkout.min.css') }}">
     <link rel="stylesheet" href="{{ asset('jw-styles/base/assets/libs/nprogress/nprogress.css') }}">
@@ -68,9 +69,11 @@
 
 </div>
 <form
-        class="formCheckout"
-        action="{{ route('ecomm.checkout.store') }}"
-        method="POST"
+
+        method="post"
+        action="{{ route('ajax', ['checkout']) }}"
+        data-toggle="validator"
+        class="content stateful-form formCheckout"
 >
 
     {{ csrf_field() }}

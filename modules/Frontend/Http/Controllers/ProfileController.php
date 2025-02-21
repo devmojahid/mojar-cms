@@ -14,6 +14,7 @@ use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Juzaweb\Frontend\Http\Requests\ChangePasswordRequest;
 use Juzaweb\Frontend\Http\Requests\UpdateProfileRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends FrontendController
 {
@@ -32,11 +33,15 @@ class ProfileController extends FrontendController
             if (!$page) {
                     throw new \Exception(__('Profile page not found'), 404);
             }
-            
+
             $title = $page['title'];
-            
+
             if ($callback = Arr::get($page, 'callback')) {
                 return app()->call("{$callback[0]}@{$callback[1]}", ['page' => $page]);
+            }
+
+            if ($page['key'] == 'logout') {
+                return $this->logout();
             }
 
             return $this->view(
@@ -98,7 +103,7 @@ class ProfileController extends FrontendController
         $title = trans('cms::app.change_password');
         $user = UserResource::make($request->user())->toArray($request);
         $pages = HookAction::getProfilePages();
-        
+
         $page = [
             'title' => $title,
             'contents' => 'theme::profile.change_password',
@@ -158,5 +163,14 @@ class ProfileController extends FrontendController
                 'message' => trans('cms::app.change_password_successfully'),
             ]
         );
+    }
+
+    public function logout()
+    {
+        if (Auth::check()) {
+            Auth::logout();
+        }
+
+        return redirect()->to('/');
     }
 }

@@ -9,15 +9,17 @@
             {'label': page.title}
         ]
     } %}
-    <section class="tf__dashboard mt_190 xs_mt_95">
+
+    <section class="tf__dashboard pt_120 xs_pt_80 pb_120 xs_pb_80">
         <div class="container">
-            <div class="tf__dashboard_area">
+            <div class="tf__dashboard_content">
                 <div class="row">
-                    <div class="col-xl-3 col-lg-4 wow fadeInLeft" data-wow-duration="1s">
+                    <div class="col-xxl-3 col-lg-4">
                         <div class="tf__dashboard_sidebar">
                             <div class="tf__dashboard_sidebar_user">
                                 <div class="img">
                                     <img src="{{ user.avatar }}" alt="user" class="img-fluid w-100">
+
                                     <label for="upload">
                                         <img src="images/camera_icon.png" alt="upload" class="img-fluid w-100">
                                     </label>
@@ -30,7 +32,7 @@
                                 <ul>
                                     {% for menu_page in pages %}
                                         <li>
-                                            <a class="{% if page.key is defined and page.key == menu_page.key %}active{% endif %}" 
+                                            <a class="{% if page.key is defined and page.key == menu_page.key %}active{% endif %}"
                                             href="{{ route('profile', [menu_page.key]) }}">
                                                 <i class="{{ menu_page.icon }}"></i> {{ menu_page.title }}
                                             </a>
@@ -40,21 +42,18 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-xl-9 col-lg-8 wow fadeInRight" data-wow-duration="1s">
+                    <div class="col-xxl-9 col-lg-8">
                         <div class="tf__dashboard_body">
-                            <h2>{{ page.title }}</h2>
-                            <div class="tf__dashboard_overview">
-                                {% if page.contents is defined and page.contents is not empty %}
-                                    {% include page.contents with {
-                                        data: page.data|default([])
-                                    } %}
-                                {% else %}
-                                    <div class="alert alert-info">
-                                        {{ __('No content available for this section.') }}
-                                    </div>
-                                {% endif %}
-                            </div>
+                            <h2 class="dashboard_title">{{ page.title }}</h2>
+                            {% if page.contents is defined and page.contents is not empty %}
+                                {% include page.contents with {
+                                    data: page.data|default([])
+                                } %}
+                            {% else %}
+                                <div class="alert alert-info">
+                                    {{ __('No content available for this section.') }}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

@@ -125,6 +125,10 @@ return [
     'total_customers' => 'Total customers',
     'total_earnings' => 'Total earnings',
     'shipping_to_other_address' => 'Shipping to other address',
+    'orders_details' => 'Orders details',
+    'account' => 'Account',
+    'change_password' => 'Change password',
+    'logout' => 'Logout',
 
 
     // Ecommerce Management

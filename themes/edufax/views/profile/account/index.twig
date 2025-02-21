@@ -1,0 +1,41 @@
+<div class="tf__dashboard_info wow fadeInUp" data-wow-duration="1s">
+    <ul>
+        <li><span>Name</span><b>:</b> {{ data.user.name }}</li>
+        <li><span>email</span><b>:</b> {{ data.user.email }}</li>
+        <li><span>phone</span><b>:</b> {{ data.user.phone }}</li>
+        <li><span>address </span><b>:</b> {{ data.user.address }}
+        </li>
+    </ul>
+</div>
+
+<div class="tf__dashboard_info_edit tf__dashboard_info">
+    <form action="#" method="POST">
+        <div class="row wow fadeInUp" data-wow-duration="1s">
+            <div class="col-xl-12">
+                <div class="tf__form_single_input">
+                    <label>name</label>
+                    <input type="text" placeholder="Name" value="{{ data.user.name }}">
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="tf__form_single_input">
+                    <label>Email</label>
+                    <input type="email" placeholder="Email" value="{{ data.user.email }}">
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="tf__form_single_input">
+                    <label>phone</label>
+                    <input type="text" placeholder="Phone" value="{{ data.user.phone }}">
+                </div>
+            </div>
+            <div class="col-xl-12">
+                <div class="tf__form_single_input">
+                    <label>address</label>
+                    <textarea rows="5" placeholder="Address">{{ data.user.address }}</textarea>
+                </div>
+                <button type="submit" class="tf__common_btn">save</button>
+            </div>
+        </div>
+    </form>
+</div>

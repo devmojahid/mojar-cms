@@ -67,7 +67,7 @@ class CheckoutController extends FrontendController
             throw $e;
         }
 
-        event(new OrderSuccess($newOrder, $user));
+        // event(new OrderSuccess($newOrder, $user));
 
         $params = apply_filters(
             'ecom_checkout_success_email_params',

@@ -117,20 +117,31 @@ class MenuAction extends Action
 
     public function addProfilePages(): void
     {
+        // Dashboard
+        HookAction::registerProfilePage(
+            'dashboard',
+            [
+                'title' => trans('ecomm::content.dashboard'),
+                'key' => 'dashboard',
+                'contents' => view()->exists('theme::profile.dashboard.index') ? 'theme::profile.dashboard.index' : 'ecomm::frontend.profile.dashboard.index',
+                'icon' => 'fa fa-home',
+                'position' => 1,
+            ]
+        );
+
         HookAction::registerProfilePage(
             'orders',
             [
                 'title' => trans('ecomm::content.orders'),
                 'key' => 'orders',
-                'contents' => 'ecomm::frontend.profile.orders.index',
+                'contents' => view()->exists('theme::profile.orders.index') ? 'theme::profile.orders.index' : 'ecomm::frontend.profile.orders.index',
                 'icon' => 'fa fa-shopping-cart',
                 'position' => 10,
                 'data' => [
                     'orders' => OrderResource::collection(
                         Order::with(['paymentMethod'])
-                            // ->where('user_id', auth()->id())
                             ->paginate(10)
-                    )->response()->getData(true), // Convert to array format
+                    )->response()->getData(true),
                     'thank_page' => get_config('ecom_thanks_page')
                         ? get_page_url(get_config('ecom_thanks_page'))
                         : null
@@ -138,14 +149,34 @@ class MenuAction extends Action
             ]
         );
 
+        // Account
         HookAction::registerProfilePage(
-            'dashboard',
+            'account',
             [
-                'title' => trans('ecomm::content.dashboard'),
-                'key' => 'dashboard',
-                'contents' => 'ecomm::frontend.profile.dashboard.index',
-                'icon' => 'fa fa-home',
+                'title' => trans('ecomm::content.account'),
+                'key' => 'account',
+                'contents' => view()->exists('theme::profile.account.index') ? 'theme::profile.account.index' : 'ecomm::frontend.profile.account.index',
+                'icon' => 'fa fa-user',
                 'position' => 10,
+                'data' => [
+                    'user' => auth()->user()
+                ]
+            ]
+        );
+
+        HookAction::registerProfilePage(
+            'change-password',
+            [
+                'title' => trans('ecomm::content.change_password'),
+                'key' => 'change-password',
+            ]
+        );
+
+        HookAction::registerProfilePage(
+            'logout',
+            [
+                'title' => trans('ecomm::content.logout'),
+                'key' => 'logout',
             ]
         );
     }

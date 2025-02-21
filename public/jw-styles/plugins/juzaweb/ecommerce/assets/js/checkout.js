@@ -461,6 +461,52 @@ window.Juzaweb = window.Juzaweb || {};
         showShippingWard: function() {
             // Implement ward display logic if needed
             console.log('Show shipping ward');
+        },
+
+        submitCheckout: function() {
+            if (this.submitInProgress) {
+                return false;
+            }
+
+            var form = $('.formCheckout');
+            var self = this;
+
+            // Set submission state
+            this.submitInProgress = true;
+            $('.btn-checkout').prop('disabled', true);
+            let token = $('meta[name="csrf-token"]').attr('content');
+
+            $.ajax({
+                url: form.attr('action'),
+                type: 'POST',
+                data: form.serialize(),
+                success: function(response) {
+                    console.log(response);
+                    if (response?.status) {
+                        window.location.href = response?.data?.redirect || '/checkout/success';
+                    } else {
+                        self.handleError(response.message || 'Checkout failed');
+                    }
+                },
+                error: function(xhr) {
+                    var errorMsg = 'An error occurred during checkout';
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        errorMsg = xhr.responseJSON.message;
+                    }
+                    self.handleError(errorMsg);
+                },
+                complete: function() {
+                    self.submitInProgress = false;
+                    $('.btn-checkout').prop('disabled', false);
+                }
+            });
+
+            return false;
+        },
+
+        handleError: function(message) {
+            var errorHtml = '<li>' + message + '</li>';
+            $('.sidebar__content .has-error .help-block > ul').html(errorHtml);
         }
     };
 
