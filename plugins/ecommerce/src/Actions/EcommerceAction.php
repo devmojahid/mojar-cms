@@ -13,6 +13,7 @@ use Mojahid\Ecommerce\Http\Controllers\Frontend\CartController as FrontendCartCo
 use Mojahid\Ecommerce\Http\Controllers\Frontend\CheckoutController as FrontendCheckoutController;
 use Mojahid\Ecommerce\Http\Resources\CartResource;
 use Mojahid\Ecommerce\Supports\Manager\CartManager;
+use Juzaweb\CMS\Models\Role;
 
 class EcommerceAction extends Action
 {
@@ -23,6 +24,10 @@ class EcommerceAction extends Action
             [$this, 'registerConfigs']
         );
 
+        $this->addAction(
+            Action::INIT_ACTION, 
+            [$this, 'registerRoles']
+        );
 
         $this->addFilter(
             'theme.get_view_page',
@@ -172,5 +177,62 @@ class EcommerceAction extends Action
                 'callback' => [FrontendCheckoutController::class, 'completed'],
             ]
         );
+    }
+
+    /**
+     * Register ecommerce specific roles and permissions
+     */
+    public function registerRoles(): void
+    {
+        // First register the permissions
+        HookAction::registerResourcePermissions(
+            'products',
+            trans('ecommerce::content.products')
+        );
+
+        HookAction::registerResourcePermissions(
+            'orders',
+            trans('ecommerce::content.orders')
+        );
+
+        // Then create roles with those permissions
+        $roles = [
+            'customer' => [
+                'name' => 'Customer',
+                'description' => 'Ecommerce customer role',
+                'permissions' => [
+                    'orders.view_own',
+                    'profile.edit',
+                    'downloads.access'
+                ]
+            ],
+            'shop_manager' => [
+                'name' => 'Shop Manager',
+                'description' => 'Can manage products and orders',
+                'permissions' => [
+                    'products.index',
+                    'products.create',
+                    'products.edit',
+                    'products.delete',
+                    'orders.index',
+                    'orders.edit',
+                    'orders.delete'
+                ]
+            ]
+        ];
+
+        foreach ($roles as $key => $role) {
+            // Check if role already exists
+            if (!Role::where('name', $key)->exists()) {
+                $newRole = Role::create([
+                    'name' => $key,
+                    'description' => $role['description'],
+                    'guard_name' => 'web'
+                ]);
+
+                // Sync permissions
+                $newRole->syncPermissions($role['permissions']);
+            }
+        }
     }
 }

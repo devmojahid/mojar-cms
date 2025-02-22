@@ -1,0 +1,284 @@
+{% extends 'cms::layouts.frontend' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3>{{ trans('ecomm::content.shopping_cart') }}</h3>
+                </div>
+                <div class="card-body">
+                    {% if cart.totalItems() > 0 %}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>{{ trans('ecomm::content.product') }}</th>
+                                    <th>{{ trans('ecomm::content.price') }}</th>
+                                    <th>{{ trans('ecomm::content.quantity') }}</th>
+                                    <th>{{ trans('ecomm::content.total') }}</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in cart.getCollectionItems() %}
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex">
+                                                <img
+                                                    style="width: 120px; height: auto; margin-right: 10px;"
+                                                    src="{{ upload_url(item.thumbnail) }}"
+                                                    alt="{{ item.title }}"
+                                                    class="img-thumbnail mr-3"
+                                                >
+                                                <div>
+                                                    <h5>{{ item.title }}</h5>
+                                                    {% if item.sku_code %}
+                                                        <small>SKU: {{ item.sku_code }}</small>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {{ ecom_price_with_unit(item.price) }}
+                                        </td>
+                                        <td>
+                                            <div class="input-group" style="width: 130px">
+                                                <button
+                                                    class="btn btn-outline-secondary btn-sm quantity-decrease"
+                                                    type="button"
+                                                >-</button>
+                                                <input
+                                                    type="number"
+                                                    class="form-control form-control-sm text-center quantity-input"
+                                                    value="{{ item.quantity }}"
+                                                    min="1"
+                                                    data-id="{{ item.post_id }}"
+                                                    data-type="{{ item.type|default('product') }}"
+                                                >
+                                                <button
+                                                    class="btn btn-outline-secondary btn-sm quantity-increase"
+                                                    type="button"
+                                                >+</button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {{ ecom_price_with_unit(item.line_price) }}
+                                        </td>
+                                        <td>
+                                            <button
+                                                class="btn btn-danger btn-sm remove-item"
+                                                data-id="{{ item.post_id }}"
+                                                data-type="{{ item.type|default('product') }}"
+                                            >
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <div class="text-center py-5">
+                            <i class="fa fa-shopping-cart fa-3x text-muted mb-3"></i>
+                            <h4>{{ trans('ecomm::content.cart_empty') }}</h4>
+                            <a href="/" class="btn btn-primary mt-3">
+                                {{ trans('ecomm::content.continue_shopping') }}
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3>{{ trans('ecomm::content.order_summary') }}</h3>
+                </div>
+                <div class="card-body" id="cartSummary">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>{{ trans('ecomm::content.subtotal') }}</td>
+                            <td class="text-right">
+                                {{ ecom_price_with_unit(cart.totalPrice()) }}
+                            </td>
+                        </tr>
+                        {% if cart.getDiscount() > 0 %}
+                            <tr>
+                                <td>{{ trans('ecomm::content.discount') }}</td>
+                                <td class="text-right">
+                                    -{{ ecom_price_with_unit(cart.getDiscount()) }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <td><strong>{{ trans('ecomm::content.total') }}</strong></td>
+                            <td class="text-right">
+                                <strong>
+                                    {{ ecom_price_with_unit(cart.totalPrice() - cart.getDiscount()) }}
+                                </strong>
+                            </td>
+                        </tr>
+                    </table>
+
+                    {% if cart.totalItems() > 0 %}
+                        <a href="{{ route('checkout') }}" class="btn btn-primary btn-block">
+                            {{ trans('ecomm::content.proceed_to_checkout') }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Toast container for user feedback #}
+<div class="cart-toast-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>
+
+<script>
+/**
+ * Reusable toast function for success/error messages
+ */
+function showCartToast(type, message) {
+    const alertDiv = document.createElement('div');
+    alertDiv.classList.add('alert', 'fade', 'show');
+    alertDiv.classList.add(type === 'success' ? 'alert-success' : 'alert-danger');
+    alertDiv.style.minWidth = '250px';
+    alertDiv.style.marginBottom = '5px';
+    alertDiv.innerHTML = message;
+
+    const container = document.querySelector('.cart-toast-container');
+    container.appendChild(alertDiv);
+
+    // Auto-close after a few seconds
+    setTimeout(() => {
+        alertDiv.classList.remove('show');
+        setTimeout(() => alertDiv.remove(), 300);
+    }, 3000);
+}
+
+$(document).ready(function() {
+    // Handle quantity changes
+    $('.quantity-input').on('change', function() {
+        let postId   = $(this).data('id');
+        let type     = $(this).data('type') || 'product';
+        let quantity = $(this).val();
+
+        $.ajax({
+            url: "{{ jw_ajax('cart.update') }}",
+            type: 'POST',
+            data: {
+                post_id: postId,
+                type: type,
+                quantity: quantity,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                if (response.success) {
+                    showCartToast('success', response.message || '{{ trans("ecomm::content.cart_updated_successfully") }}');
+                    // Reload or partial update
+                    setTimeout(() => { location.reload(); }, 800);
+                } else {
+                    showCartToast('error', response.message || '{{ trans("ecomm::content.error_updating_cart") }}');
+                }
+            },
+            error: function() {
+                showCartToast('error', '{{ trans("ecomm::content.server_error") }}');
+            }
+        });
+    });
+
+    // Handle remove item
+    $('.remove-item').click(function() {
+        let postId = $(this).data('id');
+        let type   = $(this).data('type') || 'product';
+
+        $.ajax({
+            url: "{{ jw_ajax('cart.remove-item') }}",
+            type: 'POST',
+            data: {
+                post_id: postId,
+                type: type,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                if (response.success) {
+                    showCartToast('success', response.message || '{{ trans("ecomm::content.item_removed_successfully") }}');
+                    setTimeout(() => { location.reload(); }, 800);
+                } else {
+                    showCartToast('error', response.message || '{{ trans("ecomm::content.error_removing_item") }}');
+                }
+            },
+            error: function() {
+                showCartToast('error', '{{ trans("ecomm::content.server_error") }}');
+            }
+        });
+    });
+
+    // Increment/decrement
+    $('.quantity-decrease').click(function() {
+        let input = $(this).closest('.input-group').find('.quantity-input');
+        let value = parseInt(input.val(), 10);
+        if (value > 1) {
+            input.val(value - 1).trigger('change');
+        }
+    });
+
+    $('.quantity-increase').click(function() {
+        let input = $(this).closest('.input-group').find('.quantity-input');
+        let value = parseInt(input.val(), 10);
+        input.val(value + 1).trigger('change');
+    });
+});
+</script>
+{% endblock %}
+
+
+
+
+
+{# For your product detail page or listing, you might have a button: #}
+
+{# 
+<button
+    class="btn btn-primary btn-add-to-cart"
+    data-id="{{ product.id }}"
+    data-type="product"
+    data-qty="1"  <!-- or an <input> for quantity -->
+>
+    {{ trans('ecomm::content.add_to_cart') }}
+</button>
+
+<script>
+$('.btn-add-to-cart').click(function() {
+    let postId   = $(this).data('id');
+    let type     = $(this).data('type') || 'product';
+    let quantity = $(this).data('qty') || 1;
+
+    $.ajax({
+        url: "{{ jw_ajax('cart.add-to-cart') }}",
+        type: 'POST',
+        data: {
+            post_id: postId,
+            type: type,
+            quantity: quantity,
+            _token: '{{ csrf_token() }}'
+        },
+        success: function(response) {
+            if (response.success) {
+                // show toast
+                showCartToast('success', response.message || '{{ trans("ecomm::content.added_to_cart_successfully") }}');
+                // optionally refresh a cart icon badge or something
+            } else {
+                showCartToast('error', response.message || '{{ trans("ecomm::content.error_adding_to_cart") }}');
+            }
+        },
+        error: function() {
+            showCartToast('error', '{{ trans("ecomm::content.server_error") }}');
+        }
+    });
+});
+</script>
+
+ #}

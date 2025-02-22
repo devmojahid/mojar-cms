@@ -2,12 +2,12 @@
 
 namespace Mojahid\Ecommerce\Http\Datatables;
 
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Juzaweb\CMS\Abstracts\DataTable;
-use Mojahid\Ecommerce\Models\Order;
+use Juzaweb\CMS\Models\User;
 
-class OrderDatatable extends DataTable
+class CustomerDatatable extends DataTable
 {
     /**
      * Columns datatable
@@ -17,33 +17,34 @@ class OrderDatatable extends DataTable
     public function columns(): array
     {
         return [
-            'code' => [
-                'label' => trans('ecomm::content.code'),
-                'width' => '15%',
+            'avatar' => [
+                'label' => trans('cms::app.avatar'),
+                'width' => '5%',
+                'formatter' => function ($value, $row, $index) {
+                    return '<img src="' . $row->getAvatar('150x150') . '" class="w-100"/>';
+                },
             ],
             'name' => [
-                'label' => trans('ecomm::content.name'),
+                'label' => trans('cms::app.name'),
                 'formatter' => function ($value, $row, $index) {
-                    return view('cms::backend.items.datatable_item', [
-                        'value' => $row->name,
-                        'row' => $row,
-                        'actions' => $this->rowAction($row),
-                        'editUrl' => $this->currentUrl . '/' . $row->id . '/edit',
-                        'title_hidden' => false,
-                        'actions_hidden' => true,
-                    ])
+                    return view(
+                        'cms::backend.items.datatable_item',
+                        [
+                            'value' => $row->{$row->getFieldName()},
+                            'row' => $row,
+                            'actions' => $this->rowAction($row),
+                            'editUrl' => $this->currentUrl . '/' . $row->id . '/edit',
+                            'title_hidden' => false,
+                            'actions_hidden' => true,
+                        ]
+                    )
                     ->render();
                 },
-                'width' => '20%',
-            ],
-            'phone' => [
-                'label' => trans('ecomm::content.phone'),
             ],
             'email' => [
-                'label' => trans('ecomm::content.email'),
-            ],
-            'total' => [
-                'label' => trans('ecomm::content.total'),
+                'label' => trans('cms::app.email'),
+                'width' => '15%',
+                'align' => 'center',
             ],
             'created_at' => [
                 'label' => trans('cms::app.created_at'),
@@ -51,7 +52,7 @@ class OrderDatatable extends DataTable
                 'align' => 'center',
                 'formatter' => function ($value, $row, $index) {
                     return jw_date_format($row->created_at);
-                }
+                },
             ],
             'operations' => [
                 'label' => trans('cms::app.operations'),
@@ -76,44 +77,55 @@ class OrderDatatable extends DataTable
         ];
     }
 
+    public function rowAction($row)
+    {
+        $data = parent::rowAction($row);
+
+        $data['edit'] = [
+            'label' => trans('cms::app.edit'),
+            'url' => route('admin.users.edit', [$row->id]),
+        ];
+
+        return $data;
+    }
+
     /**
      * Query data datatable
      *
-     * @param  array  $data
+     * @param array $data
      * @return Builder
      */
-    public function query(array $data): \Illuminate\Contracts\Database\Query\Builder
+    public function query($data)
     {
-        $query = Order::select(
-            [
-                'id',
-                'code',
-                'name',
-                'email',
-                'phone',
-                'total',
-                'created_at',
-            ]
-        );
+        $query = User::query();
 
         if ($keyword = Arr::get($data, 'keyword')) {
             $query->where(
                 function (Builder $q) use ($keyword) {
-                    $q->where('name', JW_SQL_LIKE, '%'. $keyword .'%');
-                    $q->orWhere('email', JW_SQL_LIKE, '%'. $keyword .'%');
-                    $q->orWhere('phone', JW_SQL_LIKE, '%'. $keyword .'%');
+                    $q->where('name', JW_SQL_LIKE, '%' . $keyword . '%');
+                    $q->orWhere('email', JW_SQL_LIKE, '%' . $keyword . '%');
                 }
             );
+        }
+
+        if ($status = Arr::get($data, 'status')) {
+            $query->where('status', '=', $status);
         }
 
         return $query;
     }
 
-    public function bulkActions($action, $ids): void
+    public function bulkActions($action, $ids)
     {
+        /* Only update are not master admin  */
+        $ids = User::whereIn('id', $ids)
+            ->whereIsAdmin(0)
+            ->pluck('id')
+            ->toArray();
+
         switch ($action) {
             case 'delete':
-                Order::destroy($ids);
+                User::destroy($ids);
                 break;
         }
     }

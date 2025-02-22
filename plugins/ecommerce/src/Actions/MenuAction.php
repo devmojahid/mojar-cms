@@ -30,9 +30,6 @@ class MenuAction extends Action
             [
                 'title' => trans('ecomm::content.ecommerce'),
                 'menu' => [
-
-
-
                     'icon' => '<svg xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-shopee"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l.867 12.143a2 2 0 0 0 2 1.857h10.276a2 2 0 0 0 2 -1.857l.867 -12.143h-16z" /><path d="M8.5 7c0 -1.653 1.5 -4 3.5 -4s3.5 2.347 3.5 4" /><path d="M9.5 17c.413 .462 1 1 2.5 1s2.5 -.897 2.5 -2s-1 -1.5 -2.5 -2s-2 -1.47 -2 -2c0 -1.104 1 -2 2 -2s1.5 0 2.5 1" /></svg>',
                     'position' => 12,
                 ]
@@ -52,42 +49,6 @@ class MenuAction extends Action
         );
 
         HookAction::registerAdminPage(
-            'ecommerce.incomplete-orders',
-            [
-                'title' => trans('ecomm::content.incomplete_orders'),
-                'menu' => [
-                    'icon' => '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-basket-cancel"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 10l-2 -6" /><path d="M7 10l2 -6" /><path d="M12 20h-4.756a3 3 0 0 1 -2.965 -2.544l-1.255 -7.152a2 2 0 0 1 1.977 -2.304h13.999a2 2 0 0 1 1.977 2.304l-.3 1.713" /><path d="M10 14a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M19 19m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M17 21l4 -4" /></svg>',
-                    'position' => 6,
-                    'parent' => 'ecommerce'
-                ]
-            ]
-        );
-
-        HookAction::registerAdminPage(
-            'ecommerce.return-orders',
-            [
-                'title' => trans('ecomm::content.return_orders'),
-                'menu' => [
-                    'icon' => '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-basket-down"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 10l-2 -6" /><path d="M7 10l2 -6" /><path d="M12 20h-4.756a3 3 0 0 1 -2.965 -2.544l-1.255 -7.152a2 2 0 0 1 1.977 -2.304h13.999a2 2 0 0 1 1.977 2.304l-.349 1.989" /><path d="M10 14a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M19 16v6" /><path d="M22 19l-3 3l-3 -3" /></svg>',
-                    'position' => 7,
-                    'parent' => 'ecommerce'
-                ]
-            ]
-        );
-
-        HookAction::registerAdminPage(
-            'ecommerce.invoice',
-            [
-                'title' => trans('ecomm::content.invoice'),
-                'menu' => [
-                    'icon' => '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-invoice"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M19 12v7a1.78 1.78 0 0 1 -3.1 1.4a1.65 1.65 0 0 0 -2.6 0a1.65 1.65 0 0 1 -2.6 0a1.65 1.65 0 0 0 -2.6 0a1.78 1.78 0 0 1 -3.1 -1.4v-14a2 2 0 0 1 2 -2h7l5 5v4.25" /></svg>',
-                    'position' => 8,
-                    'parent' => 'ecommerce'
-                ]
-            ]
-        );
-
-        HookAction::registerAdminPage(
             'ecommerce.customers',
             [
                 'title' => trans('ecomm::content.customers'),
@@ -98,7 +59,6 @@ class MenuAction extends Action
                 ]
             ]
         );
-
 
         HookAction::registerAdminPage(
             'ecommerce.settings',
@@ -169,6 +129,12 @@ class MenuAction extends Action
             [
                 'title' => trans('ecomm::content.change_password'),
                 'key' => 'change-password',
+                // 'contents' => view()->exists('theme::profile.change-password.index') ? 'theme::profile.change-password.index' : 'ecomm::frontend.profile.change-password.index',
+                'icon' => 'fa fa-key',
+                'position' => 10,
+                'data' => [
+                    'user' => auth()->user()
+                ]
             ]
         );
 

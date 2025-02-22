@@ -11,8 +11,12 @@
 |
 */
 
-use Mojahid\Ecommerce\Http\Controllers\Backend\OrderController;
-use Mojahid\Ecommerce\Http\Controllers\Backend\SettingController;
+use Mojahid\Ecommerce\Http\Controllers\Backend\{
+    OrderController,
+    CustomerController,
+    InvoiceController,
+    SettingController
+};
 
 use Illuminate\Support\Facades\Route;
 
@@ -24,4 +28,13 @@ Route::jwResource(
     ]
 );
 
+Route::jwResource(
+    'ecommerce/customers',
+    CustomerController::class,
+    [
+        'name' => 'customers'
+    ]
+);
+
 Route::get('ecommerce/settings', [SettingController::class, 'index'])->name('admin.ecommerce.setting');
+

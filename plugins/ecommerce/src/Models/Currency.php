@@ -27,5 +27,10 @@ class Currency extends Model
     {
         return $query->where('is_default', true);
     }
+
+    public function scopeEnabled($query)
+    {
+        return $query->where('is_enabled', true);
+    }
     
 }
