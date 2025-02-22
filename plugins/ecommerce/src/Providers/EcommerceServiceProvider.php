@@ -29,7 +29,8 @@ use Mojahid\Ecommerce\Models\OrderItem;
 use Mojahid\Ecommerce\Models\ProductVariant;
 use Mojahid\Ecommerce\Http\Middleware\EcommerceTheme;
 use Illuminate\Support\Facades\Route;
-
+use TwigBridge\Facade\Twig;
+use Mojahid\Ecommerce\Extensions\TwigExtension;
 class EcommerceServiceProvider extends ServiceProvider
 {
     public array $bindings = [
@@ -41,6 +42,8 @@ class EcommerceServiceProvider extends ServiceProvider
     public function boot()
     {
         Route::pushMiddlewareToGroup('theme', EcommerceTheme::class);
+
+        Twig::addExtension(new TwigExtension());
 
         ActionRegister::register([
             EcommerceAction::class,

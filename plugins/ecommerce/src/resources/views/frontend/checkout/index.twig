@@ -409,7 +409,6 @@
     </svg>
 </div>
 <script>var code_langs = {'choose_province': '{{ trans('ecomm::content.choose_province') }}'};</script>
-{# <script src="{{ asset('jw-styles/plugins/juzaweb/ecommerce/assets/js/checkout.min.js') }}" type="text/javascript"></script> #}
 
 <script type="text/javascript">
     $(document).ajaxStart(function () {
@@ -443,21 +442,22 @@
     });
 </script>
 
-<script type="text/javascript">
+{# <script type="text/javascript">
     window.ecommerceConfig = {
         routes: {
             checkout: '{{ route('ecomm.checkout.store') }}',
         }
     };
-</script>
+</script> #}
 
-<script src="{{ asset('jw-styles/plugins/juzaweb/ecommerce/assets/js/checkout.js') }}"></script>
+{# <script src="{{ asset('jw-styles/plugins/juzaweb/ecommerce/assets/js/checkout.js') }}"></script> #}
+<script src="{{ asset('jw-styles/plugins/juzaweb/ecommerce/assets/js/checkout-draft-1.js') }}"></script>
 
 </body>
 </html>
 
 
-
+{% endblock %}
 
 
 

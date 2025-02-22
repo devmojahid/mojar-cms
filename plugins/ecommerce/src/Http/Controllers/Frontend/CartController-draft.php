@@ -87,9 +87,7 @@ class FrontendCartController extends FrontendController
         }
     }
 
-    /**
-     * Update item quantity (hook: cart.update).
-     */
+
     public function update(Request $request): JsonResponse
     {
         try {

@@ -25,7 +25,7 @@ class EcommerceAction extends Action
         );
 
         $this->addAction(
-            Action::INIT_ACTION, 
+            Action::INIT_ACTION,
             [$this, 'registerRoles']
         );
 
@@ -161,6 +161,7 @@ class EcommerceAction extends Action
             [
                 'callback' => [FrontendCartController::class, 'update'],
                 'method' => 'POST',
+                'name' => 'cart.update'
             ]
         );
 

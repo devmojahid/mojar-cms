@@ -1,6 +1,658 @@
 {% extends 'cms::layouts.frontend' %}
 
 {% block content %}
+<div class="container py-4">
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white py-3">
+                    <h3 class="mb-0 h4">{{ trans('ecomm::content.shopping_cart') }}</h3>
+                </div>
+                <div class="card-body" id="cartItems">
+                    {% if cart.totalItems() > 0 %}
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>{{ trans('ecomm::content.product') }}</th>
+                                        <th>{{ trans('ecomm::content.price') }}</th>
+                                        <th>{{ trans('ecomm::content.quantity') }}</th>
+                                        <th>{{ trans('ecomm::content.total') }}</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cartItemsList">
+                                    {% for item in cart.getCollectionItems() %}
+                                        <tr data-item-id="{{ item.post_id }}" data-item-type="{{ item.type|default('product') }}">
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0">
+                                                        <img
+                                                            class="rounded"
+                                                            style="width: 80px !important; height: 80px !important; object-fit: cover;"
+                                                            src="{{ upload_url(item.thumbnail) }}"
+                                                            alt="{{ item.title }}"
+                                                        >
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h5 class="mb-1">{{ item.title }}</h5>
+                                                        {% if item.sku_code %}
+                                                            <span class="badge bg-light text-dark">SKU: {{ item.sku_code }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="item-price">{{ ecom_price_with_unit(item.price) }}</td>
+                                            <td>
+                                                <div class="quantity-control d-flex align-items-center" style="width: 120px">
+                                                    <button class="btn btn-outline-secondary btn-sm quantity-btn" data-action="decrease">
+                                                        <i class="fa fa-minus"></i>
+                                                    </button>
+                                                    <input
+                                                        type="number"
+                                                        class="form-control form-control-sm mx-2 text-center quantity-input"
+                                                        value="{{ item.quantity }}"
+                                                        min="1"
+                                                        data-id="{{ item.post_id }}"
+                                                        data-type="{{ item.type|default('product') }}"
+                                                    >
+                                                    <button class="btn btn-outline-secondary btn-sm quantity-btn" data-action="increase">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                            <td class="item-total">{{ ecom_price_with_unit(item.line_price) }}</td>
+                                            <td>
+                                                <button
+                                                    class="btn btn-outline-danger btn-sm remove-item"
+                                                    data-id="{{ item.post_id }}"
+                                                    data-type="{{ item.type|default('product') }}"
+                                                >
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="empty-cart-state text-center py-5">
+                            <div class="empty-cart-icon mb-4">
+                                <i class="fa fa-shopping-cart fa-4x text-muted"></i>
+                            </div>
+                            <h4 class="mb-3">{{ trans('ecomm::content.cart_empty') }}</h4>
+                            <a href="/" class="btn btn-primary">
+                                {{ trans('ecomm::content.continue_shopping') }}
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white py-3">
+                    <h3 class="mb-0 h4">{{ trans('ecomm::content.order_summary') }}</h3>
+                </div>
+                <div class="card-body" id="cartSummary">
+                    <div class="summary-item d-flex justify-content-between mb-3">
+                        <span>{{ trans('ecomm::content.subtotal') }}</span>
+                        <span class="subtotal-price">{{ ecom_price_with_unit(cart.totalPrice()) }}</span>
+                    </div>
+                    {% if cart.getDiscount() > 0 %}
+                        <div class="summary-item d-flex justify-content-between mb-3 discount-row">
+                            <span>{{ trans('ecomm::content.discount') }}</span>
+                            <span class="discount-amount text-success">
+                                -{{ ecom_price_with_unit(cart.getDiscount()) }}
+                            </span>
+                        </div>
+                    {% endif %}
+                    <hr>
+                    <div class="summary-item d-flex justify-content-between mb-4">
+                        <strong>{{ trans('ecomm::content.total') }}</strong>
+                        <strong class="total-price">
+                            {{ ecom_price_with_unit(cart.totalPrice() - cart.getDiscount()) }}
+                        </strong>
+                    </div>
+
+                    {% if cart.totalItems() > 0 %}
+                        <a href="/checkout" class="btn btn-primary w-100">
+                            {{ trans('ecomm::content.proceed_to_checkout') }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Toast Container #}
+<div class="toast-container position-fixed top-0 end-0 p-3"></div>
+
+<script>
+    const CartState = {
+        items: new Map(),
+        totals: {
+            subtotal: 0,
+            discount: 0,
+            total: 0
+        },
+
+        init() {
+            document.querySelectorAll('#cartItemsList tr').forEach(row => {
+                const itemId = row.dataset.itemId;
+                const itemType = row.dataset.itemType;
+                this.items.set(`${itemType}_${itemId}`, {
+                    id: itemId,
+                    type: itemType,
+                    quantity: parseInt(row.querySelector('.quantity-input').value)
+                });
+            });
+        },
+
+        updateItem(itemKey, updates) {
+            const item = this.items.get(itemKey);
+            if (item) {
+                Object.assign(item, updates);
+                this.notifyListeners('itemUpdated', { itemKey, updates });
+            }
+        },
+
+        removeItem(itemKey) {
+            if (this.items.delete(itemKey)) {
+                this.notifyListeners('itemRemoved', { itemKey });
+            }
+        },
+
+        listeners: new Set(),
+
+        subscribe(listener) {
+            this.listeners.add(listener);
+            return () => this.listeners.delete(listener);
+        },
+
+        notifyListeners(event, data) {
+            this.listeners.forEach(listener => listener(event, data));
+        }
+    };
+
+    // Toast Manager
+    const ToastManager = {
+        show(type, message) {
+            const toastElement = document.createElement('div');
+            toastElement.className = `toast align-items-center border-0 ${type === 'success' ? 'bg-success' : 'bg-danger'} text-white`;
+            toastElement.setAttribute('role', 'alert');
+            toastElement.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">
+                        ${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            `;
+
+            document.querySelector('.toast-container').appendChild(toastElement);
+            const toast = new bootstrap.Toast(toastElement, { delay: 3000 });
+            toast.show();
+
+            toastElement.addEventListener('hidden.bs.toast', () => {
+                toastElement.remove();
+            });
+        }
+    };
+
+    // Cart UI
+    const CartUI = {
+        init() {
+            this.bindEvents();
+            CartState.init();
+        },
+
+        bindEvents() {
+            // Quantity controls
+            document.addEventListener('click', e => {
+                if (e.target.closest('.quantity-btn')) {
+                    const btn = e.target.closest('.quantity-btn');
+                    const action = btn.dataset.action;
+                    const input = btn.closest('.quantity-control').querySelector('.quantity-input');
+                    this.handleQuantityChange(input, action);
+                }
+            });
+
+            // Direct quantity input
+            document.addEventListener('change', e => {
+                if (e.target.matches('.quantity-input')) {
+                    this.handleQuantityChange(e.target);
+                }
+            });
+
+            // Remove item
+            document.addEventListener('click', e => {
+                if (e.target.closest('.remove-item')) {
+                    const btn = e.target.closest('.remove-item');
+                    this.handleRemoveItem(btn);
+                }
+            });
+        },
+
+        async handleQuantityChange(input, action) {
+            const currentValue = parseInt(input.value);
+            let newValue = currentValue;
+
+            if (action === 'increase') newValue++;
+            else if (action === 'decrease') newValue = Math.max(1, currentValue - 1);
+
+            if (newValue === currentValue) return;
+
+            const row = input.closest('tr');
+            const itemId = input.dataset.id;
+            const itemType = input.dataset.type;
+
+            try {
+                this.setLoading(row, true);
+                const response = await this.updateCartItem(itemId, itemType, newValue);
+
+                if (response.success) {
+                    input.value = newValue;
+                    this.updateCartDisplay(response.cart.data);
+                    ToastManager.show('success', response.message);
+                } else {
+                    input.value = currentValue;
+                    ToastManager.show('error', response.message);
+                }
+            } catch (error) {
+                console.error('Cart update error:', error);
+                input.value = currentValue;
+                ToastManager.show('error', '{{ trans("ecomm::content.server_error") }}');
+            } finally {
+                this.setLoading(row, false);
+            }
+        },
+
+        async handleRemoveItem(btn) {
+            const row = btn.closest('tr');
+            const itemId = btn.dataset.id;
+            const itemType = btn.dataset.type;
+
+            try {
+                this.setLoading(row, true);
+                const response = await this.removeCartItem(itemId, itemType);
+
+                if (response.success) {
+                    row.style.opacity = '0';
+                    setTimeout(() => {
+                        row.remove();
+                        this.updateCartDisplay(response.cart.data);
+
+                        if (response.cart.data.total_items === 0) {
+                            this.showEmptyState();
+                        }
+                    }, 300);
+
+                    ToastManager.show('success', response.message);
+                } else {
+                ToastManager.show('error', response.message);
+                }
+            } catch (error) {
+                console.error('Remove item error:', error);
+                ToastManager.show('error', '{{ trans("ecomm::content.server_error") }}');
+            } finally {
+                this.setLoading(row, false);
+            }
+        },
+
+        async updateCartItem(itemId, type, quantity) {
+            const response = await fetch('{{ url("ajax/cart/update") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ post_id: itemId, type, quantity })
+            });
+            return response.json();
+        },
+
+        async removeCartItem(itemId, type) {
+            const response = await fetch('{{ url("ajax/cart/remove-item") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ post_id: itemId, type })
+            });
+            return response.json();
+        },
+
+        updateCartDisplay(cartData) {
+            // Update subtotal
+            const subtotalElement = document.querySelector('.subtotal-price');
+            if (subtotalElement) {
+                subtotalElement.textContent = cartData.pricing.subtotal_formatted;
+            }
+
+            // Handle discount display
+            const discountRow = document.querySelector('.discount-row');
+            const discountAmount = document.querySelector('.discount-amount');
+            if (cartData.pricing.discount > 0) {
+                if (discountRow) discountRow.style.display = '';
+                if (discountAmount) {
+                    discountAmount.textContent = '-' + cartData.pricing.discount_formatted;
+                }
+            } else {
+                if (discountRow) discountRow.style.display = 'none';
+            }
+
+            // Update total price
+            const totalElement = document.querySelector('.total-price');
+            if (totalElement) {
+                totalElement.textContent = cartData.pricing.total_formatted;
+            }
+
+            // Update cart count in header if exists
+            this.updateCartCounter(cartData.total_items);
+        },
+
+        updateCartCounter(count) {
+            const cartCounter = document.querySelector('.cart-counter');
+            if (cartCounter) {
+                cartCounter.textContent = count;
+                cartCounter.style.display = count > 0 ? '' : 'none';
+            }
+        },
+
+        showEmptyState() {
+            const cartItems = document.getElementById('cartItems');
+            if (cartItems) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart-state text-center py-5">
+                        <div class="empty-cart-icon mb-4">
+                            <i class="fa fa-shopping-cart fa-4x text-muted"></i>
+                        </div>
+                        <h4 class="mb-3">{{ trans('ecomm::content.cart_empty') }}</h4>
+                        <a href="/" class="btn btn-primary">
+                            {{ trans('ecomm::content.continue_shopping') }}
+                        </a>
+                    </div>
+                `;
+            }
+
+            // Hide checkout button
+            const checkoutButton = document.querySelector('a[href="/checkout"]');
+            if (checkoutButton) {
+                checkoutButton.style.display = 'none';
+            }
+        },
+
+        setLoading(element, isLoading) {
+            if (isLoading) {
+                element.style.opacity = '0.6';
+                element.style.pointerEvents = 'none';
+
+                const overlay = document.createElement('div');
+                overlay.className = 'loading-overlay';
+                overlay.innerHTML = '<div class="spinner"></div>';
+                element.appendChild(overlay);
+            } else {
+                element.style.opacity = '';
+                element.style.pointerEvents = '';
+                const overlay = element.querySelector('.loading-overlay');
+                if (overlay) overlay.remove();
+            }
+        }
+    };
+
+    // Add to Cart Button Handler
+    class AddToCartButton {
+        constructor(button) {
+            this.button = button;
+            this.originalText = button.innerHTML;
+            this.init();
+        }
+
+        init() {
+            this.button.addEventListener('click', (e) => this.handleClick(e));
+        }
+
+        async handleClick(e) {
+            e.preventDefault();
+            if (this.button.disabled) return;
+
+            const productId = this.button.dataset.id;
+            const type = this.button.dataset.type || 'product';
+            const quantity = parseInt(this.button.dataset.qty) || 1;
+
+            try {
+                this.setLoading(true);
+                const response = await this.addToCart(productId, type, quantity);
+
+                if (response.success) {
+                    ToastManager.show('success', response.message);
+                    CartUI.updateCartDisplay(response.cart.data);
+                } else {
+                    ToastManager.show('error', response.message);
+                }
+            } catch (error) {
+                console.error('Add to cart error:', error);
+                ToastManager.show('error', '{{ trans("ecomm::content.server_error") }}');
+            } finally {
+                this.setLoading(false);
+            }
+        }
+
+        async addToCart(productId, type, quantity) {
+            const response = await fetch('{{ url("ajax/cart/add-to-cart") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ post_id: productId, type, quantity })
+            });
+            return response.json();
+        }
+
+        setLoading(isLoading) {
+            this.button.disabled = isLoading;
+            this.button.innerHTML = isLoading ?
+                '<span class="spinner-border spinner-border-sm me-2"></span>Adding...' :
+                this.originalText;
+        }
+    }
+
+    // Utility Functions
+    const CartUtils = {
+        debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        },
+
+        formatPrice(amount, currency = '') {
+            return `${currency}${parseFloat(amount).toFixed(2)}`;
+        },
+
+        validateQuantity(value) {
+            const quantity = parseInt(value);
+            return !isNaN(quantity) && quantity > 0 ? quantity : 1;
+        }
+    };
+
+    // Initialize everything when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+        // Initialize Cart UI=
+        CartUI.init();
+
+        // Initialize all Add to Cart buttons on the page
+        document.querySelectorAll('.btn-add-to-cart').forEach(button => {
+            new AddToCartButton(button);
+        });
+
+        // Handle quantity input validation
+        document.querySelectorAll('.quantity-input').forEach(input => {
+            input.addEventListener('input', CartUtils.debounce((e) => {
+                const value = CartUtils.validateQuantity(e.target.value);
+                if (value !== parseInt(e.target.value)) {
+                    e.target.value = value;
+                }
+            }, 300));
+        });
+    });
+
+    // Handle errors globally
+    window.addEventListener('error', (event) => {
+        ToastManager.show('error', '{{ trans("ecomm::content.unexpected_error") }}');
+    });
+</script>
+
+{# style #}
+
+<style>
+    /* Cart Styles */
+    .card {
+        border: none;
+        transition: box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .quantity-control {
+        border-radius: 0.25rem;
+        overflow: hidden;
+    }
+
+    .quantity-control .btn {
+        padding: 0.25rem 0.5rem;
+        border: 1px solid #dee2e6;
+        background: #f8f9fa;
+        transition: all 0.2s ease;
+    }
+
+    .quantity-control .btn:hover {
+        background: #e9ecef;
+    }
+
+    .quantity-control .form-control {
+        border: 1px solid #dee2e6;
+        border-left: none;
+        border-right: none;
+    }
+
+    .quantity-control .form-control:focus {
+        box-shadow: none;
+        border-color: #dee2e6;
+    }
+
+    .remove-item {
+        transition: all 0.2s ease;
+    }
+
+    .remove-item:hover {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .empty-cart-state {
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    .cart-item-row {
+        transition: all 0.3s ease;
+    }
+
+    .cart-item-row:hover {
+        background-color: #f8f9fa;
+    }
+
+    .summary-item {
+        padding: 0.5rem 0;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+        from { transform: translateX(100%); }
+        to { transform: translateX(0); }
+    }
+
+    /* Loading overlay */
+    .loading-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .spinner {
+        width: 2rem;
+        height: 2rem;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Toast improvements */
+    .toast-container {
+        z-index: 1050;
+    }
+
+    .toast {
+        min-width: 250px;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .card {
+            border-radius: 0;
+        }
+
+        .quantity-control {
+            width: 100px !important;
+        }
+
+        .table-responsive {
+            margin: 0 -1rem;
+        }
+
+        .card-body {
+            padding: 1rem;
+        }
+    }
+</style>
+
+{% endblock %}
+
+{# {% extends 'cms::layouts.frontend' %}
+
+{% block content %}
 <div class="container">
     <div class="row">
         <div class="col-md-8">
@@ -9,7 +661,7 @@
                     <h3>{{ trans('ecomm::content.shopping_cart') }}</h3>
                 </div>
                 <div class="card-body">
-                    {% if cart.items > 0 %}
+                    {% if cart.totalItems() > 0 %}
                         <table class="table">
                             <thead>
                                 <tr>
@@ -21,11 +673,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for item in cart.items %}
+                                {% for item in cart.getCollectionItems() %}
                                     <tr>
                                         <td>
                                             <div class="d-flex">
-                                                <img  style="width: 120px !important; height: auto !important; margin-right: 10px;" src="{{ upload_url(item.thumbnail) }}" alt="{{ item.title }}" class="img-thumbnail mr-3">
+                                                <img
+                                                    style="width: 80px; height: auto; margin-right: 10px;"
+                                                    src="{{ upload_url(item.thumbnail) }}"
+                                                    alt="{{ item.title }}"
+                                                    class="img-thumbnail mr-3"
+                                                >
                                                 <div>
                                                     <h5>{{ item.title }}</h5>
                                                     {% if item.sku_code %}
@@ -34,17 +691,38 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>{{ item.price }}</td>
+                                        <td>
+                                            {{ ecom_price_with_unit(item.price) }}
+                                        </td>
                                         <td>
                                             <div class="input-group" style="width: 130px">
-                                                <button class="btn btn-outline-secondary btn-sm quantity-decrease" type="button">-</button>
-                                                <input type="number" class="form-control form-control-sm text-center quantity-input" value="{{ item.quantity }}" min="1" data-id="{{ item.id }}">
-                                                <button class="btn btn-outline-secondary btn-sm quantity-increase" type="button">+</button>
+                                                <button
+                                                    class="btn btn-outline-secondary btn-sm quantity-decrease"
+                                                    type="button"
+                                                >-</button>
+                                                <input
+                                                    type="number"
+                                                    class="form-control form-control-sm text-center quantity-input"
+                                                    value="{{ item.quantity }}"
+                                                    min="1"
+                                                    data-id="{{ item.post_id }}"
+                                                    data-type="{{ item.type|default('product') }}"
+                                                >
+                                                <button
+                                                    class="btn btn-outline-secondary btn-sm quantity-increase"
+                                                    type="button"
+                                                >+</button>
                                             </div>
                                         </td>
-                                        <td>{{ item.line_price }}</td>
                                         <td>
-                                            <button class="btn btn-danger btn-sm remove-item" data-id="{{ item.id }}">
+                                            {{ ecom_price_with_unit(item.line_price) }}
+                                        </td>
+                                        <td>
+                                            <button
+                                                class="btn btn-danger btn-sm remove-item"
+                                                data-id="{{ item.post_id }}"
+                                                data-type="{{ item.type|default('product') }}"
+                                            >
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </td>
@@ -70,26 +748,34 @@
                 <div class="card-header">
                     <h3>{{ trans('ecomm::content.order_summary') }}</h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body" id="cartSummary">
                     <table class="table table-borderless">
                         <tr>
                             <td>{{ trans('ecomm::content.subtotal') }}</td>
-                            <td class="text-right">{{ cart.total_price }}</td>
+                            <td class="text-right subtotal-price">
+                                {{ ecom_price_with_unit(cart.totalPrice()) }}
+                            </td>
                         </tr>
-                        {% if cart.discount %}
-                            <tr>
+                        {% if cart.getDiscount() > 0 %}
+                            <tr class="discount-row">
                                 <td>{{ trans('ecomm::content.discount') }}</td>
-                                <td class="text-right">-{{ cart.discount }}</td>
+                                <td class="text-right discount-amount">
+                                    -{{ ecom_price_with_unit(cart.getDiscount()) }}
+                                </td>
                             </tr>
                         {% endif %}
                         <tr>
                             <td><strong>{{ trans('ecomm::content.total') }}</strong></td>
-                            <td class="text-right"><strong>{{ cart.totalPrice }}</strong></td>
+                            <td class="text-right">
+                                <strong class="total-price">
+                                    {{ ecom_price_with_unit(cart.totalPrice() - cart.getDiscount()) }}
+                                </strong>
+                            </td>
                         </tr>
                     </table>
 
-                    {% if cart.total_items > 0 %}
-                        <a href="{{ route('checkout') }}" class="btn btn-primary btn-block">
+                    {% if cart.totalItems() > 0 %}
+                        <a href="/checkout" class="btn btn-primary btn-block">
                             {{ trans('ecomm::content.proceed_to_checkout') }}
                         </a>
                     {% endif %}
@@ -99,62 +785,225 @@
     </div>
 </div>
 
-<script>
+{# Toast container for user feedback #}
+{# <div class="cart-toast-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div> #}
+
+{# jquery #}
+{# <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> #}
+{# <script>
+
+function showCartToast(type, message) {
+    const alertDiv = document.createElement('div');
+    alertDiv.classList.add('alert', 'fade', 'show');
+    alertDiv.classList.add(type === 'success' ? 'alert-success' : 'alert-danger');
+    alertDiv.style.cssText = 'min-width: 250px; margin-bottom: 5px; opacity: 0; transition: opacity 0.3s ease-in-out;';
+    alertDiv.innerHTML = message;
+
+    const container = document.querySelector('.cart-toast-container');
+    container.appendChild(alertDiv);
+
+    // Trigger reflow for animation
+    alertDiv.offsetHeight;
+    alertDiv.style.opacity = '1';
+
+    setTimeout(() => {
+        alertDiv.style.opacity = '0';
+        setTimeout(() => alertDiv.remove(), 300);
+    }, 3000);
+}
+
 $(document).ready(function() {
-    // Update quantity
-    $('.quantity-input').change(function() {
-        let id = $(this).data('id');
-        let quantity = $(this).val();
+    // Handle quantity changes
+    $('.quantity-input').on('change', function() {
+        let $input = $(this);
+        let postId = $input.data('id');
+        let type = $input.data('type') || 'product';
+        let quantity = $input.val();
+        let $row = $input.closest('tr');
 
         $.ajax({
             url: '{{ url('ajax/cart/update') }}',
             type: 'POST',
             data: {
-                id: id,
+                post_id: postId,
+                type: type,
                 quantity: quantity,
+                content: 'cart',
                 _token: '{{ csrf_token() }}'
             },
             success: function(response) {
-                if (response.status === 'success') {
-                    location.reload();
+                if (response.success) {
+                    // Get the item from nested structure
+                    let itemKey = `${type}_${postId}`;
+                    let updatedItem = response.cart.data.items[itemKey];
+
+                    if (updatedItem) {
+                        // Update line price for this item
+                        $row.find('.product-price').text(updatedItem.pricing.line_price_formatted);
+                    }
+
+                    // Update cart totals
+                    $('.subtotal-price').html(response.cart.data.pricing.subtotal_formatted);
+
+                    if (response.cart.data.pricing.discount > 0) {
+                        $('.discount-row').show();
+                        $('.discount-amount').html('-' + response.cart.data.pricing.discount_formatted);
+                    } else {
+                        $('.discount-row').hide();
+                    }
+
+                    // Update final total
+                    $('.total-price').html(response.cart.data.pricing.total_formatted);
+
+                    showCartToast('success', response.message);
+                } else {
+                    showCartToast('error', response.message || '{{ trans("ecomm::content.error_updating_cart") }}');
+                    // Reset quantity on error
+                    $input.val($input.data('original-value'));
                 }
+            },
+            error: function(xhr) {
+                showCartToast('error', '{{ trans("ecomm::content.server_error") }}');
+                // Reset quantity on error
+                $input.val($input.data('original-value'));
             }
         });
     });
 
-    // Remove item
-    $('.remove-item').click(function() {
-        let id = $(this).data('id');
-
-        $.ajax({
-            url: '{{ url('ajax/cart/remove-item') }}',
-            type: 'DELETE',
-            data: {
-                id: id,
-                _token: '{{ csrf_token() }}'
-            },
-            success: function(response) {
-                if (response.status === 'success') {
-                    location.reload();
-                }
-            }
-        });
+    // Store original values when focusing input
+    $('.quantity-input').on('focus', function() {
+        $(this).data('original-value', $(this).val());
     });
 
-    // Quantity buttons
+    // Increment/decrement buttons
     $('.quantity-decrease').click(function() {
-        let input = $(this).next('.quantity-input');
-        let value = parseInt(input.val());
+        let $input = $(this).closest('.input-group').find('.quantity-input');
+        let value = parseInt($input.val(), 10);
         if (value > 1) {
-            input.val(value - 1).change();
+            $input.val(value - 1).trigger('change');
         }
     });
 
     $('.quantity-increase').click(function() {
-        let input = $(this).prev('.quantity-input');
-        input.val(parseInt(input.val()) + 1).change();
+        let $input = $(this).closest('.input-group').find('.quantity-input');
+        let value = parseInt($input.val(), 10);
+        $input.val(value + 1).trigger('change');
+    });
+
+    // Handle remove item
+    $('.remove-item').click(function() {
+        let $row = $(this).closest('tr');
+        let postId = $(this).data('id');
+        let type = $(this).data('type') || 'product';
+
+        $.ajax({
+            url: '{{ url('ajax/cart/remove-item') }}',
+            type: 'POST',
+            data: {
+                post_id: postId,
+                type: type,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                console.log('Remove response:', response); // For debugging
+                if (response.success) {
+                    // First remove the row
+                    $row.fadeOut(300, function() {
+                        $(this).remove();
+                    });
+
+                    // Then update totals
+                    if (response.cart && response.cart.data) {
+                        let pricing = response.cart.data.pricing;
+
+                        // Update subtotal
+                        $('.subtotal-price').html(pricing.subtotal_formatted);
+
+                        // Handle discount
+                        if (pricing.discount > 0) {
+                            $('.discount-row').show();
+                            $('.discount-amount').html('-' + pricing.discount_formatted);
+                        } else {
+                            $('.discount-row').hide();
+                        }
+
+                        // Update final total
+                        $('.total-price').html(pricing.total_formatted);
+
+                        // Handle empty cart
+                        if (response.cart.data.total_items === 0) {
+                            $('.card-body').html(`
+                                <div class="text-center py-5">
+                                    <i class="fa fa-shopping-cart fa-3x text-muted mb-3"></i>
+                                    <h4>{{ trans('ecomm::content.cart_empty') }}</h4>
+                                    <a href="/" class="btn btn-primary mt-3">
+                                        {{ trans('ecomm::content.continue_shopping') }}
+                                    </a>
+                                </div>
+                            `);
+                        }
+                    }
+
+                    showCartToast('success', response.message);
+                } else {
+                    showCartToast('error', response.message || '{{ trans("ecomm::content.error_removing_item") }}');
+                }
+            },
+            error: function(xhr) {
+                console.error('Remove error:', xhr); // For debugging
+                showCartToast('error', '{{ trans("ecomm::content.server_error") }}');
+            }
+        });
+    });
+});
+</script>
+{% endblock %} #}
+
+
+
+
+
+{# For your product detail page or listing, you might have a button: #}
+
+{#
+<button
+    class="btn btn-primary btn-add-to-cart"
+    data-id="{{ product.id }}"
+    data-type="product"
+    data-qty="1"  <!-- or an <input> for quantity -->
+>
+    {{ trans('ecomm::content.add_to_cart') }}
+</button>
+
+<script>
+$('.btn-add-to-cart').click(function() {
+    let postId   = $(this).data('id');
+    let type     = $(this).data('type') || 'product';
+    let quantity = $(this).data('qty') || 1;
+
+    $.ajax({
+        url: "{{ jw_ajax('cart.add-to-cart') }}",
+        type: 'POST',
+        data: {
+            post_id: postId,
+            type: type,
+            quantity: quantity,
+            _token: '{{ csrf_token() }}'
+        },
+        success: function(response) {
+            if (response.success) {
+                // show toast
+                showCartToast('success', response.message || '{{ trans("ecomm::content.added_to_cart_successfully") }}');
+                // optionally refresh a cart icon badge or something
+            } else {
+                showCartToast('error', response.message || '{{ trans("ecomm::content.error_adding_to_cart") }}');
+            }
+        },
+        error: function() {
+            showCartToast('error', '{{ trans("ecomm::content.server_error") }}');
+        }
     });
 });
 </script>
 
-{% endblock %}
+ #}

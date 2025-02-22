@@ -26,10 +26,9 @@ class AddToCartRequest extends FormRequest
                 'integer'
             ],
             'type' => [
-                'bail', 
+                'bail',
                 'required',
-                'string',
-                'in:products,events'
+                'string'
             ],
             'quantity' => [
                 'bail',

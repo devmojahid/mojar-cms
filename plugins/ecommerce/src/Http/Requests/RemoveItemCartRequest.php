@@ -13,15 +13,13 @@ class RemoveItemCartRequest extends FormRequest
         return [
             'post_id' => [
                 'bail',
-                'required', 
-                'integer',
-                Rule::exists(Post::class, 'id')->where('type', 'product'),
+                'required',
+                'integer'
             ],
             'type' => [
                 'bail',
                 'required',
-                'string',
-                'in:product,event'
+                'string'
             ]
         ];
     }

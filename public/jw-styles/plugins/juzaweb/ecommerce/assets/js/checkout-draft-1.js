@@ -338,7 +338,7 @@ window.Juzaweb = window.Juzaweb || {};
                         // console.log('Abandoned checkout updated');
                     }
                 });
-            }, 3000);
+            }, 1000);
         },
 
         /*************************************************

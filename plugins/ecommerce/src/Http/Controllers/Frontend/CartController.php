@@ -115,29 +115,45 @@ class CartController extends FrontendController
         );
     }
 
-    public function removeItem(RemoveItemCartRequest $request): JsonResponse|RedirectResponse
+    public function removeItem(RemoveItemCartRequest $request): JsonResponse
     {
-        $postId = $request->input('post_id');
-        $type = $request->input('type', 'product');
-
-        $cart = $this->cartManager->find();
-
-        DB::beginTransaction();
         try {
+            $postId = $request->input('post_id');
+            $type = $request->input('type', 'product');
+
+            $cart = $this->cartManager->find();
+
+            DB::beginTransaction();
             $cart->removeItem($postId, $type);
             DB::commit();
+
+            $cartResource = new CartResource($cart);
+
+            return Response::json([
+                'success' => true,
+                'message' => trans('ecomm::content.item_removed_successfully'),
+                'cart' => [
+                    'data' => [
+                        'total_items' => $cart->totalItems(),
+                        'pricing' => [
+                            'subtotal' => $cart->totalPrice(),
+                            'subtotal_formatted' => ecom_price_with_unit($cart->totalPrice()),
+                            'discount' => $cart->getDiscount(),
+                            'discount_formatted' => ecom_price_with_unit($cart->getDiscount()),
+                            'total' => $cart->totalPrice() - $cart->getDiscount(),
+                            'total_formatted' => ecom_price_with_unit($cart->totalPrice() - $cart->getDiscount())
+                        ]
+                    ]
+                ]
+            ])->withCookie(Cookie::make('jw_cart', $cart->getCode(), 43200));
+
         } catch (\Exception $e) {
             DB::rollBack();
-            report($e);
-            return $this->error([
-                'message' => $e->getMessage(),
-            ]);
+            return Response::json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
         }
-
-        return $this->responseCartWithCookie(
-            $cart,
-            trans('ecomm::content.item_removed_successfully')
-        );
     }
 
     public function bulkUpdate(
@@ -185,19 +201,41 @@ class CartController extends FrontendController
             'cart' => new CartResource($cart),
         ]);
     }
-    public function update(Request $request)
-    {
-        $key = $request->input('key');
-        $quantity = $request->input('quantity');
-        // TODO: Your logic. Example if using session
-        $cart = $this->cartManager->find();
-        $cart->update($key, $quantity);
-        return $this->success([
-            'message' => trans('ecomm::content.cart_updated_successfully'),
-            'cart' => new CartResource($cart),
-        ]);
-    }
 
+    public function update(Request $request): JsonResponse
+    {
+        try {
+            $postId = $request->input('post_id');
+            $type = $request->input('type', 'product');
+            $quantity = (int) $request->input('quantity', 1);
+
+            $cart = $this->cartManager->find();
+
+            DB::beginTransaction();
+            $cart->addOrUpdate($postId, $type, $quantity);
+            DB::commit();
+
+            $cartResource = new CartResource($cart);
+
+            return Response::json([
+                'success' => true,
+                'message' => trans('ecomm::content.cart_updated_successfully'),
+                'cart' => [
+                    'data' => $cartResource->toArray($request),
+                    'total_price' => ecom_price_with_unit($cart->totalPrice()),
+                    'discount' => ecom_price_with_unit($cart->getDiscount()),
+                    'final_total' => ecom_price_with_unit($cart->totalPrice() - $cart->getDiscount())
+                ]
+            ])->withCookie(Cookie::make('jw_cart', $cart->getCode(), 43200));
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return Response::json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
 
     public function getCartItems(): JsonResponse
     {
