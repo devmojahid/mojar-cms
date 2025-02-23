@@ -1,0 +1,305 @@
+/*************************************************************
+ * Example Improved Checkout CSS
+ * Keep existing class & ID names. Mobile-first approach.
+ *************************************************************/
+
+/* 1) General resets & typography */
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
+    color: #333;
+    background-color: #f9f9f9;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #0275d8;
+  }
+  a:hover {
+    color: #025aa5;
+  }
+  
+  /* 2) Wrapper & global spacing */
+  .wrap {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  
+  /* Make sure images never overflow their container */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* 3) Headings & section titles */
+  .section__title,
+  h2.section__title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+    display: flex;
+    align-items: center;
+  }
+  .section__title--icon {
+    margin-right: 0.5rem;
+  }
+  
+  /* 4) Container layout: sidebar vs main (desktop) */
+  .sidebar,
+  .main {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  /* 
+     Use a media query so that on larger screens,
+     the .sidebar is on the right (or left) and
+     the .main is on the left (or right).
+  */
+  @media (min-width: 992px) {
+    .sidebar,
+    .main {
+      display: inline-block;
+      vertical-align: top;
+    }
+    .sidebar {
+      width: 33%;
+      padding-right: 1rem;
+    }
+    .main {
+      width: 65%;
+      padding-left: 1rem;
+    }
+  }
+  
+  /* 5) Sidebar styling */
+  .sidebar {
+    background-color: #fff;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    padding: 1rem;
+  }
+  .sidebar_header h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  hr.full_width {
+    margin: 0.5rem 0 1rem;
+  }
+  .order-summary--product-list table.product-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .product.product-has-image {
+    border-bottom: 1px solid #eee;
+    padding: 0.75rem 0;
+  }
+  .product-thumbnail__wrapper img {
+    border-radius: 4px;
+  }
+  .product-thumbnail__quantity {
+    background: #777;
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border-radius: 50%;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+  }
+  
+  /* 6) Discount code & totals */
+  .order-summary--discount {
+    margin-top: 1rem;
+  }
+  .discount_code {
+    height: 2.4rem;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+  }
+  .btn.event-voucher-apply {
+    font-size: 0.9rem;
+  }
+  
+  .total-line {
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+  }
+  .total-line-name {
+    color: #666;
+  }
+  .total-line-price,
+  .total-line-shipping,
+  .total-line-subprice {
+    font-weight: 600;
+  }
+  .total-line-total {
+    font-size: 1rem;
+    border-top: 1px solid #ddd;
+    padding-top: 0.75rem;
+  }
+  
+  /* “Back to cart” and “Order” buttons in sidebar (desktop) */
+  .field__input-btn-wrapper.mt10 {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .previous-link {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  .previous-link i {
+    margin-right: 0.25rem;
+  }
+  .btn.btn-primary.btn-checkout {
+    background-color: #0275d8;
+    color: #fff;
+    border: none;
+    font-size: 0.95rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .btn.btn-primary.btn-checkout:hover {
+    background-color: #025aa5;
+  }
+  
+  /* 7) Main content area */
+  .main_header,
+  .main_footer {
+    margin-bottom: 1rem;
+  }
+  .main_header .logo {
+    margin-bottom: 1rem;
+  }
+  .main_content .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -0.5rem;
+  }
+  .col-md-6,
+  .col-lg-6 {
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+  @media (min-width: 768px) {
+    .col-md-6 {
+      width: 50%;
+    }
+  }
+  @media (min-width: 992px) {
+    .col-lg-6 {
+      width: 50%;
+    }
+  }
+  
+  /* 8) Form elements & sections */
+  .section {
+    background-color: #fff;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+  .field__label {
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+    display: inline-block;
+    color: #666;
+  }
+  .field__input-wrapper {
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .field__input {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 2.6rem;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    color: #333;
+  }
+  .field__input--select {
+    appearance: none;
+    background: #fff url("data:image/svg+xml;charset=UTF-8,<svg ...>") no-repeat right 0.75rem center/1em;
+  }
+  .field__input:focus {
+    outline: none;
+    border-color: #0275d8;
+  }
+  .form-group.has-error .field__input {
+    border-color: #d9534f;
+  }
+  .help-block.with-errors {
+    color: #d9534f;
+    font-size: 0.85rem;
+  }
+  
+  /* 9) Payment & shipping method blocks */
+  .payment-methods .content-box {
+    border: 1px solid #ddd;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+  }
+  .radio-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+  }
+  .radio__input {
+    margin-right: 0.5rem;
+  }
+  .radio__label__primary {
+    font-weight: 600;
+  }
+  .payment-icon-fa {
+    font-size: 1.2rem;
+    margin-left: 0.25rem;
+  }
+  .content-box__row--secondary {
+    background: #fafafa;
+    padding: 1rem;
+    border-top: 1px solid #ddd;
+    font-size: 0.9rem;
+  }
+  
+  /* 10) Hide/show elements */
+  .hide {
+    display: none !important;
+  }
+  .visible-small-device {
+    display: none;
+  }
+  .hidden-small-device {
+    display: inline-block;
+  }
+  @media (max-width: 767px) {
+    .visible-small-device {
+      display: inline-block !important;
+    }
+    .hidden-small-device {
+      display: none !important;
+    }
+  }
+  
+  /* 11) Mobile “Order” button at bottom */
+  .section.hidden-md.hidden-lg .btn.btn-primary.btn-checkout {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  /* 12) Footer spacing */
+  .main_footer.footer.unprint {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #999;
+  }
+  

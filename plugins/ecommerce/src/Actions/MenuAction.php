@@ -6,6 +6,7 @@ use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
 use Mojahid\Ecommerce\Models\Order;
 use Mojahid\Ecommerce\Http\Resources\OrderResource;
+use Mojahid\Ecommerce\Models\Product;
 
 class MenuAction extends Action
 
@@ -105,6 +106,26 @@ class MenuAction extends Action
                     'thank_page' => get_config('ecom_thanks_page')
                         ? get_page_url(get_config('ecom_thanks_page'))
                         : null
+                ]
+            ]
+        );
+
+        HookAction::registerProfilePage(
+            'download',
+            [
+                'title' => __('Download'),
+                'contents' => 'ecomm::frontend.profile.download.index',
+                'icon' => 'download',
+                'data' => [
+                    'purchased' => fn () => Product::select(['title', 'id'])
+                        ->whereIn(
+                            'id',
+                            Order::select(['order_items.product_id'])
+                                ->join('order_items', 'order_items.order_id', 'orders.id')
+                                ->where('orders.user_id', auth()->id())
+                                ->where('orders.payment_status', Order::PAYMENT_STATUS_COMPLETED)
+                        )
+                        ->paginate(10)
                 ]
             ]
         );
