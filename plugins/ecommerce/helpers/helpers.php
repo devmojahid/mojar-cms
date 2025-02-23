@@ -1,10 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Log;
 use Juzaweb\CMS\Http\Resources\PaymentMethodCollectionResource;
 use Juzaweb\CMS\Models\PaymentMethod;
 use Mojahid\Ecommerce\Contracts\CartContract;
 use Mojahid\Ecommerce\Contracts\CartManagerContract;
 use Mojahid\Ecommerce\Http\Resources\CartItemCollectionResource;
+use Mojahid\Ecommerce\Models\Currency;
 use Mojahid\Ecommerce\Supports\Manager\CurrencyManager;
 if (!function_exists('ecom_get_cart')) {
     function ecom_get_cart(): array
@@ -67,6 +69,27 @@ if (!function_exists('ecom_price_with_currency')) {
         $formatted = $manager->formatPrice($converted);
 
         return $formatted;
+    }
+}
+
+
+if (!function_exists('getAvailableCurrencyCodes')) {
+    /**
+     * Get list of available currency codes from database
+     *
+     * @return array
+     */
+    function getAvailableCurrencyCodes(): array
+    {
+        try {
+            return Currency::query()
+                ->where('is_active', true)
+                ->pluck('name', 'code')
+                ->toArray();
+        } catch (\Exception $e) {
+            Log::error('Error fetching currency codes: ' . $e->getMessage());
+            return ['USD' => 'US Dollar (USD)']; // Fallback to USD if error
+        }
     }
 }
 

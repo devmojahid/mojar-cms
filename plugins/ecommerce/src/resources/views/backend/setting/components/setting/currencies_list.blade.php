@@ -1,6 +1,6 @@
 @php
   use Mojahid\Ecommerce\Models\Currency;
-  $currencies = Currency::orderBy('currency_code')->get();
+  $currencies = Currency::orderBy('code')->get();
 @endphp
 
 <table class="table table-bordered" id="currency-table">
@@ -19,7 +19,7 @@
   @foreach($currencies as $c)
     <tr>
       <td>
-        <input type="text" name="currencies[{{ $c->id }}][currency_code]" value="{{ $c->currency_code }}" class="form-control">
+        <input type="text" name="currencies[{{ $c->id }}][code]" value="{{ $c->code }}" class="form-control">
       </td>
       <td>
         <input type="text" name="currencies[{{ $c->id }}][name]" value="{{ $c->name }}" class="form-control">

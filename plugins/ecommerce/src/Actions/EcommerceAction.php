@@ -14,6 +14,7 @@ use Mojahid\Ecommerce\Http\Controllers\Frontend\CheckoutController as FrontendCh
 use Mojahid\Ecommerce\Http\Resources\CartResource;
 use Mojahid\Ecommerce\Supports\Manager\CartManager;
 use Juzaweb\CMS\Models\Role;
+use Mojahid\Ecommerce\Models\Currency;
 
 class EcommerceAction extends Action
 {
@@ -56,6 +57,11 @@ class EcommerceAction extends Action
         $this->addAction(
             Action::FRONTEND_CALL_ACTION,
             [$this, 'registerFrontendAjaxs']
+        );
+
+        $this->addAction(
+            'juzaweb.setting.save',
+            [$this, 'saveSetting']
         );
     }
 
@@ -235,5 +241,59 @@ class EcommerceAction extends Action
                 $newRole->syncPermissions($role['permissions']);
             }
         }
+    }
+
+    public function saveSetting($request)
+    {
+         // Save other config
+        set_config('ecom_enable_multi_currency', $request->input('ecom_enable_multi_currency', 0));
+        set_config('ecom_allow_currency_switcher', $request->input('ecom_allow_currency_switcher', 1));
+        set_config('ecom_force_checkout_currency', $request->input('ecom_force_checkout_currency'));
+        set_config('ecom_exchange_rate_api', $request->input('ecom_exchange_rate_api'));
+        set_config('ecom_exchange_rate_api_key', $request->input('ecom_exchange_rate_api_key'));
+        set_config('ecom_auto_update_exchange', $request->input('ecom_auto_update_exchange', 0));
+
+            // Process currencies
+            $currenciesData = $request->input('currencies', []);
+            $defaultId = $request->input('default_currency_id');
+
+            // reset old defaults
+            Currency::where('is_default', true)->update(['is_default' => false]);
+
+            foreach ($currenciesData as $rowId => $data) {
+                if (is_numeric($rowId)) {
+                    // existing
+                    $currency = Currency::find($rowId);
+                    if ($currency) {
+                        $currency->code      = $data['currency_code'] ?? $currency->currency_code;
+                        $currency->name              = $data['name'] ?? $currency->name;
+                        $currency->symbol            = $data['symbol'] ?? $currency->symbol;
+                        $currency->exchange_rate     = floatval($data['exchange_rate'] ?? 1);
+                        $currency->is_enabled        = isset($data['is_enabled']);
+                        $currency->is_default        = false;
+                        $currency->save();
+                    }
+                } else {
+                    // new currency
+                    $currency = new Currency();
+                    $currency->code      = $data['currency_code'] ?? '';
+                    $currency->name              = $data['name'] ?? '';
+                    $currency->symbol            = $data['symbol'] ?? '';
+                    $currency->exchange_rate     = floatval($data['exchange_rate'] ?? 1);
+                    $currency->is_enabled        = isset($data['is_enabled']);
+                    $currency->is_default        = false;
+                    $currency->save();
+                }
+            }
+
+            if ($defaultId) {
+                $def = Currency::find($defaultId);
+                if ($def) {
+                    $def->is_default = true;
+                    $def->save();
+                }
+            }
+
+            return redirect()->back()->with('success', __('Settings saved.'));
     }
 }

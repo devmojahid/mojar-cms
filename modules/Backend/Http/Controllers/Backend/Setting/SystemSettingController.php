@@ -49,6 +49,7 @@ class SystemSettingController extends BackendController
 
     public function save(SettingRequest $request): JsonResponse|RedirectResponse
     {
+        do_action('juzaweb.setting.save', $request);
         $locales = config('locales');
         $configs = $request->only($this->hookAction->getConfigs()->keys()->toArray());
         
