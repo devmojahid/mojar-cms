@@ -154,6 +154,7 @@ return [
     'cart_updated_dialog' => 'Cart updated dialog',
     'cart_updated_notification' => 'Cart updated notification',
     'cart_updated_toastr' => 'Cart updated toastr',
+    'discount_code_is_not_valid' => 'Discount code is not valid',
     // Ecommerce Management
     'ecommerce' => 'Ecommerce',
     'order' => 'Order',

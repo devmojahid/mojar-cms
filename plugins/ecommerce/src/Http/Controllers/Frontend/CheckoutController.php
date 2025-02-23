@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Events\Users\RegisterSuccessful;
+use Juzaweb\Backend\Events\RegisterSuccessful;
 use Juzaweb\CMS\Events\EmailHook;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Juzaweb\CMS\Models\User;

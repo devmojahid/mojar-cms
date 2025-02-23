@@ -3,7 +3,13 @@ const path = require('path');
 
 const baseAsset = path.resolve(__dirname, '');
 const baseStyles = baseAsset + '/styles';
-const basePublish = baseAsset + '/public';
+// const basePublish = baseAsset + '/public';
+
+// dev mode
+const localAsset = path.resolve(__dirname, '..', '..', '..', '..','mojar-cms', 'public', 'jw-styles', 'plugins', 'mojahid', 'ecommerce', 'assets');
+
+let basePublish = localAsset;
+
 
 mix.styles(
     [

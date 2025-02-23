@@ -107,11 +107,6 @@ class EcommerceServiceProvider extends ServiceProvider
             }
         );
 
-        $this->publishes([
-            __DIR__.'/../resources/assets' => public_path('jw-styles/plugins/juzaweb/ecommerce/assets'),
-            __DIR__.'/../resources/assets/js/toast.js' => public_path('jw-styles/plugins/juzaweb/ecommerce/assets/js/toast.js'),
-        ], 'ecommerce-assets');
-
     }
 
     /**

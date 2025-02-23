@@ -7,22 +7,30 @@
     <meta name="description" content="{{ title }} - {{ trans('ecomm::content.payment_order') }}" />
     <title>{{ title }} - {{ trans('ecomm::content.payment_order') }}</title>
     <link rel="shortcut icon" href="{{ upload_url(config('icon')) }}" type="image/x-icon" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="stylesheet" href="{{ asset('jw-styles/plugins/mojahid/ecommerce/assets/css/checkout.min.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('jw-styles/plugins/juzaweb/ecommerce/assets/css/checkout.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('jw-styles/base/assets/libs/nprogress/nprogress.css') }}">
     <script> var Juzaweb = Juzaweb || {}; Juzaweb.store = ''; Juzaweb.theme = {"id":606449,"role":"main","name":"{{ shop_name }}"}; Juzaweb.template = ''; </script>
 
-    <script type="text/javascript">if (typeof Juzaweb == 'undefined') { Juzaweb = {}; }
+    {# <script src="{{ asset('jw-styles/base/assets/js/jquery-3.7.1.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('jw-styles/base/assets/js/twine.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('jw-styles/base/assets/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+
+    <script src="{{ asset('jw-styles/base/assets/libs/jquery-validation/jquery.validate.min.js') }}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('jw-styles/base/assets/libs/nprogress/nprogress.js') }}"></script> #}
+
+    <script type="text/javascript">
+        if (typeof Juzaweb == 'undefined') { Juzaweb = {}; }
         Juzaweb.Checkout = {};
         Juzaweb.Checkout.token = "{{ cart.token }}";
         Juzaweb.Checkout.apiHost = "";
+        Juzaweb.Checkout.submitInProgress = false;
     </script>
 
-    <style>
-        .hide {
-            display: none;
-        }
-    </style>
+    <meta name="robots" content="noindex, nofollow">
 </head>
 <body class="body--custom-background-color ">
 <div class="banner" data-header="">
@@ -60,6 +68,7 @@
 
 </div>
 <form
+
         method="post"
         action="{{ route('ajax', ['checkout']) }}"
         data-toggle="validator"
@@ -183,7 +192,11 @@
                             <i class="fa fa-angle-left fa-lg" aria-hidden="true"></i>
                             <span>{{ trans('ecomm::content.back_to_cart') }}</span>
                         </a>
-                        <input class="btn btn-primary btn-checkout" data-loading-text="{{ trans('ecomm::content.please_wait') }}" type="button" bind-event-click="paymentCheckout('AIzaSyAjQYbV19v7UMDVk0cDZ54yKh3OP1hQhbk;AIzaSyCLd-YkfOzBXlNGfS_FNLnpolyME1tRAJI;AIzaSyDdvilzaJlb50t2IRC3PrfSb1lNzf6n3pQ')" value="{{ trans('ecomm::content.order')|upper }}" />
+                        <input class="btn btn-primary btn-checkout"
+                               type="button"
+                               value="{{ trans('ecomm::content.order') }}"
+                               data-loading-text="{{ trans('ecomm::content.processing') }}"
+                               bind-event-click="submitCheckout()" />
                     </div>
                 </div>
                 <div class="form-group has-error">
@@ -294,6 +307,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6">
+
                         <div class="section shipping-method hide" bind-show="shippingMethodsLoading || shippingMethods.length > 0">
                             <div class="section__header">
                                 <h2 class="section__title">
@@ -314,7 +328,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="payment-methods" bind-class="{'p0--desktop': shippingMethods.length == 0}">
+
+                        <div class="section payment-methods" bind-class="{'p0--desktop': shippingMethods.length == 0}">
                             <div class="section__header">
                                 <h2 class="section__title">
                                     <i class="fa fa-credit-card fa-lg section__title--icon hidden-md hidden-lg" aria-hidden="true"></i>
@@ -325,7 +340,7 @@
                                 {% include 'ecomm::frontend.checkout.components.payment_methods' %}
                             </div>
                         </div>
-                        <div class="section hidden-md hidden-lg hide">
+                        <div class="section hidden-md hidden-lg">
                             <div class="form-group clearfix m0">
                                 <input class="btn btn-primary btn-checkout" data-loading-text="Đang xử lý" type="button" bind-event-click="paymentCheckout('AIzaSyAjQYbV19v7UMDVk0cDZ54yKh3OP1hQhbk;AIzaSyCLd-YkfOzBXlNGfS_FNLnpolyME1tRAJI;AIzaSyDdvilzaJlb50t2IRC3PrfSb1lNzf6n3pQ')" value="{{ trans('ecomm::content.order') }}" />
                             </div>
@@ -393,8 +408,6 @@
     </svg>
 </div>
 <script>var code_langs = {'choose_province': '{{ trans('ecomm::content.choose_province') }}'};</script>
-<script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
-<script src="{{ asset('jw-styles/plugins/mojahid/ecommerce/assets/js/checkout.min.js') }}" type="text/javascript"></script>
 
 <script type="text/javascript">
     $(document).ajaxStart(function () {
@@ -428,5 +441,6 @@
     });
 </script>
 
+<script src="{{ asset('jw-styles/plugins/juzaweb/ecommerce/assets/js/checkout.js') }}"></script>
 </body>
 </html>

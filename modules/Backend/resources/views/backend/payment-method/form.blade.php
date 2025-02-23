@@ -21,6 +21,10 @@
                                 [
                                     'paypal' => 'Paypal',
                                     'custom' => 'Custom',
+                                    'stripe' => 'Stripe',
+                                    'razorpay' => 'Razorpay',
+                                    'bank_transfer' => 'Bank Transfer',
+                                    'cod' => 'Cash On Delivery',
                                 ],
                             ),
                         ]) }}
@@ -37,7 +41,7 @@
                         'label' => trans('cms::app.config'),
                         'class' => $model->data ? 'box-data' : 'box-hidden box-data',
                     ])
-                        @if ($model->type == 'paypal')
+                        {{-- @if ($model->type == 'paypal')
                             @component('cms::backend.payment-method.components.paypal_template', [
                                 'data' => $model->data,
                             ])
@@ -49,7 +53,16 @@
                                 'data' => $model->data,
                             ])
                             @endcomponent
-                        @endif
+                        @endif --}}
+
+                        @foreach (['paypal', 'custom', 'stripe', 'razorpay', 'bank_transfer', 'cod'] as $type)
+                            @if ($model->type == $type)
+                                @component('cms::backend.payment-method.components.' . $type . '_template', [
+                                    'data' => $model->data,
+                                ])
+                                @endcomponent
+                            @endif
+                        @endforeach
                     @endcomponent
                 </div>
             </div>
@@ -67,7 +80,7 @@
         </div>
     @endcomponent
 
-    <template id="data-custom">
+    {{-- <template id="data-custom">
         @component('cms::backend.payment-method.components.custom_template')
         @endcomponent
     </template>
@@ -75,7 +88,14 @@
     <template id="data-paypal">
         @component('cms::backend.payment-method.components.paypal_template')
         @endcomponent
-    </template>
+    </template> --}}
+
+    @foreach(['paypal', 'stripe', 'razorpay', 'bank_transfer', 'cod'] as $type)
+    <template id="data-{{ $type }}">
+        @component("cms::backend.payment-method.components.{$type}_template")
+        @endcomponent
+        </template>
+    @endforeach
 
     <script type="text/javascript">
         $('select[name=type]').on('change', function() {
