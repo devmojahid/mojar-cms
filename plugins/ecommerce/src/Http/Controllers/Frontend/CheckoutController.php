@@ -67,7 +67,7 @@ class CheckoutController extends FrontendController
             throw $e;
         }
 
-        // event(new OrderSuccess($newOrder, $user));
+        event(new OrderSuccess($newOrder, $user));
 
         $params = apply_filters(
             'ecom_checkout_success_email_params',
@@ -96,7 +96,6 @@ class CheckoutController extends FrontendController
             $redirect = $purchase->isRedirect() ?
                 $purchase->getRedirectURL() :
                     $this->getThanksPageURL($newOrder->getOrder());
-
             return $this->success(
                 [
                     'redirect' => $redirect,
@@ -104,7 +103,7 @@ class CheckoutController extends FrontendController
                 ]
             );
 
-     
+
         } catch (\Exception $e) {
             report($e);
 
@@ -195,7 +194,7 @@ class CheckoutController extends FrontendController
 
     protected function getThanksPageURL(Order $order): string
     {
-        if (!$thanksPage = get_config('ecom_thanks_page')) {
+        if (!$thanksPage = get_config('_thanks_page')) {
             return '/';
         }
 

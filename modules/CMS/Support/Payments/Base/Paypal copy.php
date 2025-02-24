@@ -16,18 +16,19 @@ use Juzaweb\CMS\Contracts\Payment\PaymentMethodInterface;
 use Omnipay\Common\GatewayInterface;
 use Omnipay\Omnipay;
 
-class Paypal extends PaymentMethodAbstract implements PaymentMethodInterface
+class Paypal extends PaymentMethodAbstract
 {
     public function purchase(array $params): PaymentMethodInterface
     {
         $gateway = $this->getGateway();
 
-        $params['amount'] = 100;
         $response = $gateway->purchase($params)->send();
 
         $this->setRedirect($response->isRedirect());
 
-        $this->setRedirectURL($response->getRedirectUrl());
+        $this->setRedirectURL($response->getRedirectUrl() ?? '');
+        $this->setMessage($response->getMessage());
+        $this->setSuccessful($response->isSuccessful());
 
         return $this;
     }

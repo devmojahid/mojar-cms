@@ -10,68 +10,127 @@
 %}
 
 <section class="tf__event_details_page pt_120 xs_pt_80 pb_120 xs_pb_80">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 wow fadeInUp" data-wow-duration="1s">
-                    <div class="tf__event_details_area">
-                        <div class="tf__event_details_img">
-                            <img src="{{ post.thumbnail }}" alt="event" class="img-fluid w-100">
-                        </div>
-                        <h2>{{ post.title }}</h2>
-                        <div class="tf__event_details_text">
-                            {{ post.content|raw }}
-                        </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 wow fadeInUp" data-wow-duration="1s">
+                <div class="tf__event_details_area">
+                    <div class="tf__event_details_img">
+                        <img src="{{ post.thumbnail }}" alt="event" class="img-fluid w-100">
+                    </div>
+                    <h2>{{ post.title }}</h2>
+                    <div class="tf__event_details_text">
+                        {{ post.content|raw }}
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="tf__sidebar" id="sticky_sidebar">
-                        <div class="tf__sidebar_course_enrole">
-                            <h3>Event Booking</h3>
-                            <ul class="list">
-                                <li><span><i class="fal fa-calendar-alt"></i> Start Date :</span> {{ post.metas.start_date }}</li>
-                                <li><span><i class="far fa-clock"></i> End Date :</span> {{ post.metas.end_date }} </li>
-                                <li><span><i class="far fa-user"></i> Views :</span> {{ post.views }}</li>
-                                <li><span><i class="far fa-map-marker-alt"></i> Location :</span> {{ post.metas.venue }}</li>
-                            </ul>
+            </div>
+            <div class="col-lg-4">
+                <div class="tf__sidebar" id="sticky_sidebar">
+                    <div class="tf__sidebar_course_enrole">
+                        <h3>Event Booking</h3>
+                        <ul class="list">
+                            <li><span><i class="fal fa-calendar-alt"></i> Start Date :</span> {{ post.metas.start_date }}</li>
+                            <li><span><i class="far fa-clock"></i> End Date :</span> {{ post.metas.end_date }} </li>
+                            <li><span><i class="far fa-user"></i> Views :</span> {{ post.views }}</li>
+                            <li><span><i class="far fa-map-marker-alt"></i> Location :</span> {{ post.metas.venue }}</li>
+                        </ul>
 
-                            <a class="tf__common_btn2" href="#">Price : {{ post.metas.price }}</a>
-                            <a class="tf__common_btn" href="#">Enroll Now</a>
-                            <ul class="share d-flex flex-wrap">
-                                <li>share :</li>
-                                {% for social in post.metas.social_links %}
-                                <li>
-                                    <a class="facebook" href="{{ social.url }}">
-                                        <i class="{{ social.icon }}"></i>
-                                    </a>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
+                        <a class="tf__common_btn2" href="#">Price : {{ post.metas.price }}</a>
+                        <a class="tf__common_btn" href="javascript:void(0)"
+                           onclick="addToCart({{ post.id }}, 'events', 1); return false;">Enroll Now</a>
+
+                        <ul class="share d-flex flex-wrap">
+                            <li>share :</li>
+                            {% for social in post.metas.social_links %}
+                            <li>
+                                <a class="facebook" href="{{ social.url }}">
+                                    <i class="{{ social.icon }}"></i>
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
 
 
-                        <div class="tf__sidebar_event">
-                            <h3>Recent Events</h3>
-                            <ul>
-                                {% for event in post.related_events %}
-                                <li>
-                                    <div class="date">
-                                        <h4>12</h4>
-                                        <p>jun 2023</p>
-                                    </div>
-                                    <div class="text">
-                                        <a href="event_details.html">A Better Alternative To Grading Student Writing</a>
-                                        <p>
-                                            <span><i class="far fa-clock"></i> 12.30 PM</span>
-                                            <span><i class="far fa-map-marker-alt"></i> Cumilla</span>
-                                        </p>
-                                    </div>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
+                    <div class="tf__sidebar_event">
+                        <h3>Recent Events</h3>
+                        <ul>
+                            {% for event in post.related_events %}
+                            <li>
+                                <div class="date">
+                                    <h4>12</h4>
+                                    <p>jun 2023</p>
+                                </div>
+                                <div class="text">
+                                    <a href="event_details.html">A Better Alternative To Grading Student Writing</a>
+                                    <p>
+                                        <span><i class="far fa-clock"></i> 12.30 PM</span>
+                                        <span><i class="far fa-map-marker-alt"></i> Cumilla</span>
+                                    </p>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+<script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        });
+
+        function addToCart(postId, type, quantity) {
+            console.log('Sending data:', {
+                post_id: postId,
+                type: type,
+                quantity: quantity
+            });
+
+            $.ajax({
+                url: '{{ url('ajax/cart/add-to-cart') }}',
+                type: 'POST',
+                data: {
+                    post_id: postId,
+                    type: type,
+                    quantity: quantity
+                },
+                beforeSend: function() {
+                    console.log('Request payload:', {
+                        post_id: postId,
+                        type: type,
+                        quantity: quantity
+                    });
+                },
+                success: function(response) {
+                    console.log('Full response:', response);
+                    if (response.status === 'success') {
+                        console.log('Success:', response.message);
+                        updateCartCount();
+                    } else {
+                        console.log('Error:', response.data ? response.data.message : response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log('Error status:', status);
+                    console.log('Error message:', error);
+                    console.log('Response:', xhr.responseJSON);
+                }
+            });
+        }
+
+        function updateCartCount() {
+            $.ajax({
+                url: '{{ url('ajax/cart/get-items') }}',
+                type: 'GET',
+                success: function(response) {
+                    $('.cart-count').text(response.total_items);
+                }
+            });
+        }
+    </script>
 {% endblock %}

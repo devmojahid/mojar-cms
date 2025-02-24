@@ -45,7 +45,7 @@
                                             <span><i class="fas fa-layer-group"></i> Stock: {{ post.metas.quantity }}</span>
                                         {% endif %}
                                     </div>
-                                    <a class="common_btn" href="javascript:void(0)" 
+                                    <a class="common_btn" href="javascript:void(0)"
                                        onclick="addToCart({{ post.id }}, 'products', 1); return false;">
                                         <i class="fas fa-shopping-cart"></i> Add to Cart
                                     </a>
@@ -72,14 +72,14 @@
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             }
         });
-        
+
         function addToCart(postId, type, quantity) {
             console.log('Sending data:', {
                 post_id: postId,
                 type: type,
                 quantity: quantity
             });
-            
+
             $.ajax({
                 url: '{{ url('ajax/cart/add-to-cart') }}',
                 type: 'POST',

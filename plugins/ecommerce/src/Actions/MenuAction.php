@@ -103,8 +103,8 @@ class MenuAction extends Action
                         Order::with(['paymentMethod'])
                             ->paginate(10)
                     )->response()->getData(true),
-                    'thank_page' => get_config('ecom_thanks_page')
-                        ? get_page_url(get_config('ecom_thanks_page'))
+                    'thank_page' => get_config('_thanks_page')
+                        ? get_page_url(get_config('_thanks_page'))
                         : null
                 ]
             ]
