@@ -4,6 +4,8 @@ namespace Mojahid\EventManagement\Actions;
 
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
+use Mojahid\EventManagement\Models\EventBooking;
+
 class MenuAction extends Action
 {
     public function handle(): void
@@ -11,6 +13,12 @@ class MenuAction extends Action
         $this->addAction(
             Action::BACKEND_INIT,
             [$this, 'addAdminMenus']
+        );
+
+        
+        $this->addAction(
+            Action::FRONTEND_INIT,
+            [$this, 'addProfilePages']
         );
     }
 
@@ -77,4 +85,21 @@ class MenuAction extends Action
         // );
 
     }
+
+    public function addProfilePages(): void
+    {
+        HookAction::registerProfilePage(
+            'event-booking',
+            [
+                'title' => trans('evman::content.booking'),
+                'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-event"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" /><path d="M16 3l0 4" /><path d="M8 3l0 4" /><path d="M4 11l16 0" /><path d="M8 15h2v2h-2z" /></svg>',
+                'position' => 10,
+                'contents' => view()->exists('theme::profile.booking.index') ? 'theme::profile.booking.index' : 'evman::frontend.profile.booking.index',
+                'key' => 'event-booking',
+                'data' => [
+                    'bookings' => EventBooking::where('user_id', auth()->user()->id)->get(),
+                ]
+            ]
+        );
+    }    
 }

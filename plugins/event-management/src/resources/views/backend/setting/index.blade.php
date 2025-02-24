@@ -4,16 +4,11 @@
     <form method="post" action="{{ route('admin.setting.save') }}" class="form-ajax">
         @component('cms::components.tabs', [
             'tabs' => [
-                'general' => trans('cms::app.general'),
-                'shop' => trans('evman::content.shop'),
+                'general' => trans('cms::app.general')
             ]
         ])
             @slot('tab_general')
                 @include('evman::backend.setting.components.setting.general')
-            @endslot
-
-            @slot('tab_shop')
-                @include('evman::backend.setting.components.setting.shop')
             @endslot
         @endcomponent
 

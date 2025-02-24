@@ -21,6 +21,7 @@ class EventTicket extends Model
         'description',
         'price',
         'capacity',
+        'status',
         'min_ticket_number',
         'max_ticket_number',
         'start_date',
@@ -32,11 +33,12 @@ class EventTicket extends Model
     protected $casts = [
         'start_date' => 'datetime',
         'end_date' => 'datetime',
+        'price' => 'float'
     ];
 
     public function event()
     {
-        return $this->belongsTo(Post::class, 'event_id', 'id');
+        return $this->belongsTo(Post::class, 'event_id');
     }
 
     public static function findByEvent($eventId): EloquentModel|EventTicket|null
@@ -44,12 +46,46 @@ class EventTicket extends Model
         return self::where('event_id', $eventId)->orderBy('id', 'ASC')->first();
     }
 
-
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    public function bookings()
+    {
+        return $this->hasMany(EventBooking::class, 'ticket_id');
+    }
+
+    public function getBookedCount(): int
+    {
+        return $this->bookings()
+            ->whereIn('payment_status', [
+                EventBooking::PAYMENT_STATUS_COMPLETED,
+                EventBooking::PAYMENT_STATUS_PROCESSING
+            ])
+            ->sum('quantity');
+    }
+
+    public function isAvailable(): bool
+    {
+        if ($this->status !== 'active') {
+            return false;
+        }
+
+        if ($this->start_date && now() < $this->start_date) {
+            return false;
+        }
+
+        if ($this->end_date && now() > $this->end_date) {
+            return false;
+        }
+
+        if ($this->capacity && $this->getBookedCount() >= $this->capacity) {
+            return false;
+        }
+
+        return true;
+    }
 
     public function getStatusTextAttribute(): string
     {

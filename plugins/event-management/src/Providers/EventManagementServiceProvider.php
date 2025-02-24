@@ -7,11 +7,17 @@ use Juzaweb\CMS\Facades\ActionRegister;
 use Mojahid\EventManagement\Actions\ConfigAction;
 use Mojahid\EventManagement\Actions\EventManagementAction;
 use Mojahid\EventManagement\Actions\MenuAction;
+use Mojahid\EventManagement\Supports\BookingManager;
+use Juzaweb\CMS\Support\Payment;
+use Mojahid\EventManagement\Models\EventBooking;
+use Mojahid\EventManagement\Observers\BookingObserver;
 
 class EventManagementServiceProvider extends ServiceProvider
 {
     public function boot()
-    {
+    {   
+        EventBooking::observe(BookingObserver::class);
+        
         ActionRegister::register([
             EventManagementAction::class,
             MenuAction::class,
@@ -27,7 +33,9 @@ class EventManagementServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(BookingManager::class, function ($app) {
+            return new BookingManager($app->make(Payment::class));
+        });
     }
 
     /**

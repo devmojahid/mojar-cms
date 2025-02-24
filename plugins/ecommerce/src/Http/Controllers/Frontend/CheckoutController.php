@@ -103,6 +103,8 @@ class CheckoutController extends FrontendController
                     'message' => trans('ecomm::content.order_thanks'),
                 ]
             );
+
+     
         } catch (\Exception $e) {
             report($e);
 

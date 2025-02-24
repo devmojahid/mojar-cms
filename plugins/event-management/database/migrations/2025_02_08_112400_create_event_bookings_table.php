@@ -30,16 +30,17 @@ return new class extends Migration {
                 $table->string('status')->default('pending');
                 $table->unsignedBigInteger('payment_method_id')->nullable();
                 $table->string('payment_status')->nullable();
-
-
+                $table->decimal('total', 15, 2)->default(0);
+                $table->integer('quantity')->default(1);
+                $table->string('code')->unique();
+                $table->timestamp('booking_date')->nullable();
+                $table->text('notes')->nullable();
 
                 $table->foreign('event_id')->references('id')->on('posts')->onDelete('cascade');
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
                 // $table->foreign('ticket_id')->references('id')->on('evman_event_tickets')->onDelete('set null');
                 $table->foreign('payment_method_id')->references('id')->on('payment_methods')->onDelete('set null');
                 $table->timestamps();
-
-
             }
         );
     }

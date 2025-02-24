@@ -32,24 +32,3 @@ if (!function_exists('ecom_get_cart_items')) {
             ->toArray(request());
     }
 }
-
-if (!function_exists('ecom_get_payment_methods')) {
-    function ecom_get_payment_methods(): array
-    {
-        $methods = PaymentMethod::active()->get();
-
-        return (new PaymentMethodCollectionResource($methods))
-            ->toArray(request());
-    }
-}
-
-if (!function_exists('ecom_price_with_unit')) {
-    function ecom_price_with_unit(?float $price): ?string
-    {
-        if (is_null($price)) {
-            return null;
-        }
-
-        return '$'.$price;
-    }
-}

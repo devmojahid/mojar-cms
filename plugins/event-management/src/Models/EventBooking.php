@@ -5,6 +5,8 @@ namespace Mojahid\EventManagement\Models;
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Models\PaymentMethod;
 use Juzaweb\CMS\Models\User;
+use Juzaweb\Backend\Models\Post;
+use Mojahid\EventManagement\Models\EventTicket;
 use Juzaweb\CMS\Traits\ResourceModel;
 
 class EventBooking extends Model
@@ -65,8 +67,26 @@ class EventBooking extends Model
     {
         return $this->payment_status == static::PAYMENT_STATUS_FAILED;
     }
-    
 
+    public function event()
+    {
+        return $this->belongsTo(Post::class, 'event_id');
+    }
+
+    public function ticket()
+    {
+        return $this->belongsTo(EventTicket::class, 'ticket_id');
+    }
+
+    public function generateCode(): string
+    {
+        return 'EVT-' . strtoupper(uniqid());
+    }
+
+    public static function findByCode(string $code): ?self
+    {
+        return static::where('code', $code)->first();
+    }
 }
 
 

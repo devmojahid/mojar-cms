@@ -6,6 +6,8 @@ use Juzaweb\CMS\Models\PaymentMethod;
 use Juzaweb\CMS\Support\Payments\Paypal;
 use Juzaweb\CMS\Support\Payments\Cod;   
 use Juzaweb\CMS\Contracts\Payment\PaymentMethodInterface;
+use Juzaweb\CMS\Support\Payments\Razorpay;
+use Juzaweb\CMS\Support\Payments\Stripe;
 
 class Payment
 {
@@ -13,6 +15,9 @@ class Payment
     {
         return match ($paymentMethod->type) {
             'paypal' => new Paypal($paymentMethod),
+            'cod' => new Cod($paymentMethod),
+            'stripe' => new Stripe($paymentMethod),
+            'razorpay' => new Razorpay($paymentMethod),
             default => new Cod($paymentMethod),
         };
     }
