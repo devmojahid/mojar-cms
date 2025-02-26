@@ -42,10 +42,10 @@ class AddToCartRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'post_id.exists' => 'Product not found or not available',
-            'post_id.required' => 'Product ID is required',
+            'post_id.exists' => 'Item not found or not available',
+            'post_id.required' => 'Item ID is required',
             'quantity.min' => 'Quantity must be at least 1',
-            'type.in' => 'Invalid product type specified'
+            'type.in' => 'Invalid Item type specified'
         ];
     }
 

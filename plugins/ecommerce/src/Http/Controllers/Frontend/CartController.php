@@ -92,7 +92,7 @@ class CartController extends FrontendController
     public function addToCart(AddToCartRequest $request): HttpResponse|JsonResponse|RedirectResponse
     {
         $postId = $request->input('post_id');
-        $type = $request->input('type', 'product');
+        $type = $request->input('type', 'products');
         $quantity = $request->input('quantity');
 
         $cart = $this->cartManager->find();
@@ -119,7 +119,7 @@ class CartController extends FrontendController
     {
         try {
             $postId = $request->input('post_id');
-            $type = $request->input('type', 'product');
+            $type = $request->input('type', 'products');
 
             $cart = $this->cartManager->find();
 
@@ -206,7 +206,7 @@ class CartController extends FrontendController
     {
         try {
             $postId = $request->input('post_id');
-            $type = $request->input('type', 'product');
+            $type = $request->input('type', 'products');
             $quantity = (int) $request->input('quantity', 1);
 
             $cart = $this->cartManager->find();

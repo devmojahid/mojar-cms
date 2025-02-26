@@ -41,6 +41,9 @@ class OrderCreater
             ]
         );
 
+        do_action('ecomm.before.save.order', $filldata, $items, $user);
+
+        dd($data, $items);
         $order = new Order();
         $order->fill($filldata);
         $order->code = $this->generateOrderCode();
@@ -51,14 +54,17 @@ class OrderCreater
         $order->quantity = $items->sum('quantity');
         $order->name = $user->name;
         $order->phone = $user->phone;
+        $order->type = $items->first()['type'] ?? 'products';
         $order->email = $user->email;
         $order->payment_method_name = $paymentMethod->name;
         $order->save();
 
+        do_action('ecomm.after.save.order', $order);
+
         foreach ($items as $item) {
             $order->orderItems()->create([
                 'title' => $item['title'],
-                'type' => 'product',
+                'type' => $item['type'] ?? 'products',
                 'thumbnail' => $item['thumbnail'],
                 'price' => (float) $item['price'],
                 'line_price' => (float) ($item['price'] * $item['quantity']),

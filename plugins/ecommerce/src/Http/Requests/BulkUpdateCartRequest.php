@@ -15,15 +15,12 @@ class BulkUpdateCartRequest extends FormRequest
             'items.*.post_id' => [
                 'bail',
                 'required',
-                'integer',
-                'min:1',
-                Rule::exists(Post::class, 'id')->where('type', 'product'),
+                'integer'
             ],
             'items.*.type' => [
                 'bail',
                 'required',
-                'string',
-                'in:product,event'
+                'string'
             ],
             'items.*.quantity' => [
                 'bail',
