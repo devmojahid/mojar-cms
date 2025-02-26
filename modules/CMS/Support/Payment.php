@@ -4,11 +4,11 @@ namespace Juzaweb\CMS\Support;
 
 use Juzaweb\CMS\Models\PaymentMethod;
 use Juzaweb\CMS\Support\Payments\Paypal;
-use Juzaweb\CMS\Support\Payments\Cod;   
+use Juzaweb\CMS\Support\Payments\Cod;
 use Juzaweb\CMS\Contracts\Payment\PaymentMethodInterface;
 use Juzaweb\CMS\Support\Payments\Razorpay;
 use Juzaweb\CMS\Support\Payments\Stripe;
-
+use Juzaweb\CMS\Support\Payments\Stripe2;
 class Payment
 {
     public function make(PaymentMethod $paymentMethod): PaymentMethodInterface
@@ -17,6 +17,7 @@ class Payment
             'paypal' => new Paypal($paymentMethod),
             'cod' => new Cod($paymentMethod),
             'stripe' => new Stripe($paymentMethod),
+            'stripe2' => new Stripe2($paymentMethod),
             'razorpay' => new Razorpay($paymentMethod),
             default => new Cod($paymentMethod),
         };

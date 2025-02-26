@@ -9,7 +9,7 @@ use Omnipay\Omnipay;
 use Omnipay\Common\Exception\InvalidRequestException;
 use Exception;
 
-class Stripe extends PaymentMethodAbstract implements PaymentMethodInterface
+class Stripe2 extends PaymentMethodAbstract implements PaymentMethodInterface
 {
     /**
      * Perform the "purchase" step for Stripe PaymentIntents.
@@ -26,7 +26,7 @@ class Stripe extends PaymentMethodAbstract implements PaymentMethodInterface
         // 2) Pull your secret key from $this->paymentMethod->data
         //    (The "data" field is JSON. E.g. {"sandbox_secret": "..."} or "live_secret")
         $stripeData = json_decode($this->paymentMethod->data, true) ?: [];
-        
+
         // If you store separate keys for sandbox vs. production, pick the right one:
         // Adjust as needed based on your config
         $secretKey = $stripeData['sandbox_secret'] ?? $stripeData['live_secret'] ?? null;
@@ -48,10 +48,10 @@ class Stripe extends PaymentMethodAbstract implements PaymentMethodInterface
          *  - 'paymentMethod' => 'pm_xxxx' (preferred) for Payment Intents
          *  - 'token' => 'tok_xxxx' for older style
          *
-         * If your front-end or Stripe.js returns “pm_card_visa”, 
+         * If your front-end or Stripe.js returns “pm_card_visa”,
          * use `'paymentMethod' => 'pm_card_visa'`.
          *
-         * If you are still using "tok_xxxx", 
+         * If you are still using "tok_xxxx",
          * set `'token' => 'tok_xxxx'` instead.
          */
         $requestData = [
@@ -124,7 +124,7 @@ class Stripe extends PaymentMethodAbstract implements PaymentMethodInterface
         $gateway = Omnipay::create('Stripe_PaymentIntents');
         $gateway->setApiKey($secretKey);
 
-        // If user returns with: 
+        // If user returns with:
         //   GET /payment/completed?order=12345&method=1&payment_intent=pi_123&payment_intent_client_secret=...
         // Then we can "confirm" again to finalize:
 
@@ -193,7 +193,7 @@ class Stripe extends PaymentMethodAbstract implements PaymentMethodInterface
     // 1) Create your $order via $this->orderManager->createByCart(...)
     // 2) $paymentMethodModel = PaymentMethod::find($request->input('payment_method_id'));
     // 3) $purchase = $orderWrapper->purchase(); // calls the method e.g. RazorpayPaymentMethod->purchase()
-    
+
 //     if ($purchase->isRedirect()) {
 //         return redirect()->away($purchase->getRedirectURL());
 //     }
@@ -213,8 +213,8 @@ class Stripe extends PaymentMethodAbstract implements PaymentMethodInterface
 //     $orderCode = $request->input('order');
 //     $helper = $this->orderManager->find($orderCode);
 
-//     $payment = $helper->completed($request->all()); 
-    
+//     $payment = $helper->completed($request->all());
+
 //     if ($payment->isSuccessful()) {
 //         // Payment done
 //         return redirect()->to($this->getThanksPageURL($helper->getOrder()));
