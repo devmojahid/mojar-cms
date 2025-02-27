@@ -16,14 +16,19 @@ class BookingObserver
 
     public function updated(EventBooking $booking): void
     {
-        if ($booking->wasChanged('payment_status') && 
-            $booking->payment_status === EventBooking::PAYMENT_STATUS_COMPLETED
-        ) {
-            // Send payment confirmation
-            $booking->notify(new BookingNotification($booking));
-            
-            // Trigger booking completed event
-            event(new BookingCompleted($booking));
+        if ($booking->wasChanged('payment_status')) {
+            // Update associated order status
+            if ($booking->order) {
+                $booking->order->update([
+                    'payment_status' => $booking->payment_status
+                ]);
+            }
+
+            if ($booking->payment_status === EventBooking::PAYMENT_STATUS_COMPLETED) {
+                // Send notifications etc
+                $booking->notify(new BookingNotification($booking));
+                event(new BookingCompleted($booking));
+            }
         }
     }
-} 
+}

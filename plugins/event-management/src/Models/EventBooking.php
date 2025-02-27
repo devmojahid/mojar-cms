@@ -38,6 +38,7 @@ class EventBooking extends Model
         'status',
         'payment_method_id',
         'payment_status',
+        'order_id',
     ];
 
     public function user()
@@ -86,6 +87,11 @@ class EventBooking extends Model
     public static function findByCode(string $code): ?self
     {
         return static::where('code', $code)->first();
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(\Mojahid\Ecommerce\Models\Order::class, 'order_id');
     }
 }
 

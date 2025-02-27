@@ -43,7 +43,6 @@ class OrderCreater
 
         do_action('ecomm.before.save.order', $filldata, $items, $user);
 
-        dd($data, $items);
         $order = new Order();
         $order->fill($filldata);
         $order->code = $this->generateOrderCode();
@@ -59,7 +58,8 @@ class OrderCreater
         $order->payment_method_name = $paymentMethod->name;
         $order->save();
 
-        do_action('ecomm.after.save.order', $order);
+
+        do_action('ecomm.after.save.order', $order, $items, $user);
 
         foreach ($items as $item) {
             $order->orderItems()->create([

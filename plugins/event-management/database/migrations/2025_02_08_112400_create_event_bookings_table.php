@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration {
+// return new class extends Migration {
+class CreateEventBookingsTable extends Migration {
     /**
      * Run the migrations.
      *
@@ -35,11 +36,13 @@ return new class extends Migration {
                 $table->string('code')->unique();
                 $table->timestamp('booking_date')->nullable();
                 $table->text('notes')->nullable();
+                $table->unsignedBigInteger('order_id')->nullable();
 
                 $table->foreign('event_id')->references('id')->on('posts')->onDelete('cascade');
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
                 // $table->foreign('ticket_id')->references('id')->on('evman_event_tickets')->onDelete('set null');
                 $table->foreign('payment_method_id')->references('id')->on('payment_methods')->onDelete('set null');
+                $table->foreign('order_id')->references('id')->on('orders')->onDelete('set null');
                 $table->timestamps();
             }
         );
