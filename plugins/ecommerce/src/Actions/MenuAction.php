@@ -110,6 +110,34 @@ class MenuAction extends Action
             ]
         );
 
+        // Add this to your MenuAction class in the addProfilePages() method
+        HookAction::registerProfilePage(
+            'order-details',
+            [
+                'title' => trans('ecomm::content.order_details'),
+                'key' => 'order-details',
+                'contents' => view()->exists('theme::profile.orders.details') ? 'theme::profile.orders.details' : 'ecomm::frontend.profile.orders.details',
+                'icon' => 'fa fa-receipt',
+                'position' => 11,
+                'hide_from_menu' => true, // Hide from the sidebar menu since we'll access it directly
+                'data' => [
+                    'order' => function () {
+                        $token = request()?->token; // Get the token from URL
+                        if ($token) {
+                            $order = Order::with(['paymentMethod', 'orderItems.product'])
+                                ->where('token', $token)
+                                ->where('user_id', auth()->id())
+                                ->first();
+
+                            return $order ? new OrderResource($order) : null;
+                        }
+                        return null;
+                    }
+                ]
+            ]
+        );
+
+
         HookAction::registerProfilePage(
             'download',
             [

@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-// return new class extends Migration {
 class CreateEventBookingsTable extends Migration {
     /**
      * Run the migrations.
@@ -19,10 +18,10 @@ class CreateEventBookingsTable extends Migration {
                 $table->bigIncrements('id');
                 $table->unsignedBigInteger('event_id');
                 $table->unsignedBigInteger('user_id')->nullable();
-                // $table->unsignedBigInteger('ticket_id')->nullable();
+                $table->unsignedBigInteger('ticket_id')->nullable();
                 $table->string('name');
-                $table->string('email');
-                $table->string('phone');
+                $table->string('email')->nullable();
+                $table->string('phone')->nullable();
                 $table->string('address')->nullable();
                 $table->string('city')->nullable();
                 $table->string('state')->nullable();
@@ -40,7 +39,7 @@ class CreateEventBookingsTable extends Migration {
 
                 $table->foreign('event_id')->references('id')->on('posts')->onDelete('cascade');
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
-                // $table->foreign('ticket_id')->references('id')->on('evman_event_tickets')->onDelete('set null');
+                $table->foreign('ticket_id')->references('id')->on('evman_event_tickets')->onDelete('set null');
                 $table->foreign('payment_method_id')->references('id')->on('payment_methods')->onDelete('set null');
                 $table->foreign('order_id')->references('id')->on('orders')->onDelete('set null');
                 $table->timestamps();

@@ -15,7 +15,7 @@ class MenuAction extends Action
             [$this, 'addAdminMenus']
         );
 
-        
+
         $this->addAction(
             Action::FRONTEND_INIT,
             [$this, 'addProfilePages']
@@ -101,5 +101,5 @@ class MenuAction extends Action
                 ]
             ]
         );
-    }    
+    }
 }

@@ -10,7 +10,7 @@ class BookingObserver
     public function created(EventBooking $booking): void
     {
         if ($booking->email) {
-            $booking->notify(new BookingNotification($booking));
+            // $booking->notify(new BookingNotification($booking));
         }
     }
 
@@ -24,11 +24,11 @@ class BookingObserver
                 ]);
             }
 
-            if ($booking->payment_status === EventBooking::PAYMENT_STATUS_COMPLETED) {
-                // Send notifications etc
-                $booking->notify(new BookingNotification($booking));
-                event(new BookingCompleted($booking));
-            }
+            // if ($booking->payment_status === EventBooking::PAYMENT_STATUS_COMPLETED) {
+            //     // Send notifications etc
+            //     $booking->notify(new BookingNotification($booking));
+            //     event(new BookingCompleted($booking));
+            // }
         }
     }
 }

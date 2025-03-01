@@ -155,6 +155,7 @@ return [
     'cart_updated_notification' => 'Cart updated notification',
     'cart_updated_toastr' => 'Cart updated toastr',
     'discount_code_is_not_valid' => 'Discount code is not valid',
+    'free' => "Free",
     // Ecommerce Management
     'ecommerce' => 'Ecommerce',
     'order' => 'Order',

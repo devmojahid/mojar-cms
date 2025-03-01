@@ -1,6 +1,5 @@
 const mix = require('laravel-mix');
 
-console.log('theme mix');
 mix.styles([
     'themes/edufax/assets/css/all.min.css',
     'themes/edufax/assets/css/bootstrap.min.css',

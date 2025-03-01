@@ -39,6 +39,11 @@ class EventBooking extends Model
         'payment_method_id',
         'payment_status',
         'order_id',
+        'quantity',
+        'code',
+        'booking_date',
+        'notes',
+        'total'
     ];
 
     public function user()

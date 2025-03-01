@@ -25,9 +25,9 @@ class EventManagementServiceProvider extends ServiceProvider
         // Create instance of listener instead of using static call
         $orderListener = new OrderCreatedListener();
         // do_action('ecomm.after.save.order', $order, $items, $user);
-        add_action('ecomm.after.save.order', [$orderListener, 'handle']);
+        // add_action('ecomm.after.save.order', [$orderListener, 'handle']);
 
-        // add_action('ecomm.after.save.order', [OrderCreatedListener::class, 'handle'], 10, 3);
+        add_action('ecomm.after.save.order', [OrderCreatedListener::class, 'handle'], 10, 3);
 
         ActionRegister::register([
             EventManagementAction::class,

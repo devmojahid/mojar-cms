@@ -45,6 +45,7 @@ return [
     'price' => 'Price',
     'compare_price' => 'Compare price',
     'sku_code' => 'Sku code',
+    'booking' => "Booking",
 
     'barcode' => 'Barcode',
     'images' => 'Images',
