@@ -34,7 +34,7 @@
                             <li><span><i class="far fa-map-marker-alt"></i> Location :</span> {{ post.metas.venue }}</li>
                         </ul>
 
-                        <a class="tf__common_btn2" href="#">Price : {{ post.metas.price }}</a>
+                        <a class="tf__common_btn2" href="#">Price : {{ ecom_price_with_unit(post.metas.price) }}</a>
                         <a class="tf__common_btn" href="javascript:void(0)"
                            onclick="addToCart({{ post.id }}, 'events', 1); return false;">Enroll Now</a>
 

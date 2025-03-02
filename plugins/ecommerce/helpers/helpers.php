@@ -57,7 +57,7 @@ if (!function_exists('ecom_price_with_unit')) {
         $converted = $manager->convertPrice($price);
         $formatted = $manager->formatPrice($converted);
 
-        return '$'.$price;
+        return $formatted;
     }
 }
 

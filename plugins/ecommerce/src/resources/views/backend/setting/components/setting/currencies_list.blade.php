@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const randomId = 'new_'+Date.now();
     const row = document.createElement('tr');
     row.innerHTML = `
-      <td><input type="text" name="currencies[${randomId}][currency_code]" class="form-control"></td>
+      <td><input type="text" name="currencies[${randomId}][code]" class="form-control"></td>
       <td><input type="text" name="currencies[${randomId}][name]" class="form-control"></td>
       <td><input type="text" name="currencies[${randomId}][symbol]" class="form-control"></td>
       <td><input type="text" name="currencies[${randomId}][exchange_rate]" value="1" class="form-control"></td>

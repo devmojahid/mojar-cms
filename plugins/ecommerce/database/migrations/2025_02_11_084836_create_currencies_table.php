@@ -16,7 +16,7 @@ class CreateCurrenciesTable extends Migration {
             'ecomm_currencies',
             function (Blueprint $table) {
                 $table->bigIncrements('id');
-                $table->string('currency_code', 10)->unique()->nullable();
+                $table->string('code', 10)->unique()->nullable();
                 $table->string('symbol')->nullable();
                 $table->decimal('exchange_rate', 12, 6)->default(1);
                 $table->boolean('is_default')->default(false);
