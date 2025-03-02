@@ -31,8 +31,9 @@ class CurrencyManager
 
         // fallback to default
         $defaultCurrency = Currency::default()->first();
-        $this->currentCurrencyCode = $defaultCurrency 
-            ? $defaultCurrency->currency_code 
+
+        $this->currentCurrencyCode = $defaultCurrency
+            ? $defaultCurrency->code
             : 'USD';
 
         return $this->currentCurrencyCode;
@@ -44,7 +45,7 @@ class CurrencyManager
     public function setCurrentCurrencyCode(string $code): void
     {
         // validate if code is enabled
-        $currency = Currency::where('currency_code', $code)
+        $currency = Currency::where('code', $code)
             ->where('is_enabled', true)
             ->first();
 
@@ -61,7 +62,7 @@ class CurrencyManager
     {
         $toCurrency = $toCurrency ?: $this->getCurrentCurrencyCode();
 
-        $currency = Currency::where('currency_code', $toCurrency)
+        $currency = Currency::where('code', $toCurrency)
             ->where('is_enabled', true)
             ->first();
 
@@ -80,7 +81,7 @@ class CurrencyManager
     public function formatPrice(float $amount, ?string $currencyCode = null): string
     {
         $currencyCode = $currencyCode ?: $this->getCurrentCurrencyCode();
-        $currency = Currency::where('currency_code', $currencyCode)->first();
+        $currency = Currency::where('code', $currencyCode)->first();
 
         if (!$currency) {
             // fallback
@@ -103,7 +104,7 @@ class CurrencyManager
             // e.g. placeholders: {symbol}, {amount}, {code}
             return str_replace(
                 ['{symbol}', '{amount}', '{code}'],
-                [$symbol, $formattedValue, $currency->currency_code],
+                [$symbol, $formattedValue, $currency->code],
                 $currency->custom_price_format
             );
         }

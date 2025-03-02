@@ -52,6 +52,11 @@ if (!function_exists('ecom_price_with_unit')) {
             return null;
         }
 
+        $manager = app(CurrencyManager::class);
+
+        $converted = $manager->convertPrice($price);
+        $formatted = $manager->formatPrice($converted);
+
         return '$'.$price;
     }
 }
@@ -95,7 +100,7 @@ if (!function_exists('getAvailableCurrencyCodes')) {
 
 
 // {% set cart = ecom_get_cart() %}
-// {{ ecom_price_with_unit(120) }}  
+// {{ ecom_price_with_unit(120) }}
 
 // Cart Page
 // {% for item in cart.items %}
