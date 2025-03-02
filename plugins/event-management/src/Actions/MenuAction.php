@@ -97,7 +97,7 @@ class MenuAction extends Action
                 'contents' => view()->exists('theme::profile.booking.index') ? 'theme::profile.booking.index' : 'evman::frontend.profile.booking.index',
                 'key' => 'event-booking',
                 'data' => [
-                    'bookings' => EventBooking::where('user_id', auth()->user()->id)->get(),
+                    'bookings' => EventBooking::where('user_id', auth()?->user()?->id)->get(),
                 ]
             ]
         );
