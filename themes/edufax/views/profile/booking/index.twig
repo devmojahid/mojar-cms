@@ -16,7 +16,7 @@
                         <tr>
                             <td>
                                 {% if booking.event %}
-                                    <a href="{{ route('event.booking.details', {code: booking.code}) }}">
+                                    <a href="{{ booking.event.slug }}">
                                         {{ booking.event.title }}
                                     </a>
                                 {% else %}
@@ -57,5 +57,5 @@
 </div>
 
 {% if data.bookings.pagination %}
-    {{ paginate_links(data.bookings, 'theme::components.pagination') }}
+    {{ paginate_links(data.bookings, 'theme::components.pagination-profile') }}
 {% endif %}

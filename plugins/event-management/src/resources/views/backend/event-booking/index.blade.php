@@ -19,5 +19,4 @@
 
 @section('content')
     {{ $dataTable->render() }}
-
 @endsection
