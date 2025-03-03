@@ -14,7 +14,8 @@
                     {% for order in data.orders.data %}
                         <tr>
                             <td>
-                                <a href="/profile/order-details?token={{ order.token }}">
+                                {# <a href="{{ route('ecomm.order.details', ['token' => order.token]) }}"> #}
+                                <a href="{{ route('ecomm.order.details', {token: order.token}) }}">
                                     #{{ order.code }}
                                 </a>
                             </td>
@@ -30,7 +31,7 @@
                             </td>
                             <td>{{ order.total_amount }}</td>
                             <td>
-                                <a href="/profile/order-details?token={{ order.token }}">
+                                <a href="{{ route('ecomm.order.details', {token: order.token}) }}">
                                     Details
                                 </a>
                             </td>

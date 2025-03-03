@@ -1,98 +1,87 @@
-<div class="tf__dashboard_order_details wow fadeInUp" data-wow-duration="1s">
-    <div class="tf_dashboard_order_details_area">
+<div class="tf__dashboard_body">
+	<div class="tf__invoice">
+		<a class="go_back" href="{{ route('profile', 'orders') }}">
+			<i class="fas fa-long-arrow-alt-left"></i>
+			go back
+        </a>
         {% if data.order %}
-            <div class="order-details-header">
-                <h3>Order #{{ data.order.code }}</h3>
-                <div class="order-meta">
-                    <span class="order-date">Date: {{ data.order.created_at|date('d M Y') }}</span>
-                    <span class="order-status">
-                        {% if data.order.payment_status == 'pending' %}
-                            <span class="status pending">{{ data.order.payment_status_text }}</span>
-                        {% elseif data.order.payment_status == 'cancel' %}
-                            <span class="status cancel">{{ data.order.payment_status_text }}</span>
-                        {% else %}
-                            <span class="status paid">{{ data.order.payment_status_text }}</span>
-                        {% endif %}
-                    </span>
+            <div class="tf__invoice_header wow fadeInUp" data-wow-duration="1s">
+                <div class="header_address">
+                    <h4>invoice to</h4>
+                    <p>
+                        {{data.order.address}}
+                    </p>
+                    <p>
+                        {{data.order.phone}}
+                    </p>
+                </div>
+                <div class="header_address">
+                    <p>
+                        <b>invoice no:
+                        </b>
+                        <span>{{data.order.code}}</span>
+                    </p>
+                    <p>
+                        <b>Order ID:</b>
+                        <span>
+                            #{{data.order.code}}
+                        </span>
+                    </p>
+                    <p>
+                        <b>date:</b>
+                        <span>{{data.order.created_at|date('d M Y')}}</span>
+                    </p>
                 </div>
             </div>
-
-            <div class="order-details-content">
-                <div class="order-info">
-                    <div class="order-info-section">
-                        <h4>Order Information</h4>
-                        <p><strong>Order Number:</strong> #{{ data.order.code }}</p>
-                        <p><strong>Date:</strong> {{ data.order.created_at|date('d M Y H:i') }}</p>
-                        <p><strong>Payment Method:</strong> {{ data.order.payment_method.name ?? 'N/A' }}</p>
-                        <p><strong>Status:</strong> {{ data.order.payment_status_text }}</p>
-                    </div>
-
-                    {% if data.order.billing_address %}
-                    <div class="order-info-section">
-                        <h4>Billing Information</h4>
-                        <p><strong>Name:</strong> {{ data.order.billing_address.name }}</p>
-                        <p><strong>Email:</strong> {{ data.order.billing_address.email }}</p>
-                        <p><strong>Phone:</strong> {{ data.order.billing_address.phone }}</p>
-                        <p><strong>Address:</strong> {{ data.order.billing_address.address }}, {{ data.order.billing_address.city }}, {{ data.order.billing_address.state }} {{ data.order.billing_address.zip }}</p>
-                    </div>
-                    {% endif %}
-                </div>
-
-                <div class="order-items-section">
-                    <h4>Order Items</h4>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th>Price</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for item in data.order.order_items %}
-                                <tr>
-                                    <td>{{ item.product.title }}</td>
-                                    <td>{{ item.quantity }}</td>
-                                    <td>{{ item.price }}</td>
-                                    <td>{{ item.total }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="3" class="text-right"><strong>Subtotal</strong></td>
-                                    <td>{{ data.order.sub_total }}</td>
-                                </tr>
-                                {% if data.order.discount %}
-                                <tr>
-                                    <td colspan="3" class="text-right"><strong>Discount</strong></td>
-                                    <td>{{ data.order.discount }}</td>
-                                </tr>
-                                {% endif %}
-                                {% if data.order.tax %}
-                                <tr>
-                                    <td colspan="3" class="text-right"><strong>Tax</strong></td>
-                                    <td>{{ data.order.tax }}</td>
-                                </tr>
-                                {% endif %}
-                                <tr>
-                                    <td colspan="3" class="text-right"><strong>Total</strong></td>
-                                    <td>{{ data.order.total_amount }}</td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="order-actions">
-                    <a href="{{ route('profile', 'orders') }}" class="btn btn-secondary">Back to Orders</a>
-                    {% if data.order.payment_status == 'pending' %}
-                        <a href="{{ data.order.payment_url }}" class="btn btn-primary">Pay Now</a>
-                    {% endif %}
+            <div class="tf__invoice_body wow fadeInUp" data-wow-duration="1s">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <th class="sl_no">SL</th>
+                                <th class="package">item description</th>
+                                <th class="price">Price</th>
+                                <th class="qnty">Quantity</th>
+                                <th class="total">Total</th>
+                            </tr>
+                            {% for item in data.order.items %}
+                            <tr>
+                                <td class="sl_no">01</td>
+                                <td class="package">
+                                    <a class="course_name" href="#">{{item.title}}</a>
+                                </td>
+                                <td class="price">
+                                    {{item.price}}
+                                </td>
+                                <td class="qnty">
+                                    {{item.quantity}}
+                                </td>
+                                <td class="total">
+                                    {{item.line_price}}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td class="package" colspan="3">
+                                    <b>Total</b>
+                                </td>
+                                <td class="qnty">
+                                    <b></b>
+                                </td>
+                                <td class="total">
+                                    <b>{{data.order.total_amount}}</b>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
+            <a class="print_btn tf__common_btn" href="#">
+                <i class="far fa-print"></i>
+                print PDF
+            </a>
         {% else %}
             <div class="order-not-found">
                 <h3>Order not found</h3>
@@ -100,5 +89,6 @@
                 <a href="{{ route('profile', 'orders') }}" class="btn btn-secondary">Back to Orders</a>
             </div>
         {% endif %}
-    </div>
+	</div>
 </div>
+

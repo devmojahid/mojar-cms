@@ -1,80 +1,90 @@
-<div class="booking-details">
-    <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="card-title">Booking #{{ data.booking.code }}</h5>
-            <span class="badge 
-                {% if data.booking.payment_status == 'completed' %}
-                    badge-success
-                {% elseif data.booking.payment_status == 'pending' %}
-                    badge-warning
-                {% else %}
-                    badge-danger
-                {% endif %}">
-                {{ data.booking.payment_status_text }}
-            </span>
-        </div>
-        <div class="card-body">
-            <div class="row mb-4">
-                <div class="col-md-6">
-                    <h6 class="mb-3">Event Information</h6>
-                    {% if data.booking.event %}
-                        <p><strong>Event:</strong> {{ data.booking.event.title }}</p>
-                        {% if data.booking.ticket %}
-                            <p><strong>Ticket:</strong> {{ data.booking.ticket.name }}</p>
-                        {% endif %}
-                        <p><strong>Booking Date:</strong> {{ data.booking.booking_date|date('d M Y') }}</p>
-                        <p><strong>Quantity:</strong> {{ data.booking.quantity }}</p>
-                    {% else %}
-                        <p>Event information not available</p>
-                    {% endif %}
-                </div>
-                <div class="col-md-6">
-                    <h6 class="mb-3">Customer Information</h6>
-                    <p><strong>Name:</strong> {{ data.booking.name }}</p>
-                    <p><strong>Email:</strong> {{ data.booking.email }}</p>
-                    {% if data.booking.phone %}
-                        <p><strong>Phone:</strong> {{ data.booking.phone }}</p>
-                    {% endif %}
-                    {% if data.booking.address %}
-                        <p><strong>Address:</strong> {{ data.booking.address }}</p>
-                    {% endif %}
-                </div>
+<div class="tf__dashboard_body">
+	<div class="tf__invoice">
+		<a class="go_back" href="{{ route('profile', 'event-booking') }}">
+			<i class="fas fa-long-arrow-alt-left"></i>
+			go back
+        </a>
+		<div class="tf__invoice_header wow fadeInUp" data-wow-duration="1s">
+			<div class="header_address">
+				<h4>invoice to</h4>
+				<p>
+                    {{data.booking.address}}
+                </p>
+				<p>
+                    {{data.booking.phone}}
+                </p>
+			</div>
+			<div class="header_address">
+				<p>
+					<b>invoice no:
+					</b>
+					<span>{{data.booking.code}}</span>
+				</p>
+				<p>
+					<b>Order ID:</b>
+					<span>
+						{{data.booking.code}}
+                    </span>
+				</p>
+				<p>
+					<b>date:</b>
+					<span>{{data.booking.booking_date}}</span>
+				</p>
+			</div>
+		</div>
+        {% if data.booking %}
+		<div class="tf__invoice_body wow fadeInUp" data-wow-duration="1s">
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<tbody>
+						<tr>
+							<th class="sl_no">SL</th>
+							<th class="package">item description</th>
+							<th class="price">Price</th>
+							<th class="qnty">Quantity</th>
+							<th class="total">Total</th>
+						</tr>
+						<tr>
+							<td class="sl_no">01</td>
+							<td class="package">
+								<a class="course_name" href="#">{{data.booking.event.title}}</a>
+							</td>
+							<td class="price">
+								{{data.booking.total}}
+							</td>
+							<td class="qnty">
+								{{data.booking.quantity}}
+							</td>
+							<td class="total">
+								{{data.booking.total}}
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td class="package" colspan="3">
+								<b>Total</b>
+							</td>
+							<td class="qnty">
+								<b></b>
+							</td>
+							<td class="total">
+								<b>{{data.booking.total}}</b>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+        {% else %}
+            <div class="order-not-found">
+                <h3>Booking not found</h3>
+                <p>The booking you are looking for does not exist or you don't have permission to view it.</p>
+                <a href="{{ route('profile', 'event-booking') }}" class="btn btn-secondary">Back to Bookings</a>
             </div>
-            
-            <div class="row mb-4">
-                <div class="col-md-12">
-                    <h6 class="mb-3">Payment Information</h6>
-                    <p><strong>Payment Status:</strong> {{ data.booking.payment_status_text }}</p>
-                    {% if data.booking.payment_method %}
-                        <p><strong>Payment Method:</strong> {{ data.booking.payment_method.name }}</p>
-                    {% endif %}
-                    <p><strong>Total Amount:</strong> {{ data.booking.total }}</p>
-                </div>
-            </div>
-            
-            {% if data.booking.notes %}
-                <div class="row">
-                    <div class="col-md-12">
-                        <h6 class="mb-3">Additional Notes</h6>
-                        <p>{{ data.booking.notes }}</p>
-                    </div>
-                </div>
-            {% endif %}
-            
-            <div class="row mt-4">
-                <div class="col-12">
-                    {# <a href="{{ route('profile.page', {'key': 'event-booking'}) }}" class="btn btn-secondary"> #}
-                    <a href="#" class="btn btn-secondary">
-                        Back to Bookings
-                    </a>
-                    
-                    {% if data.booking.payment_status == 'pending' %}
-                        <a href="{{ route('event.payment', {'code': data.booking.code}) }}" class="btn btn-primary">
-                            Complete Payment
-                        </a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-</div> 
+        {% endif %}
+		<a class="print_btn tf__common_btn" href="#">
+			<i class="far fa-print"></i>
+			print PDF</a>
+	</div>
+</div>

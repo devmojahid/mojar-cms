@@ -85,7 +85,7 @@ class MenuAction extends Action
                 'title' => trans('ecomm::content.dashboard'),
                 'key' => 'dashboard',
                 'contents' => view()->exists('theme::profile.dashboard.index') ? 'theme::profile.dashboard.index' : 'ecomm::frontend.profile.dashboard.index',
-                'icon' => 'fa fa-home',
+                'icon' => 'far fa-home',
                 'position' => 1,
             ]
         );
@@ -96,7 +96,7 @@ class MenuAction extends Action
                 'title' => trans('ecomm::content.orders'),
                 'key' => 'orders',
                 'contents' => view()->exists('theme::profile.orders.index') ? 'theme::profile.orders.index' : 'ecomm::frontend.profile.orders.index',
-                'icon' => 'fa fa-shopping-cart',
+                'icon' => 'far fa-shopping-basket',
                 'position' => 10,
                 'data' => [
                     'orders' => OrderResource::collection(
@@ -110,40 +110,12 @@ class MenuAction extends Action
             ]
         );
 
-        // Add this to your MenuAction class in the addProfilePages() method
-        HookAction::registerProfilePage(
-            'order-details',
-            [
-                'title' => trans('ecomm::content.order_details'),
-                'key' => 'order-details',
-                'contents' => view()->exists('theme::profile.orders.details') ? 'theme::profile.orders.details' : 'ecomm::frontend.profile.orders.details',
-                'icon' => 'fa fa-receipt',
-                'position' => 11,
-                'hide_from_menu' => true, // Hide from the sidebar menu since we'll access it directly
-                'data' => [
-                    'order' => function () {
-                        $token = request()?->token; // Get the token from URL
-                        if ($token) {
-                            $order = Order::with(['paymentMethod', 'orderItems.product'])
-                                ->where('token', $token)
-                                ->where('user_id', auth()->id())
-                                ->first();
-
-                            return $order ? new OrderResource($order) : null;
-                        }
-                        return null;
-                    }
-                ]
-            ]
-        );
-
-
         HookAction::registerProfilePage(
             'download',
             [
                 'title' => __('Download'),
                 'contents' => 'ecomm::frontend.profile.download.index',
-                'icon' => 'download',
+                'icon' => 'far fa-download',
                 'data' => [
                     'purchased' => fn () => Product::select(['title', 'id'])
                         ->whereIn(
@@ -165,7 +137,7 @@ class MenuAction extends Action
                 'title' => trans('ecomm::content.account'),
                 'key' => 'account',
                 'contents' => view()->exists('theme::profile.account.index') ? 'theme::profile.account.index' : 'ecomm::frontend.profile.account.index',
-                'icon' => 'fa fa-user',
+                'icon' => 'far fa-user',
                 'position' => 10,
                 'data' => [
                     'user' => auth()->user()
@@ -179,7 +151,7 @@ class MenuAction extends Action
                 'title' => trans('ecomm::content.change_password'),
                 'key' => 'change-password',
                 // 'contents' => view()->exists('theme::profile.change-password.index') ? 'theme::profile.change-password.index' : 'ecomm::frontend.profile.change-password.index',
-                'icon' => 'fa fa-key',
+                'icon' => 'far fa-lock',
                 'position' => 10,
                 'data' => [
                     'user' => auth()->user()
@@ -192,6 +164,7 @@ class MenuAction extends Action
             [
                 'title' => trans('ecomm::content.logout'),
                 'key' => 'logout',
+                'icon' => 'far fa-sign-out',
             ]
         );
     }

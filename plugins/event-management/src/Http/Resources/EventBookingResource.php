@@ -25,7 +25,7 @@ class EventBookingResource extends JsonResource
             
             // Booking Details
             'quantity' => $this->resource->quantity,
-            'total' => $this->resource->total ? $this->resource->total : null,
+            'total' => $this->resource->total ? ecom_price_with_unit($this->resource->total) : null,
             'booking_date' => $this->resource->booking_date ? jw_date_format($this->resource->booking_date) : null,
             'notes' => $this->resource->notes,
             
@@ -67,7 +67,7 @@ class EventBookingResource extends JsonResource
             $resource['ticket'] = [
                 'id' => $this->resource->ticket?->id,
                 'name' => $this->resource->ticket?->name,
-                'price' => $this->resource->ticket?->price ? jw_price_format($this->resource->ticket?->price) : null,
+                'price' => $this->resource->ticket?->price ? ecom_price_with_unit($this->resource->ticket?->price) : null,
                 'status' => $this->resource->ticket?->status,
                 'quantity' => $this->resource->ticket?->quantity,
                 'available' => $this->resource->ticket?->isAvailable(),

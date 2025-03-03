@@ -118,4 +118,5 @@ return [
     'shipping_method' => 'Shipping method',
     'payment_instruction' => 'Payment instruction',
     'store_address' => 'Store address',
+    'booking_details' => 'Booking details',
 ];

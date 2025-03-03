@@ -30,7 +30,29 @@
                             </div>
                             <div class="tf__dashboard_sidebar_menu">
                                 <ul>
-                                    {% for menu_page in pages %}
+                                    {% set sorted_pages = [] %}
+                                    {% set unsorted_pages = [] %}
+                                    
+                                    {% for key, menu_page in pages %}
+                                        {% if menu_page.position is defined %}
+                                            {% set sorted_pages = sorted_pages|merge([menu_page]) %}
+                                        {% else %}
+                                            {% set unsorted_pages = unsorted_pages|merge([menu_page]) %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    
+                                    {% set sorted_pages = sorted_pages|sort((a, b) => a.position <=> b.position) %}
+                                    
+                                    {% for menu_page in sorted_pages %}
+                                        <li>
+                                            <a class="{% if page.key is defined and page.key == menu_page.key %}active{% endif %}"
+                                            href="{{ route('profile', [menu_page.key]) }}">
+                                                <i class="{{ menu_page.icon }}"></i> {{ menu_page.title }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                    
+                                    {% for menu_page in unsorted_pages %}
                                         <li>
                                             <a class="{% if page.key is defined and page.key == menu_page.key %}active{% endif %}"
                                             href="{{ route('profile', [menu_page.key]) }}">
@@ -40,6 +62,18 @@
                                     {% endfor %}
                                 </ul>
                             </div>
+                            {# <div class="tf__dashboard_sidebar_menu">
+                                <ul>
+                                    {% for menu_page in pages %}
+                                        <li>
+                                            <a class="{% if page.key is defined and page.key == menu_page.key %}active{% endif %}"
+                                            href="{{ route('profile', [menu_page.key]) }}">
+                                                <i class="{{ menu_page.icon }}"></i> {{ menu_page.title }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div> #}
                         </div>
                     </div>
                     <div class="col-xxl-9 col-lg-8">

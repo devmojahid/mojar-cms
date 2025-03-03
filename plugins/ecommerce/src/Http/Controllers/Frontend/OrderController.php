@@ -14,6 +14,8 @@ use Mojahid\Ecommerce\Http\Resources\OrderResource;
 use Mojahid\Ecommerce\Models\DownloadLink;
 use Mojahid\Ecommerce\Models\Order;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Juzaweb\CMS\Facades\HookAction;
+use Illuminate\Http\Request;
 
 class OrderController extends FrontendController
 {
@@ -56,6 +58,36 @@ class OrderController extends FrontendController
                 ]
             )
         );
+    }
+
+    public function details(Request $request, string $token)
+    {
+        $order = Order::where('token', $token)
+            ->where('user_id', auth()->id())
+            ->with(['orderItems', 'paymentMethod'])
+            ->firstOrFail();
+
+        $title = __('Order').": #{$order->code}";
+        $pages = collect(HookAction::getProfilePages());
+        $user = auth()?->user();
+
+        $page = [
+            'title' => $title,
+            'key' => 'order-detail',
+            'contents' => view()->exists('theme::profile.orders.details') ? 
+                          'theme::profile.orders.details' : 
+                          'ecomm::frontend.profile.orders.details',
+            'data' => [
+                'order' => OrderResource::make($order)->resolve(),
+            ]
+        ];
+
+        return $this->view('theme::profile.index', compact(
+            'title',
+            'pages',
+            'page',
+            'user'
+        ));
     }
 
 }

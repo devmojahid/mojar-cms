@@ -34,14 +34,14 @@ class OrderItemCollection extends ResourceCollection
                     'meta_data' => $item->json_metas ?? [],
                     
                     // Post Details (if loaded)
-                    'post' => $item->whenLoaded('post', function() use ($item) {
-                        return [
-                            'id' => $item->post->id,
-                            'title' => $item->post->title,
-                            'type' => $item->post->type,
-                            'thumbnail' => $item->post->thumbnail,
-                        ];
-                    }),
+                    // 'post' => $item->whenLoaded('post', function() use ($item) {
+                    //     return [
+                    //         'id' => $item->post->id,
+                    //         'title' => $item->post->title,
+                    //         'type' => $item->post->type,
+                    //         'thumbnail' => $item->post->thumbnail,
+                    //     ];
+                    // }),
                     
                     // Timestamps
                     'created_at' => jw_date_format($item->created_at),
