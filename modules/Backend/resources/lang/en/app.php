@@ -658,4 +658,13 @@ return [
         'dev_tools_settings_description' => 'View and update your dev tools settings',
     ],
     'add_repeater_item' => 'Add :label',
+    'operations' => 'Operations',
+    'prev' => 'Prev',
+    'next' => 'Next',
+    'test_publishable_key' => 'Test Publishable Key',
+    'test_secret_key' => 'Test Secret Key',
+    'live_publishable_key' => 'Live Publishable Key',
+    'live_secret_key' => 'Live Secret Key',
+    'stripe' => 'Stripe',
+    'test' => 'Test',
 ];

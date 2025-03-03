@@ -25,7 +25,7 @@ class Stripe2 extends PaymentMethodAbstract implements PaymentMethodInterface
 
         // 2) Pull your secret key from $this->paymentMethod->data
         //    (The "data" field is JSON. E.g. {"sandbox_secret": "..."} or "live_secret")
-        $stripeData = json_decode($this->paymentMethod->data, true) ?: [];
+        $stripeData = $this->paymentMethod->data ?: [];
 
         // If you store separate keys for sandbox vs. production, pick the right one:
         // Adjust as needed based on your config
@@ -118,7 +118,7 @@ class Stripe2 extends PaymentMethodAbstract implements PaymentMethodInterface
     public function completed(array $params): PaymentMethodInterface
     {
         // Only relevant if 3D-Secure or "returnUrl" callback flow was triggered
-        $stripeData = json_decode($this->paymentMethod->data, true) ?: [];
+        $stripeData = $this->paymentMethod->data ?: [];
         $secretKey = $stripeData['sandbox_secret'] ?? $stripeData['live_secret'] ?? null;
 
         $gateway = Omnipay::create('Stripe_PaymentIntents');

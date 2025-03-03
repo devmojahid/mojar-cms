@@ -15,6 +15,8 @@ use Mojahid\Ecommerce\Http\Resources\CartResource;
 use Mojahid\Ecommerce\Supports\Manager\CartManager;
 use Juzaweb\CMS\Models\Role;
 use Mojahid\Ecommerce\Models\Currency;
+use Mojahid\Ecommerce\Models\Order;
+use Mojahid\Ecommerce\Http\Resources\OrderResource;
 
 class EcommerceAction extends Action
 {
@@ -114,6 +116,18 @@ class EcommerceAction extends Action
         // add title
         if ($thanksPage == $page->id) {
             $params['title'] = 'Thank you';
+            $orderToken = request()?->segment(2);
+
+            abort_if($orderToken === null, 404);
+
+            $order = Order::findByToken($orderToken);
+
+            abort_if($order === null, 404);
+
+            $order->load(['orderItems', 'paymentMethod']);
+            // $order->loadExists(['downloadableProducts']);
+            // dd($order);
+            $params['order'] = OrderResource::make($order)->toArray(request());
         }
 
         return $params;
