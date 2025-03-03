@@ -64,8 +64,8 @@ class EventBooking extends Model
     public function getPaymentStatusTextAttribute(): string
     {
         return match ($this->payment_status) {
-            static::PAYMENT_STATUS_COMPLETED => trans('ecom::content.completed'),
-            default => trans('ecom::content.pending'),
+            static::PAYMENT_STATUS_COMPLETED => trans('ecomm::content.completed'),
+            default => trans('ecomm::content.pending'),
         };
     }
 

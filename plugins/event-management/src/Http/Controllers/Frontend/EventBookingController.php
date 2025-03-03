@@ -7,7 +7,9 @@ use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Mojahid\EventManagement\Services\BookingService;
 use Mojahid\EventManagement\Http\Requests\BookingRequest;
 use Mojahid\EventManagement\Models\EventTicket;
+use Mojahid\EventManagement\Models\EventBooking;
 use Mojahid\EventManagement\Services\BookingManager;
+use Mojahid\EventManagement\Http\Resources\EventBookingResource;
 
 class EventBookingController extends FrontendController
 {
@@ -43,6 +45,7 @@ class EventBookingController extends FrontendController
             $purchase = $bookingOrder->purchase();
 
             return $this->success([
+                'booking' => new EventBookingResource($booking->load(['event', 'ticket', 'paymentMethod'])),
                 'redirect' => $purchase->isRedirect() ? 
                     $purchase->getRedirectURL() : 
                     route('event.booking.success', ['booking' => $booking->code])
@@ -52,5 +55,20 @@ class EventBookingController extends FrontendController
             report($e);
             return $this->error(['message' => $e->getMessage()]);
         }
+    }
+    
+    public function getBooking(string $code): JsonResponse
+    {
+        $booking = EventBooking::findByCode($code);
+        
+        if (!$booking) {
+            return $this->error([
+                'message' => __('Booking not found')
+            ]);
+        }
+        
+        return $this->success([
+            'booking' => new EventBookingResource($booking->load(['event', 'ticket', 'paymentMethod', 'user']))
+        ]);
     }
 } 

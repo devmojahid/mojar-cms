@@ -5,6 +5,7 @@ namespace Mojahid\EventManagement\Actions;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
 use Mojahid\EventManagement\Models\EventBooking;
+use Mojahid\EventManagement\Http\Resources\EventBookingCollection;
 
 class MenuAction extends Action
 {
@@ -97,7 +98,11 @@ class MenuAction extends Action
                 'contents' => view()->exists('theme::profile.booking.index') ? 'theme::profile.booking.index' : 'evman::frontend.profile.booking.index',
                 'key' => 'event-booking',
                 'data' => [
-                    'bookings' => EventBooking::where('user_id', auth()?->user()?->id)->get(),
+                'bookings' => (new EventBookingCollection(
+                        EventBooking::where('user_id', auth()?->user()?->id)
+                            ->with(['event', 'ticket', 'paymentMethod'])
+                            ->paginate(10)
+                    ))->response()->getData(true),
                 ]
             ]
         );

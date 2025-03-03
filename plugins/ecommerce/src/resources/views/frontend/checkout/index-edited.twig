@@ -7,30 +7,22 @@
     <meta name="description" content="{{ title }} - {{ trans('ecomm::content.payment_order') }}" />
     <title>{{ title }} - {{ trans('ecomm::content.payment_order') }}</title>
     <link rel="shortcut icon" href="{{ upload_url(config('icon')) }}" type="image/x-icon" />
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="stylesheet" href="{{ asset('jw-styles/plugins/juzaweb/ecommerce/assets/css/checkout.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('jw-styles/base/assets/libs/nprogress/nprogress.css') }}">
+    <link rel="stylesheet" href="{{ asset('jw-styles/plugins/mojahid/ecommerce/assets/css/checkout.min.css') }}">
+
     <script> var Juzaweb = Juzaweb || {}; Juzaweb.store = ''; Juzaweb.theme = {"id":606449,"role":"main","name":"{{ shop_name }}"}; Juzaweb.template = ''; </script>
 
-    {# <script src="{{ asset('jw-styles/base/assets/js/jquery-3.7.1.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('jw-styles/base/assets/js/twine.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('jw-styles/base/assets/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-
-    <script src="{{ asset('jw-styles/base/assets/libs/jquery-validation/jquery.validate.min.js') }}"></script>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="{{ asset('jw-styles/base/assets/libs/nprogress/nprogress.js') }}"></script> #}
-
-    <script type="text/javascript">
-        if (typeof Juzaweb == 'undefined') { Juzaweb = {}; }
+    <script type="text/javascript">if (typeof Juzaweb == 'undefined') { Juzaweb = {}; }
         Juzaweb.Checkout = {};
         Juzaweb.Checkout.token = "{{ cart.token }}";
         Juzaweb.Checkout.apiHost = "";
-        Juzaweb.Checkout.submitInProgress = false;
     </script>
 
-    <meta name="robots" content="noindex, nofollow">
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
 </head>
 <body class="body--custom-background-color ">
 <div class="banner" data-header="">
@@ -46,6 +38,7 @@
         </div>
     </div>
 </div>
+
 <button class="order-summary-toggle" bind-event-click="Juzaweb.StoreCheckout.toggleOrderSummary(this)">
     <div class="wrap">
         <h2>
@@ -68,7 +61,6 @@
 
 </div>
 <form
-
         method="post"
         action="{{ route('ajax', ['checkout']) }}"
         data-toggle="validator"
@@ -108,7 +100,7 @@
                                             </td>
 
                                             <td class="product-price text-right">
-                                                {{ item.line_price }}
+                                                {{ ecom_price_with_unit(item.line_price) }}
                                             </td>
                                         </tr>
                                     {% endfor %}
@@ -192,11 +184,7 @@
                             <i class="fa fa-angle-left fa-lg" aria-hidden="true"></i>
                             <span>{{ trans('ecomm::content.back_to_cart') }}</span>
                         </a>
-                        <input class="btn btn-primary btn-checkout"
-                               type="button"
-                               value="{{ trans('ecomm::content.order') }}"
-                               data-loading-text="{{ trans('ecomm::content.processing') }}"
-                               bind-event-click="submitCheckout()" />
+                        <input class="btn btn-primary btn-checkout" data-loading-text="{{ trans('ecomm::content.please_wait') }}" type="button" bind-event-click="paymentCheckout('AIzaSyAjQYbV19v7UMDVk0cDZ54yKh3OP1hQhbk;AIzaSyCLd-YkfOzBXlNGfS_FNLnpolyME1tRAJI;AIzaSyDdvilzaJlb50t2IRC3PrfSb1lNzf6n3pQ')" value="{{ trans('ecomm::content.order')|upper }}" />
                     </div>
                 </div>
                 <div class="form-group has-error">
@@ -307,7 +295,6 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6">
-
                         <div class="section shipping-method hide" bind-show="shippingMethodsLoading || shippingMethods.length > 0">
                             <div class="section__header">
                                 <h2 class="section__title">
@@ -328,8 +315,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="section payment-methods" bind-class="{'p0--desktop': shippingMethods.length == 0}">
+                        <div class="payment-methods" bind-class="{'p0--desktop': shippingMethods.length == 0}">
                             <div class="section__header">
                                 <h2 class="section__title">
                                     <i class="fa fa-credit-card fa-lg section__title--icon hidden-md hidden-lg" aria-hidden="true"></i>
@@ -340,7 +326,7 @@
                                 {% include 'ecomm::frontend.checkout.components.payment_methods' %}
                             </div>
                         </div>
-                        <div class="section hidden-md hidden-lg">
+                        <div class="section hidden-md hidden-lg hide">
                             <div class="form-group clearfix m0">
                                 <input class="btn btn-primary btn-checkout" data-loading-text="Đang xử lý" type="button" bind-event-click="paymentCheckout('AIzaSyAjQYbV19v7UMDVk0cDZ54yKh3OP1hQhbk;AIzaSyCLd-YkfOzBXlNGfS_FNLnpolyME1tRAJI;AIzaSyDdvilzaJlb50t2IRC3PrfSb1lNzf6n3pQ')" value="{{ trans('ecomm::content.order') }}" />
                             </div>
@@ -401,13 +387,15 @@
         </div>
     </div>
 </form>
-<div id="icon-symbols" style="display: none;">
+<div id="icon-symbols" >
     <svg xmlns="http://www.w3.org/2000/svg">
         <symbol id="spinner-large"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-270 364 66 66"><path d="M-237 428c-17.1 0-31-13.9-31-31s13.9-31 31-31v-2c-18.2 0-33 14.8-33 33s14.8 33 33 33 33-14.8 33-33h-2c0 17.1-13.9 31-31 31z"/></svg></symbol><symbol id="chevron-right"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M2 1l1-1 4 4 1 1-1 1-4 4-1-1 4-4" /></svg></symbol><symbol id="success"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 24C5.373 24 0 18.627 0 12S5.373 0 12 0s12 5.373 12 12-5.373 12-12 12zm0-2c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm3.784-13.198c.386-.396 1.02-.404 1.414-.018.396.386.404 1.02.018 1.414l-5.85 6c-.392.403-1.04.403-1.432 0l-3.15-3.23c-.386-.396-.378-1.03.018-1.415.395-.385 1.028-.377 1.414.018l2.434 2.5 5.134-5.267z"/></svg></symbol><symbol id="arrow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M16 8.1l-8.1 8.1-1.1-1.1L13 8.9H0V7.3h13L6.8 1.1 7.9 0 16 8.1z" /></svg></symbol><symbol id="spinner-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M20 10c0 5.523-4.477 10-10 10S0 15.523 0 10 4.477 0 10 0v2c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8h2z"/></svg></symbol>
         <symbol id="next-spinner"><svg preserveAspectRatio="xMinYMin"><circle class="next-spinner__ring" cx="50%" cy="50%" r="45%"></circle></svg></symbol>
     </svg>
 </div>
 <script>var code_langs = {'choose_province': '{{ trans('ecomm::content.choose_province') }}'};</script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="{{ asset('jw-styles/plugins/mojahid/ecommerce/assets/js/checkout.min.js') }}" type="text/javascript"></script>
 
 <script type="text/javascript">
     $(document).ajaxStart(function () {
@@ -441,6 +429,5 @@
     });
 </script>
 
-<script src="{{ asset('jw-styles/plugins/juzaweb/ecommerce/assets/js/checkout.js') }}"></script>
 </body>
 </html>

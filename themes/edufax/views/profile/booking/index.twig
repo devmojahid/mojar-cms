@@ -1,40 +1,53 @@
 <div class="tf__dashboard_order wow fadeInUp" data-wow-duration="1s">
     <div class="tf_dashboard_order_area">
         <div class="table-responsive">
-        {{dump(data.bookings)}}
             <table class="table">
                 <tbody>
                     <tr>
                         <th>Event name</th>
+                        <th>Booking Code</th>
                         <th>Date</th>
                         <th>Status</th>
-                        <th>course fee</th>
+                        <th>Price</th>
                         <th>Action</th>
                     </tr>
 
-                    {% for order in data.orders.data %}
+                    {% for booking in data.bookings.data %}
                         <tr>
                             <td>
-                                <a href="{{ thank_page }}/{{ order.token }}">
-                                    #{{ order.code }}
-                                </a>
-                            </td>
-                            <td>{{ order.created_at|date('d M Y') }}</td>
-                            <td>
-                                {% if order.payment_status == 'pending' %}
-                                    <span class="pending">{{ order.payment_status_text }}</span>
-                                {% elseif order.payment_status == 'cancel' %}
-                                    <span class="cancel">{{ order.payment_status_text }}</span>
+                                {% if booking.event %}
+                                    <a href="{{ route('event.booking.details', {code: booking.code}) }}">
+                                        {{ booking.event.title }}
+                                    </a>
                                 {% else %}
-                                    <span class="paid">{{ order.payment_status_text }}</span>
+                                    N/A
                                 {% endif %}
                             </td>
-                            <td>{{ order.total_amount }}</td>
                             <td>
-                                <a href="{{ thank_page }}/{{ order.token }}">
+                                <a href="{{ route('event.booking.details', {code: booking.code}) }}">
+                                    #{{ booking.code }}
+                                </a>
+                            </td>
+                            <td>{{ booking.booking_date|date('d M Y') }}</td>
+                            <td>
+                                {% if booking.payment_status == 'pending' %}
+                                    <span class="pending">{{ booking.payment_status_text }}</span>
+                                {% elseif booking.payment_status == 'cancelled' or booking.payment_status == 'failed' %}
+                                    <span class="cancel">{{ booking.payment_status_text }}</span>
+                                {% else %}
+                                    <span class="paid">{{ booking.payment_status_text }}</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ booking.total }}</td>
+                            <td>
+                                <a href="{{ route('event.booking.details', {code: booking.code}) }}">
                                     Details
                                 </a>
                             </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center">No bookings found</td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -43,4 +56,6 @@
     </div>
 </div>
 
-{{ paginate_links(data.orders, 'theme::components.pagination') }}
+{% if data.bookings.pagination %}
+    {{ paginate_links(data.bookings, 'theme::components.pagination') }}
+{% endif %}

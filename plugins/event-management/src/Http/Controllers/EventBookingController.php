@@ -9,9 +9,6 @@ use Mojahid\EventManagement\Http\Datatables\EventDatatable;
 use Mojahid\EventManagement\Models\EventBooking;
 use Illuminate\Support\Facades\Validator;
 
-
-
-
 class EventBookingController extends BackendController
 {
     use ResourceController {

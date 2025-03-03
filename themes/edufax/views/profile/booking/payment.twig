@@ -1,0 +1,67 @@
+<div class="booking-payment">
+    <h3 class="mb-4">Complete Payment</h3>
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title">Booking Summary</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <p><strong>Booking Code:</strong> #{{ data.booking.code }}</p>
+                    
+                    {% if data.booking.event %}
+                        <p><strong>Event:</strong> {{ data.booking.event.title }}</p>
+                    {% endif %}
+                    
+                    {% if data.booking.ticket %}
+                        <p><strong>Ticket:</strong> {{ data.booking.ticket.name }}</p>
+                    {% endif %}
+                    
+                    <p><strong>Quantity:</strong> {{ data.booking.quantity }}</p>
+                    <p><strong>Total Amount:</strong> {{ data.booking.total }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Payment Options</h5>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('event.booking.process_payment') }}" method="POST" id="payment-form">
+                {{ csrf_field() }}
+                <input type="hidden" name="booking_code" value="{{ data.booking.code }}">
+                
+                <div class="form-group mb-4">
+                    <label for="payment_method">Payment Method</label>
+                    <select class="form-control" id="payment_method" name="payment_method_id" required>
+                        <option value="">Select Payment Method</option>
+                        {% for method in payment_methods|default([]) %}
+                            <option value="{{ method.id }}" 
+                                {% if data.booking.payment_method and data.booking.payment_method.id == method.id %}
+                                    selected
+                                {% endif %}
+                            >
+                                {{ method.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="payment-method-details mt-4">
+                    <!-- Payment method specific fields will be loaded dynamically -->
+                </div>
+                
+                <div class="form-group mt-4">
+                    <button type="submit" class="btn btn-primary">Complete Payment</button>
+                    {# <a href="{{ route('profile.page', {'key': 'event-booking'}) }}" class="btn btn-secondary"> #}
+                    <a href="#" class="btn btn-secondary">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> 

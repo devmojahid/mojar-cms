@@ -1,98 +1,102 @@
 <div class="section pt10">
-    <div class="section__content">
-        <div class="form-group" bind-show="requiresShipping">
-            <div class="checkbox-wrapper">
-                <div class="checkbox__input">
-                    <input class="input-checkbox" type="checkbox" value="false" name="otherAddress" id="other_address" bind="otherAddress" bind-event-change="changeOtherAddress(this)">
-                </div>
-                <label class="checkbox__label" for="other_address">
-                    {{ trans('ecomm::content.shipping_to_other_address') }}
-                </label>
-            </div>
-        </div>
-    </div>
+	<div class="section__content">
+		<div class="form-group" bind-show="requiresShipping">
+			<div class="checkbox-wrapper">
+				<div class="checkbox__input">
+					<input class="input-checkbox" type="checkbox" value="false" name="otherAddress" id="other_address" bind="otherAddress" bind-event-change="changeOtherAddress(this)">
+				</div>
+				<label class="checkbox__label" for="other_address">
+					{{ trans('ecomm::content.shipping_to_other_address') }}
+				</label>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class="section pt10" bind-show="otherAddress">
-    <div class="section__header">
-        <h2 class="section__title">
-            <i class="fa fa-id-card-o fa-lg section__title--icon hidden-md hidden-lg" aria-hidden="true"></i>
-            <label class="control-label">
-                {{ trans('ecomm::content.shipping_information') }}
-            </label>
-        </h2>
-    </div>
-    <div class="section__content">
-        <div bind-show="otherAddress" define="{shipping_address: {}, shipping_expand:true,show_district: false,show_ward:  false ,show_country:  true }" class="shipping  hide ">
-            <div bind-show="shipping_expand || !otherAddress">
-                <div class="form-group">
-                    <div class="field__input-wrapper" bind-class="{ 'js-is-filled': shipping_address.full_name }">
-                                                <span class="field__label" bind-event-click="handleClick(this)">
-                                                    {{ trans('ecomm::content.full_name') }}
-                                                </span>
-                        <input name="ShippingAddress_LastName" bind-event-change="saveAbandoned()" type="text" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_shipping_address_last_name" data-error="{{ trans('ecomm::content.please_enter_full_name') }}" bind="shipping_address.full_name" />
-                    </div>
-                    <div class="help-block with-errors"></div>
-                </div>
+	<div class="section__header">
+		<h2 class="section__title">
+			<i class="fa fa-id-card-o fa-lg section__title--icon hidden-md hidden-lg" aria-hidden="true"></i>
+			<label class="control-label">
+				{{ trans('ecomm::content.shipping_information') }}
+			</label>
+		</h2>
+	</div>
+	<div class="section__content">
+		<div bind-show="otherAddress" define="{shipping_address: {}, shipping_expand:true,show_district: false,show_ward:  false ,show_country:  true }" class="shipping  hide ">
+			<div bind-show="shipping_expand || !otherAddress">
+				<div class="form-group">
+					<div class="field__input-wrapper" bind-class="{ 'js-is-filled': shipping_address.full_name }">
+						<span class="field__label" bind-event-click="handleClick(this)">
+							{{ trans('ecomm::content.full_name') }}
+						</span>
+						<input name="ShippingAddress_LastName" bind-event-change="saveAbandoned()" type="text" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_shipping_address_last_name" data-error="{{ trans('ecomm::content.please_enter_full_name') }}" bind="shipping_address.full_name"/>
+					</div>
+					<div class="help-block with-errors"></div>
+				</div>
 
-                <div class="form-group">
-                    <div class="field__input-wrapper" bind-class="{ 'js-is-filled': shipping_address.phone }">
-                                                <span class="field__label" bind-event-click="handleClick(this)">
-                                                    {{ trans('ecomm::content.phone') }}
-                                                </span>
-                        <input name="ShippingAddress_Phone" bind-event-change="saveAbandoned()" type="tel" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_shipping_address_phone"  data-error="{{ trans('ecomm::content.please_enter_phone') }}" pattern="^([0-9,\+,\-,\(,\),\.]{8,20})$" bind="shipping_address.phone"/>
-                    </div>
-                    <div class="help-block with-errors"></div>
-                </div>
+				<div class="form-group">
+					<div class="field__input-wrapper" bind-class="{ 'js-is-filled': shipping_address.phone }">
+						<span class="field__label" bind-event-click="handleClick(this)">
+							{{ trans('ecomm::content.phone') }}
+						</span>
+						<input name="ShippingAddress_Phone" bind-event-change="saveAbandoned()" type="tel" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_shipping_address_phone" data-error="{{ trans('ecomm::content.please_enter_phone') }}" pattern="^([0-9,\+,\-,\(,\),\.]{8,20})$" bind="shipping_address.phone"/>
+					</div>
+					<div class="help-block with-errors"></div>
+				</div>
 
-                <div class="form-group">
-                    <div class="field__input-wrapper" bind-class="{ 'js-is-filled': shipping_address.address1 }">
-                                                <span class="field__label" bind-event-click="handleClick(this)">
-                                                    {{ trans('ecomm::content.address') }}
-                                                </span>
-                        <input name="ShippingAddress_Address1" bind-event-change="saveAbandoned()" type="text" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_shipping_address_address1"  bind="shipping_address.address1" />
-                    </div>
-                    <div class="help-block with-errors"></div>
-                </div>
+				<div class="form-group">
+					<div class="field__input-wrapper" bind-class="{ 'js-is-filled': shipping_address.address1 }">
+						<span class="field__label" bind-event-click="handleClick(this)">
+							{{ trans('ecomm::content.address') }}
+						</span>
+						<input name="ShippingAddress_Address1" bind-event-change="saveAbandoned()" type="text" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_shipping_address_address1" bind="shipping_address.address1"/>
+					</div>
+					<div class="help-block with-errors"></div>
+				</div>
 
-                {% if countrys is defined and countrys is not empty %}
-                <div class="form-group">
-                    <div class="field__input-wrapper field__input-wrapper--select">
-                        <label class="field__label" for="ShippingCountryId">
-                            {{ trans('ecomm::content.country') }}
-                        </label>
-                        <select class="field__input field__input--select form-control filter-dropdown" name="ShippingCountryId" id="shippingCountry"  bind-event-change="shippingCountryChange('')" bind="ShippingCountryId">
-                            <option value="">--- {{ trans('ecomm::content.choose_country') }} ---</option>
-                            {% for country in countrys %}
-                            <option value='{{ country.code }}' @if(selected_country == country.code) selected @endif>{{ country.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="help-block with-errors"></div>
-                </div>
+				{% if countrys is defined and countrys is not empty %}
+					<div class="form-group">
+						<div class="field__input-wrapper field__input-wrapper--select">
+							<label class="field__label" for="ShippingCountryId">
+								{{ trans('ecomm::content.country') }}
+							</label>
+							<select class="field__input field__input--select form-control filter-dropdown" name="ShippingCountryId" id="shippingCountry" bind-event-change="shippingCountryChange('')" bind="ShippingCountryId">
+								<option value="">---
+									{{ trans('ecomm::content.choose_country') }}
+									---</option>
+								{% for country in countrys %}
+									<option value='{{ country.code }}' @if(selected_country == country.code) selected @endif>{{ country.name }}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="help-block with-errors"></div>
+					</div>
 
-                <div class="form-group">
-                    <div class="field__input-wrapper field__input-wrapper--select">
-                        <label class="field__label" for="BillingProvinceId">
-                            {{ trans('ecomm::content.province') }}
-                        </label>
-                        <select class="field__input field__input--select form-control filter-dropdown" name="ShippingProvinceId" id="shippingProvince" data-error="{{ trans('ecomm::content.please_choose', {'name': trans('ecomm::content.province')}) }}" bind-event-change="shippingProviceChange('')" bind="ShippingProvinceId">
-                            <option value=''>--- {{ trans('ecomm::content.choose_province') }} ---</option>
-                            {% for province in provinces %}
-                            <option value='{{ province.id }}'>{{ province.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="help-block with-errors"></div>
-                </div>
+					<div class="form-group">
+						<div class="field__input-wrapper field__input-wrapper--select">
+							<label class="field__label" for="BillingProvinceId">
+								{{ trans('ecomm::content.province') }}
+							</label>
+							<select class="field__input field__input--select form-control filter-dropdown" name="ShippingProvinceId" id="shippingProvince" data-error="{{ trans('ecomm::content.please_choose', {'name': trans('ecomm::content.province')}) }}" bind-event-change="shippingProviceChange('')" bind="ShippingProvinceId">
+								<option value=''>---
+									{{ trans('ecomm::content.choose_province') }}
+									---</option>
+								{% for province in provinces %}
+									<option value='{{ province.id }}'>{{ province.name }}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="help-block with-errors"></div>
+					</div>
 
-                <div class="form-group">
-                    <div class="error hide" bind-show="requiresShipping && shippingMethods.length == 0 && ShippingProvinceId ">
-                        <label>{{ trans('ecomm::content.area_not_support_shipping') }}</label>
-                    </div>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+					<div class="form-group">
+						<div class="error hide" bind-show="requiresShipping && shippingMethods.length == 0 && ShippingProvinceId ">
+							<label>{{ trans('ecomm::content.area_not_support_shipping') }}</label>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
 </div>

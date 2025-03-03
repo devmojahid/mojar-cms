@@ -1,0 +1,80 @@
+<div class="booking-details">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="card-title">Booking #{{ data.booking.code }}</h5>
+            <span class="badge 
+                {% if data.booking.payment_status == 'completed' %}
+                    badge-success
+                {% elseif data.booking.payment_status == 'pending' %}
+                    badge-warning
+                {% else %}
+                    badge-danger
+                {% endif %}">
+                {{ data.booking.payment_status_text }}
+            </span>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h6 class="mb-3">Event Information</h6>
+                    {% if data.booking.event %}
+                        <p><strong>Event:</strong> {{ data.booking.event.title }}</p>
+                        {% if data.booking.ticket %}
+                            <p><strong>Ticket:</strong> {{ data.booking.ticket.name }}</p>
+                        {% endif %}
+                        <p><strong>Booking Date:</strong> {{ data.booking.booking_date|date('d M Y') }}</p>
+                        <p><strong>Quantity:</strong> {{ data.booking.quantity }}</p>
+                    {% else %}
+                        <p>Event information not available</p>
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    <h6 class="mb-3">Customer Information</h6>
+                    <p><strong>Name:</strong> {{ data.booking.name }}</p>
+                    <p><strong>Email:</strong> {{ data.booking.email }}</p>
+                    {% if data.booking.phone %}
+                        <p><strong>Phone:</strong> {{ data.booking.phone }}</p>
+                    {% endif %}
+                    {% if data.booking.address %}
+                        <p><strong>Address:</strong> {{ data.booking.address }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <h6 class="mb-3">Payment Information</h6>
+                    <p><strong>Payment Status:</strong> {{ data.booking.payment_status_text }}</p>
+                    {% if data.booking.payment_method %}
+                        <p><strong>Payment Method:</strong> {{ data.booking.payment_method.name }}</p>
+                    {% endif %}
+                    <p><strong>Total Amount:</strong> {{ data.booking.total }}</p>
+                </div>
+            </div>
+            
+            {% if data.booking.notes %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <h6 class="mb-3">Additional Notes</h6>
+                        <p>{{ data.booking.notes }}</p>
+                    </div>
+                </div>
+            {% endif %}
+            
+            <div class="row mt-4">
+                <div class="col-12">
+                    {# <a href="{{ route('profile.page', {'key': 'event-booking'}) }}" class="btn btn-secondary"> #}
+                    <a href="#" class="btn btn-secondary">
+                        Back to Bookings
+                    </a>
+                    
+                    {% if data.booking.payment_status == 'pending' %}
+                        <a href="{{ route('event.payment', {'code': data.booking.code}) }}" class="btn btn-primary">
+                            Complete Payment
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
