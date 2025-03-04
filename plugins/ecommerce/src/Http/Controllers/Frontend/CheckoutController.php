@@ -18,7 +18,7 @@ use Mojahid\Ecommerce\Contracts\OrderManagerContract;
 use Mojahid\Ecommerce\Events\OrderSuccess;
 use Mojahid\Ecommerce\Events\PaymentSuccess;
 use Mojahid\Ecommerce\Http\Requests\CheckoutRequest;
-use Juzaweb\CMS\Models\PaymentMethod;
+use Mojahid\Ecommerce\Models\PaymentMethod;
 
 class CheckoutController extends FrontendController
 {

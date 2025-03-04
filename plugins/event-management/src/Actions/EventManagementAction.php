@@ -6,8 +6,8 @@ use Mojahid\EventManagement\Models\EventTicket;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
 use Illuminate\Support\Arr;
-use Juzaweb\CMS\Http\Resources\PaymentMethodCollectionResource;
-use Juzaweb\CMS\Models\PaymentMethod;
+use Mojahid\Ecommerce\Http\Resources\PaymentMethodCollectionResource;
+use Mojahid\Ecommerce\Models\PaymentMethod;
 
 class EventManagementAction extends Action
 

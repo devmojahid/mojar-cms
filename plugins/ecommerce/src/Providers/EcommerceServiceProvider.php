@@ -5,7 +5,7 @@ namespace Mojahid\Ecommerce\Providers;
 use Juzaweb\CMS\Support\ServiceProvider;
 use Juzaweb\CMS\Facades\ActionRegister;
 use Juzaweb\CMS\Facades\MacroableModel;
-use Juzaweb\CMS\Support\Payment;
+use Mojahid\Ecommerce\Supports\Payment;
 use Mojahid\Ecommerce\Actions\ConfigAction;
 use Mojahid\Ecommerce\Actions\EcommerceAction;
 use Mojahid\Ecommerce\Actions\MenuAction;

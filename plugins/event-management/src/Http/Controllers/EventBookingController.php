@@ -3,7 +3,7 @@
 namespace Mojahid\EventManagement\Http\Controllers;
 
 use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Models\PaymentMethod;
+use Mojahid\Ecommerce\Models\PaymentMethod;
 use Juzaweb\CMS\Traits\ResourceController;
 use Mojahid\EventManagement\Http\Datatables\EventDatatable;
 use Mojahid\EventManagement\Models\EventBooking;

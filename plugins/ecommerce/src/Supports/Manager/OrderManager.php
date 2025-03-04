@@ -3,7 +3,7 @@
 namespace Mojahid\Ecommerce\Supports\Manager;
 
 use Juzaweb\CMS\Models\User;
-use Juzaweb\CMS\Support\Payment;
+use Mojahid\Ecommerce\Supports\Payment;
 use Mojahid\Ecommerce\Contracts\CartContract;
 use Mojahid\Ecommerce\Contracts\OrderManagerContract;
 use Mojahid\Ecommerce\Models\Order;

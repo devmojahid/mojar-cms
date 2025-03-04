@@ -3,7 +3,7 @@
 namespace Mojahid\EventManagement\Models;
 
 use Juzaweb\CMS\Models\Model;
-use Juzaweb\CMS\Models\PaymentMethod;
+use Mojahid\Ecommerce\Models\PaymentMethod;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\Backend\Models\Post;
 use Mojahid\EventManagement\Models\EventTicket;

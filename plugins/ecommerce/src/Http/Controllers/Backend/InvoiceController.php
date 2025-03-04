@@ -10,7 +10,7 @@ use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Traits\ResourceController;
 use Mojahid\Ecommerce\Http\Datatables\OrderDatatable;
 use Mojahid\Ecommerce\Models\Order;
-use Juzaweb\CMS\Models\PaymentMethod;
+use Mojahid\Ecommerce\Models\PaymentMethod;
 
 class InvoiceController extends BackendController
 {

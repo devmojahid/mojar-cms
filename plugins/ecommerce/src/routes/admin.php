@@ -15,7 +15,8 @@ use Mojahid\Ecommerce\Http\Controllers\Backend\{
     OrderController,
     CustomerController,
     InvoiceController,
-    SettingController
+    SettingController,
+    PaymentMethodController
 };
 
 use Illuminate\Support\Facades\Route;
@@ -38,3 +39,5 @@ Route::jwResource(
 
 Route::get('ecommerce/settings', [SettingController::class, 'index'])->name('admin.ecommerce.setting');
 
+
+Route::jwResource('ecommerce/payment-methods', PaymentMethodController::class,[ 'name' => 'payment_methods']);

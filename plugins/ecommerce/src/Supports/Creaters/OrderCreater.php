@@ -13,7 +13,7 @@ namespace Mojahid\Ecommerce\Supports\Creaters;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Juzaweb\CMS\Models\User;
-use Juzaweb\CMS\Models\PaymentMethod;
+use Mojahid\Ecommerce\Models\PaymentMethod;
 use Mojahid\Ecommerce\Models\Order;
 
 class OrderCreater

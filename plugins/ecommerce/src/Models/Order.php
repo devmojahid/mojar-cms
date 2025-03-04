@@ -19,7 +19,7 @@ use Illuminate\Support\Carbon;
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\CMS\Traits\ResourceModel;
-use Juzaweb\CMS\Models\PaymentMethod;
+use Mojahid\Ecommerce\Models\PaymentMethod;
 use Juzaweb\CMS\Traits\UseMetaData;
 use Juzaweb\Backend\Models\Post;
 

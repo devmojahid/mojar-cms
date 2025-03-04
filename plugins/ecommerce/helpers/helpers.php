@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Log;
-use Juzaweb\CMS\Http\Resources\PaymentMethodCollectionResource;
-use Juzaweb\CMS\Models\PaymentMethod;
+use Mojahid\Ecommerce\Http\Resources\PaymentMethodCollectionResource;
+use Mojahid\Ecommerce\Models\PaymentMethod;
 use Mojahid\Ecommerce\Contracts\CartContract;
 use Mojahid\Ecommerce\Contracts\CartManagerContract;
 use Mojahid\Ecommerce\Http\Resources\CartItemCollectionResource;

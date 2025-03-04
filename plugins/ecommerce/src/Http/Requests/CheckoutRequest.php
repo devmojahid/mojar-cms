@@ -4,7 +4,7 @@ namespace Mojahid\Ecommerce\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Juzaweb\CMS\Models\PaymentMethod;
+use Mojahid\Ecommerce\Models\PaymentMethod;
 
 class CheckoutRequest extends FormRequest
 {

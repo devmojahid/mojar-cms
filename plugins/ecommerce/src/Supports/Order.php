@@ -12,8 +12,8 @@ namespace Mojahid\Ecommerce\Supports;
 
 use Illuminate\Support\Collection;
 use Mojahid\Ecommerce\Models\Order as OrderModel;
-use Juzaweb\CMS\Contracts\Payment\PaymentMethodInterface;
-use Juzaweb\CMS\Support\Payment;
+use Mojahid\Ecommerce\Contracts\Payment\PaymentMethodInterface;
+use Mojahid\Ecommerce\Supports\Payment;
 
 class Order implements OrderInterface
 {

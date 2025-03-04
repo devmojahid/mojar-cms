@@ -12,7 +12,7 @@ namespace Mojahid\Ecommerce\Supports;
 
 use Illuminate\Support\Collection;
 use Mojahid\Ecommerce\Models\Order;
-use Juzaweb\CMS\Contracts\Payment\PaymentMethodInterface;
+use Mojahid\Ecommerce\Contracts\Payment\PaymentMethodInterface;
 
 interface OrderInterface
 {
