@@ -13,5 +13,12 @@ return [
         'cod' => 'Cash on delivery',
         'paypal' => 'Paypal',
         'custom' => 'Custom',
+        'razorpay' => 'Razorpay',
+        'stripe' => 'Stripe',
+        'bank_transfer' => 'Bank Transfer',
+        'paystack' => 'Paystack',
+        'flutterwave' => 'Flutterwave',
+        'mollie' => 'Mollie',
+        'square' => 'Square',
     ],
 ];

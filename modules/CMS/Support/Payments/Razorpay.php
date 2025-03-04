@@ -1,48 +1,31 @@
 <?php
 
-/**
- * Mojar - The Best CMS for Laravel Project
- *
- * @package    mojar/cms
- * @author     Mojar Team <admin@mojar.com>
- * @link       https://mojar.com
- * @license    MIT
- */
-
 namespace Juzaweb\CMS\Support\Payments;
 
 use Juzaweb\CMS\Abstracts\PaymentMethodAbstract;
 use Juzaweb\CMS\Contracts\Payment\PaymentMethodInterface;
-use Omnipay\Common\GatewayInterface;
-use Omnipay\Omnipay;
+use Razorpay\Api\Api;
 
-class Razorpay extends PaymentMethodAbstract
+class Razorpay extends PaymentMethodAbstract implements PaymentMethodInterface
 {
     public function purchase(array $params): PaymentMethodInterface
     {
         try {
-            $gateway = $this->getGateway();
+            $api = $this->getApiClient();
+            
+            $order = $api->order->create([
+                'amount' => $this->formatAmount($params['amount']),
+                'currency' => $params['currency'] ?? 'INR',
+                'receipt' => $params['order_id'] ?? uniqid(),
+                'payment_capture' => 1
+            ]);
 
-            $response = $gateway->purchase([
-                'amount' => $params['amount'],
-                'currency' => $params['currency'],
-                'returnUrl' => $params['returnUrl'],
-                'cancelUrl' => $params['cancelUrl'],
-                'description' => 'Order Payment #' . ($params['orderId'] ?? time()),
-            ])->send();
+            $this->setRedirect(true);
+            $this->setRedirectURL($this->getCheckoutUrl($order->id, $params));
+            $this->status = PaymentStatus::PENDING;
 
-            if ($response->isRedirect()) {
-                $this->setRedirect(true);
-                $this->setRedirectURL($response->getRedirectResponse()->getTargetUrl());
-                $this->setSuccessful(true);
-            } else {
-                $this->setRedirect(false);
-                $this->setSuccessful($response->isSuccessful());
-                $this->setMessage($response->getMessage());
-            }
         } catch (\Exception $e) {
-            $this->setSuccessful(false);
-            $this->setMessage($e->getMessage());
+            $this->handleError($e);
         }
 
         return $this;
@@ -51,43 +34,48 @@ class Razorpay extends PaymentMethodAbstract
     public function completed(array $params): PaymentMethodInterface
     {
         try {
-            $gateway = $this->getGateway();
+            $api = $this->getApiClient();
+            $payment = $api->payment->fetch($params['razorpay_payment_id']);
 
-            $response = $gateway->completePurchase([
-                'razorpay_payment_id' => $params['razorpay_payment_id'],
-                'razorpay_order_id' => $params['razorpay_order_id'],
-                'razorpay_signature' => $params['razorpay_signature']
-            ])->send();
+            $this->successful = $payment->status === 'captured';
+            $this->status = $this->successful ? PaymentStatus::COMPLETED : PaymentStatus::FAILED;
 
-            $this->setSuccessful($response->isSuccessful());
-            $this->setMessage($response->getMessage());
         } catch (\Exception $e) {
-            $this->setSuccessful(false);
-            $this->setMessage($e->getMessage());
+            $this->handleError($e);
         }
 
         return $this;
     }
 
-    private function getGateway(): GatewayInterface
+    private function getApiClient(): Api
     {
-        $gateway = Omnipay::create('Razorpay');
+        $data = $this->paymentMethod->data;
+        $keyId = ($data['mode'] === 'live') ? $data['live_key_id'] : $data['test_key_id'];
+        $keySecret = ($data['mode'] === 'live') ? $data['live_key_secret'] : $data['test_key_secret'];
 
-        $gateway->initialize([
-            'key' => $this->paymentMethod->data['mode'] === 'live'
-                ? $this->paymentMethod->data['live_key_id']
-                : $this->paymentMethod->data['test_key_id'],
-            'secret' => $this->paymentMethod->data['mode'] === 'live'
-                ? $this->paymentMethod->data['live_key_secret']
-                : $this->paymentMethod->data['test_key_secret'],
-            'testMode' => $this->paymentMethod->data['mode'] !== 'live'
-        ]);
-
-        return $gateway;
+        return new Api($keyId, $keySecret);
     }
 
-    public function isSuccessful(): bool
+    private function getCheckoutUrl(string $orderId, array $params): string
     {
-        return $this->successful;
+        return route('payment.razorpay.checkout', [
+            'order_id' => $orderId,
+            'amount' => $this->formatAmount($params['amount']),
+            'currency' => $params['currency'] ?? 'INR',
+            'callback_url' => $params['returnUrl']
+        ]);
+    }
+
+    private function formatAmount(float $amount): int
+    {
+        return (int) ($amount * 100);
+    }
+
+    private function handleError(\Exception $e): void
+    {
+        $this->setSuccessful(false);
+        $this->status = PaymentStatus::FAILED;
+        $this->setMessage($e->getMessage());
+        $this->logError($e);
     }
 }

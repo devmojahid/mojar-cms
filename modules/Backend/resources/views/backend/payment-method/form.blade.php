@@ -23,6 +23,7 @@
                                     'custom' => 'Custom',
                                     'stripe' => 'Stripe',
                                     'razorpay' => 'Razorpay',
+                                    'mollie' => 'Mollie',
                                     'bank_transfer' => 'Bank Transfer',
                                     'cod' => 'Cash On Delivery',
                                 ],
@@ -55,7 +56,7 @@
                             @endcomponent
                         @endif --}}
 
-                        @foreach (['paypal', 'custom', 'stripe', 'razorpay', 'bank_transfer', 'cod'] as $type)
+                        @foreach (['paypal', 'custom', 'stripe', 'razorpay', 'mollie', 'bank_transfer', 'cod'] as $type)
                             @if ($model->type == $type)
                                 @component('cms::backend.payment-method.components.' . $type . '_template', [
                                     'data' => $model->data,
@@ -90,7 +91,7 @@
         @endcomponent
     </template> --}}
 
-    @foreach(['paypal', 'stripe', 'razorpay', 'bank_transfer', 'cod'] as $type)
+    @foreach(['paypal', 'stripe', 'razorpay', 'mollie', 'bank_transfer', 'cod'] as $type)
     <template id="data-{{ $type }}">
         @component("cms::backend.payment-method.components.{$type}_template")
         @endcomponent

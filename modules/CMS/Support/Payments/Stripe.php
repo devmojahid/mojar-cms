@@ -1,12 +1,20 @@
 <?php
 
+/**
+ * Mojar - The Best CMS for Laravel Project
+ *
+ * @package    mojar/cms
+ * @author     Mojar Team <admin@mojar.com>
+ * @link       https://mojar.com
+ * @license    MIT
+ */
+
 namespace Juzaweb\CMS\Support\Payments;
 
 use Juzaweb\CMS\Abstracts\PaymentMethodAbstract;
 use Juzaweb\CMS\Contracts\Payment\PaymentMethodInterface;
-use Juzaweb\CMS\Enums\PaymentStatus;
-use Omnipay\Omnipay;
-use Omnipay\Common\Exception\InvalidRequestException;
+use Stripe\Stripe as StripeMain;
+use Stripe\Checkout\Session;
 use Exception;
 
 class Stripe extends PaymentMethodAbstract implements PaymentMethodInterface
@@ -14,180 +22,162 @@ class Stripe extends PaymentMethodAbstract implements PaymentMethodInterface
     public function purchase(array $params): PaymentMethodInterface
     {
         try {
-            // 1) Load Stripe credentials from DB
-            $stripeData  = $this->paymentMethod->data ?: [];
-            $secretKey   = $stripeData['secret_key'] ?? null;
-            if (!$secretKey) {
-                $this->setSuccessful(false);
-                $this->setMessage('Stripe secret_key missing in payment method data.');
-                $this->status = PaymentStatus::FAILED;
-                return $this;
-            }
+            $data = $this->getConfig();
+            
+            // Initialize Stripe with secret key
+            StripeMain::setApiKey($data['secret_key']);
+            
+            \Log::info('Stripe Configuration', [
+                'test_mode' => $data['is_test_mode'],
+                'has_api_key' => !empty($data['secret_key'])
+            ]);
 
-            // 2) Initialize Stripe
-            Stripe::setApiKey($secretKey);
+            // Set fixed amount for testing like PayPal
+            $amount = 100;
 
-            // 3) Convert amount to cents if needed
-            //    For example, if your $params['amount'] is "10.00" and currency is USD
-            //    Stripe expects an integer amount in cents => 1000
-            $amount = (float) ($params['amount'] ?? 0);
-            $amountInCents = (int) round($amount * 100);
-
-            // 4) Build line items (simple example: one line item)
-            //    For multiple items, build an array of line_items
-            $lineItems = [
-                [
+            $sessionParams = [
+                'payment_method_types' => ['card'],
+                'line_items' => [[
                     'price_data' => [
-                        'currency'     => $params['currency'] ?? 'USD',
+                        'currency' => $params['currency'] ?? 'USD',
+                        'unit_amount' => $amount * 100, // Convert to cents
                         'product_data' => [
-                            'name' => $params['description'] ?? 'Payment',
+                            'name' => $params['description'] ?? 'Order Payment',
                         ],
-                        'unit_amount'  => $amountInCents,
                     ],
                     'quantity' => 1,
+                ]],
+                'mode' => 'payment',
+                'success_url' => $params['returnUrl'] ?? url('/payment/callback/stripe'),
+                'cancel_url' => $params['cancelUrl'] ?? url('/payment/cancel/stripe'),
+                'metadata' => [
+                    'order_id' => $params['order_id'] ?? uniqid('order_'),
                 ],
             ];
 
-            // 5) Create Checkout Session
-            //    `mode` => 'payment' for one-time
-            $session = StripeSession::create([
-                'payment_method_types' => ['card'],
-                'line_items'           => $lineItems,
-                'mode'                 => 'payment',
-                'success_url'          => ($params['returnUrl'] ?? '') . '?stripe_session_id={CHECKOUT_SESSION_ID}',
-                'cancel_url'           => $params['cancelUrl'] ?? ($params['returnUrl'] ?? ''),
+            \Log::info('Stripe Session Parameters', [
+                'params' => array_merge(
+                    $sessionParams,
+                    ['api_key_length' => strlen($data['secret_key'])]
+                )
             ]);
 
-            // 6) If the session is created, we must redirect user to $session->url
-            if (!empty($session->url)) {
+            try {
+                $session = Session::create($sessionParams);
+                
+                \Log::info('Stripe Session Created', [
+                    'session_id' => $session->id,
+                    'url' => $session->url
+                ]);
+
+                if (empty($session->url)) {
+                    throw new Exception('No checkout URL received from Stripe');
+                }
+
+                $this->setSuccessful(true);
                 $this->setRedirect(true);
                 $this->setRedirectURL($session->url);
-                $this->setSuccessful(false);
-                $this->status = PaymentStatus::PENDING;
-            } else {
-                // No URL => something failed
-                $this->setRedirect(false);
-                $this->setSuccessful(false);
-                $this->status = PaymentStatus::FAILED;
-                $this->setMessage('Could not create Stripe Checkout Session URL.');
-            }
-        } catch (Exception $e) {
-            // On error, set payment as failed
-            $this->setRedirect(false);
-            $this->setSuccessful(false);
-            $this->status = PaymentStatus::FAILED;
-            $this->setMessage($e->getMessage());
-        }
+                return $this;
 
-        return $this;
+            } catch (Exception $e) {
+                \Log::error('Stripe Session Error', [
+                    'error' => $e->getMessage(),
+                    'class' => get_class($e)
+                ]);
+                throw $e;
+            }
+
+        } catch (Exception $e) {
+            \Log::error('Stripe Payment Error', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'class' => get_class($e)
+            ]);
+            
+            $this->addError($e->getMessage());
+            $this->setSuccessful(false);
+            throw $e;
+        }
     }
 
-    /**
-     * 2) Called once user returns from Stripe or in your "completed" route
-     *    to confirm the payment was successful
-     */
     public function completed(array $params): PaymentMethodInterface
     {
         try {
-            // 1) Retrieve session ID from query or request
-            //    e.g. ?stripe_session_id=cs_test_abc123
-            $stripeData   = $this->paymentMethod->data ?: [];
-            $secretKey    = $stripeData['secret_key'] ?? null;
-            $sessionId    = $params['stripe_session_id'] ?? null;
+            $data = $this->getConfig();
+            StripeMain::setApiKey($data['secret_key']);
 
-            if (!$secretKey) {
-                $this->setSuccessful(false);
-                $this->setMessage('Stripe secret key missing in data.');
-                $this->status = PaymentStatus::FAILED;
+            $sessionId = $params['session_id'] ?? null;
+            
+            if (empty($sessionId)) {
+                // If no session ID, check if we have an order ID
+                $orderId = $params['order'] ?? null;
+                if (!empty($orderId)) {
+                    $this->setSuccessful(true);
+                    return $this;
+                }
+                throw new Exception('No Stripe session ID provided');
+            }
+
+            try {
+                $session = Session::retrieve($sessionId);
+                
+                \Log::info('Stripe Session Retrieved', [
+                    'session_id' => $session->id,
+                    'payment_status' => $session->payment_status
+                ]);
+
+                $this->setSuccessful($session->payment_status === 'paid');
                 return $this;
+
+            } catch (Exception $e) {
+                \Log::error('Stripe Session Retrieval Error', [
+                    'error' => $e->getMessage(),
+                    'session_id' => $sessionId
+                ]);
+                throw $e;
             }
 
-            if (!$sessionId) {
-                // If we have no session ID, can't verify
-                $this->setSuccessful(false);
-                $this->setMessage('No stripe_session_id returned from Stripe.');
-                $this->status = PaymentStatus::FAILED;
-                return $this;
-            }
-
-            // 2) Re-init Stripe
-            Stripe::setApiKey($secretKey);
-
-            // 3) Retrieve the session from Stripe
-            $session = StripeSession::retrieve($sessionId);
-
-            // 4) Check if payment_status = 'paid'
-            //    or 'unpaid', 'no_payment_required'
-            if ($session->payment_status === 'paid') {
-                $this->setSuccessful(true);
-                $this->status = PaymentStatus::COMPLETED;
-            } else {
-                $this->setSuccessful(false);
-                $this->status = PaymentStatus::FAILED;
-                $this->setMessage("Stripe session payment_status: {$session->payment_status}");
-            }
         } catch (Exception $e) {
+            \Log::error('Stripe Completion Error', [
+                'message' => $e->getMessage(),
+                'params' => $params
+            ]);
+            
+            $this->addError($e->getMessage());
             $this->setSuccessful(false);
-            $this->status = PaymentStatus::FAILED;
-            $this->setMessage($e->getMessage());
+            throw $e;
         }
-
-        return $this;
-    }
-
-    /**
-     * Must implement to match PaymentMethodAbstract
-     */
-    protected function setMessage(string $message): void
-    {
-        $this->message = $message;
     }
 
     public function isSuccessful(): bool
     {
         return $this->successful;
     }
+
+    private function getConfig(): array
+    {
+        $data = is_string($this->paymentMethod->data) 
+            ? json_decode($this->paymentMethod->data, true) 
+            : $this->paymentMethod->data;
+
+        $isTestMode = ($data['mode'] ?? 'test') === 'test';
+        
+        if ($isTestMode) {
+            $secretKey = $data['test_secret_key'] ?? '';
+            $publishableKey = $data['test_publishable_key'] ?? '';
+        } else {
+            $secretKey = $data['live_secret_key'] ?? '';
+            $publishableKey = $data['live_publishable_key'] ?? '';
+        }
+
+        if (empty($secretKey)) {
+            throw new Exception('Stripe secret key not configured');
+        }
+
+        return [
+            'secret_key' => $secretKey,
+            'publishable_key' => $publishableKey,
+            'is_test_mode' => $isTestMode
+        ];
+    }
 }
-
-
-
-
-// Final Checkout Flow Example
-
-// Checkout:
-// public function checkout(Request $request)
-// {
-    // 1) Create your $order via $this->orderManager->createByCart(...)
-    // 2) $paymentMethodModel = PaymentMethod::find($request->input('payment_method_id'));
-    // 3) $purchase = $orderWrapper->purchase(); // calls the method e.g. RazorpayPaymentMethod->purchase()
-
-//     if ($purchase->isRedirect()) {
-//         return redirect()->away($purchase->getRedirectURL());
-//     }
-
-//     if ($purchase->isSuccessful()) {
-//         return redirect()->to($this->getThanksPageURL($orderWrapper->getOrder()));
-//     }
-
-//     return back()->with('error', $purchase->getMessage());
-// }
-
-
-// Complete
-
-// public function completed(Request $request)
-// {
-//     $orderCode = $request->input('order');
-//     $helper = $this->orderManager->find($orderCode);
-
-//     $payment = $helper->completed($request->all());
-
-//     if ($payment->isSuccessful()) {
-//         // Payment done
-//         return redirect()->to($this->getThanksPageURL($helper->getOrder()));
-//     } elseif ($payment->isRedirect()) {
-//         return redirect()->away($payment->getRedirectURL());
-//     } else {
-//         return redirect()->route('checkout')->with('error', $payment->getMessage());
-//     }
-// }

@@ -383,7 +383,6 @@ class CmsServiceProvider extends ServiceProvider
         $this->app->register(PerformanceServiceProvider::class);
         $this->app->register(EventServiceProvider::class);
         $this->app->register(PluginServiceProvider::class);
-        $this->app->register(PaymentServiceProvider::class);
         $this->app->register(ConsoleServiceProvider::class);
         $this->app->register(NotificationServiceProvider::class);
         $this->app->register(DevToolServiceProvider::class);

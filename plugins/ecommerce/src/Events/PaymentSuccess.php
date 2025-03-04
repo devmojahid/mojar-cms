@@ -8,9 +8,9 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Ecommerce\Events;
+namespace Mojahid\Ecommerce\Events;
 
-use Juzaweb\Ecommerce\Models\Order;
+use Mojahid\Ecommerce\Models\Order;
 
 class PaymentSuccess
 {
