@@ -1,14 +1,5 @@
 <?php
 
-/**
- * Mojar - The Best CMS for Laravel Project
- *
- * @package    mojar/cms
- * @author     Mojar Team <admin@mojar.com>
- * @link       https://mojar.com
- * @license    MIT
- */
-
 namespace Juzaweb\CMS\Support\Payments;
 
 use Juzaweb\CMS\Abstracts\PaymentMethodAbstract;
@@ -22,18 +13,19 @@ class Mollie extends PaymentMethodAbstract implements PaymentMethodInterface
     public function purchase(array $params): PaymentMethodInterface
     {
         try {
+            // Set fixed amount for testing like PayPal and Stripe
             $amount = 100;
             if (empty($amount) || (float)$amount <= 0) {
                 \Log::error('Mollie Payment Error: Invalid amount', ['amount' => $amount]);
                 throw new \Exception('Invalid amount. Amount must be greater than zero.');
             }
             
-            // Get API key
-            $apiKeyData = $this->getApiKey();
-            $apiKey = $apiKeyData['apiKey'];
-            
-            
             $gateway = $this->getGateway();
+            
+            \Log::info('Mollie Gateway Configuration', [
+                'test_mode' => $gateway->getTestMode(),
+                'has_api_key' => !empty($gateway->getApiKey())
+            ]);
            
             $purchaseParams = [
                 'amount' => $amount,
@@ -45,20 +37,34 @@ class Mollie extends PaymentMethodAbstract implements PaymentMethodInterface
                 ],
             ];
 
+             // Only add webhook URL if not in local environment
             if (!app()->environment('local')) {
                 $purchaseParams['notifyUrl'] = $params['notifyUrl'] ?? url('/payment/webhook/mollie');
             }
             
             \Log::info('Mollie Purchase Request', [
-                'params' => $purchaseParams,
+                'params' => array_merge(
+                    $purchaseParams,
+                    ['api_key_length' => strlen($gateway->getApiKey())]
+                )
             ]);
             
             $response = $gateway->purchase($purchaseParams)->send();
+
+            \Log::info('Mollie Purchase Response', [
+                'is_successful' => $response->isSuccessful(),
+                'is_redirect' => $response->isRedirect(),
+                'redirect_url' => $response->isRedirect() ? $response->getRedirectUrl() : null,
+                'transaction_reference' => $response->getTransactionReference()
+            ]);
+            
             if ($response->isSuccessful()) {
                 $this->setSuccessful(true);
                 $this->setRedirect(false);
                 return $this;
-            } elseif ($response->isRedirect()) {
+            } 
+            
+            if ($response->isRedirect()) {
                 $redirectUrl = $response->getRedirectUrl();
                 
                 if (empty($redirectUrl)) {
@@ -69,11 +75,15 @@ class Mollie extends PaymentMethodAbstract implements PaymentMethodInterface
                 $this->setRedirect(true);
                 $this->setRedirectURL($redirectUrl);
                 return $this;
-            } else {
-                $error = $response->getMessage() ?? 'Payment initialization failed';
-                throw new \Exception($error);
             }
+
+            throw new \Exception($response->getMessage() ?? 'Payment initialization failed');
         } catch (\Exception $e) {    
+            \Log::error('Mollie Payment Error', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            
             $this->addError($e->getMessage());
             $this->setSuccessful(false);
             throw $e;
@@ -82,11 +92,66 @@ class Mollie extends PaymentMethodAbstract implements PaymentMethodInterface
 
     public function completed(array $params): PaymentMethodInterface
     {   
-       
-        $order = Order::whereCode($params['order'])->first();
-        $order->payment_status = 'paid';
-        $order->save();
-        return $this;
+        try {
+            $gateway = $this->getGateway();
+            
+            // Get payment ID from return parameters
+            $paymentId = $params['id'] ?? null;
+            
+            if (empty($paymentId)) {
+                // If no payment ID, check if we have an order ID
+                $orderId = $params['order'] ?? null;
+                if (!empty($orderId)) {
+                    // Update order status directly
+                    $order = Order::whereCode($orderId)->first();
+                    if ($order) {
+                        $order->payment_status = 'paid';
+                        $order->save();
+                        $this->setSuccessful(true);
+                        return $this;
+                    }
+                }
+                throw new \Exception('No payment ID provided');
+            }
+
+            // Fetch transaction status from Mollie
+            $response = $gateway->fetchTransaction([
+                'transactionReference' => $paymentId
+            ])->send();
+            
+            \Log::info('Mollie Completion Response', [
+                'payment_id' => $paymentId,
+                'is_paid' => $response->isPaid(),
+                'status' => $response->getData()['status'] ?? null
+            ]);
+
+            if ($response->isPaid()) {
+                $this->setSuccessful(true);
+                
+                // Update order if exists
+                if (!empty($params['order'])) {
+                    $order = Order::whereCode($params['order'])->first();
+                    if ($order) {
+                        $order->payment_status = 'paid';
+                        $order->save();
+                    }
+                }
+            } else {
+                $this->setSuccessful(false);
+                $this->addError('Payment not completed');
+            }
+
+            return $this;
+        } catch (\Exception $e) {
+            \Log::error('Mollie Completion Error', [
+                'message' => $e->getMessage(),
+                'params' => $params
+            ]);
+            
+            $this->addError($e->getMessage());
+            $this->setSuccessful(false);
+            throw $e;
+        }
     }
     
     public function isSuccessful(): bool
@@ -94,41 +159,34 @@ class Mollie extends PaymentMethodAbstract implements PaymentMethodInterface
         return $this->successful;
     }
 
-    public function getGateway() 
+    private function getGateway(): GatewayInterface 
     {
         $gateway = Omnipay::create('Mollie');
-        // $gateway->setApiKey($this->getApiKey()['apiKey']);
+        
+        $apiKeyData = $this->getApiKey();
         $gateway->setApiKey('test_uMfQEwF3sk43WFkHhFvRFJbGevSGgt');
+        // $gateway->setApiKey($apiKeyData['apiKey']);
+        $gateway->setTestMode($apiKeyData['testMode']);
+        
         return $gateway;
     }
 
-    /**
-     * Get API key and test mode status
-     * 
-     * @return array
-     * @throws \Exception
-     */
     private function getApiKey(): array
     {
-        // Get payment method data
         $data = is_string($this->paymentMethod->data) 
             ? json_decode($this->paymentMethod->data, true) 
             : $this->paymentMethod->data;
         
-        // Determine test/sandbox mode
         $testMode = ($data['mode'] ?? 'sandbox') === 'sandbox';
         
-        // Get the appropriate API key based on mode
         $apiKey = $testMode ? ($data['sandbox_api_key'] ?? '') : ($data['live_api_key'] ?? '');
         
-        // Validate API key
         if (empty($apiKey)) {
-            $errorMsg = 'Mollie API key is not configured for ' . ($testMode ? 'sandbox' : 'live') . ' mode';
+            $errorMsg = 'Mollie API key not configured for ' . ($testMode ? 'sandbox' : 'live') . ' mode';
             \Log::error('Mollie API Key Error', ['error' => $errorMsg]);
             throw new \Exception($errorMsg);
         }
         
-        // Log API key info without revealing full key
         \Log::info('Using Mollie API Key', [
             'mode' => $testMode ? 'test' : 'live',
             'key_prefix' => substr($apiKey, 0, 5),
