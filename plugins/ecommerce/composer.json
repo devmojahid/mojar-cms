@@ -5,7 +5,7 @@
         "mojar": {
             "name": "Ecommerce",
             "domain": "ecomm",
-            "cms_min": "3.3",
+            "cms_min": "1.0.0",
             "version": "1.0.0",
             "providers": [
                 "Mojahid\\Ecommerce\\Providers\\EcommerceServiceProvider"
