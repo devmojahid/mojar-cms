@@ -126,7 +126,6 @@ class EcommerceAction extends Action
 
             $order->load(['orderItems', 'paymentMethod']);
             // $order->loadExists(['downloadableProducts']);
-            // dd($order);
             $params['order'] = OrderResource::make($order)->toArray(request());
         }
 

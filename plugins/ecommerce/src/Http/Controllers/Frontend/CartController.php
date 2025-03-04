@@ -270,7 +270,8 @@ class CartController extends FrontendController
             'quantity' => (int) $quantity,
             'sku_code' => (string) ($post->getMeta('sku_code') ?? ''),
             'barcode' => (string) ($post->getMeta('barcode') ?? ''),
-            'type' => 'product'
+            'type' => $post->type ?? 'product',
+            'line_price' => (float) ($post->getMeta('price') ?? 0) * $quantity,
         ];
     }
 }

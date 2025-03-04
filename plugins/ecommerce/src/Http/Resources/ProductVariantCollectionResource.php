@@ -30,6 +30,7 @@ class ProductVariantCollectionResource extends ResourceCollection
                     'compare_price' => $item->compare_price,
                     'stock' => $item->stock,
                     'type' => $item->type,
+                    'line_price' => ecom_price_with_unit($item->line_price),
                 ];
             }
         )->toArray();

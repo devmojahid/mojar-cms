@@ -22,7 +22,6 @@ class Paypal extends PaymentMethodAbstract implements PaymentMethodInterface
     {
         $gateway = $this->getGateway();
 
-        $params['amount'] = 100;
         $response = $gateway->purchase($params)->send();
 
         $this->setRedirect($response->isRedirect());

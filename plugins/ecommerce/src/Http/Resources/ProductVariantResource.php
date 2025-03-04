@@ -28,6 +28,7 @@ class ProductVariantResource extends JsonResource
             'price' => $this->resource->price,
             'compare_price' => $this->resource->compare_price,
             'type' => $this->resource->type,
+            'line_price' => ecom_price_with_unit($this->resource->line_price),
         ];
     }
 }

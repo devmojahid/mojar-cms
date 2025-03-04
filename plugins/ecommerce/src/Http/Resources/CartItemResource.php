@@ -17,11 +17,11 @@ class CartItemResource extends JsonResource
             'thumbnail' => upload_url($this['thumbnail']),
             'compare_price' => (float) ($this['compare_price'] ?? 0),
             'compare_price_formatted' => ecom_price_with_unit($this['compare_price'] ?? 0),
+            'line_price' => (float) ecom_price_with_unit($this['line_price'] ?? 0),
             'pricing' => [
                 'unit_price' => (float) $this['price'],
                 'unit_price_formatted' => ecom_price_with_unit($this['price']),
-                'line_price' => (float) ($this['price'] * $this['quantity']),
-                'line_price_formatted' => ecom_price_with_unit($this['price'] * $this['quantity']),
+                'line_price' => (float) ecom_price_with_unit($this['price'] * $this['quantity']),
                 'compare_price' => (float) ($this['compare_price'] ?? 0),
                 'compare_price_formatted' => ecom_price_with_unit($this['compare_price'] ?? 0),
             ],

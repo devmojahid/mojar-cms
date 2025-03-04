@@ -18,7 +18,6 @@ class Payment
             'paypal' => new Paypal($paymentMethod),
             'cod' => new Cod($paymentMethod),
             'stripe' => new Stripe($paymentMethod),
-            'razorpay' => new Razorpay($paymentMethod),
             'mollie' => new Mollie($paymentMethod),
             default => new Cod($paymentMethod),
         };

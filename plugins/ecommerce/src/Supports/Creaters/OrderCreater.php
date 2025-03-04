@@ -43,6 +43,7 @@ class OrderCreater
 
         do_action('ecomm.before.save.order', $filldata, $items, $user);
 
+    
         $order = new Order();
         $order->fill($filldata);
         $order->code = $this->generateOrderCode();
@@ -67,7 +68,7 @@ class OrderCreater
                 'type' => $item['type'] ?? 'products',
                 'thumbnail' => $item['thumbnail'],
                 'price' => (float) $item['price'],
-                'line_price' => (float) ($item['price'] * $item['quantity']),
+                'line_price' => (float) $item['line_price'], 
                 'quantity' => (int) $item['quantity'],
                 'compare_price' => (float) ($item['compare_price'] ?? 0),
                 'sku_code' => $item['sku_code'] ?? null,

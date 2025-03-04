@@ -91,6 +91,7 @@ class DBCart implements CartContract
                 'sku_code' => $skuCode,
                 'barcode' => $barcode,
                 'compare_price' => $comparePrice,
+                'line_price' => $price * $quantity, 
             ];
 
             // Encode items as JSON before saving
@@ -130,6 +131,7 @@ class DBCart implements CartContract
                 'sku_code' => $post->getMeta('sku_code'),
                 'barcode' => $post->getMeta('barcode'),
                 'compare_price' => (float) $post->getMeta('compare_price'),
+                'line_price' => (float) $post->getMeta('price', 0) * $item['quantity'],
             ];
         }
 
@@ -212,6 +214,8 @@ class DBCart implements CartContract
         return collect($items)->map(function($item) {
             $item['line_price'] = $item['price'] * $item['quantity'];
             $item['metadata'] = $this->getItemMetadata($item);
+            $item['type'] = $item['type'] ?? 'products';
+            $item['quantity'] = $item['quantity'] ?? 1;
             return $item;
         });
     }
