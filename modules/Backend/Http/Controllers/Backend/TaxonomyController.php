@@ -193,7 +193,9 @@ class TaxonomyController extends BackendController
      */
     protected function afterSave($data, $model, ...$params): void
     {
-        $model->syncMetas($data['meta']);
+        if (isset($data['meta'])) {
+            $model->syncMetas($data['meta']);
+        }
     }
 
 

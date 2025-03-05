@@ -16,3 +16,9 @@
     height: .36em;
 	transform: rotate(0deg);
 }
+
+.page-item.page-next{
+    .page-link{
+        width: 20px !important;
+    }
+}

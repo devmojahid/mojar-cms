@@ -9,6 +9,8 @@
     }
 %}
 
+{% set related_events = get_related_posts(post, 3) %}
+
 <section class="tf__event_details_page pt_120 xs_pt_80 pb_120 xs_pb_80">
     <div class="container">
         <div class="row">
@@ -49,28 +51,28 @@
                             {% endfor %}
                         </ul>
                     </div>
-
-
+                    {% if related_events|length > 0 %}
                     <div class="tf__sidebar_event">
                         <h3>Recent Events</h3>
                         <ul>
-                            {% for event in post.related_events %}
+                            {% for event in related_events %}
                             <li>
                                 <div class="date">
-                                    <h4>12</h4>
-                                    <p>jun 2023</p>
+                                    <h4>{{ event.date|date('d') }}</h4>
+                                    <p>{{ event.date|date('M Y') }}</p>
                                 </div>
                                 <div class="text">
-                                    <a href="event_details.html">A Better Alternative To Grading Student Writing</a>
+                                    <a href="{{ event.url }}">{{ event.title }}</a>
                                     <p>
-                                        <span><i class="far fa-clock"></i> 12.30 PM</span>
-                                        <span><i class="far fa-map-marker-alt"></i> Cumilla</span>
+                                        <span><i class="far fa-clock"></i> {{ event.created_at|date('g') }} - {{ event.created_at|date('i') }} {{ event.created_at|date('A') }}</span>
+                                        <span><i class="far fa-map-marker-alt"></i> {{ event.metas.venue }}</span>
                                     </p>
                                 </div>
                             </li>
                             {% endfor %}
                         </ul>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

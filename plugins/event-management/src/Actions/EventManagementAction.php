@@ -232,9 +232,9 @@ class EventManagementAction extends Action
             'label'          => 'My Events',
             'supports'       => ['category','tag', 'comment'], 
             'rewrite'        => true,
-            'menu_box'       => false,
             'menu_position'  => 6,
-            'show_in_menu'   => false,
+            'show_in_menu' => true,
+            'menu_box'     => false,
             // Metas for the post type (automatically displayed in form.blade.php)
 
             'metas' => [
