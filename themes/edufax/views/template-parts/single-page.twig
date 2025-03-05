@@ -2,4 +2,24 @@
 
 {% block content %}
 
+    {% set tags = get_post_taxonomies(post, 'tags', {limit: 5}) %}
+    {% include 'theme::components.breadcrumb' with {
+            is_dynamic: true,
+            post: post,
+            background_image: post.thumbnail ?? 'images/breadcrumb_bg.jpg'
+        }
+    %}
+
+<section class="tf__privacy_policy_page pt_80 xs_pt_30 pb_115 xs_pb_75">
+    <div class="container">
+        <div class="row wow fadeInUp" data-wow-duration="1s" style="visibility: visible; animation-duration: 1s; animation-name: fadeInUp;">
+            <div class="col-12">
+                <div class="tf__trems_condition_text">
+                    <h2>{{ post.title }}</h2>
+                    {{ post.content|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

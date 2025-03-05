@@ -1,0 +1,33 @@
+<section class="tf__student_choose pt_{{ data.padding_top|default(120) }} xs_pt_{{ data.mobile_padding_top|default(80) }} pb_{{ data.padding_bottom|default(115) }} xs_pb_{{ data.mobile_padding_bottom|default(75) }}"
+    {% if data.background_image %}style="background: url({{ upload_url(data.background_image) }})"{% endif %}>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 {% if data.enable_animation %}wow fadeInLeft{% endif %}" {% if data.enable_animation %}data-wow-duration="1s"{% endif %}>
+                <div class="tf__student_choose_text">
+                    <div class="tf__section_heading mb_35">
+                        <h2>{{ data.section_title }}</h2>
+                    </div>
+                    <p>{{ data.description }}</p>
+                    {% if data.features %}
+                        <ul>
+                            {% for feature in data.features %}
+                                <li>{{ feature.text }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <a class="tf__common_btn2" href="{{ data.button_url }}">{{ data.button_text }}</a>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-10 col-lg-6 {% if data.enable_animation %}wow fadeInRight{% endif %}" {% if data.enable_animation %}data-wow-duration="1s"{% endif %}>
+                <div class="tf__student_choose_img">
+                    <div class="img_1">
+                        <img src="{{ upload_url(data.image_1) }}" alt="student choose" class="img-fluid w-100">
+                    </div>
+                    <div class="img_2">
+                        <img src="{{ upload_url(data.image_2) }}" alt="student choose" class="img-fluid w-100">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 

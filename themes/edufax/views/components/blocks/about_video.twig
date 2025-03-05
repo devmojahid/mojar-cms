@@ -1,0 +1,27 @@
+<section class="tf__about_video mt_{{ data.margin_top|default(115) }} xs_mt_{{ data.mobile_margin_top|default(80) }}">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 {% if data.enable_animation %}wow fadeInUp{% endif %}" {% if data.enable_animation %}data-wow-duration="1s"{% endif %}>
+                <div class="tf__community_img">
+                    <img src="{{ upload_url(data.background_image) }}" alt="about video" class="img-fluid w-100">
+                    {% if data.enable_overlay %}
+                    <div class="tf__community_img_overlay">
+                        <a class="venobox tf__play_btn" 
+                           data-autoplay="{{ data.enable_autoplay ? 'true' : 'false' }}" 
+                           data-vbtype="{{ data.video_type|default('video') }}"
+                           href="{{ data.video_url }}">
+                            <i class="{{ data.play_icon|default('fas fa-play') }}"></i>
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function(){
+        $('.venobox').venobox(); 
+    });
+</script> 

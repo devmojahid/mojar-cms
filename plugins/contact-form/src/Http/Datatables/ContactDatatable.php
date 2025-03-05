@@ -30,7 +30,20 @@ class ContactDatatable extends DataTable
         return [
             'subject' => [
                 'label' => trans('contact_form::content.subject'),
-                'formatter' => [$this, 'rowActionsFormatter'],
+                'formatter' => function ($value, $row, $index) {
+                    return view(
+                        'cms::backend.items.datatable_item',
+                        [
+                            'value' => $row->{$row->getFieldName()},
+                            'row' => $row,
+                            'actions' => $this->rowAction($row),
+                            'editUrl' => $this->currentUrl . '/' . $row->id . '/edit',
+                            'title_hidden' => false,
+                            'actions_hidden' => true,
+                        ]
+                    )
+                    ->render();
+                }
             ],
             'name' => [
                 'label' => trans('contact_form::content.name'),
@@ -48,7 +61,27 @@ class ContactDatatable extends DataTable
                 'formatter' => function ($value, $row, $index) {
                     return jw_date_format($row->created_at);
                 }
-            ]
+            ],
+            'operations' => [
+                'label' => trans('cms::app.operations'),
+                'width' => '10%',
+                'align' => 'center',
+                'sortable' => false,
+                'formatter' => function ($value, $row, $index) {
+                    return view(
+                        'cms::backend.items.datatable_item',
+                        [
+                            'value' => $row->{$row->getFieldName()},
+                            'row' => $row,
+                            'actions' => $this->rowAction($row),
+                            'editUrl' => $this->currentUrl . '/' . $row->id . '/edit',
+                            'title_hidden' => true,
+                            'actions_hidden' => false,
+                        ]
+                    )
+                    ->render();
+                },
+            ],
         ];
     }
 

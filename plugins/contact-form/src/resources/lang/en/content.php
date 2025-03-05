@@ -8,4 +8,5 @@ return [
     'subject' => 'Subject',
     'message' => 'Message',
     'metas' => 'Metas',
+    'contact_form' => 'Contact Form',
 ];

@@ -1,0 +1,128 @@
+{
+    "label": "FAQ With Contact Form",
+    "description": "Display FAQ accordion with contact form",
+    "form": [
+        {
+            "type": "text",
+            "name": "section_title",
+            "label": "Section Title",
+            "data": {
+                "value": "Frequently Asked Questions"
+            }
+        },
+        {
+            "type": "checkbox",
+            "name": "show_section_title",
+            "label": "Show Section Title",
+            "description": "Show section title"
+        },
+        {
+            "type": "repeater",
+            "name": "faq_items",
+            "label": "FAQ Items",
+            "fields": [
+                {
+                    "type": "text",
+                    "name": "question",
+                    "label": "Question"
+                },
+                {
+                    "type": "textarea",
+                    "name": "answer",
+                    "label": "Answer"
+                }
+            ],
+            "options": {
+                "min_items": 1,
+                "max_items": 10,
+                "add_button_text": "Add FAQ Item",
+                "remove_button_text": "Remove FAQ Item",
+                "value": [
+                    {
+                        "question": "What is EduFax?",
+                        "answer": "Yes, you can try us for free for 30 days. If you want, we'll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible."
+                    },
+                    {
+                        "question": "How to Purchase a Course?",
+                        "answer": "Yes, you can try us for free for 30 days. If you want, we'll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible."
+                    }
+                ]
+            }
+        },
+        {
+            "type": "checkbox",
+            "name": "show_contact_form",
+            "label": "Show Contact Form"
+        },
+        {
+            "type": "text",
+            "name": "form_title",
+            "label": "Form Title"
+        },
+        {
+            "type": "text",
+            "name": "name_label",
+            "label": "Name Field Label"
+        },
+        {
+            "type": "text",
+            "name": "name_placeholder",
+            "label": "Name Field Placeholder"
+        },
+        {
+            "type": "text",
+            "name": "email_label",
+            "label": "Email Field Label"
+        },
+        {
+            "type": "text",
+            "name": "email_placeholder",
+            "label": "Email Field Placeholder"
+        },
+        {
+            "type": "text",
+            "name": "phone_label",
+            "label": "Phone Field Label"
+        },
+        {
+            "type": "text",
+            "name": "phone_placeholder",
+            "label": "Phone Field Placeholder"
+        },
+        {
+            "type": "text",
+            "name": "message_label",
+            "label": "Message Field Label"
+        },
+        {
+            "type": "textarea",
+            "name": "message_placeholder",
+            "label": "Message Field Placeholder"
+        },
+        {
+            "type": "checkbox",
+            "name": "show_privacy_checkbox",
+            "label": "Show Privacy Policy Checkbox"
+        },
+        {
+            "type": "text",
+            "name": "privacy_text",
+            "label": "Privacy Policy Text"
+        },
+        {
+            "type": "text",
+            "name": "privacy_link_text",
+            "label": "Privacy Policy Link Text"
+        },
+        {
+            "type": "text",
+            "name": "privacy_link",
+            "label": "Privacy Policy URL"
+        },
+        {
+            "type": "text",
+            "name": "submit_text",
+            "label": "Submit Button Text"
+        }
+    ]
+} 

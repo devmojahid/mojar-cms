@@ -1,0 +1,76 @@
+{
+    "label": "About Video",
+    "description": "Display about video section with video popup",
+    "form": [
+        {
+            "type": "image",
+            "name": "background_image",
+            "label": "Background Image",
+            "data": {
+                "value": "images/about_video_img.jpg"
+            }
+        },
+        {
+            "type": "text",
+            "name": "video_url",
+            "label": "Video URL (YouTube)",
+            "data": {
+                "value": "https://youtu.be/CZkux700lqU"
+            }
+        },
+        {
+            "type": "checkbox",
+            "name": "enable_autoplay",
+            "label": "Enable Autoplay",
+            "description": "Enable video autoplay when popup opens"
+        },
+        {
+            "type": "select",
+            "name": "video_type",
+            "label": "Video Type",
+            "data": {
+                "options": {
+                    "video": "Video",
+                    "iframe": "iFrame"
+                },
+                "value": "video"
+            }
+        },
+        {
+            "type": "text",
+            "name": "margin_top",
+            "label": "Top Margin",
+            "data": {
+                "value": "115"
+            }
+        },
+        {
+            "type": "text",
+            "name": "mobile_margin_top",
+            "label": "Mobile Top Margin",
+            "data": {
+                "value": "80"
+            }
+        },
+        {
+            "type": "checkbox",
+            "name": "enable_animation",
+            "label": "Enable Animation",
+            "description": "Enable fade in animation"
+        },
+        {
+            "type": "text",
+            "name": "play_icon",
+            "label": "Play Button Icon",
+            "data": {
+                "value": "fas fa-play"
+            }
+        },
+        {
+            "type": "checkbox",
+            "name": "enable_overlay",
+            "label": "Enable Overlay",
+            "description": "Enable dark overlay on image"
+        }
+    ]
+} 

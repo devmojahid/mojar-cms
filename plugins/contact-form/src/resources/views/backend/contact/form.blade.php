@@ -2,7 +2,8 @@
 
 @section('content')
     @component('cms::components.form_resource', [
-        'model' => $model
+        'model' => $model,
+        'cardTitle' => trans('contact_form::content.contact_form')
     ])
 
         <div class="row">

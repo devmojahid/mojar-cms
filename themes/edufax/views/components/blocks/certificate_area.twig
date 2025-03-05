@@ -1,0 +1,20 @@
+<section class="tf__certificate" {% if data.background_image %}style="background: url({{ upload_url(data.background_image) }})"{% endif %}>
+    <div class="{% if data.enable_overlay %}tf__certificate_overlay{% endif %} pt_{{ data.padding_top|default(60) }} pb_{{ data.padding_bottom|default(60) }} xs_pb_{{ data.mobile_padding_bottom|default(5) }}">
+        <div class="container">
+            <div class="row">
+                {% if data.certificates %}
+                    {% for certificate in data.certificates %}
+                        <div class="col-xl-3 col-md-6 col-lg-3 {% if data.enable_animation %}wow fadeInUp{% endif %}" {% if data.enable_animation %}data-wow-duration="1s"{% endif %}>
+                            <div class="tf__single_certificate">
+                                <span>
+                                    <img src="{{ upload_url(certificate.icon) }}" alt="{{ certificate.title }}" class="img-fluid w-100">
+                                </span>
+                                <h4>{{ certificate.title }}</h4>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section> 

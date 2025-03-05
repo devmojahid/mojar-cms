@@ -12,6 +12,7 @@
             @if($disabled ?? false) disabled @endif
             @if($required ?? false) required @endif
             @if ($readonly ?? false) readonly @endif
+            @if ($value == 1) checked @endif
             @foreach ($data ?? [] as $key => $val)
                 {{ 'data-' . $key. '="'. $val .'"' }}
             @endforeach

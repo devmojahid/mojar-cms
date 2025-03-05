@@ -1,0 +1,70 @@
+<section class="tf__testimonial pt_110 xs_pt_75 pb_115 xs_pb_75" 
+    {% if data.background_image %}style="background: url({{ upload_url(data.background_image) }})"{% endif %}>
+    <div class="container">
+        {% if data.show_section_title %}
+            <div class="row">
+                <div class="col-xl-6 col-md-9 col-lg-7">
+                    <div class="tf__section_heading mb_50">
+                        <h2>{{ data.section_title }}</h2>
+                        <p>{{ data.section_description }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="row {% if data.enable_slider %}testi_slider{% endif %}">
+            {% if data.testimonials %}
+                {% for testimonial in data.testimonials %}
+                    <div class="col-xl-4 wow fadeInUp" data-wow-duration="1s">
+                        <div class="tf__single_testimonial">
+                            <div class="img">
+                                <img src="{{ upload_url(testimonial.image) }}" alt="{{ testimonial.name }}" class="img-fluid w-100">
+                            </div>
+                            <h4>{{ testimonial.name }}</h4>
+                            <span>{{ testimonial.designation }}</span>
+                            <p class="rating">
+                                {% for i in 1..5 %}
+                                    <i class="fas fa-star{% if i > testimonial.rating %} text-muted{% endif %}"></i>
+                                {% endfor %}
+                            </p>
+                            <p class="description">{{ testimonial.description }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% if data.enable_slider %}
+<script>
+    $('.testi_slider').slick({
+        slidesToShow: {{ data.slides_to_show|default(3) }},
+        slidesToScroll: 1,
+        autoplay: {{ data.enable_autoplay ? 'true' : 'false' }},
+        autoplaySpeed: {{ data.autoplay_speed|default(4000) }},
+        dots: false,
+        arrows: false,
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: {% if data.slides_to_show > 2 %}2{% else %}{{ data.slides_to_show }}{% endif %}
+                }
+            },
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ]
+    });
+</script>
+{% endif %} 

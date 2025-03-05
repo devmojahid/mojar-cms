@@ -1,0 +1,129 @@
+{
+    "label": "Student Choose",
+    "description": "Display why students choose us section",
+    "form": [
+        {
+            "type": "image",
+            "name": "background_image",
+            "label": "Background Image",
+            "data": {
+                "value": "images/student_choose_bg.jpg"
+            }
+        },
+        {
+            "type": "text",
+            "name": "section_title",
+            "label": "Section Title",
+            "data": {
+                "value": "Why Students Choose Us for Gain Their Knowledge"
+            }
+        },
+        {
+            "type": "textarea",
+            "name": "description",
+            "label": "Description",
+            "data": {
+                "value": "Lorem ipsum dolor sit amet consectetur. Posuere vulputate at tortor aenean tortor tincidunt dui consequat enim. Vel iaculis euismod et scelerisque condimentum nulla cras. Praesent diam orci id et eu nulla id. Auctor fermentum."
+            }
+        },
+        {
+            "type": "repeater",
+            "name": "features",
+            "label": "Features List",
+            "fields": [
+                {
+                    "type": "text",
+                    "name": "text",
+                    "label": "Feature Text"
+                }
+            ],
+            "options": {
+                "min_items": 1,
+                "max_items": 10,
+                "add_button_text": "Add Feature",
+                "remove_button_text": "Remove Feature",
+                "value": [
+                    {
+                        "text": "Free for physically handcraft."
+                    },
+                    {
+                        "text": "Easy to enroll courses"
+                    },
+                    {
+                        "text": "Course certificate for particular course"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "text",
+            "name": "button_text",
+            "label": "Button Text",
+            "data": {
+                "value": "More About Us"
+            }
+        },
+        {
+            "type": "text",
+            "name": "button_url",
+            "label": "Button URL",
+            "data": {
+                "value": "#"
+            }
+        },
+        {
+            "type": "image",
+            "name": "image_1",
+            "label": "Image 1",
+            "data": {
+                "value": "images/student_choose_img_1.jpg"
+            }
+        },
+        {
+            "type": "image",
+            "name": "image_2",
+            "label": "Image 2",
+            "data": {
+                "value": "images/student_choose_img_2.jpg"
+            }
+        },
+        {
+            "type": "text",
+            "name": "padding_top",
+            "label": "Top Padding",
+            "data": {
+                "value": "120"
+            }
+        },
+        {
+            "type": "text",
+            "name": "padding_bottom",
+            "label": "Bottom Padding",
+            "data": {
+                "value": "115"
+            }
+        },
+        {
+            "type": "text",
+            "name": "mobile_padding_top",
+            "label": "Mobile Top Padding",
+            "data": {
+                "value": "80"
+            }
+        },
+        {
+            "type": "text",
+            "name": "mobile_padding_bottom",
+            "label": "Mobile Bottom Padding",
+            "data": {
+                "value": "75"
+            }
+        },
+        {
+            "type": "checkbox",
+            "name": "enable_animation",
+            "label": "Enable Animation",
+            "description": "Enable fade in animation"
+        }
+    ]
+} 

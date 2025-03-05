@@ -1,0 +1,130 @@
+<section class="tf__faq_page pt_95 xs_pt_55 pb_120 xs_pb_80">
+    <div class="container">
+        {% if data.show_section_title %}
+            <div class="row">
+                <div class="col-12">
+                    <div class="tf__section_heading mb_40">
+                        <h2>{{ data.section_title }}</h2>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-xxl-8 col-lg-7">
+                <div class="tf__faq_text">
+                    <div class="accordion" id="accordionFaq">
+                        {% if data.faq_items %}
+                            {% for index, item in data.faq_items %}
+                                <div class="accordion-item wow fadeInUp" data-wow-duration="1s">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button {% if index > 0 %}collapsed{% endif %}" 
+                                                type="button" 
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#collapse{{ index }}" 
+                                                aria-expanded="{% if index == 0 %}true{% else %}false{% endif %}" 
+                                                aria-controls="collapse{{ index }}">
+                                            {{ item.question }}
+                                        </button>
+                                    </h2>
+                                    <div id="collapse{{ index }}" 
+                                         class="accordion-collapse collapse {% if index == 0 %}show{% endif %}"
+                                         data-bs-parent="#accordionFaq">
+                                        <div class="accordion-body">
+                                            <p>{{ item.answer }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            {% if data.show_contact_form %}
+            <div class="col-xxl-4 col-lg-5 wow fadeInRight" data-wow-duration="1s">
+                <form class="tf__faq_form tf__become_instructor_form" action="{{ url('ajax/contact') }}" method="POST">
+                    <div id="contact-success-message" class="alert alert-success" style="display: none;"></div>
+                    <div id="contact-error-message" class="alert alert-danger" style="display: none;"></div>
+
+                    <h2>{{ data.form_title }}</h2>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="tf__form_single_input">
+                                <label>{{ data.name_label }}</label>
+                                <input type="text" name="name" placeholder="{{ data.name_placeholder }}" required>
+                            </div>
+                        </div>
+                        <div class="col-xl-12">
+                            <div class="tf__form_single_input">
+                                <label>{{ data.email_label }}</label>
+                                <input type="email" name="email" placeholder="{{ data.email_placeholder }}" required>
+                            </div>
+                        </div>
+                        <div class="col-xl-12">
+                            <div class="tf__form_single_input">
+                                <label>{{ data.phone_label }}</label>
+                                <input type="text" name="phone" placeholder="{{ data.phone_placeholder }}">
+                            </div>
+                        </div>
+                        <div class="col-xl-12">
+                            <div class="tf__form_single_input">
+                                <label>{{ data.message_label }}</label>
+                                <textarea name="message" rows="4" placeholder="{{ data.message_placeholder }}" required></textarea>
+                            </div>
+                        </div>
+                        {% if data.show_privacy_checkbox %}
+                        <div class="col-xl-12">
+                            <div class="tf__form_single_input">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="privacyCheck" required>
+                                    <label class="form-check-label" for="privacyCheck">
+                                        {{ data.privacy_text }} <a href="{{ data.privacy_link }}">{{ data.privacy_link_text }}</a>.
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="col-xl-12">
+                            <button type="submit" class="tf__common_btn">{{ data.submit_text }}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function() {
+        $('.tf__faq_form').on('submit', function(e) {
+            e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            });
+
+            $.ajax({
+                url: '{{ url('ajax/contact') }}',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response.status === true) {
+                        $('#contact-success-message').show();
+                        $('#contact-success-message').text(response?.data?.message);
+                        $('.tf__faq_form')[0].reset();
+                    } else {
+                        $('#contact-error-message').show();
+                        $('#contact-error-message').text(response?.data?.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#contact-error-message').show();
+                    $('#contact-error-message').text(xhr.responseJSON?.message);
+                }
+            });
+        });
+    });
+</script> 

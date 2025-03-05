@@ -4,7 +4,7 @@ namespace Mojahid\ContactForm\Actions;
 
 use Juzaweb\CMS\Abstracts\Action;
 use Mojahid\ContactForm\Http\Controllers\Frontend\ContactController;
-
+use Juzaweb\CMS\Facades\HookAction;
 class AjaxAction extends Action
 {
     public function handle(): void
@@ -14,7 +14,7 @@ class AjaxAction extends Action
 
     public function registerPostContact(): void
     {
-        $this->registerFrontendAjax(
+        HookAction::registerFrontendAjax(
             'contact',
             [
                 'method' => 'POST',

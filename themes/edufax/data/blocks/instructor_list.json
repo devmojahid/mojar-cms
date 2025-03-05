@@ -1,0 +1,128 @@
+{
+    "label": "Instructor List",
+    "description": "Display instructors list with two different styles",
+    "form": [
+        {
+            "type": "select",
+            "name": "style",
+            "label": "Display Style",
+            "data": {
+                "options": {
+                    "style1": "Style 1 (With Background)",
+                    "style2": "Style 2 (Grid View)"
+                },
+                "value": "style1"
+            }
+        },
+        {
+            "type": "checkbox",
+            "name": "show_section_title",
+            "label": "Show Section Title",
+            "description": "Show section title and description"
+        },
+        {
+            "type": "text",
+            "name": "section_title",
+            "label": "Section Title",
+            "data": {
+                "value": "Our Expert Instructor"
+            }
+        },
+        {
+            "type": "textarea",
+            "name": "section_description",
+            "label": "Section Description",
+            "data": {
+                "value": "Take your learning organization to the next level. Who will share their knowledge to people around the world."
+            }
+        },
+        {
+            "type": "image",
+            "name": "background_image",
+            "label": "Background Image (Style 1 only)",
+            "data": {
+                "value": "images/instructor_bg.jpg"
+            }
+        },
+        {
+            "type": "repeater",
+            "name": "instructors",
+            "label": "Instructors",
+            "fields": [
+                {
+                    "type": "text",
+                    "name": "name",
+                    "label": "Instructor Name"
+                },
+                {
+                    "type": "text",
+                    "name": "designation",
+                    "label": "Designation"
+                },
+                {
+                    "type": "image",
+                    "name": "image",
+                    "label": "Instructor Image"
+                },
+                {
+                    "type": "text",
+                    "name": "detail_url",
+                    "label": "Detail Page URL"
+                },
+                {
+                    "type": "text",
+                    "name": "facebook_url",
+                    "label": "Facebook URL"
+                },
+                {
+                    "type": "text",
+                    "name": "linkedin_url",
+                    "label": "LinkedIn URL"
+                },
+                {
+                    "type": "text",
+                    "name": "twitter_url",
+                    "label": "Twitter URL"
+                }
+            ],
+            "options": {
+                "min_items": 1,
+                "max_items": 20,
+                "add_button_text": "Add Instructor",
+                "remove_button_text": "Remove Instructor",
+                "value": [
+                    {
+                        "name": "Darrell Steward",
+                        "designation": "Sales & Marketing",
+                        "image": "images/instructor_img_1.png",
+                        "detail_url": "instructor_details.html",
+                        "facebook_url": "#",
+                        "linkedin_url": "#",
+                        "twitter_url": "#"
+                    },
+                    {
+                        "name": "Devon Lane",
+                        "designation": "Web Designer",
+                        "image": "images/instructor_img_2.png",
+                        "detail_url": "instructor_details.html",
+                        "facebook_url": "#",
+                        "linkedin_url": "#",
+                        "twitter_url": "#"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "checkbox",
+            "name": "enable_slider",
+            "label": "Enable Slider (Style 1 only)",
+            "description": "Enable slider for style 1"
+        },
+        {
+            "type": "checkbox",
+            "name": "show_pagination",
+            "label": "Show Pagination (Style 2 only)",
+            "description": "Show pagination for style 2"
+        }
+    ]
+} 

@@ -1,0 +1,134 @@
+{
+    "label": "Testimonial Area",
+    "description": "Display testimonials with slider",
+    "form": [
+        {
+            "type": "checkbox",
+            "name": "show_section_title",
+            "label": "Show Section Title",
+            "description": "Show section title and description"
+        },
+        {
+            "type": "text",
+            "name": "section_title",
+            "label": "Section Title",
+            "data": {
+                "value": "What Our Student Saying"
+            }
+        },
+        {
+            "type": "textarea",
+            "name": "section_description",
+            "label": "Section Description",
+            "data": {
+                "value": "Take your learning organization to the next level. Who will share their knowledge to people around the world."
+            }
+        },
+        {
+            "type": "image",
+            "name": "background_image",
+            "label": "Background Image",
+            "data": {
+                "value": "images/testimonial_bg.jpg"
+            }
+        },
+        {
+            "type": "repeater",
+            "name": "testimonials",
+            "label": "Testimonials",
+            "fields": [
+                {
+                    "type": "text",
+                    "name": "name",
+                    "label": "Student Name"
+                },
+                {
+                    "type": "text",
+                    "name": "designation",
+                    "label": "Designation"
+                },
+                {
+                    "type": "image",
+                    "name": "image",
+                    "label": "Student Image"
+                },
+                {
+                    "type": "select",
+                    "name": "rating",
+                    "label": "Rating",
+                    "data": {
+                        "options": {
+                            "1": "1 Star",
+                            "2": "2 Stars",
+                            "3": "3 Stars",
+                            "4": "4 Stars",
+                            "5": "5 Stars"
+                        },
+                        "value": "5"
+                    }
+                },
+                {
+                    "type": "textarea",
+                    "name": "description",
+                    "label": "Testimonial Text"
+                }
+            ],
+            "options": {
+                "min_items": 1,
+                "max_items": 20,
+                "add_button_text": "Add Testimonial",
+                "remove_button_text": "Remove Testimonial",
+                "value": [
+                    {
+                        "name": "Leslie Alexander",
+                        "designation": "Dog Trainer",
+                        "image": "images/testimonial_img_1.jpg",
+                        "rating": "5",
+                        "description": "Lorem ipsum dolor sit amet consectetur. Hac ullamcorper nisi con velit eget dignissim pharetra at. Libero ultrices semper aliquet fusce aliquam nunc. Platea cursus in duis semper non lectus."
+                    },
+                    {
+                        "name": "Leslie Alexander",
+                        "designation": "Dog Trainer",
+                        "image": "images/testimonial_img_2.jpg",
+                        "rating": "5",
+                        "description": "Lorem ipsum dolor sit amet consectetur. Hac ullamcorper nisi con velit eget dignissim pharetra at. Libero ultrices semper aliquet fusce aliquam nunc. Platea cursus in duis semper non lectus."
+                    }
+                ]
+            }
+        },
+        {
+            "type": "checkbox",
+            "name": "enable_slider",
+            "label": "Enable Slider",
+            "description": "Enable slider for testimonials"
+        },
+        {
+            "type": "select",
+            "name": "slides_to_show",
+            "label": "Slides to Show",
+            "data": {
+                "options": {
+                    "1": "1 Slide",
+                    "2": "2 Slides",
+                    "3": "3 Slides",
+                    "4": "4 Slides"
+                },
+                "value": "3"
+            }
+        },
+        {
+            "type": "checkbox",
+            "name": "enable_autoplay",
+            "label": "Enable Autoplay",
+            "description": "Enable autoplay for slider"
+        },
+        {
+            "type": "text",
+            "name": "autoplay_speed",
+            "label": "Autoplay Speed (ms)",
+            "data": {
+                "value": "4000"
+            }
+        }
+    ]
+} 

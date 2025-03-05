@@ -1,0 +1,158 @@
+{% if data.style == 'style1' %}
+    <!-- Instructor Section style 1 -->
+    <section class="tf__instructor mt_120 xs_mt_80" {% if data.background_image %}style="background: url({{ upload_url(data.background_image) }})"{% endif %}>
+        <div class="tf__instructor_overlay pt_110 xs_pt_75 pb_80 xs_pb_40">
+            <div class="container">
+                {% if data.show_section_title %}
+                    <div class="row">
+                        <div class="col-xl-6 col-md-9 col-lg-7 m-auto">
+                            <div class="tf__section_heading heading_center mb_35 xs_mb_30">
+                                <h2>{{ data.section_title }}</h2>
+                                <p>{{ data.section_description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="row {% if data.enable_slider %}team_slider{% endif %}">
+                    {% if data.instructors %}
+                        {% for instructor in data.instructors %}
+                            <div class="col-xl-3 wow fadeInUp" data-wow-duration="1s">
+                                <div class="tf__single_instructor">
+                                    <a href="{{ instructor.detail_url }}" class="tf__single_instructor_img">
+                                        <img src="{{ upload_url(instructor.image) }}" alt="{{ instructor.name }}" class="img-fluid w-100">
+                                    </a>
+                                    <div class="tf__instructor_text">
+                                        <a href="{{ instructor.detail_url }}">{{ instructor.name }}</a>
+                                        <p>{{ instructor.designation }}</p>
+                                    </div>
+                                    <ul>
+                                        {% if instructor.facebook_url %}
+                                            <li><a class="facebook" href="{{ instructor.facebook_url }}"><i class="fab fa-facebook-f"></i></a></li>
+                                        {% endif %}
+                                        {% if instructor.linkedin_url %}
+                                            <li><a class="linkedin" href="{{ instructor.linkedin_url }}"><i class="fab fa-linkedin-in"></i></a></li>
+                                        {% endif %}
+                                        {% if instructor.twitter_url %}
+                                            <li><a class="twitter" href="{{ instructor.twitter_url }}"><i class="fab fa-twitter"></i></a></li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% else %}
+    <!-- Instructor Section style 2 -->
+    <section class="tf__instructor_page pt_95 xs_pt_55 pb_120 xs_pb_80">
+        <div class="container">
+            {% if data.show_section_title %}
+                <div class="row">
+                    <div class="col-xl-6 col-md-9 col-lg-7 m-auto">
+                        <div class="tf__section_heading heading_center mb_35 xs_mb_30">
+                            <h2>{{ data.section_title }}</h2>
+                            <p>{{ data.section_description }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="row">
+                {% if data.instructors %}
+                    {% for instructor in data.instructors %}
+                        <div class="col-xl-3 col-sm-6 col-lg-4 wow fadeInUp" data-wow-duration="1s">
+                            <div class="tf__single_instructor">
+                                <a href="{{ instructor.detail_url }}" class="tf__single_instructor_img">
+                                    <img src="{{ upload_url(instructor.image) }}" alt="{{ instructor.name }}" class="img-fluid w-100">
+                                </a>
+                                <div class="tf__instructor_text">
+                                    <a href="{{ instructor.detail_url }}">{{ instructor.name }}</a>
+                                    <p>{{ instructor.designation }}</p>
+                                </div>
+                                <ul>
+                                    {% if instructor.facebook_url %}
+                                        <li><a class="facebook" href="{{ instructor.facebook_url }}"><i class="fab fa-facebook-f"></i></a></li>
+                                    {% endif %}
+                                    {% if instructor.linkedin_url %}
+                                        <li><a class="linkedin" href="{{ instructor.linkedin_url }}"><i class="fab fa-linkedin-in"></i></a></li>
+                                    {% endif %}
+                                    {% if instructor.twitter_url %}
+                                        <li><a class="twitter" href="{{ instructor.twitter_url }}"><i class="fab fa-twitter"></i></a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            {% if data.show_pagination %}
+                <div class="tf__pagination mt_60">
+                    <div class="row">
+                        <div class="col-12">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Previous">
+                                            <i class="far fa-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link active" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Next">
+                                            <i class="far fa-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+{% endif %}
+
+{% if data.enable_slider and data.style == 'style1' %}
+<script>
+    $('.team_slider').slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 4000,
+        dots: false,
+        arrows: false,
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 3
+                }
+            },
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ]
+    });
+</script>
+{% endif %} 

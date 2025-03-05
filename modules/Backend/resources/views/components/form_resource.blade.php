@@ -25,7 +25,12 @@
     @endif
     <div class="card">
 
-        <div class="card-header bg-transparent justify-content-end align-items-center">
+        <div class="card-header bg-transparent justify-content-end align-items-center d-flex">
+            @if (isset($cardTitle) && $cardTitle)
+                <div class="me-auto">
+                    <h5 class="card-title">{{ $cardTitle }}</h5>
+                </div>
+            @endif
             <div class="actions-buttons">
                 <button type="submit" class="btn btn-tabler me-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" <svg

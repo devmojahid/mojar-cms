@@ -81,6 +81,41 @@
             "label": "About Area",
             "description": "About Area",
             "view": "theme::components.blocks.about_area"
+        },
+        "contact_form": {
+            "label": "Contact Form",
+            "description": "Contact Form",
+            "view": "theme::components.blocks.contact_form"
+        },
+        "faq_with_form": {
+            "label": "FAQ with Form",
+            "description": "FAQ with Form",
+            "view": "theme::components.blocks.faq_with_form"
+        },
+        "instructor_list": {
+            "label": "Instructor List",
+            "description": "Instructor List",
+            "view": "theme::components.blocks.instructor_list"
+        },
+        "testimonial_area": {
+            "label": "Testimonial Area",
+            "description": "Testimonial Area",
+            "view": "theme::components.blocks.testimonial_area"
+        },
+        "certificate_area": {
+            "label": "Certificate Area",
+            "description": "Certificate Area",
+            "view": "theme::components.blocks.certificate_area"
+        },
+        "student_choose": {
+            "label": "Student Choose",
+            "description": "Student Choose",
+            "view": "theme::components.blocks.student_choose"
+        },
+        "about_video": {
+            "label": "About Video",
+            "description": "About Video",
+            "view": "theme::components.blocks.about_video"
         }
     },
     "sidebars": {

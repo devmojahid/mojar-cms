@@ -1,0 +1,91 @@
+{
+    "label": "Certificate Area",
+    "description": "Display certificate features with icons",
+    "form": [
+        {
+            "type": "image",
+            "name": "background_image",
+            "label": "Background Image",
+            "data": {
+                "value": "images/certificate_bg.jpg"
+            }
+        },
+        {
+            "type": "checkbox",
+            "name": "enable_overlay",
+            "label": "Enable Background Overlay",
+            "description": "Enable dark overlay on background"
+        },
+        {
+            "type": "repeater",
+            "name": "certificates",
+            "label": "Certificate Features",
+            "fields": [
+                {
+                    "type": "text",
+                    "name": "title",
+                    "label": "Feature Title"
+                },
+                {
+                    "type": "image",
+                    "name": "icon",
+                    "label": "Feature Icon"
+                }
+            ],
+            "options": {
+                "min_items": 1,
+                "max_items": 4,
+                "add_button_text": "Add Feature",
+                "remove_button_text": "Remove Feature",
+                "value": [
+                    {
+                        "title": "Online Certification",
+                        "icon": "images/certificate_icon_1.png"
+                    },
+                    {
+                        "title": "Top Instructors",
+                        "icon": "images/certificate_icon_2.png"
+                    },
+                    {
+                        "title": "Unlimited Access",
+                        "icon": "images/certificate_icon_3.png"
+                    },
+                    {
+                        "title": "Experienced Members",
+                        "icon": "images/certificate_icon_4.png"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "text",
+            "name": "padding_top",
+            "label": "Top Padding",
+            "data": {
+                "value": "60"
+            }
+        },
+        {
+            "type": "text",
+            "name": "padding_bottom",
+            "label": "Bottom Padding",
+            "data": {
+                "value": "60"
+            }
+        },
+        {
+            "type": "text",
+            "name": "mobile_padding_bottom",
+            "label": "Mobile Bottom Padding",
+            "data": {
+                "value": "5"
+            }
+        },
+        {
+            "type": "checkbox",
+            "name": "enable_animation",
+            "label": "Enable Animation",
+            "description": "Enable fade in animation"
+        }
+    ]
+} 

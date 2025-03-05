@@ -1,0 +1,150 @@
+{
+    "label": "Contact Form",
+    "description": "Contact form with information boxes and map",
+    "form": [
+        {
+            "type": "checkbox",
+            "name": "show_title",
+            "label": "Show Title",
+            "value": true
+        },
+        {
+            "type": "text",
+            "name": "title",
+            "label": "Section Title",
+            "value": "Get In Touch With Us"
+        },
+        {
+            "type": "checkbox",
+            "name": "show_info_boxes",
+            "label": "Show Info Boxes",
+            "value": true
+        },
+        {
+            "type": "repeater",
+            "name": "info_boxes",
+            "label": "Information Boxes",
+            "fields": [
+                {
+                    "type": "text",
+                    "name": "icon",
+                    "label": "Icon Class",
+                    "description": "FontAwesome icon class (e.g. fas fa-envelope)"
+                },
+                {
+                    "type": "text",
+                    "name": "title",
+                    "label": "Box Title"
+                },
+                {
+                    "type": "text",
+                    "name": "subtitle",
+                    "label": "Box Subtitle"
+                },
+                {
+                    "type": "text",
+                    "name": "content",
+                    "label": "Box Content"
+                }
+            ],
+            "options": {
+                "min_items": 1,
+                "max_items": 4,
+                "add_button_text": "Add Info Box",
+                "remove_button_text": "Remove Info Box",
+                "value": [
+                    {
+                        "icon": "fas fa-envelope",
+                        "title": "Email",
+                        "subtitle": "Our friendly team is here to help.",
+                        "content": "example@gmail.com"
+                    },
+                    {
+                        "icon": "fas fa-map-marker-alt",
+                        "title": "Office",
+                        "subtitle": "Come say hello at our office.",
+                        "content": "8502 Preston Rd. Maine 98380, USA"
+                    },
+                    {
+                        "icon": "fas fa-phone-alt",
+                        "title": "Phone",
+                        "subtitle": "Mon-Fri from 8am to 5pm.",
+                        "content": "+088 (246) 642-27"
+                    },
+                    {
+                        "icon": "fas fa-clock",
+                        "title": "Working Hours",
+                        "subtitle": "Monday to Friday:",
+                        "content": "09:00am - 10:00pm"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "text",
+            "name": "name_label",
+            "label": "Name Field Label",
+            "value": "Name"
+        },
+        {
+            "type": "text",
+            "name": "name_placeholder",
+            "label": "Name Field Placeholder",
+            "value": "Your name"
+        },
+        {
+            "type": "text",
+            "name": "email_label",
+            "label": "Email Field Label",
+            "value": "Email"
+        },
+        {
+            "type": "text",
+            "name": "email_placeholder",
+            "label": "Email Field Placeholder",
+            "value": "example@gmail.com"
+        },
+        {
+            "type": "text",
+            "name": "subject_label",
+            "label": "Subject Field Label",
+            "value": "Subject"
+        },
+        {
+            "type": "text",
+            "name": "subject_placeholder",
+            "label": "Subject Field Placeholder",
+            "value": "Your subject"
+        },
+        {
+            "type": "text",
+            "name": "message_label",
+            "label": "Message Field Label",
+            "value": "Message"
+        },
+        {
+            "type": "textarea",
+            "name": "message_placeholder",
+            "label": "Message Field Placeholder",
+            "value": "Type your message here.."
+        },
+        {
+            "type": "text",
+            "name": "submit_text",
+            "label": "Submit Button Text",
+            "value": "Send message"
+        },
+        {
+            "type": "checkbox",
+            "name": "show_map",
+            "label": "Show Map",
+            "value": true
+        },
+        {
+            "type": "text",
+            "name": "map_url",
+            "label": "Google Map URL",
+            "value": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58404.90712306111!2d90.33188860263257!3d23.807690708042205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2sDhaka!5e0!3m2!1sen!2sbd!4v1685520321950!5m2!1sen!2sbd"
+        }
+    ]
+}

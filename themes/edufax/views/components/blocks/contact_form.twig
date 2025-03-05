@@ -1,0 +1,100 @@
+<section class="tf__contact_page pt_110 xs_pt_70 pb_120 xs_pb_80">
+    <div class="container">
+        <div class="row">
+            {% if data.show_title %}
+                <h2>{{ data.title }}</h2>
+            {% endif %}
+            
+            {% if data.show_info_boxes %}
+            <div class="col-xl-6">
+                <div class="row">
+                    {% for info_box in data.info_boxes %}
+                        <div class="col-xl-6 col-md-6 wow fadeInUp" data-wow-duration="1s">
+                            <div class="tf__contact_info">
+                                <i class="{{ info_box.icon }}"></i>
+                                <h3>{{ info_box.title }}</h3>
+                                <span>{{ info_box.subtitle }}</span>
+                                <p>{{ info_box.content }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="col-xl-{{ data.show_info_boxes ? '6' : '12' }} wow fadeInRight" data-wow-duration="1s">
+                <form class="tf__contact_form" action="{{ url('ajax/contact') }}" method="POST">
+                 <div id="contact-success-message" class="alert alert-success" style="display: none;"></div>
+                    <div id="contact-error-message" class="alert alert-danger" style="display: none;"></div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="tf__form_single_input">
+                                <label>{{ data.name_label|default('Name') }}</label>
+                                <input type="text" name="name" placeholder="{{ data.name_placeholder }}" required>
+                            </div>
+                        </div>
+                        <div class="col-xl-12 col-md-6">
+                            <div class="tf__form_single_input">
+                                <label>{{ data.email_label|default('Email') }}</label>
+                                <input type="email" name="email" placeholder="{{ data.email_placeholder }}" required>
+                            </div>
+                        </div>
+                        <div class="col-xl-12 col-md-6">
+                            <div class="tf__form_single_input">
+                                <label>{{ data.subject_label|default('Subject') }}</label>
+                                <input type="text" name="subject" placeholder="{{ data.subject_placeholder }}" required>
+                            </div>
+                        </div>
+                        <div class="col-xl-12">
+                            <div class="tf__form_single_input">
+                                <label>{{ data.message_label|default('Message') }}</label>
+                                <textarea name="message" rows="4" placeholder="{{ data.message_placeholder }}" required></textarea>
+                            </div>
+                            <button type="submit" class="tf__common_btn">{{ data.submit_text }}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            {% if data.show_map %}
+            <div class="col-12 wow fadeInUp" data-wow-duration="1s">
+                <div class="tf__contact_map mt_120 xs_mt_80">
+                    <iframe src="{{ data.map_url }}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function() {
+        $('.tf__contact_form').on('submit', function(e) {
+            e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            });
+
+            $.ajax({
+                url: '{{ url('ajax/contact') }}',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response.status === true) {
+                        $('#contact-success-message').show();
+                        $('#contact-success-message').text(response?.data?.message);
+                    } else {
+                        $('#contact-error-message').show();
+                        $('#contact-error-message').text(response?.data?.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#contact-error-message').show();
+                    $('#contact-error-message').text(xhr.responseJSON?.message);
+                }
+            });
+        });
+    });
+</script>
