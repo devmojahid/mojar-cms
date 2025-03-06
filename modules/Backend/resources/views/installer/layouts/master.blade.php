@@ -9,14 +9,84 @@
     <title>@yield('template_title')</title>
 
     <link href="{{ asset('jw-styles/mojar/installer/css/style.css') }}" rel="stylesheet" />
-    {{-- <link href="{{ asset('jw-styles/base/assets/css/tabler.min.css') }}" rel="stylesheet" /> --}}
-    {{-- <link href="{{ asset('jw-styles/base/assets/css/tabler-vendors.min.css') }}" rel="stylesheet" /> --}}
 
     <script>
         window.Laravel = @json([
             'csrfToken' => csrf_token(),
         ])
     </script>
+
+    <style>
+        .error-block {
+            color: red;
+        }
+
+        .error-block i {
+            margin-right: 5px;
+        }
+
+        .error-block p {
+            margin-bottom: 0;
+        }
+
+        .has-error {
+            border: 1px solid red;
+        }
+
+        .rounded-full {
+            border-radius: 50%;
+        }
+
+        .w-20 {
+            width: 5rem;
+        }
+
+        .h-20 {
+            height: 5rem;
+        }
+
+        .w-4 {
+            width: 1rem;
+        }
+
+        .h-4 {
+            height: 1rem;
+        }
+
+        .text-center{
+            text-align: center;
+        }
+
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+        .justify-center {
+            justify-content: center;
+        }
+        .items-center {
+            align-items: center;
+        }
+        
+        .gap-4 {
+            gap: 1rem;
+        }
+        .pt-6 {
+            padding-top: 1.5rem;
+        }
+        .text-muted {
+            color: #6c757d;
+        }
+        
+    </style>
 
     @yield('style')
 </head>
@@ -63,23 +133,7 @@
                     @endif
                 </div>
             </li>
-            <li class="step {{ is_active_route('installer.permissions') }}">
-                <div class="step-icon">4</div>
-                <div class="step-label">
-                    @if (Request::is('install/requirements') ||
-                            Request::is('install/environment') ||
-                            Request::is('install/environment/wizard') ||
-                            Request::is('install/environment/classic'))
-                        <a href="{{ route('installer.permissions') }}">
-                            <i class="fa fa-key" aria-hidden="true"></i>
-                            <span>Permissions</span>
-                        </a>
-                    @else
-                        <i class="fa fa-key" aria-hidden="true"></i>
-                        <span>Permissions</span>
-                    @endif
-                </div>
-            </li>
+
             <li class="step {{ is_active_route('installer.environment') }}">
                 <div class="step-icon">3</div>
                 <div class="step-label">
@@ -129,4 +183,5 @@
 
     {{-- <script src="{{ asset('jw-styles/mojar/installer/js/main.js') }}"></script> --}}
 </body>
+
 </html>

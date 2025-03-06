@@ -37,6 +37,13 @@ class EnvironmentController extends Controller
             'database_username' => 'required|string|max:150',
             'database_password' => 'nullable|string|max:150',
             'database_prefix' => 'nullable|string|max:10',
+            'app_name' => 'nullable|string|max:150',
+            'app_url' => 'nullable|string|max:150',
+            'mail_driver' => 'nullable|string|max:150',
+            'smtp_host' => 'nullable|string|max:150',
+            'smtp_port' => 'nullable|numeric',
+            'smtp_username' => 'nullable|string|max:150',
+            'smtp_password' => 'nullable|string|max:150',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -46,6 +53,12 @@ class EnvironmentController extends Controller
                 ->withInput()
                 ->withErrors($validator->errors());
         }
+
+        // save smtp config
+        $this->saveSmtpConfig($request);
+
+        // save app config
+        $this->saveAppConfig($request);
 
         if (! $this->checkDatabaseConnection($request)) {
             return $redirect->route('installer.environment')
@@ -93,5 +106,28 @@ class EnvironmentController extends Controller
         } catch (Exception $e) {
             return false;
         }
+    }
+
+    private function saveSmtpConfig(Request $request)
+    {
+        $smtpConfig = [
+            'mail_driver' => $request->input('mail_driver'),
+            'smtp_host' => $request->input('smtp_host'),
+            'smtp_port' => $request->input('smtp_port'),
+            'smtp_username' => $request->input('smtp_username'),
+            'smtp_password' => $request->input('smtp_password'),
+        ];
+
+        config(['mail' => $smtpConfig]);
+    }
+    
+    private function saveAppConfig(Request $request)
+    {
+        $appConfig = [
+            'app_name' => $request->input('app_name'),
+            'app_url' => $request->input('app_url'),
+        ];
+
+        config(['app' => $appConfig]);
     }
 }

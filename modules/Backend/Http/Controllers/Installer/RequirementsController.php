@@ -4,6 +4,7 @@ namespace Juzaweb\Backend\Http\Controllers\Installer;
 
 use Illuminate\Routing\Controller;
 use Juzaweb\CMS\Support\RequirementsChecker;
+use Juzaweb\CMS\Support\PermissionsChecker;
 
 class RequirementsController extends Controller
 {
@@ -13,11 +14,17 @@ class RequirementsController extends Controller
     protected $requirements;
 
     /**
+     * @var PermissionsChecker
+     */
+    protected $permissions;
+
+    /**
      * @param RequirementsChecker $checker
      */
-    public function __construct(RequirementsChecker $checker)
+    public function __construct(RequirementsChecker $checker, PermissionsChecker $permissions)
     {
         $this->requirements = $checker;
+        $this->permissions = $permissions;
     }
 
     /**
@@ -35,6 +42,16 @@ class RequirementsController extends Controller
             config('installer.requirements')
         );
 
-        return view('cms::installer.requirements', compact('requirements', 'phpSupportInfo'));
+        $permissions = $this->permissions->check([
+            'storage/' => '775',
+            'bootstrap/cache/' => '775',
+            'resources/' => '775',
+            'public/' => '775',
+            'plugins/' => '775',
+            'themes/' => '775',
+            'vendor/' => '775',
+        ]);
+
+        return view('cms::installer.requirements', compact('requirements', 'phpSupportInfo', 'permissions'));
     }
 }

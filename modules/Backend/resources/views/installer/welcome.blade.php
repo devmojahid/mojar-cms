@@ -33,45 +33,38 @@
                     <div class="flex flex-col sm:flex-row gap-4 items-center text-sm text-muted">
                         <div class="flex items-center gap-2">
                             <div class="w-2 h-2 rounded-full bg-green-500"></div>
-                            <span>PHP Version: 8.1.0</span>
+                            <span>PHP Version: 
+                                @php
+                                    $phpVersion = phpversion();
+                                @endphp
+                                {{ $phpVersion }}
+                            </span>
                         </div>
                         <div class="flex items-center gap-2">
                             <div class="w-2 h-2 rounded-full bg-green-500"></div>
-                            <span>MySQL Version: 5.7+</span>
+                            <span>MySQL Version: 
+                                @php
+                                    $mysqlVersion = DB::select('SELECT VERSION() AS version');
+                                @endphp
+                                {{ $mysqlVersion[0]->version }}
+                            </span>
                         </div>
                         <div class="flex items-center gap-2">
                             <div class="w-2 h-2 rounded-full bg-green-500"></div>
-                            <span>Server: Apache/Nginx</span>
+                            <span>Server: 
+                                @php
+                                    $server = $_SERVER['SERVER_SOFTWARE'];
+                                @endphp
+                                {{ $server }}
+                            </span>
                         </div>
                     </div>
                 </div>
                 <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
                     <button class="button button-outline w-full sm:w-auto" disabled>Previous</button>
-                    <a href="requirements.html" class="button w-full sm:w-auto">Start Installation</a>
+                    <a href="{{ route('installer.requirements') }}" class="button w-full sm:w-auto">Start Installation</a>
                 </div>
             </div>
         </div>
     </div>
 @endsection
-{{-- @extends('cms::installer.layouts.master')
-
-@section('template_title')
-    {{ trans('cms::installer.welcome.template_title') }}
-@endsection
-
-@section('title')
-    {{ trans('cms::installer.welcome.title') }}
-@endsection
-
-@section('container')
-    <p class="text-center">
-      {{ trans('cms::installer.welcome.message') }}
-    </p>
-
-    <p class="text-center">
-      <a href="{{ route('installer.requirements') }}" class="button">
-        {{ trans('cms::installer.welcome.next') }}
-        <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
-      </a>
-    </p>
-@endsection --}}
