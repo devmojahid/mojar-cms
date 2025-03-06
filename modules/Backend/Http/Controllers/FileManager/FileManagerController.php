@@ -17,18 +17,36 @@ class FileManagerController extends BackendController
         $mimeTypes = config("mojar.filemanager.types.{$type}.valid_mime");
         $maxSize = config("mojar.filemanager.types.{$type}.max_size");
         $multiChoose = $request->get('multichoose', 0);
+        $folderId = $request->get('folderId', 0);
 
         if (empty($mimeTypes)) {
             abort(404);
         }
 
+        if ($folderId) {
+            $this->addBreadcrumb(
+                [
+                    'title' => $title,
+                    'url' => route('admin.media.index'),
+                ]
+            );
+
+            $folder = $this->folderRepository->find($folderId);
+            $folder->load('parent');
+            $this->addBreadcrumbFolder($folder);
+            $title = $folder->name;
+        }
+
         return view(
             'cms::backend.filemanager.index',
-            compact(
-                'mimeTypes',
-                'maxSize',
-                'multiChoose'
-            )
+            [
+                'fileTypes' => $this->getFileTypes(),
+                'mimeTypes' => $mimeTypes,
+                'maxSize' => $maxSize,
+                'multiChoose' => $multiChoose,
+                'type' => $type,
+                'folderId' => $folderId,
+            ]
         );
     }
 
@@ -79,5 +97,10 @@ class FileManagerController extends BackendController
         }
 
         return false;
+    }
+
+    protected function getFileTypes()
+    {
+        return config('mojar.filemanager.types');
     }
 }

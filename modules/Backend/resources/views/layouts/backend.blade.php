@@ -7,7 +7,13 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $title ?? '' }}</title>
+    <title>
+        @if(isset($title) && !empty($title))
+            {{ $title }}
+        @else
+            {{ get_config('title', 'Mojar') }}
+        @endisset
+    </title>
     <link rel="icon" href="{{ asset('jw-styles/mojar/images/favicon.ico') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
 

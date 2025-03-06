@@ -61,6 +61,7 @@ class PluginController extends BackendController
         $data = $data->paginate($limit, $page);
         $updates = $this->getDataUpdates($data->getCollection());
         $results = [];
+
         foreach ($data as $plugin) {
             /**
              * @var SupportPlugin $plugin

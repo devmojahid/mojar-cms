@@ -555,6 +555,31 @@ class Plugin implements PluginInterface
         return $this->getExtraMojar('setting_url');
     }
 
+    // public function asset(string $path, string $default = null): string
+    // {
+    //     if (str_starts_with($path, 'jw-styles/')) {
+    //         return $this->url->asset($path);
+    //     }
+
+    //     $path = str_replace('assets/', '', $path);
+
+    //     $path = $this->getPath("assets/public/{$path}");
+
+    //     if (file_exists($path)) {
+    //         return $this->url->asset("jw-styles/plugins/{$this->name}/assets/{$path}");
+    //     }
+
+    //     if ($default) {
+    //         if (is_url($default)) {
+    //             return $default;
+    //         }
+
+    //         return $this->url->asset($default);
+    //     }
+
+    //     return $this->url->asset('jw-styles/mojar/images/thumb-default.png');
+    // }
+
     public function asset(string $path, string $default = null): string
     {
         if (str_starts_with($path, 'jw-styles/')) {
@@ -563,13 +588,9 @@ class Plugin implements PluginInterface
 
         $path = str_replace('assets/', '', $path);
 
-        $path = $this->getPath("assets/public/{$path}");
+        $fullPath = $this->getPath("assets/public/{$path}");
 
-        if (file_exists($path)) {
-            return $this->url->asset("jw-styles/plugins/{$this->name}/assets/{$path}");
-        }
-
-        if ($default) {
+        if (!file_exists($fullPath)) {
             if (is_url($default)) {
                 return $default;
             }
@@ -577,9 +598,9 @@ class Plugin implements PluginInterface
             return $this->url->asset($default);
         }
 
-        return $this->url->asset('jw-styles/mojar/images/thumb-default.png');
+        return $this->url->asset("jw-styles/plugins/{$this->name}/assets/{$path}");
     }
-
+    
     public function getScreenshot(): ?string
     {
         return $this->asset(

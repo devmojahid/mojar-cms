@@ -308,7 +308,90 @@
                     method: "GET",
                     data: formData,
                     success: function(response) {
-                        $('.row-cards').html(response.html || response);
+                        if (response.rows) {
+                            const pluginsHtml = response.rows.map(plugin => `
+                                <div class="col-lg-6">
+                                    <label class="form-selectgroup-item">
+                                        <input type="checkbox" name="name" value="CSS" class="form-selectgroup-input">
+                                        <div class="card position-relative">
+                                            <div class="plugin-loading-overlay">
+                                                <div class="plugin-loading-spinner"></div>
+                                            </div>
+                                            <div class="card-status-top bg-${plugin.status === 'active' ? 'green' : 'red'}">
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row align-items-center">
+                                                    <div class="col-3">
+                                                        <img src="${plugin.screenshot}" alt="${plugin.name}"
+                                                            class="rounded">
+                                                    </div>
+                                                    <div class="col">
+                                                        <h3 class="card-title mb-1">
+                                                            <h3 class="text-reset">
+                                                                ${plugin.name}
+                                                                <span
+                                                                    class="badge bg-${plugin.status === 'active' ? 'green' : 'red'} ms-2">
+                                                                    ${plugin.status === 'active' ? 'Active' : 'Inactive'}
+                                                                </span>
+                                                                <span class="badge bg-blue ms-1">v${plugin.version}</span>
+                                                            </h3>
+                                                        </h3>
+                                                        <div class="text-secondary">
+                                                            ${plugin.description}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <div class="dropdown">
+                                                            <a href="#" class="btn-action" data-bs-toggle="dropdown"
+                                                                aria-expanded="false">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                    width="24" height="24" viewBox="0 0 24 24"
+                                                                    stroke-width="2" stroke="currentColor" fill="none"
+                                                                    stroke-linecap="round" stroke-linejoin="round">
+                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                    <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                                                                    <path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                                                                    <path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                                                                </svg>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-end">
+                                                                ${plugin.status === 'active' ? 
+                                                                    `<a href="{{ route('admin.plugin.bulk-actions') }}?action=deactivate&plugin=${plugin.id}"
+                                                                        class="dropdown-item" data-action="deactivate">
+                                                                        {{ trans('cms::app.deactivate') }}
+                                                                    </a>` :
+                                                                    `<a href="{{ route('admin.plugin.bulk-actions') }}?action=activate&plugin=${plugin.id}"
+                                                                        class="dropdown-item" data-action="activate">
+                                                                        {{ trans('cms::app.activate') }}
+                                                                    </a>`
+                                                                }
+                                                                ${plugin.setting && plugin.status === 'active' ?
+                                                                    `<a href="${plugin.setting}" class="dropdown-item"
+                                                                        data-settings-link>
+                                                                        {{ trans('cms::app.setting') }}
+                                                                    </a>` : ''
+                                                                }
+                                                                ${plugin.update ?
+                                                                    `<a href="{{ route('admin.plugin.bulk-actions') }}?action=update&plugin=${plugin.id}"
+                                                                        class="dropdown-item" data-action="update">
+                                                                        {{ trans('cms::app.update') }}
+                                                                    </a>` : ''
+                                                                }
+                                                                <a href="{{ route('admin.plugin.bulk-actions') }}?action=delete&plugin=${plugin.id}"
+                                                                    class="dropdown-item text-danger" data-action="delete">
+                                                                    {{ trans('cms::app.delete') }}
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            `).join('');
+                            $('.row-cards.m-2').html(pluginsHtml);
+                        }
                     },
                     error: function() {
                         alert("Error loading search results. Please try again.");
