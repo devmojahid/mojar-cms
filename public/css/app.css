@@ -428,6 +428,84 @@ button[type=button][role=checkbox]{
 .skeleton-image{
   @apply h-48 w-full rounded;
 }
+.plugin-loading-overlay{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:rgba(255, 255, 255, 0.8);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+  border-radius:4px;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity 0.3s ease;
+}
+
+.plugin-loading-overlay.active{
+  opacity:1;
+  visibility:visible;
+}
+
+.plugin-loading-spinner{
+  width:40px;
+  height:40px;
+  border:3px solid #f3f3f3;
+  border-top:3px solid #206bc4;
+  border-radius:50%;
+  animation:plugin-spin 1s linear infinite;
+}
+
+@keyframes plugin-spin{
+  0%{
+    transform:rotate(0deg);
+  }
+  100%{
+    transform:rotate(360deg);
+  }
+}
+.theme-loading-overlay{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:rgba(255, 255, 255, 0.8);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+  border-radius:4px;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity 0.3s ease;
+}
+
+.theme-loading-overlay.active{
+  opacity:1;
+  visibility:visible;
+}
+
+.theme-loading-spinner{
+  width:40px;
+  height:40px;
+  border:3px solid #f3f3f3;
+  border-top:3px solid #206bc4;
+  border-radius:50%;
+  animation:theme-spin 1s linear infinite;
+}
+
+@keyframes theme-spin{
+  0%{
+    transform:rotate(0deg);
+  }
+  100%{
+    transform:rotate(360deg);
+  }
+}
 .breadcrumb{
   display:flex;
   flex-wrap:wrap;
@@ -527,6 +605,9 @@ button[type=button][role=checkbox]{
   min-height:28px;
 }
 .select2-container .select2-selection--multiple .select2-search__field::-moz-placeholder{
+  color:#626976;
+}
+.select2-container .select2-selection--multiple .select2-search__field:-ms-input-placeholder{
   color:#626976;
 }
 .select2-container .select2-selection--multiple .select2-search__field::placeholder{
@@ -3241,4 +3322,8 @@ button[type=button][role=checkbox]{
   width:0.36em;
   height:0.36em;
   transform:rotate(0deg);
+}
+
+.page-item.page-next .page-link{
+  width:20px !important;
 }

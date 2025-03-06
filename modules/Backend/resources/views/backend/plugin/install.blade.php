@@ -6,7 +6,7 @@
             <div class="card-header p-0 p-sm-2">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
+                        <a class="nav-link active" href="javascript:void(0)">
                             <span>Free Plugins</span>
                         </a>
                     </li>
@@ -225,9 +225,7 @@
                             });
 
                             this.on('uploadprogress', function(file, progress) {
-                                $('.progress-bar').width(progress + '%');
-                                $('.progress-percentage span').text(Math.round(progress) +
-                                    '%');
+                                //
                             });
 
                             this.on('success', function(file, response) {

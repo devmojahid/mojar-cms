@@ -66,7 +66,10 @@
                         <div class="col-lg-6">
                             <label class="form-selectgroup-item">
                                 <input type="checkbox" name="name" value="CSS" class="form-selectgroup-input">
-                                <div class="card">
+                                <div class="card position-relative">
+                                    <div class="plugin-loading-overlay">
+                                        <div class="plugin-loading-spinner"></div>
+                                    </div>
                                     <div class="card-status-top bg-{{ $plugin->status == 'active' ? 'green' : 'red' }}">
                                     </div>
                                     <div class="card-body">
@@ -154,9 +157,7 @@
     @include('cms::components.custom-alert')
 
     <script>
-        // 3) The plugin logic (replacing confirm/sweetalert usage with CustomAlert)
         $(function() {
-            // Handle all dropdown actions
             $('.dropdown-menu .dropdown-item').on('click', function(e) {
                 e.preventDefault();
 
@@ -164,7 +165,6 @@
                 const href = $link.attr('href');
                 const dataAction = $link.data('action');
 
-                // If there's no data-action (like a settings link), go directly
                 if (typeof dataAction === 'undefined') {
                     if (href && href !== '#') {
                         window.location.href = href;
@@ -172,16 +172,13 @@
                     return;
                 }
 
-                // Gather plugin info from the link
                 const $pluginCard = $link.closest('.col-lg-6');
                 const $cardBody = $pluginCard.find('.card-body');
                 const url = new URL(href, window.location.origin);
                 const action = url.searchParams.get('action');
                 const pluginId = url.searchParams.get('plugin');
 
-                // Decide if it's a destructive action
                 if (['delete', 'deactivate'].includes(action)) {
-                    // Show custom alert
                     CustomAlert.show({
                         title: "{{ trans('cms::app.are_you_sure') }}",
                         message: "{{ trans('cms::app.action_cannot_be_undone') }}",
@@ -190,23 +187,20 @@
                         cancelText: "{{ trans('cms::app.cancel') }}",
                         confirmBtnClass: "btn-danger",
                         onConfirm: function() {
-                            // Proceed if user confirms
                             proceedWithAjax(action, pluginId, $cardBody, $pluginCard);
-                            // Optional: hide the modal manually if you don't have data-bs-dismiss
-                            // CustomAlert.hide();
+                            CustomAlert.hide();
                         },
                         onCancel: function() {
-                            // User canceled
                         }
                     });
                 } else {
-                    // Non-destructive: proceed directly
                     proceedWithAjax(action, pluginId, $cardBody, $pluginCard);
                 }
             });
 
-            // Reusable AJAX function
             function proceedWithAjax(action, pluginId, $cardBody, $pluginCard) {
+                const $loadingOverlay = $pluginCard.find('.plugin-loading-overlay');
+                $loadingOverlay.addClass('active');
                 $cardBody.addClass('opacity-50');
 
                 $.ajax({
@@ -232,7 +226,6 @@
                                     });
                                     break;
                                 case 'update':
-                                    // Additional update logic here
                                     break;
                             }
                         }
@@ -250,12 +243,12 @@
                         });
                     },
                     complete: function() {
+                        $loadingOverlay.removeClass('active');
                         $cardBody.removeClass('opacity-50');
                     }
                 });
             }
 
-            // Update UI for activate/deactivate
             function updatePluginStatus($card, newStatus) {
                 const isActive = newStatus === 'active';
 
@@ -277,7 +270,6 @@
                         .attr('href', $actionLink.attr('href').replace('activate', 'deactivate'))
                         .attr('data-action', 'deactivate')
                         .text("{{ trans('cms::app.deactivate') }}");
-                    // If you have a data-settings-link, show it if needed
                     if ($dropdown.data('has-settings')) {
                         $dropdown.find('[data-settings-link]').show();
                     }
@@ -290,7 +282,6 @@
                 }
             }
 
-            // Show toast notification
             function showNotification(response) {
                 if (typeof juzaweb !== 'undefined' && typeof juzaweb.message !== 'undefined') {
                     juzaweb.message(response);
@@ -301,8 +292,6 @@
                         type: response.status ? 'success' : 'error',
                         duration: 4000,
                         onClose: function() {
-                            // Optional callback when toast is closed
-                            //
                         }
                     });
                 }
@@ -313,23 +302,15 @@
         $(document).ready(function() {
             $('#form-search').on('submit', function(e) {
                 e.preventDefault();
-
-                // Collect form data
                 const formData = $(this).serialize();
-
                 $.ajax({
-                    url: "{{ route('admin.plugin.get-data') }}", // or your route for fetching plugin data
+                    url: "{{ route('admin.plugin.get-data') }}",
                     method: "GET",
                     data: formData,
                     success: function(response) {
-                        // Suppose the server returns HTML that updates the plugin cards.
-                        // For example, if you return just the <div class="row row-cards m-2">...</div> content.
-                        $('.row-cards.m-2').html(response.html || response);
-
-                        // Optionally, update any pagination or other UI if needed.
+                        $('.row-cards').html(response.html || response);
                     },
                     error: function() {
-                        // Handle error gracefully
                         alert("Error loading search results. Please try again.");
                     }
                 });
