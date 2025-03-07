@@ -44,7 +44,8 @@
                         </select>
                         <p class="description mt-2">{{ trans('cms::app.auth_layout_description') }}</p>
                     </div>
-                </div>
+                </div>  
+           
                 @foreach($socials as $social)
                     <div class="col-md-6">
                         <h5>{{ trans("cms::app.socials.{$social}") }}</h5>

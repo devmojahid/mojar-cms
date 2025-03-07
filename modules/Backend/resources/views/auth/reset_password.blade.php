@@ -167,10 +167,6 @@
         </div>
     </div>
     @endif
-
-    <div class="text-center text-secondary mt-3">
-        Copyright © {{ date('Y') }} {{ get_config('title') }} - Provided by Mojar
-    </div>
 </div>
 @endsection
 
