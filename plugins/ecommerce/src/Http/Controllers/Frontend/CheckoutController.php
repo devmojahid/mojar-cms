@@ -228,7 +228,8 @@ class CheckoutController extends FrontendController
                     'id' => $method->id,
                     'type' => $method->type,
                     'name' => $method->name,
-                    'description' => $method->description
+                    'description' => $method->description,
+                    'image' => $method->image
                 ];
             })->toArray()
         ]);

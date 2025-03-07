@@ -17,6 +17,7 @@ mix.styles(
         baseAsset + '/css/nprogress.css',
         baseAsset + '/css/select2-min.css',
         baseAsset + '/css/checkout.css',
+        baseAsset + '/css/custom-checkout.css',
     ],
     `${basePublish}/css/checkout.min.css`
 );

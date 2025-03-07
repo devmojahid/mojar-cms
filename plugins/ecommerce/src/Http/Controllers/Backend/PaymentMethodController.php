@@ -37,6 +37,9 @@ class PaymentMethodController extends BackendController
                     ],
                     'name' => [
                         'required'
+                    ],
+                    'image' => [
+                        'nullable'
                     ]
                 ]
             );

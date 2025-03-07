@@ -20,7 +20,16 @@
 
     <style>
         .hide {
-            display: none;
+            display: none !important;
+        }
+
+        .payment-method-image{
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .payment-methods{
+            padding-top: 10px;
         }
         
     </style>
@@ -115,6 +124,7 @@
                     </div>
                     <hr class="m0"/>
                 </div>
+
                 <div class="order-summary order-summary--discount">
                     <div class="summary-section">
                         <div class="form-group m0" bind-show="!existCode || !applyWithPromotion || code == null || !code.length">
@@ -126,15 +136,13 @@
                             </div>
                         </div>
 
-                        <div bind-class="{'warning' : existCode && !freeShipping && discount == 0,'success' : existCode && ( freeShipping || discount >0 )}" class="clearfix hide" bind-show="code!= null && code.length && existCode && applyWithPromotion">
+                        <div bind-class="{'warning' : checkout.existCode && !checkout.freeShipping && checkout.discount == 0, 'success' : checkout.existCode && ( checkout.freeShipping || checkout.discount > 0 )}" class="clearfix hide" bind-show="checkout.code != null && checkout.code.length && checkout.existCode && checkout.applyWithPromotion">
                             <div class="pull-left">
                                 <i class="fa fa-check applied-discount-status-success" aria-hidden="true"></i>
                                 <i class="fa fa-exclamation-triangle applied-discount-status-warning" aria-hidden="true"></i>
                             </div>
-                            <div bind="code" class="pull-left applied-discount-code">
-
-                            </div>
-                            <div bind="(discountShipping && freeShipping) ? '{{ trans('ecomm::content.free') }}' : discount" class="pull-right">
+                            <div bind="checkout.code" class="pull-left applied-discount-code"></div>
+                             <div bind="(checkout.discountShipping && checkout.freeShipping) ? '{{ trans('ecomm::content.free') }}' : checkout.discount" class="pull-right">
                                 0
                             </div>
                             <input bind-event-click="removeCode('')" class="btn btn-delete" type="button" value="×" name="commit">
@@ -148,6 +156,7 @@
                     </div>
                     <hr class="m0"/>
                 </div>
+
                 <div class="order-summary order-summary--total-lines">
                     <div class="summary-section border-top-none--mobile">
                         <div class="total-line total-line-subtotal clearfix">
@@ -155,8 +164,8 @@
                                 {{ trans('ecomm::content.total_price') }}
                             </span>
 
-                            <span bind="totalOrderItemPrice" class="total-line-subprice pull-right">
-                                {{ cart.total_line_price }}
+                            <span bind="checkout.totalOrderItemPrice" class="total-line-subprice pull-right">
+                                {{ cart.total_price }}
                             </span>
                         </div>
 
@@ -164,7 +173,7 @@
                             <span class="total-line-name pull-left">
                                 {{ trans('ecomm::content.shipping_fee') }}
                             </span>
-                            <span bind="shippingFee !=  0 ? shippingFee : ((requiresShipping && shippingMethods.length == 0) ? 'This area does not support transportation': '{{ trans('ecomm::content.free') }}')" class="total-line-shipping pull-right" >
+                            <span bind="checkout.shippingFee != 0 ? checkout.shippingFee : ((checkout.requiresShipping && checkout.shippingMethods.length == 0) ? 'This area does not support transportation' : '{{ trans('ecomm::content.free') }}')" class="total-line-shipping pull-right">
                                 {{ trans('ecomm::content.free') }}
                             </span>
                         </div>
@@ -173,7 +182,7 @@
                             <span class="total-line-name pull-left">
                                 {{ trans('ecomm::content.total') }}
                             </span>
-                            <span bind="totalPrice" class="total-line-price pull-right">
+                            <span bind="checkout.totalPrice" class="total-line-price pull-right">
                                 {{ cart.total_price }}
                             </span>
                         </div>
@@ -210,7 +219,7 @@
 
             <div class="main_content">
                 <div class="row">
-                    <div class="col-md-6 col-lg-6">
+                    <div class="col-md-12 col-lg-12">
                         <div class="section" define="{billing_address: {}}">
                             <div class="section__header">
                                 <div class="layout-flex layout-flex--wrap">
@@ -288,14 +297,15 @@
                                                       bind-event-focus="handleFocus(this)"
                                                       bind-event-blur="handleFieldBlur(this)"
                                                       bind="note"
-                                                      class="field__input form-control m0"></textarea>
+                                                      class="field__input form-control m0"
+                                                      style="height: 60px;"></textarea>
                                         </label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-6">
+                    <div class="col-md-12 col-lg-12">
                         <div class="section shipping-method hide" bind-show="shippingMethodsLoading || shippingMethods.length > 0">
                             <div class="section__header">
                                 <h2 class="section__title">
@@ -323,7 +333,7 @@
                                     <label class="control-label">{{ trans('ecomm::content.payment') }}</label>
                                 </h2>
                             </div>
-                            <div class="section__content">
+                            <div class="section__content payment_methods_section">
                                 {% include 'ecomm::frontend.checkout.components.payment_methods' %}
                             </div>
                         </div>
@@ -388,12 +398,6 @@
         </div>
     </div>
 </form>
-<div id="icon-symbols" >
-    <svg xmlns="http://www.w3.org/2000/svg">
-        <symbol id="spinner-large"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-270 364 66 66"><path d="M-237 428c-17.1 0-31-13.9-31-31s13.9-31 31-31v-2c-18.2 0-33 14.8-33 33s14.8 33 33 33 33-14.8 33-33h-2c0 17.1-13.9 31-31 31z"/></svg></symbol><symbol id="chevron-right"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M2 1l1-1 4 4 1 1-1 1-4 4-1-1 4-4" /></svg></symbol><symbol id="success"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 24C5.373 24 0 18.627 0 12S5.373 0 12 0s12 5.373 12 12-5.373 12-12 12zm0-2c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm3.784-13.198c.386-.396 1.02-.404 1.414-.018.396.386.404 1.02.018 1.414l-5.85 6c-.392.403-1.04.403-1.432 0l-3.15-3.23c-.386-.396-.378-1.03.018-1.415.395-.385 1.028-.377 1.414.018l2.434 2.5 5.134-5.267z"/></svg></symbol><symbol id="arrow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M16 8.1l-8.1 8.1-1.1-1.1L13 8.9H0V7.3h13L6.8 1.1 7.9 0 16 8.1z" /></svg></symbol><symbol id="spinner-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M20 10c0 5.523-4.477 10-10 10S0 15.523 0 10 4.477 0 10 0v2c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8h2z"/></svg></symbol>
-        <symbol id="next-spinner"><svg preserveAspectRatio="xMinYMin"><circle class="next-spinner__ring" cx="50%" cy="50%" r="45%"></circle></svg></symbol>
-    </svg>
-</div>
 <script>var code_langs = {'choose_province': '{{ trans('ecomm::content.choose_province') }}'};</script>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
 <script src="{{ asset('jw-styles/plugins/mojahid/ecommerce/assets/js/checkout.min.js') }}" type="text/javascript"></script>

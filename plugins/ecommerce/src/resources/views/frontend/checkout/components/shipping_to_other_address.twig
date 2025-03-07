@@ -1,4 +1,4 @@
-<div class="section pt10">
+<div class="section">
 	<div class="section__content">
 		<div class="form-group" bind-show="requiresShipping">
 			<div class="checkbox-wrapper">
@@ -13,7 +13,7 @@
 	</div>
 </div>
 
-<div class="section pt10" bind-show="otherAddress">
+<div class="section" bind-show="otherAddress">
 	<div class="section__header">
 		<h2 class="section__title">
 			<i class="fa fa-id-card-o fa-lg section__title--icon hidden-md hidden-lg" aria-hidden="true"></i>
@@ -23,7 +23,7 @@
 		</h2>
 	</div>
 	<div class="section__content">
-		<div bind-show="otherAddress" define="{shipping_address: {}, shipping_expand:true,show_district: false,show_ward:  false ,show_country:  true }" class="shipping  hide ">
+		<div bind-show="otherAddress" define="{shipping_address: {}, shipping_expand:true,show_district: false,show_ward:  false ,show_country:  true }" class="shipping hide">
 			<div bind-show="shipping_expand || !otherAddress">
 				<div class="form-group">
 					<div class="field__input-wrapper" bind-class="{ 'js-is-filled': shipping_address.full_name }">

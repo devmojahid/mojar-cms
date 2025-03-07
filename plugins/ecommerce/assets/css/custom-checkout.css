@@ -1,0 +1,29 @@
+.main_footer{
+    display: none;
+}
+
+.main_footer.footer.unprint{
+    display: none;
+}
+
+body{
+    height: 100vh;
+}
+
+.section__title .control-label{
+    font-size: 1.6rem;
+    font-weight:500;
+    color: #000;
+}
+
+.sidebar {
+    width: 100%;
+}
+
+.form-control{
+    height: 40px;
+}
+
+.payment_methods_section{
+    margin-top: 20px;
+}

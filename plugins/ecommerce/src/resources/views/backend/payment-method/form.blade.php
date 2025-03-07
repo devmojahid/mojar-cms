@@ -42,20 +42,6 @@
                         'label' => trans('cms::app.config'),
                         'class' => $model->data ? 'box-data' : 'box-hidden box-data',
                     ])
-                        {{-- @if ($model->type == 'paypal')
-                            @component('cms::backend.payment-method.components.paypal_template', [
-                                'data' => $model->data,
-                            ])
-                            @endcomponent
-                        @endif
-
-                        @if ($model->type == 'custom')
-                            @component('cms::backend.payment-method.components.custom_template', [
-                                'data' => $model->data,
-                            ])
-                            @endcomponent
-                        @endif --}}
-
                         @foreach (['paypal', 'custom', 'stripe', 'razorpay', 'mollie', 'bank_transfer', 'cod'] as $type)
                             @if ($model->type == $type)
                                 @component('ecomm::backend.payment-method.components.' . $type . '_template', [
@@ -77,19 +63,20 @@
                         'checked' => $model->active == 1 || is_null($model->active),
                     ]) }}
                 @endcomponent
+
+                <div class="mt-3">
+                    @component('cms::components.card', [
+                        'label' => trans('cms::app.image'),
+                    ])
+                        {{ Field::image($model, 'image', [
+                            'label' => trans('cms::app.image'),
+                        ]) }}
+                    @endcomponent
+                </div>
             </div>
         </div>
     @endcomponent
 
-    {{-- <template id="data-custom">
-        @component('cms::backend.payment-method.components.custom_template')
-        @endcomponent
-    </template>
-
-    <template id="data-paypal">
-        @component('cms::backend.payment-method.components.paypal_template')
-        @endcomponent
-    </template> --}}
 
     @foreach(['paypal', 'stripe', 'razorpay', 'mollie', 'bank_transfer', 'cod'] as $type)
     <template id="data-{{ $type }}">

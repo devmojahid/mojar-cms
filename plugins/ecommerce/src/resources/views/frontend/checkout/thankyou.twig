@@ -13,6 +13,36 @@
     <link rel="stylesheet" href="{{ asset('jw-styles/plugins/mojahid/ecommerce/assets/css/thankyou.min.css') }}">
     <style>
         #map {width: 100%;height: 245px;} .hidden-map{display:none;}
+        .thankyou-message {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .thankyou-message-text{
+            text-align: center;
+            margin-top: 20px;
+        }
+        .shipping-info{
+            min-height: 285px;
+        }
+        .main_footer{
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .order-info {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .order-info {
+                padding: 9px !important;
+            }
+        }
     </style>
 
 {#    {{ do_action('ecom.thankyou_page.btns.head', order) }}#}
@@ -36,7 +66,7 @@
         <div class="main">
             <div class="wrap clearfix">
                 <div class="row thankyou-infos">
-                    <div class="col-md-7 thankyou-message">
+                    <div class="col-md-12 thankyou-message">
                         <div class="thankyou-message-icon unprint">
                             <div class="icon icon--order-success svg">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="72px" height="72px">
@@ -65,9 +95,9 @@
                                     {{ order.code }}
                                     <label class="control-label unprint">({{ order.quantity }})</label>
                                 </h2>
-                                <a class="underline-none expandable expandable--pull-right mobile unprint" bind-event-click="toggle(this, '.order-items')" bind-class="{open: order_expand}" href="javascript:void(0)">
+                                {# <a class="underline-none expandable expandable--pull-right mobile unprint" bind-event-click="toggle(this, '.order-items')" bind-class="{open: order_expand}" href="javascript:void(0)">
                                     {{ trans('ecomm::content.view_detail') }}
-                                </a>
+                                </a> #}
                             </div>
                             <div class="order-items mobile--is-collapsed" bind-class="{'mobile--is-collapsed': !order_expand}">
                                 <div class="summary-body summary-section summary-product">
@@ -131,7 +161,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-7 col-sm-12 customer-info">
+                    <div class="col-md-7 col-sm-12">
 
                         <div class="shipping-info">
                             <div class="row">
@@ -243,7 +273,7 @@
                         </div>
 
                         <div class="order-success unprint">
-{#                            {{ do_action('ecom.thankyou_page.btns.left', order) }}#}
+                                {#  {{ do_action('ecom.thankyou_page.btns.left', order) }}#}
                             {% if order.downloadable_products_exists %}
                             <a href="{{ route('ecommerce.orders.download', [order.code]) }}"
                                class="btn btn-success"

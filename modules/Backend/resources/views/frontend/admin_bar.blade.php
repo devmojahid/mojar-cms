@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="{{ asset('jw-styles/mojar/css/admin-bar.css') }}?v={{ \Juzaweb\CMS\Version::getVersion() }}">
-<script src="{{ asset('jw-styles/mojar/js/admin-bar.js') }}?v={{ \Juzaweb\CMS\Version::getVersion() }}"></script>
+<link rel="stylesheet" href="{{ asset('jw-styles/mojar/css/admin-bar.css') }}">
+<script src="{{ asset('jw-styles/mojar/js/admin-bar.js') }}"></script>
 
 @php
     $speedDialItems = [
