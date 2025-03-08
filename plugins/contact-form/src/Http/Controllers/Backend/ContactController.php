@@ -2,9 +2,9 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/juzacms
- * @author     Juzaweb Team <admin@juzaweb.com>
- * @link       https://juzaweb.com
+ * @package    mojahid/contact-form
+ * @author     Mojahid <mojahid.dev@gmail.com>
+ * @link       https://mojahid.dev
  * @license    MIT
  */
 

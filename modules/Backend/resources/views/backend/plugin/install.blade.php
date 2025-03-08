@@ -178,6 +178,7 @@
                 success: function(response) {
                     $('#plugin-list').empty();
                     if (response && response.data) {
+                        console.log(response.data);
                         response.data.forEach(function(plugin) {
                             let template = $('#plugin-template').html();
                             template = template.replace(/{title}/g, plugin.title)

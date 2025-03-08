@@ -14,7 +14,10 @@
             "type": "checkbox",
             "name": "show_section_title",
             "label": "Show Section Title",
-            "description": "Show section title"
+            "description": "Show section title",
+            "data": {
+                "value": 1
+            }
         },
         {
             "type": "repeater",
@@ -52,7 +55,8 @@
         {
             "type": "checkbox",
             "name": "show_contact_form",
-            "label": "Show Contact Form"
+            "label": "Show Contact Form",
+            "description": "Show contact form"
         },
         {
             "type": "text",
@@ -102,7 +106,8 @@
         {
             "type": "checkbox",
             "name": "show_privacy_checkbox",
-            "label": "Show Privacy Policy Checkbox"
+            "label": "Show Privacy Policy Checkbox",
+            "description": "Show privacy policy checkbox"
         },
         {
             "type": "text",

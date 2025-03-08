@@ -31,7 +31,7 @@ class ThemeController extends ApiController
                 'screenshot' => 'https://img.juzaweb.com/themes/default/screenshot.png',
                 'banner' => 'https://cdn.juzaweb.com/jw-styles/juzaweb/images/thumb-default.png',
                 'url' => 'https://juzaweb.com/product/default-theme',
-                'is_paid' => false,
+                'is_paid' => true,
                 'price' => null,
                 'created_at' => '2022-05-07 03:05:00',
                 'updated_at' => '2024-03-24 08:59:00'
@@ -43,7 +43,7 @@ class ThemeController extends ApiController
                 'screenshot' => 'https://img.juzaweb.com/themes/gamxo/screenshot.png',
                 'banner' => 'https://cdn.juzaweb.com/jw-styles/juzaweb/images/thumb-default.png',
                 'url' => 'https://juzaweb.com/product/gamxo-theme',
-                'is_paid' => false,
+                'is_paid' => true,
                 'price' => null,
                 'created_at' => '2022-05-07 03:05:00',
                 'updated_at' => '2023-07-01 12:07:00'

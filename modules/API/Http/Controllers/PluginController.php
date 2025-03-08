@@ -16,14 +16,113 @@ use Juzaweb\Backend\Http\Resources\PluginResource;
 use Juzaweb\CMS\Http\Controllers\ApiController;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Pagination\LengthAwarePaginator;
-
+use Juzaweb\CMS\Facades\JWQuery;
 
 class PluginController extends ApiController
 {
 
     public function index(Request $request): AnonymousResourceCollection
     {
-        $themes = [
+        $plugins = $this->getPlugins();
+        // Create a collection and paginate it
+        $perPage = $request->get('per_page', 10);
+        $page = $request->get('page', 1);
+        $collection = collect($plugins);
+
+        $paginator = new LengthAwarePaginator(
+            $collection,
+            $collection->count(),
+            $perPage,
+            $page,
+            ['path' => $request->url()]
+        );
+
+        return PluginResource::collection($paginator);
+    }
+
+    private function getPlugins()
+{
+    try {
+        // Check if JWQuery::posts returns an object or collection that supports select()
+        $query = JWQuery::posts('dev_tool_plugin');
+        
+        // If $query is already an array, we can't call select() on it
+        if (is_array($query)) {
+            // Just work with the array directly
+            $plugins = collect($query)->map(function ($plugin) {
+                return [
+                    'name' => $plugin['name'] ?? '',
+                    'title' => $plugin['title'] ?? '',
+                    'thumbnail' => $plugin['thumbnail'] ?? 'https://via.placeholder.com/590x300.png',
+                    'description' => $plugin['description'] ?? '',
+                    'url' => $plugin['url'] ?? 'https://juzaweb.com/juzaweb/movie',
+                    'created_at' => $plugin['created_at'] ?? now()->format('Y-m-d H:i:s'),
+                    'updated_at' => $plugin['updated_at'] ?? now()->format('Y-m-d H:i:s')
+                ];
+            })->toArray();
+        } else {
+            // Original approach if $query supports select()
+            $plugins = $query->select([
+                'id',
+                'name',
+                'title',
+                'thumbnail',
+                'description',
+                'url',
+                'created_at',
+                'updated_at'
+            ])
+            ->get()
+            ->map(function ($plugin) {
+                return [
+                    'name' => $plugin->name ?? '',
+                    'title' => $plugin->title ?? '',
+                    'thumbnail' => $plugin->thumbnail ?? 'https://via.placeholder.com/590x300.png',
+                    'description' => $plugin->description ?? '',
+                    'url' => $plugin->url ?? '',
+                    'created_at' => $plugin->created_at?->format('Y-m-d H:i:s') ?? now()->format('Y-m-d H:i:s'),
+                    'updated_at' => $plugin->updated_at?->format('Y-m-d H:i:s') ?? now()->format('Y-m-d H:i:s')
+                ];
+            })
+            ->toArray();
+        }
+
+        return !empty($plugins) ? $plugins : [
+            // Fallback data if no plugins found
+            [
+                'name' => 'juzaweb/movie',
+                'title' => 'Movie Plugin - Easily Create Movie Website',
+                'thumbnail' => 'https://img.juzaweb.com/plugins/juzaweb/movie/screenshot.png',
+                'description' => 'Movie JuzaCMS Plugin About The Movie plugin...',
+                'url' => 'https://juzaweb.com/juzaweb/movie',
+                'created_at' => '2022-05-07 06:22:00',
+                'updated_at' => '2024-04-18 08:40:00'
+            ],
+            // ... other fallback plugins
+        ];
+
+    } catch (\Exception $e) {
+        \Log::error('Plugin fetch error: ' . $e->getMessage());
+        // Return fallback data in case of error
+        return [
+            [
+                'name' => 'juzaweb/movie',
+                'title' => 'Movie Plugin - Easily Create Movie Website',
+                'thumbnail' => 'https://img.juzaweb.com/plugins/juzaweb/movie/screenshot.png',
+                'description' => 'Movie JuzaCMS Plugin About The Movie plugin...',
+                'url' => 'https://juzaweb.com/juzaweb/movie',
+                'created_at' => '2022-05-07 06:22:00',
+                'updated_at' => '2024-04-18 08:40:00'
+            ],
+            // ... other fallback data
+        ];
+    }
+}
+    private function getPluginsOld()
+    {
+        // return JWQuery::posts('dev_tool_plugin');
+
+        return [
             [
                 'name' => 'juzaweb/movie',
                 'title' => 'Movie Plugin - Easily Create Movie Website',
@@ -52,21 +151,6 @@ class PluginController extends ApiController
                 'updated_at' => '2024-03-24 03:38:00'
             ],
         ];
-
-        // Create a collection and paginate it
-        $perPage = $request->get('per_page', 10);
-        $page = $request->get('page', 1);
-        $collection = collect($themes);
-
-        $paginator = new LengthAwarePaginator(
-            $collection,
-            $collection->count(),
-            $perPage,
-            $page,
-            ['path' => $request->url()]
-        );
-
-        return PluginResource::collection($paginator);
     }
 }
 

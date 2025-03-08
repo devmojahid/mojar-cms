@@ -19,7 +19,7 @@ class PluginResource extends JsonResource
             'name' => $this->resource['name'],
             'title' => $this->resource['title'],
             'description' => $this->resource['description'],
-            'screenshot' => $this->resource['screenshot'] ?? null,
+            'thumbnail' => $this->resource['thumbnail'] ?? null,
             'banner' => $this->resource['banner'] ?? null,
             'url' => $this->resource['url'] ?? null,
             'is_paid' => $this->resource['is_paid'] ?? null,

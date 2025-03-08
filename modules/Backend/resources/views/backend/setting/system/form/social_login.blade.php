@@ -31,6 +31,7 @@
 
         <div class="card-body">
 
+            {{-- @dd($data) --}}
             <div class="row">
                 <div class="auth-setting">
                     <div class="form-group">
@@ -51,7 +52,6 @@
                         <h5>{{ trans("cms::app.socials.{$social}") }}</h5>
 
                         {{ Field::checkbox(trans('cms::app.enable'), "socialites[{$social}][enable]", [
-                            'value' => '1',
                             'checked' => $data[$social]['enable'] ?? false
                         ]) }}
 
