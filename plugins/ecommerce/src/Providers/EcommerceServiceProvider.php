@@ -121,6 +121,11 @@ class EcommerceServiceProvider extends ServiceProvider
             'ecommerce'
         );
 
+        // $pluginPath = __DIR__ . '/../../';
+        // if (file_exists($pluginPath . 'vendor/autoload.php')) {
+        //     require_once $pluginPath . 'vendor/autoload.php';
+        // }
+
         $this->app->singleton(
             CartManagerContract::class,
             function () {

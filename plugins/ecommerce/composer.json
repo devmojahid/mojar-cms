@@ -17,7 +17,8 @@
         "omnipay/mollie": "^5.5",
         "omnipay/paypal": "^3.0",
         "omnipay/stripe": "^3.2",
-        "stripe/stripe-php": "^16.6"
+        "stripe/stripe-php": "^16.6",
+        "omnipay/common": "^3.4"
     },
     "autoload": {
         "psr-4": {
@@ -31,5 +32,6 @@
         "allow-plugins": {
             "php-http/discovery": true
         }
+        
     }
 }

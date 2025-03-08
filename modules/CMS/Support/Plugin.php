@@ -671,8 +671,11 @@ class Plugin implements PluginInterface
         $loader->register(true);
     }
 
-    protected function runMigrate(): void
+    protected function runMigrateOld(): void
     {
+
+        // php artisan plugin:migrate author/plugin-name
+
         Artisan::call(
             'plugin:migrate',
             [
@@ -680,6 +683,22 @@ class Plugin implements PluginInterface
                 '--force' => true,
             ]
         );
+    }
+
+    protected function runMigrate(): void
+    {
+        try {
+            Artisan::call(
+                'plugin:migrate',
+                [
+                    'module' => $this->name,
+                    '--force' => true,
+                ]
+            );
+        } catch (\Exception $e) {
+                \Log::error('Migration failed for ' . $this->name . ': ' . $e->getMessage());
+                dd($e->getMessage());
+        }
     }
 
     /**

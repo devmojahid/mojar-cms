@@ -65,6 +65,32 @@ class PluginAutoloadCommand extends Command
 
         $fileContent = "<?php \n\n";
         $fileContent .= "\$vendorDir = dirname(dirname(dirname(__FILE__))) . '/plugins';\n
+    \$baseDir = dirname(dirname(dirname(__FILE__)));\n\n";
+        
+        // Add this to load plugin vendor autoloads
+        if ($filename === 'plugin_autoload_files.php') {
+            $fileContent .= "// Load plugin vendor autoloads\n";
+            $fileContent .= "\$pluginFolders = glob(\$vendorDir . '/*', GLOB_ONLYDIR);\n";
+            $fileContent .= "foreach (\$pluginFolders as \$pluginFolder) {\n";
+            $fileContent .= "    \$vendorAutoload = \$pluginFolder . '/vendor/autoload.php';\n";
+            $fileContent .= "    if (file_exists(\$vendorAutoload)) {\n";
+            $fileContent .= "        require_once \$vendorAutoload;\n";
+            $fileContent .= "    }\n";
+            $fileContent .= "}\n\n";
+        }
+        
+        $fileContent .= "return {$psr4Content};";
+        $fileContent .= "\n";
+        file_put_contents(base_path('bootstrap/cache/' . $filename), $fileContent);
+    }
+
+    protected function putArrayFileContentsOld($filename, $array)
+    {
+        $psr4Content = $this->varExportShort($array);
+        $psr4Content = str_replace('\'__VENDOR_DIR__', '$vendorDir . \'/', $psr4Content);
+
+        $fileContent = "<?php \n\n";
+        $fileContent .= "\$vendorDir = dirname(dirname(dirname(__FILE__))) . '/plugins';\n
 \$baseDir = dirname(dirname(dirname(__FILE__)));\n\n";
         $fileContent .= "return {$psr4Content};";
         $fileContent .= "\n";
