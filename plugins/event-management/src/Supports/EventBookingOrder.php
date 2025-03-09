@@ -2,8 +2,8 @@
 
 namespace Mojahid\EventManagement\Supports;
 
-use Juzaweb\CMS\Contracts\Payment\PaymentMethodInterface;
-use Juzaweb\CMS\Support\Payment;
+use Mojahid\Ecommerce\Contracts\Payment\PaymentMethodInterface;
+use Mojahid\Ecommerce\Supports\Payment;
 use Mojahid\EventManagement\Models\EventBooking;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;

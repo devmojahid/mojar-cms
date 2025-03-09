@@ -8,7 +8,7 @@ use Mojahid\EventManagement\Actions\ConfigAction;
 use Mojahid\EventManagement\Actions\EventManagementAction;
 use Mojahid\EventManagement\Actions\MenuAction;
 use Mojahid\EventManagement\Supports\BookingManager;
-use Juzaweb\CMS\Support\Payment;
+use Mojahid\Ecommerce\Supports\Payment;
 use Mojahid\EventManagement\Models\EventBooking;
 use Mojahid\EventManagement\Observers\BookingObserver;
 use Mojahid\EventManagement\Listeners\OrderCreatedListener;

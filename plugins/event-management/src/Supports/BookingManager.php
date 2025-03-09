@@ -2,7 +2,7 @@
 
 namespace Mojahid\EventManagement\Supports;
 
-use Juzaweb\CMS\Support\Payment;
+use Mojahid\Ecommerce\Supports\Payment;
 use Mojahid\EventManagement\Models\EventBooking;
 
 class BookingManager
