@@ -2,15 +2,15 @@
 
 {% block content %}
 
-    {#
-        {% include 'theme::components.breadcrumb' with {
-            is_dynamic: true,
-            post: post,
-            background_image: post.thumbnail ?? theme_assets('images/breadcrumb_bg.jpg')
-        } %}
-     #}
+	{#
+	        {% include 'theme::components.breadcrumb' with {
+	            is_dynamic: true,
+	            post: post,
+	            background_image: post.thumbnail ?? theme_assets('images/breadcrumb_bg.jpg')
+	        } %}
+	     #}
 
-    {% include 'theme::components.breadcrumb' with {
+	{% include 'theme::components.breadcrumb' with {
         title: 'Blog List',
         background_image: 'images/breadcrumb_bg.jpg',
         items: [
@@ -19,46 +19,78 @@
         ]
     } %}
 
-    <section class="tf__blog_page pt_120 xs_pt_80 pb_120 xs_pb_80">
-        <div class="container">
-            <form class="tf__blog_search_area" id="post-filter-form">
-                <div class="row justify-content-between wow fadeInUp" data-wow-duration="1s">
-                    <div class="col-xl-4 col-md-6 col-lg-5">
-                        <div class="tf__blog_search_item">
-                            <label>Search Here</label>
-                            <div class="tf__blog_search_input">
-                                <input type="text" name="keyword" placeholder="Type here" class="post-filter">
-                                <button type="submit"><i class="far fa-search"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-6 col-lg-5">
-                        <div class="tf__blog_search_item">
-                            <label>By Category</label>
-                            <div class="tf__blog_search_input">
-                                <select class="select_js post-filter" name="category">
-                                    <option value=""> Please Select </option>
-                                    {% for category in get_taxonomies('categories') %}
-                                        <option value="{{ category.id }}">{{ category.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <div class="row mt_35" id="post-list">
-                {% for post in page.data %}
-                    {{ get_template_part(post, 'content') }}
-                {% endfor %}
-            </div>
-            <div class="tf__pagination mt_60">
-                <div class="row">
-                    <div class="col-12" id="pagination">
-                        {{ paginate_links(page, 'theme::components.pagination') }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+	<section class="tf__blog_page pt_120 xs_pt_80 pb_120 xs_pb_80">
+		<div class="container">
+			<form class="tf__blog_search_area" id="post-filter-form">
+				<div class="row justify-content-between wow fadeInUp" data-wow-duration="1s">
+					<div class="col-xl-4 col-md-4 col-lg-4">
+						<div class="tf__blog_search_item">
+							<label>Sort By</label>
+							<div class="tf__blog_search_input">
+								<select class="select_js post-filter" name="sort">
+									<option value="latest" {% if input_get('sort') == 'latest' %} selected="selected" {% endif %}>Latest First</option>
+									<option value="oldest" {% if input_get('sort') == 'oldest' %} selected="selected" {% endif %}>Oldest First</option>
+									<option value="a-z" {% if input_get('sort') == 'a-z' %} selected="selected" {% endif %}>Title (A-Z)</option>
+									<option value="z-a" {% if input_get('sort') == 'z-a' %} selected="selected" {% endif %}>Title (Z-A)</option>
+									<option value="popular" {% if input_get('sort') == 'popular' %} selected="selected" {% endif %}>Most Popular</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 col-md-4 col-lg-4">
+						<div class="tf__blog_search_item">
+							<label>By Category</label>
+							<div class="tf__blog_search_input">
+								<select class="select_js post-filter" name="category">
+									<option value="">
+										Please Select
+									</option>
+									{% for category in get_taxonomies('categories') %}
+										<option value="{{ category.id }}" {% if input_get('category') == category.id %} selected="selected" {% endif %}>
+											{{ category.name }}
+										</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 col-md-4 col-lg-4">
+						<div class="tf__blog_search_item">
+							<label>Search Here</label>
+							<div class="tf__blog_search_input">
+								<input type="text" name="keyword" placeholder="Type here" class="post-filter" value="{{ input_get('keyword') }}">
+								<button type="submit">
+									<i class="far fa-search"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+
+			<div class="row mt_35" id="post-list">
+				{% if page.data|length > 0 %}
+					{% for post in page.data %}
+						{{ get_template_part(post, 'content') }}
+					{% endfor %}
+				{% else %}
+					<div class="col-12">
+						<div class="tf__blog_empty_state">
+							<h3>No Posts Found</h3>
+							<p>We couldn't find any posts matching your criteria. Try changing your search terms or filters.</p>
+							<a href="{{ url('/') }}" class="reset-button">Reset Filters</a>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+
+			<div class="tf__pagination mt_60">
+				<div class="row">
+					<div class="col-12" id="pagination">
+						{{ paginate_links(page, 'theme::components.pagination') }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 {% endblock %}

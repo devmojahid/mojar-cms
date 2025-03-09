@@ -2,8 +2,6 @@
  * Advanced Post Filter
  * Handles AJAX filtering for blog posts with loading animation
  */
-
-console.log('AdvancedPostFilter 3');
 class AdvancedPostFilter {
     constructor() {
         // Elements
@@ -40,9 +38,6 @@ class AdvancedPostFilter {
                 this.loadFromState(e.state.filter);
             }
         });
-        
-        // Check for URL parameters on initial load
-        this.loadFromUrl();
     }
     
     /**
@@ -111,10 +106,13 @@ class AdvancedPostFilter {
             this.filterPosts();
         });
         
-        // Handle dropdown changes (categories, sort) with immediate filtering
-        const selectInputs = this.form.querySelectorAll('select.post-filter');
-        selectInputs.forEach(input => {
-            input.addEventListener('change', () => this.filterPosts());
+        // Handle input changes with debounce
+        const filterInputs = this.form.querySelectorAll('.post-filter');
+        filterInputs.forEach(input => {
+            input.addEventListener('change', () => this.debounceFilter());
+            if (input.tagName === 'INPUT') {
+                input.addEventListener('keyup', () => this.debounceFilter());
+            }
         });
         
         // Handle pagination clicks
@@ -127,55 +125,17 @@ class AdvancedPostFilter {
                     this.filterPosts(page);
                 }
             }
-            
-            // Handle filter tag removal
-            const tagRemove = e.target.closest('.tag-remove');
-            if (tagRemove) {
-                e.preventDefault();
-                const filter = tagRemove.getAttribute('data-filter');
-                this.removeFilter(filter);
-            }
         });
     }
     
     /**
-     * Remove a filter and refresh results
-     * @param {string} filter - Filter to remove
+     * Debounce filter to prevent excessive AJAX calls
      */
-    removeFilter(filter) {
-        if (filter === 'all') {
-            // Reset all filters
-            Array.from(this.form.elements).forEach(element => {
-                if (element.name && element.name !== 'page') {
-                    if (element.tagName === 'SELECT') {
-                        if (element.name === 'sort') {
-                            element.value = 'latest';
-                        } else {
-                            element.value = '';
-                        }
-                    } else {
-                        element.value = '';
-                    }
-                }
-            });
-        } else {
-            // Reset specific filter
-            const element = this.form.elements[filter];
-            if (element) {
-                if (element.tagName === 'SELECT') {
-                    if (element.name === 'sort') {
-                        element.value = 'latest';
-                    } else {
-                        element.value = '';
-                    }
-                } else {
-                    element.value = '';
-                }
-            }
-        }
-        
-        // Trigger filter update
-        this.filterPosts();
+    debounceFilter() {
+        clearTimeout(this.debounceTimeout);
+        this.debounceTimeout = setTimeout(() => {
+            this.filterPosts();
+        }, this.debounceDelay);
     }
     
     /**
@@ -226,21 +186,10 @@ class AdvancedPostFilter {
                     const response = JSON.parse(this.currentRequest.responseText);
                     
                     if (response.status === 'success') {
-                        // Update posts HTML if there is content
-                        if (response.posts_html && response.posts_html.trim() !== '') {
-                            this.postList.innerHTML = response.posts_html;
-                        } else {
-                            // Empty state when no posts found
-                            this.showEmptyState();
-                        }
-                        
-                        // Update pagination if there is content
+                        // Update posts and pagination
+                        this.postList.innerHTML = response.posts_html;
                         if (this.pagination) {
-                            if (response.pagination_html && response.pagination_html.trim() !== '') {
-                                this.pagination.innerHTML = response.pagination_html;
-                            } else {
-                                this.pagination.innerHTML = '';
-                            }
+                            this.pagination.innerHTML = response.pagination_html;
                         }
                         
                         // Update URL with filter parameters (for browser history)
@@ -252,13 +201,13 @@ class AdvancedPostFilter {
                         // Reinitialize any plugins that might be needed for the new content
                         this.reinitializePlugins();
                     } else {
-                        this.showErrorMessage(response.message || 'An error occurred while filtering posts.');
+                        console.error('Error filtering posts:', response.message);
                     }
                 } catch (e) {
-                    this.showErrorMessage('An error occurred while processing the server response.');
+                    console.error('Error parsing JSON response:', e);
                 }
             } else {
-                this.showErrorMessage('Server error. Please try again later.');
+                console.error('Server returned error status:', this.currentRequest.status);
             }
             
             // Hide loading overlay
@@ -268,7 +217,7 @@ class AdvancedPostFilter {
         
         // Handle network errors
         this.currentRequest.onerror = () => {
-            this.showErrorMessage('Network error. Please check your connection and try again.');
+            console.error('Connection error occurred while filtering posts');
             this.toggleLoading(false);
             this.currentRequest = null;
         };
@@ -366,7 +315,7 @@ class AdvancedPostFilter {
         if (typeof $ !== 'undefined' && $.fn.select2) {
             $('.select_js').select2();
         }
-
+        
         // Re-initialize any image lazy loading or other plugins
         if (typeof WOW !== 'undefined') {
             new WOW().init();
@@ -374,51 +323,9 @@ class AdvancedPostFilter {
         
         // You can add other reinitializations as needed
     }
-    
-    /**
-     * Show empty state when no posts are found
-     */
-    showEmptyState() {
-        this.postList.innerHTML = `
-            <div class="col-12">
-                <div class="tf__blog_empty_state">
-                    <h3>No Posts Found</h3>
-                    <p>We couldn't find any posts matching your criteria. Try changing your search terms or filters.</p>
-                    <a href="${jwdata.base_url}" class="reset-button">Reset Filters</a>
-                </div>
-            </div>
-        `;
-    }
-    
-    /**
-     * Load filters from URL parameters on initial page load
-     */
-    loadFromUrl() {
-        const urlSearchParams = new URLSearchParams(window.location.search);
-        const params = Object.fromEntries(urlSearchParams.entries());
-        
-        // Check if we have any filter parameters
-        if (params.keyword || params.category || params.sort || params.page) {
-            // Set form values based on URL parameters
-            for (const [key, value] of Object.entries(params)) {
-                const element = this.form.elements[key];
-                if (element) {
-                    element.value = value;
-                }
-            }
-            
-            // If we're on a specific page but not the first page, filter with the page parameter
-            if (params.page && params.page !== '1') {
-                this.filterPosts(parseInt(params.page, 10));
-            } else if (params.keyword || params.category || (params.sort && params.sort !== 'latest')) {
-                // Otherwise just filter with the current parameters
-                this.filterPosts();
-            }
-        }
-    }
 }
 
 // Initialize on DOM content loaded
 document.addEventListener('DOMContentLoaded', () => {
     new AdvancedPostFilter();
-});
+}); 

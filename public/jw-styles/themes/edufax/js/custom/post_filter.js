@@ -3,7 +3,7 @@
  * Handles AJAX filtering for blog posts with loading animation
  */
 
-console.log('AdvancedPostFilter 3');
+console.log('AdvancedPostFilter 2');
 class AdvancedPostFilter {
     constructor() {
         // Elements

@@ -1,0 +1,23 @@
+{
+    "name": "mojahid/edufax-helper",
+    "description": "Edufax helper to enhance edufax frontend functionalities",
+    "extra": {
+        "mojar": {
+            "name": "Edufax Helper",
+            "domain": "edufaxhelper",
+            "cms_min": "3.3",
+            "version": "1.0.0",
+            "providers": [
+                "Mojahid\\EdufaxHelper\\Providers\\EdufaxHelperServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Mojahid\\EdufaxHelper\\": "src/"
+        },
+        "files": [
+            "helpers/helpers.php"
+        ]
+    }
+} 
