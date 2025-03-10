@@ -1,0 +1,30 @@
+{
+    "name": "mojahid/lms",
+    "description": "This plugin Developed For Maintain lms. This plugin is used to manage the lms system.",
+    "extra": {
+        "mojar": {
+            "name": "LMS",
+            "domain": "lms",
+            "cms_min": "1.0.0",
+            "version": "1.0.0",
+            "providers": [
+                "Mojahid\\Lms\\Providers\\LmsServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Mojahid\\Lms\\": "src/"
+        },
+        "files": [
+            "helpers/helpers.php"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        },
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}
