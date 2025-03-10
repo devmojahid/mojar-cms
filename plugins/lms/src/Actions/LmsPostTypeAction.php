@@ -7,6 +7,7 @@ use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
+use Mojahid\Lms\Models\CourseTopic;
 
 class LmsPostTypeAction extends Action
 {
@@ -23,8 +24,8 @@ class LmsPostTypeAction extends Action
         );
         
         $this->addAction(
-            'post_type.products.form.left',
-            [$this, 'addFormProduct']
+            'post_type.courses.form.left',
+            [$this, 'addFormCourse']
         );
 
         $this->addFilter(
@@ -119,18 +120,18 @@ class LmsPostTypeAction extends Action
         );
     }
 
-    public function addFormProduct($model): void
+    public function addFormCourse($model): void
     {
-        $variant = ProductVariant::findByProduct($model->id);
-        if ($variant === null) {
-            $variant = new ProductVariant();
+        $topic = CourseTopic::findByTopic($model->id);
+        if ($topic === null) {
+            $topic = new CourseTopic();
         }
 
         echo e(
             view(
-                'lms::backend.product.form',
+                'lms::backend.lms.form',
                 compact(
-                    'variant',
+                    'topic',
                     'model'
                 )
             )

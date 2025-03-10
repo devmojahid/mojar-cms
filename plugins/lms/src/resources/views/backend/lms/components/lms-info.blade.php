@@ -1,10 +1,8 @@
 @php
     /**
      * @var \Juzaweb\Backend\Models\Post $model
-     * @var \Juzaweb\merce\Models\ProductVariant $variant
+     * @var \Juzaweb\merce\Models\Producttopic $topic
      */
-
-     $downloadLinks = \Mojahid\Lms\Models\DownloadLink::where(['variant_id' => $variant->id])->get();
 @endphp
 
 
@@ -63,7 +61,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             {{ Field::text(trans('lms::content.price'), 'meta[price]', [
-                                'value' => $variant->price ? number_format($variant->price) : '',
+                                'value' => $topic->price ? number_format($topic->price) : '',
                                 'class' => 'is-number number-format',
                                 'prefix' => '$',
                             ]) }}
@@ -72,7 +70,7 @@
 
                         <div class="col-md-6">
                             {{ Field::text(trans('lms::content.compare_price'), 'meta[compare_price]', [
-                                'value' => $variant->compare_price ? number_format($variant->compare_price) : '',
+                                'value' => $topic->compare_price ? number_format($topic->compare_price) : '',
                                 'class' => 'is-number number-format',
                                 'prefix' => '$',
                             ]) }}
@@ -84,13 +82,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             {{ Field::text(trans('lms::content.sku_code'), 'meta[sku_code]', [
-                                'value' => $variant->sku_code ?? '',
+                                'value' => $topic->sku_code ?? '',
                             ]) }}
                         </div>
 
                         <div class="col-md-6">
                             {{ Field::text(trans('lms::content.barcode'), 'meta[barcode]', [
-                                'value' => $variant->barcode ?? '',
+                                'value' => $topic->barcode ?? '',
                             ]) }}
                         </div>
 
@@ -131,14 +129,7 @@
                                 </tr>
                                 </thead>
                                 <tbody class="repeater-items">
-                                @foreach($downloadLinks as $downloadLink)
-                                    @component(
-                                        'lms::backend.product.components.download-link-item',
-                                        ['marker' => $downloadLink->id, 'item' => $downloadLink]
-                                    )
-            
-                                    @endcomponent
-                                @endforeach
+                           
                                 </tbody>
                             </table>
                         </div>
@@ -148,12 +139,6 @@
                                 {{ trans('cms::app.add_repeater_item', ['label' => trans('Download Links')]) }}
                             </button>
                         </div>
-            
-                        <script type="text/html" class="repeater-item-template">
-                            @component('lms::backend.product.components.download-link-item', ['marker' => '{marker}'])
-            
-                            @endcomponent
-                        </script>
                     </div>
                 </div>
             </div>

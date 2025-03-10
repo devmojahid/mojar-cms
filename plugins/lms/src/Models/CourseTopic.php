@@ -59,9 +59,9 @@ class CourseTopic extends Model
 {
     use ResourceModel, QueryCacheable;
 
-    public string $cachePrefix = 'course_topics_';
+    public string $cachePrefix = 'lms_course_topics_';
 
-    protected $table = 'course_topics';
+    protected $table = 'lms_course_topics';
 
     protected $fillable = [
         'title',
@@ -99,7 +99,7 @@ class CourseTopic extends Model
     protected function getCacheBaseTags(): array
     {
         return [
-            'course_topics',
+            'lms_course_topics',
         ];
     }
 }
