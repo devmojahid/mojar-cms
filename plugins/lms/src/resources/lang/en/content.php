@@ -157,6 +157,7 @@ return [
     'discount_code_is_not_valid' => 'Discount code is not valid',
     'free' => "Free",
     // lms Management
+    'courses' => "Courses",
     'lms' => 'LMS',
     'order' => 'Order',
     'orders' => 'Orders',
