@@ -15,6 +15,7 @@ use Mojahid\Lms\Http\Controllers\Backend\{
     CustomerController,
     InvoiceController,
     SettingController,
+    CurriculumController
 };
 
 use Illuminate\Support\Facades\Route;
@@ -36,3 +37,6 @@ Route::jwResource(
 );
 
 Route::get('lms/settings', [SettingController::class, 'index'])->name('admin.lms.setting');
+
+Route::get('/courses/{course}/curriculum', [CurriculumController::class, 'index'])
+     ->name('courses.curriculum.index');

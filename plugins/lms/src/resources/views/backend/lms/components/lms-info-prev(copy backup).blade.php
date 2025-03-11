@@ -139,199 +139,21 @@
             align-items: flex-start;
             gap: 0.5rem;
         }
-
+        
         .curriculum-topic-actions {
             width: 100%;
             justify-content: flex-end;
         }
-
+        
         .curriculum-item {
             flex-wrap: wrap;
         }
-
+        
         .curriculum-item-actions {
             width: 100%;
             justify-content: flex-end;
             margin-top: 0.5rem;
         }
-    }
-
-    /* LMS CSS Styles */
-
-    /* Main Container Styles */
-    .lms-curriculum-container {
-        background-color: #f9f9fb;
-        border-radius: 0.5rem;
-        padding: 1.5rem;
-    }
-
-    /* Empty State Styles */
-    .lms-empty-state {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 3rem 1.5rem;
-        text-align: center;
-        background-color: #fff;
-        border-radius: 0.5rem;
-        border: 1px dashed #d1d5db;
-    }
-
-    .lms-empty-state-icon {
-        width: 5rem;
-        height: 5rem;
-        color: #6b7280;
-        margin-bottom: 1.5rem;
-    }
-
-    .lms-empty-state-title {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin-bottom: 0.75rem;
-        color: #374151;
-    }
-
-    .lms-empty-state-text {
-        color: #6b7280;
-        max-width: 32rem;
-        margin-bottom: 1.5rem;
-    }
-
-    /* Topic Styles */
-    .lms-topics-container {
-        display: flex;
-        flex-direction: column;
-        gap: 1.25rem;
-    }
-
-    .lms-topic {
-        background-color: #fff;
-        border-radius: 0.5rem;
-        border: 1px solid #e5e7eb;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-    }
-
-    .lms-topic-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1rem;
-        background-color: #f9fafb;
-        border-bottom: 1px solid #e5e7eb;
-        cursor: move;
-    }
-
-    .lms-topic-title-wrapper {
-        display: flex;
-        align-items: center;
-        flex: 1;
-    }
-
-    .lms-topic-toggle {
-        display: flex;
-        align-items: center;
-        margin-right: 0.5rem;
-        cursor: pointer;
-        color: #6b7280;
-        transition: transform 0.2s ease;
-    }
-
-    .lms-topic-title {
-        margin: 0;
-        font-size: 1rem;
-        font-weight: 600;
-        color: #1f2937;
-    }
-
-    .lms-topic-actions {
-        display: flex;
-        gap: 0.5rem;
-    }
-
-    .lms-topic-content {
-        padding: 1rem;
-        display: none;
-    }
-
-    .lms-topic-expanded .lms-topic-content {
-        display: block;
-    }
-
-    .lms-topic-description {
-        color: #6b7280;
-        margin-bottom: 1rem;
-        font-size: 0.875rem;
-    }
-
-    .lms-topic-footer {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0.75rem 1rem;
-        background-color: #f9fafb;
-        border-top: 1px solid #e5e7eb;
-    }
-
-    /* Lesson Container Styles */
-    .lms-lessons-container {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-        margin-top: 1rem;
-    }
-
-    .lms-lesson-item {
-        background-color: #f9fafb;
-        border: 1px solid #e5e7eb;
-        border-radius: 0.375rem;
-        overflow: hidden;
-    }
-
-    .lms-lesson-header {
-        display: flex;
-        align-items: center;
-        padding: 0.75rem;
-        cursor: move;
-    }
-
-    .lms-lesson-type-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 2rem;
-        height: 2rem;
-        margin-right: 0.75rem;
-    }
-
-    .lms-lesson-info {
-        flex: 1;
-    }
-
-    .lms-lesson-title {
-        margin: 0 0 0.25rem 0;
-        font-size: 0.875rem;
-        font-weight: 500;
-    }
-
-    .lms-lesson-type {
-        font-size: 0.75rem;
-    }
-
-    .lms-lesson-actions {
-        display: flex;
-        gap: 0.25rem;
-    }
-
-    /* Loading Spinner */
-    .lms-spinner {
-        width: 2rem;
-        height: 2rem;
-        border: 0.25rem solid rgba(59, 130, 246, 0.25);
-        border-right-color: #3b82f6;
-        border-radius: 50%;
-        animation: lms-spinner 1s linear infinite;
     }
 </style>
 
@@ -484,11 +306,9 @@
                         {{ __('Curriculum') }}
                     </h4>
                     <div>
-                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#topicModal">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus"
-                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-topic">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                 <path d="M12 5l0 14" />
                                 <path d="M5 12l14 0" />
                             </svg>
@@ -496,18 +316,12 @@
                         </a>
                     </div>
                 </div>
-                @php
-                    $courseId = 1;
-                @endphp
-                <div id="lmsManager" data-course-id="{{ $courseId }}"></div>
 
                 <div id="curriculum-items-container" class="curriculum-container">
                     <!-- Empty state - displayed when no curriculum items exist -->
                     <div class="curriculum-empty-state" id="curriculum-empty-state">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book"
-                            width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                             <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
                             <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
                             <path d="M3 6l0 13" />
@@ -515,11 +329,8 @@
                             <path d="M21 6l0 13" />
                         </svg>
                         <h3>{{ __('No Curriculum Items Yet') }}</h3>
-                        <p class="text-muted">
-                            {{ __('Start building your course by adding topics, lessons, quizzes, and assignments.') }}
-                        </p>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#topicModal"
-                            type="button">
+                        <p class="text-muted">{{ __('Start building your course by adding topics, lessons, quizzes, and assignments.') }}</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-topic">
                             {{ __('Add Your First Topic') }}
                         </button>
                     </div>
@@ -531,36 +342,25 @@
                             <div class="curriculum-topic-header">
                                 <h5 class="curriculum-topic-title">Introduction to the Course</h5>
                                 <div class="curriculum-topic-actions">
-                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
-                                        data-bs-target="#modal-lesson">
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="icon icon-tabler icon-tabler-plus" width="24" height="24"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal-lesson">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                             <path d="M12 5l0 14" />
                                             <path d="M5 12l14 0" />
                                         </svg>
                                         {{ __('Add Item') }}
                                     </button>
                                     <button class="btn btn-sm btn-outline-secondary">
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="icon icon-tabler icon-tabler-edit" width="24" height="24"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                             <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-                                            <path
-                                                d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                                            <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
                                             <path d="M16 5l3 3" />
                                         </svg>
                                     </button>
                                     <button class="btn btn-sm btn-outline-danger">
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="icon icon-tabler icon-tabler-trash" width="24" height="24"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                             <path d="M4 7l16 0" />
                                             <path d="M10 11l0 6" />
                                             <path d="M14 11l0 6" />
@@ -574,16 +374,10 @@
                                 <div class="curriculum-item curriculum-item-video" data-id="1">
                                     <div class="d-flex align-items-center flex-grow-1">
                                         <span class="curriculum-item-type">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="icon icon-tabler icon-tabler-video me-1" width="24"
-                                                height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path
-                                                    d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
-                                                <path
-                                                    d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-video me-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                <path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
+                                                <path d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
                                             </svg>
                                             Video
                                         </span>
@@ -592,25 +386,16 @@
                                     </div>
                                     <div class="curriculum-item-actions">
                                         <button class="btn btn-sm btn-icon btn-ghost-secondary">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="icon icon-tabler icon-tabler-edit" width="24"
-                                                height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                                 <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-                                                <path
-                                                    d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                                                <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
                                                 <path d="M16 5l3 3" />
                                             </svg>
                                         </button>
                                         <button class="btn btn-sm btn-icon btn-ghost-danger">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="icon icon-tabler icon-tabler-trash" width="24"
-                                                height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                                 <path d="M4 7l16 0" />
                                                 <path d="M10 11l0 6" />
                                                 <path d="M14 11l0 6" />
@@ -623,12 +408,8 @@
                                 <div class="curriculum-item curriculum-item-quiz" data-id="2">
                                     <div class="d-flex align-items-center flex-grow-1">
                                         <span class="curriculum-item-type">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="icon icon-tabler icon-tabler-brand-stackoverflow me-1"
-                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-stackoverflow me-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                                 <path d="M4 17v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-1" />
                                                 <path d="M8 16h8" />
                                                 <path d="M8.322 12.582l7.956 .836" />
@@ -642,25 +423,16 @@
                                     </div>
                                     <div class="curriculum-item-actions">
                                         <button class="btn btn-sm btn-icon btn-ghost-secondary">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="icon icon-tabler icon-tabler-edit" width="24"
-                                                height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                                 <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-                                                <path
-                                                    d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                                                <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
                                                 <path d="M16 5l3 3" />
                                             </svg>
                                         </button>
                                         <button class="btn btn-sm btn-icon btn-ghost-danger">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="icon icon-tabler icon-tabler-trash" width="24"
-                                                height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                                 <path d="M4 7l16 0" />
                                                 <path d="M10 11l0 6" />
                                                 <path d="M14 11l0 6" />
@@ -691,38 +463,28 @@
     </div>
 </div>
 
-<div class="modal modal-blur fade" id="topicModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal modal-blur fade" id="modal-topic" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <form id="topicForm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ __('Add New Topic') }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ __('Add New Topic') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label required">{{ __('Topic Title') }}</label>
+                    <input type="text" class="form-control" id="topic-title" placeholder="{{ __('Enter topic title...') }}" required>
                 </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label class="form-label required">{{ __('Topic Title') }}</label>
-                        <input type="text" class="form-control" id="topicTitle" name="title"
-                            placeholder="{{ __('Enter topic title...') }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">{{ __('Description') }}</label>
-                        <textarea class="form-control" id="topic-description" rows="3" name="description"
-                            placeholder="{{ __('Enter topic description...') }}"></textarea>
-                    </div>
-                </div>
-                <input type="hidden" name="id" id="topicId">
-                <div class="modal-footer">
-                    <button type="button" class="btn me-auto" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-                    <button type="button" class="btn btn-primary" id="saveTopic">
-                        <span class="d-none" id="saveTopicLoading">
-                          <span class="spinner-border spinner-border-sm"></span>
-                        </span>
-                        <span id="saveTopicText">{{ __('Save Topic 1') }}</span>
-                      </button>
+                <div class="mb-3">
+                    <label class="form-label">{{ __('Description') }}</label>
+                    <textarea class="form-control" id="topic-description" rows="3" placeholder="{{ __('Enter topic description...') }}"></textarea>
                 </div>
             </div>
-        </form>
+            <div class="modal-footer">
+                <button type="button" class="btn me-auto" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
+                <button type="button" class="btn btn-primary" id="save-topic" data-bs-dismiss="modal">{{ __('Save Topic') }}</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -738,16 +500,14 @@
                     <label class="form-label">{{ __('Item Type') }}</label>
                     <div class="form-selectgroup form-selectgroup-boxes d-flex flex-column">
                         <label class="form-selectgroup-item">
-                            <input type="radio" name="item-type" value="lesson" class="form-selectgroup-input"
-                                checked>
+                            <input type="radio" name="item-type" value="lesson" class="form-selectgroup-input" checked>
                             <span class="form-selectgroup-label d-flex align-items-center p-3">
                                 <span class="me-3">
                                     <span class="form-selectgroup-check"></span>
                                 </span>
                                 <span class="form-selectgroup-label-content">
                                     <span class="form-selectgroup-title strong mb-1">{{ __('Lesson') }}</span>
-                                    <span
-                                        class="d-block text-muted">{{ __('Add a video, audio, or text lesson') }}</span>
+                                    <span class="d-block text-muted">{{ __('Add a video, audio, or text lesson') }}</span>
                                 </span>
                             </span>
                         </label>
@@ -764,28 +524,25 @@
                             </span>
                         </label>
                         <label class="form-selectgroup-item">
-                            <input type="radio" name="item-type" value="assignment"
-                                class="form-selectgroup-input">
+                            <input type="radio" name="item-type" value="assignment" class="form-selectgroup-input">
                             <span class="form-selectgroup-label d-flex align-items-center p-3">
                                 <span class="me-3">
                                     <span class="form-selectgroup-check"></span>
                                 </span>
                                 <span class="form-selectgroup-label-content">
                                     <span class="form-selectgroup-title strong mb-1">{{ __('Assignment') }}</span>
-                                    <span
-                                        class="d-block text-muted">{{ __('Add an assignment for students to complete') }}</span>
+                                    <span class="d-block text-muted">{{ __('Add an assignment for students to complete') }}</span>
                                 </span>
                             </span>
                         </label>
                     </div>
                 </div>
-
+                
                 <!-- Lesson Form (default visible) -->
                 <div id="lesson-form">
                     <div class="mb-3">
                         <label class="form-label required">{{ __('Lesson Title') }}</label>
-                        <input type="text" class="form-control" id="lesson-title"
-                            placeholder="{{ __('Enter lesson title...') }}" required>
+                        <input type="text" class="form-control" id="lesson-title" placeholder="{{ __('Enter lesson title...') }}" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">{{ __('Lesson Type') }}</label>
@@ -798,14 +555,12 @@
                     </div>
                     <div class="mb-3" id="lesson-content-url">
                         <label class="form-label">{{ __('Content URL') }}</label>
-                        <input type="text" class="form-control" id="lesson-url"
-                            placeholder="{{ __('Enter content URL...') }}">
+                        <input type="text" class="form-control" id="lesson-url" placeholder="{{ __('Enter content URL...') }}">
                         <small class="form-hint">{{ __('YouTube, Vimeo, or direct file URL') }}</small>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">{{ __('Duration (minutes)') }}</label>
-                        <input type="number" class="form-control" id="lesson-duration" placeholder="0"
-                            min="0">
+                        <input type="number" class="form-control" id="lesson-duration" placeholder="0" min="0">
                     </div>
                     <div class="mb-3">
                         <label class="form-check">
@@ -815,223 +570,55 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">{{ __('Description') }}</label>
-                        <textarea class="form-control" id="lesson-description" rows="3"
-                            placeholder="{{ __('Enter lesson description...') }}"></textarea>
+                        <textarea class="form-control" id="lesson-description" rows="3" placeholder="{{ __('Enter lesson description...') }}"></textarea>
                     </div>
                 </div>
-
+                
                 <!-- Quiz Form (initially hidden) -->
                 <div id="quiz-form" style="display: none;">
                     <div class="mb-3">
                         <label class="form-label required">{{ __('Quiz Title') }}</label>
-                        <input type="text" class="form-control" id="quiz-title"
-                            placeholder="{{ __('Enter quiz title...') }}">
+                        <input type="text" class="form-control" id="quiz-title" placeholder="{{ __('Enter quiz title...') }}">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">{{ __('Time Limit (minutes)') }}</label>
-                        <input type="number" class="form-control" id="quiz-time-limit" placeholder="0"
-                            min="0">
+                        <input type="number" class="form-control" id="quiz-time-limit" placeholder="0" min="0">
                         <small class="form-hint">{{ __('Leave empty for no time limit') }}</small>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">{{ __('Passing Score (%)') }}</label>
-                        <input type="number" class="form-control" id="quiz-passing-score" placeholder="70"
-                            min="0" max="100">
+                        <input type="number" class="form-control" id="quiz-passing-score" placeholder="70" min="0" max="100">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">{{ __('Description') }}</label>
-                        <textarea class="form-control" id="quiz-description" rows="3"
-                            placeholder="{{ __('Enter quiz description...') }}"></textarea>
+                        <textarea class="form-control" id="quiz-description" rows="3" placeholder="{{ __('Enter quiz description...') }}"></textarea>
                     </div>
                 </div>
-
+                
                 <!-- Assignment Form (initially hidden) -->
                 <div id="assignment-form" style="display: none;">
                     <div class="mb-3">
                         <label class="form-label required">{{ __('Assignment Title') }}</label>
-                        <input type="text" class="form-control" id="assignment-title"
-                            placeholder="{{ __('Enter assignment title...') }}">
+                        <input type="text" class="form-control" id="assignment-title" placeholder="{{ __('Enter assignment title...') }}">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">{{ __('Assignment Instructions') }}</label>
-                        <textarea class="form-control" id="assignment-instructions" rows="5"
-                            placeholder="{{ __('Enter detailed instructions...') }}"></textarea>
+                        <textarea class="form-control" id="assignment-instructions" rows="5" placeholder="{{ __('Enter detailed instructions...') }}"></textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">{{ __('Due Days') }}</label>
-                        <input type="number" class="form-control" id="assignment-due-days" placeholder="7"
-                            min="1">
+                        <input type="number" class="form-control" id="assignment-due-days" placeholder="7" min="1">
                         <small class="form-hint">{{ __('Number of days to complete after starting') }}</small>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">{{ __('Total Points') }}</label>
-                        <input type="number" class="form-control" id="assignment-points" placeholder="100"
-                            min="1">
+                        <input type="number" class="form-control" id="assignment-points" placeholder="100" min="1">
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn me-auto" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-                <button type="button" class="btn btn-primary" id="save-curriculum-item"
-                    data-bs-dismiss="modal">{{ __('Save Item') }}</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Lesson Modal -->
-<div class="modal modal-blur fade" id="lessonModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">{{ __('Add Lesson') }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="lessonForm">
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label class="form-label required">{{ __('Lesson Title') }}</label>
-                        <input type="text" class="form-control" name="title" required
-                            placeholder="{{ __('Enter lesson title...') }}">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">{{ __('Lesson Type') }}</label>
-                        <select class="form-select" name="type">
-                            <option value="video">{{ __('Video') }}</option>
-                            <option value="audio">{{ __('Audio') }}</option>
-                            <option value="document">{{ __('Document') }}</option>
-                            <option value="link">{{ __('External Link') }}</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">{{ __('Content URL') }}</label>
-                        <input type="url" class="form-control" name="content_url"
-                            placeholder="{{ __('Enter content URL...') }}">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">{{ __('Duration (minutes)') }}</label>
-                        <input type="number" class="form-control" name="duration" min="0">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-check">
-                            <input class="form-check-input" type="checkbox" name="downloadable">
-                            <span class="form-check-label">{{ __('Downloadable') }}</span>
-                        </label>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">{{ __('Description') }}</label>
-                        <textarea class="form-control" name="description" rows="3"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn me-auto" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-                    <button type="submit" class="btn btn-primary" id="saveLesson">
-                        <span class="d-none" id="saveLessonLoading"></span>
-                        <span id="saveLessonText">{{ __('Save Lesson') }}</span>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Quiz Modal -->
-<div class="modal modal-blur fade" id="quizModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">{{ __('Add Quiz') }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="quizForm">
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label class="form-label required">{{ __('Quiz Title') }}</label>
-                        <input type="text" class="form-control" name="title" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">{{ __('Time Limit (minutes)') }}</label>
-                        <input type="number" class="form-control" name="time_limit" min="0">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">{{ __('Passing Score (%)') }}</label>
-                        <input type="number" class="form-control" name="passing_score" min="0"
-                            max="100">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">{{ __('Description') }}</label>
-                        <textarea class="form-control" name="description" rows="3"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn me-auto" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-                    <button type="submit" class="btn btn-primary" id="saveQuiz">
-                        <span class="d-none" id="saveQuizLoading"></span>
-                        <span id="saveQuizText">{{ __('Save Quiz') }}</span>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Assignment Modal -->
-<div class="modal modal-blur fade" id="assignmentModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">{{ __('Add Assignment') }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="assignmentForm">
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label class="form-label required">{{ __('Assignment Title') }}</label>
-                        <input type="text" class="form-control" name="title" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">{{ __('Instructions') }}</label>
-                        <textarea class="form-control" name="instructions" rows="5"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">{{ __('Due Days') }}</label>
-                        <input type="number" class="form-control" name="due_days" min="1">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">{{ __('Total Points') }}</label>
-                        <input type="number" class="form-control" name="points" min="1">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn me-auto" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-                    <button type="submit" class="btn btn-primary" id="saveAssignment">
-                        <span class="d-none" id="saveAssignmentLoading"></span>
-                        <span id="saveAssignmentText">{{ __('Save Assignment') }}</span>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Confirmation Modal -->
-<div class="modal modal-blur fade" id="confirmationModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">{{ __('Confirm Action') }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p id="confirmationMessage">{{ __('Are you sure you want to perform this action?') }}</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-link link-secondary me-auto" data-bs-dismiss="modal">
-                    {{ __('Cancel') }}
-                </button>
-                <button type="button" class="btn btn-danger" id="confirmAction">
-                    {{ __('Confirm') }}
-                </button>
+                <button type="button" class="btn btn-primary" id="save-curriculum-item" data-bs-dismiss="modal">{{ __('Save Item') }}</button>
             </div>
         </div>
     </div>
@@ -1048,6 +635,132 @@
                 $('input[name="meta[compare_price]"]').prop('disabled', true);
             }
         });
+
+        // default checked item wise show or hide
+        if ($('input[name="form-imagecheck-radio"]').val() == '2') {
+            $('input[name="meta[price]"]').prop('disabled', false);
+            $('input[name="meta[compare_price]"]').prop('disabled', false);
+        } else {
+            $('input[name="meta[price]"]').prop('disabled', true);
+            $('input[name="meta[compare_price]"]').prop('disabled', true);
+        }
+        
+        // Curriculum Item Type Selector
+        $('input[name="item-type"]').change(function() {
+            const selectedType = $(this).val();
+            
+            // Hide all forms first
+            $('#lesson-form, #quiz-form, #assignment-form').hide();
+            
+            // Show the selected form
+            if(selectedType === 'lesson') {
+                $('#lesson-form').show();
+            } else if(selectedType === 'quiz') {
+                $('#quiz-form').show();
+            } else if(selectedType === 'assignment') {
+                $('#assignment-form').show();
+            }
+        });
+        
+        // Toggle between sample curriculum and empty state (for demo purposes)
+        // In production, this would check for actual data
+        const hasCurriculum = false; // Set to true to see the sample curriculum
+        
+        if(hasCurriculum) {
+            $('#curriculum-empty-state').hide();
+            $('#curriculum-topics').show();
+        } else {
+            $('#curriculum-empty-state').show();
+            $('#curriculum-topics').hide();
+        }
+        
+        // Lesson type change handler
+        $('#lesson-type').change(function() {
+            const lessonType = $(this).val();
+            
+            if(lessonType === 'document') {
+                $('#lesson-content-url').find('small').text('{{ __("PDF, DOCX, or other document URL") }}');
+            } else if(lessonType === 'video') {
+                $('#lesson-content-url').find('small').text('{{ __("YouTube, Vimeo, or direct video file URL") }}');
+            } else if(lessonType === 'audio') {
+                $('#lesson-content-url').find('small').text('{{ __("Direct audio file URL or streaming audio URL") }}');
+            } else if(lessonType === 'link') {
+                $('#lesson-content-url').find('small').text('{{ __("External website or resource URL") }}');
+            }
+        });
+        
+        // Save Topic Button
+        $('#save-topic').click(function() {
+            const title = $('#topic-title').val();
+            const description = $('#topic-description').val();
+            
+            if(!title) {
+                alert('{{ __("Please enter a topic title") }}');
+                return;
+            }
+            
+            // Here you would typically save the topic via AJAX
+            console.log("Saving topic:", { title, description });
+            
+            // For demo purposes, show the curriculum after adding a topic
+            $('#curriculum-empty-state').hide();
+            $('#curriculum-topics').show();
+            
+            // Clear the form
+            $('#topic-title').val('');
+            $('#topic-description').val('');
+        });
+        
+        // Save Curriculum Item Button
+        $('#save-curriculum-item').click(function() {
+            const itemType = $('input[name="item-type"]:checked').val();
+            let data = {};
+            
+            if(itemType === 'lesson') {
+                data = {
+                    title: $('#lesson-title').val(),
+                    type: $('#lesson-type').val(),
+                    url: $('#lesson-url').val(),
+                    duration: $('#lesson-duration').val(),
+                    downloadable: $('#lesson-downloadable').is(':checked'),
+                    description: $('#lesson-description').val()
+                };
+            } else if(itemType === 'quiz') {
+                data = {
+                    title: $('#quiz-title').val(),
+                    timeLimit: $('#quiz-time-limit').val(),
+                    passingScore: $('#quiz-passing-score').val(),
+                    description: $('#quiz-description').val()
+                };
+            } else if(itemType === 'assignment') {
+                data = {
+                    title: $('#assignment-title').val(),
+                    instructions: $('#assignment-instructions').val(),
+                    dueDays: $('#assignment-due-days').val(),
+                    points: $('#assignment-points').val()
+                };
+            }
+            
+            // Validate required fields based on type
+            if((itemType === 'lesson' && !data.title) || 
+               (itemType === 'quiz' && !data.title) || 
+               (itemType === 'assignment' && !data.title)) {
+                alert('{{ __("Please enter a title") }}');
+                return;
+            }
+            
+            // Here you would typically save the item via AJAX
+            console.log("Saving curriculum item:", { itemType, data });
+            
+            // Clear the form based on type
+            if(itemType === 'lesson') {
+                $('#lesson-title, #lesson-url, #lesson-duration, #lesson-description').val('');
+                $('#lesson-downloadable').prop('checked', false);
+            } else if(itemType === 'quiz') {
+                $('#quiz-title, #quiz-time-limit, #quiz-passing-score, #quiz-description').val('');
+            } else if(itemType === 'assignment') {
+                $('#assignment-title, #assignment-instructions, #assignment-due-days, #assignment-points').val('');
+            }
+        });
     });
 </script>
-<script src="{{ asset('jw-styles/plugins/mojahid/lms/assets/js/lms.min.js') }}" type="text/javascript"></script>
