@@ -2,6 +2,7 @@
 
 namespace Mojahid\Lms\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -9,7 +10,9 @@ use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
 use Juzaweb\CMS\Traits\ResourceModel;
-
+use Juzaweb\CMS\Traits\PostTypeModel;
+use Juzaweb\CMS\Traits\UseUUIDColumn;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * Mojahid\Lms\Models\CourseTopic
  *
@@ -57,7 +60,11 @@ use Juzaweb\CMS\Traits\ResourceModel;
  */
 class CourseTopic extends Model
 {
-    use ResourceModel, QueryCacheable;
+    use PostTypeModel, HasFactory, ResourceModel, QueryCacheable {
+        // Use PostTypeModel's implementation instead of ResourceModel's
+        PostTypeModel::getStatuses insteadof ResourceModel;
+        PostTypeModel::scopeWhereFilter insteadof ResourceModel;
+    }
 
     public string $cachePrefix = 'lms_course_topics_';
 
@@ -101,5 +108,10 @@ class CourseTopic extends Model
         return [
             'lms_course_topics',
         ];
+    }
+
+    public function lessons(): HasMany
+    {
+        return $this->hasMany(CourseLesson::class, 'course_topic_id', 'id');
     }
 }

@@ -15,18 +15,19 @@ use Mojahid\Lms\Http\Controllers\Backend\{
     CustomerController,
     InvoiceController,
     SettingController,
-    CurriculumController
+    CurriculumController,
+    TopicController
 };
 
 use Illuminate\Support\Facades\Route;
 
-Route::jwResource(
-    'lms/orders',
-    OrderController::class,
-    [
-        'name' => 'orders'
-    ]
-);
+// Route::jwResource(
+//     'lms/orders',
+//     OrderController::class,
+//     [
+//         'name' => 'orders'
+//     ]
+// );
 
 Route::jwResource(
     'lms/customers',
@@ -40,3 +41,6 @@ Route::get('lms/settings', [SettingController::class, 'index'])->name('admin.lms
 
 Route::get('/courses/{course}/curriculum', [CurriculumController::class, 'index'])
      ->name('courses.curriculum.index');
+
+
+Route::apiResource('lms/topics', TopicController::class);

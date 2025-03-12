@@ -8,7 +8,7 @@ use Mojahid\EventManagement\Services\BookingService;
 use Mojahid\EventManagement\Http\Requests\BookingRequest;
 use Mojahid\EventManagement\Models\EventTicket;
 use Mojahid\EventManagement\Models\EventBooking;
-use Mojahid\EventManagement\Services\BookingManager;
+use Mojahid\EventManagement\Supports\BookingManager;
 use Mojahid\EventManagement\Http\Resources\EventBookingResource;
 
 class EventBookingController extends FrontendController

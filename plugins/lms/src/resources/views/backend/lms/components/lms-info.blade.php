@@ -691,38 +691,38 @@
     </div>
 </div>
 
+<div class="alert alert-danger d-none" id="topicFormError"></div>
+
 <div class="modal modal-blur fade" id="topicModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <form id="topicForm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ __('Add New Topic') }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div id="topicForm" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="topicModalTitle">{{ __('Add New Topic') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label required">{{ __('Topic Title') }}</label>
+                    <input type="text" class="form-control" id="topicTitle" name="title"
+                        placeholder="{{ __('Enter topic title...') }}" required>
                 </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label class="form-label required">{{ __('Topic Title') }}</label>
-                        <input type="text" class="form-control" id="topicTitle" name="title"
-                            placeholder="{{ __('Enter topic title...') }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">{{ __('Description') }}</label>
-                        <textarea class="form-control" id="topic-description" rows="3" name="description"
-                            placeholder="{{ __('Enter topic description...') }}"></textarea>
-                    </div>
-                </div>
-                <input type="hidden" name="id" id="topicId">
-                <div class="modal-footer">
-                    <button type="button" class="btn me-auto" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-                    <button type="button" class="btn btn-primary" id="saveTopic">
-                        <span class="d-none" id="saveTopicLoading">
-                          <span class="spinner-border spinner-border-sm"></span>
-                        </span>
-                        <span id="saveTopicText">{{ __('Save Topic 1') }}</span>
-                      </button>
+                <div class="mb-3">
+                    <label class="form-label">{{ __('Description') }}</label>
+                    <textarea class="form-control" id="topicDescription" rows="3" name="description"
+                        placeholder="{{ __('Enter topic description...') }}"></textarea>
                 </div>
             </div>
-        </form>
+            <input type="hidden" name="id" id="topicId">
+            <div class="modal-footer">
+                <button type="button" class="btn me-auto" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
+                <button type="button" class="btn btn-primary" id="saveTopic">
+                    <span class="d-none" id="saveTopicLoading">
+                      <span class="spinner-border spinner-border-sm"></span>
+                    </span>
+                    <span id="saveTopicText">{{ __('Save Topic') }}</span>
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -25,8 +25,8 @@ use Juzaweb\Backend\Models\PostRating;
 use Juzaweb\Backend\Models\PostView;
 use Juzaweb\Backend\Models\Resource;
 use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\CMS\Database\Factories\PostFactory;
-use Juzaweb\CMS\Models\User;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+
 
 /**
  * Mojahid\Lms\Models\Course
@@ -138,5 +138,33 @@ class Course extends Post
             'course_id',
             'id'
         );
+    }
+
+    public function getTopics(): Collection
+    {
+        return $this->topics()->get();
+    }
+
+    // lesson relation with topic hasmanythrough
+    public function lessons(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            CourseLesson::class,
+            CourseTopic::class,
+            'post_id', // topic_id
+            'id', // lesson_id
+            'id', // course_id
+            'id' // topic_id
+        );
+    }
+
+    // public function allItems(): Collection
+    // {
+    //     return $this->topics()->with('lessons')->get();
+    // }
+    // Mojahid\Lms\Models\Course::allItems must return a relationship instance.
+    public function allItems(): HasMany
+    {
+        return $this->hasMany(CourseTopic::class, 'post_id', 'id');
     }
 }
