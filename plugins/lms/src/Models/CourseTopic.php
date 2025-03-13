@@ -11,7 +11,6 @@ use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
 use Juzaweb\CMS\Traits\ResourceModel;
 use Juzaweb\CMS\Traits\PostTypeModel;
-use Juzaweb\CMS\Traits\UseUUIDColumn;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * Mojahid\Lms\Models\CourseTopic
@@ -60,15 +59,20 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class CourseTopic extends Model
 {
-    use PostTypeModel, HasFactory, ResourceModel, QueryCacheable {
-        // Use PostTypeModel's implementation instead of ResourceModel's
-        PostTypeModel::getStatuses insteadof ResourceModel;
-        PostTypeModel::scopeWhereFilter insteadof ResourceModel;
-    }
+    use PostTypeModel, HasFactory, QueryCacheable;
 
     public string $cachePrefix = 'lms_course_topics_';
 
     protected $table = 'lms_course_topics';
+
+    public static function bootUseDescription(): void
+    {
+        static::saving(
+            function ($model) {
+                // Don't do anything - this overrides the trait behavior
+            }
+        );
+    }
 
     protected $fillable = [
         'title',

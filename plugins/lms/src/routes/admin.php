@@ -16,7 +16,8 @@ use Mojahid\Lms\Http\Controllers\Backend\{
     InvoiceController,
     SettingController,
     CurriculumController,
-    TopicController
+    TopicController,
+    LessonController
 };
 
 use Illuminate\Support\Facades\Route;
@@ -44,3 +45,4 @@ Route::get('/courses/{course}/curriculum', [CurriculumController::class, 'index'
 
 
 Route::apiResource('lms/topics', TopicController::class);
+Route::apiResource('lms/lessons', LessonController::class);

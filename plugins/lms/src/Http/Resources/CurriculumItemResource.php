@@ -13,7 +13,7 @@ class CurriculumItemResource extends JsonResource
             'type' => $this->item_type ?? "",
             'title' => $this->title ?? "",
             'order' => $this->order ?? 0,
-            'topic_id' => $this->topic_id ?? "",
+            'topic_id' => $this->id ?? "",
             'created_at' => $this->created_at ?? "",
             'updated_at' => $this->updated_at ?? "",
             // Include type-specific fields

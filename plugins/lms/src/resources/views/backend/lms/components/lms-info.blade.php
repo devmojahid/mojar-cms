@@ -333,6 +333,265 @@
         border-radius: 50%;
         animation: lms-spinner 1s linear infinite;
     }
+
+    /* LMS Curriculum Styles */
+    .lms-topics-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        margin-top: 1.5rem;
+    }
+
+    .lms-topic {
+        background-color: #fff;
+        border-radius: 0.5rem;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .lms-topic-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        background-color: #f9fafb;
+        border-bottom: 1px solid #e5e7eb;
+        cursor: pointer;
+    }
+
+    .lms-topic-title-wrapper {
+        display: flex;
+        align-items: center;
+        flex: 1;
+    }
+
+    .lms-topic-toggle {
+        display: flex;
+        align-items: center;
+        margin-right: 0.5rem;
+        cursor: pointer;
+        color: #6b7280;
+        transition: transform 0.2s ease;
+    }
+
+    .lms-topic-title {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1f2937;
+    }
+
+    .lms-topic-actions {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .lms-topic-content {
+        padding: 1rem;
+    }
+
+    .lms-topic-description {
+        color: #6b7280;
+        margin-bottom: 1rem;
+        font-size: 0.875rem;
+    }
+
+    .lms-topic-footer {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        background-color: #f9fafb;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    .lms-lessons-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-top: 1rem;
+    }
+
+    .lms-lesson-item {
+        background-color: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.375rem;
+        overflow: hidden;
+    }
+
+    .lms-lesson-header {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem;
+        cursor: move;
+    }
+
+    .lms-lesson-type-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        margin-right: 0.75rem;
+    }
+
+    .lms-lesson-info {
+        flex: 1;
+    }
+
+    .lms-lesson-title {
+        margin: 0 0 0.25rem 0;
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+
+    .lms-lesson-type {
+        font-size: 0.75rem;
+    }
+
+    .lms-lesson-actions {
+        display: flex;
+        gap: 0.25rem;
+    }
+
+    .lms-empty-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 1.5rem;
+        text-align: center;
+        background-color: #fff;
+        border-radius: 0.5rem;
+        border: 1px dashed #d1d5db;
+    }
+
+    .lms-empty-lesson {
+        padding: 1rem;
+        text-align: center;
+        background-color: #f9fafb;
+        border-radius: 0.375rem;
+        border: 1px dashed #d1d5db;
+    }
+
+    /* Loading spinner */
+    .lms-spinner {
+        width: 2rem;
+        height: 2rem;
+        border: 0.25rem solid rgba(59, 130, 246, 0.25);
+        border-right-color: #3b82f6;
+        border-radius: 50%;
+        animation: lms-spinner 1s linear infinite;
+    }
+
+    @keyframes lms-spinner {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .lms-topic-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .lms-topic-actions {
+            width: 100%;
+            justify-content: flex-end;
+        }
+
+        .lms-lesson-item {
+            flex-wrap: wrap;
+        }
+
+        .lms-lesson-actions {
+            width: 100%;
+            justify-content: flex-end;
+            margin-top: 0.5rem;
+        }
+    }
+
+
+    /* LMS Curriculum Styles */
+    .lms-topics-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        margin-top: 1.5rem;
+    }
+
+    .lms-topic {
+        background-color: #fff;
+        border-radius: 0.5rem;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .lms-topic-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        background-color: #f9fafb;
+        border-bottom: 1px solid #e5e7eb;
+        cursor: pointer;
+    }
+
+    .lms-topic-title-wrapper {
+        display: flex;
+        align-items: center;
+        flex: 1;
+    }
+
+    .lms-topic-toggle {
+        display: flex;
+        align-items: center;
+        margin-right: 0.5rem;
+        cursor: pointer;
+        color: #6b7280;
+        transition: transform 0.2s ease;
+    }
+
+    .lms-topic-title {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1f2937;
+    }
+
+    .lms-topic-actions {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .lms-topic-content {
+        padding: 1rem;
+        display: none;
+        /* Hidden by default, will be toggled by JavaScript */
+    }
+
+    .lms-topic-expanded .lms-topic-content {
+        display: block !important;
+        /* Force display when expanded */
+    }
+
+    .lms-topic-description {
+        color: #6b7280;
+        margin-bottom: 1rem;
+        font-size: 0.875rem;
+    }
+
+    .lms-topic-footer {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        background-color: #f9fafb;
+        border-top: 1px solid #e5e7eb;
+    }
 </style>
 
 
@@ -340,7 +599,19 @@
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
             <li class="nav-item">
-                <a href="#tabs-product-info" class="nav-link active" data-bs-toggle="tab">
+                <a href="#tabs-curriculum" class="nav-link active" data-bs-toggle="tab">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2" width="24" height="24"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <circle cx="12" cy="7" r="4" />
+                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                    </svg>
+                    {{ __('Curriculum') }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#tabs-product-info" class="nav-link" data-bs-toggle="tab">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round"
@@ -353,18 +624,6 @@
                         <path d="M15 19l2 2l4 -4" />
                     </svg>
                     {{ __('Course Info') }}
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#tabs-curriculum" class="nav-link" data-bs-toggle="tab">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2" width="24" height="24"
-                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <circle cx="12" cy="7" r="4" />
-                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                    </svg>
-                    {{ __('Curriculum') }}
                 </a>
             </li>
             <li class="nav-item">
@@ -384,7 +643,83 @@
     </div>
     <div class="card-body">
         <div class="tab-content">
-            <div class="tab-pane active show" id="tabs-product-info">
+
+            <div class="tab-pane show active" id="tabs-curriculum">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="mb-0">
+                        {{ __('Curriculum') }}
+                    </h4>
+                    <div>
+                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#topicModal">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus"
+                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M12 5l0 14" />
+                                <path d="M5 12l14 0" />
+                            </svg>
+                            {{ __('Add Topic') }}
+                        </a>
+                    </div>
+                </div>
+                @php
+                    $courseId = $model->id ?? 1;
+                @endphp
+                <div id="lmsManager" data-course-id="{{ $courseId }}"></div>
+
+                <div id="curriculum-items-container" class="curriculum-container">
+                    <!-- Empty state - displayed when no curriculum items exist -->
+                    <div class="curriculum-empty-state" id="lmsEmptyState">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24"
+                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+                            <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+                            <path d="M3 6l0 13" />
+                            <path d="M12 6l0 13" />
+                            <path d="M21 6l0 13" />
+                        </svg>
+                        <h3>{{ __('No Curriculum Items Yet') }}</h3>
+                        <p class="text-muted">
+                            {{ __('Start building your course by adding topics, lessons, quizzes, and assignments.') }}
+                        </p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#topicModal"
+                            type="button">
+                            {{ __('Add Your First Topic') }}
+                        </button>
+                    </div>
+
+                    <!-- Add More Topic Button (hidden initially) -->
+                    <div class="text-center mb-3" id="lmsAddMoreTopicBtn" style="display: none;">
+                        <button class="btn btn-primary lms-add-topic-btn" data-bs-toggle="modal"
+                            data-bs-target="#topicModal" type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus"
+                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M12 5l0 14" />
+                                <path d="M5 12l14 0" />
+                            </svg>
+                            {{ __('Add Another Topic') }}
+                        </button>
+                    </div>
+
+                    <!-- Topics Container -->
+                    <div class="lms-topics-container" id="lmsTopicsContainer">
+                        <!-- Topics will be dynamically added here -->
+                    </div>
+
+                    <!-- Loading Indicator -->
+                    <div class="text-center py-4" id="lmsTopicLoading" style="display: none;">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane show" id="tabs-product-info">
                 {{-- pricing model free or paid --}}
                 <div>
                     <div class="mb-3">
@@ -478,204 +813,6 @@
                 </div>
             </div>
 
-            <div class="tab-pane" id="tabs-curriculum">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="mb-0">
-                        {{ __('Curriculum') }}
-                    </h4>
-                    <div>
-                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#topicModal">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus"
-                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M12 5l0 14" />
-                                <path d="M5 12l14 0" />
-                            </svg>
-                            {{ __('Add Topic') }}
-                        </a>
-                    </div>
-                </div>
-                @php
-                    $courseId = 1;
-                @endphp
-                <div id="lmsManager" data-course-id="{{ $courseId }}"></div>
-
-                <div id="curriculum-items-container" class="curriculum-container">
-                    <!-- Empty state - displayed when no curriculum items exist -->
-                    <div class="curriculum-empty-state" id="curriculum-empty-state">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book"
-                            width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-                            <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-                            <path d="M3 6l0 13" />
-                            <path d="M12 6l0 13" />
-                            <path d="M21 6l0 13" />
-                        </svg>
-                        <h3>{{ __('No Curriculum Items Yet') }}</h3>
-                        <p class="text-muted">
-                            {{ __('Start building your course by adding topics, lessons, quizzes, and assignments.') }}
-                        </p>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#topicModal"
-                            type="button">
-                            {{ __('Add Your First Topic') }}
-                        </button>
-                    </div>
-
-                    <!-- Sample curriculum topics with lessons (this will be dynamically populated) -->
-                    <div class="curriculum-topics" id="curriculum-topics" style="display: none;">
-                        <!-- Topic 1 -->
-                        <div class="curriculum-topic" data-id="1">
-                            <div class="curriculum-topic-header">
-                                <h5 class="curriculum-topic-title">Introduction to the Course</h5>
-                                <div class="curriculum-topic-actions">
-                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
-                                        data-bs-target="#modal-lesson">
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="icon icon-tabler icon-tabler-plus" width="24" height="24"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M12 5l0 14" />
-                                            <path d="M5 12l14 0" />
-                                        </svg>
-                                        {{ __('Add Item') }}
-                                    </button>
-                                    <button class="btn btn-sm btn-outline-secondary">
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="icon icon-tabler icon-tabler-edit" width="24" height="24"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-                                            <path
-                                                d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
-                                            <path d="M16 5l3 3" />
-                                        </svg>
-                                    </button>
-                                    <button class="btn btn-sm btn-outline-danger">
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="icon icon-tabler icon-tabler-trash" width="24" height="24"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M4 7l16 0" />
-                                            <path d="M10 11l0 6" />
-                                            <path d="M14 11l0 6" />
-                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="curriculum-items">
-                                <div class="curriculum-item curriculum-item-video" data-id="1">
-                                    <div class="d-flex align-items-center flex-grow-1">
-                                        <span class="curriculum-item-type">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="icon icon-tabler icon-tabler-video me-1" width="24"
-                                                height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path
-                                                    d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
-                                                <path
-                                                    d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
-                                            </svg>
-                                            Video
-                                        </span>
-                                        <span class="curriculum-item-title">Welcome to the Course</span>
-                                        <span class="curriculum-item-duration">10:30</span>
-                                    </div>
-                                    <div class="curriculum-item-actions">
-                                        <button class="btn btn-sm btn-icon btn-ghost-secondary">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="icon icon-tabler icon-tabler-edit" width="24"
-                                                height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-                                                <path
-                                                    d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
-                                                <path d="M16 5l3 3" />
-                                            </svg>
-                                        </button>
-                                        <button class="btn btn-sm btn-icon btn-ghost-danger">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="icon icon-tabler icon-tabler-trash" width="24"
-                                                height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path d="M4 7l16 0" />
-                                                <path d="M10 11l0 6" />
-                                                <path d="M14 11l0 6" />
-                                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="curriculum-item curriculum-item-quiz" data-id="2">
-                                    <div class="d-flex align-items-center flex-grow-1">
-                                        <span class="curriculum-item-type">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="icon icon-tabler icon-tabler-brand-stackoverflow me-1"
-                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path d="M4 17v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-1" />
-                                                <path d="M8 16h8" />
-                                                <path d="M8.322 12.582l7.956 .836" />
-                                                <path d="M8.787 9.168l7.826 1.664" />
-                                                <path d="M10.096 5.764l7.608 2.472" />
-                                            </svg>
-                                            Quiz
-                                        </span>
-                                        <span class="curriculum-item-title">Introduction Quiz</span>
-                                        <span class="curriculum-item-duration">5 questions</span>
-                                    </div>
-                                    <div class="curriculum-item-actions">
-                                        <button class="btn btn-sm btn-icon btn-ghost-secondary">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="icon icon-tabler icon-tabler-edit" width="24"
-                                                height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-                                                <path
-                                                    d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
-                                                <path d="M16 5l3 3" />
-                                            </svg>
-                                        </button>
-                                        <button class="btn btn-sm btn-icon btn-ghost-danger">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="icon icon-tabler icon-tabler-trash" width="24"
-                                                height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path d="M4 7l16 0" />
-                                                <path d="M10 11l0 6" />
-                                                <path d="M14 11l0 6" />
-                                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="tab-pane" id="tabs-media-area">
                 <h4>
                     {{ __('Media') }}
@@ -717,7 +854,7 @@
                 <button type="button" class="btn me-auto" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
                 <button type="button" class="btn btn-primary" id="saveTopic">
                     <span class="d-none" id="saveTopicLoading">
-                      <span class="spinner-border spinner-border-sm"></span>
+                        <span class="spinner-border spinner-border-sm"></span>
                     </span>
                     <span id="saveTopicText">{{ __('Save Topic') }}</span>
                 </button>
@@ -887,7 +1024,7 @@
                 <h5 class="modal-title">{{ __('Add Lesson') }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="lessonForm">
+            <div id="lessonForm">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label required">{{ __('Lesson Title') }}</label>
@@ -925,12 +1062,12 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn me-auto" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-                    <button type="submit" class="btn btn-primary" id="saveLesson">
+                    <button type="button" class="btn btn-primary" id="saveLesson">
                         <span class="d-none" id="saveLessonLoading"></span>
                         <span id="saveLessonText">{{ __('Save Lesson') }}</span>
                     </button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
@@ -1050,4 +1187,154 @@
         });
     });
 </script>
+
+<!-- Topic Template -->
+<template id="topicTemplate">
+    <div class="lms-topic">
+        <div class="lms-topic-header">
+            <div class="lms-topic-title-wrapper">
+                <div class="lms-topic-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right"
+                        width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M9 6l6 6l-6 6"></path>
+                    </svg>
+                </div>
+                <h5 class="lms-topic-title">Topic Title</h5>
+                <span class="badge bg-success ms-2">Published</span>
+                <small class="text-muted small ms-2">Order: 0</small>
+            </div>
+            <div class="lms-topic-actions">
+                <button class="btn btn-sm btn-outline-secondary edit-topic-btn" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24"
+                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
+                        <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
+                        <path d="M16 5l3 3"></path>
+                    </svg>
+                    Edit
+                </button>
+                <button class="btn btn-sm btn-outline-danger delete-topic-btn" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24"
+                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M4 7l16 0"></path>
+                        <path d="M10 11l0 6"></path>
+                        <path d="M14 11l0 6"></path>
+                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                    </svg>
+                    Delete
+                </button>
+            </div>
+        </div>
+        <div class="lms-topic-content" style="display: none;">
+            <p class="lms-topic-description">Topic description goes here.</p>
+            <div class="lms-lessons-container" data-topic-id="">
+                <div class="lms-empty-lesson">
+                    <p class="text-muted text-center">No items in this topic yet. Add your first item below.</p>
+                </div>
+            </div>
+            <div class="lms-topic-footer">
+                <button type="button" class="btn btn-sm btn-outline-primary add-lesson-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24"
+                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 5l0 14"></path>
+                        <path d="M5 12l14 0"></path>
+                    </svg>
+                    Add Lesson
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- Lesson Template -->
+<template id="lessonTemplate">
+    <div class="lms-lesson-item">
+        <div class="lms-lesson-header">
+            <div class="lms-lesson-type-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-video" width="24"
+                    height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z">
+                    </path>
+                    <path d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"></path>
+                </svg>
+            </div>
+            <div class="lms-lesson-info">
+                <h6 class="lms-lesson-title">Lesson Title</h6>
+                <span class="lms-lesson-type">Video</span>
+            </div>
+            <div class="lms-lesson-actions">
+                <button class="btn btn-sm btn-icon btn-ghost-secondary edit-lesson-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24"
+                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
+                        <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
+                        <path d="M16 5l3 3"></path>
+                    </svg>
+                </button>
+                <button class="btn btn-sm btn-icon btn-ghost-danger delete-lesson-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24"
+                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M4 7l16 0"></path>
+                        <path d="M10 11l0 6"></path>
+                        <path d="M14 11l0 6"></path>
+                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
+
 <script src="{{ asset('jw-styles/plugins/mojahid/lms/assets/js/lms.min.js') }}" type="text/javascript"></script>
+
+<script>
+    // Ensure LMSManager is initialized after the script is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM content loaded in inline script');
+
+        // Check if LMSManager was already initialized
+        if (!window.lmsManager) {
+            console.log('LMSManager not initialized yet, initializing now');
+
+            // Wait a bit to ensure all scripts are loaded
+            setTimeout(function() {
+                try {
+                    window.lmsManager = new LMSManager();
+                    console.log('LMSManager initialized from inline script');
+
+                    // Force load topics
+                    if (window.lmsManager && window.lmsManager.loadTopics) {
+                        console.log('Forcing loadTopics call');
+                        window.lmsManager.loadTopics();
+                    }
+                } catch (error) {
+                    console.error('Error initializing LMSManager from inline script:', error);
+                }
+            }, 500);
+        } else {
+            console.log('LMSManager already initialized');
+
+            // Force load topics
+            if (window.lmsManager && window.lmsManager.loadTopics) {
+                console.log('Forcing loadTopics call');
+                window.lmsManager.loadTopics();
+            }
+        }
+    });
+</script>

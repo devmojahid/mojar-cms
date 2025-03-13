@@ -8,19 +8,17 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Traits\ResourceController;
-use Mojahid\Lms\Models\CourseTopic;
+use Mojahid\Lms\Models\CourseLesson;
 use Illuminate\Support\Str;
 use Juzaweb\CMS\Traits\ResponseMessage;
 use Illuminate\Http\RedirectResponse;
-use Mojahid\Lms\Http\Resources\TopicResource;
-use Illuminate\Database\Eloquent\Model;
 
-class TopicController extends BackendController
+class LessonController extends BackendController
 {
     use ResponseMessage;
-    protected function getDataTable(...$params): TopicDatatable
+    protected function getDataTable(...$params): LessonDatatable
     {
-        return new TopicDatatable();
+        return new LessonDatatable();
     }
 
     protected function validator(array $attributes, ...$params): \Illuminate\Validation\Validator
@@ -28,10 +26,17 @@ class TopicController extends BackendController
         return Validator::make(
             $attributes,
             [
-                'title' => 'nullable|string|max:250',
+                'title' => 'required|string|max:250',
                 'slug' => 'nullable|string|max:250',
+                'thumbnail' => 'nullable|string',
                 'description' => 'nullable|string',
-                'post_id' => 'required|exists:posts,id',
+                'status' => 'nullable|string',
+                'order' => 'nullable|integer',
+                'post_id' => 'nullable|exists:posts,id',
+                'course_topic_id' => 'required|exists:lms_course_topics,id',
+                'type' => 'nullable|string',
+                'duration' => 'nullable|integer',
+                'metas' => 'nullable|array',
             ]
         );
     }
@@ -80,75 +85,6 @@ class TopicController extends BackendController
             ]
         );
     }
-    // show topic and response json with TopicResource
-    public function show(CourseTopic $topic)
-    {
-        return response()->json(
-            [
-                'status' => 'success',
-                'data' => new TopicResource($topic),
-            ]
-        );
-    }
-
-    // update topic
-    public function update(Request $request, CourseTopic $topic, ...$params): JsonResponse|RedirectResponse
-    {
-        $validator = $this->validator($request->all(), ...$params);
-        if (is_array($validator)) {
-            $validator = Validator::make($request->all(), $validator);
-        }
-
-        $validator->validate();
-        // $data = $this->parseDataForSave($request->all(), ...$params);
-        $data = $request->all();
-
-        $model = $topic;
-
-        DB::beginTransaction();
-        try {
-            $slug = $request->input('slug');
-            if ($slug && method_exists($model, 'generateSlug')) {
-                $data['slug'] = $model->generateSlug($slug);
-            }
-
-            $model->fill($data);
-            $model->save();
-
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            throw $e;
-        }
-
-        if (method_exists($this, 'updateSuccess')) {
-            $this->updateSuccess($request, $model, ...$params);
-        }
-
-        if (method_exists($this, 'saveSuccess')) {
-            $this->saveSuccess($request, $model, ...$params);
-        }
-
-        return response()->json(
-            [
-                'status' => 'success',
-                'data' => new TopicResource($model),
-            ]
-        );
-    }
-
-    public function destroy(CourseTopic $topic, ...$params): JsonResponse|RedirectResponse
-    {
-        $topic->delete();
-
-        return response()->json(
-            [
-                'status' => 'success',
-                'message' => 'Topic deleted successfully',
-            ]
-        );
-    }
-    
 
     /**
      * @param $params
@@ -162,11 +98,11 @@ class TopicController extends BackendController
 
     protected function getModel(...$params): string
     {
-        return CourseTopic::class;
+        return CourseLesson::class;
     }
 
     protected function getTitle(...$params): string
     {
-        return trans('lms::content.topics');
+        return trans('lms::content.lessons');
     }
 }

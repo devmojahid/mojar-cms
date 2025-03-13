@@ -165,6 +165,8 @@ class Course extends Post
     // Mojahid\Lms\Models\Course::allItems must return a relationship instance.
     public function allItems(): HasMany
     {
+        // Instead of just returning topics, we need to return items with topic_id set
+        // For now, we'll use the topics relation but in the resource we'll transform it
         return $this->hasMany(CourseTopic::class, 'post_id', 'id');
     }
 }

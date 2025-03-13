@@ -18,10 +18,14 @@ class CourseCurriculumResource extends PostResource
      */
     public function toArray($request): array
     {
-        // $data['topics'] = CourseTopicResource::collection($this->resource->topics)->resolve();
+        // Get topics from the course
+        $topics = TopicResource::collection($this->topics)->resolve();
+        // items curriculum
+        $items = CurriculumItemResource::collection($this->lessons)->resolve();
+        
         return [
-           'topics' => TopicResource::collection($this->topics),
-           'items' => CurriculumItemResource::collection($this->allItems)
+           'topics' => $topics,
+           'items' => $items
         ];
     }
 }

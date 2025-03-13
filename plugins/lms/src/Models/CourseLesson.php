@@ -9,6 +9,8 @@ use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
 use Juzaweb\CMS\Traits\ResourceModel;
+use Juzaweb\CMS\Traits\PostTypeModel;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Mojahid\Lms\Models\CourseLesson
@@ -61,7 +63,11 @@ use Juzaweb\CMS\Traits\ResourceModel;
  */
 class CourseLesson extends Model
 {
-    use ResourceModel, QueryCacheable;
+    use PostTypeModel, HasFactory, ResourceModel, QueryCacheable {
+        PostTypeModel::getStatuses insteadof ResourceModel;
+        PostTypeModel::scopeWhereFilter insteadof ResourceModel;
+    }
+
 
     public string $cachePrefix = 'lms_course_lessons_';
 

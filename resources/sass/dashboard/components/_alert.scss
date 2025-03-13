@@ -107,3 +107,8 @@
       max-width: 100%;
     }
   }
+
+.modal.modal-blur {
+  backdrop-filter: blur(10px);
+  z-index: 2000 !important;
+}
