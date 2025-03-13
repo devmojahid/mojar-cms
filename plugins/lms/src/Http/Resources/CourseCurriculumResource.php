@@ -19,7 +19,6 @@ class CourseCurriculumResource extends PostResource
     public function toArray($request): array
     {
         // $data['topics'] = CourseTopicResource::collection($this->resource->topics)->resolve();
-        dd($this->topics, $this->allItems);
         return [
            'topics' => TopicResource::collection($this->topics),
            'items' => CurriculumItemResource::collection($this->allItems)
