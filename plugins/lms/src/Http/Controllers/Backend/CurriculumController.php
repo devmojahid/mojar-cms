@@ -19,17 +19,8 @@ class CurriculumController extends BackendController
         // Log the course ID for debugging
         \Log::info('Loading curriculum for course ID: ' . $course->id);
         
-        // Load the topics and lessons
-        $course->load([
-            'topics',
-            'lessons',
-            // 'quizzes',
-            // 'assignments'
-        ]);
-        
-        // Log the number of topics and lessons for debugging
-        \Log::info('Loaded ' . $course->topics->count() . ' topics');
-        \Log::info('Loaded ' . $course->lessons->count() . ' lessons');
+        // The eager loading is now handled in the resource
+        // so we just need to pass the course model
         
         // Return the resource
         return new CourseCurriculumResource($course);

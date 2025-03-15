@@ -1123,6 +1123,10 @@ class LMSManager {
             return;
         }
 
+        // Show loading animation
+        this.setLoading('saveLessonLoading', true);
+        document.getElementById('saveLessonText').classList.add('d-none');
+
         // Create a new FormData object
         const formData = new FormData();
 
@@ -1140,22 +1144,38 @@ class LMSManager {
         formData.append('course_topic_id', this.state.currentTopicId);
 
         // Log the formData contents for debugging
-        console.log("FormData contents:");
-        for (const pair of formData.entries()) {
-            console.log(pair[0] + ': ' + pair[1]);
-        }
+       // console.log("FormData contents:");
+        // for (const pair of formData.entries()) {
+        //     console.log(pair[0] + ': ' + pair[1]);
+        // }
 
         try {
             const data = await this.apiRequest(this.config.apiEndpoints.lessons, {
                 method: 'POST',
                 body: formData
             });
-            this.state.items.push(data.item);
-            this.renderCurriculum();
+            
+            // Add the new lesson to the items array
+            if (data.data) {
+                this.state.items.push(data.data);
+            } else if (data.item) {
+                this.state.items.push(data.item);
+            }
+            
+            // Load topics to ensure we have the latest data
+            await this.loadTopics();
+            
+            // Hide modal
             this.hideModal('lessonModal');
+            
+            // Show success message
             this.showToast('Lesson saved successfully');
         } catch (error) {
             this.showToast(error.message, 'danger');
+        } finally {
+            // Hide loading animation
+            this.setLoading('saveLessonLoading', false);
+            document.getElementById('saveLessonText').classList.remove('d-none');
         }
     }
 
@@ -1221,22 +1241,41 @@ class LMSManager {
      * Handle item editing
      */
     editItem(itemId, itemType) {
-        const item = this.state.items.find(i => i.id === itemId && i.type === itemType);
+        const item = this.state.items.find(i => i.id === itemId);
         if (!item) return;
 
-        switch (itemType) {
+        this.state.currentItemId = itemId;
+        this.state.currentTopicId = item.topic_id;
+
+        switch (itemType.toLowerCase()) {
             case 'lesson':
-                this.openLessonModal(item.topic_id);
+                this.openLessonModal(item.topic_id, item);
                 // Add code to populate lesson form
                 break;
             case 'quiz':
-                this.openQuizModal(item.topic_id);
+                this.openQuizModal(item.topic_id, item);
                 // Add code to populate quiz form
                 break;
             case 'assignment':
-                this.openAssignmentModal(item.topic_id);
+                this.openAssignmentModal(item.topic_id, item);
                 // Add code to populate assignment form
                 break;
+        }
+    }
+
+    /**
+     * Get API endpoint for item type
+     */
+    getEndpointForItemType(itemType) {
+        switch (itemType.toLowerCase()) {
+            case 'lesson':
+                return this.config.apiEndpoints.lessons;
+            case 'quiz':
+                return this.config.apiEndpoints.quizzes;
+            case 'assignment':
+                return this.config.apiEndpoints.assignments;
+            default:
+                return null;
         }
     }
 
@@ -1244,28 +1283,43 @@ class LMSManager {
      * Handle item deletion
      */
     confirmDeleteItem(itemId, itemType) {
-        this.state.currentItemId = itemId;
+        const item = this.state.items.find(i => i.id === itemId);
+        if (!item) return;
+    
+        const confirmationMessage = document.getElementById('confirmationMessage');
+        confirmationMessage.textContent = `Are you sure you want to delete this ${itemType}?`;
+    
+        document.getElementById('confirmAction').textContent = `Yes, delete ${itemType}`;
+    
         this.state.currentAction = () => this.deleteItem(itemId, itemType);
+    
         this.showModal('confirmationModal');
     }
-
-    async deleteItem(itemId, itemType) {
-        const endpointMap = {
-            lesson: this.config.apiEndpoints.lessons,
-            quiz: this.config.apiEndpoints.quizzes,
-            assignment: this.config.apiEndpoints.assignments
-        };
-
-        try {
-            await this.apiRequest(`${endpointMap[itemType]}/${itemId}`, {
-                method: 'DELETE'
-            });
-            this.state.items = this.state.items.filter(i => i.id !== itemId);
-            this.renderCurriculum();
-            this.showToast('Item deleted successfully');
-        } catch (error) {
-            this.showToast(error.message, 'danger');
+    /**
+     * Delete item (lesson, quiz, assignment)
+     */
+    deleteItem(itemId, itemType) {
+        const endpoint = this.getEndpointForItemType(itemType);
+        if (!endpoint) {
+            this.showToast(`Invalid item type: ${itemType}`, 'danger');
+            return;
         }
+
+        this.apiRequest(`${endpoint}/${itemId}`, {
+            method: 'DELETE'
+        })
+            .then(data => {
+                // Remove item from state
+                this.state.items = this.state.items.filter(i => i.id !== itemId);
+                
+                // Load topics to ensure we have the latest data
+                this.loadTopics();
+                
+                this.showToast(`${itemType.charAt(0).toUpperCase() + itemType.slice(1)} deleted successfully`);
+            })
+            .catch(error => {
+                this.showToast(error.message, 'danger');
+            });
     }
 
     /**

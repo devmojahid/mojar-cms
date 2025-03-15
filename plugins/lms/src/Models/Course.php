@@ -151,22 +151,29 @@ class Course extends Post
         return $this->hasManyThrough(
             CourseLesson::class,
             CourseTopic::class,
-            'post_id', // topic_id
-            'id', // lesson_id
-            'id', // course_id
-            'id' // topic_id
+            'post_id',       // Foreign key on CourseTopic table (refers to Course)
+            'course_topic_id', // Foreign key on CourseLesson table (refers to Topic)
+            'id',            // Local key on Course table
+            'id'             // Local key on CourseTopic table
         );
     }
 
-    // public function allItems(): Collection
-    // {
-    //     return $this->topics()->with('lessons')->get();
-    // }
+    public function curriculumItems()
+    {
+        // This relationship serves as a base for retrieving all curriculum items
+        // Currently this will only return lessons, but it can be expanded later
+        return $this->lessons();
+    }
+
+    public function allItems(): Collection
+    {
+        return $this->topics()->with('lessons')->get();
+    }
     // Mojahid\Lms\Models\Course::allItems must return a relationship instance.
-    public function allItems(): HasMany
+    public function allItems2(): HasMany
     {
         // Instead of just returning topics, we need to return items with topic_id set
         // For now, we'll use the topics relation but in the resource we'll transform it
-        return $this->hasMany(CourseTopic::class, 'post_id', 'id');
+        return $this->hasMany(CourseTopic::class, 'post_id', 'id')->with('lessons');
     }
 }

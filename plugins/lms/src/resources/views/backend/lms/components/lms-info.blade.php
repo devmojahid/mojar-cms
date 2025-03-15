@@ -591,6 +591,7 @@
         padding: 0.75rem 1rem;
         background-color: #f9fafb;
         border-top: 1px solid #e5e7eb;
+        margin-top: .6rem;
     }
 </style>
 
@@ -1063,7 +1064,9 @@
                 <div class="modal-footer">
                     <button type="button" class="btn me-auto" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
                     <button type="button" class="btn btn-primary" id="saveLesson">
-                        <span class="d-none" id="saveLessonLoading"></span>
+                        <span class="d-none" id="saveLessonLoading">
+                            <span class="spinner-border spinner-border-sm"></span>
+                        </span>
                         <span id="saveLessonText">{{ __('Save Lesson') }}</span>
                     </button>
                 </div>
