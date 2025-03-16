@@ -378,7 +378,7 @@ class LMSManager {
         if (!this.state.topics || this.state.topics.length === 0) {
             console.log('No topics found, showing empty state');
             if (emptyState) {
-                emptyState.style.display = 'flex';
+                emptyState.style.display = '';
             } else {
                 console.error('Empty state element not found:', this.config.selectors.emptyState);
             }
@@ -535,7 +535,7 @@ class LMSManager {
                 // Add quiz button
                 const addQuizBtn = document.createElement('button');
                 addQuizBtn.type = 'button';
-                addQuizBtn.className = 'btn btn-sm btn-outline-warning add-quiz-btn ms-2';
+                addQuizBtn.className = 'btn btn-sm btn-outline-warning add-quiz-btn ms-2 d-none';
                 addQuizBtn.dataset.topicId = topic.id;
                 addQuizBtn.innerHTML = `
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24"
@@ -552,7 +552,7 @@ class LMSManager {
                 // Add assignment button
                 const addAssignmentBtn = document.createElement('button');
                 addAssignmentBtn.type = 'button';
-                addAssignmentBtn.className = 'btn btn-sm btn-outline-danger add-assignment-btn ms-2';
+                addAssignmentBtn.className = 'btn btn-sm btn-outline-danger add-assignment-btn ms-2 d-none';
                 addAssignmentBtn.dataset.topicId = topic.id;
                 addAssignmentBtn.innerHTML = `
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24"
@@ -1015,16 +1015,20 @@ class LMSManager {
     /**
      * Hide a modal
      */
+
     hideModal(modalId) {
         console.log(`Hiding modal: ${modalId}`);
-        
-           // Add this to remove the backdrop
-    document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
-        backdrop.remove();
-    });
-    
-    // Also make sure the body doesn't have the 'modal-open' class
-    document.body.classList.remove('modal-open');
+
+        const modal = this.state.modals[modalId];
+        if (modal) {
+            modal.hide(); // Properly hide the Bootstrap modal
+        }
+
+        // Add this to remove the backdrop
+        document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop.remove());
+        // Also make sure the body doesn't have the 'modal-open' class
+        document.body.classList.remove('modal-open');
+        document.body.style.paddingRight = '';
 
         if (this.state.modals[modalId]) {
             try {
@@ -1144,7 +1148,7 @@ class LMSManager {
         formData.append('course_topic_id', this.state.currentTopicId);
 
         // Log the formData contents for debugging
-       // console.log("FormData contents:");
+        // console.log("FormData contents:");
         // for (const pair of formData.entries()) {
         //     console.log(pair[0] + ': ' + pair[1]);
         // }
@@ -1154,20 +1158,22 @@ class LMSManager {
                 method: 'POST',
                 body: formData
             });
-            
+
             // Add the new lesson to the items array
             if (data.data) {
                 this.state.items.push(data.data);
             } else if (data.item) {
                 this.state.items.push(data.item);
             }
+
+            // reset form 
             
             // Load topics to ensure we have the latest data
             await this.loadTopics();
-            
+
             // Hide modal
             this.hideModal('lessonModal');
-            
+
             // Show success message
             this.showToast('Lesson saved successfully');
         } catch (error) {
@@ -1176,6 +1182,7 @@ class LMSManager {
             // Hide loading animation
             this.setLoading('saveLessonLoading', false);
             document.getElementById('saveLessonText').classList.remove('d-none');
+            this.state.currentItemId = null; // Reset current item ID
         }
     }
 
@@ -1241,7 +1248,7 @@ class LMSManager {
      * Handle item editing
      */
     editItem(itemId, itemType) {
-        const item = this.state.items.find(i => i.id === itemId);
+        const item = this.state.items.find(i => i.id === Number(itemId));
         if (!item) return;
 
         this.state.currentItemId = itemId;
@@ -1283,16 +1290,16 @@ class LMSManager {
      * Handle item deletion
      */
     confirmDeleteItem(itemId, itemType) {
-        const item = this.state.items.find(i => i.id === itemId);
+        const item = this.state.items.find(i => i.id === Number(itemId));
         if (!item) return;
-    
+
         const confirmationMessage = document.getElementById('confirmationMessage');
         confirmationMessage.textContent = `Are you sure you want to delete this ${itemType}?`;
-    
+
         document.getElementById('confirmAction').textContent = `Yes, delete ${itemType}`;
-    
+
         this.state.currentAction = () => this.deleteItem(itemId, itemType);
-    
+
         this.showModal('confirmationModal');
     }
     /**
@@ -1311,10 +1318,10 @@ class LMSManager {
             .then(data => {
                 // Remove item from state
                 this.state.items = this.state.items.filter(i => i.id !== itemId);
-                
+
                 // Load topics to ensure we have the latest data
                 this.loadTopics();
-                
+
                 this.showToast(`${itemType.charAt(0).toUpperCase() + itemType.slice(1)} deleted successfully`);
             })
             .catch(error => {
@@ -1361,3 +1368,11 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('LMSManager element not found');
     }
 });
+
+
+// everything is working good in topic topic create edit update delete but there are 2 or some mejor problem and many minor problem. 
+// 1. after topic create new topic its successfullly show toast and render everything is parfect but just like scroll not work after create new topic but after delete or edit its not problem its working parfectly where is the problem please find out and solve. 
+// 2. this is mejor problem like after lesson create successfully model form data not reset or not empty its big problem. and other big problem is when we try to edit any lesson or items its not send any ajax request but topic send ajax request liek http://localhost:3000/app/lms/topics/14 and its working and show data in edit model and user can update but currently its not happedn with lesson. 
+// without mejor changes or distroy system just solve this error nothing else not distroy anything why not others working well
+
+// Note: make sure current system not change not change anything just fix issue without change so much issue. just fix issue not change any mejor things. 

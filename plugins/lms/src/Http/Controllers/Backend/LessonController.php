@@ -86,6 +86,19 @@ class LessonController extends BackendController
         );
     }
 
+    
+    public function destroy(CourseLesson $lesson, ...$params): JsonResponse|RedirectResponse
+    {
+        $lesson->delete();
+
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Lesson deleted successfully',
+            ]
+        );
+    }
+
     /**
      * @param $params
      * @return \Juzaweb\CMS\Models\ResourceModel

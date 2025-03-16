@@ -691,8 +691,15 @@
                         </button>
                     </div>
 
+
+                    <!-- Topics Container -->
+                    <div class="lms-topics-container" id="lmsTopicsContainer">
+                        <!-- Topics will be dynamically added here -->
+                    </div>
+
+                    
                     <!-- Add More Topic Button (hidden initially) -->
-                    <div class="text-center mb-3" id="lmsAddMoreTopicBtn" style="display: none;">
+                    <div class="text-center mt-3" id="lmsAddMoreTopicBtn" style="display: none;">
                         <button class="btn btn-primary lms-add-topic-btn" data-bs-toggle="modal"
                             data-bs-target="#topicModal" type="button">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus"
@@ -704,11 +711,6 @@
                             </svg>
                             {{ __('Add Another Topic') }}
                         </button>
-                    </div>
-
-                    <!-- Topics Container -->
-                    <div class="lms-topics-container" id="lmsTopicsContainer">
-                        <!-- Topics will be dynamically added here -->
                     </div>
 
                     <!-- Loading Indicator -->

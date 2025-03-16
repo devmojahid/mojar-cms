@@ -15,11 +15,6 @@ class LmsPostTypeAction extends Action
     {
         $this->addAction(
             Action::INIT_ACTION,
-            [$this, 'registerConfigs']
-        );
-
-        $this->addAction(
-            Action::INIT_ACTION,
             [$this, 'registerPostTypes']
         );
         
@@ -61,13 +56,6 @@ class LmsPostTypeAction extends Action
         );
     }
 
-    public function registerConfigs(): void
-    {
-        HookAction::registerConfig([
-            '_shop_page',
-            '_shop_params',
-        ]);
-    }
     /**
      * Register post types
     */
@@ -75,11 +63,6 @@ class LmsPostTypeAction extends Action
     {
         $productInvisibleMetas = [
             'price',
-            'sku_code',
-            'barcode',
-            'quantity',
-            'inventory_management',
-            'disable_out_of_stock',
             'downloadable',
         ];
 
