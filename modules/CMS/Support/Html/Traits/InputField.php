@@ -55,6 +55,14 @@ trait InputField
         return view('cms::components.form_checkbox', $options);
     }
 
+    public function checkboxJson(string|Model $label, ?string $name, ?array $options = []): Factory|View
+    {
+        $options['value'] = Arr::get($options, 'value', 1);
+        $options = $this->mapOptions($label, $name, $options);
+
+        return view('cms::components.form_checkbox_json', $options);
+    }
+
     public function slug(string|Model $label, ?string $name, ?array $options = []): Factory|View
     {
         $options = $this->mapOptions($label, $name, $options);

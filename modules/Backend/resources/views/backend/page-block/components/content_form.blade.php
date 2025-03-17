@@ -1,4 +1,4 @@
-<div class="page-block-content">
+<div class="page-block-content 1">
     @php
         $currentTheme = jw_current_theme();
         $themePath = \Juzaweb\CMS\Facades\ThemeLoader::getThemePath($currentTheme);

@@ -100,22 +100,22 @@ class LMSManager {
     init() {
         console.log('LMSManager initializing with course ID:', this.state.courseId);
 
-        // Initialize modals
-        this.initModals();
+        // Use a delayed initialization to prevent conflicts with other scripts
+        setTimeout(() => {
+            // Initialize modals
+            this.initModals();
 
-        // Initialize toast system
-        this.initToastSystem();
+            // Initialize toast system
+            this.initToastSystem();
 
-        // Bind events
-        this.bindEvents();
+            // Bind events
+            this.bindEvents();
 
-        // Load topics if course ID is available
-        if (this.state.courseId) {
-            // Set a small timeout to ensure DOM is fully loaded
-            setTimeout(() => {
+            // Load topics if course ID is available
+            if (this.state.courseId) {
                 this.loadTopics();
-            }, 100);
-        }
+            }
+        }, 300); // Delay initialization to allow other scripts to load first
     }
 
     /**
@@ -443,6 +443,38 @@ class LMSManager {
         });
 
         console.log('Curriculum rendering complete');
+        
+        // Auto-expand the first topic after rendering if there are any topics
+        if (sortedTopics.length > 0) {
+            const firstTopicEl = topicsContainer.querySelector('.lms-topic');
+            if (firstTopicEl) {
+                setTimeout(() => {
+                    // First ensure all topics are collapsed
+                    document.querySelectorAll('.lms-topic').forEach(topic => {
+                        const content = topic.querySelector('.lms-topic-content');
+                        if (content) {
+                            content.style.display = 'none';
+                            topic.classList.remove('lms-topic-expanded');
+                            const toggleIcon = topic.querySelector('.lms-topic-toggle svg');
+                            if (toggleIcon) {
+                                toggleIcon.style.transform = 'rotate(0deg)';
+                            }
+                        }
+                    });
+                    
+                    // Then explicitly expand the first topic
+                    const firstContent = firstTopicEl.querySelector('.lms-topic-content');
+                    if (firstContent) {
+                        firstContent.style.display = 'block';
+                        firstTopicEl.classList.add('lms-topic-expanded');
+                        const toggleIcon = firstTopicEl.querySelector('.lms-topic-toggle svg');
+                        if (toggleIcon) {
+                            toggleIcon.style.transform = 'rotate(90deg)';
+                        }
+                    }
+                }, 100);
+            }
+        }
     }
 
     /**
@@ -601,13 +633,6 @@ class LMSManager {
                 header.addEventListener('click', () => {
                     this.toggleTopic(topicEl);
                 });
-            }
-
-            // Expand the first topic by default
-            if (topic.order === 0 || topic.id === this.state.topics[0].id) {
-                setTimeout(() => {
-                    this.toggleTopic(topicEl);
-                }, 100);
             }
 
             return topicEl;
@@ -873,15 +898,41 @@ class LMSManager {
                 // Close modal
                 this.hideModal('topicModal');
                 
-                // Add a small delay to allow the DOM to update, then scroll to the new topic if it was created
-                if (!topicId) {
-                    setTimeout(() => {
-                        const newTopicElement = document.querySelector(`[data-topic-id="${topicData.id}"]`);
-                        if (newTopicElement) {
-                            newTopicElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Add a small delay to allow the DOM to update, then handle the topic expansion
+                setTimeout(() => {
+                    // First ensure all topics are collapsed
+                    document.querySelectorAll('.lms-topic').forEach(topic => {
+                        const content = topic.querySelector('.lms-topic-content');
+                        if (content) {
+                            content.style.display = 'none';
+                            topic.classList.remove('lms-topic-expanded');
+                            const toggleIcon = topic.querySelector('.lms-topic-toggle svg');
+                            if (toggleIcon) {
+                                toggleIcon.style.transform = 'rotate(0deg)';
+                            }
                         }
-                    }, 300);
-                }
+                    });
+                    
+                    // Then find and expand the topic that was just created or edited
+                    const targetTopicElement = document.querySelector(`[data-topic-id="${topicData.id}"]`);
+                    if (targetTopicElement) {
+                        // Scroll to the topic if it was newly created
+                        if (!topicId) {
+                            targetTopicElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                        
+                        // Expand the topic
+                        const content = targetTopicElement.querySelector('.lms-topic-content');
+                        if (content) {
+                            content.style.display = 'block';
+                            targetTopicElement.classList.add('lms-topic-expanded');
+                            const toggleIcon = targetTopicElement.querySelector('.lms-topic-toggle svg');
+                            if (toggleIcon) {
+                                toggleIcon.style.transform = 'rotate(90deg)';
+                            }
+                        }
+                    }
+                }, 300);
             })
             .catch(error => {
                 // Handle validation errors
@@ -1017,8 +1068,6 @@ class LMSManager {
                 } catch (error) {
                     console.error(`Error initializing and showing modal ${modalId}:`, error);
                 }
-            } else {
-                console.error(`Modal element not found: ${modalId}`);
             }
         }
     }
@@ -1220,6 +1269,26 @@ class LMSManager {
             // Hide modal
             this.hideModal('lessonModal');
 
+            // Expand the parent topic
+            setTimeout(() => {
+                const parentTopic = document.querySelector(`.lms-lessons-container[data-topic-id="${this.state.currentTopicId}"]`)?.closest('.lms-topic');
+                if (parentTopic) {
+                    // Ensure parent topic is expanded
+                    const content = parentTopic.querySelector('.lms-topic-content');
+                    if (content && (content.style.display === 'none' || content.style.display === '')) {
+                        content.style.display = 'block';
+                        parentTopic.classList.add('lms-topic-expanded');
+                        const toggleIcon = parentTopic.querySelector('.lms-topic-toggle svg');
+                        if (toggleIcon) {
+                            toggleIcon.style.transform = 'rotate(90deg)';
+                        }
+                    }
+                    
+                    // Scroll to the parent topic
+                    parentTopic.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100);
+
             // Show success message
             const actionText = isUpdate ? 'updated' : 'saved';
             this.showToast(`Lesson ${actionText} successfully`);
@@ -1296,6 +1365,26 @@ class LMSManager {
             this.renderCurriculum();
             this.hideModal('quizModal');
             
+            // Expand the parent topic
+            setTimeout(() => {
+                const parentTopic = document.querySelector(`.lms-lessons-container[data-topic-id="${this.state.currentTopicId}"]`)?.closest('.lms-topic');
+                if (parentTopic) {
+                    // Ensure parent topic is expanded
+                    const content = parentTopic.querySelector('.lms-topic-content');
+                    if (content && (content.style.display === 'none' || content.style.display === '')) {
+                        content.style.display = 'block';
+                        parentTopic.classList.add('lms-topic-expanded');
+                        const toggleIcon = parentTopic.querySelector('.lms-topic-toggle svg');
+                        if (toggleIcon) {
+                            toggleIcon.style.transform = 'rotate(90deg)';
+                        }
+                    }
+                    
+                    // Scroll to the parent topic
+                    parentTopic.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100);
+
             // Show success message
             const actionText = isUpdate ? 'updated' : 'saved';
             this.showToast(`Quiz ${actionText} successfully`);
@@ -1369,6 +1458,26 @@ class LMSManager {
             this.renderCurriculum();
             this.hideModal('assignmentModal');
             
+            // Expand the parent topic
+            setTimeout(() => {
+                const parentTopic = document.querySelector(`.lms-lessons-container[data-topic-id="${this.state.currentTopicId}"]`)?.closest('.lms-topic');
+                if (parentTopic) {
+                    // Ensure parent topic is expanded
+                    const content = parentTopic.querySelector('.lms-topic-content');
+                    if (content && (content.style.display === 'none' || content.style.display === '')) {
+                        content.style.display = 'block';
+                        parentTopic.classList.add('lms-topic-expanded');
+                        const toggleIcon = parentTopic.querySelector('.lms-topic-toggle svg');
+                        if (toggleIcon) {
+                            toggleIcon.style.transform = 'rotate(90deg)';
+                        }
+                    }
+                    
+                    // Scroll to the parent topic
+                    parentTopic.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100);
+
             // Show success message
             const actionText = isUpdate ? 'updated' : 'saved';
             this.showToast(`Assignment ${actionText} successfully`);

@@ -11,7 +11,7 @@
             }
         },
         {
-            "type": "checkbox",
+            "type": "checkbox_json",
             "name": "show_section_title",
             "label": "Show Section Title",
             "description": "Show section title",

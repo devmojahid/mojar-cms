@@ -132,6 +132,11 @@ class Field implements FieldContract
                 $data['name'],
                 Arr::get($data, 'data', [])
             ),
+            'checkbox_json' => $this->checkboxJson(
+                $data['label'],
+                $data['name'],
+                Arr::get($data, 'data', [])
+            ),
             'upload_url' => $this->uploadUrl(
                 $data['label'],
                 $data['name'],

@@ -667,4 +667,7 @@ return [
     'live_secret_key' => 'Live Secret Key',
     'stripe' => 'Stripe',
     'test' => 'Test',
+    'item_num' => "Item Num",
+    'add_item' => "Add Item",
+    'remove_item' => "Remove Item",
 ];
