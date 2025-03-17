@@ -12,6 +12,7 @@ use Mojahid\Lms\Models\CourseLesson;
 use Illuminate\Support\Str;
 use Juzaweb\CMS\Traits\ResponseMessage;
 use Illuminate\Http\RedirectResponse;
+use Mojahid\Lms\Http\Resources\CurriculumItemResource;
 
 class LessonController extends BackendController
 {
@@ -86,6 +87,61 @@ class LessonController extends BackendController
         );
     }
 
+    // show lesson and response json with LessonResource
+    public function show(CourseLesson $lesson)
+    {
+        return response()->json(
+            [
+                'status' => 'success',
+                'data' => new CurriculumItemResource($lesson),
+            ]
+        );
+    }
+
+    public function update(Request $request, CourseLesson $lesson, ...$params): JsonResponse|RedirectResponse
+    {
+        $validator = $this->validator($request->all(), ...$params);
+        if (is_array($validator)) {
+            $validator = Validator::make($request->all(), $validator);
+        }
+
+        $validator->validate();
+        $data = $request->all();
+
+        $model = $lesson;
+
+        DB::beginTransaction();
+        try {
+            $slug = $request->input('slug');
+            if ($slug && method_exists($model, 'generateSlug')) {
+                $data['slug'] = $model->generateSlug($slug);
+            }
+
+            $model->fill($data);
+            $model->save();
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+        
+        if (method_exists($this, 'updateSuccess')) {
+            $this->updateSuccess($request, $model, ...$params);
+        }
+
+        if (method_exists($this, 'saveSuccess')) {
+            $this->saveSuccess($request, $model, ...$params);
+        }
+
+        return response()->json(
+            [
+                'status' => 'success',
+                'data' => new CurriculumItemResource($model),
+            ]
+        );
+    }
+    
     
     public function destroy(CourseLesson $lesson, ...$params): JsonResponse|RedirectResponse
     {

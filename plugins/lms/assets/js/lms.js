@@ -467,6 +467,7 @@ class LMSManager {
             }
 
             topicEl.dataset.id = topic.id;
+            topicEl.dataset.topicId = topic.id;
 
             const titleEl = clone.querySelector('.lms-topic-title');
             if (titleEl) {
@@ -871,6 +872,16 @@ class LMSManager {
 
                 // Close modal
                 this.hideModal('topicModal');
+                
+                // Add a small delay to allow the DOM to update, then scroll to the new topic if it was created
+                if (!topicId) {
+                    setTimeout(() => {
+                        const newTopicElement = document.querySelector(`[data-topic-id="${topicData.id}"]`);
+                        if (newTopicElement) {
+                            newTopicElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }, 300);
+                }
             })
             .catch(error => {
                 // Handle validation errors
@@ -1113,8 +1124,22 @@ class LMSManager {
      */
     openLessonModal(topicId) {
         this.state.currentTopicId = topicId;
-        const form = document.querySelector(this.config.selectors.lessonForm);
-        // form.reset();
+        const lessonForm = document.querySelector(this.config.selectors.lessonForm);
+        
+        // Reset form fields
+        if (lessonForm) {
+            const inputs = lessonForm.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                if (input.type === 'checkbox') {
+                    input.checked = false;
+                } else if (input.type === 'select-one') {
+                    input.selectedIndex = 0;
+                } else {
+                    input.value = '';
+                }
+            });
+        }
+        
         this.showModal('lessonModal');
     }
 
@@ -1146,27 +1171,48 @@ class LMSManager {
 
         // Add the topic ID
         formData.append('course_topic_id', this.state.currentTopicId);
-
-        // Log the formData contents for debugging
-        // console.log("FormData contents:");
-        // for (const pair of formData.entries()) {
-        //     console.log(pair[0] + ': ' + pair[1]);
-        // }
+        
+        // Determine if this is a create or update operation
+        const isUpdate = this.state.currentItemId !== null;
+        let url = this.config.apiEndpoints.lessons;
+        let method = 'POST';
+        
+        if (isUpdate) {
+            url = `${url}/${this.state.currentItemId}`;
+            formData.append('_method', 'PUT');
+        }
 
         try {
-            const data = await this.apiRequest(this.config.apiEndpoints.lessons, {
-                method: 'POST',
+            const data = await this.apiRequest(url, {
+                method: method,
                 body: formData
             });
 
-            // Add the new lesson to the items array
-            if (data.data) {
-                this.state.items.push(data.data);
-            } else if (data.item) {
-                this.state.items.push(data.item);
+            // Add or update the lesson in the items array
+            const itemData = data.data || data.item;
+            if (itemData) {
+                if (isUpdate) {
+                    // Update existing item
+                    const index = this.state.items.findIndex(i => i.id === this.state.currentItemId);
+                    if (index !== -1) {
+                        this.state.items[index] = itemData;
+                    }
+                } else {
+                    // Add new item
+                    this.state.items.push(itemData);
+                }
             }
-
-            // reset form 
+            
+            // Reset form inputs
+            inputs.forEach(input => {
+                if (input.type === 'checkbox') {
+                    input.checked = false;
+                } else if (input.type === 'select-one') {
+                    input.selectedIndex = 0;
+                } else {
+                    input.value = '';
+                }
+            });
             
             // Load topics to ensure we have the latest data
             await this.loadTopics();
@@ -1175,7 +1221,8 @@ class LMSManager {
             this.hideModal('lessonModal');
 
             // Show success message
-            this.showToast('Lesson saved successfully');
+            const actionText = isUpdate ? 'updated' : 'saved';
+            this.showToast(`Lesson ${actionText} successfully`);
         } catch (error) {
             this.showToast(error.message, 'danger');
         } finally {
@@ -1191,8 +1238,22 @@ class LMSManager {
      */
     openQuizModal(topicId) {
         this.state.currentTopicId = topicId;
-        const form = document.querySelector(this.config.selectors.quizForm);
-        form.reset();
+        const quizForm = document.querySelector(this.config.selectors.quizForm);
+        
+        // Reset form fields
+        if (quizForm) {
+            const inputs = quizForm.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                if (input.type === 'checkbox') {
+                    input.checked = false;
+                } else if (input.type === 'select-one') {
+                    input.selectedIndex = 0;
+                } else {
+                    input.value = '';
+                }
+            });
+        }
+        
         this.showModal('quizModal');
     }
 
@@ -1200,18 +1261,48 @@ class LMSManager {
         const form = document.querySelector(this.config.selectors.quizForm);
         const formData = new FormData(form);
         formData.append('topic_id', this.state.currentTopicId);
+        
+        // Determine if this is a create or update operation
+        const isUpdate = this.state.currentItemId !== null;
+        let url = this.config.apiEndpoints.quizzes;
+        let method = 'POST';
+        
+        if (isUpdate) {
+            url = `${url}/${this.state.currentItemId}`;
+            formData.append('_method', 'PUT');
+        }
 
         try {
-            const data = await this.apiRequest(this.config.apiEndpoints.quizzes, {
-                method: 'POST',
+            const data = await this.apiRequest(url, {
+                method: method,
                 body: formData
             });
-            this.state.items.push(data.item);
+            
+            // Add or update the quiz in the items array
+            const itemData = data.data || data.item;
+            if (itemData) {
+                if (isUpdate) {
+                    // Update existing item
+                    const index = this.state.items.findIndex(i => i.id === this.state.currentItemId);
+                    if (index !== -1) {
+                        this.state.items[index] = itemData;
+                    }
+                } else {
+                    // Add new item
+                    this.state.items.push(itemData);
+                }
+            }
+            
             this.renderCurriculum();
             this.hideModal('quizModal');
-            this.showToast('Quiz saved successfully');
+            
+            // Show success message
+            const actionText = isUpdate ? 'updated' : 'saved';
+            this.showToast(`Quiz ${actionText} successfully`);
         } catch (error) {
             this.showToast(error.message, 'danger');
+        } finally {
+            this.state.currentItemId = null; // Reset current item ID
         }
     }
 
@@ -1220,8 +1311,22 @@ class LMSManager {
      */
     openAssignmentModal(topicId) {
         this.state.currentTopicId = topicId;
-        const form = document.querySelector(this.config.selectors.assignmentForm);
-        form.reset();
+        const assignmentForm = document.querySelector(this.config.selectors.assignmentForm);
+        
+        // Reset form fields
+        if (assignmentForm) {
+            const inputs = assignmentForm.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                if (input.type === 'checkbox') {
+                    input.checked = false;
+                } else if (input.type === 'select-one') {
+                    input.selectedIndex = 0;
+                } else {
+                    input.value = '';
+                }
+            });
+        }
+        
         this.showModal('assignmentModal');
     }
 
@@ -1229,18 +1334,48 @@ class LMSManager {
         const form = document.querySelector(this.config.selectors.assignmentForm);
         const formData = new FormData(form);
         formData.append('topic_id', this.state.currentTopicId);
+        
+        // Determine if this is a create or update operation
+        const isUpdate = this.state.currentItemId !== null;
+        let url = this.config.apiEndpoints.assignments;
+        let method = 'POST';
+        
+        if (isUpdate) {
+            url = `${url}/${this.state.currentItemId}`;
+            formData.append('_method', 'PUT');
+        }
 
         try {
-            const data = await this.apiRequest(this.config.apiEndpoints.assignments, {
-                method: 'POST',
+            const data = await this.apiRequest(url, {
+                method: method,
                 body: formData
             });
-            this.state.items.push(data.item);
+            
+            // Add or update the assignment in the items array
+            const itemData = data.data || data.item;
+            if (itemData) {
+                if (isUpdate) {
+                    // Update existing item
+                    const index = this.state.items.findIndex(i => i.id === this.state.currentItemId);
+                    if (index !== -1) {
+                        this.state.items[index] = itemData;
+                    }
+                } else {
+                    // Add new item
+                    this.state.items.push(itemData);
+                }
+            }
+            
             this.renderCurriculum();
             this.hideModal('assignmentModal');
-            this.showToast('Assignment saved successfully');
+            
+            // Show success message
+            const actionText = isUpdate ? 'updated' : 'saved';
+            this.showToast(`Assignment ${actionText} successfully`);
         } catch (error) {
             this.showToast(error.message, 'danger');
+        } finally {
+            this.state.currentItemId = null; // Reset current item ID
         }
     }
 
@@ -1254,20 +1389,73 @@ class LMSManager {
         this.state.currentItemId = itemId;
         this.state.currentTopicId = item.topic_id;
 
-        switch (itemType.toLowerCase()) {
-            case 'lesson':
-                this.openLessonModal(item.topic_id, item);
-                // Add code to populate lesson form
-                break;
-            case 'quiz':
-                this.openQuizModal(item.topic_id, item);
-                // Add code to populate quiz form
-                break;
-            case 'assignment':
-                this.openAssignmentModal(item.topic_id, item);
-                // Add code to populate assignment form
-                break;
-        }
+        const itemEndpoint = this.getEndpointForItemType(itemType) + '/' + itemId;
+        
+        // Show loading indicator
+        this.setLoading('topicLoading', true);
+        
+        // First fetch the item details
+        this.apiRequest(itemEndpoint)
+            .then(data => {
+                const itemData = data.data || data.item || {};
+                
+                switch (itemType.toLowerCase()) {
+                    case 'lesson':
+                        this.openLessonModal(item.topic_id);
+                        
+                        // Populate lesson form with data
+                        const lessonForm = document.querySelector(this.config.selectors.lessonForm);
+                        if (lessonForm) {
+                            const inputs = lessonForm.querySelectorAll('input, select, textarea');
+                            inputs.forEach(input => {
+                                if (input.name && itemData[input.name] !== undefined) {
+                                    if (input.type === 'checkbox') {
+                                        input.checked = Boolean(itemData[input.name]);
+                                    } else {
+                                        input.value = itemData[input.name];
+                                    }
+                                }
+                            });
+                        }
+                        break;
+                        
+                    case 'quiz':
+                        this.openQuizModal(item.topic_id);
+                        
+                        // Populate quiz form with data
+                        const quizForm = document.querySelector(this.config.selectors.quizForm);
+                        if (quizForm) {
+                            const inputs = quizForm.querySelectorAll('input, select, textarea');
+                            inputs.forEach(input => {
+                                if (input.name && itemData[input.name] !== undefined) {
+                                    input.value = itemData[input.name];
+                                }
+                            });
+                        }
+                        break;
+                        
+                    case 'assignment':
+                        this.openAssignmentModal(item.topic_id);
+                        
+                        // Populate assignment form with data
+                        const assignmentForm = document.querySelector(this.config.selectors.assignmentForm);
+                        if (assignmentForm) {
+                            const inputs = assignmentForm.querySelectorAll('input, select, textarea');
+                            inputs.forEach(input => {
+                                if (input.name && itemData[input.name] !== undefined) {
+                                    input.value = itemData[input.name];
+                                }
+                            });
+                        }
+                        break;
+                }
+            })
+            .catch(error => {
+                this.showToast(`Error loading ${itemType}: ${error.message}`, 'danger');
+            })
+            .finally(() => {
+                this.setLoading('topicLoading', false);
+            });
     }
 
     /**
@@ -1368,11 +1556,3 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('LMSManager element not found');
     }
 });
-
-
-// everything is working good in topic topic create edit update delete but there are 2 or some mejor problem and many minor problem. 
-// 1. after topic create new topic its successfullly show toast and render everything is parfect but just like scroll not work after create new topic but after delete or edit its not problem its working parfectly where is the problem please find out and solve. 
-// 2. this is mejor problem like after lesson create successfully model form data not reset or not empty its big problem. and other big problem is when we try to edit any lesson or items its not send any ajax request but topic send ajax request liek http://localhost:3000/app/lms/topics/14 and its working and show data in edit model and user can update but currently its not happedn with lesson. 
-// without mejor changes or distroy system just solve this error nothing else not distroy anything why not others working well
-
-// Note: make sure current system not change not change anything just fix issue without change so much issue. just fix issue not change any mejor things. 
