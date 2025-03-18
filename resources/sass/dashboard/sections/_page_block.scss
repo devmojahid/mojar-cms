@@ -310,6 +310,33 @@
                 }
             }
         }
+        
+        // Improve drag appearance
+        .dd-dragel {
+            position: absolute;
+            pointer-events: none;
+            z-index: 9999;
+            
+            .dd-item {
+                margin-top: 0;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15) !important;
+                border: 1px solid var(--tblr-primary) !important;
+                opacity: 0.95;
+                
+                .form-block-edit {
+                    display: none !important;
+                }
+            }
+        }
+        
+        // Placeholder styling
+        .dd-placeholder {
+            background: rgba(var(--tblr-primary-rgb), 0.05);
+            border: 2px dashed rgba(var(--tblr-primary-rgb), 0.3);
+            border-radius: var(--block-radius);
+            margin-bottom: var(--block-spacing);
+            height: 60px;
+        }
     }
 }
 
@@ -318,7 +345,7 @@
     z-index: 1200;
 
     .modal-dialog {
-        max-width: 850px;
+        max-width: 1000px;
         max-height: 90vh;
     }
     
@@ -356,7 +383,7 @@
     }
     
     .block-grid {
-        max-height: 60vh;
+        max-height: 65vh;
         overflow-y: auto;
         padding: 0.5rem;
         
@@ -657,4 +684,30 @@
 
 .page-block-content .dd-item.editing .block-header {
     background: rgba(var(--tblr-primary-rgb), 0.04);
+}
+
+/* Drag and Drop Enhancements */
+body.is-dragging {
+    cursor: grabbing !important;
+}
+
+body.is-dragging .dd-item:not(.dd-dragel) {
+    transition: transform 0.1s ease;
+}
+
+body.is-dragging .dd-handle {
+    cursor: grabbing !important;
+}
+
+.dd-dragel {
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.dd-dragel .dd-item {
+    background: #fff !important;
+}
+
+.dd-placeholder {
+    border: 2px dashed rgba(var(--tblr-primary-rgb), 0.3) !important;
+    background-color: rgba(var(--tblr-primary-rgb), 0.05) !important;
 }
