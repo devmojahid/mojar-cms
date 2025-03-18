@@ -84,23 +84,7 @@ class LmsPostTypeAction extends Action
             ]
         );
 
-        HookAction::registerTaxonomy(
-            'brands',
-            'products',
-            [
-                'label' => trans('lms::content.brands'),
-                'menu_position' => 11,
-            ]
-        );
 
-        HookAction::registerTaxonomy(
-            'vendors',
-            'products',
-            [
-                'label' => trans('lms::content.vendors'),
-                'menu_position' => 12,
-            ]
-        );
     }
 
     public function addFormCourse($model): void

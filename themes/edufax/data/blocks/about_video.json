@@ -7,7 +7,8 @@
             "name": "background_image",
             "label": "Background Image",
             "data": {
-                "value": "images/about_video_img.jpg"
+                "value": "images/about_video_img.jpg",
+                "show_label": 1
             }
         },
         {

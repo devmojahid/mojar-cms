@@ -252,12 +252,12 @@ class LMSManager {
         }
 
         // Form submission prevention
-        document.querySelectorAll('form').forEach(form => {
-            form.addEventListener('submit', e => {
-                e.preventDefault();
-                return false;
-            });
-        });
+        // document.querySelectorAll('form').forEach(form => {
+        //     form.addEventListener('submit', e => {
+        //         e.preventDefault();
+        //         return false;
+        //     });
+        // });
     }
 
     /**
