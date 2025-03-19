@@ -49,7 +49,7 @@
                                 <img src="{{ upload_url(get_config('admin_logo')) }}"
                                     alt="{{ get_config('title', 'Mojar') }}">
                             @else
-                                <img src="{{ asset('jw-styles/base/assets/static/logo.svg') }}" width="110"
+                                <img src="{{ asset('jw-styles/mojar/assets/static/logo.svg') }}" width="110"
                                     height="32" alt="Tabler" class="navbar-brand-image">
                                 {{-- {{ trans('cms::message.admin_logo', ['name' => get_config('title', 'Mojar')]) }} --}}
                             @endif

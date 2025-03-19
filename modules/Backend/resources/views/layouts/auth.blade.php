@@ -13,8 +13,8 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
 
     <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/mojar/css/backend.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/base/assets/css/tabler.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/base/assets/css/tabler-vendors.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/mojar/assets/css/tabler.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/mojar/assets/css/tabler-vendors.css') }}">
 
     @include('cms::components.mojar_langs')
 

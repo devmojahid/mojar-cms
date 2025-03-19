@@ -15,7 +15,7 @@
 
     <link rel="stylesheet" href="{{ asset('jw-styles/mojar/css/filemanager.min.css') }}">
     <link rel="stylesheet" href="{{ asset('jw-styles/mojar/css/vendor.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('jw-styles/base/assets/css/tabler.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('jw-styles/mojar/assets/css/tabler.min.css') }}">
 
     <style>
         .grid {
@@ -297,7 +297,7 @@
     <script src="{{ asset('jw-styles/mojar/js/filemanager.min.js') }}?v={{ \Juzaweb\CMS\Version::getVersion() }}">
     </script>
     <script src="{{ asset('jw-styles/mojar/js/vendor.min.js') }}"></script>
-    <script src="{{ asset('jw-styles/base/assets/js/tabler.min.js') }}"></script>
+    <script src="{{ asset('jw-styles/mojar/assets/js/tabler.min.js') }}"></script>
 
     <script>
         function addFolder() {

@@ -354,11 +354,11 @@ class MenuAction extends Action
         HookAction::enqueueScript('core-custom', 'jw-styles/mojar/js/custom.min.js', $ver);
         HookAction::enqueueScript('custom-main-js', 'jw-styles/mojar/js/custom-main.min.js', $ver);
         // Tabler js
-        HookAction::enqueueScript('tabler-apexcharts', 'jw-styles/base/assets/libs/apexcharts/dist/apexcharts.min.js', $ver);
-        HookAction::enqueueScript('tabler-jsvectormap', 'jw-styles/base/assets/libs/jsvectormap/dist/js/jsvectormap.min.js', $ver);
-        HookAction::enqueueScript('tabler-jsvectormap-maps', 'jw-styles/base/assets/libs/jsvectormap/dist/maps/world.js', $ver);
-        HookAction::enqueueScript('tabler-jsvectormap-world', 'jw-styles/base/assets/libs/jsvectormap/dist/maps/world-merc.js?1692870487', $ver);
-        HookAction::enqueueScript('tabler-main-js', 'jw-styles/base/assets/js/tabler.min.js', $ver);
+        HookAction::enqueueScript('tabler-apexcharts', 'jw-styles/mojar/assets/libs/apexcharts/dist/apexcharts.min.js', $ver);
+        HookAction::enqueueScript('tabler-jsvectormap', 'jw-styles/mojar/assets/libs/jsvectormap/dist/js/jsvectormap.min.js', $ver);
+        HookAction::enqueueScript('tabler-jsvectormap-maps', 'jw-styles/mojar/assets/libs/jsvectormap/dist/maps/world.js', $ver);
+        HookAction::enqueueScript('tabler-jsvectormap-world', 'jw-styles/mojar/assets/libs/jsvectormap/dist/maps/world-merc.js?1692870487', $ver);
+        HookAction::enqueueScript('tabler-main-js', 'jw-styles/mojar/assets/js/tabler.min.js', $ver);
     }
 
     public function addAdminStyles(): void
@@ -368,9 +368,9 @@ class MenuAction extends Action
         // HookAction::enqueueStyle('core-backend', 'jw-styles/mojar/css/backend.min.css', $ver);
         // HookAction::enqueueStyle('core-custom', 'jw-styles/mojar/css/custom.min.css', $ver);
         // Tabler css
-        HookAction::enqueueStyle('tabler-main', 'jw-styles/base/assets/css/tabler.min.css', $ver);
-        HookAction::enqueueStyle('tabler-vendors', 'jw-styles/base/assets/css/tabler-vendors.min.css', $ver);
-        HookAction::enqueueStyle('base-custom', 'jw-styles/base/assets/css/custom.css', $ver);
+        HookAction::enqueueStyle('tabler-main', 'jw-styles/mojar/assets/css/tabler.min.css', $ver);
+        HookAction::enqueueStyle('tabler-vendors', 'jw-styles/mojar/assets/css/tabler-vendors.min.css', $ver);
+        HookAction::enqueueStyle('base-custom', 'jw-styles/mojar/assets/css/custom.css', $ver);
         HookAction::enqueueStyle('base-custom', 'css/app.css', $ver);
     }
 

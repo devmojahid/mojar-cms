@@ -7,8 +7,8 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="turbolinks-cache-control" content="no-cache">
     <title>404 - Page not found</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/base/assets/css/tabler.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/base/assets/css/tabler-vendors.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/mojar/assets/css/tabler.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/mojar/assets/css/tabler-vendors.min.css') }}">
 </head>
 
 <body class="mojar__menuLeft--dark">

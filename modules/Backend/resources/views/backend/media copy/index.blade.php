@@ -256,7 +256,7 @@
 @endsection
 
 @section('footer')
-    <script src="{{ asset('jw-styles/base/assets/js/media-manager.js') }}"></script>
+    <script src="{{ asset('jw-styles/mojar/assets/js/media-manager.js') }}"></script>
     <script>
         Dropzone.autoDiscover = false;
 
