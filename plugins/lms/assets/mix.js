@@ -15,7 +15,6 @@ let basePublish = localAsset;
 
 mix.styles(
     [
-        baseAsset + '/css/bootstrap.min.css',
         baseAsset + '/css/lms.css',
     ],
     `${basePublish}/css/lms.min.css`
@@ -23,7 +22,6 @@ mix.styles(
 
 mix.combine(
     [
-        baseAsset + '/js/bootstrap.min.js',
         baseAsset + '/js/lms.js',
     ],
     `${basePublish}/js/lms.min.js`

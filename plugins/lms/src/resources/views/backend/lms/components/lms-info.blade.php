@@ -1282,8 +1282,6 @@
     </div>
 </template>
 
-<script src="{{ asset('jw-styles/plugins/mojahid/lms/assets/js/lms.min.js') }}" type="text/javascript"></script>
-
 <script>
     // Ensure LMSManager is initialized after the script is loaded
     document.addEventListener('DOMContentLoaded', function() {
@@ -1319,3 +1317,5 @@
         }
     });
 </script>
+
+<script defer src="{{ asset('jw-styles/plugins/mojahid/lms/assets/js/lms.min.js') }}" type="text/javascript"></script>
