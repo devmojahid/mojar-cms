@@ -371,7 +371,7 @@ class MenuAction extends Action
         HookAction::enqueueStyle('tabler-main', 'jw-styles/mojar/assets/css/tabler.min.css', $ver);
         HookAction::enqueueStyle('tabler-vendors', 'jw-styles/mojar/assets/css/tabler-vendors.min.css', $ver);
         HookAction::enqueueStyle('base-custom', 'jw-styles/mojar/assets/css/custom.css', $ver);
-        HookAction::enqueueStyle('base-custom', 'css/app.css', $ver);
+        HookAction::enqueueStyle('base-custom', 'jw-styles/mojar/css/app.css', $ver);
     }
 
     public function addDatatableSearchFieldTypes(): void

@@ -19,7 +19,10 @@ mix.options({
 });
 
 // Base application styles
-mix.sass('resources/sass/app.scss', 'public/css')
+// mix.sass('resources/sass/app.scss', 'public/css')
+//    .disableNotifications();
+
+mix.sass('resources/sass/app.scss', 'public/jw-styles/mojar/css/app.css')
    .disableNotifications();
 
 const selectedModule = process.env.MODULE;
