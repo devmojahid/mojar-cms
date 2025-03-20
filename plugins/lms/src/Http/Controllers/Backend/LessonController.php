@@ -27,7 +27,7 @@ class LessonController extends BackendController
         return Validator::make(
             $attributes,
             [
-                'title' => 'required|string|max:250',
+                'lesson_title' => 'required|string|max:250',
                 'slug' => 'nullable|string|max:250',
                 'thumbnail' => 'nullable|string',
                 'description' => 'nullable|string',
@@ -50,14 +50,15 @@ class LessonController extends BackendController
         }
 
         $validator->validate();
-        // $data = $this->parseDataForSave($request->all(), ...$params);
         $data = $request->all();
+        
+        $data['title'] = $data['lesson_title'];
 
         DB::beginTransaction();
 
         try {
             $model = $this->makeModel(...$params);
-            $slug = $request->input('slug') ?? Str::slug($request->input('title'));
+            $slug = $request->input('slug') ?? Str::slug($request->input('lesson_title'));
             if ($slug && method_exists($model, 'generateSlug')) {
                 $data['slug'] = $model->generateSlug($slug);
             }
@@ -107,6 +108,8 @@ class LessonController extends BackendController
 
         $validator->validate();
         $data = $request->all();
+
+        $data['title'] = $data['lesson_title']; 
 
         $model = $lesson;
 

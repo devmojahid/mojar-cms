@@ -68,6 +68,8 @@ class LMSManager {
             modals: {}
         };
 
+        console.log(this.config.courseId, 'courseId');
+
         // Initialize the application
         this.init();
     }
@@ -99,6 +101,7 @@ class LMSManager {
      */
     init() {
         console.log('LMSManager initializing with course ID:', this.state.courseId);
+        console.log('LMSManager Config with course ID:', this.config.courseId);
 
         // Use a delayed initialization to prevent conflicts with other scripts
         setTimeout(() => {

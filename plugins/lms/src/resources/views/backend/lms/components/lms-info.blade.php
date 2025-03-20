@@ -1,10 +1,3 @@
-@php
-    /**
-     * @var \Juzaweb\Backend\Models\Post $model
-     * @var \Juzaweb\merce\Models\Producttopic $topic
-     */
-@endphp
-
 <style>
     .form-imagecheck-input[type=radio]:checked~.form-imagecheck-figure:before {
         display: none;
@@ -595,6 +588,10 @@
     }
 </style>
 
+@php
+    $isEdit = isset($model->id) && $model->id > 0;
+    $courseId = $model->id ?? 0;
+@endphp
 
 <div class="card mt-3 mb-3">
     <div class="card-header">
@@ -651,10 +648,8 @@
                         </a>
                     </div>
                 </div>
-                @php
-                    $courseId = $model->id ?? 1;
-                @endphp
-                <div id="lmsManager" data-course-id="{{ $courseId }}"></div>
+
+                <div id="lmsManager" data-course-id="{{ $courseId }}" data-is-edit="{{ $isEdit ? 'true' : 'false' }}"></div>
 
                 <div id="curriculum-items-container" class="curriculum-container">
                     <!-- Empty state - displayed when no curriculum items exist -->
@@ -711,7 +706,6 @@
             </div>
 
             <div class="tab-pane show" id="tabs-product-info">
-                {{-- pricing model free or paid --}}
                 <div>
                     <div class="mb-3">
                         <label class="form-label">
@@ -722,7 +716,7 @@
                                 <div class="col-6 col-sm-4">
                                     <label class="form-imagecheck mb-2">
                                         <input name="form-imagecheck-radio" type="radio" value="1"
-                                            class="form-imagecheck-input" checked />
+                                            class="form-imagecheck-input" {{ $model->getMeta('price') == 0 ? 'checked' : '' }} />
                                         <span class="form-selectgroup-label form-imagecheck-figure">
                                             {{ __('Free') }}
                                         </span>
@@ -731,7 +725,7 @@
                                 <div class="col-6 col-sm-4">
                                     <label class="form-imagecheck mb-2">
                                         <input name="form-imagecheck-radio" type="radio" value="2"
-                                            class="form-imagecheck-input" />
+                                            class="form-imagecheck-input" {{ $model->getMeta('price') > 0 ? 'checked' : '' }} />
                                         <span class="form-selectgroup-label form-imagecheck-figure">
                                             {{ __('Paid') }}
                                         </span>
@@ -748,7 +742,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             {{ Field::text(trans('lms::content.price'), 'meta[price]', [
-                                'value' => $topic->price ? number_format($topic->price) : '',
+                                'value' => $model->getMeta('price') ?? '',
                                 'class' => 'is-number number-format',
                                 'prefix' => '$',
                             ]) }}
@@ -757,7 +751,7 @@
 
                         <div class="col-md-6">
                             {{ Field::text(trans('lms::content.compare_price'), 'meta[compare_price]', [
-                                'value' => $topic->compare_price ? number_format($topic->compare_price) : '',
+                                'value' => $model->getMeta('compare_price') ?? '',
                                 'class' => 'is-number number-format',
                                 'prefix' => '$',
                             ]) }}
@@ -769,14 +763,14 @@
                     <div class="row">
                         <div class="col-md-6">
                             {{ Field::text(trans('lms::content.max_students'), 'meta[max_students]', [
-                                'value' => $topic->max_students ?? '',
+                                'value' => $model->getMeta('max_students') ?? '',
                                 'type' => 'number',
                             ]) }}
                         </div>
 
                         <div class="col-md-6">
                             {{ Field::select(trans('lms::content.language'), 'meta[language]', [
-                                'value' => $topic->language ?? '',
+                                'value' => $model->getMeta('language') ?? '',
                                 'options' => [
                                     'en' => 'English',
                                     'vi' => 'Vietnamese',
@@ -786,18 +780,18 @@
                         {{-- difficulty level --}}
                         <div class="col-md-6">
                             {{ Field::select(trans('lms::content.difficulty_level'), 'meta[difficulty_level]', [
-                                'value' => $topic->difficulty_level ?? '',
+                                'value' => $model->getMeta('difficulty_level') ?? '',
                                 'options' => [
-                                    'easy' => 'Easy',
-                                    'medium' => 'Medium',
-                                    'hard' => 'Hard',
+                                    'beginner' => 'Beginner',
+                                    'intermediate' => 'Intermediate',
+                                    'advanced' => 'Advanced',
                                 ],
                             ]) }}
                         </div>
                         {{-- preview video url --}}
                         <div class="col-md-6">
                             {{ Field::text(trans('lms::content.preview_video_url'), 'meta[preview_video_url]', [
-                                'value' => $topic->preview_video_url ?? '',
+                                'value' => $model->getMeta('preview_video_url') ?? '',
                             ]) }}
                         </div>
                     </div>
@@ -819,7 +813,7 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <label class="form-label required">{{ __('Topic Title') }}</label>
-                    <input type="text" class="form-control" id="topicTitle" name="title"
+                    <input type="text" class="form-control" id="topicTitle" name="topic_title"
                         placeholder="{{ __('Enter topic title...') }}" required>
                 </div>
                 <div class="mb-3">
@@ -1007,7 +1001,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label required">{{ __('Lesson Title') }}</label>
-                        <input type="text" class="form-control" name="title" required
+                        <input type="text" class="form-control" name="lesson_title" required
                             placeholder="{{ __('Enter lesson title...') }}">
                     </div>
                     <div class="mb-3">
@@ -1065,7 +1059,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label required">{{ __('Quiz Title') }}</label>
-                        <input type="text" class="form-control" name="title" required>
+                        <input type="text" class="form-control" name="quiz_title" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">{{ __('Time Limit (minutes)') }}</label>
@@ -1105,7 +1099,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label required">{{ __('Assignment Title') }}</label>
-                        <input type="text" class="form-control" name="title" required>
+                        <input type="text" class="form-control" name="assignment_title" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">{{ __('Instructions') }}</label>
@@ -1155,19 +1149,6 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function() {
-        $('input[name="form-imagecheck-radio"]').change(function() {
-            if ($(this).val() == '2') {
-                $('input[name="meta[price]"]').prop('disabled', false);
-                $('input[name="meta[compare_price]"]').prop('disabled', false);
-            } else {
-                $('input[name="meta[price]"]').prop('disabled', true);
-                $('input[name="meta[compare_price]"]').prop('disabled', true);
-            }
-        });
-    });
-</script>
 
 <!-- Topic Template -->
 <template id="topicTemplate">
@@ -1282,39 +1263,48 @@
     </div>
 </template>
 
+
+
+
+
+
 <script>
-    // Ensure LMSManager is initialized after the script is loaded
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM content loaded in inline script');
+    $(document).ready(function() {
+    function convertToSlug(text) {
+        return text
+            .toLowerCase()
+            .replace(/[^\w ]+/g, '')
+            .replace(/ +/g, '-')
+            .trim();
+    }
+    
+    $('input[name="title"]').on('change keyup', function() {
+        let titleValue = $(this).val();
+        let slugValue = convertToSlug(titleValue);
+        
+        // Update the slug input field
+        $('input[name="slug"]').val(slugValue);
+        });
+        
 
-        // Check if LMSManager was already initialized
-        if (!window.lmsManager) {
-            console.log('LMSManager not initialized yet, initializing now');
+        // checked currently checked radio button
+        $(`input[name="form-imagecheck-radio"][value="${{{ $model->getMeta('price') }}}"]`).prop('checked', true);
 
-            // Wait a bit to ensure all scripts are loaded
-            setTimeout(function() {
-                try {
-                    window.lmsManager = new LMSManager();
-                    console.log('LMSManager initialized from inline script');
-
-                    // Force load topics
-                    if (window.lmsManager && window.lmsManager.loadTopics) {
-                        console.log('Forcing loadTopics call');
-                        window.lmsManager.loadTopics();
-                    }
-                } catch (error) {
-                    console.error('Error initializing LMSManager from inline script:', error);
-                }
-            }, 500);
-        } else {
-            console.log('LMSManager already initialized');
-
-            // Force load topics
-            if (window.lmsManager && window.lmsManager.loadTopics) {
-                console.log('Forcing loadTopics call');
-                window.lmsManager.loadTopics();
-            }
+        // disable price input if price is 0
+        if ($('input[name="form-imagecheck-radio"][value="1"]').is(':checked')) {
+            $('input[name="meta[price]"]').prop('disabled', true);
+            $('input[name="meta[compare_price]"]').prop('disabled', true);
         }
+
+        $('input[name="form-imagecheck-radio"]').change(function() {
+            if ($(this).val() == '2') {
+                $('input[name="meta[price]"]').prop('disabled', false);
+                $('input[name="meta[compare_price]"]').prop('disabled', false);
+            } else {
+                $('input[name="meta[price]"]').prop('disabled', true);
+                $('input[name="meta[compare_price]"]').prop('disabled', true);
+            }
+        });
     });
 </script>
 
