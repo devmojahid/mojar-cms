@@ -86,16 +86,20 @@ class LmsPostTypeAction extends Action
     public function parseDataForSave($data)
     {
         $metas = (array) $data['meta'];
-        if ($metas['price']) {
+        if (isset($metas['price']) && !empty($metas['price'])) {
             $metas['price'] = parse_price_format($metas['price']);
+        } else {
+            $metas['price'] = 0;
         }
 
-        if ($metas['compare_price']) {
+        if (isset($metas['compare_price']) && !empty($metas['compare_price'])) {
             $metas['compare_price'] = parse_price_format($metas['compare_price']);
+        } else {
+            $metas['compare_price'] = 0;
         }
 
         // compare price should be greater than price
-        if ($metas['compare_price'] && $metas['compare_price'] < $metas['price']) {
+        if (isset($metas['compare_price']) && $metas['compare_price'] < $metas['price']) {
             $metas['compare_price'] = $metas['price'];
         }
  

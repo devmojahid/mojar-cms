@@ -82,7 +82,6 @@ class CourseController extends BackendController
 
         $data = [
             'title' => 'Basic Course',
-            'slug' => 'basic-course',
         ];
 
         DB::beginTransaction();

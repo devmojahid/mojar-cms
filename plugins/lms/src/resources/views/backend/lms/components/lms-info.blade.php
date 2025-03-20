@@ -649,7 +649,8 @@
                     </div>
                 </div>
 
-                <div id="lmsManager" data-course-id="{{ $courseId }}" data-is-edit="{{ $isEdit ? 'true' : 'false' }}"></div>
+                <div id="lmsManager" data-course-id="{{ $courseId }}"
+                    data-is-edit="{{ $isEdit ? 'true' : 'false' }}"></div>
 
                 <div id="curriculum-items-container" class="curriculum-container">
                     <!-- Empty state - displayed when no curriculum items exist -->
@@ -680,14 +681,14 @@
                         <!-- Topics will be dynamically added here -->
                     </div>
 
-                    
+
                     <!-- Add More Topic Button (hidden initially) -->
                     <div class="text-center mt-3" id="lmsAddMoreTopicBtn" style="display: none;">
                         <button class="btn btn-primary lms-add-topic-btn" data-bs-toggle="modal"
                             data-bs-target="#topicModal" type="button">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus"
-                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M12 5l0 14" />
                                 <path d="M5 12l14 0" />
@@ -716,7 +717,8 @@
                                 <div class="col-6 col-sm-4">
                                     <label class="form-imagecheck mb-2">
                                         <input name="form-imagecheck-radio" type="radio" value="1"
-                                            class="form-imagecheck-input" {{ $model->getMeta('price') == 0 ? 'checked' : '' }} />
+                                            class="form-imagecheck-input"
+                                            {{ $model->getMeta('price') == 0 ? 'checked' : '' }} />
                                         <span class="form-selectgroup-label form-imagecheck-figure">
                                             {{ __('Free') }}
                                         </span>
@@ -725,7 +727,8 @@
                                 <div class="col-6 col-sm-4">
                                     <label class="form-imagecheck mb-2">
                                         <input name="form-imagecheck-radio" type="radio" value="2"
-                                            class="form-imagecheck-input" {{ $model->getMeta('price') > 0 ? 'checked' : '' }} />
+                                            class="form-imagecheck-input"
+                                            {{ $model->getMeta('price') > 0 ? 'checked' : '' }} />
                                         <span class="form-selectgroup-label form-imagecheck-figure">
                                             {{ __('Paid') }}
                                         </span>
@@ -1270,25 +1273,25 @@
 
 <script>
     $(document).ready(function() {
-    function convertToSlug(text) {
-        return text
-            .toLowerCase()
-            .replace(/[^\w ]+/g, '')
-            .replace(/ +/g, '-')
-            .trim();
-    }
-    
-    $('input[name="title"]').on('change keyup', function() {
-        let titleValue = $(this).val();
-        let slugValue = convertToSlug(titleValue);
-        
-        // Update the slug input field
-        $('input[name="slug"]').val(slugValue);
+        function convertToSlug(text) {
+            return text
+                .toLowerCase()
+                .replace(/[^\w ]+/g, '')
+                .replace(/ +/g, '-')
+                .trim();
+        }
+
+        $('input[name="title"]').on('change keyup', function() {
+            let titleValue = $(this).val();
+            let slugValue = convertToSlug(titleValue);
+
+            // Update the slug input field
+            $('input[name="slug"]').val(slugValue);
         });
-        
+
 
         // checked currently checked radio button
-        $(`input[name="form-imagecheck-radio"][value="${{{ $model->getMeta('price') }}}"]`).prop('checked', true);
+        $('input[name="form-imagecheck-radio"][value="{{ $model->getMeta('price') }}"]').prop('checked', true);
 
         // disable price input if price is 0
         if ($('input[name="form-imagecheck-radio"][value="1"]').is(':checked')) {
