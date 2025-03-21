@@ -122,26 +122,6 @@ class MenuAction extends Action
             ]
         );
 
-        HookAction::registerProfilePage(
-            'download',
-            [
-                'title' => __('Download'),
-                'contents' => 'ecomm::frontend.profile.download.index',
-                'icon' => 'far fa-download',
-                'data' => [
-                    'purchased' => fn () => Product::select(['title', 'id'])
-                        ->whereIn(
-                            'id',
-                            Order::select(['order_items.product_id'])
-                                ->join('order_items', 'order_items.order_id', 'orders.id')
-                                ->where('orders.user_id', auth()->id())
-                                ->where('orders.payment_status', Order::PAYMENT_STATUS_COMPLETED)
-                        )
-                        ->paginate(10)
-                ]
-            ]
-        );
-
         // Account
         HookAction::registerProfilePage(
             'account',

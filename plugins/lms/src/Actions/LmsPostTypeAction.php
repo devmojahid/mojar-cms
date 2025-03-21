@@ -61,7 +61,8 @@ class LmsPostTypeAction extends Action
                 'menu_position' => 10,
                 'supports' => [
                     'category',
-                    'tag'
+                    'tag',
+                    'comment'
                 ],
                 'metas' => collect($courseInvisibleMetas)
                     ->mapWithKeys(

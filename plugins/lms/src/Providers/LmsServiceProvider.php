@@ -7,6 +7,7 @@ use Juzaweb\CMS\Facades\ActionRegister;
 use Mojahid\Lms\Actions\LmsAction;
 use Mojahid\Lms\Actions\MenuAction;
 use Mojahid\Lms\Actions\LmsPostTypeAction;
+use Mojahid\Lms\Actions\LmsReviewAction;
 use Mojahid\Lms\Http\Middleware\LmsTheme;
 use Illuminate\Support\Facades\Route;
 use TwigBridge\Facade\Twig;

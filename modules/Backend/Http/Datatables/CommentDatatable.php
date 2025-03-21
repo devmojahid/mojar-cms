@@ -82,6 +82,17 @@ class CommentDatatable extends DataTable
                     return jw_date_format($row->created_at);
                 },
             ],
+            'rating' => [
+                'label' => trans('cms::app.rating'),
+                'width' => '10%',
+                'align' => 'center',
+                'formatter' => function ($value, $row, $index) {
+                    if ($row->isReview()) {
+                        return $row->getRating();
+                    }
+                    return '';
+                },
+            ],
         ];
     }
 

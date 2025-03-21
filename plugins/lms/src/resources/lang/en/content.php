@@ -190,6 +190,21 @@ return [
     'Lesson Video URL' => 'Lesson Video URL',
     'topic_description' => 'Topic description goes here.',
     'no_items_in_this_topic' => 'No items in this topic yet. Add your first item below.',
-    
-    
+    'reviews' => 'Reviews',
+    'rating' => 'Rating',
+    'write_review' => 'Write a review',
+    'your_rating' => 'Your rating',
+    'review_content' => 'Review content',
+    'submit_review' => 'Submit review',
+    'total_reviews' => 'Total reviews',
+    'star_ratings' => 'Star ratings',
+    'no_reviews' => 'No reviews',
+    'be_first_review' => 'Be the first to review this course',
+    'login_to_review' => 'Login to review',
+    'star' => 'Star',
+    'reviews_count' => 'Reviews count',
+    'select_your_rating' => 'Select your rating',
+    'your_review' => 'Your review',
+    'no_rating' => 'No rating yet',
+    'enrolled_courses' => 'Enrolled Courses',
 ];

@@ -53,13 +53,12 @@ class MenuAction extends Action
 
     public function addProfilePages(): void
     {
-        // Dashboard
         HookAction::registerProfilePage(
-            'courses',
+            'enrolled-courses',
             [
-                'title' => trans('lms::content.courses'),
-                'key' => 'courses',
-                // 'contents' => view()->exists('theme::profile.courses.index') ? 'theme::profile.courses.index' : 'lms::frontend.profile.courses.index',
+                'title' => trans('lms::content.enrolled_courses'),
+                'key' => 'enrolled-courses',
+                'contents' => view()->exists('theme::profile.enrolled-courses.index') ? 'theme::profile.enrolled-courses.index' : 'lms::frontend.profile.enrolled-courses.index',
                 'icon' => 'far fa-home',
                 'position' => 1,
             ]

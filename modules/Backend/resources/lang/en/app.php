@@ -670,4 +670,5 @@ return [
     'item_num' => "Item Num",
     'add_item' => "Add Item",
     'remove_item' => "Remove Item",
+    'rating' => 'Rating',
 ];

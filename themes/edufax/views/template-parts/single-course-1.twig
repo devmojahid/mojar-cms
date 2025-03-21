@@ -9,10 +9,6 @@
     }
 %}
 
-{% set reviews = lms_get_reviews(post, 10) %}
-{% set averageRating = lms_get_average_rating(post) %}
-{% set reviewStats = lms_get_review_stats(post) %}
-
 {% set related_courses = get_related_posts(post, 3) %}
     <section class="tf__courses_details_page pt_120 xs_pt_80 pb_120 xs_pb_80">
         <div class="container">
@@ -40,7 +36,7 @@
                                     <span>
                                         <img src="{{ asset('images/icons/star_icon.svg') }}" alt="book" class="img-fluid w-100">
                                     </span>
-                                    {{ averageRating|number_format(1) }} ({{ reviews.count }})
+                                    4.9 (2,523 ratings)
                                 </li>
                             </ul>
                             <h2>{{ post.title }}</h2>
@@ -138,147 +134,206 @@
                                 <div class="tab-pane fade" id="nav-contact" role="tabpanel"
                                     aria-labelledby="nav-contact-tab" tabindex="0">
                                     <div class="tf__courses_review">
-                                        <h3>{{ reviews.count }} {{ trans('lms::content.reviews') }}</h3>
-                                        
-                                        {% if averageRating > 0 %}
-                                        <div class="reviews-summary mb-4 d-none">
+                                        <h3>04 Review</h3>
+                                        <div class="tf__single_review">
+                                            <div class="tf__single_review_img">
+                                                <img src="images/review_img_1.jpg" alt="review" class="img-fluid w-100">
+                                            </div>
+                                            <div class="tf__single_review_text">
+                                                <h4>Farjana Bawnia <span><i class="fal fa-calendar-alt"></i> May 15,
+                                                        2023</span></h4>
+                                                <p class="rating">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </p>
+                                                <p class="comment">At 29 years old, my favorite compliment is being told
+                                                    that I look
+                                                    like my mom. Seeing myself in her image, like this daughter up top.
+                                                </p>
+                                                <ul>
+                                                    <li>
+                                                        <a href="#">
+                                                            <img src="images/like_icon.svg" alt="link"
+                                                                class="img-fluid w-100">
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <img src="images/dislike_icon.svg" alt="link"
+                                                                class="img-fluid w-100">
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tf__single_review">
+                                            <div class="tf__single_review_img">
+                                                <img src="images/review_img_2.jpg" alt="review" class="img-fluid w-100">
+                                            </div>
+                                            <div class="tf__single_review_text">
+                                                <h4>Razwan Islam <span><i class="fal fa-calendar-alt"></i> May 15,
+                                                        2023</span></h4>
+                                                <p class="rating">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </p>
+                                                <p class="comment">My favorite compliment is being told that I look like
+                                                    my mom. Seeing myself in her image, like this daughter up top.
+                                                </p>
+                                                <ul>
+                                                    <li>
+                                                        <a href="#">
+                                                            <img src="images/like_icon.svg" alt="link"
+                                                                class="img-fluid w-100">
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <img src="images/dislike_icon.svg" alt="link"
+                                                                class="img-fluid w-100">
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tf__single_review">
+                                            <div class="tf__single_review_img">
+                                                <img src="images/review_img_3.jpg" alt="review" class="img-fluid w-100">
+                                            </div>
+                                            <div class="tf__single_review_text">
+                                                <h4>Babor Azom <span><i class="fal fa-calendar-alt"></i> May 15,
+                                                        2023</span></h4>
+                                                <p class="rating">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </p>
+                                                <p class="comment">Duis aute irure dolor in reprehenderit in voluptate
+                                                    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                                                    occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                                                    mollit anim id est laborum.
+                                                </p>
+                                                <ul>
+                                                    <li>
+                                                        <a href="#">
+                                                            <img src="images/like_icon.svg" alt="link"
+                                                                class="img-fluid w-100">
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <img src="images/dislike_icon.svg" alt="link"
+                                                                class="img-fluid w-100">
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tf__single_review">
+                                            <div class="tf__single_review_img">
+                                                <img src="images/review_img_4.jpg" alt="review" class="img-fluid w-100">
+                                            </div>
+                                            <div class="tf__single_review_text">
+                                                <h4>Mohammad Ali <span><i class="fal fa-calendar-alt"></i> May 15,
+                                                        2023</span></h4>
+                                                <p class="rating">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </p>
+                                                <p class="comment">Sed ut perspiciatis unde omnis iste natus error sit
+                                                    voluptatem accusantium doloremque laudantium, totam rem aperiam,
+                                                    eaque ipsa quae ab illo inventore veritatis et quasi architecto
+                                                    beatae vitae dicta sunt explicabo.
+                                                </p>
+                                                <ul>
+                                                    <li>
+                                                        <a href="#">
+                                                            <img src="images/like_icon.svg" alt="link"
+                                                                class="img-fluid w-100">
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <img src="images/dislike_icon.svg" alt="link"
+                                                                class="img-fluid w-100">
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tf__pagination">
                                             <div class="row">
-                                                <div class="col-md-4 text-center">
-                                                    <div class="average-rating-box">
-                                                        <div class="average-score display-4 fw-bold">{{ averageRating|number_format(1) }}</div>
-                                                        <div class="rating-stars d-flex justify-content-center my-2">
-                                                            {% for i in 1..5 %}
-                                                                {% if i <= averageRating %}
-                                                                    <span class="rating-star active">
-                                                                        <i class="fas fa-star"></i>
-                                                                    </span>
-                                                                {% elseif i <= averageRating + 0.5 and i > averageRating %}
-                                                                    <span class="rating-star half">
-                                                                        <i class="fas fa-star-half-alt"></i>
-                                                                    </span>
-                                                                {% else %}
-                                                                    <span class="rating-star">
-                                                                        <i class="far fa-star"></i>
-                                                                    </span>
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                        </div>
-                                                        <div class="text-muted">{{ trans('lms::content.total_reviews') }}: {{ totalReviews }}</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="rating-breakdown">
-                                                        <h5>{{ trans('lms::content.star_ratings') }}</h5>
-                                                        {% for rating, count in reviewStats.counts %}
-                                                            <div class="rating-progress-bar d-flex align-items-center mb-2">
-                                                                <div class="rating-label me-2">{{ rating }} {{ trans('lms::content.star') }}</div>
-                                                                <div class="progress flex-grow-1">
-                                                                    <div class="progress-bar bg-warning" role="progressbar" 
-                                                                         style="width: {{ reviewStats.percentages[rating] }}%" 
-                                                                         aria-valuenow="{{ reviewStats.percentages[rating] }}" 
-                                                                         aria-valuemin="0" 
-                                                                         aria-valuemax="100"></div>
-                                                                </div>
-                                                                <div class="ms-2">{{ count }}</div>
-                                                            </div>
-                                                        {% endfor %}
-                                                    </div>
+                                                <div class="col-12">
+                                                    <nav aria-label="Page navigation example">
+                                                        <ul class="pagination">
+                                                            <li class="page-item"> <a class="page-link" href="#"
+                                                                    aria-label="Previous">
+                                                                    <i class="far fa-chevron-left"></i>
+                                                                </a>
+                                                            </li>
+                                                            <li class="page-item"><a class="page-link" href="#">1</a>
+                                                            </li>
+                                                            <li class="page-item"><a class="page-link active"
+                                                                    href="#">2</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">3</a>
+                                                            </li>
+                                                            <li class="page-item"><a class="page-link" href="#"
+                                                                    aria-label="Next">
+                                                                    <i class="far fa-chevron-right"></i>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </nav>
                                                 </div>
                                             </div>
                                         </div>
-                                        {% endif %}
-                                        
-                                        {% if reviews.count > 0 %}
-                                            {% for review in reviews %}
-                                                <div class="tf__single_review">
-                                                    <div class="tf__single_review_img">
-                                                        <img src="{{ review.getAvatar() }}" alt="{{ review.getUserName() }}" class="img-fluid w-100">
-                                                    </div>
-                                                    <div class="tf__single_review_text">
-                                                        <h4>{{ review.getUserName() }} <span><i class="fal fa-calendar-alt"></i>
-                                                            {{ review.getCreatedDate() }}
-                                                         </span></h4>
-                                                        <p class="rating">
-                                                            {% for i in 1..5 %}
-                                                                {% if i <= review.getRating() %}
-                                                                    <i class="fas fa-star"></i>
-                                                                {% else %}
-                                                                    <i class="far fa-star"></i>
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                        </p>
-                                                        <p class="comment">{{ review.content }}</p>
-                                                    </div>
-                                                </div>
-                                            {% endfor %}
-                                            
-                                            <div class="review-pagination mt-4">
-                                                {{ reviews.links()|raw }}
-                                            </div>
-                                        {% else %}
-                                            <div class="no-reviews text-center p-4 bg-light rounded">
-                                                <div class="mb-2">
-                                                    <i class="fas fa-comment-alt fa-3x text-muted"></i>
-                                                </div>
-                                                <h5>{{ trans('lms::content.no_reviews') }}</h5>
-                                                <p class="text-muted">{{ trans('lms::content.be_first_review') }}</p>
-                                            </div>
-                                        {% endif %}
-                                        
-                                        {% if auth %}
                                         <div class="tf__courses_review_input_area">
-                                            <h3>{{ trans('lms::content.write_review') }}</h3>
-                                             <form action="{{ route('lms.courses.review', {'slug': post.slug}) }}" method="post">
-                                                {{ csrf_field() }}
-                                                <p>{{ trans('lms::content.select_your_rating') }} :
+                                            <h3>Write A Review</h3>
+                                            <form>
+                                                <p>Select your rating :
                                                     <span>
-                                                         {% for i in range(5, 1, -1) %}
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="radio" name="rating" id="rating{{ i }}" value="{{ i }}" required>
-                                                                <label class="form-check-label" for="rating{{ i }}">
-                                                                    <div class="star-rating">
-                                                                        {% for j in 1..5 %}
-                                                                            {% if j <= i %}
-                                                                                <i class="fas fa-star"></i>
-                                                                            {% else %}
-                                                                                <i class="far fa-star"></i>
-                                                                            {% endif %}
-                                                                        {% endfor %}
-                                                                    </div>
-                                                                </label>
-                                                            </div>
-                                                        {% endfor %}
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
                                                     </span>
                                                 </p>
                                                 <div class="row">
                                                     <div class="col-xl-6">
                                                         <div class="tf__courses_review_input_sigle">
-                                                            <label>{{ trans('lms::content.name') }}</label>
-                                                            <input type="text" name="name" placeholder="{{ trans('lms::content.name') }}">
+                                                            <label>name</label>
+                                                            <input type="text" placeholder="Name">
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-6">
                                                         <div class="tf__courses_review_input_sigle">
-                                                            <label>{{ trans('lms::content.email') }}</label>
-                                                            <input type="email" name="email" placeholder="{{ trans('lms::content.email') }}">
+                                                            <label>email</label>
+                                                            <input type="email" placeholder="Email">
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-12">
                                                         <div class="tf__courses_review_input_sigle">
-                                                            <label>{{ trans('lms::content.your_review') }}</label>
-                                                            <textarea rows="8" name="content" placeholder="{{ trans('lms::content.your_review') }}"></textarea>
-                                                            <button type="submit" class="tf__common_btn">{{ trans('lms::content.submit_review') }}</button>
+                                                            <label>Your review</label>
+                                                            <textarea rows="8" placeholder="Type here"></textarea>
+                                                            <button type="submit" class="tf__common_btn">Submit
+                                                                Review</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </form>
                                         </div>
-                                        {% else %}
-                                            <div class="login-to-review alert alert-info mt-4">
-                                                <p>{{ trans('lms::content.login_to_review') }}</p>
-                                                <a href="{{ route('login') }}" class="tf__common_btn">{{ trans('cms::app.login') }}</a>
-                                            </div>
-                                        {% endif %}
                                     </div>
                                 </div>
                             </div>

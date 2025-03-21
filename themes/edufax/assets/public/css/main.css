@@ -10171,7 +10171,7 @@ button {
 .tf__pay_modal_info .list_item li::after {
     position: absolute;
     content: "";
-    background: url(../images/check_icon.png);
+    background: url(../public/images/check_icon.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

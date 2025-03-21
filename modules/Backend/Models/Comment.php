@@ -65,9 +65,14 @@ class Comment extends Model
         'object_id',
         'object_type',
         'user_id',
+        'json_metas',
     ];
 
     protected $touches = ['post'];
+
+    protected $casts = [
+        'json_metas' => 'array',
+    ];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
@@ -133,5 +138,16 @@ class Comment extends Model
         return [
             'comments',
         ];
+    }
+    
+    public function getRating()
+    {
+        return $this->json_metas['rating'] ?? null;
+    }
+
+    
+    public function isReview()
+    {
+        return isset($this->json_metas['rating']);
     }
 }

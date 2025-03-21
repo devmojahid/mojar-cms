@@ -12,6 +12,8 @@
   "difficulty_level" => "beginner"
   "preview_video_url" => ""
 ] #}
+{% set averageRating = lms_get_average_rating(post) %}
+{% set reviews = lms_get_reviews(post, 10) %}
 {% set categories = get_post_taxonomies(post, 'categories', {limit: 1}) %}
 <div class="col-xl-4 col-md-6 wow fadeInUp" data-wow-duration="1s">
 	<div class="tf__single_courses">
@@ -33,8 +35,12 @@
 					<span class="icon">
 						<img src="{{ asset('images/icons/star_icon.svg') }}" alt="start" class="img-fluid w-100">
 					</span>
-					4.9
-					<span class="d-block ml_5">(25)</span>
+					{% if averageRating %}
+						{{ averageRating|number_format(1) }}
+					{% else %}
+						{{ trans('lms::content.no_rating') }}
+					{% endif %}
+					<span class="d-block ml_5">({{ reviews.count }})</span>
 				</li>
 			</ul>
 			<a class="title" href="{{ post.url }}">{{ post.title }}</a>
