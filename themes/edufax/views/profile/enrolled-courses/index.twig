@@ -1,0 +1,53 @@
+<div class="tf__dashboard_courses">
+    <div class="row">
+        {% for course in data.courses.data %}
+        {% set categories = get_post_taxonomies(course, 'categories', {limit: 1}) %}
+        {% set averageRating = lms_get_average_rating(course) %}
+        {% set reviews = lms_get_reviews(course, 10) %}
+        <div class="col-xl-6 col-md-6 wow fadeInUp" data-wow-duration="1s">
+            <div class="tf__single_courses">
+                <div class="tf__single_courses_img">
+                    <img src="{{ upload_url(course.thumbnail) }}" alt="{{ course.title }}"
+                        class="img-fluid w-100">
+                    {% for category in categories %}
+                        <a class="category" href="{{ category.url }}">{{ category.name }}</a>
+                    {% endfor %}
+                </div>
+                <div class="tf__single_courses_text">
+                    <ul class="d-flex flex-wrap justify-content-between">
+                        <li>
+                            <span class="icon">
+                                <img src="{{ asset('images/icons/book_icon.svg') }}" alt="book"
+                                    class="img-fluid w-100">
+                            </span>
+                            32 Lesson
+                        </li>
+                        <li>
+                            <span class="icon">
+                                <img src="{{ asset('images/icons/star_icon.svg') }}" alt="start"
+                                    class="img-fluid w-100">
+                            </span>
+                            {% if averageRating %}
+                                {{ averageRating|number_format(1) }}
+                            {% else %}
+                                {{ trans('lms::content.no_rating') }}
+                            {% endif %}
+                             <span class="d-block ml_5">({{ reviews.count }})</span>
+                        </li>
+                    </ul>
+                    <a class="title" href="{{ course.slug }}">{{ course.title }}</a>
+                </div>
+                <div class="tf__dashboard_course_play">
+                    <a class="tf__common_btn w-100" href="{{ route('lms.courses.learning-area', {slug: course.slug}) }}">
+                        play video
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if data.courses.pagination %}
+            {{ paginate_links(data.courses, 'theme::components.pagination-profile') }}
+        {% endif %}
+    </div>
+</div>

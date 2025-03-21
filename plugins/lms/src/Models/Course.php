@@ -26,6 +26,8 @@ use Juzaweb\Backend\Models\PostView;
 use Juzaweb\Backend\Models\Resource;
 use Juzaweb\Backend\Models\Taxonomy;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Mojahid\Ecommerce\Models\Order;
+use Mojahid\Ecommerce\Models\OrderItem;
 
 
 /**
@@ -126,18 +128,18 @@ class Course extends Post
         return $this->belongsToMany(
             Order::class,
             OrderItem::getTableName(),
-            'course_id',
+            'post_id',
             'order_id'
-        );
+        )->wherePivot('type', 'courses');
     }
 
     public function orderItems(): HasMany
     {
         return $this->hasMany(
             OrderItem::class,
-            'course_id',
+            'post_id',
             'id'
-        );
+        )->where('type', 'courses');
     }
 
     public function getTopics(): Collection

@@ -1,0 +1,149 @@
+{% extends 'cms::layouts.frontend' %}
+
+{% block content %}
+    {% include 'theme::components.breadcrumb' with {
+        title: page.title,
+        background_image: 'images/breadcrumb_bg.jpg',
+        items: [
+            {'label': 'Home', 'url': '/'},
+            {'label': 'Courses', 'url': '/courses'},
+            {'label': page.title}
+        ]
+    } %}
+
+    <section class="tf__course_video pt_120 xs_pt_80 pb_120 xs_pb_80">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-7 col-lg-6 wow fadeInLeft" data-wow-duration="1s">
+                    <div class="tf__courses_video_area">
+                        <div class="tf__courses_video_play">
+                            {% if data.current_lesson %}
+                                {% set video_url = data.current_lesson.metas.video_url ?? '#' %}
+                                {# {% set video_thumbnail = data.current_lesson.thumbnail is defined and data.current_lesson.thumbnail
+                                    ? upload_url(data.current_lesson.thumbnail) 
+                                    : upload_url(page.thumbnail) %} #}
+                                
+                                <div class="myVideo" id="my_video" 
+                                    data-video="{{ video_url }}"
+                                    {# data-poster="{{ video_thumbnail }}"  #}
+                                    data-type="video/mp4">
+                                </div>
+                            {% else %}
+                                <div class="tf__empty_lesson">
+                                    <img src="{{ upload_url(page.thumbnail) }}" alt="{{ page.title }}" class="img-fluid w-100">
+                                    <div class="overlay">
+                                        <h3>No lessons available yet</h3>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="tf__courses_video_text">
+                            <h3>{{ data.current_lesson.title ?? page.title }}</h3>
+                            <p>{{ data.current_lesson.description ?? page.description }}</p>
+                            <ul class="d-flex flex-wrap justify-content-between">
+                                {% if data.prev_lesson %}
+                                    <li>
+                                        <a href="{{ route('lms.courses.learning-area', [page.slug, data.prev_lesson.slug]) }}">
+                                            <i class="fal fa-arrow-left"></i> Previous Lesson
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                
+                                {% if data.next_lesson %}
+                                    <li>
+                                        <a href="{{ route('lms.courses.learning-area', [page.slug, data.next_lesson.slug]) }}">
+                                            Next Lesson <i class="fal fa-arrow-right"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-5 col-lg-6 wow fadeInRight" data-wow-duration="1s">
+                    <div class="tf__courses_video_list_area">
+                        <div class="tf__courses_video_list_header">
+                            <h3>Course Syllabus 
+                                <span>{{ data.course.topics_count ? data.course.topics_count ~ ' Topics' : 'No Topics' }}</span>
+                            </h3>
+                        </div>
+                        <div class="tf__courses_video_list">
+                            <div class="accordion" id="accordionExample">
+                                {% for topic in data.course.topics %}
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button {{ loop.first ? '' : 'collapsed' }}" 
+                                                    type="button" 
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#collapse{{ topic.id }}" 
+                                                    aria-expanded="{{ loop.first ? 'true' : 'false' }}"
+                                                    aria-controls="collapse{{ topic.id }}">
+                                                <span><b>{{ topic.title }}</b></span>
+                                                <span>{{ topic.lessons_count }} lesson{{ topic.lessons_count != 1 ? 's' : '' }}</span>
+                                            </button>
+                                        </h2>
+                                        <div id="collapse{{ topic.id }}" 
+                                             class="accordion-collapse collapse {{ loop.first ? 'show' : '' }}"
+                                             data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <ul>
+                                                    {% for lesson in topic.lessons %}
+                                                        <li>
+                                                            <a href="{{ route('lms.courses.learning-area', [page.slug, lesson.slug]) }}"
+                                                               class="{{ data.current_lesson and data.current_lesson.id == lesson.id ? 'active' : '' }}">
+                                                                {{ lesson.title }}
+                                                            </a>
+                                                        </li>
+                                                    {% else %}
+                                                        <li>No lessons available</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button" type="button">
+                                                <span><b>No topics available</b></span>
+                                            </button>
+                                        </h2>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+    <style>
+        .tf__courses_video_list .accordion-body ul li a.active {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .tf__empty_lesson {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+        
+        .tf__empty_lesson .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+    </style>
+{% endblock %} 

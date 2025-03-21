@@ -4,10 +4,10 @@ namespace Mojahid\Lms\Actions;
 
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
-
+use Mojahid\Lms\Models\Course;
+use Mojahid\Lms\Http\Resources\CourseCollection;
 
 class MenuAction extends Action
-
 {
     public function handle(): void
     {
@@ -59,8 +59,29 @@ class MenuAction extends Action
                 'title' => trans('lms::content.enrolled_courses'),
                 'key' => 'enrolled-courses',
                 'contents' => view()->exists('theme::profile.enrolled-courses.index') ? 'theme::profile.enrolled-courses.index' : 'lms::frontend.profile.enrolled-courses.index',
-                'icon' => 'far fa-home',
-                'position' => 1,
+                'icon' => 'far fa-graduation-cap',
+                'position' => 10,
+                'data' => [
+                    'courses' => (new CourseCollection(
+                        Course::where('type', 'courses')
+                        ->whereHas('orderItems', function ($query) {
+                            $query->where('type', 'courses')
+                                ->whereHas('order', function($subQuery) {
+                                    $subQuery->where('user_id', auth()?->user()?->id)
+                                        ->where('payment_status', 'completed');
+                                });
+                        })
+                        ->with([
+                            'topics.lessons', 
+                            'orders' => function($query) {
+                                $query->where('user_id', auth()?->user()?->id)
+                                    ->where('payment_status', 'completed');
+                            }, 
+                            'orders.paymentMethod'
+                        ])
+                        ->paginate(10)
+                    ))->response()->getData(true),
+                ]
             ]
         );
     }
