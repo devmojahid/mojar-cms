@@ -1,0 +1,73 @@
+{% extends 'cms::layouts.frontend' %}
+
+{% block content %}
+	{% include 'theme::components.breadcrumb' with {
+        title: 'Courses List',
+        background_image: 'images/breadcrumb_bg.jpg',
+        items: [
+
+            {'label': 'Home', 'url': '/'},
+            {'label': 'Courses'}
+        ]
+    } %}
+
+	{% if input_get('page') is empty %}
+		{{ dynamic_block(post, 'content') }}
+	{% endif %}
+
+	{% set items = get_posts('courses', {
+        'paginate': 10
+    }) %}
+
+	<section class="tf__courses_page pt_120 xs_pt_80 pb_120 xs_pb_80">
+		<div class="container">
+			<form class="tf__blog_search_area">
+				<div class="row justify-content-between wow fadeInUp" data-wow-duration="1s">
+					<div class="col-xl-4 col-md-6 col-lg-5">
+						<div class="tf__blog_search_item">
+							<label>Search Here</label>
+							<div class="tf__blog_search_input">
+								<input type="text" placeholder="Type here">
+								<button type="submit">
+									<i class="far fa-search"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 col-md-6 col-lg-5">
+						<div class="tf__blog_search_item">
+							<label>By Category</label>
+							<div class="tf__blog_search_input">
+								<select class="select_js">
+									<option value="">
+										Please Select
+									</option>
+									<option value="">English</option>
+									<option value="">finance</option>
+									<option value="">design</option>
+									<option value="">marketing</option>
+									<option value="">development</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+
+			<div class="row mt_35">
+				{% for post in items.data %}
+					{{ get_template_part(post, 'course-item') }}
+				{% endfor %}
+			</div>
+			<div class="tf__pagination mt_60">
+				<div class="row">
+					<div class="col-12">
+						<nav aria-label="Page navigation example">
+							{{ paginate_links(items, 'theme::components.pagination') }}
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

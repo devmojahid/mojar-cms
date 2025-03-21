@@ -48,6 +48,9 @@ class LmsPostTypeAction extends Action
             'language',
             'difficulty_level',
             'preview_video_url',
+            'preview_video_thumbnail',
+            'duration',
+            'certificate',
         ];
 
         HookAction::registerPostType(
@@ -106,6 +109,9 @@ class LmsPostTypeAction extends Action
         $metas['max_students'] = $metas['max_students'] ?? 0;
         $metas['language'] = $metas['language'] ?? '';
         $metas['preview_video_url'] = $metas['preview_video_url'] ?? '';
+        $metas['preview_video_thumbnail'] = $metas['preview_video_thumbnail'] ?? '';
+        $metas['duration'] = $metas['duration'] ?? '';
+        $metas['certificate'] = $metas['certificate'] ?? '';
 
         if (!empty($metas['difficulty_level'])) {
             $validLevels = ['beginner', 'intermediate', 'advanced'];

@@ -1,0 +1,62 @@
+
+{% set date = post.metas.start_date|date('d') %}
+{% set month = post.metas.start_date|date('F') %}
+{% set year = post.metas.start_date|date('Y') %}
+
+
+{# array:6 [▼
+  "price" => 0
+  "language" => "en"
+  "max_students" => "0"
+  "compare_price" => 0
+  "difficulty_level" => "beginner"
+  "preview_video_url" => ""
+] #}
+{% set categories = get_post_taxonomies(post, 'categories', {limit: 1}) %}
+<div class="col-xl-4 col-md-6 wow fadeInUp" data-wow-duration="1s">
+	<div class="tf__single_courses">
+		<div class="tf__single_courses_img">
+			<img src="{{ post.thumbnail }}" alt="{{ post.title }}" class="img-fluid w-100">
+             {% for category in categories %}
+			<a class="category" href="{{ category.url }}"> {{ category.name }}</a>
+             {% endfor %}
+		</div>
+		<div class="tf__single_courses_text">
+			<ul class="d-flex flex-wrap justify-content-between">
+				<li>
+					<span class="icon">
+						<img src="{{ asset('images/icons/book_icon.svg') }}" alt="book" class="img-fluid w-100">
+					</span>
+					32 Lesson
+				</li>
+				<li>
+					<span class="icon">
+						<img src="{{ asset('images/icons/star_icon.svg') }}" alt="start" class="img-fluid w-100">
+					</span>
+					4.9
+					<span class="d-block ml_5">(25)</span>
+				</li>
+			</ul>
+			<a class="title" href="{{ post.url }}">{{ post.title }}</a>
+		</div>
+		<ul class="tf__single_courses_footer d-flex flex-wrap justify-content-between">
+			<li>
+				<span>
+					<img src="{{ asset('images/icons/user_icon.svg') }}" alt="user" class="img-fluid w-100">
+				</span>
+				110 Students
+			</li>
+			<li>
+				<span>
+					<img src="{{ asset('images/icons/doller_icon.svg') }}" alt="user" class="img-fluid w-100">
+				</span>
+
+                {% if post.metas.price %}
+                    {{ post.metas.price }}
+                {% else %}
+                    Free
+                {% endif %}
+			</li>
+		</ul>
+	</div>
+</div>

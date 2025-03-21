@@ -43,6 +43,15 @@
                     "label": "Content"
                 }
             }
+        },
+        "courses": {
+            "label": "Courses",
+            "view": "theme::templates.courses",
+            "blocks": {
+                "content": {
+                    "label": "Content"
+                }
+            }
         }
     },
     "nav_menus": {

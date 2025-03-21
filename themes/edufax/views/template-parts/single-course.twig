@@ -1,0 +1,483 @@
+{% extends 'cms::layouts.frontend' %}
+
+{% block content %}
+
+{% include 'theme::components.breadcrumb' with {
+        is_dynamic: true,
+        post: post,
+        background_image: post.thumbnail ?? 'images/breadcrumb_bg.jpg'
+    }
+%}
+
+{% set related_courses = get_related_posts(post, 3) %}
+    <section class="tf__courses_details_page pt_120 xs_pt_80 pb_120 xs_pb_80">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 wow fadeInUp" data-wow-duration="1s">
+                    <div class="tf__courses_details_area">
+                        <div class="tf__courses_details_img">
+                            <img src="{{ post.thumbnail }}" alt="course" class="img-fluid w-100">
+                        </div>
+                        <div class="tf__courses_details_header">
+                            <ul class="d-flex flex-wrap">
+                                <li>
+                                    <span>
+                                        <img src="{{ asset('images/icons/book_icon.svg') }}" alt="book" class="img-fluid w-100">
+                                    </span>
+                                    22 Lesson
+                                </li>
+                                <li>
+                                    <span>
+                                        <img src="{{ asset('images/icons/user_icon.svg') }}" alt="book" class="img-fluid w-100">
+                                    </span>
+                                    110 Students
+                                </li>
+                                <li>
+                                    <span>
+                                        <img src="{{ asset('images/icons/star_icon.svg') }}" alt="book" class="img-fluid w-100">
+                                    </span>
+                                    4.9 (2,523 ratings)
+                                </li>
+                            </ul>
+                            <h2>{{ post.title }}</h2>
+                        </div>
+                        <div class="tf__courses_details_text">
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                                        aria-selected="true"><i class="fas fa-th-large"></i> Overview </button>
+                                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-profile" type="button" role="tab"
+                                        aria-controls="nav-profile" aria-selected="false"><i class="fas fa-user"></i>
+                                        Instructor </button>
+                                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-contact" type="button" role="tab"
+                                        aria-controls="nav-contact" aria-selected="false"><i class="fas fa-star"></i>
+                                        Review </button>
+                                </div>
+                            </nav>
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                                    aria-labelledby="nav-home-tab" tabindex="0">
+                                    <div class="tf__course_overview">
+                                        {{ post.content|raw }}
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="nav-profile" role="tabpanel"
+                                    aria-labelledby="nav-profile-tab" tabindex="0">
+                                    <div class="tf__course_instructor">
+                                        <div class="row">
+                                            <div class="col-xl-5 col-sm-8 col-md-6">
+                                                <div class="tf__course_instructor_img">
+                                                    <img src="images/instructor_details_img.png" alt="course"
+                                                        class="img-fluid w-100">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-7">
+                                                <div class="tf__course_instructor_text">
+                                                    <h3>Darrell Steward</h3>
+                                                    <h5>Sales & Marketing
+                                                        <span>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <b>(25 Review)</b>
+                                                        </span>
+                                                    </h5>
+                                                    <ul class="course_rating">
+                                                        <li>
+                                                            <span><img src="images/book_icon.svg" alt="book"
+                                                                    class="img-fluid w-100"></span>
+                                                            05 Courses
+                                                        </li>
+                                                        <li>
+                                                            <span><img src="images/user_icon.svg" alt="book"
+                                                                    class="img-fluid w-100"></span>
+                                                            40 Students
+                                                        </li>
+                                                    </ul>
+
+                                                    <p class="about">I'm the Front-End Developer for #Rainbow IT in
+                                                        Bangladesh, OR. I
+                                                        have serious passion for UI effects, animations and creating
+                                                        intuitive, dynamic user experiences.</p>
+
+                                                    <p class="address"><i class="fas fa-map-marker-alt"></i> 8502
+                                                        Preston Rd. Maine
+                                                        98380, USA</p>
+                                                    <p class="address"><i class="fas fa-phone-alt"></i> +088 (246)
+                                                        642-27</p>
+                                                    <p class="address"><i class="fas fa-envelope"></i> mail@example.com
+                                                    </p>
+
+                                                    <ul class="social_link d-flex flex-wrap">
+                                                        <li><a class="facebook" href="#"><i
+                                                                    class="fab fa-facebook-f"></i></a>
+                                                        </li>
+                                                        <li><a class="linkedin" href="#"><i
+                                                                    class="fab fa-linkedin-in"></i></a>
+                                                        </li>
+                                                        <li><a class="twitter" href="#"><i
+                                                                    class="fab fa-twitter"></i></a></li>
+                                                        <li><a class="pinterest" href="#"><i
+                                                                    class="fab fa-pinterest-p"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="nav-contact" role="tabpanel"
+                                    aria-labelledby="nav-contact-tab" tabindex="0">
+                                    <div class="tf__courses_review">
+                                        <h3>04 Review</h3>
+                                        <div class="tf__single_review">
+                                            <div class="tf__single_review_img">
+                                                <img src="images/review_img_1.jpg" alt="review" class="img-fluid w-100">
+                                            </div>
+                                            <div class="tf__single_review_text">
+                                                <h4>Farjana Bawnia <span><i class="fal fa-calendar-alt"></i> May 15,
+                                                        2023</span></h4>
+                                                <p class="rating">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </p>
+                                                <p class="comment">At 29 years old, my favorite compliment is being told
+                                                    that I look
+                                                    like my mom. Seeing myself in her image, like this daughter up top.
+                                                </p>
+                                                <ul>
+                                                    <li>
+                                                        <a href="#">
+                                                            <img src="images/like_icon.svg" alt="link"
+                                                                class="img-fluid w-100">
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <img src="images/dislike_icon.svg" alt="link"
+                                                                class="img-fluid w-100">
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tf__single_review">
+                                            <div class="tf__single_review_img">
+                                                <img src="images/review_img_2.jpg" alt="review" class="img-fluid w-100">
+                                            </div>
+                                            <div class="tf__single_review_text">
+                                                <h4>Razwan Islam <span><i class="fal fa-calendar-alt"></i> May 15,
+                                                        2023</span></h4>
+                                                <p class="rating">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </p>
+                                                <p class="comment">My favorite compliment is being told that I look like
+                                                    my mom. Seeing myself in her image, like this daughter up top.
+                                                </p>
+                                                <ul>
+                                                    <li>
+                                                        <a href="#">
+                                                            <img src="images/like_icon.svg" alt="link"
+                                                                class="img-fluid w-100">
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <img src="images/dislike_icon.svg" alt="link"
+                                                                class="img-fluid w-100">
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tf__single_review">
+                                            <div class="tf__single_review_img">
+                                                <img src="images/review_img_3.jpg" alt="review" class="img-fluid w-100">
+                                            </div>
+                                            <div class="tf__single_review_text">
+                                                <h4>Babor Azom <span><i class="fal fa-calendar-alt"></i> May 15,
+                                                        2023</span></h4>
+                                                <p class="rating">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </p>
+                                                <p class="comment">Duis aute irure dolor in reprehenderit in voluptate
+                                                    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                                                    occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                                                    mollit anim id est laborum.
+                                                </p>
+                                                <ul>
+                                                    <li>
+                                                        <a href="#">
+                                                            <img src="images/like_icon.svg" alt="link"
+                                                                class="img-fluid w-100">
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <img src="images/dislike_icon.svg" alt="link"
+                                                                class="img-fluid w-100">
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tf__single_review">
+                                            <div class="tf__single_review_img">
+                                                <img src="images/review_img_4.jpg" alt="review" class="img-fluid w-100">
+                                            </div>
+                                            <div class="tf__single_review_text">
+                                                <h4>Mohammad Ali <span><i class="fal fa-calendar-alt"></i> May 15,
+                                                        2023</span></h4>
+                                                <p class="rating">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </p>
+                                                <p class="comment">Sed ut perspiciatis unde omnis iste natus error sit
+                                                    voluptatem accusantium doloremque laudantium, totam rem aperiam,
+                                                    eaque ipsa quae ab illo inventore veritatis et quasi architecto
+                                                    beatae vitae dicta sunt explicabo.
+                                                </p>
+                                                <ul>
+                                                    <li>
+                                                        <a href="#">
+                                                            <img src="images/like_icon.svg" alt="link"
+                                                                class="img-fluid w-100">
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <img src="images/dislike_icon.svg" alt="link"
+                                                                class="img-fluid w-100">
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tf__pagination">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <nav aria-label="Page navigation example">
+                                                        <ul class="pagination">
+                                                            <li class="page-item"> <a class="page-link" href="#"
+                                                                    aria-label="Previous">
+                                                                    <i class="far fa-chevron-left"></i>
+                                                                </a>
+                                                            </li>
+                                                            <li class="page-item"><a class="page-link" href="#">1</a>
+                                                            </li>
+                                                            <li class="page-item"><a class="page-link active"
+                                                                    href="#">2</a></li>
+                                                            <li class="page-item"><a class="page-link" href="#">3</a>
+                                                            </li>
+                                                            <li class="page-item"><a class="page-link" href="#"
+                                                                    aria-label="Next">
+                                                                    <i class="far fa-chevron-right"></i>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </nav>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tf__courses_review_input_area">
+                                            <h3>Write A Review</h3>
+                                            <form>
+                                                <p>Select your rating :
+                                                    <span>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                    </span>
+                                                </p>
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <div class="tf__courses_review_input_sigle">
+                                                            <label>name</label>
+                                                            <input type="text" placeholder="Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <div class="tf__courses_review_input_sigle">
+                                                            <label>email</label>
+                                                            <input type="email" placeholder="Email">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-12">
+                                                        <div class="tf__courses_review_input_sigle">
+                                                            <label>Your review</label>
+                                                            <textarea rows="8" placeholder="Type here"></textarea>
+                                                            <button type="submit" class="tf__common_btn">Submit
+                                                                Review</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="tf__sidebar" id="sticky_sidebar">
+                        <div class="tf__sidebar_course_enrole">
+                            <div class="tf__sidebar_course_video">
+                                <img src="{{ upload_url(post.metas.preview_video_thumbnail) }}" alt="video" class="img-fluid w-100">
+                                <div class="tf__sidebar_course_video_overlay">
+                                    <a class="venobox tf__play_btn" data-autoplay="true" data-vbtype="video"
+                                        href="{{ post.metas.preview_video_url }}">
+                                        <i class=" fas fa-play"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <ul class="list">
+                                <li><span><i class="far fa-clock"></i> {{ __('Duration') }} :</span> {{ 
+                                    post.metas.duration ? (post.metas.duration >= 60 ? (post.metas.duration // 60) ~ ' ' ~ __('Hours') ~ ' ' ~ (post.metas.duration % 60) ~ ' ' ~ __('Minutes') : post.metas.duration ~ ' ' ~ __('Minutes')) : ''
+                                 }}</li>
+                                <li><span><i class="far fa-user"></i> {{ __('Total Enrolled') }} :</span> {{ post.metas.total_enrolled }}</li>
+                                <li><span><i class="far fa-user"></i> {{ __('Max Students') }} :</span> {{ post.metas.max_students }}</li>
+                                <li><span><i class="fal fa-books"></i> {{ __('Course Lebel') }} :</span> {{ post.metas.difficulty_level }}</li>
+                                <li><span><i class="far fa-file-certificate"></i> {{ __('Certificate') }} :</span> {{ post.metas.certificate ? 'yes' : 'no' }}</li>
+                                <li><span><i class="fal fa-language"></i> {{ __('Language') }} :</span> {{ post.metas.language }}</li>
+                            </ul>
+                            <a class="tf__common_btn2" href="#">{{ __('Price') }} : {{ ecom_price_with_unit(post.metas.price) }}</a>
+                            <a class="tf__common_btn" href="javascript:void(0)" onclick="addToCart({{ post.id }}, 'courses', 1); return false;">{{ __('Enroll Now') }}</a>
+                            <ul class="share d-flex flex-wrap">
+                                <li>{{ __('share') }} :</li>
+                                <li><a class="facebook" target="_blank" href="https://www.facebook.com/sharer.php?u={{ url().current() }}"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a class="twitter" target="_blank" href="https://twitter.com/intent/tweet?url={{ url().current() }}&text={{ title }}"><i class="fab fa-twitter"></i></a></li>
+                                <li><a class="linkedin" target="_blank" href="https://www.linkedin.com/sharing/share-offsite/?url={{ url().current() }}"><i class="fab fa-linkedin-in"></i></a></li>
+                                <li><a class="pinterest" target="_blank" href="https://pinterest.com/pin/create/button/?url={{ url().current() }}&description={{ title }}"><i class="fab fa-pinterest-p"></i></a></li>
+                            </ul>
+                        </div>
+                        {% if related_courses|length > 0 %}
+                        <div class="tf__sidebar_courses tf__sidebar_post">
+                            <h3>{{ __('Popular Course') }}</h3>
+                            <ul>
+                                {% for course in related_courses %}
+                                <li>
+                                    <div class="img">
+                                        <img src="{{ course.thumbnail }}" alt="{{ course.title }}"
+                                            class="img-fluid w-100">
+                                    </div>
+                                    <div class="text">
+                                        <a href="{{ course.url }}">{{ course.title }}</a>
+                                        <p>
+                                            <span>
+                                                <img src="{{ asset('images/icons/book_icon.svg') }}" alt="book" class="img-fluid w-100">
+                                                {{ course.metas.total_lessons }} Lesson
+                                            </span>
+                                            <span>
+                                                <img src="{{ asset('images/icons/star_icon.svg') }}" alt="book" class="img-fluid w-100">
+                                                {{ course.metas.rating }} ({{ course.metas.total_reviews }})
+                                            </span>
+                                        </p>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    {% if related_courses|length > 0 %}
+        <section class="tf__related_item pt_110 xs_pt_70 pb_100 xs_pb_60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-7 m-auto">
+                        <div class="tf__section_heading heading_center mb_5">
+                            <h2>{{ __('Some More Courses For You') }}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row blog_slider">
+                    {% for course in related_courses %}
+                        {{ get_template_part(course, 'course-item') }}
+                    {% endfor %}                
+                </div>
+            </div>
+        </section>
+    {% endif %}
+<script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        });
+
+        function addToCart(postId, type, quantity) {
+            console.log('Sending data:', {
+                post_id: postId,
+                type: type,
+                quantity: quantity
+            });
+
+            $.ajax({
+                url: '{{ url('ajax/cart/add-to-cart') }}',
+                type: 'POST',
+                data: {
+                    post_id: postId,
+                    type: type,
+                    quantity: quantity
+                },
+                beforeSend: function() {
+                    console.log('Request payload:', {
+                        post_id: postId,
+                        type: type,
+                        quantity: quantity
+                    });
+                },
+                success: function(response) {
+                    console.log('Full response:', response);
+                    if (response.status === 'success') {
+                        console.log('Success:', response.message);
+                        updateCartCount();
+                    } else {
+                        console.log('Error:', response.data ? response.data.message : response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log('Error status:', status);
+                    console.log('Error message:', error);
+                    console.log('Response:', xhr.responseJSON);
+                }
+            });
+        }
+
+        function updateCartCount() {
+            $.ajax({
+                url: '{{ url('ajax/cart/get-items') }}',
+                type: 'GET',
+                success: function(response) {
+                    $('.cart-count').text(response.total_items);
+                }
+            });
+        }
+    </script>
+{% endblock %}

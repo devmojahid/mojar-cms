@@ -700,7 +700,7 @@
                     <!-- Loading Indicator -->
                     <div class="text-center py-4" id="lmsTopicLoading" style="display: none;">
                         <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Loading...</span>
+                            <span class="visually-hidden">{{ trans('lms::content.loading') }}</span>
                         </div>
                     </div>
                 </div>
@@ -793,10 +793,36 @@
                         </div>
                         {{-- preview video url --}}
                         <div class="col-md-6">
+                            {{ Field::image(trans('lms::content.preview_video_thumbnail'), 'meta[preview_video_thumbnail]', [
+                                'value' => $model->getMeta('preview_video_thumbnail') ?? '',
+                                'data' => [
+                                    'show_label' => true,
+                                ]
+                            ]) }}
+                        </div>
+                        <div class="col-md-6">
                             {{ Field::text(trans('lms::content.preview_video_url'), 'meta[preview_video_url]', [
                                 'value' => $model->getMeta('preview_video_url') ?? '',
                             ]) }}
                         </div>
+                        {{-- duration --}}
+                        <div class="col-md-6">
+                            {{ Field::text(trans('lms::content.duration_in_minutes'), 'meta[duration]', [
+                                'value' => $model->getMeta('duration') ?? '',
+                                'data' => [
+                                    'description' => trans('lms::content.duration_description'),
+                                ]
+                            ]) }}
+                        </div>
+
+                        {{-- certificate --}}
+                        <div class="col-md-6">
+                            {{ Field::checkbox(trans('lms::content.certificate'), 'meta[certificate]', [
+                                'value' => $model->getMeta('certificate') ?? '',
+                                'checked' => $model->getMeta('certificate') ?? false,
+                            ]) }}
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -1166,9 +1192,9 @@
                         <path d="M9 6l6 6l-6 6"></path>
                     </svg>
                 </div>
-                <h5 class="lms-topic-title">Topic Title</h5>
-                <span class="badge bg-success ms-2">Published</span>
-                <small class="text-muted small ms-2">Order: 0</small>
+                <h5 class="lms-topic-title">{{ trans('lms::content.topic_title') }}</h5>
+                <span class="badge bg-success ms-2">{{ trans('lms::content.published') }}</span>
+                <small class="text-muted small ms-2">{{ trans('lms::content.order') }}: 0</small>
             </div>
             <div class="lms-topic-actions">
                 <button class="btn btn-sm btn-outline-secondary edit-topic-btn" type="button">
@@ -1180,7 +1206,7 @@
                         <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
                         <path d="M16 5l3 3"></path>
                     </svg>
-                    Edit
+                    {{ trans('lms::content.edit') }}
                 </button>
                 <button class="btn btn-sm btn-outline-danger delete-topic-btn" type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24"
@@ -1193,15 +1219,15 @@
                         <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
                         <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
                     </svg>
-                    Delete
+                    {{ trans('lms::content.delete') }}
                 </button>
             </div>
         </div>
         <div class="lms-topic-content" style="display: none;">
-            <p class="lms-topic-description">Topic description goes here.</p>
+            <p class="lms-topic-description">{{ trans('lms::content.topic_description') }}</p>
             <div class="lms-lessons-container" data-topic-id="">
                 <div class="lms-empty-lesson">
-                    <p class="text-muted text-center">No items in this topic yet. Add your first item below.</p>
+                    <p class="text-muted text-center">{{ trans('lms::content.no_items_in_this_topic') }}</p>
                 </div>
             </div>
             <div class="lms-topic-footer">
@@ -1213,7 +1239,7 @@
                         <path d="M12 5l0 14"></path>
                         <path d="M5 12l14 0"></path>
                     </svg>
-                    Add Lesson
+                    {{ trans('lms::content.add_lesson') }}
                 </button>
             </div>
         </div>
@@ -1235,8 +1261,8 @@
                 </svg>
             </div>
             <div class="lms-lesson-info">
-                <h6 class="lms-lesson-title">Lesson Title</h6>
-                <span class="lms-lesson-type">Video</span>
+                <h6 class="lms-lesson-title">{{ trans('lms::content.lesson_title') }}</h6>
+                <span class="lms-lesson-type">{{ trans('lms::content.video') }}</span>
             </div>
             <div class="lms-lesson-actions">
                 <button class="btn btn-sm btn-icon btn-ghost-secondary edit-lesson-btn">
