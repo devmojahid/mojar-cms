@@ -41,7 +41,10 @@ class CourseCurriculumResource extends PostResource
                     'topic_id' => $lesson->course_topic_id,
                     'created_at' => $lesson->created_at,
                     'updated_at' => $lesson->updated_at,
-                    'content' => $lesson->metas['content'] ?? null,
+                    'content_url' => $lesson->content_url ?? null,
+                    'local_video_path' => $lesson->local_video_path ?? null,
+                    'thumbnail' => $lesson->thumbnail ?? null,
+                    'description' => $lesson->description ?? null,
                     'duration' => $lesson->duration ?? 0,
                     // Other lesson-specific fields
                 ];

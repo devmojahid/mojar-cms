@@ -1051,7 +1051,7 @@
                         <label class="form-label">{{ __('Duration (minutes)') }}</label>
                         <input type="number" class="form-control" name="duration" min="0">
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 d-none">
                         <label class="form-check">
                             <input class="form-check-input" type="checkbox" name="downloadable">
                             <span class="form-check-label">{{ __('Downloadable') }}</span>

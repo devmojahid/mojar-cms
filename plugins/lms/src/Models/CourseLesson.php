@@ -73,6 +73,15 @@ class CourseLesson extends Model
 
     protected $table = 'lms_course_lessons';
 
+    public static function bootUseDescription(): void
+    {
+        static::saving(
+            function ($model) {
+                // Don't do anything - this overrides the trait behavior
+            }
+        );
+    }
+
     protected $fillable = [
         'title',
         'slug',
@@ -82,6 +91,8 @@ class CourseLesson extends Model
         'order',
         'post_id',
         'course_topic_id',
+        'content_url',
+        'local_video_path',
         'type',
         'duration',
         'metas',
