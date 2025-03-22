@@ -12,7 +12,7 @@ class CourseResource extends JsonResource
             'id' => $this->resource->id,
             'title' => $this->resource->title,
             'slug' => $this->resource->slug,
-            'thumbnail' => $this->resource->thumbnail ?? upload_url($this->resource->thumbnail),
+            'thumbnail' => $this->resource->thumbnail,
             'description' => $this->resource->description,
             'content' => $this->resource->content,
             'status' => $this->resource->status,

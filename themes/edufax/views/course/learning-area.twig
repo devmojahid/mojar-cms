@@ -21,11 +21,24 @@
                                 {% set video_url = data.current_lesson.metas.video_url ?? '#' %}
                                 {# {% set video_thumbnail = data.current_lesson.thumbnail is defined and data.current_lesson.thumbnail
                                     ? upload_url(data.current_lesson.thumbnail) 
-                                    : upload_url(page.thumbnail) %} #}
+                                    : upload_url(page.thumbnail) %}  #}
+
+                                {# {{dump(data.current_lesson)}} #}
+                            
+                            {% set video_thumbnail = upload_url( (data.current_lesson ? data.current_lesson.thumbnail : "") ) %}
+
+                        
+
+                                {# null check video_thumbnail #}
+                                {# {% if data.current_lesson.thumbnail is defined and data.current_lesson.thumbnail %}
+                                    {% set video_thumbnail = upload_url(data.current_lesson.thumbnail) %}
+                                {% else %}
+                                    {% set video_thumbnail = upload_url(page.thumbnail) %}
+                                {% endif %} #}
                                 
                                 <div class="myVideo" id="my_video" 
                                     data-video="{{ video_url }}"
-                                    {# data-poster="{{ video_thumbnail }}"  #}
+                                    data-poster="{{ video_thumbnail }}" 
                                     data-type="video/mp4">
                                 </div>
                             {% else %}

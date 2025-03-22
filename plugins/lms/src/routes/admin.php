@@ -17,7 +17,8 @@ use Mojahid\Lms\Http\Controllers\Backend\{
     CurriculumController,
     TopicController,
     LessonController,
-    CourseController
+    CourseController,
+    OrderController
 };
 
 use Illuminate\Support\Facades\Route;
@@ -51,3 +52,13 @@ Route::post('/post-type/courses/ajax-create', [CourseController::class, 'ajaxCre
 
 
 Route::get('post-type/courses/create', [CourseController::class, 'create'])->name('admin.post-type.courses.create');
+
+// Route::get('lms/orders', [OrderController::class, 'index'])->name('admin.lms.orders');
+Route::jwResource(
+    'lms/orders',
+    OrderController::class,
+    [
+        'name' => 'orders'
+    ]
+);
+

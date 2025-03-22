@@ -18,7 +18,8 @@ class CurriculumItemResource extends JsonResource
             'updated_at' => $this->updated_at ?? "",
             'content_url' => $this->content_url ?? null,
             'local_video_path' => $this->local_video_path ?? null,
-            'thumbnail' => $this->thumbnail ?? null,
+            // 'thumbnail' => $this->thumbnail ?? null,
+            'thumbnail' => asset(upload_url($this->thumbnail)) ?? null,
             'description' => $this->description ?? null,
             'duration' => $this->duration ?? 0,
             // Include type-specific fields

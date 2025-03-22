@@ -28,7 +28,7 @@ class CreateCourseLessonsTable extends Migration
                 $table->integer('duration')->default(0);
                 $table->json('metas')->nullable();
                 $table->string('content_url')->nullable();
-                $table->string('local_video_path')->nullable();
+                $table->string('local_content_path')->nullable();
                 $table->unsignedBigInteger('post_id')->nullable(); // this is course id
                 $table->unsignedBigInteger('course_topic_id')->index();
                 $table->timestamps();

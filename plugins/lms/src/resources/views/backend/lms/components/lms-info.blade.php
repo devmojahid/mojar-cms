@@ -1035,17 +1035,37 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">{{ __('Lesson Type') }}</label>
-                        <select class="form-select" name="type">
-                            <option value="video">{{ __('Video') }}</option>
-                            <option value="audio">{{ __('Audio') }}</option>
-                            <option value="document">{{ __('Document') }}</option>
+                        <select class="form-select" name="type" id="lesson-type">
+                            <option value="video">{{ __('Video Url') }}</option>
+                            <option value="audio">{{ __('Audio Url') }}</option>
+                            <option value="document">{{ __('Document Url') }}</option>
                             <option value="link">{{ __('External Link') }}</option>
+                            <option value="local_video">{{ __('Local Video') }}</option>
+                            <option value="local_audio">{{ __('Local Audio') }}</option>
+                            <option value="local_document">{{ __('Local Document') }}</option>
                         </select>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" id="lesson-content-url">
                         <label class="form-label">{{ __('Content URL') }}</label>
                         <input type="url" class="form-control" name="content_url"
                             placeholder="{{ __('Enter content URL...') }}">
+                    </div>
+                    <div class="mb-3" id="lesson-local-content-path">
+                        <label class="form-label">{{ __('Local Content Path') }}</label>
+                            {{ Field::image(__('Enter local content path...'), 'local_content_path', [
+                                'data' => [
+                                    'show_label' => true,
+                                ]
+                            ]) }}
+                    </div>
+                    <div class="mb-3 lesson-thumbnail-area">
+                        <label class="form-label">{{ __('Thumbnail') }}</label>
+                        {{ Field::image(__('Thumbnail'), 'thumbnail', [
+                            'value' => 'thumbnail',
+                            'data' => [
+                                'show_label' => true,
+                            ]
+                        ]) }}
                     </div>
                     <div class="mb-3">
                         <label class="form-label">{{ __('Duration (minutes)') }}</label>
@@ -1334,7 +1354,18 @@
                 $('input[name="meta[compare_price]"]').prop('disabled', true);
             }
         });
+
+        // lesson thumbnail
+        $('select[name="type"]').on('change', function() {
+            let lessonType = $(this).val();
+            if (lessonType == 'local_video' || lessonType == 'local_audio' || lessonType == 'local_document') {
+                $('#lesson-local-content-path').show();
+                $('#lesson-content-url').hide();
+            } else {
+                $('#lesson-local-content-path').hide();
+                $('#lesson-content-url').show();
+            }
+        });
     });
 </script>
-
 <script defer src="{{ asset('jw-styles/plugins/mojahid/lms/assets/js/lms.min.js') }}" type="text/javascript"></script>
