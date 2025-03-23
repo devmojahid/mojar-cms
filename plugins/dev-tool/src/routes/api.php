@@ -14,59 +14,29 @@
 use Illuminate\Support\Facades\Route;
 use Mojarsoft\DevTool\Http\Controllers\ThemeController;
 use Mojarsoft\DevTool\Http\Controllers\PluginController;
-use Juzaweb\CMS\Support\Updater\CmsUpdater;
-# Route::get('/themes2', [ThemeController::class, 'getThemes']);
-# Route::get('/plugins2', [PluginController::class, 'getPlugins']);
+use Mojarsoft\DevTool\Http\Controllers\CmsController;
 
-// cms/version-available
-Route::get('/cms/version-available', function () {
-    $updater = app(CmsUpdater::class);
-    
-    $currentVersion = $updater->getCurrentVersion();
-    try {
-        $versionAvailable = $updater->getVersionAvailable();
-        // $versionAvailable = $currentVersion;
-    } catch (\Exception $e) {
-        report($e);
-        $versionAvailable = $currentVersion;
-    }
-    
-    return response()->json([
-        'data' => [
-            'version' => $versionAvailable,
-            'update' => version_compare($versionAvailable, $currentVersion, '>')
-        ],
-        'message' => 'Get data successfully.'
-    ]);
+// CMS Update Routes
+Route::prefix('cms')->group(function () {
+    Route::get('/version-available', [CmsController::class, 'getVersionAvailable']);
+    Route::get('/update', [CmsController::class, 'getUpdate']);
+    Route::get('/download', [CmsController::class, 'download'])->name('api.cms.download');
 });
 
-
-// themes/versions-available
-Route::get('/themes/versions-available', function () {
-
-    return response()->json([
-        'data' => [
-            'version' => '1.0.0',
-            'update' => false
-        ],
-        'message' => 'Get data successfully.'
-    ]);
-    $updater = app(ThemeUpdater::class);
-    $versionsAvailable = $updater->getVersionsAvailable();
-    return response()->json(['versions' => $versionsAvailable]);
+// Theme Update Routes
+Route::prefix('themes')->group(function () {
+    Route::post('/versions-available', [ThemeController::class, 'getVersionsAvailable']);
+    Route::get('/{theme}/version-available', [ThemeController::class, 'getVersionAvailable']);
+    Route::get('/{theme}/update', [ThemeController::class, 'getUpdate']);
+    Route::get('/{theme}/download', [ThemeController::class, 'download'])->name('api.themes.download');
+    Route::get('/', [ThemeController::class, 'getThemes']);
 });
 
-    
-// plugins/versions-available
-Route::get('/plugins/versions-available', function () {
-    return response()->json([
-        'data' => [
-            'version' => '1.0.0',
-            'update' => false
-        ],
-        'message' => 'Get data successfully.'
-    ]);
-    $updater = app(PluginUpdater::class);
-    $versionsAvailable = $updater->getVersionsAvailable();
-    return response()->json(['versions' => $versionsAvailable]);
+// Plugin Update Routes
+Route::prefix('plugins')->group(function () {
+    Route::post('/versions-available', [PluginController::class, 'getVersionsAvailable']);
+    Route::get('/{plugin}/version-available', [PluginController::class, 'getVersionAvailable']);
+    Route::get('/{plugin}/update', [PluginController::class, 'getUpdate']);
+    Route::get('/{plugin}/download', [PluginController::class, 'download'])->name('api.plugins.download');
+    Route::get('/', [PluginController::class, 'getPlugins']);
 });

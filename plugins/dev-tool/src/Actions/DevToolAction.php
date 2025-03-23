@@ -13,7 +13,8 @@ class DevToolAction extends Action
      */
     public function handle(): void
     {
-        $this->addAction(Action::INIT_ACTION, [$this, 'registerPostTypes']);
+        // $this->addAction(Action::INIT_ACTION, [$this, 'registerPostTypes']);
+        $this->addAction(Action::BACKEND_INIT, [$this, 'addAdminMenu']);
     }
 
     public function registerPostTypes()
@@ -62,7 +63,41 @@ class DevToolAction extends Action
                 ],
             ]
         );
-
+    }
+    
+    public function addAdminMenu(): void
+    {
+        $this->hookAction->addAdminMenu(
+            'dev_tool',
+            'dev_tool',
+            [
+                'title' => __('Dev Tool'),
+                'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-tool"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10h3v-3l-3.5 -3.5a6 6 0 0 1 8 8l6 6a2 2 0 0 1 -3 3l-6 -6a6 6 0 0 1 -8 -8l3.5 3.5" /></svg>',
+                'position' => 30,
+            ]
+        );
+        
+        $this->hookAction->addAdminMenu(
+            'cms_versions',
+            'dev-tool.cms-versions',
+            [
+                'title' => __('CMS Versions'),
+                'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-version"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 5m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M6 5m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M14 5m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M5 12h14" /><path d="M13 19l4 -4l-4 -4" /></svg>',
+                'parent' => 'dev_tool',
+                'position' => 1
+            ]
+        );
+        
+        $this->hookAction->addAdminMenu(
+            'package_versions',
+            'dev-tool.package-versions',
+            [
+                'title' => __('Package Versions'),
+                'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-package"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" /><path d="M12 12l8 -4.5" /><path d="M12 12l0 9" /><path d="M12 12l-8 -4.5" /><path d="M16 5.25l-8 4.5" /></svg>',
+                'parent' => 'dev_tool',
+                'position' => 2,
+            ]
+        );
     }
 }
 

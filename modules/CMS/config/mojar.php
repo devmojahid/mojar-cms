@@ -270,7 +270,11 @@ return [
          */
         'frontend' => [
             'enable' => env('JW_ALLOW_FRONTEND_API', env('JW_ALLOW_API', true)),
-        ]
+        ],
+        /**
+         * API URL for update system
+         */
+        'url' => env('JW_API_URL', 'http://mojar-cms.test/api'),
     ],
 
     /**

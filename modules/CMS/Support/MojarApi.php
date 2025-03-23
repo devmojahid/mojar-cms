@@ -23,7 +23,8 @@ class MojarApi implements MojarApiContract
 
     protected ConfigContract $config;
 
-    protected string $apiUrl = 'http://mojar-cms.test/api';
+    protected string $apiUrl;
+    // protected string $apiUrl = 'http://mojar-cms.test/api';
     // protected string $apiUrl = 'https://juzaweb.com/api';
 
     protected ?string $accessToken = null;
@@ -33,8 +34,8 @@ class MojarApi implements MojarApiContract
     public function __construct(ConfigContract $config)
     {
         $this->curl = app(Curl::class);
-
         $this->config = $config;
+        $this->apiUrl = config('mojar.api.url', 'http://mojar-cms.test/api');
     }
 
     public function login(string $email, string $password): bool
