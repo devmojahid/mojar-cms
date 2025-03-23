@@ -19,7 +19,8 @@ class ThemeResource extends JsonResource
             'name' => $this->resource['name'],
             'title' => $this->resource['title'],
             'description' => $this->resource['description'],
-            'screenshot' => $this->resource['screenshot'],
+            'screenshot' => $this->resource['screenshot'] ? $this->resource['screenshot'] : 
+                            ($this->resource['screenshot_path'] ? upload_url($this->resource['screenshot_path']) : null),
             'banner' => $this->resource['banner'],
             'url' => $this->resource['url'],
             'is_paid' => $this->resource['is_paid'],

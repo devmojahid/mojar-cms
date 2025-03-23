@@ -23,6 +23,7 @@ class MarketplaceThemeDatatable extends DataTable
                 'title',
                 'description',
                 'screenshot',
+                'screenshot_path',
                 'is_paid',
                 'price',
                 'is_featured',
@@ -72,12 +73,12 @@ class MarketplaceThemeDatatable extends DataTable
     public function columns(): array
     {
         return [
-            'screenshot' => [
+            'screenshot_path' => [
                 'label' => trans('Screenshot'),
                 'width' => '80px',
                 'formatter' => function ($value, $row, $index) {
                     if ($value) {
-                        return '<img src="' . $value . '" class="img-thumbnail" style="max-width: 80px;">';
+                        return '<img src="' . upload_url($value) . '" class="img-thumbnail" style="max-width: 80px;">';
                     }
                     return '<div class="img-thumbnail text-center" style="width: 80px; height: 50px;"><i class="fa fa-image text-muted"></i></div>';
                 }

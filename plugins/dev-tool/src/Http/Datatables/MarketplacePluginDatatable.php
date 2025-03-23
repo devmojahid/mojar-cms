@@ -23,6 +23,7 @@ class MarketplacePluginDatatable extends DataTable
                 'title',
                 'description',
                 'thumbnail',
+                'thumbnail_path',
                 'is_paid',
                 'price',
                 'is_featured',
@@ -72,14 +73,11 @@ class MarketplacePluginDatatable extends DataTable
     public function columns(): array
     {
         return [
-            'thumbnail' => [
+            'thumbnail_path' => [
                 'label' => trans('Thumbnail'),
                 'width' => '80px',
                 'formatter' => function ($value, $row, $index) {
-                    if ($value) {
-                        return '<img src="' . $value . '" class="img-thumbnail" style="max-width: 80px;">';
-                    }
-                    return '<div class="img-thumbnail text-center" style="width: 80px; height: 50px;"><i class="fa fa-plug text-muted"></i></div>';
+                    return '<img src="' . upload_url($value) . '" class="img-thumbnail" style="max-width: 80px;">';
                 }
             ],
             'title' => [
