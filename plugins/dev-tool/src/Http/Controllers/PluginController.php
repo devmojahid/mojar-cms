@@ -4,22 +4,28 @@ namespace Mojarsoft\DevTool\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Facades\Plugin;
 use Juzaweb\CMS\Version;
 use Mojarsoft\DevTool\Models\PackageVersion;
+use Mojarsoft\DevTool\Models\MarketplacePlugin;
+use Mojarsoft\DevTool\Models\CmsVersion;
+use Juzaweb\Backend\Http\Resources\PluginResource;
 
 class PluginController extends BackendController
 {       
-    public function getPlugins()
+    public function getPlugins(Request $request)
     {
-        return response()->json([
-            'status' => true,
-            'data' => [
-                'plugins' => [],
-            ],
-        ]);
-
-        // return response()->json(Theme::all());
+        $perPage = $request->get('per_page', 10);
+        
+        $plugins = MarketplacePlugin::active()
+            ->orderBy('is_featured', 'DESC')
+            ->orderBy('sort_order', 'ASC')
+            ->orderBy('created_at', 'DESC')
+            ->paginate($perPage);
+        
+        return PluginResource::collection($plugins);
     }
     
     /**

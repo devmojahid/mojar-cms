@@ -29,7 +29,9 @@ Route::prefix('themes')->group(function () {
     Route::get('/{theme}/version-available', [ThemeController::class, 'getVersionAvailable']);
     Route::get('/{theme}/update', [ThemeController::class, 'getUpdate']);
     Route::get('/{theme}/download', [ThemeController::class, 'download'])->name('api.themes.download');
-    Route::get('/', [ThemeController::class, 'getThemes']);
+    if (config('mojar.api.external-service')) {
+        Route::get('/', [ThemeController::class, 'getThemes']);
+    }
 });
 
 // Plugin Update Routes
@@ -38,5 +40,13 @@ Route::prefix('plugins')->group(function () {
     Route::get('/{plugin}/version-available', [PluginController::class, 'getVersionAvailable']);
     Route::get('/{plugin}/update', [PluginController::class, 'getUpdate']);
     Route::get('/{plugin}/download', [PluginController::class, 'download'])->name('api.plugins.download');
-    Route::get('/', [PluginController::class, 'getPlugins']);
+    if (config('mojar.api.external-service')) {
+        Route::get('/', [PluginController::class, 'getPlugins']);
+    }
 });
+
+// Route::get('/marketplace/themes', [MarketplaceController::class, 'getThemes']);
+// Route::get('/marketplace/plugins', [MarketplaceController::class, 'getPlugins']);
+
+// Route::get('/marketplace/themes/{theme}', [MarketplaceController::class, 'getTheme']);
+// Route::get('/marketplace/plugins/{plugin}', [MarketplaceController::class, 'getPlugin']);

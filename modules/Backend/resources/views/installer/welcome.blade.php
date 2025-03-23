@@ -41,12 +41,25 @@
                             </span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                            <div class="w-2 h-2 rounded-full 
+                                @php
+                                    try {
+                                        $mysqlVersion = DB::select('SELECT VERSION() AS version');
+                                        echo 'bg-green-500';
+                                    } catch (\Exception $e) {
+                                        echo 'bg-red-500';
+                                    }
+                                @endphp">
+                            </div>
                             <span>MySQL Version: 
                                 @php
-                                    $mysqlVersion = DB::select('SELECT VERSION() AS version');
+                                    try {
+                                        $mysqlVersion = DB::select('SELECT VERSION() AS version');
+                                        echo $mysqlVersion[0]->version;
+                                    } catch (\Exception $e) {
+                                        echo 'Not connected';
+                                    }
                                 @endphp
-                                {{ $mysqlVersion[0]->version }}
                             </span>
                         </div>
                         <div class="flex items-center gap-2">

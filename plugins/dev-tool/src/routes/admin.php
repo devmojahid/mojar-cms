@@ -12,6 +12,8 @@
 */
 
 use Illuminate\Support\Facades\Route;
+use Mojarsoft\DevTool\Http\Controllers\Backend\MarketplaceController;
+use Mojarsoft\DevTool\Http\Controllers\Backend\UpdateController;
 use Mojarsoft\DevTool\Http\Controllers\Backend\VersionController;
 
 Route::group(['prefix' => 'dev-tool'], function () {
@@ -42,4 +44,25 @@ Route::group(['prefix' => 'dev-tool'], function () {
         ->name('admin.dev-tool.package-versions.update');
     Route::delete('/package-versions/{id}', [VersionController::class, 'destroyPackageVersion'])
         ->name('admin.dev-tool.package-versions.destroy');
+
+    // Marketplace Theme Routes
+    Route::get('marketplace-themes', [MarketplaceController::class, 'themeIndex'])->name('admin.dev-tool.marketplace-themes.index');
+    Route::get('marketplace-themes/create', [MarketplaceController::class, 'themeCreate'])->name('admin.dev-tool.marketplace-themes.create');
+    Route::post('marketplace-themes', [MarketplaceController::class, 'themeStore'])->name('admin.dev-tool.marketplace-themes.store');
+    Route::get('marketplace-themes/{id}/edit', [MarketplaceController::class, 'themeEdit'])->name('admin.dev-tool.marketplace-themes.edit');
+    Route::put('marketplace-themes/{id}', [MarketplaceController::class, 'themeUpdate'])->name('admin.dev-tool.marketplace-themes.update');
+    Route::delete('marketplace-themes/{id}', [MarketplaceController::class, 'themeDestroy'])->name('admin.dev-tool.marketplace-themes.destroy');
+    Route::get('marketplace-themes/get-data', [MarketplaceController::class, 'getThemeData'])->name('admin.dev-tool.marketplace-themes.get-data');
+    
+    // Marketplace Plugin Routes
+    Route::get('marketplace-plugins', [MarketplaceController::class, 'pluginIndex'])->name('admin.dev-tool.marketplace-plugins.index');
+    Route::get('marketplace-plugins/create', [MarketplaceController::class, 'pluginCreate'])->name('admin.dev-tool.marketplace-plugins.create');
+    Route::post('marketplace-plugins', [MarketplaceController::class, 'pluginStore'])->name('admin.dev-tool.marketplace-plugins.store');
+    Route::get('marketplace-plugins/{id}/edit', [MarketplaceController::class, 'pluginEdit'])->name('admin.dev-tool.marketplace-plugins.edit');
+    Route::put('marketplace-plugins/{id}', [MarketplaceController::class, 'pluginUpdate'])->name('admin.dev-tool.marketplace-plugins.update');
+    Route::delete('marketplace-plugins/{id}', [MarketplaceController::class, 'pluginDestroy'])->name('admin.dev-tool.marketplace-plugins.destroy');
+    Route::get('marketplace-plugins/get-data', [MarketplaceController::class, 'getPluginData'])->name('admin.dev-tool.marketplace-plugins.get-data');
+    
+    // Marketplace Dashboard
+    Route::get('marketplace', [MarketplaceController::class, 'index'])->name('admin.dev-tool.marketplace');
 });
