@@ -37,9 +37,13 @@ Route::prefix('themes')->group(function () {
 // Plugin Update Routes
 Route::prefix('plugins')->group(function () {
     Route::post('/versions-available', [PluginController::class, 'getVersionsAvailable']);
-    Route::get('/{plugin}/version-available', [PluginController::class, 'getVersionAvailable']);
-    Route::get('/{plugin}/update', [PluginController::class, 'getUpdate']);
-    Route::get('/{plugin}/download', [PluginController::class, 'download'])->name('api.plugins.download');
+    Route::get('/{vendor}/{plugin}/version-available', [PluginController::class, 'getVersionAvailable'])
+        ->where(['vendor' => '[a-z0-9-]+', 'plugin' => '[a-z0-9-]+']);
+    Route::get('/{vendor}/{plugin}/update', [PluginController::class, 'getUpdate'])
+        ->where(['vendor' => '[a-z0-9-]+', 'plugin' => '[a-z0-9-]+']);
+    Route::get('/{vendor}/{plugin}/download', [PluginController::class, 'download'])
+        ->name('api.plugins.download')
+        ->where(['vendor' => '[a-z0-9-]+', 'plugin' => '[a-z0-9-]+']);
     if (config('mojar.api.external-service')) {
         Route::get('/', [PluginController::class, 'getPlugins']);
     }

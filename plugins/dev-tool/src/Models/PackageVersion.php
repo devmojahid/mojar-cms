@@ -49,11 +49,69 @@ class PackageVersion extends Model
      */
     public static function getLatest(string $packageName, string $packageType): ?self
     {
-        return self::where('package_name', $packageName)
+        $latestVersion = self::where('package_name', $packageName)
             ->where('package_type', $packageType)
             ->where('is_active', true)
             ->orderBy('created_at', 'desc')
             ->first();
+            
+        // If we're looking for a plugin and it doesn't exist in our database
+        // but it exists in the marketplace, create a version entry for it
+        if (!$latestVersion && $packageType === 'plugin') {
+            $latestVersion = self::createFromMarketplace($packageName);
+        }
+            
+        return $latestVersion;
+    }
+    
+    /**
+     * Create a package version from marketplace data if available
+     * 
+     * @param string $packageName 
+     * @return self|null
+     */
+    public static function createFromMarketplace(string $packageName): ?self
+    {
+        try {
+            // Look for the plugin in the marketplace
+            $marketplace = \Mojarsoft\DevTool\Models\MarketplacePlugin::where('name', $packageName)
+                ->where('is_active', true)
+                ->first();
+                
+            if (!$marketplace) {
+                \Log::info("Plugin {$packageName} not found in marketplace");
+                return null;
+            }
+            
+            // Check if the plugin has a download URL
+            if (empty($marketplace->url)) {
+                \Log::warning("Plugin {$packageName} found in marketplace but has no download URL");
+                return null;
+            }
+            
+            \Log::info("Creating package version entry for {$packageName} from marketplace");
+            
+            // Create a new package version entry
+            $version = new self();
+            $version->package_name = $packageName;
+            $version->package_type = 'plugin';
+            $version->version = '1.0.0'; // Default initial version
+            $version->download_url = $marketplace->url;
+            $version->is_active = true;
+            $version->description = $marketplace->description ?? '';
+            $version->save();
+            
+            \Log::info("Created new package version for {$packageName}", [
+                'version' => $version->toArray()
+            ]);
+            
+            return $version;
+        } catch (\Exception $e) {
+            \Log::error("Failed to create package version from marketplace: {$e->getMessage()}", [
+                'exception' => $e
+            ]);
+            return null;
+        }
     }
     
     /**

@@ -41,26 +41,48 @@ class ThemeController extends BackendController
         
         $result = [];
         
+        if (!is_array($themes)) {
+            return response()->json([
+                'data' => $result
+            ]);
+        }
+        
         foreach ($themes as $theme) {
-            $name = $theme['name'] ?? '';
-            $currentVersion = $theme['current_version'] ?? '1.0.0';
-            
-            // Get latest version from the database
-            $latestVersion = PackageVersion::getLatest($name, 'theme');
-            
-            if (!$latestVersion) {
-                $result[$name] = [
-                    'version' => $currentVersion,
-                    'update' => false,
-                ];
+            // Ensure theme data is valid
+            if (!is_array($theme) || !isset($theme['name'])) {
                 continue;
             }
             
-            $result[$name] = [
-                'version' => $latestVersion->version,
-                'update' => $latestVersion->isNewer($currentVersion),
-                'download_url' => $latestVersion->download_url ?: route('api.themes.download', ['theme' => $name]),
-            ];
+            $name = $theme['name'];
+            $currentVersion = $theme['current_version'] ?? '1.0.0';
+            
+            try {
+                // Get latest version from the database
+                $latestVersion = PackageVersion::getLatest($name, 'theme');
+                
+                if (!$latestVersion) {
+                    $result[$name] = [
+                        'version' => $currentVersion,
+                        'update' => false,
+                    ];
+                    continue;
+                }
+                
+                $result[$name] = [
+                    'version' => $latestVersion->version,
+                    'update' => $latestVersion->isNewer($currentVersion),
+                    'download_url' => $latestVersion->download_url ?: route('api.themes.download', ['theme' => $name]),
+                ];
+            } catch (\Exception $e) {
+                // Log the error but continue processing other themes
+                \Log::error("Error processing theme version for '{$name}': " . $e->getMessage());
+                
+                $result[$name] = [
+                    'version' => $currentVersion,
+                    'update' => false,
+                    'error' => 'Could not check for updates'
+                ];
+            }
         }
         
         return response()->json([
