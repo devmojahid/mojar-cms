@@ -52,29 +52,62 @@ class CmsController extends BackendController
     {
         $currentVersion = $request->input('current_version', Version::getVersion());
         
-        // Get latest version from the database
-        $latestVersion = CmsVersion::getLatest();
-        
-        if (!$latestVersion || !$latestVersion->isNewer($currentVersion)) {
+        try {
+            // Log what we're trying to do
+            \Log::info("CMS update request:", [
+                'current_version' => $currentVersion
+            ]);
+            
+            // Get latest version from the database
+            $latestVersion = CmsVersion::getLatest();
+            
+            if (!$latestVersion) {
+                \Log::info("No CMS version found in database");
+                return response()->json([
+                    'status' => false,
+                    'data' => ['message' => 'No update available']
+                ]);
+            }
+            
+            if (!$latestVersion->isNewer($currentVersion)) {
+                \Log::info("CMS is already at the latest version");
+                return response()->json([
+                    'status' => false,
+                    'data' => ['message' => 'No update available']
+                ]);
+            }
+            
+            $downloadUrl = $latestVersion->download_url ?: route('api.api.cms.download', ['version' => $latestVersion->version]);
+            
+            // Log the download URL for debugging
+            \Log::info("CMS update response:", [
+                'download_url' => $downloadUrl,
+                'version' => $latestVersion->version
+            ]);
+            
+            // Create the proper response structure expected by UpdateManager
+            $response = [
+                'status' => true,
+                'data' => [
+                    'version' => $latestVersion->version,
+                    'link' => $downloadUrl,
+                    'changelog' => $latestVersion->changelog ?? '',
+                ]
+            ];
+            
+            // Log the full response for debugging
+            \Log::info("Full CMS update response:", ['response' => $response]);
+            
+            return response()->json($response);
+        } catch (\Exception $e) {
+            \Log::error("CMS update check failed: {$e->getMessage()}", [
+                'exception' => $e
+            ]);
             return response()->json([
-                'error' => true,
-                'message' => 'No update available',
-            ], 404);
+                'status' => false,
+                'data' => ['message' => 'Update check failed: ' . $e->getMessage()]
+            ]);
         }
-        
-        $downloadUrl = $latestVersion->download_url;
-        
-        // If no external download URL is set, use our local endpoint
-        if (empty($downloadUrl)) {
-            $downloadUrl = route('api.cms.download');
-        }
-        
-        return response()->json([
-            'data' => [
-                'version' => $latestVersion->version,
-                'link' => $downloadUrl,
-            ]
-        ]);
     }
     
     /**
@@ -87,31 +120,72 @@ class CmsController extends BackendController
     {
         $version = $request->input('version');
         
-        // If version is specified, get that version, otherwise get latest
-        if ($version) {
-            $versionModel = CmsVersion::where('version', $version)
-                ->where('is_active', true)
-                ->first();
-        } else {
-            $versionModel = CmsVersion::getLatest();
-        }
+        // Log download request for debugging
+        \Log::info("CMS download request:", [
+            'version' => $version
+        ]);
         
-        if (!$versionModel || !$versionModel->file_path) {
+        try {
+            // If version is specified, get that version, otherwise get latest
+            if ($version) {
+                $versionModel = CmsVersion::where('version', $version)
+                    ->where('is_active', true)
+                    ->first();
+            } else {
+                $versionModel = CmsVersion::getLatest();
+            }
+            
+            if (!$versionModel) {
+                \Log::error("Download failed: No CMS version found");
+                return response()->json([
+                    'error' => true,
+                    'message' => 'CMS version not found',
+                ], 404);
+            }
+            
+            if (!$versionModel->file_path) {
+                \Log::error("Download failed: No file path for CMS version {$versionModel->version}");
+                return response()->json([
+                    'error' => true,
+                    'message' => 'CMS package file path not defined',
+                ], 404);
+            }
+            
+            $filePath = $versionModel->getFullPath();
+            
+            if (!file_exists($filePath)) {
+                \Log::error("Download failed: File does not exist at {$filePath}");
+                
+                // Additional logging to help debug file location issues
+                \Log::info("File path details:", [
+                    'file_path' => $versionModel->file_path,
+                    'storage_path' => Storage::path(''),
+                    'full_path' => $filePath,
+                    'storage_exists' => Storage::exists($versionModel->file_path)
+                ]);
+                
+                return response()->json([
+                    'error' => true,
+                    'message' => 'CMS package file not found',
+                ], 404);
+            }
+            
+            \Log::info("Serving CMS download:", [
+                'version' => $versionModel->version,
+                'file' => $filePath
+            ]);
+            
+            $downloadFilename = 'cms-' . $versionModel->version . '.zip';
+            
+            return response()->download($filePath, $downloadFilename);
+        } catch (\Exception $e) {
+            \Log::error("Error downloading CMS: " . $e->getMessage(), [
+                'exception' => $e
+            ]);
             return response()->json([
                 'error' => true,
-                'message' => 'Update package not found',
-            ], 404);
+                'message' => 'Error downloading CMS: ' . $e->getMessage(),
+            ], 500);
         }
-        
-        $filePath = $versionModel->getFullPath();
-        
-        if (!file_exists($filePath)) {
-            return response()->json([
-                'error' => true,
-                'message' => 'Update package file not found',
-            ], 404);
-        }
-        
-        return response()->download($filePath);
     }
 } 

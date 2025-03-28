@@ -71,7 +71,7 @@ class ThemeController extends BackendController
                 $result[$name] = [
                     'version' => $latestVersion->version,
                     'update' => $latestVersion->isNewer($currentVersion),
-                    'download_url' => $latestVersion->download_url ?: route('api.themes.download', ['theme' => $name]),
+                    'download_url' => $latestVersion->download_url ?: route('api.api.themes.download', ['theme' => $name]),
                 ];
             } catch (\Exception $e) {
                 // Log the error but continue processing other themes
@@ -132,31 +132,70 @@ class ThemeController extends BackendController
     public function getUpdate(Request $request, string $theme): JsonResponse
     {
         $currentVersion = $request->input('current_version', '1.0.0');
-        $cmsVersion = $request->input('cms_version', Version::getVersion());
+        $installMode = $currentVersion === '0'; // If current version is 0, we're installing, not updating
         
-        // Get latest version from the database
-        $latestVersion = PackageVersion::getLatest($theme, 'theme');
-        
-        if (!$latestVersion || !$latestVersion->isNewer($currentVersion)) {
+        try {
+            // Log what we're trying to do
+            \Log::info("Theme update request:", [
+                'theme' => $theme,
+                'current_version' => $currentVersion,
+                'mode' => $installMode ? 'install' : 'update'
+            ]);
+            
+            // Get latest version from the database
+            $latestVersion = PackageVersion::getLatest($theme, 'theme');
+            
+            // If we're in install mode (current version is 0), we should provide the latest version
+            // even if it's not newer than the current version
+            if (!$latestVersion) {
+                return response()->json([
+                    'status' => false,
+                    'data' => ['message' => $installMode ? 'Theme not found' : 'No update available']
+                ]);
+            }
+            
+            // Only check if newer when not in install mode
+            if (!$installMode && !$latestVersion->isNewer($currentVersion)) {
+                return response()->json([
+                    'status' => false,
+                    'data' => ['message' => 'No update available']
+                ]);
+            }
+            
+            $downloadUrl = $latestVersion->download_url ?: route('api.api.themes.download', [
+                'theme' => $theme,
+                'version' => $latestVersion->version
+            ]);
+            
+            // Log the download URL for debugging
+            \Log::info("Theme update response for {$theme}:", [
+                'download_url' => $downloadUrl,
+                'version' => $latestVersion->version
+            ]);
+            
+            // Create the proper response structure expected by UpdateManager
+            $response = [
+                'status' => true,
+                'data' => [
+                    'version' => $latestVersion->version,
+                    'link' => $downloadUrl,
+                    'changelog' => $latestVersion->changelog ?? '',
+                ]
+            ];
+            
+            // Log the full response for debugging
+            \Log::info("Full theme update response:", ['response' => $response]);
+            
+            return response()->json($response);
+        } catch (\Exception $e) {
+            \Log::error("Theme update check failed: {$e->getMessage()}", [
+                'exception' => $e
+            ]);
             return response()->json([
-                'error' => true,
-                'message' => 'No update available',
-            ], 404);
+                'status' => false,
+                'data' => ['message' => 'Update check failed: ' . $e->getMessage()]
+            ]);
         }
-        
-        $downloadUrl = $latestVersion->download_url;
-        
-        // If no external download URL is set, use our local endpoint
-        if (empty($downloadUrl)) {
-            $downloadUrl = route('api.themes.download', ['theme' => $theme]);
-        }
-        
-        return response()->json([
-            'data' => [
-                'version' => $latestVersion->version,
-                'link' => $downloadUrl,
-            ]
-        ]);
     }
     
     /**
@@ -170,33 +209,77 @@ class ThemeController extends BackendController
     {
         $version = $request->input('version');
         
-        // If version is specified, get that version, otherwise get latest
-        if ($version) {
-            $versionModel = PackageVersion::where('package_name', $theme)
-                ->where('package_type', 'theme')
-                ->where('version', $version)
-                ->where('is_active', true)
-                ->first();
-        } else {
-            $versionModel = PackageVersion::getLatest($theme, 'theme');
-        }
+        // Log download request for debugging
+        \Log::info("Theme download request:", [
+            'theme' => $theme,
+            'version' => $version
+        ]);
         
-        if (!$versionModel || !$versionModel->file_path) {
+        try {
+            // If version is specified, get that version, otherwise get latest
+            if ($version) {
+                $versionModel = PackageVersion::where('package_name', $theme)
+                    ->where('package_type', 'theme')
+                    ->where('version', $version)
+                    ->where('is_active', true)
+                    ->first();
+            } else {
+                $versionModel = PackageVersion::getLatest($theme, 'theme');
+            }
+            
+            if (!$versionModel) {
+                \Log::error("Download failed: No version found for theme {$theme}");
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Theme version not found',
+                ], 404);
+            }
+            
+            if (!$versionModel->file_path) {
+                \Log::error("Download failed: No file path for theme {$theme}, version {$versionModel->version}");
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Theme package file path not defined',
+                ], 404);
+            }
+            
+            $filePath = $versionModel->getFullPath();
+            
+            if (!file_exists($filePath)) {
+                \Log::error("Download failed: File does not exist at {$filePath}");
+                
+                // Additional logging to help debug file location issues
+                \Log::info("File path details:", [
+                    'file_path' => $versionModel->file_path,
+                    'storage_path' => Storage::path(''),
+                    'full_path' => $filePath,
+                    'storage_exists' => Storage::exists($versionModel->file_path)
+                ]);
+                
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Theme package file not found',
+                ], 404);
+            }
+            
+            \Log::info("Serving theme download:", [
+                'theme' => $theme,
+                'version' => $versionModel->version,
+                'file' => $filePath
+            ]);
+            
+            // Create a clean filename for the download
+            $downloadFilename = $theme . '-' . $versionModel->version . '.zip';
+            
+            return response()->download($filePath, $downloadFilename);
+        } catch (\Exception $e) {
+            \Log::error("Error downloading theme '{$theme}': " . $e->getMessage(), [
+                'exception' => $e
+            ]);
             return response()->json([
                 'error' => true,
-                'message' => 'Update package not found',
-            ], 404);
+                'message' => 'Error downloading theme: ' . $e->getMessage(),
+            ], 500);
         }
-        
-        $filePath = $versionModel->getFullPath();
-        
-        if (!file_exists($filePath)) {
-            return response()->json([
-                'error' => true,
-                'message' => 'Update package file not found',
-            ], 404);
-        }
-        
-        return response()->download($filePath);
     }
 }

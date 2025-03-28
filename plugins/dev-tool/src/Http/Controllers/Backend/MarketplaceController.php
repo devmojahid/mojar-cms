@@ -96,19 +96,22 @@ class MarketplaceController extends BackendController
         
         // Handle package file upload
         if ($request->hasFile('package_file')) {
-            $filePath = $request->file('package_file')->store('marketplace/themes', 'local');
+            $filePath = 'public/marketplace/themes/' . $data['name'] . '.zip';
+            Storage::put($filePath, file_get_contents($request->file('package_file')));
             $data['file_path'] = $filePath;
         }
         
         // Handle screenshot upload
         if ($request->hasFile('screenshot_file')) {
-            $screenshotPath = $request->file('screenshot_file')->store('marketplace/themes/screenshots', 'public');
+            $screenshotPath = 'public/marketplace/themes/screenshots/' . $data['name'] . '.' . $request->file('screenshot_file')->extension();
+            Storage::put($screenshotPath, file_get_contents($request->file('screenshot_file')));
             $data['screenshot_path'] = $screenshotPath;
         }
         
         // Handle banner upload
         if ($request->hasFile('banner_file')) {
-            $bannerPath = $request->file('banner_file')->store('marketplace/themes/banners', 'public');
+            $bannerPath = 'public/marketplace/themes/banners/' . $data['name'] . '.' . $request->file('banner_file')->extension();
+            Storage::put($bannerPath, file_get_contents($request->file('banner_file')));
             $data['banner_path'] = $bannerPath;
         }
 
@@ -144,10 +147,11 @@ class MarketplaceController extends BackendController
         if ($request->hasFile('package_file')) {
             // Delete old file if exists
             if (!empty($theme->file_path)) {
-                Storage::disk('local')->delete($theme->file_path);
+                Storage::delete($theme->file_path);
             }
             
-            $filePath = $request->file('package_file')->store('marketplace/themes', 'local');
+            $filePath = 'public/marketplace/themes/' . $data['name'] . '.zip';
+            Storage::put($filePath, file_get_contents($request->file('package_file')));
             $data['file_path'] = $filePath;
         }
         
@@ -155,10 +159,11 @@ class MarketplaceController extends BackendController
         if ($request->hasFile('screenshot_file')) {
             // Delete old file if exists
             if (!empty($theme->screenshot_path)) {
-                Storage::disk('public')->delete($theme->screenshot_path);
+                Storage::delete($theme->screenshot_path);
             }
             
-            $screenshotPath = $request->file('screenshot_file')->store('marketplace/themes/screenshots', 'public');
+            $screenshotPath = 'public/marketplace/themes/screenshots/' . $data['name'] . '.' . $request->file('screenshot_file')->extension();
+            Storage::put($screenshotPath, file_get_contents($request->file('screenshot_file')));
             $data['screenshot_path'] = $screenshotPath;
         }
         
@@ -166,10 +171,11 @@ class MarketplaceController extends BackendController
         if ($request->hasFile('banner_file')) {
             // Delete old file if exists
             if (!empty($theme->banner_path)) {
-                Storage::disk('public')->delete($theme->banner_path);
+                Storage::delete($theme->banner_path);
             }
             
-            $bannerPath = $request->file('banner_file')->store('marketplace/themes/banners', 'public');
+            $bannerPath = 'public/marketplace/themes/banners/' . $data['name'] . '.' . $request->file('banner_file')->extension();
+            Storage::put($bannerPath, file_get_contents($request->file('banner_file')));
             $data['banner_path'] = $bannerPath;
         }
 
@@ -187,15 +193,15 @@ class MarketplaceController extends BackendController
         
         // Delete files if they exist
         if (!empty($theme->file_path)) {
-            Storage::disk('local')->delete($theme->file_path);
+            Storage::delete($theme->file_path);
         }
         
         if (!empty($theme->screenshot_path)) {
-            Storage::disk('public')->delete($theme->screenshot_path);
+            Storage::delete($theme->screenshot_path);
         }
         
         if (!empty($theme->banner_path)) {
-            Storage::disk('public')->delete($theme->banner_path);
+            Storage::delete($theme->banner_path);
         }
         
         $theme->delete();
@@ -271,19 +277,22 @@ class MarketplaceController extends BackendController
         
         // Handle package file upload
         if ($request->hasFile('package_file')) {
-            $filePath = $request->file('package_file')->store('marketplace/plugins', 'local');
+            $filePath = 'public/marketplace/plugins/' . $data['name'] . '.zip';
+            Storage::put($filePath, file_get_contents($request->file('package_file')));
             $data['file_path'] = $filePath;
         }
         
         // Handle thumbnail upload
         if ($request->hasFile('thumbnail_file')) {
-            $thumbnailPath = $request->file('thumbnail_file')->store('marketplace/plugins/thumbnails', 'public');
+            $thumbnailPath = 'public/marketplace/plugins/thumbnails/' . $data['name'] . '.' . $request->file('thumbnail_file')->extension();
+            Storage::put($thumbnailPath, file_get_contents($request->file('thumbnail_file')));
             $data['thumbnail_path'] = $thumbnailPath;
         }
         
         // Handle banner upload
         if ($request->hasFile('banner_file')) {
-            $bannerPath = $request->file('banner_file')->store('marketplace/plugins/banners', 'public');
+            $bannerPath = 'public/marketplace/plugins/banners/' . $data['name'] . '.' . $request->file('banner_file')->extension();
+            Storage::put($bannerPath, file_get_contents($request->file('banner_file')));
             $data['banner_path'] = $bannerPath;
         }
 
@@ -319,10 +328,11 @@ class MarketplaceController extends BackendController
         if ($request->hasFile('package_file')) {
             // Delete old file if exists
             if (!empty($plugin->file_path)) {
-                Storage::disk('local')->delete($plugin->file_path);
+                Storage::delete($plugin->file_path);
             }
             
-            $filePath = $request->file('package_file')->store('marketplace/plugins', 'local');
+            $filePath = 'public/marketplace/plugins/' . $data['name'] . '.zip';
+            Storage::put($filePath, file_get_contents($request->file('package_file')));
             $data['file_path'] = $filePath;
         }
         
@@ -330,10 +340,11 @@ class MarketplaceController extends BackendController
         if ($request->hasFile('thumbnail_file')) {
             // Delete old file if exists
             if (!empty($plugin->thumbnail_path)) {
-                Storage::disk('public')->delete($plugin->thumbnail_path);
+                Storage::delete($plugin->thumbnail_path);
             }
             
-            $thumbnailPath = $request->file('thumbnail_file')->store('marketplace/plugins/thumbnails', 'public');
+            $thumbnailPath = 'public/marketplace/plugins/thumbnails/' . $data['name'] . '.' . $request->file('thumbnail_file')->extension();
+            Storage::put($thumbnailPath, file_get_contents($request->file('thumbnail_file')));
             $data['thumbnail_path'] = $thumbnailPath;
         }
         
@@ -341,10 +352,11 @@ class MarketplaceController extends BackendController
         if ($request->hasFile('banner_file')) {
             // Delete old file if exists
             if (!empty($plugin->banner_path)) {
-                Storage::disk('public')->delete($plugin->banner_path);
+                Storage::delete($plugin->banner_path);
             }
             
-            $bannerPath = $request->file('banner_file')->store('marketplace/plugins/banners', 'public');
+            $bannerPath = 'public/marketplace/plugins/banners/' . $data['name'] . '.' . $request->file('banner_file')->extension();
+            Storage::put($bannerPath, file_get_contents($request->file('banner_file')));
             $data['banner_path'] = $bannerPath;
         }
 
@@ -362,15 +374,15 @@ class MarketplaceController extends BackendController
         
         // Delete files if they exist
         if (!empty($plugin->file_path)) {
-            Storage::disk('local')->delete($plugin->file_path);
+            Storage::delete($plugin->file_path);
         }
         
         if (!empty($plugin->thumbnail_path)) {
-            Storage::disk('public')->delete($plugin->thumbnail_path);
+            Storage::delete($plugin->thumbnail_path);
         }
         
         if (!empty($plugin->banner_path)) {
-            Storage::disk('public')->delete($plugin->banner_path);
+            Storage::delete($plugin->banner_path);
         }
         
         $plugin->delete();

@@ -70,9 +70,21 @@ class VersionController extends BackendController
         // Handle file upload if present
         if ($request->hasFile('package_file')) {
             $file = $request->file('package_file');
-            $path = 'cms/updates/' . $data['version'] . '/' . $file->getClientOriginalName();
-            Storage::disk('local')->put($path, file_get_contents($file));
-            $data['file_path'] = $path;
+            
+            // Store in public directory so files are web accessible
+            $fileName = 'cms-' . $data['version'] . '.zip';
+            $path = $file->storeAs('cms/updates/' . $data['version'], $fileName, 'public');
+            
+            // Store path with 'public/' prefix to maintain compatibility
+            $data['file_path'] = 'public/' . $path;
+            
+            // Log the file upload path for debugging
+            \Log::info("CMS version file uploaded: {$path}", [
+                'version' => $data['version'],
+                'stored_path' => $data['file_path'],
+                'full_path' => Storage::disk('public')->path($path),
+                'public_url' => Storage::disk('public')->url($path)
+            ]);
         }
         
         CmsVersion::create($data);
@@ -133,13 +145,30 @@ class VersionController extends BackendController
         if ($request->hasFile('package_file')) {
             // Delete old file if exists
             if ($version->file_path) {
-                Storage::disk('local')->delete($version->file_path);
+                if (strpos($version->file_path, 'public/') === 0) {
+                    $oldPath = str_replace('public/', '', $version->file_path);
+                    Storage::disk('public')->delete($oldPath);
+                } else {
+                    Storage::delete($version->file_path);
+                }
             }
             
             $file = $request->file('package_file');
-            $path = 'cms/updates/' . $data['version'] . '/' . $file->getClientOriginalName();
-            Storage::disk('local')->put($path, file_get_contents($file));
-            $data['file_path'] = $path;
+            
+            // Store in public directory so files are web accessible
+            $fileName = 'cms-' . $data['version'] . '.zip';
+            $path = $file->storeAs('cms/updates/' . $data['version'], $fileName, 'public');
+            
+            // Store path with 'public/' prefix to maintain compatibility
+            $data['file_path'] = 'public/' . $path;
+            
+            // Log the file upload path for debugging
+            \Log::info("CMS version file updated: {$path}", [
+                'version' => $data['version'],
+                'stored_path' => $data['file_path'],
+                'full_path' => Storage::disk('public')->path($path),
+                'public_url' => Storage::disk('public')->url($path)
+            ]);
         }
         
         $version->update($data);
@@ -161,7 +190,7 @@ class VersionController extends BackendController
         
         // Delete file if exists
         if ($version->file_path) {
-            Storage::disk('local')->delete($version->file_path);
+            Storage::delete($version->file_path);
         }
         
         $version->delete();
@@ -254,13 +283,30 @@ class VersionController extends BackendController
         // Handle file upload if present
         if ($request->hasFile('package_file')) {
             $file = $request->file('package_file');
-            $path = $data['package_type'] . 's/updates/' . 
-                    $data['package_name'] . '/' . 
-                    $data['version'] . '/' . 
-                    $file->getClientOriginalName();
-                    
-            Storage::disk('local')->put($path, file_get_contents($file));
-            $data['file_path'] = $path;
+            
+            // Create a safe filename without forward slashes
+            $safePackageName = str_replace('/', '_', $data['package_name']);
+            $fileName = $safePackageName . '-' . $data['version'] . '.zip';
+            
+            // Store in public directory so files are web accessible
+            $path = $file->storeAs(
+                $data['package_type'] . 's/updates/' . $safePackageName . '/' . $data['version'], 
+                $fileName, 
+                'public'
+            );
+            
+            // Store path with 'public/' prefix to maintain compatibility
+            $data['file_path'] = 'public/' . $path;
+            
+            // Log the file upload path for debugging
+            \Log::info("Package version file uploaded: {$path}", [
+                'type' => $data['package_type'],
+                'name' => $data['package_name'],
+                'version' => $data['version'],
+                'stored_path' => $data['file_path'],
+                'full_path' => Storage::disk('public')->path($path),
+                'public_url' => Storage::disk('public')->url($path)
+            ]);
         }
         
         PackageVersion::create($data);
@@ -346,17 +392,39 @@ class VersionController extends BackendController
         if ($request->hasFile('package_file')) {
             // Delete old file if exists
             if ($version->file_path) {
-                Storage::disk('local')->delete($version->file_path);
+                if (strpos($version->file_path, 'public/') === 0) {
+                    $oldPath = str_replace('public/', '', $version->file_path);
+                    Storage::disk('public')->delete($oldPath);
+                } else {
+                    Storage::delete($version->file_path);
+                }
             }
             
             $file = $request->file('package_file');
-            $path = $data['package_type'] . 's/updates/' . 
-                    $data['package_name'] . '/' . 
-                    $data['version'] . '/' . 
-                    $file->getClientOriginalName();
-                    
-            Storage::disk('local')->put($path, file_get_contents($file));
-            $data['file_path'] = $path;
+            
+            // Create a safe filename without forward slashes
+            $safePackageName = str_replace('/', '_', $data['package_name']);
+            $fileName = $safePackageName . '-' . $data['version'] . '.zip';
+            
+            // Store in public directory so files are web accessible
+            $path = $file->storeAs(
+                $data['package_type'] . 's/updates/' . $safePackageName . '/' . $data['version'], 
+                $fileName, 
+                'public'
+            );
+            
+            // Store path with 'public/' prefix to maintain compatibility
+            $data['file_path'] = 'public/' . $path;
+            
+            // Log the file upload path for debugging
+            \Log::info("Package version file updated: {$path}", [
+                'type' => $data['package_type'],
+                'name' => $data['package_name'],
+                'version' => $data['version'],
+                'stored_path' => $data['file_path'],
+                'full_path' => Storage::disk('public')->path($path),
+                'public_url' => Storage::disk('public')->url($path)
+            ]);
         }
         
         $version->update($data);
@@ -378,7 +446,7 @@ class VersionController extends BackendController
         
         // Delete file if exists
         if ($version->file_path) {
-            Storage::disk('local')->delete($version->file_path);
+            Storage::delete($version->file_path);
         }
         
         $version->delete();

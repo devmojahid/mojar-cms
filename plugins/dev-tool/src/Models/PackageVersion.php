@@ -125,7 +125,47 @@ class PackageVersion extends Model
             return null;
         }
         
-        return Storage::disk('local')->path($this->file_path);
+        // Try the standard storage path first
+        $path = Storage::path($this->file_path);
+        
+        if (file_exists($path)) {
+            return $path;
+        }
+        
+        // If the file doesn't exist with the current path, try some fallbacks
+        
+        // 1. Try to convert 'public/...' paths to use proper storage_path with public disk
+        if (strpos($this->file_path, 'public/') === 0) {
+            $publicPath = str_replace('public/', '', $this->file_path);
+            $path = Storage::disk('public')->path($publicPath);
+            if (file_exists($path)) {
+                return $path;
+            }
+        }
+        
+        // 2. Try to check if file exists without storage prefix (direct path)
+        $directPath = public_path('storage/' . str_replace('public/', '', $this->file_path));
+        if (file_exists($directPath)) {
+            return $directPath;
+        }
+        
+        // 3. Check if it's using an old path format with local disk
+        $localPath = Storage::disk('local')->path($this->file_path);
+        if (file_exists($localPath)) {
+            return $localPath;
+        }
+        
+        // Log the attempted paths to help with debugging
+        \Log::warning("Package Version: Could not find file with path {$this->file_path}. Tried multiple locations.", [
+            'package' => "{$this->package_type}/{$this->package_name} v{$this->version}",
+            'standard_path' => $path,
+            'public_disk_path' => $path,
+            'direct_public_path' => $directPath,
+            'local_disk_path' => $localPath,
+        ]);
+        
+        // Return the original path even if it doesn't exist
+        return $path;
     }
     
     /**

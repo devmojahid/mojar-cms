@@ -48,9 +48,3 @@ Route::prefix('plugins')->group(function () {
         Route::get('/', [PluginController::class, 'getPlugins']);
     }
 });
-
-// Route::get('/marketplace/themes', [MarketplaceController::class, 'getThemes']);
-// Route::get('/marketplace/plugins', [MarketplaceController::class, 'getPlugins']);
-
-// Route::get('/marketplace/themes/{theme}', [MarketplaceController::class, 'getTheme']);
-// Route::get('/marketplace/plugins/{plugin}', [MarketplaceController::class, 'getPlugin']);

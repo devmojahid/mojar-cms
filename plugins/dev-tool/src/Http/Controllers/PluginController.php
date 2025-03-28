@@ -71,7 +71,10 @@ class PluginController extends BackendController
                 $result[$name] = [
                     'version' => $latestVersion->version,
                     'update' => $latestVersion->isNewer($currentVersion),
-                    'download_url' => $latestVersion->download_url ?: route('api.plugins.download', ['plugin' => $name]),
+                    'download_url' => $latestVersion->download_url ?: route('api.api.plugins.download', [
+                        'vendor' => explode('/', $name)[0], 
+                        'plugin' => explode('/', $name)[1]
+                    ]),
                 ];
             } catch (\Exception $e) {
                 // Log the error but continue processing other plugins
@@ -165,9 +168,10 @@ class PluginController extends BackendController
                 ]);
             }
             
-            $downloadUrl = $latestVersion->download_url ?: route('api.plugins.download', [
+            $downloadUrl = $latestVersion->download_url ?: route('api.api.plugins.download', [
                 'vendor' => $vendor, 
-                'plugin' => $plugin
+                'plugin' => $plugin,
+                'version' => $latestVersion->version
             ]);
     
             // Log the download URL for debugging
@@ -176,19 +180,13 @@ class PluginController extends BackendController
                 'version' => $latestVersion->version
             ]);
             
-            // We need to ensure this structure is exactly what the UpdateManager expects
-            // Specifically response->data->link should be available
+            // Create the proper response structure expected by UpdateManager
             $response = [
                 'status' => true,
                 'data' => [
                     'version' => $latestVersion->version,
-                    'link' => $downloadUrl,  // This is critical for UpdateManager->downloadUpdateFile()
-                    'checksum' => $latestVersion->checksum ?? '',
+                    'link' => $downloadUrl,
                     'changelog' => $latestVersion->changelog ?? '',
-                    
-                    // Also include fields that might be used by our adapter
-                    'download_url' => $downloadUrl, // Alternative field name
-                    'url' => $downloadUrl // Another possible field name
                 ]
             ];
             
@@ -312,6 +310,15 @@ class PluginController extends BackendController
             
             if (!file_exists($filePath)) {
                 \Log::error("Download failed: File does not exist at {$filePath}");
+                
+                // Additional logging to help debug file location issues
+                \Log::info("File path details:", [
+                    'file_path' => $versionModel->file_path,
+                    'storage_path' => Storage::path(''),
+                    'full_path' => $filePath,
+                    'storage_exists' => Storage::exists($versionModel->file_path)
+                ]);
+                
                 return response()->json([
                     'error' => true,
                     'message' => 'Plugin package file not found',
@@ -324,7 +331,10 @@ class PluginController extends BackendController
                 'file' => $filePath
             ]);
             
-            return response()->download($filePath);
+            // Get a filename without forward slashes for the response
+            $downloadFilename = str_replace('/', '_', $pluginName) . '-' . $versionModel->version . '.zip';
+            
+            return response()->download($filePath, $downloadFilename);
         } catch (\Exception $e) {
             \Log::error("Error downloading plugin '{$pluginName}': " . $e->getMessage(), [
                 'exception' => $e
