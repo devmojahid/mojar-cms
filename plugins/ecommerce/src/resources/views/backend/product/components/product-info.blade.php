@@ -28,7 +28,7 @@
                     {{ __('Product Info') }}
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item d-none">
                 <a href="#tabs-brand-area" class="nav-link" data-bs-toggle="tab">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2" width="24" height="24"
                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -40,7 +40,7 @@
                     {{ __('Advanced') }}
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item d-none">
                 <a href="#tabs-media-area" class="nav-link" data-bs-toggle="tab">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2" width="24" height="24"
                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"

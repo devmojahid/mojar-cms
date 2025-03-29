@@ -33,7 +33,7 @@ class CartController extends FrontendController
     protected CartManagerContract $cartManager;
     protected bool $themeView = false;
     protected const VIEW_PATH = 'ecomm::frontend.cart.index';
-    protected const THEME_VIEW_PATH = 'theme::frontend.cart.index';
+    protected const THEME_VIEW_PATH = 'theme::products.cart.index';
 
     public function __construct(CartManagerContract $cartManager)
     {

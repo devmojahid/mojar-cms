@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('template_title')</title>
 
-    <link href="{{ asset('jw-styles/mojar/installer/css/style.css') }}" rel="stylesheet" />
+    <link href="{{ asset('jw-styles/mojar/installer/css/style-main.css') }}" rel="stylesheet" />
 
     <script>
         window.Laravel = @json([

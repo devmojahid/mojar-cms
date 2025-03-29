@@ -41,27 +41,39 @@ class SeoAction extends Action
             [
                 'jw_enable_sitemap' => [
                     'form' => 'seo',
-                    'type' => 'checkbox',
+                    'type' => 'select',  // Changed from checkbox to select
                     'label' => trans('cms::app.seo.enable_sitemap'),
                     'data' => [
                         'default' => 1,
                         'description' => trans('cms::app.seo.enable_sitemap_description'),
+                        'options' => [
+                            0 => trans('cms::app.disabled'),
+                            1 => trans('cms::app.enable')
+                        ]
                     ]
                 ],
                 'jw_enable_post_feed' => [
-                    'type' => 'checkbox',
+                    'type' => 'select',  // Changed from checkbox to select
                     'label' => trans('cms::app.seo.enable_post_feed'),
                     'form' => 'seo',
                     'data' => [
-                        'default' => 1
+                        'default' => 1,
+                        'options' => [
+                            0 => trans('cms::app.disabled'),
+                            1 => trans('cms::app.enable')
+                        ]
                     ]
                 ],
                 'jw_enable_taxonomy_feed' => [
-                    'type' => 'checkbox',
+                    'type' => 'select',  // Changed from checkbox to select
                     'label' => trans('cms::app.seo.enable_taxonomy_feed'),
                     'form' => 'seo',
                     'data' => [
-                        'default' => 1
+                        'default' => 1,
+                        'options' => [
+                            0 => trans('cms::app.disabled'),
+                            1 => trans('cms::app.enable')
+                        ]
                     ]
                 ],
                 'jw_auto_ping_google_sitemap' => [

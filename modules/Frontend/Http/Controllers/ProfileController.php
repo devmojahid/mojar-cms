@@ -31,7 +31,21 @@ class ProfileController extends FrontendController
             $page = $pages->where('key', $slug)->first();
 
             if (!$page) {
-                    throw new \Exception(__('Profile page not found'), 404);
+                $title = trans('cms::app.profile');
+                $page = [
+                    'title' => $title,
+                    'contents' => 'theme::profile.default'
+                ];
+
+                return $this->view(
+                    'theme::profile.index',
+                    compact(
+                        'title',
+                        'pages',
+                        'page',
+                        'user'
+                    )
+                );
             }
 
             $title = $page['title'];

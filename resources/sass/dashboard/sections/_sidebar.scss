@@ -51,8 +51,9 @@
   // Slight shadow for depth
   box-shadow: 2px 0 6px rgba(0, 0, 0, 0.05);
   transition:
-    background-color var(--transition-speed) ease,
-    border-color var(--transition-speed) ease;
+  background-color var(--transition-speed) ease,
+  border-color var(--transition-speed) ease;
+  padding-top: 0px !important;
 
   // Make sidebar scrollable on medium & up
   @media #{$common-medium-screen} {
@@ -60,6 +61,10 @@
     min-height: 100vh;
     overflow-y: auto !important;
     padding-top: 5px !important;
+  }
+
+  .navbar-brand.navbar-brand-autodark{
+    padding: 0px !important;
   }
 
   // ------------------------------------------------------------

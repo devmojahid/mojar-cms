@@ -22,6 +22,24 @@ class MenuAction extends Action
             Action::FRONTEND_INIT,
             [$this, 'addProfilePages']
         );
+
+        // dashboard states and view
+        // $this->addAction(
+        //     Action::BACKEND_DASHBOARD_ACTION,
+        //     [$this, 'registerDashboardStats']
+        // );
+        
+        // Register dashboard views
+        // $this->addAction(
+        //     'backend.dashboard.statis',
+        //     [$this, 'registerDashboardStatsView']
+        // );
+        
+        // // Register additional dashboard views
+        $this->addAction(
+            'backend.dashboard.view',
+            [$this, 'registerDashboardView']
+        );
     }
 
     public function addAdminMenus(): void
@@ -159,5 +177,10 @@ class MenuAction extends Action
                 'icon' => 'far fa-sign-out',
             ]
         );
+    }
+
+    public function registerDashboardView(): void
+    {
+        echo view('ecomm::backend.dashboard.orders')->render();
     }
 }

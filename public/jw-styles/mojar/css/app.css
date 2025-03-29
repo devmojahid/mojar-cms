@@ -1555,6 +1555,7 @@ button[type=button][role=checkbox]{
   border-right:1px solid var(--sidebar-border);
   box-shadow:2px 0 6px rgba(0, 0, 0, 0.05);
   transition:background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+  padding-top:0px !important;
 }
 @media (min-width: 992px){
   .mojar_cms_sidebar{
@@ -1563,6 +1564,9 @@ button[type=button][role=checkbox]{
     overflow-y:auto !important;
     padding-top:5px !important;
   }
+}
+.mojar_cms_sidebar .navbar-brand.navbar-brand-autodark{
+  padding:0px !important;
 }
 .mojar_cms_sidebar #sidebar-menu{
   transition:all var(--transition-speed) ease;

@@ -1,0 +1,914 @@
+{% extends 'cms::layouts.frontend' %}
+
+{% block content %}
+	<div class="container py-4 enhanced-cart-ui">
+		<div class="row g-4">
+			<div class="col-lg-8">
+				<div class="card shadow-sm">
+					<div class="card-header bg-white py-3">
+						<h3 class="mb-0 h4">{{ trans('ecomm::content.shopping_cart') }}</h3>
+					</div>
+					<div class="card-body" id="cartItems">
+						{% if cart.totalItems() > 0 %}
+							<div class="table-responsive">
+								<table class="table align-middle">
+									<thead>
+										<tr>
+											<th>{{ trans('ecomm::content.product') }}</th>
+											<th>{{ trans('ecomm::content.price') }}</th>
+											<th>{{ trans('ecomm::content.quantity') }}</th>
+											<th>{{ trans('ecomm::content.total') }}</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody id="cartItemsList">
+										{% for item in cart.getCollectionItems() %}
+											<tr data-item-id="{{ item.post_id }}" data-item-type="{{ item.type|default('product') }}">
+												<td>
+													<div class="d-flex align-items-center">
+														<div class="flex-shrink-0">
+															<img class="rounded" style="width: 80px !important; height: 80px !important; object-fit: cover;" src="{{ upload_url(item.thumbnail) }}" alt="{{ item.title }}">
+														</div>
+														<div class="flex-grow-1 ms-3">
+															<h5 class="mb-1">{{ item.title }}</h5>
+															{% if item.sku_code %}
+																<span class="badge bg-light text-dark">SKU:
+																	{{ item.sku_code }}</span>
+															{% endif %}
+														</div>
+													</div>
+												</td>
+												<td class="item-price">{{ ecom_price_with_unit(item.price) }}</td>
+												<td>
+													<div class="quantity-control d-flex align-items-center" style="width: 120px">
+														<button class="btn btn-outline-secondary btn-sm quantity-btn" data-action="decrease">
+															<i class="fa fa-minus"></i>
+														</button>
+														<input type="number" class="form-control form-control-sm mx-2 text-center quantity-input" value="{{ item.quantity }}" min="1" data-id="{{ item.post_id }}" data-type="{{ item.type|default('product') }}">
+														<button class="btn btn-outline-secondary btn-sm quantity-btn" data-action="increase">
+															<i class="fa fa-plus"></i>
+														</button>
+													</div>
+												</td>
+												<td class="item-total">{{ ecom_price_with_unit(item.line_price) }}</td>
+												<td>
+													<button class="btn btn-outline-danger btn-sm remove-item" data-id="{{ item.post_id }}" data-type="{{ item.type|default('product') }}">
+														<i class="fa fa-trash"></i>
+													</button>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						{% else %}
+							<div class="empty-cart-state text-center py-5">
+								<div class="empty-cart-icon mb-4">
+									<i class="fa fa-shopping-cart fa-4x text-muted"></i>
+								</div>
+								<h4 class="mb-3">{{ trans('ecomm::content.cart_empty') }}</h4>
+								<a href="/" class="btn btn-primary">
+									{{ trans('ecomm::content.continue_shopping') }}
+								</a>
+							</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-4">
+				<div class="card shadow-sm">
+					<div class="card-header bg-white py-3">
+						<h3 class="mb-0 h4">{{ trans('ecomm::content.order_summary') }}</h3>
+					</div>
+					<div class="card-body" id="cartSummary">
+						<div class="summary-item d-flex justify-content-between mb-3">
+							<span>{{ trans('ecomm::content.subtotal') }}</span>
+							<span class="subtotal-price">{{ ecom_price_with_unit(cart.totalPrice()) }}</span>
+						</div>
+						{% if cart.getDiscount() > 0 %}
+							<div class="summary-item d-flex justify-content-between mb-3 discount-row">
+								<span>{{ trans('ecomm::content.discount') }}</span>
+								<span class="discount-amount text-success">
+									-{{ ecom_price_with_unit(cart.getDiscount()) }}
+								</span>
+							</div>
+						{% endif %}
+						<hr>
+						<div class="summary-item d-flex justify-content-between mb-4">
+							<strong>{{ trans('ecomm::content.total') }}</strong>
+							<strong class="total-price">
+								{{ ecom_price_with_unit(cart.totalPrice() - cart.getDiscount()) }}
+							</strong>
+						</div>
+
+						{% if cart.totalItems() > 0 %}
+							<a href="/checkout" class="btn btn-primary w-100">
+								{{ trans('ecomm::content.proceed_to_checkout') }}
+							</a>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{# Toast Container #}
+	<div class="toast-container position-fixed top-0 end-0 p-3"></div>
+
+	<script>
+		const CartState = {
+items: new Map(),
+totals: {
+subtotal: 0,
+discount: 0,
+total: 0
+},
+
+init() {
+document.querySelectorAll('#cartItemsList tr').forEach(row => {
+const itemId = row.dataset.itemId;
+const itemType = row.dataset.itemType;
+this.items.set(`${itemType}_${itemId}`, {
+id: itemId,
+type: itemType,
+quantity: parseInt(row.querySelector('.quantity-input').value)
+});
+});
+},
+
+updateItem(itemKey, updates) {
+const item = this.items.get(itemKey);
+if (item) {
+Object.assign(item, updates);
+this.notifyListeners('itemUpdated', {itemKey, updates});
+}
+},
+
+removeItem(itemKey) {
+if (this.items.delete(itemKey)) {
+this.notifyListeners('itemRemoved', {itemKey});
+}
+},
+
+listeners: new Set(),
+
+subscribe(listener) {
+this.listeners.add(listener);
+return() => this.listeners.delete(listener);
+},
+
+notifyListeners(event, data) {
+this.listeners.forEach(listener => listener(event, data));
+}
+};
+
+// Toast Manager
+const ToastManager = {
+show(type, message) {
+const toastElement = document.createElement('div');
+toastElement.className = `toast align-items-center border-0 ${
+type === 'success' ? 'bg-success' : 'bg-danger'
+} text-white`;
+toastElement.setAttribute('role', 'alert');
+toastElement.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">
+                        ${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            `;
+
+document.querySelector('.toast-container').appendChild(toastElement);
+const toast = new bootstrap.Toast(toastElement, {delay: 3000});
+toast.show();
+
+toastElement.addEventListener('hidden.bs.toast', () => {
+toastElement.remove();
+});
+}
+};
+
+// Cart UI
+const CartUI = {
+init() {
+this.bindEvents();
+CartState.init();
+},
+
+bindEvents() { // Quantity controls
+document.addEventListener('click', e => {
+if (e.target.closest('.quantity-btn')) {
+const btn = e.target.closest('.quantity-btn');
+const action = btn.dataset.action;
+const input = btn.closest('.quantity-control').querySelector('.quantity-input');
+this.handleQuantityChange(input, action);
+}
+});
+
+// Direct quantity input
+document.addEventListener('change', e => {
+if (e.target.matches('.quantity-input')) {
+this.handleQuantityChange(e.target);
+}
+});
+
+// Remove item
+document.addEventListener('click', e => {
+if (e.target.closest('.remove-item')) {
+const btn = e.target.closest('.remove-item');
+this.handleRemoveItem(btn);
+}
+});
+},
+
+async handleQuantityChange(input, action) {
+const currentValue = parseInt(input.value);
+let newValue = currentValue;
+
+if (action === 'increase') 
+newValue++;
+ else if (action === 'decrease') 
+newValue = Math.max(1, currentValue - 1);
+
+
+if (newValue === currentValue) 
+return;
+
+
+const row = input.closest('tr');
+const itemId = input.dataset.id;
+const itemType = input.dataset.type;
+
+try {
+this.setLoading(row, true);
+const response = await this.updateCartItem(itemId, itemType, newValue);
+
+if (response.success) {
+input.value = newValue;
+this.updateCartDisplay(response.cart.data);
+ToastManager.show('success', response.message);
+} else {
+input.value = currentValue;
+ToastManager.show('error', response.message);
+}
+} catch (error) {
+console.error('Cart update error:', error);
+input.value = currentValue;
+ToastManager.show('error', '{{ trans("ecomm::content.server_error") }}');
+} finally {
+this.setLoading(row, false);
+}
+},
+
+async handleRemoveItem(btn) {
+const row = btn.closest('tr');
+const itemId = btn.dataset.id;
+const itemType = btn.dataset.type;
+
+try {
+this.setLoading(row, true);
+const response = await this.removeCartItem(itemId, itemType);
+
+if (response.success) {
+row.style.opacity = '0';
+setTimeout(() => {
+row.remove();
+this.updateCartDisplay(response.cart.data);
+
+if (response.cart.data.total_items === 0) {
+this.showEmptyState();
+}
+}, 300);
+
+ToastManager.show('success', response.message);
+} else {
+ToastManager.show('error', response.message);
+}
+} catch (error) {
+console.error('Remove item error:', error);
+ToastManager.show('error', '{{ trans("ecomm::content.server_error") }}');
+} finally {
+this.setLoading(row, false);
+}
+},
+
+async updateCartItem(itemId, type, quantity) {
+const response = await fetch('{{ url("ajax/cart/update") }}', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+'X-CSRF-TOKEN': '{{ csrf_token() }}'
+},
+body: JSON.stringify(
+{post_id: itemId, type, quantity}
+)
+});
+return response.json();
+},
+
+async removeCartItem(itemId, type) {
+const response = await fetch('{{ url("ajax/cart/remove-item") }}', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+'X-CSRF-TOKEN': '{{ csrf_token() }}'
+},
+body: JSON.stringify(
+{post_id: itemId, type}
+)
+});
+return response.json();
+},
+
+updateCartDisplay(cartData) { // Update subtotal
+const subtotalElement = document.querySelector('.subtotal-price');
+if (subtotalElement) {
+subtotalElement.textContent = cartData.pricing.subtotal_formatted;
+}
+
+// Handle discount display
+const discountRow = document.querySelector('.discount-row');
+const discountAmount = document.querySelector('.discount-amount');
+if (cartData.pricing.discount > 0) {
+if (discountRow) 
+discountRow.style.display = '';
+
+if (discountAmount) {
+discountAmount.textContent = '-' + cartData.pricing.discount_formatted;
+}
+} else {
+if (discountRow) 
+discountRow.style.display = 'none';
+
+}
+
+// Update total price
+const totalElement = document.querySelector('.total-price');
+if (totalElement) {
+totalElement.textContent = cartData.pricing.total_formatted;
+}
+
+// Update cart count in header if exists
+this.updateCartCounter(cartData.total_items);
+},
+
+updateCartCounter(count) {
+const cartCounter = document.querySelector('.cart-counter');
+if (cartCounter) {
+cartCounter.textContent = count;
+cartCounter.style.display = count > 0 ? '' : 'none';
+}
+},
+
+showEmptyState() {
+const cartItems = document.getElementById('cartItems');
+if (cartItems) {
+cartItems.innerHTML = `
+                    <div class="empty-cart-state text-center py-5">
+                        <div class="empty-cart-icon mb-4">
+                            <i class="fa fa-shopping-cart fa-4x text-muted"></i>
+                        </div>
+                        <h4 class="mb-3">{{ trans('ecomm::content.cart_empty') }}</h4>
+                        <a href="/" class="btn btn-primary">
+                            {{ trans('ecomm::content.continue_shopping') }}
+                        </a>
+                    </div>
+                `;
+}
+
+// Hide checkout button
+const checkoutButton = document.querySelector('a[href="/checkout"]');
+if (checkoutButton) {
+checkoutButton.style.display = 'none';
+}
+},
+
+setLoading(element, isLoading) {
+if (isLoading) {
+element.style.opacity = '0.6';
+element.style.pointerEvents = 'none';
+
+const overlay = document.createElement('div');
+overlay.className = 'loading-overlay';
+overlay.innerHTML = '<div class="spinner"></div>';
+element.appendChild(overlay);
+} else {
+element.style.opacity = '';
+element.style.pointerEvents = '';
+const overlay = element.querySelector('.loading-overlay');
+if (overlay) 
+overlay.remove();
+
+}
+}
+};
+
+// Add to Cart Button Handler
+class AddToCartButton {
+constructor(button) {
+this.button = button;
+this.originalText = button.innerHTML;
+this.init();
+}
+
+init() {
+this.button.addEventListener('click', (e) => this.handleClick(e));
+}
+
+async handleClick(e) {
+e.preventDefault();
+if (this.button.disabled) 
+return;
+
+
+const productId = this.button.dataset.id;
+const type = this.button.dataset.type || 'product';
+const quantity = parseInt(this.button.dataset.qty) || 1;
+
+try {
+this.setLoading(true);
+const response = await this.addToCart(productId, type, quantity);
+
+if (response.success) {
+ToastManager.show('success', response.message);
+CartUI.updateCartDisplay(response.cart.data);
+} else {
+ToastManager.show('error', response.message);
+}
+} catch (error) {
+console.error('Add to cart error:', error);
+ToastManager.show('error', '{{ trans("ecomm::content.server_error") }}');
+} finally {
+this.setLoading(false);
+}
+}
+
+async addToCart(productId, type, quantity) {
+const response = await fetch('{{ url("ajax/cart/add-to-cart") }}', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+'X-CSRF-TOKEN': '{{ csrf_token() }}'
+},
+body: JSON.stringify(
+{post_id: productId, type, quantity}
+)
+});
+return response.json();
+}
+
+setLoading(isLoading) {
+this.button.disabled = isLoading;
+this.button.innerHTML = isLoading ? '<span class="spinner-border spinner-border-sm me-2"></span>Adding...' : this.originalText;
+}
+}
+
+// Utility Functions
+const CartUtils = {
+debounce(func, wait) {
+let timeout;
+return function executedFunction(...args) {
+const later = () => {
+clearTimeout(timeout);
+func(...args);
+};
+clearTimeout(timeout);
+timeout = setTimeout(later, wait);
+};
+},
+
+formatPrice(amount, currency = '') {
+return `${currency}${
+parseFloat(amount).toFixed(2)
+}`;
+},
+
+validateQuantity(value) {
+const quantity = parseInt(value);
+return !isNaN(quantity) && quantity > 0 ? quantity : 1;
+}
+};
+
+// Initialize everything when DOM is ready
+document.addEventListener('DOMContentLoaded', () => { // Initialize Cart UI=
+CartUI.init();
+
+// Initialize all Add to Cart buttons on the page
+document.querySelectorAll('.btn-add-to-cart').forEach(button => {
+new AddToCartButton(button);
+});
+
+// Handle quantity input validation
+document.querySelectorAll('.quantity-input').forEach(input => {
+input.addEventListener('input', CartUtils.debounce((e) => {
+const value = CartUtils.validateQuantity(e.target.value);
+if (value !== parseInt(e.target.value)) {
+e.target.value = value;
+}
+}, 300));
+});
+});
+
+// Handle errors globally
+window.addEventListener('error', (event) => {
+ToastManager.show('error', '{{ trans("ecomm::content.unexpected_error") }}');
+});
+	</script>
+
+	{# style #}
+
+	<style>
+		/* Cart Styles */
+		.card {
+			border: none;
+			transition: box-shadow 0.3s ease;
+		}
+
+		.quantity-control {
+			border-radius: 0.25rem;
+			overflow: hidden;
+		}
+
+		.quantity-control .btn {
+			padding: 0.25rem 0.5rem;
+			border: 1px solid #dee2e6;
+			background: #f8f9fa;
+			transition: all 0.2s ease;
+		}
+
+		.quantity-control .btn:hover {
+			background: #e9ecef;
+		}
+
+		.quantity-control .form-control {
+			border: 1px solid #dee2e6;
+			border-left: none;
+			border-right: none;
+		}
+
+		.quantity-control .form-control:focus {
+			box-shadow: none;
+			border-color: #dee2e6;
+		}
+
+		.remove-item {
+			transition: all 0.2s ease;
+		}
+
+		.remove-item:hover {
+			background-color: #dc3545;
+			color: white;
+		}
+
+		.empty-cart-state {
+			animation: fadeIn 0.5s ease-out;
+		}
+
+		.cart-item-row {
+			transition: all 0.3s ease;
+		}
+
+		.cart-item-row:hover {
+			background-color: #f8f9fa;
+		}
+
+		.summary-item {
+			padding: 0.5rem 0;
+		}
+
+		/* Animations */
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+				transform: translateY(-10px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@keyframes slideIn {
+			from {
+				transform: translateX(100%);
+			}
+			to {
+				transform: translateX(0);
+			}
+		}
+
+		/* Loading overlay */
+		.loading-overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(255, 255, 255, 0.7);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			z-index: 1000;
+		}
+
+		.spinner {
+			width: 2rem;
+			height: 2rem;
+			border: 3px solid #f3f3f3;
+			border-top: 3px solid #3498db;
+			border-radius: 50%;
+			animation: spin 1s linear infinite;
+		}
+
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+		/* Toast improvements */
+		.toast-container {
+			z-index: 1050;
+		}
+
+		.toast {
+			min-width: 250px;
+			box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+		}
+
+		/* Responsive styles */
+		@media(max-width: 768px) {
+			.card {
+				border-radius: 0;
+			}
+
+			.quantity-control {
+				width: 100px !important;
+			}
+
+			.table-responsive {
+				margin: 0 -1rem;
+			}
+
+			.card-body {
+				padding: 1rem;
+			}
+		}
+
+
+		/* Enhanced Cart Styling */
+		.enhanced-cart-ui {
+			/* Base improvements */
+			--cart-primary: #4361ee;
+			--cart-secondary: #3f37c9;
+			--cart-success: #0bb4aa;
+			--cart-danger: #e63946;
+			--cart-light: #f8f9fa;
+			--cart-border: #e9ecef;
+			--cart-shadow: rgba(149, 157, 165, 0.1);
+		}
+
+		.enhanced-cart-ui .card {
+			border-radius: 0.5rem;
+			box-shadow: 0 4px 12px var(--cart-shadow);
+			margin-bottom: 1.5rem;
+			overflow: hidden;
+		}
+
+		.enhanced-cart-ui .card-header {
+			border-bottom: 1px solid var(--cart-border);
+			padding: 1.25rem 1.5rem;
+		}
+
+		.enhanced-cart-ui .card-header h3 {
+			font-weight: 600;
+			color: #333;
+		}
+
+		.enhanced-cart-ui .card-body {
+			padding: 1.5rem;
+		}
+
+		/* Table styling */
+		.enhanced-cart-ui .table {
+			margin-bottom: 0;
+		}
+
+		.enhanced-cart-ui .table th {
+			font-weight: 600;
+			color: #666;
+			border-top: none;
+			text-transform: uppercase;
+			font-size: 0.85rem;
+			padding-top: 1rem;
+			padding-bottom: 1rem;
+			border-bottom: 2px solid var(--cart-border);
+		}
+
+		.enhanced-cart-ui .table td {
+			padding: 1.25rem 0.75rem;
+			vertical-align: middle;
+			border-color: var(--cart-border);
+		}
+
+		.enhanced-cart-ui .item-price,
+		.enhanced-cart-ui .item-total {
+			font-weight: 600;
+		}
+
+		.enhanced-cart-ui .table tbody tr {
+			transition: background-color 0.2s;
+		}
+
+		.enhanced-cart-ui .table tbody tr:hover {
+			background-color: rgba(67, 97, 238, 0.05);
+		}
+
+		/* Product image and info */
+		.enhanced-cart-ui .table img {
+			border-radius: 0.5rem;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+			transition: transform 0.2s;
+		}
+
+		.enhanced-cart-ui .table img:hover {
+			transform: scale(1.05);
+		}
+
+		.enhanced-cart-ui h5.mb-1 {
+			font-weight: 600;
+			color: #333;
+			margin-bottom: 0.5rem !important;
+		}
+
+		.enhanced-cart-ui .badge {
+			font-weight: 500;
+			padding: 0.5em 0.8em;
+			letter-spacing: 0.5px;
+		}
+
+		/* Quantity controls */
+		.enhanced-cart-ui .quantity-control {
+			border-radius: 0.375rem;
+			overflow: hidden;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+		}
+
+		.enhanced-cart-ui .quantity-control .btn {
+			border: 1px solid var(--cart-border);
+			background: white;
+			color: #666;
+			width: 32px;
+			height: 32px;
+			padding: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.enhanced-cart-ui .quantity-control .btn:hover {
+			background: var(--cart-primary);
+			color: white;
+			border-color: var(--cart-primary);
+		}
+
+		.enhanced-cart-ui .quantity-control .form-control {
+			height: 32px;
+			font-weight: 600;
+			text-align: center;
+			width: 50px;
+			border-color: var(--cart-border);
+		}
+
+		/* Remove button */
+		.enhanced-cart-ui .remove-item {
+			height: 32px;
+			width: 32px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 0.375rem;
+			transition: all 0.2s;
+		}
+
+		.enhanced-cart-ui .remove-item:hover {
+			background-color: var(--cart-danger);
+			color: white;
+			transform: scale(1.05);
+		}
+
+		/* Order summary section */
+		.enhanced-cart-ui .summary-item {
+			padding: 0.75rem 0;
+			font-size: 1rem;
+		}
+
+		.enhanced-cart-ui .summary-item:last-of-type {
+			padding-bottom: 1.25rem;
+		}
+
+		.enhanced-cart-ui hr {
+			margin: 1rem 0;
+			opacity: 0.15;
+		}
+
+		.enhanced-cart-ui .total-price,
+		.enhanced-cart-ui .subtotal-price {
+			font-weight: 700;
+			color: #333;
+		}
+
+		.enhanced-cart-ui .discount-amount {
+			font-weight: 700;
+			color: var(--cart-success) !important;
+		}
+
+		/* Buttons */
+		.enhanced-cart-ui .btn-primary {
+			background-color: var(--cart-primary);
+			border-color: var(--cart-primary);
+			font-weight: 600;
+			padding: 0.75rem 1.5rem;
+			transition: all 0.2s;
+			border-radius: 0.375rem;
+		}
+
+		.enhanced-cart-ui .btn-primary:hover {
+			background-color: var(--cart-secondary);
+			border-color: var(--cart-secondary);
+			transform: translateY(-2px);
+			box-shadow: 0 4px 8px rgba(67, 97, 238, 0.25);
+		}
+
+		.enhanced-cart-ui .btn-outline-secondary,
+		.enhanced-cart-ui .btn-outline-danger {
+			font-weight: 500;
+			border-width: 1px;
+		}
+
+		/* Empty cart state */
+		.enhanced-cart-ui .empty-cart-state {
+			padding: 3rem 1rem;
+		}
+
+		.enhanced-cart-ui .empty-cart-icon i {
+			color: #ccc;
+			opacity: 0.7;
+		}
+
+		.enhanced-cart-ui .empty-cart-state h4 {
+			color: #666;
+			font-weight: 600;
+		}
+
+		/* Toast improvements */
+		.enhanced-cart-ui + .toast-container .toast {
+			border-radius: 0.5rem;
+			padding: 0.5rem;
+			min-width: 280px;
+			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+		}
+
+		/* Responsive adjustments */
+		@media(max-width: 992px) {
+			.enhanced-cart-ui .card {
+				margin-bottom: 1rem;
+			}
+		}
+
+		@media(max-width: 768px) {
+			.enhanced-cart-ui .card-body {
+				padding: 1.25rem;
+			}
+
+			.enhanced-cart-ui .table td {
+				padding: 1rem 0.5rem;
+			}
+
+			.enhanced-cart-ui h5.mb-1 {
+				font-size: 1rem;
+			}
+		}
+
+		@media(max-width: 576px) {
+			.enhanced-cart-ui .d-flex.align-items-center {
+				flex-direction: column;
+				align-items: flex-start !important;
+			}
+
+			.enhanced-cart-ui .flex-shrink-0 {
+				margin-bottom: 0.75rem;
+			}
+
+			.enhanced-cart-ui .flex-grow-1.ms-3 {
+				margin-left: 0 !important;
+			}
+		}
+	</style>
+
+{% endblock %}
