@@ -171,8 +171,24 @@ class EventManagementAction extends Action
             [
                 'evman_checkout_page',
                 'evman_thanks_page',
+                'evman_store_address1',
+                'evman_store_address2',
+                'evman_city',
+                'evman_country',
+                'evman_zipcode',
+                'evman_event_default_status',
+                'evman_ticket_default_status',
+                'evman_ticket_prefix',
+                'evman_email_notification',
+                'evman_booking_expiry_time',
+                'evman_date_format',
+                'evman_time_format',
             ]
-
+        );
+        
+        $this->addAction(
+            'juzaweb.setting.save',
+            [$this, 'saveSetting']
         );
     }
 
@@ -279,5 +295,35 @@ class EventManagementAction extends Action
                 'show_api' => true,
             ],
         ]);
+    }
+
+    /**
+     * Handle saving event management plugin settings
+     */
+    public function saveSetting($request): void
+    {
+        // Store address settings
+        set_config('evman_store_address1', $request->input('evman_store_address1'));
+        set_config('evman_store_address2', $request->input('evman_store_address2'));
+        set_config('evman_city', $request->input('evman_city'));
+        set_config('evman_country', $request->input('evman_country'));
+        set_config('evman_zipcode', $request->input('evman_zipcode'));
+        
+        // Event and ticket default settings
+        set_config('evman_event_default_status', $request->input('evman_event_default_status', 'active'));
+        set_config('evman_ticket_default_status', $request->input('evman_ticket_default_status', 'active'));
+        set_config('evman_ticket_prefix', $request->input('evman_ticket_prefix', 'EVT-'));
+        
+        // Notification settings
+        set_config('evman_email_notification', $request->input('evman_email_notification', 1));
+        set_config('evman_booking_expiry_time', $request->input('evman_booking_expiry_time', 30));
+        
+        // Format settings
+        set_config('evman_date_format', $request->input('evman_date_format', 'Y-m-d'));
+        set_config('evman_time_format', $request->input('evman_time_format', 'H:i'));
+        
+        // Page settings
+        set_config('evman_checkout_page', $request->input('evman_checkout_page'));
+        set_config('evman_thanks_page', $request->input('evman_thanks_page'));
     }
 }

@@ -28,3 +28,4 @@ Route::jwResource(
 );
 
 Route::get('event-management/settings', [SettingController::class, 'index'])->name('admin.event-management.setting');
+Route::post('event-management/settings', [SettingController::class, 'save'])->name('admin.event-management.setting.save');
