@@ -1,4 +1,68 @@
- <div class="card mb-4">
+<style>
+    .lms-settings .card-title {
+        margin-right: 5px;
+    }
+</style>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="card-title">{{ __('Course Display Settings') }}</h5>
+        <div class="card-subtitle">
+            {{ __('Configure how courses are displayed and accessed by students.') }}
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                {{ Field::select('Default Course Status', 'lms_default_course_status', [
+                    'value' => get_config('lms_default_course_status', 'draft'),
+                    'options' => [
+                        'publish' => __('Published'),
+                        'draft' => __('Draft'),
+                        'pending' => __('Pending Review'),
+                    ],
+                    'class' => 'form-select',
+                ]) }}
+                <small class="form-text text-muted">{{ __('Default status for newly created courses.') }}</small>
+            </div>
+            <div class="col-md-6">
+                {{ Field::text('Course Permalink Base', 'lms_course_permalink_base', [
+                    'value' => get_config('lms_course_permalink_base', 'course'),
+                    'class' => 'form-control',
+                ]) }}
+                <small class="form-text text-muted">{{ __('Base slug used in course URLs (e.g., example.com/course/course-name).') }}</small>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-6">
+                {{ Field::select('Default Course Access Mode', 'lms_course_access_mode', [
+                    'value' => get_config('lms_course_access_mode', 'open'),
+                    'options' => [
+                        'open' => __('Open Access'),
+                        'paid' => __('Paid Access'),
+                        'restricted' => __('Restricted Access'),
+                    ],
+                    'class' => 'form-select',
+                ]) }}
+                <small class="form-text text-muted">{{ __('Default access mode for new courses.') }}</small>
+            </div>
+            <div class="col-md-6">
+                {{ Field::select('Course Content Display', 'lms_course_display_mode', [
+                    'value' => get_config('lms_course_display_mode', 'all'),
+                    'options' => [
+                        'all' => __('Show All Lessons'),
+                        'sequential' => __('Sequential Access'),
+                    ],
+                    'class' => 'form-select',
+                ]) }}
+                <small class="form-text text-muted">{{ __('How course content is displayed to students.') }}</small>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+ <div class="card mb-4 d-none">
     <div class="card-header">
         <h5 class="card-title">{{ trans('lms::content.store_address') }}</h5>
         <div class="card-subtitle">

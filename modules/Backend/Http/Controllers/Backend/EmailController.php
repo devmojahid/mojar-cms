@@ -56,6 +56,7 @@ class EmailController extends BackendController
         $email = $request->post('email');
         Email::make()
             ->setEmails($email)
+            ->withTemplate('test_email')
             ->setSubject('Send email for {{ name }}')
             ->setBody(
                 'Hello {{ name }}, If you receive this email, it means that your config email on Mojar is active.'

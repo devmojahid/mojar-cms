@@ -9,7 +9,7 @@ use Juzaweb\Backend\Models\EmailTemplate;
 class Email
 {
     protected array $emails;
-    protected string $template;
+    protected string $template = '';
     protected array $params = [];
     protected int $priority = 1;
     protected string $subject;
@@ -105,7 +105,7 @@ class Email
                 [
                     'email' => $email,
                     'template_id' => $templateId,
-                    'template_code' => $this->template,
+                    'template_code' => $this->template ?: null,
                     'params' => $this->params,
                     'priority' => $this->priority,
                     'data' => $data,

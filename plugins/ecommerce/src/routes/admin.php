@@ -38,6 +38,7 @@ Route::jwResource(
 );
 
 Route::get('ecommerce/settings', [SettingController::class, 'index'])->name('admin.ecommerce.setting');
+Route::post('ecommerce/settings', [SettingController::class, 'save'])->name('admin.ecommerce.setting.save');
 
 
 Route::jwResource('ecommerce/payment-methods', PaymentMethodController::class,[ 'name' => 'payment_methods']);

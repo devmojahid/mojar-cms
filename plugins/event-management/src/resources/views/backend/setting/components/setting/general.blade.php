@@ -4,7 +4,7 @@
     }
 </style>
 
-<div class="card mb-4">
+<div class="card mb-4 d-none">
     <div class="card-header">
         <h5 class="card-title">{{ trans('evman::content.store_address') }} </h5>
         <div class="card-subtitle">
