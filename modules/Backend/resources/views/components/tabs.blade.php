@@ -4,8 +4,11 @@
             @php
                 $index = 0;
                 $tabs = $tabs ?? [];
+                $visibleTabs = collect($tabs)->filter(function ($tab) {
+                    return !isset($tab['show']) || $tab['show'] === true;
+                })->toArray();
             @endphp
-            @foreach ($tabs as $key => $tab)
+            @foreach ($visibleTabs as $key => $tab)
                 <li class="nav-item">
                     <a href="#{{ $key }}-tab" class="nav-link @if ($index == 0) active @endif"
                         id="{{ $key }}-label" data-toggle="tab" role="tab"
@@ -27,7 +30,7 @@
             @php
                 $index = 0;
             @endphp
-            @foreach ($tabs as $key => $tab)
+            @foreach ($visibleTabs as $key => $tab)
                 <div class="tab-pane p-3 @if ($index == 0) active @endif" id="{{ $key }}-tab"
                     role="tabpanel" aria-labelledby="{{ $key }}-label">
                     {{ ${'tab_' . $key} ?? '' }}

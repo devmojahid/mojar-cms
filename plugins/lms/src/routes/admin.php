@@ -40,6 +40,7 @@ Route::jwResource(
 );
 
 Route::get('lms/settings', [SettingController::class, 'index'])->name('admin.lms.setting');
+Route::post('lms/settings', [SettingController::class, 'save'])->name('admin.lms.setting.save');
 
 Route::get('/courses/{course}/curriculum', [CurriculumController::class, 'index'])
      ->name('courses.curriculum.index');
