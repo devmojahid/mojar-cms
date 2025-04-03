@@ -2,40 +2,168 @@
     <ul>
         <li><span>Name</span><b>:</b> {{ data.user.name }}</li>
         <li><span>email</span><b>:</b> {{ data.user.email }}</li>
-        <li><span>phone</span><b>:</b> {{ data.user.phone }}</li>
-        <li><span>address </span><b>:</b> {{ data.user.address }}
+        <li><span>phone</span><b>:</b> {{ data.user.json_metas.phone }}</li>
+        <li><span>address </span><b>:</b> {{ data.user.json_metas.address }}
         </li>
     </ul>
 </div>
 
 <div class="tf__dashboard_info_edit tf__dashboard_info">
-    <form action="#" method="POST">
+    <form action="{{ route('profile.update') }}" method="POST" class="form-ajax" enctype='multipart/form-data'>
+    {{ csrf_field() }}
+        <input type="hidden" name="_method" value="PUT">
         <div class="row wow fadeInUp" data-wow-duration="1s">
             <div class="col-xl-12">
                 <div class="tf__form_single_input">
                     <label>name</label>
-                    <input type="text" placeholder="Name" value="{{ data.user.name }}">
+                    <input type="text" name="name" placeholder="Name" value="{{ data.user.name }}">
                 </div>
             </div>
             <div class="col-xl-6">
                 <div class="tf__form_single_input">
                     <label>Email</label>
-                    <input type="email" placeholder="Email" value="{{ data.user.email }}">
+                    <input type="email" name="email" placeholder="Email" value="{{ data.user.email }}">
                 </div>
             </div>
             <div class="col-xl-6">
                 <div class="tf__form_single_input">
                     <label>phone</label>
-                    <input type="text" placeholder="Phone" value="{{ data.user.phone }}">
+                    <input type="text" name="metas[phone]" placeholder="Phone" value="{{ data.user.json_metas.phone }}">
+                </div>
+            </div>
+            <div class="col-xl-12">
+                <div class="tf__form_single_input">
+                    <div class="tf__form_single_input">
+                        <div class="tf__form_single_input">
+                            <label>Avatar Upload</label>
+                            
+                            {# Hidden input that will store the avatar path #}
+                            <input type="hidden" id="avatar-path" value="{{ upload_url(data.user.avatar) }}">
+                            
+                            {# File input for selecting the image #}
+                            <div class="upload-container position-relative">
+                                <input type="file" name="avatar" id="avatar-file" class="file-input" style="display: none;" accept="image/*">
+                                
+                                {# Preview area #}
+                                <div class="dropify-preview position-relative rounded-3 overflow-hidden mb-2" id="preview-container" style="{{ data.user.avatar ? '' : 'display: none;' }}">
+                                    <span class="dropify-render" id="image-preview">
+                                        {% if data.user.avatar %}
+                                            <img src="{{ upload_url(data.user.avatar) }}" style="max-width: 100%; max-height: 200px;" />
+                                        {% endif %}
+                                    </span>
+                                    <div class="dropify-infos position-absolute bottom-0 start-0 w-100 bg-opacity-75 bg-dark text-white p-2">
+                                        <div class="dropify-infos-inner">
+                                            <p class="dropify-filename mb-0">
+                                                <span class="dropify-filename-inner" id="filename-text">
+                                                    {% if data.user.avatar %}
+                                                        {{ data.user.avatar|split('/')|last }}
+                                                    {% endif %}
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <a href="javascript:void(0)" class="image-clear position-absolute top-0 end-0 m-2 z-1" id="clear-button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M4 7l16 0"></path>
+                                            <path d="M10 11l0 6"></path>
+                                            <path d="M14 11l0 6"></path>
+                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                                
+                                {# Upload area #}
+                                <div class="upload-area d-flex flex-column align-items-center justify-content-center p-4 rounded-3" id="upload-area" style="border: 2px dashed #ccc; cursor: pointer; {{ data.user.avatar ? 'display: none;' : '' }}">
+                                    <div class="icon-wrapper mb-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-library-photo">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M7 3m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z"></path>
+                                            <path d="M4.012 7.26a2.005 2.005 0 0 0 -1.012 1.737v10c0 1.1 .9 2 2 2h10c.75 0 1.158 -.385 1.5 -1"></path>
+                                            <path d="M17 7h.01"></path>
+                                            <path d="M7 13l3.644 -3.644a1.21 1.21 0 0 1 1.712 0l3.644 3.644"></path>
+                                            <path d="M15 12l1.644 -1.644a1.21 1.21 0 0 1 1.712 0l2.644 2.644"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="mb-0">Click or drag an image here to upload</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
             <div class="col-xl-12">
                 <div class="tf__form_single_input">
                     <label>address</label>
-                    <textarea rows="5" placeholder="Address">{{ data.user.address }}</textarea>
+                    <textarea rows="5" name="metas[address]" placeholder="Address">{{ data.user.json_metas.address }}</textarea>
                 </div>
                 <button type="submit" class="tf__common_btn">save</button>
             </div>
         </div>
     </form>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all the elements
+        const fileInput = document.getElementById('avatar-file');
+        const uploadArea = document.getElementById('upload-area');
+        const previewContainer = document.getElementById('preview-container');
+        const imagePreview = document.getElementById('image-preview');
+        const filenameText = document.getElementById('filename-text');
+        const clearButton = document.getElementById('clear-button');
+        const hiddenInput = document.getElementById('avatar-path');
+        
+        // Click on upload area triggers file input
+        uploadArea.addEventListener('click', function() {
+            fileInput.click();
+        });
+        
+        // File input change event
+        fileInput.addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                
+                reader.onload = function(event) {
+                    // Update preview image
+                    imagePreview.innerHTML = `<img src="${event.target.result}" style="max-width: 100%; max-height: 200px;" />`;
+                    
+                    // Update filename text
+                    filenameText.textContent = file.name;
+                    
+                    // Show preview, hide upload area
+                    previewContainer.style.display = 'block';
+                    uploadArea.style.display = 'none';
+                    
+                    console.log('File selected:', file.name);
+                };
+                
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // Clear button click event
+        clearButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            // Clear file input
+            fileInput.value = '';
+            
+            // Clear the hidden input
+            hiddenInput.value = '';
+            
+            // Clear preview
+            imagePreview.innerHTML = '';
+            filenameText.textContent = '';
+            
+            // Hide preview, show upload area
+            previewContainer.style.display = 'none';
+            uploadArea.style.display = 'flex';
+            
+            console.log('Image cleared');
+        });
+    });
+</script>

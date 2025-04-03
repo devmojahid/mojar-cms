@@ -33,6 +33,7 @@ class Custom extends AbstractExtension
             new TwigFunction('text_field', 'Field::text'),
             new TwigFunction('textarea_field', 'Field::textarea'),
             new TwigFunction('select_field', 'Field::select'),
+            new TwigFunction('image_field', 'Field::image'),
             new TwigFunction('select_taxonomy_field', 'Field::selectTaxonomy'),
             new TwigFunction('select_resource_field', 'Field::selectResource'),
             new TwigFunction('jw_nav_menu', 'jw_nav_menu', ['is_safe' => ['html']]),

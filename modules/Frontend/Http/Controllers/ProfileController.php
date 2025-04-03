@@ -15,6 +15,7 @@ use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Juzaweb\Frontend\Http\Requests\ChangePasswordRequest;
 use Juzaweb\Frontend\Http\Requests\UpdateProfileRequest;
 use Illuminate\Support\Facades\Auth;
+use Juzaweb\CMS\Support\FileManager;
 
 class ProfileController extends FrontendController
 {
@@ -88,6 +89,72 @@ class ProfileController extends FrontendController
     }
 
     public function update(UpdateProfileRequest $request): JsonResponse|RedirectResponse
+    {
+        $user = $request->user();
+        
+        // Extract allowed fields from request
+        $userData = $request->only(['name', 'phone', 'avatar']);
+        
+        // Extract meta data with null check
+        $metasInput = $request->post('metas') ?? [];
+        $metas = array_only($metasInput, ['birthday', 'country', 'address', 'city', 'state', 'zip_code', 'bio', 'phone']);
+        
+        DB::beginTransaction();
+        try {
+            // Handle password update if provided
+            if ($password = $request->input('password')) {
+                $userData['password'] = Hash::make($password);
+            }
+
+            // if ($request->hasFile('avatar')) {
+            //      $userData['avatar'] = $this->handleAvatarUpload($request->file('avatar'));
+            // } elseif ($request->input('avatar')) {
+            //      $userData['avatar'] = $request->input('avatar');
+            // }
+
+            if ($request->hasFile('avatar')) { // This will be the original file input field
+                try {
+                    // Use your FileManager to process the file
+                    $avatar = FileManager::addFile(
+                        $request->file('avatar'), // Pass the uploaded file
+                        'image',                       // Type
+                        null,                          // Additional params if needed
+                        $user->id                  // User ID
+                    );
+                    
+                    // Set the avatar path from the FileManager response
+                    $userData['avatar'] = $avatar->path;
+                } catch (\Exception $e) {
+                    // Handle error
+                    $userData['avatar'] = null;
+                    // Log error
+                    \Log::error('Avatar upload failed: ' . $e->getMessage());
+                }
+            }
+            
+            // Update user data
+            $this->userRepository->update($userData, $user->id);
+            
+            // Update meta data
+            foreach ($metas as $key => $value) {
+                $user->setMeta($key, $value);
+            }
+            
+            // Execute theme hooks
+            do_action('theme.profile.update', $user, $request->all());
+            
+            DB::commit();
+            
+            return $this->success([
+                'message' => trans('cms::message.update_successfully'),
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function updateOld(UpdateProfileRequest $request): JsonResponse|RedirectResponse
     {
         $user = $request->user();
 

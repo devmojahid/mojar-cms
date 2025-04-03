@@ -22,6 +22,48 @@ class UpdateProfileRequest extends FormRequest
             'phone' => 'nullable|string|max:20',
             'password' => 'nullable|confirmed|string|max:32|min:6',
             'password_confirmation' => 'nullable|required_if:password,!=,|string|max:32|min:6',
+            'avatar' => [
+                'nullable'
+            ],
+            'metas' => [
+                'bail',
+                'array'
+            ],
+            'metas.birthday' => [
+                'bail',
+                'nullable',
+                'string',
+            ],
+            'metas.country' => [
+                'bail',
+                'nullable',
+                'string',
+            ],
+            'metas.address' => [
+                'bail',
+                'nullable',
+                'string',
+            ],
+            'metas.city' => [
+                'bail',
+                'nullable',
+                'string',
+            ],
+            'metas.state' => [
+                'bail',
+                'nullable',
+                'string',
+            ],
+            'metas.zip_code' => [
+                'bail',
+                'nullable',
+                'string',
+            ],
+            'metas.bio' => [
+                'bail',
+                'nullable',
+                'string',
+            ]
         ];
     }
 }

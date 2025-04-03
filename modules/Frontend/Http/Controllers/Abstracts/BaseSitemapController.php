@@ -24,9 +24,9 @@ abstract class BaseSitemapController extends Controller
 
     public function __construct()
     {
-        if (!get_config('jw_enable_sitemap', true)) {
-            abort(404);
-        }
+        // if (!get_config('jw_enable_sitemap', true)) {
+        //     abort(404);
+        // }
     }
 
     protected function totalPost(string $type): int

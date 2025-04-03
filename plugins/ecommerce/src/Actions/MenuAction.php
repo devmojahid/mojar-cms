@@ -130,7 +130,7 @@ class MenuAction extends Action
                 'position' => 10,
                 'data' => [
                     'orders' => OrderResource::collection(
-                        Order::with(['paymentMethod'])
+                        Order::with(['paymentMethod'])->where('user_id', auth()?->user()?->id)
                             ->paginate(10)
                     )->response()->getData(true),
                     'thank_page' => get_config('_thanks_page')
