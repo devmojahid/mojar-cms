@@ -215,25 +215,35 @@ class Field implements FieldContract
             $fields = $options['fields'];
         }
 
+        // Normalize value to ensure it's in the correct format
+        if (isset($options['value'])) {
+            if (is_string($options['value'])) {
+                try {
+                    $decoded = json_decode($options['value'], true);
+                    if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                        $options['value'] = $decoded;
+                    }
+                } catch (\Exception $e) {
+                    // Keep original value if decoding fails
+                }
+            } elseif (!is_array($options['value'])) {
+                $options['value'] = [];
+            }
+        } else {
+            $options['value'] = [];
+        }
+
         $repeaterConfig = array_merge($options, [
             'type' => 'repeater',
             'label' => $options['label'],
             'name' => $name,
             'fields' => $fields,
+            // Ensure we have default text for buttons
+            'add_button_text' => $options['add_button_text'] ?? trans('cms::app.add_item', ['label' => $options['label']]),
+            'remove_button_text' => $options['remove_button_text'] ?? trans('cms::app.remove'),
         ]);
 
         $repeater = new RepeaterField($repeaterConfig);
-
-        // Handle existing values
-        if (isset($options['value'])) {
-            $values = is_string($options['value']) 
-                ? json_decode($options['value'], true) 
-                : $options['value'];
-            
-            if (is_array($values)) {
-                $repeater->setItems($values);
-            }
-        }
 
         return view('cms::components.form_repeater', [
             'repeater' => $repeater,

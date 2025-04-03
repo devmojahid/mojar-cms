@@ -29,7 +29,7 @@ class RepeaterField implements RepeaterFieldContract
     {
         $this->config = $this->normalizeConfig($config);
         $this->defaultItems = $config['default'] ?? [];
-        $this->items = $this->defaultItems;
+        $this->items = $this->normalizeItems($config['value'] ?? $this->defaultItems);
     }
 
     public function getConfig(): array
@@ -44,7 +44,7 @@ class RepeaterField implements RepeaterFieldContract
 
     public function setItems(array $items): void
     {
-        $this->items = array_filter($items, [$this, 'validateItem']);
+        $this->items = $this->normalizeItems($items);
     }
 
     public function getDefaultItems(): array
@@ -54,12 +54,25 @@ class RepeaterField implements RepeaterFieldContract
 
     public function validateItem(array $itemData): bool
     {
+        if (empty($itemData)) {
+            return false;
+        }
+
         foreach ($this->config['fields'] as $field) {
             $name = $field['name'];
-            if (!isset($itemData[$name]) && !($field['optional'] ?? false)) {
+            
+            // Skip optional fields
+            if (isset($field['optional']) && $field['optional']) {
+                continue;
+            }
+            
+            // For required fields, ensure they exist and are not null/empty string
+            if (!isset($itemData[$name]) || 
+                (is_string($itemData[$name]) && trim($itemData[$name]) === '')) {
                 return false;
             }
         }
+        
         return true;
     }
 
@@ -71,14 +84,49 @@ class RepeaterField implements RepeaterFieldContract
      */
     protected function normalizeConfig(array $config): array
     {
-        return array_merge([
+        $defaultConfig = [
             'min_items' => 0,
             'max_items' => null,
-            'add_button_text' => trans('cms::app.add_item'),
+            'add_button_text' => trans('cms::app.add_item', ['label' => $config['label'] ?? '']),
             'remove_button_text' => trans('cms::app.remove'),
             'sortable' => true,
             'collapsible' => true,
             'confirm_remove' => true,
-        ], $config);
+            'fields' => [],
+            'value' => [],
+        ];
+
+        return array_merge($defaultConfig, $config);
+    }
+
+    /**
+     * Normalize and filter items
+     *
+     * @param array $items
+     * @return array
+     */
+    protected function normalizeItems(array $items): array
+    {
+        // Handle JSON string values that might come from the database
+        if (count($items) === 1 && is_string(reset($items))) {
+            $jsonValue = reset($items);
+            try {
+                $decodedItems = json_decode($jsonValue, true);
+                if (json_last_error() === JSON_ERROR_NONE && is_array($decodedItems)) {
+                    $items = $decodedItems;
+                }
+            } catch (\Exception $e) {
+                // If decoding fails, keep original items
+            }
+        }
+
+        // If it's not a multidimensional array, but should be
+        if (!empty($items) && !is_array(reset($items))) {
+            // If it appears to be a single item, wrap it
+            $items = [$items];
+        }
+
+        // Filter out invalid items
+        return array_filter($items, [$this, 'validateItem']);
     }
 }

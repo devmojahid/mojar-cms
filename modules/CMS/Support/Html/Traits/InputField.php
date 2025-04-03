@@ -16,6 +16,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Support\Html\RepeaterField;
 
 trait InputField
 {
@@ -167,6 +168,12 @@ trait InputField
 
     /**
      * Renders a repeater field group.
+     * 
+     * @param string|Model $label The label for the repeater field
+     * @param string|null $name The name attribute for the field
+     * @param array|null $fields The subfields that make up each repeater item
+     * @param array|null $options Additional configuration options
+     * @return Factory|View The rendered repeater field
      */
     public function repeater(string|Model $label, ?string $name, ?array $fields = [], ?array $options = []): Factory|View
     {
@@ -179,15 +186,37 @@ trait InputField
         // Set sensible defaults for repeater options
         $options['min_items'] = $options['min_items'] ?? 0;
         $options['max_items'] = $options['max_items'] ?? null;
-        $options['add_button_text'] = $options['add_button_text'] ?? 'Add Item';
-        $options['remove_button_text'] = $options['remove_button_text'] ?? 'Remove';
+        $options['add_button_text'] = $options['add_button_text'] ?? trans('cms::app.add_item', ['label' => $options['label']]);
+        $options['remove_button_text'] = $options['remove_button_text'] ?? trans('cms::app.remove');
+        $options['collapsible'] = $options['collapsible'] ?? true;
+        $options['sortable'] = $options['sortable'] ?? true;
+        $options['confirm_remove'] = $options['confirm_remove'] ?? true;
         
         // If the value is stored as a JSON string, decode it to an array
-        if (isset($options['value']) && is_string($options['value'])) {
-            $options['value'] = json_decode($options['value'], true) ?? [];
+        if (isset($options['value'])) {
+            if (is_string($options['value'])) {
+                try {
+                    $decoded = json_decode($options['value'], true);
+                    if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                        $options['value'] = $decoded;
+                    }
+                } catch (\Exception $e) {
+                    // Keep original value if decoding fails
+                }
+            } elseif (!is_array($options['value'])) {
+                $options['value'] = [];
+            }
+        } else {
+            $options['value'] = [];
         }
         
+        $repeater = new RepeaterField($options);
+        
         // Render the repeater field Blade view
-        return view('cms::components.form_repeater', $options);
+        return view('cms::components.form_repeater', [
+            'repeater' => $repeater,
+            'id' => $options['id'],
+            'required' => $options['required'] ?? false,
+        ]);
     }
 }

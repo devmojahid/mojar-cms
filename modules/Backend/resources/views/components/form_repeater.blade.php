@@ -18,16 +18,22 @@
     </div>
 
     <button type="button" class="btn btn-secondary btn-sm mt-2 add-repeater-item">
-        <i class="fas fa-plus"></i> {{ $repeater->getConfig()['add_button_text'] }}
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M12 5l0 14" />
+            <path d="M5 12l14 0" />
+        </svg>
+        {{ $repeater->getConfig()['add_button_text'] ?? trans('cms::app.add_item', ['label' => $repeater->getConfig()['label']]) }}
     </button>
 
     <template class="repeater-template">
         @include('cms::components.form_repeater_item', [
             'fields' => $repeater->getConfig()['fields'],
-            'values' => $repeater->getConfig()['value'],
+            'values' => $repeater->getConfig()['value'] ?? [],
             'index' => '__INDEX__',
             'name' => $repeater->getConfig()['name'],
-
         ])
     </template>
 </div>
@@ -50,21 +56,24 @@
         }
 
         initializeEvents() {
-            this.addButton.addEventListener('click', () => this.addItem());
+            if (this.addButton) {
+                this.addButton.addEventListener('click', () => this.addItem());
+            }
 
             this.itemsContainer.addEventListener('click', (e) => {
-                if (e.target.matches('.remove-repeater-item')) {
-                    const confirmMessage = e.target.dataset.confirm;
+                const removeButton = e.target.closest('.remove-repeater-item');
+                if (removeButton) {
+                    const confirmMessage = removeButton.dataset.confirm;
                     if (confirmMessage && !confirm(confirmMessage)) {
                         return;
                     }
-                    this.removeItem(e.target.closest('.repeater-item'));
+                    this.removeItem(removeButton.closest('.repeater-item'));
                 }
             });
         }
 
         initializeSortable() {
-            if (this.sortable && window.Sortable) {
+            if (this.sortable && typeof Sortable !== 'undefined') {
                 new Sortable(this.itemsContainer, {
                     handle: '.handle',
                     animation: 150,
@@ -74,18 +83,63 @@
         }
 
         addItem() {
-            const currentCount = this.itemsContainer.children.length;
+            try {
+                const currentCount = this.itemsContainer.children.length;
 
-            if (this.maxItems && currentCount >= this.maxItems) {
-                return;
+                if (this.maxItems && currentCount >= this.maxItems) {
+                    return;
+                }
+
+                const newIndex = currentCount;
+                let newItem = this.template.replace(/__INDEX__/g, newIndex);
+
+                // Create a temporary div to safely parse the HTML
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = newItem.trim();
+
+                // Get the first child as the new item
+                const itemElement = tempDiv.firstElementChild;
+                if (!itemElement) {
+                    console.error('Failed to create new repeater item');
+                    return;
+                }
+
+                this.itemsContainer.appendChild(itemElement);
+                this.initializeNewItemFields(itemElement);
+                this.reindexItems();
+            } catch (error) {
+                console.error('Error adding repeater item:', error);
             }
+        }
 
-            const newIndex = currentCount;
-            const newItem = this.template.replace(/__INDEX__/g, newIndex);
+        addItem2() {
+            try {
+                const currentCount = this.itemsContainer.children.length;
 
-            this.itemsContainer.insertAdjacentHTML('beforeend', newItem);
-            this.initializeNewItemFields(this.itemsContainer.lastElementChild);
-            this.reindexItems();
+                if (this.maxItems && currentCount >= this.maxItems) {
+                    return;
+                }
+
+                const newIndex = currentCount;
+                let newItem = this.template.replace(/__INDEX__/g, newIndex);
+
+                // Create a temporary div to safely parse the HTML
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = newItem.trim();
+
+                // Get the first child as the new item
+                const itemElement = tempDiv.firstElementChild;
+                if (!itemElement) {
+                    console.error('Failed to create new repeater item');
+                    return;
+                }
+
+                this.itemsContainer.appendChild(itemElement);
+                this.initializeNewItemFields(itemElement);
+                this.reindexItems();
+            } catch (error) {
+                console.error('Error adding repeater item:', error);
+            }
         }
 
         removeItem(item) {
@@ -95,65 +149,82 @@
                 return;
             }
 
-            item.remove();
-            this.reindexItems();
+            if (item) {
+                item.remove();
+                this.reindexItems();
+            }
         }
 
         reindexItems() {
-            Array.from(this.itemsContainer.children).forEach((item, index) => {
-                // Update index data attribute
-                item.dataset.index = index;
+            try {
+                Array.from(this.itemsContainer.children).forEach((item, index) => {
+                    // Update index data attribute
+                    item.dataset.index = index;
 
-                // Update collapse ID and triggers
-                const collapseContent = item.querySelector('.collapse');
-                if (collapseContent) {
-                    const newId = `repeater-item-${index}`;
-                    collapseContent.id = newId;
-                    item.querySelector('.collapse-trigger').dataset.bsTarget = `#${newId}`;
-                }
-
-                // Update field names and IDs
-                item.querySelectorAll('[name]').forEach(input => {
-                    const name = input.getAttribute('name');
-                    input.setAttribute('name', name.replace(/\[\d+\]/, `[${index}]`));
-
-                    const id = input.getAttribute('id');
-                    if (id) {
-                        const newId = id.replace(/_\d+_/, `_${index}_`);
-                        input.setAttribute('id', newId);
-
-                        // Update associated label
-                        const label = item.querySelector(`label[for="${id}"]`);
-                        if (label) {
-                            label.setAttribute('for', newId);
+                    // Update collapse ID and triggers
+                    const collapseContent = item.querySelector('.collapse, .collapse.show');
+                    if (collapseContent) {
+                        const newId = `repeater-item-${index}`;
+                        collapseContent.id = newId;
+                        const collapseTrigger = item.querySelector('.collapse-trigger');
+                        if (collapseTrigger) {
+                            collapseTrigger.dataset.bsTarget = `#${newId}`;
                         }
                     }
+
+                    // Update field names and IDs
+                    item.querySelectorAll('[name]').forEach(input => {
+                        const name = input.getAttribute('name');
+                        if (name) {
+                            const newName = name.replace(/\[\d+\]/, `[${index}]`);
+                            input.setAttribute('name', newName);
+                        }
+
+                        const id = input.getAttribute('id');
+                        if (id) {
+                            const newId = id.replace(/_\d+_/, `_${index}_`);
+                            input.setAttribute('id', newId);
+
+                            // Update associated label
+                            const label = item.querySelector(`label[for="${id}"]`);
+                            if (label) {
+                                label.setAttribute('for', newId);
+                            }
+                        }
+                    });
                 });
-            });
+            } catch (error) {
+                console.error('Error reindexing items:', error);
+            }
         }
 
         initializeNewItemFields(item) {
-            // Initialize Select2
-            item.querySelectorAll('select').forEach(select => {
-                if (window.Select2) {
-                    $(select).select2();
-                }
-            });
+            try {
+                // Initialize Select2
+                item.querySelectorAll('select').forEach(select => {
+                    if (typeof $ !== 'undefined' && $.fn.select2) {
+                        $(select).select2();
+                    }
+                });
 
-            // Initialize other field types
-            item.querySelectorAll('.editor').forEach(editor => {
-                if (window.CKEDITOR) {
-                    CKEDITOR.replace(editor);
-                }
-            });
+                // Initialize other field types
+                item.querySelectorAll('.editor').forEach(editor => {
+                    if (typeof CKEDITOR !== 'undefined') {
+                        CKEDITOR.replace(editor);
+                    }
+                });
 
-            // Trigger custom event for other initializations
-            const event = new CustomEvent('repeater:item-added', {
-                detail: {
-                    item
-                }
-            });
-            this.container.dispatchEvent(event);
+                // Trigger custom event for other initializations
+                const event = new CustomEvent('repeater:item-added', {
+                    detail: {
+                        item
+                    },
+                    bubbles: true
+                });
+                this.container.dispatchEvent(event);
+            } catch (error) {
+                console.error('Error initializing field:', error);
+            }
         }
 
         ensureMinItems() {
@@ -163,9 +234,17 @@
         }
     }
 
-    // Initialize all repeater fields
+    // Initialize all repeater fields on DOM ready
     document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.repeater-field').forEach(element => {
+            new RepeaterField(element);
+        });
+    });
+
+    // Re-initialize repeaters added dynamically via AJAX
+    document.addEventListener('repeater:init', () => {
+        document.querySelectorAll('.repeater-field:not(.initialized)').forEach(element => {
+            element.classList.add('initialized');
             new RepeaterField(element);
         });
     });
