@@ -71,7 +71,7 @@ mix.combine(
         baseAsset + '/js/setting.js',
         baseAsset + '/js/page.js',
     ],
-    `${publicPath}/js/custom.min.js`
+    `${basePublish}/js/custom.min.js`
 );
 
 mix.combine(
