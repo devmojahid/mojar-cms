@@ -1,64 +1,60 @@
+{% set stats = data.dashboard_stats|default(edufax_get_dashboard_stats()) %}
 <div class="tf__dashboard_overview">
-    <div class="row">
-        <div class="col-xl-4 col-sm-6 wow fadeInUp" data-wow-duration="1s">
-            <div class="tf__dashboard_overview_item">
-                <div class="icon">
-                    <img src="images/overview_icon_1.png" alt="overview"
-                        class="img-fluid w-100">
-                </div>
-                <h4>30</h4>
-                <p>enrolled courses</p>
-            </div>
-        </div>
-        <div class="col-xl-4 col-sm-6 wow fadeInUp" data-wow-duration="1s">
-            <div class="tf__dashboard_overview_item">
-                <div class="icon">
-                    <img src="images/overview_icon_2.png" alt="overview"
-                        class="img-fluid w-100">
-                </div>
-                <h4>10</h4>
-                <p>active courses</p>
-            </div>
-        </div>
-        <div class="col-xl-4 col-sm-6 wow fadeInUp" data-wow-duration="1s">
-            <div class="tf__dashboard_overview_item">
-                <div class="icon">
-                    <img src="images/overview_icon_3.png" alt="overview"
-                        class="img-fluid w-100">
-                </div>
-                <h4>07</h4>
-                <p>Completed courses</p>
-            </div>
-        </div>
-        <div class="col-xl-4 col-sm-6 wow fadeInUp" data-wow-duration="1s">
-            <div class="tf__dashboard_overview_item">
-                <div class="icon">
-                    <img src="images/overview_icon_4.png" alt="overview"
-                        class="img-fluid w-100">
-                </div>
-                <h4>200</h4>
-                <p>Total student's</p>
-            </div>
-        </div>
-        <div class="col-xl-4 col-sm-6 wow fadeInUp" data-wow-duration="1s">
-            <div class="tf__dashboard_overview_item">
-                <div class="icon">
-                    <img src="images/overview_icon_5.png" alt="overview"
-                        class="img-fluid w-100">
-                </div>
-                <h4>20</h4>
-                <p>Total courses</p>
-            </div>
-        </div>
-        <div class="col-xl-4 col-sm-6 wow fadeInUp" data-wow-duration="1s">
-            <div class="tf__dashboard_overview_item">
-                <div class="icon">
-                    <img src="images/overview_icon_6.png" alt="overview"
-                        class="img-fluid w-100">
-                </div>
-                <h4>25K+</h4>
-                <p>total earnings</p>
-            </div>
-        </div>
-    </div>
+
+	<div class="row">
+		<div class="col-xl-4 col-sm-6 wow fadeInUp" data-wow-duration="1s">
+			<div class="tf__dashboard_overview_item">
+				<div class="icon">
+					<img src="{{ asset('images/icons/overview_icon_1.png') }}" alt="overview" class="img-fluid w-100">
+				</div>
+				<h4>{{ stats.enrolled_courses }}</h4>
+				<p>enrolled courses</p>
+			</div>
+		</div>
+		<div class="col-xl-4 col-sm-6 wow fadeInUp" data-wow-duration="1s">
+			<div class="tf__dashboard_overview_item">
+				<div class="icon">
+					<img src="{{ asset('images/icons/overview_icon_2.png') }}" alt="overview" class="img-fluid w-100">
+				</div>
+				<h4>{{ stats.active_courses }}</h4>
+				<p>active courses</p>
+			</div>
+		</div>
+		<div class="col-xl-4 col-sm-6 wow fadeInUp d-none" data-wow-duration="1s">
+			<div class="tf__dashboard_overview_item">
+				<div class="icon">
+					<img src="{{ asset('images/icons/overview_icon_3.png') }}" alt="overview" class="img-fluid w-100">
+				</div>
+				<h4>{{ stats.completed_courses }}</h4>
+				<p>Completed courses</p>
+			</div>
+		</div>
+		<div class="col-xl-4 col-sm-6 wow fadeInUp d-none" data-wow-duration="1s">
+			<div class="tf__dashboard_overview_item">
+				<div class="icon">
+					<img src="{{ asset('images/icons/overview_icon_4.png') }}" alt="overview" class="img-fluid w-100">
+				</div>
+				<h4>{{ stats.total_students }}</h4>
+				<p>Total student's</p>
+			</div>
+		</div>
+		<div class="col-xl-4 col-sm-6 wow fadeInUp d-none" data-wow-duration="1s">
+			<div class="tf__dashboard_overview_item">
+				<div class="icon">
+					<img src="{{ asset('images/icons/overview_icon_5.png') }}" alt="overview" class="img-fluid w-100">
+				</div>
+				<h4>{{ stats.total_courses }}</h4>
+				<p>Total courses</p>
+			</div>
+		</div>
+		<div class="col-xl-4 col-sm-6 wow fadeInUp" data-wow-duration="1s">
+			<div class="tf__dashboard_overview_item">
+				<div class="icon">
+					<img src="{{ asset('images/icons/overview_icon_6.png') }}" alt="overview" class="img-fluid w-100">
+				</div>
+				<h4>{{ ecom_price_with_unit(stats.total_earnings) }}</h4>
+				<p>total earnings</p>
+			</div>
+		</div>
+	</div>
 </div>

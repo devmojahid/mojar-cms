@@ -116,7 +116,7 @@ class MenuAction extends Action
                 'key' => 'dashboard',
                 'contents' => view()->exists('theme::profile.dashboard.index') ? 'theme::profile.dashboard.index' : 'ecomm::frontend.profile.dashboard.index',
                 'icon' => 'far fa-home',
-                'position' => 1,
+                'position' => 1
             ]
         );
 

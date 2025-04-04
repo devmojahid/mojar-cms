@@ -46,4 +46,48 @@ if (!function_exists('edufax_helper_is_filtering')) {
     {
         return request()->has('keyword') || request()->has('category') || request()->has('sort');
     }
+}
+
+if (!function_exists('edufax_get_dashboard_stats')) {
+    /**
+     * Get dashboard statistics data
+     *
+     * @return array
+     */
+    function edufax_get_dashboard_stats(): array
+    {
+        $action = app(\Mojahid\EdufaxHelper\Actions\EdufaxHelperAction::class);
+        if (method_exists($action, 'getDashboardStats')) {
+            return $action->getDashboardStats();
+        }
+        
+        // Fallback defaults
+        return [
+            'enrolled_courses' => 0,
+            'active_courses' => 0,
+            'completed_courses' => 0,
+            'total_students' => 0,
+            'total_courses' => 0,
+            'total_earnings' => 0,
+            'total_orders' => 0,
+        ];
+    }
+}
+
+if (!function_exists('edufax_get_recent_orders')) {
+    /**
+     * Get user's recent orders
+     *
+     * @param int $limit
+     * @return array
+     */
+    function edufax_get_recent_orders(int $limit = 5): array
+    {
+        $action = app(\Mojahid\EdufaxHelper\Actions\EdufaxHelperAction::class);
+        if (method_exists($action, 'getRecentOrders')) {
+            return $action->getRecentOrders($limit);
+        }
+        
+        return [];
+    }
 } 
