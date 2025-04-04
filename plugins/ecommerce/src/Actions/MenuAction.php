@@ -181,6 +181,8 @@ class MenuAction extends Action
 
     public function registerDashboardView(): void
     {
+        echo view('ecomm::backend.dashboard.chart-list')->render();
         echo view('ecomm::backend.dashboard.orders')->render();
+        echo view('ecomm::backend.dashboard.revenue-chart')->render();
     }
 }

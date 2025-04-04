@@ -16,7 +16,8 @@ use Mojahid\Ecommerce\Http\Controllers\Backend\{
     CustomerController,
     InvoiceController,
     SettingController,
-    PaymentMethodController
+    PaymentMethodController,
+    DashboardController
 };
 
 use Illuminate\Support\Facades\Route;
@@ -42,3 +43,8 @@ Route::post('ecommerce/settings', [SettingController::class, 'save'])->name('adm
 
 
 Route::jwResource('ecommerce/payment-methods', PaymentMethodController::class,[ 'name' => 'payment_methods']);
+
+Route::group(['prefix' => 'ecommerce', 'as' => 'admin.ecommerce.'], function () {
+    Route::get('dashboard/revenue-chart',[DashboardController::class, 'revenueChart'])->name('dashboard.revenue_chart');
+    Route::get('dashboard/charts-data', [DashboardController::class, 'chartsData'])->name('dashboard.charts_data');
+});
