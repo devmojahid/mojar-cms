@@ -96,10 +96,10 @@ class DatabaseManager
 
     private function makeConfig(): void
     {
-        DbConfig::setConfig('title', 'JuzaCMS - Laravel CMS for Your Project');
+        DbConfig::setConfig('title', 'Mojar - Laravel CMS for Your Project');
         DbConfig::setConfig(
             'description',
-            'Juzacms is a Content Management System (CMS)'
+            'Mojar is a Content Management System (CMS)'
                 . ' and web platform whose sole purpose is to make your development workflow simple again.'
         );
         DbConfig::setConfig('author_name', 'Mojar Team');
