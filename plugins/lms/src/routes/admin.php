@@ -59,7 +59,7 @@ Route::jwResource(
     'lms/orders',
     OrderController::class,
     [
-        'name' => 'orders'
+        'name' => 'lms.orders'
     ]
 );
 

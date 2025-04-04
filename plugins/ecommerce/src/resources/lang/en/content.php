@@ -184,4 +184,11 @@ return [
     'product_not_found' => 'Product not found',
     'quantity_must_be_at_least_1' => 'Quantity must be at least 1',
     'added_to_cart_successfully' => 'Added to cart successfully',
+    'recent_orders' => "Recent Orders",
+    'customer' => "Customer",
+    'customer_email' => "Customer Email",
+    'status' => "Status",
+    'total' => "Total",
+    'view_all' => "View All",
+    'id' => "Id",
 ];
