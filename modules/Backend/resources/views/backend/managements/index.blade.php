@@ -114,7 +114,7 @@
                             'id' => 'dev-tools',
                             'title' => trans('cms::app.managements-area.dev_tools'),
                             'description' => trans('cms::app.managements-area.dev_tools_settings_description'),
-                            'url' => route('admin.dev-tool'),
+                            'url' => Route::has('admin.dev-tool') ? route('admin.dev-tool') : '#',
                             'icon' => [
                                 'type' => 'svg',
                                 'value' => 'email-template',

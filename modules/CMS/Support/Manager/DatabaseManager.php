@@ -8,12 +8,34 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Juzaweb\CMS\Facades\Config as DbConfig;
+use Juzaweb\CMS\Support\Database\ImportDatabaseService;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 class DatabaseManager
 {
     /**
-     * Migrate and seed the database.
+     * @var ImportDatabaseService
+     */
+    private ImportDatabaseService $importDatabaseService;
+
+    /**
+     * @var string
+     */
+    private string $sqlFilePath;
+
+    /**
+     * DatabaseManager constructor.
+     *
+     * @param ImportDatabaseService $importDatabaseService
+     */
+    public function __construct(ImportDatabaseService $importDatabaseService)
+    {
+        $this->importDatabaseService = $importDatabaseService;
+        $this->sqlFilePath = base_path('database.sql');
+    }
+
+    /**
+     * Import SQL file and setup initial configs.
      *
      * @return array
      * @throws Exception
@@ -24,9 +46,9 @@ class DatabaseManager
         $outputLog = new BufferedOutput();
         $this->sqlite($outputLog);
 
-        $migrate = $this->migrate($outputLog);
-        if ($migrate['status'] == 'error') {
-            return $this->response($migrate['message'], 'error', $outputLog);
+        $importResult = $this->importDatabase($outputLog);
+        if ($importResult['status'] == 'error') {
+            return $this->response($importResult['message'], 'error', $outputLog);
         }
 
         DB::beginTransaction();
@@ -40,24 +62,18 @@ class DatabaseManager
             return $this->response($e->getMessage(), 'error', $outputLog);
         }
 
-        return $migrate;
+        return $importResult;
     }
 
     /**
-     * Run the migration and call the seeder.
+     * Import database from SQL file.
      *
      * @param BufferedOutput $outputLog
      * @return array
      */
-    private function migrate(BufferedOutput $outputLog): array
+    private function importDatabase(BufferedOutput $outputLog): array
     {
-        try {
-            Artisan::call('migrate', ['--force' => true], $outputLog);
-        } catch (Exception $e) {
-            return $this->response($e->getMessage(), 'error', $outputLog);
-        }
-
-        return $this->response(trans('cms::installer.final.database_finished'), 'success', $outputLog);
+        return $this->importDatabaseService->import($this->sqlFilePath, $outputLog);
     }
 
     /**
@@ -92,6 +108,28 @@ class DatabaseManager
             }
             $outputLog->write('Using SqlLite database: ' . $database, 1);
         }
+    }
+
+    /**
+     * Set SQL file path to use for database import.
+     *
+     * @param string $path
+     * @return self
+     */
+    public function setSqlFilePath(string $path): self
+    {
+        $this->sqlFilePath = $path;
+        return $this;
+    }
+
+    /**
+     * Get the current SQL file path.
+     *
+     * @return string
+     */
+    public function getSqlFilePath(): string
+    {
+        return $this->sqlFilePath;
     }
 
     private function makeConfig(): void
