@@ -33,7 +33,7 @@ class Stripe extends PaymentMethodAbstract implements PaymentMethodInterface
             ]);
 
             // Set fixed amount for testing like PayPal
-            $amount = 100;
+            $amount = $params['amount'];
 
             $sessionParams = [
                 'payment_method_types' => ['card'],

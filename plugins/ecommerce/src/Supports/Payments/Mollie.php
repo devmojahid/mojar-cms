@@ -14,7 +14,7 @@ class Mollie extends PaymentMethodAbstract implements PaymentMethodInterface
     {
         try {
             // Set fixed amount for testing like PayPal and Stripe
-            $amount = 100;
+            $amount = $params['amount'];
             if (empty($amount) || (float)$amount <= 0) {
                 \Log::error('Mollie Payment Error: Invalid amount', ['amount' => $amount]);
                 throw new \Exception('Invalid amount. Amount must be greater than zero.');
@@ -164,8 +164,8 @@ class Mollie extends PaymentMethodAbstract implements PaymentMethodInterface
         $gateway = Omnipay::create('Mollie');
         
         $apiKeyData = $this->getApiKey();
-        $gateway->setApiKey('test_uMfQEwF3sk43WFkHhFvRFJbGevSGgt');
-        // $gateway->setApiKey($apiKeyData['apiKey']);
+        
+        $gateway->setApiKey($apiKeyData['apiKey']);
         $gateway->setTestMode($apiKeyData['testMode']);
         
         return $gateway;
