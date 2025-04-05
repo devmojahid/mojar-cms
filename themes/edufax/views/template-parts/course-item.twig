@@ -1,17 +1,10 @@
-
 {% set date = post.metas.start_date|date('d') %}
 {% set month = post.metas.start_date|date('F') %}
 {% set year = post.metas.start_date|date('Y') %}
+{% set lessonCount = lms_get_lesson_count(post) %}
+{% set studentCount = lms_get_student_count(post) %}
 
 
-{# array:6 [▼
-  "price" => 0
-  "language" => "en"
-  "max_students" => "0"
-  "compare_price" => 0
-  "difficulty_level" => "beginner"
-  "preview_video_url" => ""
-] #}
 {% set averageRating = lms_get_average_rating(post) %}
 {% set reviews = lms_get_reviews(post, 10) %}
 {% set categories = get_post_taxonomies(post, 'categories', {limit: 1}) %}
@@ -29,7 +22,7 @@
 					<span class="icon">
 						<img src="{{ asset('images/icons/book_icon.svg') }}" alt="book" class="img-fluid w-100">
 					</span>
-					32 Lesson
+					{{ lessonCount }} {{ __('lesson') }}{{ lessonCount != 1 ? 's' : '' }}
 				</li>
 				<li>
 					<span class="icon">
@@ -50,7 +43,7 @@
 				<span>
 					<img src="{{ asset('images/icons/user_icon.svg') }}" alt="user" class="img-fluid w-100">
 				</span>
-				110 Students
+				{{ studentCount }} {{ __('student') }}{{ studentCount != 1 ? 's' : '' }}
 			</li>
 			<li>
 				<span>

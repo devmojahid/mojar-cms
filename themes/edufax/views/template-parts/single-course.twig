@@ -12,6 +12,8 @@
 {% set reviews = lms_get_reviews(post, 10) %}
 {% set averageRating = lms_get_average_rating(post) %}
 {% set reviewStats = lms_get_review_stats(post) %}
+{% set lessonCount = lms_get_lesson_count(post) %}
+{% set studentCount = lms_get_student_count(post) %}
 
 {% set related_courses = get_related_posts(post, 3) %}
     <section class="tf__courses_details_page pt_120 xs_pt_80 pb_120 xs_pb_80">
@@ -28,13 +30,13 @@
                                     <span>
                                         <img src="{{ asset('images/icons/book_icon.svg') }}" alt="book" class="img-fluid w-100">
                                     </span>
-                                    22 Lesson
+                                    {{ lessonCount }} {{ __('lesson') }} {{ lessonCount != 1 ? 's' : '' }}
                                 </li>
                                 <li>
                                     <span>
                                         <img src="{{ asset('images/icons/user_icon.svg') }}" alt="book" class="img-fluid w-100">
                                     </span>
-                                    110 Students
+                                    {{ studentCount }} {{ __('student') }}{{ studentCount != 1 ? 's' : '' }}
                                 </li>
                                 <li>
                                     <span>
@@ -51,7 +53,7 @@
                                     <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
                                         aria-selected="true"><i class="fas fa-th-large"></i> Overview </button>
-                                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
+                                    <button class="nav-link d-none" id="nav-profile-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-profile" type="button" role="tab"
                                         aria-controls="nav-profile" aria-selected="false"><i class="fas fa-user"></i>
                                         Instructor </button>
@@ -68,7 +70,7 @@
                                         {{ post.content|raw }}
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="nav-profile" role="tabpanel"
+                                <div class="tab-pane fade d-none" id="nav-profile" role="tabpanel"
                                     aria-labelledby="nav-profile-tab" tabindex="0">
                                     <div class="tf__course_instructor">
                                         <div class="row">
@@ -301,7 +303,7 @@
                                 <li><span><i class="far fa-clock"></i> {{ __('Duration') }} :</span> {{ 
                                     post.metas.duration ? (post.metas.duration >= 60 ? (post.metas.duration // 60) ~ ' ' ~ __('Hours') ~ ' ' ~ (post.metas.duration % 60) ~ ' ' ~ __('Minutes') : post.metas.duration ~ ' ' ~ __('Minutes')) : ''
                                  }}</li>
-                                <li><span><i class="far fa-user"></i> {{ __('Total Enrolled') }} :</span> {{ post.metas.total_enrolled }}</li>
+                                <li><span><i class="far fa-user"></i> {{ __('Total Enrolled') }} :</span> {{ studentCount }}</li>
                                 <li><span><i class="far fa-user"></i> {{ __('Max Students') }} :</span> {{ post.metas.max_students }}</li>
                                 <li><span><i class="fal fa-books"></i> {{ __('Course Lebel') }} :</span> {{ post.metas.difficulty_level }}</li>
                                 <li><span><i class="far fa-file-certificate"></i> {{ __('Certificate') }} :</span> {{ post.metas.certificate ? 'yes' : 'no' }}</li>
@@ -332,7 +334,7 @@
                                         <p>
                                             <span>
                                                 <img src="{{ asset('images/icons/book_icon.svg') }}" alt="book" class="img-fluid w-100">
-                                                {{ course.metas.total_lessons }} Lesson
+                                                {{ lms_get_lesson_count(course) }} {{ __('lesson') }}
                                             </span>
                                             <span>
                                                 <img src="{{ asset('images/icons/star_icon.svg') }}" alt="book" class="img-fluid w-100">
