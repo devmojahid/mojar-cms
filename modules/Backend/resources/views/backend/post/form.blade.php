@@ -86,7 +86,12 @@
                 @component('cms::components.card', [
                     'label' => trans('cms::app.thumbnail')
                 ])
-                    {{ Field::image($model, 'thumbnail') }}
+                    {{ Field::image($model, 'thumbnail', [
+                        'data' => [
+                        'show_label' => false,
+                    ],
+                    ]) }}
+
                 @endcomponent
             </div>
 

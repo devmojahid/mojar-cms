@@ -6,6 +6,7 @@
             "type": "image",
             "name": "background_image",
             "label": "Background Image",
+            "show_label": 1,
             "data": {
                 "value": "images/about_video_img.jpg",
                 "show_label": 1

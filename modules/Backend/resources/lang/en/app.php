@@ -671,4 +671,5 @@ return [
     'add_item' => "Add Item",
     'remove_item' => "Remove Item",
     'rating' => 'Rating',
+    'confirm_remove' => 'Confirm Remove',
 ];

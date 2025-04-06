@@ -3,7 +3,7 @@
     <div class="form-image text-center @if ($path) previewing @endif">
 
         @php
-            $showLabel = $data['show_label'] ?? false;
+            $showLabel = $data['show_label'] ?? true;
             $hasLabel = !empty($label);
         @endphp
 

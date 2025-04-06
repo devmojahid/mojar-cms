@@ -19,12 +19,6 @@ class EventManagementAction extends Action
             [$this, 'registerPostTypes']
         );
 
-        // $this->addAction(
-        //     Action::INIT_ACTION,
-        //     [$this, 'registerCustomEntities']
-        // );
-
-
         $this->addAction(
             Action::INIT_ACTION,
             [$this, 'registerConfigs']
@@ -46,22 +40,6 @@ class EventManagementAction extends Action
             'post_type.events.parseDataForSave',
             [$this, 'parseDataForSave']
         );
-
-
-        $this->addFilter(
-            'theme.get_view_page',
-            [$this, 'addCheckoutPage'],
-            20,
-            2
-        );
-
-        $this->addFilter(
-            'theme.get_params_page',
-            [$this, 'addCheckoutParams'],
-            20,
-            2
-        );
-
     }
 
     /**
@@ -155,7 +133,11 @@ class EventManagementAction extends Action
             $eventTicket = EventTicket::findByEvent($model->id);
             $metas = (array) $data['meta'];
             $metas['description'] = seo_string(strip_tags($data['content']), 320);
-
+            
+            if(empty($metas['name'])){
+                return;
+            }
+            
             if( $eventTicket ){
                 $eventTicket->update($metas);
             } else {
@@ -191,53 +173,6 @@ class EventManagementAction extends Action
             [$this, 'saveSetting']
         );
     }
-
-    public function addCheckoutPage($view, $page): string
-    {
-        $checkoutPage = get_config('evman_checkout_page');
-        $thanksPage = get_config('evman_thanks_page');
-
-
-        if ($checkoutPage == $page->id) {
-            return 'evman::frontend.checkout.index';
-        }
-
-        if ($thanksPage == $page->id) {
-            return 'evman::frontend.checkout.thankyou';
-        }
-
-        return $view;
-    }
-
-    public function addCheckoutParams($params, $page)
-    {
-        $checkoutPage = get_config('evman_checkout_page');
-        $thanksPage = get_config('evman_thanks_page');
-
-        if ($checkoutPage == $page->id) {
-            $methods = PaymentMethod::active()->get();
-
-            $params['payment_methods'] = (new PaymentMethodCollectionResource($methods))->toArray(request());
-        }
-
-        // if ($thanksPage == $page->id) {
-        //     $orderToken = request()?->segment(2);
-
-        //     abort_if($orderToken === null, 404);
-
-        //     $order = Order::findByToken($orderToken);
-
-        //     abort_if($order === null, 404);
-
-        //     $order->load(['orderItems', 'paymentMethod']);
-        //     $order->loadExists(['downloadableProducts']);
-
-        //     $params['order'] = OrderResource::make($order)->toArray(request());
-        // }
-
-        return $params;
-    }
-
 
 
 

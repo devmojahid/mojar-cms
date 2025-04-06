@@ -127,7 +127,6 @@ trait InputField
     public function image(string|Model $label, ?string $name, ?array $options = []): Factory|View
     {
         $options = $this->mapOptions($label, $name, $options);
-
         return view('cms::components.form_image', $options);
     }
 
