@@ -1052,7 +1052,7 @@
                     </div>
                     <div class="mb-3" id="lesson-local-content-path">
                         <label class="form-label">{{ __('Local Content Path') }}</label>
-                            {{ Field::image(__('Enter local content path...'), 'local_content_path', [
+                            {{ Field::image(__('Enter local content path...'), 'local_video_path', [
                                 'data' => [
                                     'show_label' => true,
                                 ]

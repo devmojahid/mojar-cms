@@ -19,12 +19,17 @@
 						<div class="tf__courses_video_play">
 							{% if data.current_lesson %}
 
-                            {# {{dump(data.current_lesson)}} #}
-
-								{% set video_url = data.current_lesson.content_url ?? '#' %}
+								{{dump(data.current_lesson.type)}}
+								{% set video_type = data.current_lesson.type %}
+                                {% if data.current_lesson.type == "local_video" %}
+                                    {% set video_path = data.current_lesson.local_video_path|default(null) %}
+                                    {% set video_url = video_path ? upload_url(video_path) : '#' %}
+                                {% else %}
+                                    {% set video_url = data.current_lesson.content_url|default('#') %}
+                                {% endif %}
 
 								{% set lesson_thumbnail = data.current_lesson.attributes['thumbnail'] ?? null %}
-                                {% set video_thumbnail = lesson_thumbnail ? upload_url(lesson_thumbnail) :  upload_url(null) %}
+								{% set video_thumbnail = lesson_thumbnail ? upload_url(lesson_thumbnail) :  upload_url(null) %}
 
 								<div class="myVideo" id="my_video" data-video="{{ video_url }}" data-poster="{{ video_thumbnail }}" data-type="video/mp4"></div>
 							{% else %}
