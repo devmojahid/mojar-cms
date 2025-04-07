@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_attributes`
+-- Table structure for table `app_attributes`
 --
 
-CREATE TABLE `jw_attributes` (
+CREATE TABLE `app_attributes` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -37,10 +37,10 @@ CREATE TABLE `jw_attributes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_attribute_values`
+-- Table structure for table `app_attribute_values`
 --
 
-CREATE TABLE `jw_attribute_values` (
+CREATE TABLE `app_attribute_values` (
   `id` bigint UNSIGNED NOT NULL,
   `value` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `value_type` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -50,10 +50,10 @@ CREATE TABLE `jw_attribute_values` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_comments`
+-- Table structure for table `app_comments`
 --
 
-CREATE TABLE `jw_comments` (
+CREATE TABLE `app_comments` (
   `id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
   `email` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -69,10 +69,10 @@ CREATE TABLE `jw_comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_comments`
+-- Dumping data for table `app_comments`
 --
 
-INSERT INTO `jw_comments` (`id`, `user_id`, `email`, `name`, `website`, `content`, `object_id`, `object_type`, `status`, `created_at`, `updated_at`, `json_metas`) VALUES
+INSERT INTO `app_comments` (`id`, `user_id`, `email`, `name`, `website`, `content`, `object_id`, `object_type`, `status`, `created_at`, `updated_at`, `json_metas`) VALUES
 (1, 1, NULL, NULL, NULL, 'hello world', 3, 'posts', 'approved', '2025-02-01 07:42:05', '2025-03-21 05:52:06', NULL),
 (2, 1, NULL, NULL, NULL, 'fdadffd', 3, 'posts', 'pending', '2025-02-01 07:42:34', '2025-02-01 07:42:34', NULL),
 (3, 1, NULL, NULL, NULL, 'fdfdsfsdf', 3, 'posts', 'approved', '2025-02-01 07:44:22', '2025-03-01 23:39:01', NULL),
@@ -86,20 +86,20 @@ INSERT INTO `jw_comments` (`id`, `user_id`, `email`, `name`, `website`, `content
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_configs`
+-- Table structure for table `app_configs`
 --
 
-CREATE TABLE `jw_configs` (
+CREATE TABLE `app_configs` (
   `id` bigint UNSIGNED NOT NULL,
   `code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_configs`
+-- Dumping data for table `app_configs`
 --
 
-INSERT INTO `jw_configs` (`id`, `code`, `value`) VALUES
+INSERT INTO `app_configs` (`id`, `code`, `value`) VALUES
 (1, 'title', 'JuzaCMS - Laravel CMS for Your Project'),
 (2, 'description', 'Juzacms is a Content Management System (CMS) and web platform whose sole purpose is to make your development workflow simple again.'),
 (3, 'author_name', 'Mojar Team'),
@@ -122,18 +122,18 @@ INSERT INTO `jw_configs` (`id`, `code`, `value`) VALUES
 (20, 'ecom_city', '{\"type\":\"text\",\"label\":\"City\"}'),
 (21, 'ecom_country', '{\"type\":\"text\",\"label\":\"Country\"}'),
 (22, 'ecom_zipcode', '{\"type\":\"text\",\"label\":\"Zip Code\"}'),
-(23, 'jw_enable_sitemap', '0'),
-(24, 'jw_enable_post_feed', '0'),
-(25, 'jw_enable_taxonomy_feed', '1'),
-(26, 'jw_auto_ping_google_sitemap', '1'),
-(27, 'jw_auto_submit_url_google', '0'),
-(28, 'jw_auto_submit_url_bing', '1'),
-(29, 'jw_bing_api_key', NULL),
-(30, 'jw_auto_add_tags_to_posts', '0'),
+(23, 'app_enable_sitemap', '0'),
+(24, 'app_enable_post_feed', '0'),
+(25, 'app_enable_taxonomy_feed', '1'),
+(26, 'app_auto_ping_google_sitemap', '1'),
+(27, 'app_auto_submit_url_google', '0'),
+(28, 'app_auto_submit_url_bing', '1'),
+(29, 'app_bing_api_key', NULL),
+(30, 'app_auto_add_tags_to_posts', '0'),
 (31, 'bing_verify_key', NULL),
 (32, 'google_verify_key', NULL),
-(34, 'jw_backup_enable', '0'),
-(35, 'jw_backup_time', 'daily'),
+(34, 'app_backup_enable', '0'),
+(35, 'app_backup_time', 'daily'),
 (36, 'theme_statuses', '{\"name\":\"edufax\",\"namespace\":\"Theme\\\\\",\"path\":\"E:\\\\laragon\\\\www\\\\mojar-cms\\\\modules\\/..\\/themes\\/edufax\"}'),
 (37, 'backend_messages', '[]'),
 (38, 'email', '{\"host\":\"sandbox.smtp.mailtrap.io\",\"port\":\"2525\",\"encryption\":\"tls\",\"username\":\"8274485a2f435a\",\"password\":\"58e43f671f64c5\",\"from_address\":\"raofahmedmojahid@gmail.com\",\"from_name\":\"Raof\"}'),
@@ -202,10 +202,10 @@ INSERT INTO `jw_configs` (`id`, `code`, `value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_contact_form_contacts`
+-- Table structure for table `app_contact_form_contacts`
 --
 
-CREATE TABLE `jw_contact_form_contacts` (
+CREATE TABLE `app_contact_form_contacts` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -218,10 +218,10 @@ CREATE TABLE `jw_contact_form_contacts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_contact_form_contacts`
+-- Dumping data for table `app_contact_form_contacts`
 --
 
-INSERT INTO `jw_contact_form_contacts` (`id`, `name`, `email`, `subject`, `message`, `metas`, `site_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `app_contact_form_contacts` (`id`, `name`, `email`, `subject`, `message`, `metas`, `site_id`, `created_at`, `updated_at`) VALUES
 ('1a133c89-4a55-4e51-bb0b-6fd121650fc4', 'Zenia Holman', 'pudipohuze@mailinator.com', 'Sunt explicabo Aute', 'Quas nisi perferendi', NULL, 0, '2025-03-05 02:00:23', '2025-03-05 02:00:23'),
 ('51a3c78d-166e-45d0-aba3-29eb6ee63c16', 'dasdas', 'asdasd@gmd.com', 'dadas', 'dasdas', NULL, 0, '2025-03-04 09:57:46', '2025-03-04 09:57:46'),
 ('5f7bb18c-426d-462e-9109-c94aa047a13e', 'Lacy Cannon', 'fonyga@mailinator.com', 'Rerum dolorem evenie', 'Possimus qui repreh', NULL, 0, '2025-03-05 02:04:09', '2025-03-05 02:04:09'),
@@ -231,10 +231,10 @@ INSERT INTO `jw_contact_form_contacts` (`id`, `name`, `email`, `subject`, `messa
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_dev_tool_cms_versions`
+-- Table structure for table `app_dev_tool_cms_versions`
 --
 
-CREATE TABLE `jw_dev_tool_cms_versions` (
+CREATE TABLE `app_dev_tool_cms_versions` (
   `id` bigint UNSIGNED NOT NULL,
   `version` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci,
@@ -247,19 +247,19 @@ CREATE TABLE `jw_dev_tool_cms_versions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_dev_tool_cms_versions`
+-- Dumping data for table `app_dev_tool_cms_versions`
 --
 
-INSERT INTO `jw_dev_tool_cms_versions` (`id`, `version`, `description`, `file_path`, `download_url`, `is_active`, `changelog`, `created_at`, `updated_at`) VALUES
+INSERT INTO `app_dev_tool_cms_versions` (`id`, `version`, `description`, `file_path`, `download_url`, `is_active`, `changelog`, `created_at`, `updated_at`) VALUES
 (5, '1.0.1', 'desc 1.0.1', 'public/cms/updates/1.0.1/cms-1.0.1.zip', NULL, 1, 'changelog', '2025-03-28 10:15:36', '2025-03-28 10:15:36');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_dev_tool_marketplace_plugins`
+-- Table structure for table `app_dev_tool_marketplace_plugins`
 --
 
-CREATE TABLE `jw_dev_tool_marketplace_plugins` (
+CREATE TABLE `app_dev_tool_marketplace_plugins` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `title` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -280,19 +280,19 @@ CREATE TABLE `jw_dev_tool_marketplace_plugins` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_dev_tool_marketplace_plugins`
+-- Dumping data for table `app_dev_tool_marketplace_plugins`
 --
 
-INSERT INTO `jw_dev_tool_marketplace_plugins` (`id`, `name`, `title`, `description`, `thumbnail`, `thumbnail_path`, `banner`, `banner_path`, `url`, `file_path`, `is_paid`, `price`, `is_featured`, `sort_order`, `is_active`, `created_at`, `updated_at`) VALUES
+INSERT INTO `app_dev_tool_marketplace_plugins` (`id`, `name`, `title`, `description`, `thumbnail`, `thumbnail_path`, `banner`, `banner_path`, `url`, `file_path`, `is_paid`, `price`, `is_featured`, `sort_order`, `is_active`, `created_at`, `updated_at`) VALUES
 (6, 'mojarsoft/demo-site', 'mojarsoft', 'desc', NULL, 'public/marketplace/plugins/thumbnails/mojarsoft/demo-site.png', NULL, 'public/marketplace/plugins/banners/mojarsoft/demo-site.jpg', NULL, 'public/marketplace/plugins/mojarsoft/demo-site.zip', 0, NULL, 0, 0, 1, '2025-03-28 10:47:40', '2025-03-28 10:47:40');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_dev_tool_marketplace_themes`
+-- Table structure for table `app_dev_tool_marketplace_themes`
 --
 
-CREATE TABLE `jw_dev_tool_marketplace_themes` (
+CREATE TABLE `app_dev_tool_marketplace_themes` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `title` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -315,10 +315,10 @@ CREATE TABLE `jw_dev_tool_marketplace_themes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_dev_tool_package_versions`
+-- Table structure for table `app_dev_tool_package_versions`
 --
 
-CREATE TABLE `jw_dev_tool_package_versions` (
+CREATE TABLE `app_dev_tool_package_versions` (
   `id` bigint UNSIGNED NOT NULL,
   `package_name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `package_type` enum('plugin','theme') COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -334,19 +334,19 @@ CREATE TABLE `jw_dev_tool_package_versions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_dev_tool_package_versions`
+-- Dumping data for table `app_dev_tool_package_versions`
 --
 
-INSERT INTO `jw_dev_tool_package_versions` (`id`, `package_name`, `package_type`, `version`, `description`, `file_path`, `download_url`, `is_active`, `changelog`, `requires_cms_version`, `created_at`, `updated_at`) VALUES
+INSERT INTO `app_dev_tool_package_versions` (`id`, `package_name`, `package_type`, `version`, `description`, `file_path`, `download_url`, `is_active`, `changelog`, `requires_cms_version`, `created_at`, `updated_at`) VALUES
 (5, 'mojarsoft/demo-site', 'plugin', '1.0.1', 'desc', 'public/plugins/updates/mojarsoft_demo-site/1.0.1/mojarsoft_demo-site-1.0.1.zip', NULL, 1, 'dsfgd', '1.0.0', '2025-03-28 10:32:58', '2025-03-28 10:32:58');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_discounts`
+-- Table structure for table `app_discounts`
 --
 
-CREATE TABLE `jw_discounts` (
+CREATE TABLE `app_discounts` (
   `id` bigint UNSIGNED NOT NULL,
   `code` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tbl` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -359,10 +359,10 @@ CREATE TABLE `jw_discounts` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_ecomm_addons`
+-- Table structure for table `app_ecomm_addons`
 --
 
-CREATE TABLE `jw_ecomm_addons` (
+CREATE TABLE `app_ecomm_addons` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -383,10 +383,10 @@ CREATE TABLE `jw_ecomm_addons` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_ecomm_carts`
+-- Table structure for table `app_ecomm_carts`
 --
 
-CREATE TABLE `jw_ecomm_carts` (
+CREATE TABLE `app_ecomm_carts` (
   `id` bigint UNSIGNED NOT NULL,
   `code` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `items` json DEFAULT NULL,
@@ -400,10 +400,10 @@ CREATE TABLE `jw_ecomm_carts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_ecomm_carts`
+-- Dumping data for table `app_ecomm_carts`
 --
 
-INSERT INTO `jw_ecomm_carts` (`id`, `code`, `items`, `user_id`, `discount`, `discount_codes`, `discount_target_type`, `site_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `app_ecomm_carts` (`id`, `code`, `items`, `user_id`, `discount`, `discount_codes`, `discount_target_type`, `site_id`, `created_at`, `updated_at`) VALUES
 (1, '1915fce1-2458-4c04-95ae-694059c8ed5d', '\"{\\\"products_15\\\":{\\\"post_id\\\":15,\\\"type\\\":\\\"products\\\",\\\"quantity\\\":1,\\\"price\\\":400,\\\"title\\\":\\\"Product 1\\\",\\\"thumbnail\\\":\\\"2025\\\\/02\\\\/14\\\\/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg\\\",\\\"sku_code\\\":\\\"df32312\\\",\\\"barcode\\\":\\\"3434314\\\",\\\"compare_price\\\":300}}\"', 1, '0.00', NULL, NULL, 0, '2025-02-13 23:59:17', '2025-02-13 23:59:17'),
 (2, 'fce979fe-b25b-47d2-89ab-9cb16f9e9790', '\"{\\\"products_15\\\":{\\\"post_id\\\":15,\\\"type\\\":\\\"products\\\",\\\"quantity\\\":1,\\\"price\\\":400,\\\"title\\\":\\\"Product 1\\\",\\\"thumbnail\\\":\\\"2025\\\\/02\\\\/14\\\\/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg\\\",\\\"sku_code\\\":\\\"df32312\\\",\\\"barcode\\\":\\\"3434314\\\",\\\"compare_price\\\":300}}\"', 1, '0.00', NULL, NULL, 0, '2025-02-14 00:01:03', '2025-02-14 00:01:03'),
 (3, '57badcca-16de-443e-a571-9886e493ba0d', '\"{\\\"products_15\\\":{\\\"post_id\\\":15,\\\"type\\\":\\\"products\\\",\\\"quantity\\\":1,\\\"price\\\":400,\\\"title\\\":\\\"Product 1\\\",\\\"thumbnail\\\":\\\"2025\\\\/02\\\\/14\\\\/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg\\\",\\\"sku_code\\\":\\\"df32312\\\",\\\"barcode\\\":\\\"3434314\\\",\\\"compare_price\\\":300}}\"', 1, '0.00', NULL, NULL, 0, '2025-02-14 00:01:18', '2025-02-14 00:01:18'),
@@ -416,10 +416,10 @@ INSERT INTO `jw_ecomm_carts` (`id`, `code`, `items`, `user_id`, `discount`, `dis
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_ecomm_currencies`
+-- Table structure for table `app_ecomm_currencies`
 --
 
-CREATE TABLE `jw_ecomm_currencies` (
+CREATE TABLE `app_ecomm_currencies` (
   `id` bigint UNSIGNED NOT NULL,
   `code` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `symbol` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -439,10 +439,10 @@ CREATE TABLE `jw_ecomm_currencies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_ecomm_currencies`
+-- Dumping data for table `app_ecomm_currencies`
 --
 
-INSERT INTO `jw_ecomm_currencies` (`id`, `code`, `symbol`, `exchange_rate`, `is_default`, `is_enabled`, `name`, `symbol_position`, `thousand_separator`, `decimal_separator`, `decimal_place`, `decimal_point`, `currency_format`, `custom_price_format`, `created_at`, `updated_at`) VALUES
+INSERT INTO `app_ecomm_currencies` (`id`, `code`, `symbol`, `exchange_rate`, `is_default`, `is_enabled`, `name`, `symbol_position`, `thousand_separator`, `decimal_separator`, `decimal_place`, `decimal_point`, `currency_format`, `custom_price_format`, `created_at`, `updated_at`) VALUES
 (1, 'BD', '৳', 120.00, 0, 1, 'Taka', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-01 22:38:01', '2025-04-02 11:50:14'),
 (2, 'IN', '₹', 90.00, 0, 1, 'Rupy', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-01 22:44:02', '2025-04-02 11:50:14'),
 (3, 'PK', 'Rs', 140.00, 0, 1, 'Rupy', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-02 09:24:12', '2025-04-02 11:50:14'),
@@ -451,10 +451,10 @@ INSERT INTO `jw_ecomm_currencies` (`id`, `code`, `symbol`, `exchange_rate`, `is_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_ecom_download_links`
+-- Table structure for table `app_ecom_download_links`
 --
 
-CREATE TABLE `jw_ecom_download_links` (
+CREATE TABLE `app_ecom_download_links` (
   `id` bigint UNSIGNED NOT NULL,
   `uuid` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -469,10 +469,10 @@ CREATE TABLE `jw_ecom_download_links` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_email_lists`
+-- Table structure for table `app_email_lists`
 --
 
-CREATE TABLE `jw_email_lists` (
+CREATE TABLE `app_email_lists` (
   `id` bigint UNSIGNED NOT NULL,
   `email` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `template_id` bigint UNSIGNED DEFAULT NULL,
@@ -487,20 +487,20 @@ CREATE TABLE `jw_email_lists` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_email_lists`
+-- Dumping data for table `app_email_lists`
 --
 
-INSERT INTO `jw_email_lists` (`id`, `email`, `template_id`, `params`, `status`, `priority`, `error`, `data`, `created_at`, `updated_at`, `template_code`) VALUES
+INSERT INTO `app_email_lists` (`id`, `email`, `template_id`, `params`, `status`, `priority`, `error`, `data`, `created_at`, `updated_at`, `template_code`) VALUES
 (1, 'raad@adsfda.com', NULL, '{\"name\":\"Admin\"}', 'success', 1, NULL, '{\"subject\":\"Send email for Admin\",\"body\":\"Hello Admin, If you receive this email, it means that your config email on Mojar is active.\"}', '2025-04-02 12:10:58', '2025-04-02 12:11:06', 'test_email'),
 (2, 'student2@gmail.com', 3, '{\"name\":\"Student 2\",\"email\":\"student2@gmail.com\",\"verifyToken\":\"qayuenGjNcLQCmRviVvsxR8Qa6gjxrxc\",\"verifyUrl\":\"http:\\/\\/mojar-cms.test\\/verification\\/student2@gmail.com\\/qayuenGjNcLQCmRviVvsxR8Qa6gjxrxc\"}', 'success', 1, NULL, '{\"subject\":\"Verify your account\",\"body\":\"<p>Hello Student 2,<\\/p>\\n<p>Thank you for register. Please click the link below to Verify your account<\\/p>\\n<p><a href=\\\"http:\\/\\/mojar-cms.test\\/verification\\/student2@gmail.com\\/qayuenGjNcLQCmRviVvsxR8Qa6gjxrxc\\\" target=\\\"_blank\\\">Verify account<\\/a><\\/p>\"}', '2025-04-02 12:24:39', '2025-04-02 12:24:44', 'verification');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_email_templates`
+-- Table structure for table `app_email_templates`
 --
 
-CREATE TABLE `jw_email_templates` (
+CREATE TABLE `app_email_templates` (
   `id` bigint UNSIGNED NOT NULL,
   `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `subject` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -517,10 +517,10 @@ CREATE TABLE `jw_email_templates` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_email_templates`
+-- Dumping data for table `app_email_templates`
 --
 
-INSERT INTO `jw_email_templates` (`id`, `code`, `subject`, `body`, `params`, `layout`, `created_at`, `updated_at`, `email_hook`, `uuid`, `active`, `to_sender`, `to_emails`) VALUES
+INSERT INTO `app_email_templates` (`id`, `code`, `subject`, `body`, `params`, `layout`, `created_at`, `updated_at`, `email_hook`, `uuid`, `active`, `to_sender`, `to_emails`) VALUES
 (1, 'forgot_password', 'Password Reset for you account', '<p>Someone has requested a password reset for the following account:</p>\r\n<p>Email: {{ email }}</p>\r\n<p>If this was a mistake, just ignore this email and nothing will happen.To reset your password, visit the following address:</p>\r\n<p><a href=\"{{ url }}\" target=\"_blank\">{{ url }}</a></p>', '{\"name\":\"Full Name\",\"email\":\"Email\",\"url\":\"Url reset password\"}', NULL, '2024-11-24 19:58:45', '2024-11-24 19:58:45', NULL, '886836c2-c751-4448-9bf4-b7590babf14b', 1, 1, NULL),
 (2, 'notification', '{{ subject }}', '{{ body }}', '{\"subject\":\"Subject notify\",\"body\":\"Body notify\",\"name\":\"User name\",\"email\":\"User Email address\",\"url\":\"Url notify\",\"image\":\"Image notify\"}', NULL, '2024-11-24 19:58:45', '2024-11-24 19:58:45', NULL, 'fa2b1445-6726-4b94-aee7-17be8282131d', 1, 1, NULL),
 (3, 'verification', 'Verify your account', '<p>Hello {{ name }},</p>\r\n<p>Thank you for register. Please click the link below to Verify your account</p>\r\n<p><a href=\"{{ verifyUrl }}\" target=\"_blank\">Verify account</a></p>', '{\"name\":\"Your Name\",\"verifyUrl\":\"Url verify account\"}', NULL, '2024-11-24 19:58:45', '2024-11-24 19:58:45', NULL, '395c245c-5353-475b-b7cb-6a24641a4599', 1, 1, NULL);
@@ -528,10 +528,10 @@ INSERT INTO `jw_email_templates` (`id`, `code`, `subject`, `body`, `params`, `la
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_email_template_users`
+-- Table structure for table `app_email_template_users`
 --
 
-CREATE TABLE `jw_email_template_users` (
+CREATE TABLE `app_email_template_users` (
   `id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
   `email_template_id` bigint UNSIGNED NOT NULL
@@ -540,10 +540,10 @@ CREATE TABLE `jw_email_template_users` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_evman_event_bookings`
+-- Table structure for table `app_evman_event_bookings`
 --
 
-CREATE TABLE `jw_evman_event_bookings` (
+CREATE TABLE `app_evman_event_bookings` (
   `id` bigint UNSIGNED NOT NULL,
   `event_id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
@@ -570,10 +570,10 @@ CREATE TABLE `jw_evman_event_bookings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_evman_event_bookings`
+-- Dumping data for table `app_evman_event_bookings`
 --
 
-INSERT INTO `jw_evman_event_bookings` (`id`, `event_id`, `user_id`, `ticket_id`, `name`, `email`, `phone`, `address`, `city`, `state`, `zip`, `country`, `status`, `payment_method_id`, `payment_status`, `total`, `quantity`, `code`, `booking_date`, `notes`, `order_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `app_evman_event_bookings` (`id`, `event_id`, `user_id`, `ticket_id`, `name`, `email`, `phone`, `address`, `city`, `state`, `zip`, `country`, `status`, `payment_method_id`, `payment_status`, `total`, `quantity`, `code`, `booking_date`, `notes`, `order_id`, `created_at`, `updated_at`) VALUES
 (1, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '1800.00', 2, 'EVT-67C4869D6B0E3', '2025-03-02 10:26:05', NULL, 99, '2025-03-02 10:26:05', '2025-03-02 10:26:05'),
 (2, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '400.00', 1, 'EVT-67C4869D6B722', '2025-03-02 10:26:05', NULL, 99, '2025-03-02 10:26:05', '2025-03-02 10:26:05'),
 (3, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 2, NULL, '900.00', 1, 'EVT-67C4871788433', '2025-03-02 10:28:07', NULL, 100, '2025-03-02 10:28:07', '2025-03-02 10:28:07'),
@@ -672,10 +672,10 @@ INSERT INTO `jw_evman_event_bookings` (`id`, `event_id`, `user_id`, `ticket_id`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_evman_event_tickets`
+-- Table structure for table `app_evman_event_tickets`
 --
 
-CREATE TABLE `jw_evman_event_tickets` (
+CREATE TABLE `app_evman_event_tickets` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci,
@@ -693,10 +693,10 @@ CREATE TABLE `jw_evman_event_tickets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_evman_event_tickets`
+-- Dumping data for table `app_evman_event_tickets`
 --
 
-INSERT INTO `jw_evman_event_tickets` (`id`, `name`, `description`, `price`, `capacity`, `status`, `min_ticket_number`, `max_ticket_number`, `start_date`, `end_date`, `event_id`, `user_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `app_evman_event_tickets` (`id`, `name`, `description`, `price`, `capacity`, `status`, `min_ticket_number`, `max_ticket_number`, `start_date`, `end_date`, `event_id`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 'Ticket', 'Event 2', '400.00', 10, 'active', 1, 3, '2025-03-05 16:03:00', '2025-03-06 16:04:00', 21, NULL, '2025-03-05 10:04:05', '2025-03-05 10:04:05'),
 (2, 'fafda', 'content', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 20, NULL, '2025-03-05 10:07:56', '2025-03-05 10:07:56'),
 (3, 'Eve Sherman', '', '596.00', 74, 'active', 310, 299, '1980-11-16 11:47:00', '2004-07-28 12:52:00', 28, NULL, '2025-03-19 04:44:12', '2025-03-19 04:44:12'),
@@ -705,10 +705,10 @@ INSERT INTO `jw_evman_event_tickets` (`id`, `name`, `description`, `price`, `cap
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_failed_jobs`
+-- Table structure for table `app_failed_jobs`
 --
 
-CREATE TABLE `jw_failed_jobs` (
+CREATE TABLE `app_failed_jobs` (
   `id` bigint UNSIGNED NOT NULL,
   `uuid` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -721,10 +721,10 @@ CREATE TABLE `jw_failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_jobs`
+-- Table structure for table `app_jobs`
 --
 
-CREATE TABLE `jw_jobs` (
+CREATE TABLE `app_jobs` (
   `id` bigint UNSIGNED NOT NULL,
   `queue` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -737,10 +737,10 @@ CREATE TABLE `jw_jobs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_jw_translations`
+-- Table structure for table `app_app_translations`
 --
 
-CREATE TABLE `jw_jw_translations` (
+CREATE TABLE `app_app_translations` (
   `id` bigint UNSIGNED NOT NULL,
   `status` int NOT NULL DEFAULT '1',
   `locale` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
@@ -755,10 +755,10 @@ CREATE TABLE `jw_jw_translations` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_languages`
+-- Table structure for table `app_languages`
 --
 
-CREATE TABLE `jw_languages` (
+CREATE TABLE `app_languages` (
   `id` bigint UNSIGNED NOT NULL,
   `code` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -768,19 +768,19 @@ CREATE TABLE `jw_languages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_languages`
+-- Dumping data for table `app_languages`
 --
 
-INSERT INTO `jw_languages` (`id`, `code`, `name`, `default`, `created_at`, `updated_at`) VALUES
+INSERT INTO `app_languages` (`id`, `code`, `name`, `default`, `created_at`, `updated_at`) VALUES
 (1, 'en', 'English', 1, '2025-02-28 06:41:01', '2025-02-28 06:41:01');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_language_lines`
+-- Table structure for table `app_language_lines`
 --
 
-CREATE TABLE `jw_language_lines` (
+CREATE TABLE `app_language_lines` (
   `id` bigint UNSIGNED NOT NULL,
   `namespace` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `group` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -795,10 +795,10 @@ CREATE TABLE `jw_language_lines` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_lms_course_lessons`
+-- Table structure for table `app_lms_course_lessons`
 --
 
-CREATE TABLE `jw_lms_course_lessons` (
+CREATE TABLE `app_lms_course_lessons` (
   `id` bigint UNSIGNED NOT NULL,
   `title` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -818,10 +818,10 @@ CREATE TABLE `jw_lms_course_lessons` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_lms_course_lessons`
+-- Dumping data for table `app_lms_course_lessons`
 --
 
-INSERT INTO `jw_lms_course_lessons` (`id`, `title`, `slug`, `thumbnail`, `description`, `status`, `order`, `type`, `duration`, `metas`, `content_url`, `local_video_path`, `post_id`, `course_topic_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `app_lms_course_lessons` (`id`, `title`, `slug`, `thumbnail`, `description`, `status`, `order`, `type`, `duration`, `metas`, `content_url`, `local_video_path`, `post_id`, `course_topic_id`, `created_at`, `updated_at`) VALUES
 (1, 'lesson title 1', 'lesson-title-1', '2025/03/07/paypal.png', 'asdasd', 'publish', 0, 'video', 400, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 1, '2025-03-22 04:31:11', '2025-03-22 05:53:37'),
 (2, 'lesson title 2', 'lesson-title-2', '2025/03/06/features-product-shape01.png', 'desc', 'publish', 0, 'audio', 30, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 1, '2025-03-22 09:23:08', '2025-03-22 09:23:34'),
 (3, 'lesson title 3', 'lesson-title-3', NULL, 'desc', 'publish', 0, 'audio', 30, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 1, '2025-03-22 10:25:40', '2025-03-22 10:25:40');
@@ -829,10 +829,10 @@ INSERT INTO `jw_lms_course_lessons` (`id`, `title`, `slug`, `thumbnail`, `descri
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_lms_course_topics`
+-- Table structure for table `app_lms_course_topics`
 --
 
-CREATE TABLE `jw_lms_course_topics` (
+CREATE TABLE `app_lms_course_topics` (
   `id` bigint UNSIGNED NOT NULL,
   `title` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -846,19 +846,19 @@ CREATE TABLE `jw_lms_course_topics` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_lms_course_topics`
+-- Dumping data for table `app_lms_course_topics`
 --
 
-INSERT INTO `jw_lms_course_topics` (`id`, `title`, `slug`, `thumbnail`, `description`, `status`, `order`, `post_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `app_lms_course_topics` (`id`, `title`, `slug`, `thumbnail`, `description`, `status`, `order`, `post_id`, `created_at`, `updated_at`) VALUES
 (1, 'Topic', 'topic', NULL, 'Desc', 'publish', 0, 82, '2025-03-22 04:30:48', '2025-03-22 04:30:48');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_manual_notifications`
+-- Table structure for table `app_manual_notifications`
 --
 
-CREATE TABLE `jw_manual_notifications` (
+CREATE TABLE `app_manual_notifications` (
   `id` bigint UNSIGNED NOT NULL,
   `method` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `users` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -870,10 +870,10 @@ CREATE TABLE `jw_manual_notifications` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_manual_notifications`
+-- Dumping data for table `app_manual_notifications`
 --
 
-INSERT INTO `jw_manual_notifications` (`id`, `method`, `users`, `data`, `status`, `error`, `created_at`, `updated_at`) VALUES
+INSERT INTO `app_manual_notifications` (`id`, `method`, `users`, `data`, `status`, `error`, `created_at`, `updated_at`) VALUES
 (1, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-03-02 07:18:27', '2025-03-02 07:18:28'),
 (2, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-03-06 00:36:00', '2025-03-06 00:36:00'),
 (3, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-03-06 00:41:25', '2025-03-06 00:41:25'),
@@ -896,10 +896,10 @@ INSERT INTO `jw_manual_notifications` (`id`, `method`, `users`, `data`, `status`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_media_files`
+-- Table structure for table `app_media_files`
 --
 
-CREATE TABLE `jw_media_files` (
+CREATE TABLE `app_media_files` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'image',
@@ -916,10 +916,10 @@ CREATE TABLE `jw_media_files` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_media_files`
+-- Dumping data for table `app_media_files`
 --
 
-INSERT INTO `jw_media_files` (`id`, `name`, `type`, `mime_type`, `path`, `extension`, `size`, `folder_id`, `user_id`, `created_at`, `updated_at`, `disk`, `metadata`) VALUES
+INSERT INTO `app_media_files` (`id`, `name`, `type`, `mime_type`, `path`, `extension`, `size`, `folder_id`, `user_id`, `created_at`, `updated_at`, `disk`, `metadata`) VALUES
 (1, 'logo.png', 'image', 'image/png', '2025/01/15/logo.png', 'png', 6498, NULL, 1, '2025-01-15 07:47:59', '2025-01-15 07:47:59', 'public', NULL),
 (2, 'white_logo_02.png', 'image', 'image/png', '2025/01/17/white-logo-02.png', 'png', 12796, NULL, 1, '2025-01-17 00:30:58', '2025-01-17 00:30:58', 'public', NULL),
 (3, '[freepicdownloader.com]-3d-flat-icon-as-chef-with-iso22000-certificate-seal-concept-as-chef-holding-iso22000-certif-medium.jpg', 'file', 'image/jpeg', '2025/01/26/freepicdownloadercom-3d-flat-icon-as-chef-with-iso22000-certificate-seal-concept-as-chef-holding.jpg', 'jpg', 70779, NULL, 1, '2025-01-26 09:11:32', '2025-01-26 09:11:32', 'public', NULL),
@@ -985,10 +985,10 @@ INSERT INTO `jw_media_files` (`id`, `name`, `type`, `mime_type`, `path`, `extens
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_media_folders`
+-- Table structure for table `app_media_folders`
 --
 
-CREATE TABLE `jw_media_folders` (
+CREATE TABLE `app_media_folders` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'image',
@@ -999,10 +999,10 @@ CREATE TABLE `jw_media_folders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_media_folders`
+-- Dumping data for table `app_media_folders`
 --
 
-INSERT INTO `jw_media_folders` (`id`, `name`, `type`, `folder_id`, `created_at`, `updated_at`, `disk`) VALUES
+INSERT INTO `app_media_folders` (`id`, `name`, `type`, `folder_id`, `created_at`, `updated_at`, `disk`) VALUES
 (1, 'new folder', 'file', NULL, '2025-01-26 11:36:26', '2025-01-26 11:36:26', 'public'),
 (2, 'adsds', 'file', NULL, '2025-01-26 11:36:53', '2025-01-26 11:36:53', 'public'),
 (3, 'BDT-taka', 'file', NULL, '2025-01-26 11:44:54', '2025-01-26 11:44:54', 'public'),
@@ -1032,10 +1032,10 @@ INSERT INTO `jw_media_folders` (`id`, `name`, `type`, `folder_id`, `created_at`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_menus`
+-- Table structure for table `app_menus`
 --
 
-CREATE TABLE `jw_menus` (
+CREATE TABLE `app_menus` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1045,20 +1045,20 @@ CREATE TABLE `jw_menus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_menus`
+-- Dumping data for table `app_menus`
 --
 
-INSERT INTO `jw_menus` (`id`, `name`, `description`, `created_at`, `updated_at`, `uuid`) VALUES
+INSERT INTO `app_menus` (`id`, `name`, `description`, `created_at`, `updated_at`, `uuid`) VALUES
 (11, 'Menu 1 test', NULL, '2025-01-28 12:18:15', '2025-01-28 12:18:15', '84ba77ce-7feb-44bb-94c1-02178ca41482'),
 (12, 'fcgjvb', NULL, '2025-02-01 12:30:46', '2025-02-01 12:30:46', 'a6be2487-7db7-4d24-bc46-65113d84c726');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_menu_items`
+-- Table structure for table `app_menu_items`
 --
 
-CREATE TABLE `jw_menu_items` (
+CREATE TABLE `app_menu_items` (
   `id` bigint UNSIGNED NOT NULL,
   `menu_id` bigint UNSIGNED NOT NULL,
   `parent_id` bigint UNSIGNED DEFAULT NULL,
@@ -1073,10 +1073,10 @@ CREATE TABLE `jw_menu_items` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_menu_items`
+-- Dumping data for table `app_menu_items`
 --
 
-INSERT INTO `jw_menu_items` (`id`, `menu_id`, `parent_id`, `box_key`, `label`, `model_class`, `model_id`, `link`, `icon`, `target`, `num_order`) VALUES
+INSERT INTO `app_menu_items` (`id`, `menu_id`, `parent_id`, `box_key`, `label`, `model_class`, `model_id`, `link`, `icon`, `target`, `num_order`) VALUES
 (1, 11, NULL, 'post_type_pages', 'Home2', 'Juzaweb\\Backend\\Models\\Post', 8, NULL, NULL, '_self', 1),
 (2, 11, NULL, 'post_type_pages', 'dsdsds', 'Juzaweb\\Backend\\Models\\Post', 9, NULL, NULL, '_self', 2),
 (3, 11, NULL, 'post_type_pages', 'home3', 'Juzaweb\\Backend\\Models\\Post', 10, NULL, NULL, '_self', 3),
@@ -1087,20 +1087,20 @@ INSERT INTO `jw_menu_items` (`id`, `menu_id`, `parent_id`, `box_key`, `label`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_migrations`
+-- Table structure for table `app_migrations`
 --
 
-CREATE TABLE `jw_migrations` (
+CREATE TABLE `app_migrations` (
   `id` int UNSIGNED NOT NULL,
   `migration` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_migrations`
+-- Dumping data for table `app_migrations`
 --
 
-INSERT INTO `jw_migrations` (`id`, `migration`, `batch`) VALUES
+INSERT INTO `app_migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_04_02_193005_create_translations_table', 1),
 (2, '2014_10_12_000000_create_users_table', 1),
 (3, '2014_10_12_100000_create_password_resets_table', 1),
@@ -1200,10 +1200,10 @@ INSERT INTO `jw_migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_model_has_permissions`
+-- Table structure for table `app_model_has_permissions`
 --
 
-CREATE TABLE `jw_model_has_permissions` (
+CREATE TABLE `app_model_has_permissions` (
   `permission_id` bigint UNSIGNED NOT NULL,
   `model_type` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `model_id` bigint UNSIGNED NOT NULL
@@ -1212,10 +1212,10 @@ CREATE TABLE `jw_model_has_permissions` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_model_has_roles`
+-- Table structure for table `app_model_has_roles`
 --
 
-CREATE TABLE `jw_model_has_roles` (
+CREATE TABLE `app_model_has_roles` (
   `role_id` bigint UNSIGNED NOT NULL,
   `model_type` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `model_id` bigint UNSIGNED NOT NULL
@@ -1224,10 +1224,10 @@ CREATE TABLE `jw_model_has_roles` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_notifications`
+-- Table structure for table `app_notifications`
 --
 
-CREATE TABLE `jw_notifications` (
+CREATE TABLE `app_notifications` (
   `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1239,10 +1239,10 @@ CREATE TABLE `jw_notifications` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_notifications`
+-- Dumping data for table `app_notifications`
 --
 
-INSERT INTO `jw_notifications` (`id`, `type`, `data`, `read_at`, `notifiable_type`, `notifiable_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `app_notifications` (`id`, `type`, `data`, `read_at`, `notifiable_type`, `notifiable_id`, `created_at`, `updated_at`) VALUES
 ('0090267c-f2bb-44a9-98ca-311f4d5c7d70', 'Juzaweb\\CMS\\Support\\Notifications\\DbNotify', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', NULL, 'Juzaweb\\CMS\\Models\\User', 1, '2025-03-29 02:05:40', '2025-03-29 02:05:40'),
 ('093824c2-de08-422e-beed-d0d8643f3911', 'Juzaweb\\CMS\\Support\\Notifications\\DbNotify', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', NULL, 'Juzaweb\\CMS\\Models\\User', 1, '2025-03-06 22:43:40', '2025-03-06 22:43:40'),
 ('0d6a3832-a91f-4498-a2d1-99e642d13bfa', 'Juzaweb\\CMS\\Support\\Notifications\\DbNotify', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', NULL, 'Juzaweb\\CMS\\Models\\User', 1, '2025-04-03 10:54:56', '2025-04-03 10:54:56'),
@@ -1265,10 +1265,10 @@ INSERT INTO `jw_notifications` (`id`, `type`, `data`, `read_at`, `notifiable_typ
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_oauth_access_tokens`
+-- Table structure for table `app_oauth_access_tokens`
 --
 
-CREATE TABLE `jw_oauth_access_tokens` (
+CREATE TABLE `app_oauth_access_tokens` (
   `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
   `client_id` bigint UNSIGNED NOT NULL,
@@ -1283,10 +1283,10 @@ CREATE TABLE `jw_oauth_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_oauth_auth_codes`
+-- Table structure for table `app_oauth_auth_codes`
 --
 
-CREATE TABLE `jw_oauth_auth_codes` (
+CREATE TABLE `app_oauth_auth_codes` (
   `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
   `client_id` bigint UNSIGNED NOT NULL,
@@ -1298,10 +1298,10 @@ CREATE TABLE `jw_oauth_auth_codes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_oauth_clients`
+-- Table structure for table `app_oauth_clients`
 --
 
-CREATE TABLE `jw_oauth_clients` (
+CREATE TABLE `app_oauth_clients` (
   `id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
   `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1318,10 +1318,10 @@ CREATE TABLE `jw_oauth_clients` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_oauth_personal_access_clients`
+-- Table structure for table `app_oauth_personal_access_clients`
 --
 
-CREATE TABLE `jw_oauth_personal_access_clients` (
+CREATE TABLE `app_oauth_personal_access_clients` (
   `id` bigint UNSIGNED NOT NULL,
   `client_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -1331,10 +1331,10 @@ CREATE TABLE `jw_oauth_personal_access_clients` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_oauth_refresh_tokens`
+-- Table structure for table `app_oauth_refresh_tokens`
 --
 
-CREATE TABLE `jw_oauth_refresh_tokens` (
+CREATE TABLE `app_oauth_refresh_tokens` (
   `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `access_token_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `revoked` tinyint(1) NOT NULL,
@@ -1344,10 +1344,10 @@ CREATE TABLE `jw_oauth_refresh_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_orders`
+-- Table structure for table `app_orders`
 --
 
-CREATE TABLE `jw_orders` (
+CREATE TABLE `app_orders` (
   `id` bigint UNSIGNED NOT NULL,
   `token` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `code` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1376,10 +1376,10 @@ CREATE TABLE `jw_orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_orders`
+-- Dumping data for table `app_orders`
 --
 
-INSERT INTO `jw_orders` (`id`, `token`, `code`, `title`, `type`, `status`, `payment_status`, `delivery_status`, `name`, `email`, `phone`, `address`, `country_code`, `quantity`, `total_price`, `total`, `discount`, `discount_codes`, `payment_method_id`, `payment_method_name`, `notes`, `user_id`, `site_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `app_orders` (`id`, `token`, `code`, `title`, `type`, `status`, `payment_status`, `delivery_status`, `name`, `email`, `phone`, `address`, `country_code`, `quantity`, `total_price`, `total`, `discount`, `discount_codes`, `payment_method_id`, `payment_method_name`, `notes`, `user_id`, `site_id`, `created_at`, `updated_at`) VALUES
 (8, 'fb9f6707-bc07-45ae-b508-3c1a4bebfb1a', '202502151550321', 'Order #202502151550321', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-15 09:50:32', '2025-02-15 09:50:32'),
 (9, 'fcf1f3f0-aaa7-4e6f-b8e4-e74de0de8f8a', '202502151555321', 'Order #202502151555321', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-15 09:55:32', '2025-02-15 09:55:32'),
 (10, 'a116d37d-9522-4b12-83f2-4e4388ba7127', '202502151608001', 'Order #202502151608001', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-15 10:08:00', '2025-02-15 10:08:00'),
@@ -1552,7 +1552,7 @@ INSERT INTO `jw_orders` (`id`, `token`, `code`, `title`, `type`, `status`, `paym
 (191, '1ebee572-941d-4324-85d1-b2f1872fbb42', '202503071605481', 'Order #202503071605481', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-07 10:05:48', '2025-03-07 10:05:48'),
 (192, '0606a3fa-4ca7-4bc1-ac01-24c3f5aec04c', '202503071606291', 'Order #202503071606291', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-07 10:06:29', '2025-03-07 10:06:29'),
 (193, '58bba84d-980d-4969-99cc-11e0a5fb516a', '202503071610321', 'Order #202503071610321', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-07 10:10:32', '2025-03-07 10:10:32');
-INSERT INTO `jw_orders` (`id`, `token`, `code`, `title`, `type`, `status`, `payment_status`, `delivery_status`, `name`, `email`, `phone`, `address`, `country_code`, `quantity`, `total_price`, `total`, `discount`, `discount_codes`, `payment_method_id`, `payment_method_name`, `notes`, `user_id`, `site_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `app_orders` (`id`, `token`, `code`, `title`, `type`, `status`, `payment_status`, `delivery_status`, `name`, `email`, `phone`, `address`, `country_code`, `quantity`, `total_price`, `total`, `discount`, `discount_codes`, `payment_method_id`, `payment_method_name`, `notes`, `user_id`, `site_id`, `created_at`, `updated_at`) VALUES
 (194, '150864a3-4b5e-4023-8a06-2350d407c322', '202503071610471', 'Order #202503071610471', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-07 10:10:47', '2025-03-07 10:10:47'),
 (195, 'f7461e5e-763d-4e0b-b544-dba07e2c38d0', '202503071612051', 'Order #202503071612051', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-07 10:12:05', '2025-03-07 10:12:05'),
 (196, '5e4b4955-c735-471e-8d3d-fcc2114988e0', '202503080520091', 'Order #202503080520091', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-07 23:20:09', '2025-03-07 23:20:09'),
@@ -1577,10 +1577,10 @@ INSERT INTO `jw_orders` (`id`, `token`, `code`, `title`, `type`, `status`, `paym
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_order_items`
+-- Table structure for table `app_order_items`
 --
 
-CREATE TABLE `jw_order_items` (
+CREATE TABLE `app_order_items` (
   `id` bigint UNSIGNED NOT NULL,
   `title` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'product',
@@ -1598,10 +1598,10 @@ CREATE TABLE `jw_order_items` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_order_items`
+-- Dumping data for table `app_order_items`
 --
 
-INSERT INTO `jw_order_items` (`id`, `title`, `type`, `thumbnail`, `price`, `line_price`, `quantity`, `compare_price`, `sku_code`, `barcode`, `post_id`, `order_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `app_order_items` (`id`, `title`, `type`, `thumbnail`, `price`, `line_price`, `quantity`, `compare_price`, `sku_code`, `barcode`, `post_id`, `order_id`, `created_at`, `updated_at`) VALUES
 (3, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 8, '2025-02-15 09:50:32', '2025-02-15 09:50:32'),
 (4, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 8, '2025-02-15 09:50:32', '2025-02-15 09:50:32'),
 (5, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 9, '2025-02-15 09:55:32', '2025-02-15 09:55:32'),
@@ -1824,10 +1824,10 @@ INSERT INTO `jw_order_items` (`id`, `title`, `type`, `thumbnail`, `price`, `line
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_order_item_metas`
+-- Table structure for table `app_order_item_metas`
 --
 
-CREATE TABLE `jw_order_item_metas` (
+CREATE TABLE `app_order_item_metas` (
   `id` bigint UNSIGNED NOT NULL,
   `order_item_id` bigint UNSIGNED NOT NULL,
   `meta_key` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1837,10 +1837,10 @@ CREATE TABLE `jw_order_item_metas` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_order_metas`
+-- Table structure for table `app_order_metas`
 --
 
-CREATE TABLE `jw_order_metas` (
+CREATE TABLE `app_order_metas` (
   `id` bigint UNSIGNED NOT NULL,
   `order_id` bigint UNSIGNED NOT NULL,
   `meta_key` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1850,10 +1850,10 @@ CREATE TABLE `jw_order_metas` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_pages`
+-- Table structure for table `app_pages`
 --
 
-CREATE TABLE `jw_pages` (
+CREATE TABLE `app_pages` (
   `id` bigint UNSIGNED NOT NULL,
   `title` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `thumbnail` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1871,10 +1871,10 @@ CREATE TABLE `jw_pages` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_page_metas`
+-- Table structure for table `app_page_metas`
 --
 
-CREATE TABLE `jw_page_metas` (
+CREATE TABLE `app_page_metas` (
   `id` bigint UNSIGNED NOT NULL,
   `page_id` bigint UNSIGNED NOT NULL,
   `meta_key` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1884,10 +1884,10 @@ CREATE TABLE `jw_page_metas` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_password_resets`
+-- Table structure for table `app_password_resets`
 --
 
-CREATE TABLE `jw_password_resets` (
+CREATE TABLE `app_password_resets` (
   `email` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
@@ -1896,10 +1896,10 @@ CREATE TABLE `jw_password_resets` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_payment_histories`
+-- Table structure for table `app_payment_histories`
 --
 
-CREATE TABLE `jw_payment_histories` (
+CREATE TABLE `app_payment_histories` (
   `id` bigint UNSIGNED NOT NULL,
   `transaction_id` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `payment_method_id` bigint UNSIGNED DEFAULT NULL,
@@ -1922,10 +1922,10 @@ CREATE TABLE `jw_payment_histories` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_payment_methods`
+-- Table structure for table `app_payment_methods`
 --
 
-CREATE TABLE `jw_payment_methods` (
+CREATE TABLE `app_payment_methods` (
   `id` bigint UNSIGNED NOT NULL,
   `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1938,10 +1938,10 @@ CREATE TABLE `jw_payment_methods` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_payment_methods`
+-- Dumping data for table `app_payment_methods`
 --
 
-INSERT INTO `jw_payment_methods` (`id`, `type`, `name`, `description`, `image`, `data`, `active`, `created_at`, `updated_at`) VALUES
+INSERT INTO `app_payment_methods` (`id`, `type`, `name`, `description`, `image`, `data`, `active`, `created_at`, `updated_at`) VALUES
 (1, 'paypal', 'Paypal', 'adadsd', '2025/03/07/paypal.png', '{\"mode\": \"sandbox\", \"live_secret\": null, \"live_client_id\": null, \"sandbox_secret\": \"ECCkJXVtmmMgy_ai5i_1AuUJtbO7e6P_gQISQzwctaApGyJD2h1LPi2reSt5ac_FPGESoprR3i1eIaFC\", \"sandbox_client_id\": \"Ae_EqULnkWwIRsubEs8n6FTVc48VpD5X8a_6Npk23zIhn81Aw7W6QH7hyOqSE443aUoc0FRrxa8IZiGs\"}', 1, '2025-02-06 08:39:41', '2025-03-07 03:29:18'),
 (2, 'custom', 'fgf', 'You will be redirected to Stripe to complete the payment. (Debit card/Credit card/Online banking)', NULL, '{\"description\": \"Payment description\"}', 1, '2025-02-20 23:58:59', '2025-02-23 10:53:07'),
 (3, 'stripe', 'Stripe', 'Stripe', NULL, '{\"mode\": \"test\", \"webhook_secret\": null, \"live_secret_key\": null, \"test_secret_key\": \"sk_test_51N4eDoFNqndPjg2XrvImm40p6LoRjrJimWykVbpQnzVvUSDyEbA140iXLFsrPeh4wv0i5q3I3SM8aBuUX5ZBE7YD00AE1LVUKN\", \"live_publishable_key\": null, \"test_publishable_key\": \"pk_test_51N4eDoFNqndPjg2XgA6h2UbpIysYQmjOdVh8SaFxsYCPcwNxY5BnIWyuCSYKgxPqK3QhiCOZt6vCmf5rfmgsWPho00GyRSimvC\"}', 1, '2025-02-23 20:10:37', '2025-03-03 05:51:16'),
@@ -1951,10 +1951,10 @@ INSERT INTO `jw_payment_methods` (`id`, `type`, `name`, `description`, `image`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_permissions`
+-- Table structure for table `app_permissions`
 --
 
-CREATE TABLE `jw_permissions` (
+CREATE TABLE `app_permissions` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `guard_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1964,10 +1964,10 @@ CREATE TABLE `jw_permissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_permissions`
+-- Dumping data for table `app_permissions`
 --
 
-INSERT INTO `jw_permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`, `description`) VALUES
+INSERT INTO `app_permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`, `description`) VALUES
 (1, 'post-type.pages.index', 'web', '2025-03-08 00:18:04', '2025-03-08 00:18:04', 'View List Pages'),
 (2, 'post-type.pages.create', 'web', '2025-03-08 00:18:04', '2025-03-08 00:18:04', 'Create Pages'),
 (3, 'post-type.pages.edit', 'web', '2025-03-08 00:18:04', '2025-03-08 00:18:04', 'Edit Pages'),
@@ -1980,10 +1980,10 @@ INSERT INTO `jw_permissions` (`id`, `name`, `guard_name`, `created_at`, `updated
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_permission_groups`
+-- Table structure for table `app_permission_groups`
 --
 
-CREATE TABLE `jw_permission_groups` (
+CREATE TABLE `app_permission_groups` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `plugin` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1995,10 +1995,10 @@ CREATE TABLE `jw_permission_groups` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_personal_access_tokens`
+-- Table structure for table `app_personal_access_tokens`
 --
 
-CREATE TABLE `jw_personal_access_tokens` (
+CREATE TABLE `app_personal_access_tokens` (
   `id` bigint UNSIGNED NOT NULL,
   `tokenable_type` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tokenable_id` bigint UNSIGNED NOT NULL,
@@ -2013,10 +2013,10 @@ CREATE TABLE `jw_personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_posts`
+-- Table structure for table `app_posts`
 --
 
-CREATE TABLE `jw_posts` (
+CREATE TABLE `app_posts` (
   `id` bigint UNSIGNED NOT NULL,
   `title` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `thumbnail` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -2040,10 +2040,10 @@ CREATE TABLE `jw_posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_posts`
+-- Dumping data for table `app_posts`
 --
 
-INSERT INTO `jw_posts` (`id`, `title`, `thumbnail`, `slug`, `description`, `content`, `status`, `views`, `created_at`, `updated_at`, `created_by`, `updated_by`, `type`, `json_metas`, `json_taxonomies`, `rating`, `total_rating`, `total_comment`, `uuid`, `locale`) VALUES
+INSERT INTO `app_posts` (`id`, `title`, `thumbnail`, `slug`, `description`, `content`, `status`, `views`, `created_at`, `updated_at`, `created_by`, `updated_by`, `type`, `json_metas`, `json_taxonomies`, `rating`, `total_rating`, `total_comment`, `uuid`, `locale`) VALUES
 (1, 'post test 1', NULL, 'post-test-1', 'post content', '<p>post content</p>', 'publish', 4, '2025-01-19 07:44:50', '2025-01-19 08:11:00', 1, 1, 'posts', NULL, '[{\"id\": 2, \"url\": \"http://mojar-cms.test/category/new-cat\", \"name\": \"new cat\", \"slug\": \"new-cat\", \"level\": 0, \"singular\": \"category\", \"taxonomy\": \"categories\", \"thumbnail\": \"http://mojar-cms.test/jw-styles/mojar/images/thumb-default.png\", \"total_post\": 1}]', 0.00, 0, 0, '79b4128b-1a6d-4b01-b50d-3a4a9d3f300b', 'vi'),
 (2, 'fddf d', NULL, 'fddf-d', 'dasd', '<p>dasd</p>', 'publish', 4, '2025-01-19 07:54:27', '2025-01-19 07:54:27', 1, 1, 'posts', NULL, '[]', 0.00, 0, 0, '364d6e93-ac55-44cd-a335-97ca0545b72e', 'vi'),
 (3, 'dasds', NULL, 'dasds', 'dasds', '<p>dasds</p>', 'publish', 8, '2025-01-19 08:00:00', '2025-03-21 05:52:06', 1, 1, 'posts', NULL, '[]', 0.00, 0, 2, 'b9e62429-f5a7-4cc1-b282-ba85f2676325', 'vi'),
@@ -2132,10 +2132,10 @@ INSERT INTO `jw_posts` (`id`, `title`, `thumbnail`, `slug`, `description`, `cont
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_post_likes`
+-- Table structure for table `app_post_likes`
 --
 
-CREATE TABLE `jw_post_likes` (
+CREATE TABLE `app_post_likes` (
   `id` bigint UNSIGNED NOT NULL,
   `post_id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
@@ -2147,10 +2147,10 @@ CREATE TABLE `jw_post_likes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_post_metas`
+-- Table structure for table `app_post_metas`
 --
 
-CREATE TABLE `jw_post_metas` (
+CREATE TABLE `app_post_metas` (
   `id` bigint UNSIGNED NOT NULL,
   `post_id` bigint UNSIGNED NOT NULL,
   `meta_key` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2158,10 +2158,10 @@ CREATE TABLE `jw_post_metas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_post_metas`
+-- Dumping data for table `app_post_metas`
 --
 
-INSERT INTO `jw_post_metas` (`id`, `post_id`, `meta_key`, `meta_value`) VALUES
+INSERT INTO `app_post_metas` (`id`, `post_id`, `meta_key`, `meta_value`) VALUES
 (1, 4, 'example', 'jkhj'),
 (2, 4, 'select', '1'),
 (7, 7, 'template', 'home'),
@@ -2329,10 +2329,10 @@ INSERT INTO `jw_post_metas` (`id`, `post_id`, `meta_key`, `meta_value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_post_ratings`
+-- Table structure for table `app_post_ratings`
 --
 
-CREATE TABLE `jw_post_ratings` (
+CREATE TABLE `app_post_ratings` (
   `id` bigint UNSIGNED NOT NULL,
   `post_id` bigint UNSIGNED NOT NULL,
   `client_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2344,10 +2344,10 @@ CREATE TABLE `jw_post_ratings` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_post_views`
+-- Table structure for table `app_post_views`
 --
 
-CREATE TABLE `jw_post_views` (
+CREATE TABLE `app_post_views` (
   `id` bigint UNSIGNED NOT NULL,
   `post_id` bigint UNSIGNED NOT NULL,
   `views` bigint NOT NULL DEFAULT '0',
@@ -2355,10 +2355,10 @@ CREATE TABLE `jw_post_views` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_post_views`
+-- Dumping data for table `app_post_views`
 --
 
-INSERT INTO `jw_post_views` (`id`, `post_id`, `views`, `day`) VALUES
+INSERT INTO `app_post_views` (`id`, `post_id`, `views`, `day`) VALUES
 (3, 7, 1, '2025-01-30'),
 (4, 8, 1, '2025-01-30'),
 (5, 9, 1, '2025-01-30'),
@@ -2484,10 +2484,10 @@ INSERT INTO `jw_post_views` (`id`, `post_id`, `views`, `day`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_product_variants`
+-- Table structure for table `app_product_variants`
 --
 
-CREATE TABLE `jw_product_variants` (
+CREATE TABLE `app_product_variants` (
   `id` bigint UNSIGNED NOT NULL,
   `sku_code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `barcode` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -2505,20 +2505,20 @@ CREATE TABLE `jw_product_variants` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_product_variants`
+-- Dumping data for table `app_product_variants`
 --
 
-INSERT INTO `jw_product_variants` (`id`, `sku_code`, `barcode`, `title`, `thumbnail`, `description`, `names`, `images`, `price`, `compare_price`, `type`, `post_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `app_product_variants` (`id`, `sku_code`, `barcode`, `title`, `thumbnail`, `description`, `names`, `images`, `price`, `compare_price`, `type`, `post_id`, `created_at`, `updated_at`) VALUES
 (1, 'qwew32', 'dfdf', 'Default', '2025/02/14/freepicdownloadercom-seafoo.jpg', 'This Is product desc', '[\"Default\"]', NULL, '500.00', '300.00', 'default', 16, '2025-02-14 03:50:15', '2025-02-14 03:50:15'),
 (2, NULL, NULL, 'Default', NULL, '', '[\"Default\"]', NULL, NULL, NULL, 'default', 124, '2025-03-29 13:23:28', '2025-03-29 13:23:28');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_product_variants_attribute_values`
+-- Table structure for table `app_product_variants_attribute_values`
 --
 
-CREATE TABLE `jw_product_variants_attribute_values` (
+CREATE TABLE `app_product_variants_attribute_values` (
   `id` bigint UNSIGNED NOT NULL,
   `product_variant_id` bigint UNSIGNED NOT NULL,
   `attribute_id` bigint UNSIGNED NOT NULL,
@@ -2528,10 +2528,10 @@ CREATE TABLE `jw_product_variants_attribute_values` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_resources`
+-- Table structure for table `app_resources`
 --
 
-CREATE TABLE `jw_resources` (
+CREATE TABLE `app_resources` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2549,19 +2549,19 @@ CREATE TABLE `jw_resources` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_resources`
+-- Dumping data for table `app_resources`
 --
 
-INSERT INTO `jw_resources` (`id`, `name`, `type`, `thumbnail`, `description`, `json_metas`, `status`, `post_id`, `parent_id`, `created_at`, `updated_at`, `display_order`, `slug`, `uuid`) VALUES
+INSERT INTO `app_resources` (`id`, `name`, `type`, `thumbnail`, `description`, `json_metas`, `status`, `post_id`, `parent_id`, `created_at`, `updated_at`, `display_order`, `slug`, `uuid`) VALUES
 (1, 'name', 'contact-forms', NULL, NULL, NULL, 'publish', NULL, NULL, '2025-03-05 00:46:42', '2025-03-05 00:46:42', 1, 'name', 'bf93479b-78db-442b-9629-4093d546e441');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_resource_metas`
+-- Table structure for table `app_resource_metas`
 --
 
-CREATE TABLE `jw_resource_metas` (
+CREATE TABLE `app_resource_metas` (
   `id` bigint UNSIGNED NOT NULL,
   `resource_id` bigint UNSIGNED NOT NULL,
   `meta_key` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2571,10 +2571,10 @@ CREATE TABLE `jw_resource_metas` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_roles`
+-- Table structure for table `app_roles`
 --
 
-CREATE TABLE `jw_roles` (
+CREATE TABLE `app_roles` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `guard_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2584,10 +2584,10 @@ CREATE TABLE `jw_roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_roles`
+-- Dumping data for table `app_roles`
 --
 
-INSERT INTO `jw_roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`, `description`) VALUES
+INSERT INTO `app_roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`, `description`) VALUES
 (1, 'customer', 'web', '2025-02-22 08:00:37', '2025-02-22 08:00:37', 'Ecommerce customer role'),
 (2, 'shop_manager', 'web', '2025-02-22 08:00:38', '2025-02-22 08:00:38', 'Can manage products and orders'),
 (3, 'New Role', 'web', '2025-03-08 00:18:04', '2025-03-08 00:18:04', NULL);
@@ -2595,19 +2595,19 @@ INSERT INTO `jw_roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_role_has_permissions`
+-- Table structure for table `app_role_has_permissions`
 --
 
-CREATE TABLE `jw_role_has_permissions` (
+CREATE TABLE `app_role_has_permissions` (
   `permission_id` bigint UNSIGNED NOT NULL,
   `role_id` bigint UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_role_has_permissions`
+-- Dumping data for table `app_role_has_permissions`
 --
 
-INSERT INTO `jw_role_has_permissions` (`permission_id`, `role_id`) VALUES
+INSERT INTO `app_role_has_permissions` (`permission_id`, `role_id`) VALUES
 (1, 3),
 (2, 3),
 (3, 3),
@@ -2620,10 +2620,10 @@ INSERT INTO `jw_role_has_permissions` (`permission_id`, `role_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_search`
+-- Table structure for table `app_search`
 --
 
-CREATE TABLE `jw_search` (
+CREATE TABLE `app_search` (
   `id` bigint UNSIGNED NOT NULL,
   `title` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -2639,10 +2639,10 @@ CREATE TABLE `jw_search` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_seo_metas`
+-- Table structure for table `app_seo_metas`
 --
 
-CREATE TABLE `jw_seo_metas` (
+CREATE TABLE `app_seo_metas` (
   `id` bigint UNSIGNED NOT NULL,
   `object_type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `object_id` bigint UNSIGNED NOT NULL,
@@ -2651,19 +2651,19 @@ CREATE TABLE `jw_seo_metas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_seo_metas`
+-- Dumping data for table `app_seo_metas`
 --
 
-INSERT INTO `jw_seo_metas` (`id`, `object_type`, `object_id`, `meta_title`, `meta_description`) VALUES
+INSERT INTO `app_seo_metas` (`id`, `object_type`, `object_id`, `meta_title`, `meta_description`) VALUES
 (1, 'posts', 12, 'sdsad', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_shipping_address`
+-- Table structure for table `app_shipping_address`
 --
 
-CREATE TABLE `jw_shipping_address` (
+CREATE TABLE `app_shipping_address` (
   `id` bigint UNSIGNED NOT NULL,
   `full_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -2680,10 +2680,10 @@ CREATE TABLE `jw_shipping_address` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_shipping_methods`
+-- Table structure for table `app_shipping_methods`
 --
 
-CREATE TABLE `jw_shipping_methods` (
+CREATE TABLE `app_shipping_methods` (
   `id` bigint UNSIGNED NOT NULL,
   `province_id` bigint NOT NULL,
   `country_code` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2696,10 +2696,10 @@ CREATE TABLE `jw_shipping_methods` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_single_taxonomies`
+-- Table structure for table `app_single_taxonomies`
 --
 
-CREATE TABLE `jw_single_taxonomies` (
+CREATE TABLE `app_single_taxonomies` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `thumbnail` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -2716,10 +2716,10 @@ CREATE TABLE `jw_single_taxonomies` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_single_taxonomy_metas`
+-- Table structure for table `app_single_taxonomy_metas`
 --
 
-CREATE TABLE `jw_single_taxonomy_metas` (
+CREATE TABLE `app_single_taxonomy_metas` (
   `id` bigint UNSIGNED NOT NULL,
   `taxonomy_id` bigint UNSIGNED NOT NULL,
   `meta_key` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2729,10 +2729,10 @@ CREATE TABLE `jw_single_taxonomy_metas` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_social_tokens`
+-- Table structure for table `app_social_tokens`
 --
 
-CREATE TABLE `jw_social_tokens` (
+CREATE TABLE `app_social_tokens` (
   `id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
   `social_provider` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2744,10 +2744,10 @@ CREATE TABLE `jw_social_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_table_groups`
+-- Table structure for table `app_table_groups`
 --
 
-CREATE TABLE `jw_table_groups` (
+CREATE TABLE `app_table_groups` (
   `id` bigint UNSIGNED NOT NULL,
   `table` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `total_rows` bigint NOT NULL DEFAULT '0',
@@ -2757,10 +2757,10 @@ CREATE TABLE `jw_table_groups` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_table_group_datas`
+-- Table structure for table `app_table_group_datas`
 --
 
-CREATE TABLE `jw_table_group_datas` (
+CREATE TABLE `app_table_group_datas` (
   `id` bigint UNSIGNED NOT NULL,
   `table_group_id` bigint UNSIGNED NOT NULL,
   `table_group_table_id` bigint UNSIGNED NOT NULL,
@@ -2772,10 +2772,10 @@ CREATE TABLE `jw_table_group_datas` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_table_group_tables`
+-- Table structure for table `app_table_group_tables`
 --
 
-CREATE TABLE `jw_table_group_tables` (
+CREATE TABLE `app_table_group_tables` (
   `id` bigint UNSIGNED NOT NULL,
   `table` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `real_table` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2786,10 +2786,10 @@ CREATE TABLE `jw_table_group_tables` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_taxonomies`
+-- Table structure for table `app_taxonomies`
 --
 
-CREATE TABLE `jw_taxonomies` (
+CREATE TABLE `app_taxonomies` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `thumbnail` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -2806,10 +2806,10 @@ CREATE TABLE `jw_taxonomies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_taxonomies`
+-- Dumping data for table `app_taxonomies`
 --
 
-INSERT INTO `jw_taxonomies` (`id`, `name`, `thumbnail`, `description`, `slug`, `post_type`, `taxonomy`, `parent_id`, `total_post`, `created_at`, `updated_at`, `level`, `uuid`) VALUES
+INSERT INTO `app_taxonomies` (`id`, `name`, `thumbnail`, `description`, `slug`, `post_type`, `taxonomy`, `parent_id`, `total_post`, `created_at`, `updated_at`, `level`, `uuid`) VALUES
 (2, 'new cat', NULL, NULL, 'new-cat', 'posts', 'categories', NULL, 1, '2025-01-17 04:24:19', '2025-01-19 07:44:51', 0, 'fe958ba3-b0ea-4a29-add3-643125aeb23e'),
 (5, 'Mango', NULL, NULL, 'mango', 'events', 'categories', NULL, 3, '2025-03-05 10:03:08', '2025-04-02 13:19:13', 0, '562fdb4e-85f8-48fa-853c-8d8498b5322f'),
 (6, 'Cat Course 1', NULL, NULL, 'cat-course-1', 'courses', 'categories', NULL, 2, '2025-03-20 11:49:07', '2025-03-21 09:36:20', 0, '3988138d-8765-4a3e-acbe-b9527b14d192');
@@ -2817,10 +2817,10 @@ INSERT INTO `jw_taxonomies` (`id`, `name`, `thumbnail`, `description`, `slug`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_taxonomy_metas`
+-- Table structure for table `app_taxonomy_metas`
 --
 
-CREATE TABLE `jw_taxonomy_metas` (
+CREATE TABLE `app_taxonomy_metas` (
   `id` bigint UNSIGNED NOT NULL,
   `taxonomy_id` bigint UNSIGNED NOT NULL,
   `meta_key` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2830,10 +2830,10 @@ CREATE TABLE `jw_taxonomy_metas` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_telescope_entries`
+-- Table structure for table `app_telescope_entries`
 --
 
-CREATE TABLE `jw_telescope_entries` (
+CREATE TABLE `app_telescope_entries` (
   `sequence` bigint UNSIGNED NOT NULL,
   `uuid` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2847,10 +2847,10 @@ CREATE TABLE `jw_telescope_entries` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_telescope_entries_tags`
+-- Table structure for table `app_telescope_entries_tags`
 --
 
-CREATE TABLE `jw_telescope_entries_tags` (
+CREATE TABLE `app_telescope_entries_tags` (
   `entry_uuid` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tag` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -2858,30 +2858,30 @@ CREATE TABLE `jw_telescope_entries_tags` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_telescope_monitoring`
+-- Table structure for table `app_telescope_monitoring`
 --
 
-CREATE TABLE `jw_telescope_monitoring` (
+CREATE TABLE `app_telescope_monitoring` (
   `tag` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_term_taxonomies`
+-- Table structure for table `app_term_taxonomies`
 --
 
-CREATE TABLE `jw_term_taxonomies` (
+CREATE TABLE `app_term_taxonomies` (
   `term_id` bigint NOT NULL,
   `taxonomy_id` bigint NOT NULL,
   `term_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_term_taxonomies`
+-- Dumping data for table `app_term_taxonomies`
 --
 
-INSERT INTO `jw_term_taxonomies` (`term_id`, `taxonomy_id`, `term_type`) VALUES
+INSERT INTO `app_term_taxonomies` (`term_id`, `taxonomy_id`, `term_type`) VALUES
 (1, 2, 'posts'),
 (20, 5, 'events'),
 (21, 5, 'events'),
@@ -2892,10 +2892,10 @@ INSERT INTO `jw_term_taxonomies` (`term_id`, `taxonomy_id`, `term_type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_test_eomm_plugin`
+-- Table structure for table `app_test_eomm_plugin`
 --
 
-CREATE TABLE `jw_test_eomm_plugin` (
+CREATE TABLE `app_test_eomm_plugin` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -2905,10 +2905,10 @@ CREATE TABLE `jw_test_eomm_plugin` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_theme_configs`
+-- Table structure for table `app_theme_configs`
 --
 
-CREATE TABLE `jw_theme_configs` (
+CREATE TABLE `app_theme_configs` (
   `id` bigint UNSIGNED NOT NULL,
   `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `theme` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2918,10 +2918,10 @@ CREATE TABLE `jw_theme_configs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_theme_configs`
+-- Dumping data for table `app_theme_configs`
 --
 
-INSERT INTO `jw_theme_configs` (`id`, `code`, `theme`, `value`, `created_at`, `updated_at`) VALUES
+INSERT INTO `app_theme_configs` (`id`, `code`, `theme`, `value`, `created_at`, `updated_at`) VALUES
 (1, 'sidebar_sidebar', 'gamxo', '{\"uYdEqfrntd\":{\"title\":null,\"widget\":\"categories\",\"key\":\"uYdEqfrntd\"}}', '2025-01-28 10:57:41', '2025-01-28 10:57:41'),
 (2, 'footer_bg_image', 'edufax', '2025/03/02/footer-bg.png', '2025-02-01 10:33:45', '2025-03-02 07:19:36'),
 (3, 'sidebar_sidebar', 'edufax', '{\"IAyBP33RoN\":{\"title\":\"Search Here\",\"widget\":\"search_area\",\"key\":\"IAyBP33RoN\"},\"fuWc2TaLeM\":{\"title\":\"title of menu\",\"custom_menu\":\"11\",\"widget\":\"categories_list\",\"key\":\"fuWc2TaLeM\"}}', '2025-02-01 10:47:56', '2025-02-01 12:36:33'),
@@ -2931,10 +2931,10 @@ INSERT INTO `jw_theme_configs` (`id`, `code`, `theme`, `value`, `created_at`, `u
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_users`
+-- Table structure for table `app_users`
 --
 
-CREATE TABLE `jw_users` (
+CREATE TABLE `app_users` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2954,10 +2954,10 @@ CREATE TABLE `jw_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_users`
+-- Dumping data for table `app_users`
 --
 
-INSERT INTO `jw_users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `avatar`, `is_admin`, `status`, `language`, `verification_token`, `data`, `json_metas`, `is_fake`) VALUES
+INSERT INTO `app_users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `avatar`, `is_admin`, `status`, `language`, `verification_token`, `data`, `json_metas`, `is_fake`) VALUES
 (1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$Ii4Uty/j2kbrmb5skyVFMOpMx1qBqP/LWrScoOHoV9xQUM2WdbsdC', '49CZm5hQ75Zv3GuwXFGtVXCw10xxJHHiMJyBhF7b0rjmDvuJmeJrrXPZKHAy', '2024-11-24 19:59:45', '2025-03-21 05:56:36', '2025/03/05/testimonial-img-1.jpg', 1, 'active', 'en', NULL, NULL, '{\"country\": \"AQ\", \"birthday\": \"2025-02-11\"}', 0),
 (2, 'hellow world', 'hello@gmail.com', NULL, '$2y$10$yTPeBnir5d..4skcuatmPek/1oppWd5ZGTgl4UAXPx0.nYxalNogO', 'Q69nAW0le3XYyMpZrudEUOQiqIJ7nUjwAUObOpjg4XwXHGDjFV7NsfqmMNGg', '2025-02-01 09:43:44', '2025-02-01 09:43:44', NULL, 0, 'active', 'en', NULL, NULL, NULL, 0),
 (3, 'fsfd daac', 'user@gmail.com', NULL, '$2y$10$8AwhsfcdeTiYW8Bxg4E38./E41Of0r1xpCWybLMMV4GkS4CKUTqK6', 's854p71SFIGcSzGGFUMAPYhz4AqsSykFl0dCTxlbnDFN2nxKkAXnhrViOf5Q', '2025-02-21 02:39:24', '2025-02-21 02:39:24', NULL, 0, 'active', 'en', NULL, NULL, NULL, 0),
@@ -2970,10 +2970,10 @@ INSERT INTO `jw_users` (`id`, `name`, `email`, `email_verified_at`, `password`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_user_metas`
+-- Table structure for table `app_user_metas`
 --
 
-CREATE TABLE `jw_user_metas` (
+CREATE TABLE `app_user_metas` (
   `id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
   `meta_key` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2981,10 +2981,10 @@ CREATE TABLE `jw_user_metas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jw_user_metas`
+-- Dumping data for table `app_user_metas`
 --
 
-INSERT INTO `jw_user_metas` (`id`, `user_id`, `meta_key`, `meta_value`) VALUES
+INSERT INTO `app_user_metas` (`id`, `user_id`, `meta_key`, `meta_value`) VALUES
 (1, 1, 'birthday', '2025-02-11'),
 (2, 1, 'country', 'AQ'),
 (3, 8, 'address', 'Baisherkot\r\nMohanpur 3'),
@@ -2993,10 +2993,10 @@ INSERT INTO `jw_user_metas` (`id`, `user_id`, `meta_key`, `meta_value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jw_variants_attributes`
+-- Table structure for table `app_variants_attributes`
 --
 
-CREATE TABLE `jw_variants_attributes` (
+CREATE TABLE `app_variants_attributes` (
   `id` bigint UNSIGNED NOT NULL,
   `product_variant_id` bigint UNSIGNED NOT NULL,
   `attribute_id` bigint UNSIGNED NOT NULL
@@ -3007,709 +3007,709 @@ CREATE TABLE `jw_variants_attributes` (
 --
 
 --
--- Indexes for table `jw_attributes`
+-- Indexes for table `app_attributes`
 --
-ALTER TABLE `jw_attributes`
+ALTER TABLE `app_attributes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `jw_attribute_values`
+-- Indexes for table `app_attribute_values`
 --
-ALTER TABLE `jw_attribute_values`
+ALTER TABLE `app_attribute_values`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_attribute_values_attribute_id_foreign` (`attribute_id`);
+  ADD KEY `app_attribute_values_attribute_id_foreign` (`attribute_id`);
 
 --
--- Indexes for table `jw_comments`
+-- Indexes for table `app_comments`
 --
-ALTER TABLE `jw_comments`
+ALTER TABLE `app_comments`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_comments_user_id_index` (`user_id`),
-  ADD KEY `jw_comments_email_index` (`email`),
-  ADD KEY `jw_comments_object_id_index` (`object_id`),
-  ADD KEY `jw_comments_object_type_index` (`object_type`);
+  ADD KEY `app_comments_user_id_index` (`user_id`),
+  ADD KEY `app_comments_email_index` (`email`),
+  ADD KEY `app_comments_object_id_index` (`object_id`),
+  ADD KEY `app_comments_object_type_index` (`object_type`);
 
 --
--- Indexes for table `jw_configs`
+-- Indexes for table `app_configs`
 --
-ALTER TABLE `jw_configs`
+ALTER TABLE `app_configs`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_configs_code_unique` (`code`),
-  ADD KEY `jw_configs_code_index` (`code`);
+  ADD UNIQUE KEY `app_configs_code_unique` (`code`),
+  ADD KEY `app_configs_code_index` (`code`);
 
 --
--- Indexes for table `jw_contact_form_contacts`
+-- Indexes for table `app_contact_form_contacts`
 --
-ALTER TABLE `jw_contact_form_contacts`
+ALTER TABLE `app_contact_form_contacts`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_contact_form_contacts_created_at_index` (`created_at`),
-  ADD KEY `jw_contact_form_contacts_email_index` (`email`),
-  ADD KEY `jw_contact_form_contacts_site_id_index` (`site_id`);
+  ADD KEY `app_contact_form_contacts_created_at_index` (`created_at`),
+  ADD KEY `app_contact_form_contacts_email_index` (`email`),
+  ADD KEY `app_contact_form_contacts_site_id_index` (`site_id`);
 
 --
--- Indexes for table `jw_dev_tool_cms_versions`
+-- Indexes for table `app_dev_tool_cms_versions`
 --
-ALTER TABLE `jw_dev_tool_cms_versions`
+ALTER TABLE `app_dev_tool_cms_versions`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_dev_tool_cms_versions_version_unique` (`version`);
+  ADD UNIQUE KEY `app_dev_tool_cms_versions_version_unique` (`version`);
 
 --
--- Indexes for table `jw_dev_tool_marketplace_plugins`
+-- Indexes for table `app_dev_tool_marketplace_plugins`
 --
-ALTER TABLE `jw_dev_tool_marketplace_plugins`
+ALTER TABLE `app_dev_tool_marketplace_plugins`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_dev_tool_marketplace_plugins_name_unique` (`name`);
+  ADD UNIQUE KEY `app_dev_tool_marketplace_plugins_name_unique` (`name`);
 
 --
--- Indexes for table `jw_dev_tool_marketplace_themes`
+-- Indexes for table `app_dev_tool_marketplace_themes`
 --
-ALTER TABLE `jw_dev_tool_marketplace_themes`
+ALTER TABLE `app_dev_tool_marketplace_themes`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_dev_tool_marketplace_themes_name_unique` (`name`);
+  ADD UNIQUE KEY `app_dev_tool_marketplace_themes_name_unique` (`name`);
 
 --
--- Indexes for table `jw_dev_tool_package_versions`
+-- Indexes for table `app_dev_tool_package_versions`
 --
-ALTER TABLE `jw_dev_tool_package_versions`
+ALTER TABLE `app_dev_tool_package_versions`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `pkg_type_version_unique` (`package_name`,`package_type`,`version`);
 
 --
--- Indexes for table `jw_discounts`
+-- Indexes for table `app_discounts`
 --
-ALTER TABLE `jw_discounts`
+ALTER TABLE `app_discounts`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_discounts_post_id_foreign` (`post_id`),
-  ADD KEY `jw_discounts_code_index` (`code`);
+  ADD KEY `app_discounts_post_id_foreign` (`post_id`),
+  ADD KEY `app_discounts_code_index` (`code`);
 
 --
--- Indexes for table `jw_ecomm_addons`
+-- Indexes for table `app_ecomm_addons`
 --
-ALTER TABLE `jw_ecomm_addons`
+ALTER TABLE `app_ecomm_addons`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `jw_ecomm_carts`
+-- Indexes for table `app_ecomm_carts`
 --
-ALTER TABLE `jw_ecomm_carts`
+ALTER TABLE `app_ecomm_carts`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_ecomm_carts_code_site_id_unique` (`code`,`site_id`),
-  ADD KEY `jw_ecomm_carts_user_id_foreign` (`user_id`),
-  ADD KEY `jw_ecomm_carts_site_id_index` (`site_id`);
+  ADD UNIQUE KEY `app_ecomm_carts_code_site_id_unique` (`code`,`site_id`),
+  ADD KEY `app_ecomm_carts_user_id_foreign` (`user_id`),
+  ADD KEY `app_ecomm_carts_site_id_index` (`site_id`);
 
 --
--- Indexes for table `jw_ecomm_currencies`
+-- Indexes for table `app_ecomm_currencies`
 --
-ALTER TABLE `jw_ecomm_currencies`
+ALTER TABLE `app_ecomm_currencies`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `jw_ecom_download_links`
+-- Indexes for table `app_ecom_download_links`
 --
-ALTER TABLE `jw_ecom_download_links`
+ALTER TABLE `app_ecom_download_links`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_ecom_download_links_uuid_unique` (`uuid`),
-  ADD KEY `jw_ecom_download_links_product_id_foreign` (`product_id`),
-  ADD KEY `jw_ecom_download_links_variant_id_foreign` (`variant_id`),
-  ADD KEY `jw_ecom_download_links_site_id_index` (`site_id`);
+  ADD UNIQUE KEY `app_ecom_download_links_uuid_unique` (`uuid`),
+  ADD KEY `app_ecom_download_links_product_id_foreign` (`product_id`),
+  ADD KEY `app_ecom_download_links_variant_id_foreign` (`variant_id`),
+  ADD KEY `app_ecom_download_links_site_id_index` (`site_id`);
 
 --
--- Indexes for table `jw_email_lists`
+-- Indexes for table `app_email_lists`
 --
-ALTER TABLE `jw_email_lists`
+ALTER TABLE `app_email_lists`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_email_lists_email_index` (`email`),
-  ADD KEY `jw_email_lists_template_id_index` (`template_id`),
-  ADD KEY `jw_email_lists_status_index` (`status`),
-  ADD KEY `jw_email_lists_template_code_index` (`template_code`);
+  ADD KEY `app_email_lists_email_index` (`email`),
+  ADD KEY `app_email_lists_template_id_index` (`template_id`),
+  ADD KEY `app_email_lists_status_index` (`status`),
+  ADD KEY `app_email_lists_template_code_index` (`template_code`);
 
 --
--- Indexes for table `jw_email_templates`
+-- Indexes for table `app_email_templates`
 --
-ALTER TABLE `jw_email_templates`
+ALTER TABLE `app_email_templates`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_email_templates_code_unique` (`code`),
+  ADD UNIQUE KEY `app_email_templates_code_unique` (`code`),
   ADD UNIQUE KEY `email_templates_uuid_unique` (`uuid`),
-  ADD KEY `jw_email_templates_active_index` (`active`);
+  ADD KEY `app_email_templates_active_index` (`active`);
 
 --
--- Indexes for table `jw_email_template_users`
+-- Indexes for table `app_email_template_users`
 --
-ALTER TABLE `jw_email_template_users`
+ALTER TABLE `app_email_template_users`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_email_template_users_user_id_foreign` (`user_id`),
-  ADD KEY `jw_email_template_users_email_template_id_foreign` (`email_template_id`);
+  ADD KEY `app_email_template_users_user_id_foreign` (`user_id`),
+  ADD KEY `app_email_template_users_email_template_id_foreign` (`email_template_id`);
 
 --
--- Indexes for table `jw_evman_event_bookings`
+-- Indexes for table `app_evman_event_bookings`
 --
-ALTER TABLE `jw_evman_event_bookings`
+ALTER TABLE `app_evman_event_bookings`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_evman_event_bookings_code_unique` (`code`),
-  ADD KEY `jw_evman_event_bookings_event_id_foreign` (`event_id`),
-  ADD KEY `jw_evman_event_bookings_user_id_foreign` (`user_id`),
-  ADD KEY `jw_evman_event_bookings_ticket_id_foreign` (`ticket_id`),
-  ADD KEY `jw_evman_event_bookings_payment_method_id_foreign` (`payment_method_id`),
-  ADD KEY `jw_evman_event_bookings_order_id_foreign` (`order_id`);
+  ADD UNIQUE KEY `app_evman_event_bookings_code_unique` (`code`),
+  ADD KEY `app_evman_event_bookings_event_id_foreign` (`event_id`),
+  ADD KEY `app_evman_event_bookings_user_id_foreign` (`user_id`),
+  ADD KEY `app_evman_event_bookings_ticket_id_foreign` (`ticket_id`),
+  ADD KEY `app_evman_event_bookings_payment_method_id_foreign` (`payment_method_id`),
+  ADD KEY `app_evman_event_bookings_order_id_foreign` (`order_id`);
 
 --
--- Indexes for table `jw_evman_event_tickets`
+-- Indexes for table `app_evman_event_tickets`
 --
-ALTER TABLE `jw_evman_event_tickets`
+ALTER TABLE `app_evman_event_tickets`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_evman_event_tickets_event_id_foreign` (`event_id`),
-  ADD KEY `jw_evman_event_tickets_user_id_foreign` (`user_id`);
+  ADD KEY `app_evman_event_tickets_event_id_foreign` (`event_id`),
+  ADD KEY `app_evman_event_tickets_user_id_foreign` (`user_id`);
 
 --
--- Indexes for table `jw_failed_jobs`
+-- Indexes for table `app_failed_jobs`
 --
-ALTER TABLE `jw_failed_jobs`
+ALTER TABLE `app_failed_jobs`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_failed_jobs_uuid_unique` (`uuid`);
+  ADD UNIQUE KEY `app_failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Indexes for table `jw_jobs`
+-- Indexes for table `app_jobs`
 --
-ALTER TABLE `jw_jobs`
+ALTER TABLE `app_jobs`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_jobs_queue_index` (`queue`);
+  ADD KEY `app_jobs_queue_index` (`queue`);
 
 --
--- Indexes for table `jw_jw_translations`
+-- Indexes for table `app_app_translations`
 --
-ALTER TABLE `jw_jw_translations`
+ALTER TABLE `app_app_translations`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_jw_translations_status_index` (`status`),
-  ADD KEY `jw_jw_translations_locale_index` (`locale`),
-  ADD KEY `jw_jw_translations_group_index` (`group`),
-  ADD KEY `jw_jw_translations_namespace_index` (`namespace`),
-  ADD KEY `jw_jw_translations_object_type_index` (`object_type`),
-  ADD KEY `jw_jw_translations_object_key_index` (`object_key`);
+  ADD KEY `app_app_translations_status_index` (`status`),
+  ADD KEY `app_app_translations_locale_index` (`locale`),
+  ADD KEY `app_app_translations_group_index` (`group`),
+  ADD KEY `app_app_translations_namespace_index` (`namespace`),
+  ADD KEY `app_app_translations_object_type_index` (`object_type`),
+  ADD KEY `app_app_translations_object_key_index` (`object_key`);
 
 --
--- Indexes for table `jw_languages`
+-- Indexes for table `app_languages`
 --
-ALTER TABLE `jw_languages`
+ALTER TABLE `app_languages`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_languages_code_unique` (`code`),
-  ADD KEY `jw_languages_code_index` (`code`);
+  ADD UNIQUE KEY `app_languages_code_unique` (`code`),
+  ADD KEY `app_languages_code_index` (`code`);
 
 --
--- Indexes for table `jw_language_lines`
+-- Indexes for table `app_language_lines`
 --
-ALTER TABLE `jw_language_lines`
+ALTER TABLE `app_language_lines`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_language_lines_namespace_index` (`namespace`),
-  ADD KEY `jw_language_lines_group_index` (`group`),
-  ADD KEY `jw_language_lines_key_index` (`key`),
-  ADD KEY `jw_language_lines_object_type_index` (`object_type`),
-  ADD KEY `jw_language_lines_object_key_index` (`object_key`);
+  ADD KEY `app_language_lines_namespace_index` (`namespace`),
+  ADD KEY `app_language_lines_group_index` (`group`),
+  ADD KEY `app_language_lines_key_index` (`key`),
+  ADD KEY `app_language_lines_object_type_index` (`object_type`),
+  ADD KEY `app_language_lines_object_key_index` (`object_key`);
 
 --
--- Indexes for table `jw_lms_course_lessons`
+-- Indexes for table `app_lms_course_lessons`
 --
-ALTER TABLE `jw_lms_course_lessons`
+ALTER TABLE `app_lms_course_lessons`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_lms_course_lessons_slug_unique` (`slug`),
-  ADD KEY `jw_lms_course_lessons_post_id_foreign` (`post_id`),
-  ADD KEY `jw_lms_course_lessons_course_topic_id_index` (`course_topic_id`);
+  ADD UNIQUE KEY `app_lms_course_lessons_slug_unique` (`slug`),
+  ADD KEY `app_lms_course_lessons_post_id_foreign` (`post_id`),
+  ADD KEY `app_lms_course_lessons_course_topic_id_index` (`course_topic_id`);
 
 --
--- Indexes for table `jw_lms_course_topics`
+-- Indexes for table `app_lms_course_topics`
 --
-ALTER TABLE `jw_lms_course_topics`
+ALTER TABLE `app_lms_course_topics`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_lms_course_topics_slug_unique` (`slug`),
-  ADD KEY `jw_lms_course_topics_post_id_index` (`post_id`);
+  ADD UNIQUE KEY `app_lms_course_topics_slug_unique` (`slug`),
+  ADD KEY `app_lms_course_topics_post_id_index` (`post_id`);
 
 --
--- Indexes for table `jw_manual_notifications`
+-- Indexes for table `app_manual_notifications`
 --
-ALTER TABLE `jw_manual_notifications`
+ALTER TABLE `app_manual_notifications`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_manual_notifications_method_index` (`method`);
+  ADD KEY `app_manual_notifications_method_index` (`method`);
 
 --
--- Indexes for table `jw_media_files`
+-- Indexes for table `app_media_files`
 --
-ALTER TABLE `jw_media_files`
+ALTER TABLE `app_media_files`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_media_files_folder_id_index` (`folder_id`),
-  ADD KEY `jw_media_files_user_id_index` (`user_id`),
-  ADD KEY `jw_media_files_type_index` (`type`),
-  ADD KEY `jw_media_files_mime_type_index` (`mime_type`),
-  ADD KEY `jw_media_files_path_index` (`path`),
-  ADD KEY `jw_media_files_extension_index` (`extension`),
-  ADD KEY `jw_media_files_size_index` (`size`),
-  ADD KEY `jw_media_files_disk_index` (`disk`);
+  ADD KEY `app_media_files_folder_id_index` (`folder_id`),
+  ADD KEY `app_media_files_user_id_index` (`user_id`),
+  ADD KEY `app_media_files_type_index` (`type`),
+  ADD KEY `app_media_files_mime_type_index` (`mime_type`),
+  ADD KEY `app_media_files_path_index` (`path`),
+  ADD KEY `app_media_files_extension_index` (`extension`),
+  ADD KEY `app_media_files_size_index` (`size`),
+  ADD KEY `app_media_files_disk_index` (`disk`);
 
 --
--- Indexes for table `jw_media_folders`
+-- Indexes for table `app_media_folders`
 --
-ALTER TABLE `jw_media_folders`
+ALTER TABLE `app_media_folders`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_media_folders_folder_id_index` (`folder_id`),
-  ADD KEY `jw_media_folders_type_index` (`type`),
-  ADD KEY `jw_media_folders_disk_index` (`disk`);
+  ADD KEY `app_media_folders_folder_id_index` (`folder_id`),
+  ADD KEY `app_media_folders_type_index` (`type`),
+  ADD KEY `app_media_folders_disk_index` (`disk`);
 
 --
--- Indexes for table `jw_menus`
+-- Indexes for table `app_menus`
 --
-ALTER TABLE `jw_menus`
+ALTER TABLE `app_menus`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `menus_uuid_unique` (`uuid`);
 
 --
--- Indexes for table `jw_menu_items`
+-- Indexes for table `app_menu_items`
 --
-ALTER TABLE `jw_menu_items`
+ALTER TABLE `app_menu_items`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_menu_items_menu_id_foreign` (`menu_id`),
-  ADD KEY `jw_menu_items_parent_id_foreign` (`parent_id`),
-  ADD KEY `jw_menu_items_model_class_index` (`model_class`),
-  ADD KEY `jw_menu_items_model_id_index` (`model_id`),
-  ADD KEY `jw_menu_items_num_order_index` (`num_order`);
+  ADD KEY `app_menu_items_menu_id_foreign` (`menu_id`),
+  ADD KEY `app_menu_items_parent_id_foreign` (`parent_id`),
+  ADD KEY `app_menu_items_model_class_index` (`model_class`),
+  ADD KEY `app_menu_items_model_id_index` (`model_id`),
+  ADD KEY `app_menu_items_num_order_index` (`num_order`);
 
 --
--- Indexes for table `jw_migrations`
+-- Indexes for table `app_migrations`
 --
-ALTER TABLE `jw_migrations`
+ALTER TABLE `app_migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `jw_model_has_permissions`
+-- Indexes for table `app_model_has_permissions`
 --
-ALTER TABLE `jw_model_has_permissions`
+ALTER TABLE `app_model_has_permissions`
   ADD PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
-  ADD KEY `jw_has_permissions_model_id_model_type_index` (`model_id`,`model_type`);
+  ADD KEY `app_has_permissions_model_id_model_type_index` (`model_id`,`model_type`);
 
 --
--- Indexes for table `jw_model_has_roles`
+-- Indexes for table `app_model_has_roles`
 --
-ALTER TABLE `jw_model_has_roles`
+ALTER TABLE `app_model_has_roles`
   ADD PRIMARY KEY (`role_id`,`model_id`,`model_type`),
-  ADD KEY `jw_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
+  ADD KEY `app_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
 
 --
--- Indexes for table `jw_notifications`
+-- Indexes for table `app_notifications`
 --
-ALTER TABLE `jw_notifications`
+ALTER TABLE `app_notifications`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_notifications_notifiable_type_notifiable_id_index` (`notifiable_type`,`notifiable_id`);
+  ADD KEY `app_notifications_notifiable_type_notifiable_id_index` (`notifiable_type`,`notifiable_id`);
 
 --
--- Indexes for table `jw_oauth_access_tokens`
+-- Indexes for table `app_oauth_access_tokens`
 --
-ALTER TABLE `jw_oauth_access_tokens`
+ALTER TABLE `app_oauth_access_tokens`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_oauth_access_tokens_user_id_index` (`user_id`);
+  ADD KEY `app_oauth_access_tokens_user_id_index` (`user_id`);
 
 --
--- Indexes for table `jw_oauth_auth_codes`
+-- Indexes for table `app_oauth_auth_codes`
 --
-ALTER TABLE `jw_oauth_auth_codes`
+ALTER TABLE `app_oauth_auth_codes`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_oauth_auth_codes_user_id_index` (`user_id`);
+  ADD KEY `app_oauth_auth_codes_user_id_index` (`user_id`);
 
 --
--- Indexes for table `jw_oauth_clients`
+-- Indexes for table `app_oauth_clients`
 --
-ALTER TABLE `jw_oauth_clients`
+ALTER TABLE `app_oauth_clients`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_oauth_clients_user_id_index` (`user_id`);
+  ADD KEY `app_oauth_clients_user_id_index` (`user_id`);
 
 --
--- Indexes for table `jw_oauth_personal_access_clients`
+-- Indexes for table `app_oauth_personal_access_clients`
 --
-ALTER TABLE `jw_oauth_personal_access_clients`
+ALTER TABLE `app_oauth_personal_access_clients`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `jw_oauth_refresh_tokens`
+-- Indexes for table `app_oauth_refresh_tokens`
 --
-ALTER TABLE `jw_oauth_refresh_tokens`
+ALTER TABLE `app_oauth_refresh_tokens`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_oauth_refresh_tokens_access_token_id_index` (`access_token_id`);
+  ADD KEY `app_oauth_refresh_tokens_access_token_id_index` (`access_token_id`);
 
 --
--- Indexes for table `jw_orders`
+-- Indexes for table `app_orders`
 --
-ALTER TABLE `jw_orders`
+ALTER TABLE `app_orders`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_orders_token_unique` (`token`),
-  ADD KEY `jw_orders_type_index` (`type`),
-  ADD KEY `jw_orders_status_index` (`status`),
-  ADD KEY `jw_orders_payment_method_id_index` (`payment_method_id`),
-  ADD KEY `jw_orders_user_id_index` (`user_id`),
-  ADD KEY `jw_orders_site_id_index` (`site_id`);
+  ADD UNIQUE KEY `app_orders_token_unique` (`token`),
+  ADD KEY `app_orders_type_index` (`type`),
+  ADD KEY `app_orders_status_index` (`status`),
+  ADD KEY `app_orders_payment_method_id_index` (`payment_method_id`),
+  ADD KEY `app_orders_user_id_index` (`user_id`),
+  ADD KEY `app_orders_site_id_index` (`site_id`);
 
 --
--- Indexes for table `jw_order_items`
+-- Indexes for table `app_order_items`
 --
-ALTER TABLE `jw_order_items`
+ALTER TABLE `app_order_items`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_order_items_type_index` (`type`),
-  ADD KEY `jw_order_items_sku_code_index` (`sku_code`),
-  ADD KEY `jw_order_items_barcode_index` (`barcode`),
-  ADD KEY `jw_order_items_post_id_index` (`post_id`),
-  ADD KEY `jw_order_items_order_id_index` (`order_id`);
+  ADD KEY `app_order_items_type_index` (`type`),
+  ADD KEY `app_order_items_sku_code_index` (`sku_code`),
+  ADD KEY `app_order_items_barcode_index` (`barcode`),
+  ADD KEY `app_order_items_post_id_index` (`post_id`),
+  ADD KEY `app_order_items_order_id_index` (`order_id`);
 
 --
--- Indexes for table `jw_order_item_metas`
+-- Indexes for table `app_order_item_metas`
 --
-ALTER TABLE `jw_order_item_metas`
+ALTER TABLE `app_order_item_metas`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_order_item_metas_order_item_id_meta_key_unique` (`order_item_id`,`meta_key`),
-  ADD KEY `jw_order_item_metas_order_item_id_index` (`order_item_id`),
-  ADD KEY `jw_order_item_metas_meta_key_index` (`meta_key`);
+  ADD UNIQUE KEY `app_order_item_metas_order_item_id_meta_key_unique` (`order_item_id`,`meta_key`),
+  ADD KEY `app_order_item_metas_order_item_id_index` (`order_item_id`),
+  ADD KEY `app_order_item_metas_meta_key_index` (`meta_key`);
 
 --
--- Indexes for table `jw_order_metas`
+-- Indexes for table `app_order_metas`
 --
-ALTER TABLE `jw_order_metas`
+ALTER TABLE `app_order_metas`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_order_metas_order_id_meta_key_unique` (`order_id`,`meta_key`),
-  ADD KEY `jw_order_metas_order_id_index` (`order_id`),
-  ADD KEY `jw_order_metas_meta_key_index` (`meta_key`);
+  ADD UNIQUE KEY `app_order_metas_order_id_meta_key_unique` (`order_id`,`meta_key`),
+  ADD KEY `app_order_metas_order_id_index` (`order_id`),
+  ADD KEY `app_order_metas_meta_key_index` (`meta_key`);
 
 --
--- Indexes for table `jw_pages`
+-- Indexes for table `app_pages`
 --
-ALTER TABLE `jw_pages`
+ALTER TABLE `app_pages`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_pages_slug_unique` (`slug`),
-  ADD KEY `jw_pages_template_index` (`template`),
-  ADD KEY `jw_pages_status_index` (`status`);
+  ADD UNIQUE KEY `app_pages_slug_unique` (`slug`),
+  ADD KEY `app_pages_template_index` (`template`),
+  ADD KEY `app_pages_status_index` (`status`);
 
 --
--- Indexes for table `jw_page_metas`
+-- Indexes for table `app_page_metas`
 --
-ALTER TABLE `jw_page_metas`
+ALTER TABLE `app_page_metas`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_page_metas_page_id_meta_key_unique` (`page_id`,`meta_key`),
-  ADD KEY `jw_page_metas_page_id_index` (`page_id`),
-  ADD KEY `jw_page_metas_meta_key_index` (`meta_key`);
+  ADD UNIQUE KEY `app_page_metas_page_id_meta_key_unique` (`page_id`,`meta_key`),
+  ADD KEY `app_page_metas_page_id_index` (`page_id`),
+  ADD KEY `app_page_metas_meta_key_index` (`meta_key`);
 
 --
--- Indexes for table `jw_password_resets`
+-- Indexes for table `app_password_resets`
 --
-ALTER TABLE `jw_password_resets`
-  ADD KEY `jw_password_resets_email_index` (`email`);
+ALTER TABLE `app_password_resets`
+  ADD KEY `app_password_resets_email_index` (`email`);
 
 --
--- Indexes for table `jw_payment_histories`
+-- Indexes for table `app_payment_histories`
 --
-ALTER TABLE `jw_payment_histories`
+ALTER TABLE `app_payment_histories`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_payment_histories_transaction_id_unique` (`transaction_id`),
-  ADD KEY `jw_payment_histories_payment_method_id_index` (`payment_method_id`);
+  ADD UNIQUE KEY `app_payment_histories_transaction_id_unique` (`transaction_id`),
+  ADD KEY `app_payment_histories_payment_method_id_index` (`payment_method_id`);
 
 --
--- Indexes for table `jw_payment_methods`
+-- Indexes for table `app_payment_methods`
 --
-ALTER TABLE `jw_payment_methods`
+ALTER TABLE `app_payment_methods`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_payment_methods_type_index` (`type`);
+  ADD KEY `app_payment_methods_type_index` (`type`);
 
 --
--- Indexes for table `jw_permissions`
+-- Indexes for table `app_permissions`
 --
-ALTER TABLE `jw_permissions`
+ALTER TABLE `app_permissions`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_permissions_name_guard_unique` (`name`,`guard_name`);
+  ADD UNIQUE KEY `app_permissions_name_guard_unique` (`name`,`guard_name`);
 
 --
--- Indexes for table `jw_permission_groups`
+-- Indexes for table `app_permission_groups`
 --
-ALTER TABLE `jw_permission_groups`
+ALTER TABLE `app_permission_groups`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_permission_groups_plugin_index` (`plugin`);
+  ADD KEY `app_permission_groups_plugin_index` (`plugin`);
 
 --
--- Indexes for table `jw_personal_access_tokens`
+-- Indexes for table `app_personal_access_tokens`
 --
-ALTER TABLE `jw_personal_access_tokens`
+ALTER TABLE `app_personal_access_tokens`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_personal_access_tokens_token_unique` (`token`),
-  ADD KEY `jw_personal_access_tokens_tokenable_index` (`tokenable_type`,`tokenable_id`);
+  ADD UNIQUE KEY `app_personal_access_tokens_token_unique` (`token`),
+  ADD KEY `app_personal_access_tokens_tokenable_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Indexes for table `jw_posts`
+-- Indexes for table `app_posts`
 --
-ALTER TABLE `jw_posts`
+ALTER TABLE `app_posts`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_posts_slug_unique` (`slug`),
+  ADD UNIQUE KEY `app_posts_slug_unique` (`slug`),
   ADD UNIQUE KEY `posts_uuid_unique` (`uuid`),
-  ADD KEY `jw_posts_status_index` (`status`),
-  ADD KEY `jw_posts_created_by_index` (`created_by`),
-  ADD KEY `jw_posts_updated_by_index` (`updated_by`),
-  ADD KEY `jw_posts_type_index` (`type`),
-  ADD KEY `jw_posts_locale_index` (`locale`);
+  ADD KEY `app_posts_status_index` (`status`),
+  ADD KEY `app_posts_created_by_index` (`created_by`),
+  ADD KEY `app_posts_updated_by_index` (`updated_by`),
+  ADD KEY `app_posts_type_index` (`type`),
+  ADD KEY `app_posts_locale_index` (`locale`);
 
 --
--- Indexes for table `jw_post_likes`
+-- Indexes for table `app_post_likes`
 --
-ALTER TABLE `jw_post_likes`
+ALTER TABLE `app_post_likes`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_post_likes_post_id_foreign` (`post_id`),
-  ADD KEY `jw_post_likes_user_id_index` (`user_id`),
-  ADD KEY `jw_post_likes_client_ip_index` (`client_ip`);
+  ADD KEY `app_post_likes_post_id_foreign` (`post_id`),
+  ADD KEY `app_post_likes_user_id_index` (`user_id`),
+  ADD KEY `app_post_likes_client_ip_index` (`client_ip`);
 
 --
--- Indexes for table `jw_post_metas`
+-- Indexes for table `app_post_metas`
 --
-ALTER TABLE `jw_post_metas`
+ALTER TABLE `app_post_metas`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_post_metas_post_id_meta_key_unique` (`post_id`,`meta_key`),
-  ADD KEY `jw_post_metas_post_id_index` (`post_id`),
-  ADD KEY `jw_post_metas_meta_key_index` (`meta_key`);
+  ADD UNIQUE KEY `app_post_metas_post_id_meta_key_unique` (`post_id`,`meta_key`),
+  ADD KEY `app_post_metas_post_id_index` (`post_id`),
+  ADD KEY `app_post_metas_meta_key_index` (`meta_key`);
 
 --
--- Indexes for table `jw_post_ratings`
+-- Indexes for table `app_post_ratings`
 --
-ALTER TABLE `jw_post_ratings`
+ALTER TABLE `app_post_ratings`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_post_ratings_post_id_index` (`post_id`),
-  ADD KEY `jw_post_ratings_client_ip_index` (`client_ip`);
+  ADD KEY `app_post_ratings_post_id_index` (`post_id`),
+  ADD KEY `app_post_ratings_client_ip_index` (`client_ip`);
 
 --
--- Indexes for table `jw_post_views`
+-- Indexes for table `app_post_views`
 --
-ALTER TABLE `jw_post_views`
+ALTER TABLE `app_post_views`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_post_views_post_id_index` (`post_id`),
-  ADD KEY `jw_post_views_day_index` (`day`);
+  ADD KEY `app_post_views_post_id_index` (`post_id`),
+  ADD KEY `app_post_views_day_index` (`day`);
 
 --
--- Indexes for table `jw_product_variants`
+-- Indexes for table `app_product_variants`
 --
-ALTER TABLE `jw_product_variants`
+ALTER TABLE `app_product_variants`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_product_variants_sku_code_index` (`sku_code`),
-  ADD KEY `jw_product_variants_barcode_index` (`barcode`),
-  ADD KEY `jw_product_variants_post_id_index` (`post_id`);
+  ADD KEY `app_product_variants_sku_code_index` (`sku_code`),
+  ADD KEY `app_product_variants_barcode_index` (`barcode`),
+  ADD KEY `app_product_variants_post_id_index` (`post_id`);
 
 --
--- Indexes for table `jw_product_variants_attribute_values`
+-- Indexes for table `app_product_variants_attribute_values`
 --
-ALTER TABLE `jw_product_variants_attribute_values`
+ALTER TABLE `app_product_variants_attribute_values`
   ADD PRIMARY KEY (`id`),
   ADD KEY `product_variant_id_pivot_foreign` (`product_variant_id`),
   ADD KEY `attribute_id_pivot_foreign` (`attribute_id`),
   ADD KEY `attribute_value_id_pivot_foreign` (`attribute_value_id`);
 
 --
--- Indexes for table `jw_resources`
+-- Indexes for table `app_resources`
 --
-ALTER TABLE `jw_resources`
+ALTER TABLE `app_resources`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_resources_slug_unique` (`slug`),
+  ADD UNIQUE KEY `app_resources_slug_unique` (`slug`),
   ADD UNIQUE KEY `resources_uuid_unique` (`uuid`),
-  ADD KEY `jw_resources_post_id_foreign` (`post_id`),
-  ADD KEY `jw_resources_parent_id_foreign` (`parent_id`),
-  ADD KEY `jw_resources_type_index` (`type`),
-  ADD KEY `jw_resources_status_index` (`status`);
+  ADD KEY `app_resources_post_id_foreign` (`post_id`),
+  ADD KEY `app_resources_parent_id_foreign` (`parent_id`),
+  ADD KEY `app_resources_type_index` (`type`),
+  ADD KEY `app_resources_status_index` (`status`);
 
 --
--- Indexes for table `jw_resource_metas`
+-- Indexes for table `app_resource_metas`
 --
-ALTER TABLE `jw_resource_metas`
+ALTER TABLE `app_resource_metas`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_resource_metas_resource_id_meta_key_unique` (`resource_id`,`meta_key`),
-  ADD KEY `jw_resource_metas_resource_id_index` (`resource_id`),
-  ADD KEY `jw_resource_metas_meta_key_index` (`meta_key`);
+  ADD UNIQUE KEY `app_resource_metas_resource_id_meta_key_unique` (`resource_id`,`meta_key`),
+  ADD KEY `app_resource_metas_resource_id_index` (`resource_id`),
+  ADD KEY `app_resource_metas_meta_key_index` (`meta_key`);
 
 --
--- Indexes for table `jw_roles`
+-- Indexes for table `app_roles`
 --
-ALTER TABLE `jw_roles`
+ALTER TABLE `app_roles`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_roles_name_guard_unique` (`name`,`guard_name`);
+  ADD UNIQUE KEY `app_roles_name_guard_unique` (`name`,`guard_name`);
 
 --
--- Indexes for table `jw_role_has_permissions`
+-- Indexes for table `app_role_has_permissions`
 --
-ALTER TABLE `jw_role_has_permissions`
+ALTER TABLE `app_role_has_permissions`
   ADD PRIMARY KEY (`permission_id`,`role_id`),
-  ADD KEY `jw_role_has_permissions_role_id_foreign` (`role_id`);
+  ADD KEY `app_role_has_permissions_role_id_foreign` (`role_id`);
 
 --
--- Indexes for table `jw_search`
+-- Indexes for table `app_search`
 --
-ALTER TABLE `jw_search`
+ALTER TABLE `app_search`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_search_post_id_post_type_unique` (`post_id`,`post_type`),
-  ADD KEY `jw_search_title_index` (`title`),
-  ADD KEY `jw_search_slug_index` (`slug`),
-  ADD KEY `jw_search_post_id_index` (`post_id`),
-  ADD KEY `jw_search_post_type_index` (`post_type`),
-  ADD KEY `jw_search_status_index` (`status`);
+  ADD UNIQUE KEY `app_search_post_id_post_type_unique` (`post_id`,`post_type`),
+  ADD KEY `app_search_title_index` (`title`),
+  ADD KEY `app_search_slug_index` (`slug`),
+  ADD KEY `app_search_post_id_index` (`post_id`),
+  ADD KEY `app_search_post_type_index` (`post_type`),
+  ADD KEY `app_search_status_index` (`status`);
 
 --
--- Indexes for table `jw_seo_metas`
+-- Indexes for table `app_seo_metas`
 --
-ALTER TABLE `jw_seo_metas`
+ALTER TABLE `app_seo_metas`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_seo_metas_object_type_index` (`object_type`),
-  ADD KEY `jw_seo_metas_object_id_index` (`object_id`);
+  ADD KEY `app_seo_metas_object_type_index` (`object_type`),
+  ADD KEY `app_seo_metas_object_id_index` (`object_id`);
 
 --
--- Indexes for table `jw_shipping_address`
+-- Indexes for table `app_shipping_address`
 --
-ALTER TABLE `jw_shipping_address`
+ALTER TABLE `app_shipping_address`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_shipping_address_order_id_index` (`order_id`),
-  ADD KEY `jw_shipping_address_shop_id_index` (`shop_id`);
+  ADD KEY `app_shipping_address_order_id_index` (`order_id`),
+  ADD KEY `app_shipping_address_shop_id_index` (`shop_id`);
 
 --
--- Indexes for table `jw_shipping_methods`
+-- Indexes for table `app_shipping_methods`
 --
-ALTER TABLE `jw_shipping_methods`
+ALTER TABLE `app_shipping_methods`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `jw_shipping_methods_province_id_index` (`province_id`),
-  ADD KEY `jw_shipping_methods_shop_id_index` (`shop_id`);
+  ADD KEY `app_shipping_methods_province_id_index` (`province_id`),
+  ADD KEY `app_shipping_methods_shop_id_index` (`shop_id`);
 
 --
--- Indexes for table `jw_single_taxonomies`
+-- Indexes for table `app_single_taxonomies`
 --
-ALTER TABLE `jw_single_taxonomies`
+ALTER TABLE `app_single_taxonomies`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_single_taxonomies_post_type_post_id_unique` (`post_type`,`post_id`),
-  ADD UNIQUE KEY `jw_single_taxonomies_slug_unique` (`slug`),
-  ADD KEY `jw_single_taxonomies_post_type_index` (`post_type`),
-  ADD KEY `jw_single_taxonomies_post_id_index` (`post_id`),
-  ADD KEY `jw_single_taxonomies_taxonomy_index` (`taxonomy`);
+  ADD UNIQUE KEY `app_single_taxonomies_post_type_post_id_unique` (`post_type`,`post_id`),
+  ADD UNIQUE KEY `app_single_taxonomies_slug_unique` (`slug`),
+  ADD KEY `app_single_taxonomies_post_type_index` (`post_type`),
+  ADD KEY `app_single_taxonomies_post_id_index` (`post_id`),
+  ADD KEY `app_single_taxonomies_taxonomy_index` (`taxonomy`);
 
 --
--- Indexes for table `jw_single_taxonomy_metas`
+-- Indexes for table `app_single_taxonomy_metas`
 --
-ALTER TABLE `jw_single_taxonomy_metas`
+ALTER TABLE `app_single_taxonomy_metas`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_single_taxonomy_metas_taxonomy_id_meta_key_unique` (`taxonomy_id`,`meta_key`),
-  ADD KEY `jw_single_taxonomy_metas_taxonomy_id_index` (`taxonomy_id`),
-  ADD KEY `jw_single_taxonomy_metas_meta_key_index` (`meta_key`);
+  ADD UNIQUE KEY `app_single_taxonomy_metas_taxonomy_id_meta_key_unique` (`taxonomy_id`,`meta_key`),
+  ADD KEY `app_single_taxonomy_metas_taxonomy_id_index` (`taxonomy_id`),
+  ADD KEY `app_single_taxonomy_metas_meta_key_index` (`meta_key`);
 
 --
--- Indexes for table `jw_social_tokens`
+-- Indexes for table `app_social_tokens`
 --
-ALTER TABLE `jw_social_tokens`
+ALTER TABLE `app_social_tokens`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_social_tokens_user_id_social_provider_unique` (`user_id`,`social_provider`),
-  ADD KEY `jw_social_tokens_user_id_index` (`user_id`),
-  ADD KEY `jw_social_tokens_social_provider_index` (`social_provider`),
-  ADD KEY `jw_social_tokens_social_id_index` (`social_id`);
+  ADD UNIQUE KEY `app_social_tokens_user_id_social_provider_unique` (`user_id`,`social_provider`),
+  ADD KEY `app_social_tokens_user_id_index` (`user_id`),
+  ADD KEY `app_social_tokens_social_provider_index` (`social_provider`),
+  ADD KEY `app_social_tokens_social_id_index` (`social_id`);
 
 --
--- Indexes for table `jw_table_groups`
+-- Indexes for table `app_table_groups`
 --
-ALTER TABLE `jw_table_groups`
+ALTER TABLE `app_table_groups`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_table_groups_table_unique` (`table`),
-  ADD KEY `jw_table_groups_total_rows_index` (`total_rows`);
+  ADD UNIQUE KEY `app_table_groups_table_unique` (`table`),
+  ADD KEY `app_table_groups_total_rows_index` (`total_rows`);
 
 --
--- Indexes for table `jw_table_group_datas`
+-- Indexes for table `app_table_group_datas`
 --
-ALTER TABLE `jw_table_group_datas`
+ALTER TABLE `app_table_group_datas`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_table_group_datas_real_table_table_key_unique` (`real_table`,`table_key`),
-  ADD KEY `jw_table_group_datas_table_group_id_foreign` (`table_group_id`),
-  ADD KEY `jw_table_group_datas_table_group_table_id_foreign` (`table_group_table_id`),
-  ADD KEY `jw_table_group_datas_table_index` (`table`),
-  ADD KEY `jw_table_group_datas_real_table_index` (`real_table`),
-  ADD KEY `jw_table_group_datas_table_key_index` (`table_key`);
+  ADD UNIQUE KEY `app_table_group_datas_real_table_table_key_unique` (`real_table`,`table_key`),
+  ADD KEY `app_table_group_datas_table_group_id_foreign` (`table_group_id`),
+  ADD KEY `app_table_group_datas_table_group_table_id_foreign` (`table_group_table_id`),
+  ADD KEY `app_table_group_datas_table_index` (`table`),
+  ADD KEY `app_table_group_datas_real_table_index` (`real_table`),
+  ADD KEY `app_table_group_datas_table_key_index` (`table_key`);
 
 --
--- Indexes for table `jw_table_group_tables`
+-- Indexes for table `app_table_group_tables`
 --
-ALTER TABLE `jw_table_group_tables`
+ALTER TABLE `app_table_group_tables`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_table_group_tables_real_table_unique` (`real_table`),
-  ADD KEY `jw_table_group_tables_table_group_id_foreign` (`table_group_id`),
-  ADD KEY `jw_table_group_tables_table_index` (`table`),
-  ADD KEY `jw_table_group_tables_total_rows_index` (`total_rows`);
+  ADD UNIQUE KEY `app_table_group_tables_real_table_unique` (`real_table`),
+  ADD KEY `app_table_group_tables_table_group_id_foreign` (`table_group_id`),
+  ADD KEY `app_table_group_tables_table_index` (`table`),
+  ADD KEY `app_table_group_tables_total_rows_index` (`total_rows`);
 
 --
--- Indexes for table `jw_taxonomies`
+-- Indexes for table `app_taxonomies`
 --
-ALTER TABLE `jw_taxonomies`
+ALTER TABLE `app_taxonomies`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_taxonomies_slug_unique` (`slug`),
+  ADD UNIQUE KEY `app_taxonomies_slug_unique` (`slug`),
   ADD UNIQUE KEY `taxonomies_uuid_unique` (`uuid`),
-  ADD KEY `jw_taxonomies_post_type_index` (`post_type`),
-  ADD KEY `jw_taxonomies_taxonomy_index` (`taxonomy`),
-  ADD KEY `jw_taxonomies_parent_id_index` (`parent_id`);
+  ADD KEY `app_taxonomies_post_type_index` (`post_type`),
+  ADD KEY `app_taxonomies_taxonomy_index` (`taxonomy`),
+  ADD KEY `app_taxonomies_parent_id_index` (`parent_id`);
 
 --
--- Indexes for table `jw_taxonomy_metas`
+-- Indexes for table `app_taxonomy_metas`
 --
-ALTER TABLE `jw_taxonomy_metas`
+ALTER TABLE `app_taxonomy_metas`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_taxonomy_metas_taxonomy_id_meta_key_unique` (`taxonomy_id`,`meta_key`),
-  ADD KEY `jw_taxonomy_metas_taxonomy_id_index` (`taxonomy_id`),
-  ADD KEY `jw_taxonomy_metas_meta_key_index` (`meta_key`);
+  ADD UNIQUE KEY `app_taxonomy_metas_taxonomy_id_meta_key_unique` (`taxonomy_id`,`meta_key`),
+  ADD KEY `app_taxonomy_metas_taxonomy_id_index` (`taxonomy_id`),
+  ADD KEY `app_taxonomy_metas_meta_key_index` (`meta_key`);
 
 --
--- Indexes for table `jw_telescope_entries`
+-- Indexes for table `app_telescope_entries`
 --
-ALTER TABLE `jw_telescope_entries`
+ALTER TABLE `app_telescope_entries`
   ADD PRIMARY KEY (`sequence`),
-  ADD UNIQUE KEY `jw_telescope_entries_uuid_unique` (`uuid`),
-  ADD KEY `jw_telescope_entries_batch_id_index` (`batch_id`),
-  ADD KEY `jw_telescope_entries_family_hash_index` (`family_hash`),
-  ADD KEY `jw_telescope_entries_created_at_index` (`created_at`),
+  ADD UNIQUE KEY `app_telescope_entries_uuid_unique` (`uuid`),
+  ADD KEY `app_telescope_entries_batch_id_index` (`batch_id`),
+  ADD KEY `app_telescope_entries_family_hash_index` (`family_hash`),
+  ADD KEY `app_telescope_entries_created_at_index` (`created_at`),
   ADD KEY `telescope_should_display_on_index` (`type`,`should_display_on_index`);
 
 --
--- Indexes for table `jw_telescope_entries_tags`
+-- Indexes for table `app_telescope_entries_tags`
 --
-ALTER TABLE `jw_telescope_entries_tags`
-  ADD KEY `jw_telescope_entries_tags_entry_uuid_tag_index` (`entry_uuid`,`tag`),
-  ADD KEY `jw_telescope_entries_tags_tag_index` (`tag`);
+ALTER TABLE `app_telescope_entries_tags`
+  ADD KEY `app_telescope_entries_tags_entry_uuid_tag_index` (`entry_uuid`,`tag`),
+  ADD KEY `app_telescope_entries_tags_tag_index` (`tag`);
 
 --
--- Indexes for table `jw_term_taxonomies`
+-- Indexes for table `app_term_taxonomies`
 --
-ALTER TABLE `jw_term_taxonomies`
+ALTER TABLE `app_term_taxonomies`
   ADD PRIMARY KEY (`term_id`,`term_type`,`taxonomy_id`),
-  ADD KEY `jw_term_taxonomies_term_id_index` (`term_id`),
-  ADD KEY `jw_term_taxonomies_taxonomy_id_index` (`taxonomy_id`),
-  ADD KEY `jw_term_taxonomies_term_type_index` (`term_type`);
+  ADD KEY `app_term_taxonomies_term_id_index` (`term_id`),
+  ADD KEY `app_term_taxonomies_taxonomy_id_index` (`taxonomy_id`),
+  ADD KEY `app_term_taxonomies_term_type_index` (`term_type`);
 
 --
--- Indexes for table `jw_test_eomm_plugin`
+-- Indexes for table `app_test_eomm_plugin`
 --
-ALTER TABLE `jw_test_eomm_plugin`
+ALTER TABLE `app_test_eomm_plugin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `jw_theme_configs`
+-- Indexes for table `app_theme_configs`
 --
-ALTER TABLE `jw_theme_configs`
+ALTER TABLE `app_theme_configs`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_theme_configs_code_theme_unique` (`code`,`theme`),
-  ADD KEY `jw_theme_configs_code_index` (`code`),
-  ADD KEY `jw_theme_configs_theme_index` (`theme`);
+  ADD UNIQUE KEY `app_theme_configs_code_theme_unique` (`code`,`theme`),
+  ADD KEY `app_theme_configs_code_index` (`code`),
+  ADD KEY `app_theme_configs_theme_index` (`theme`);
 
 --
--- Indexes for table `jw_users`
+-- Indexes for table `app_users`
 --
-ALTER TABLE `jw_users`
+ALTER TABLE `app_users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_users_email_unique` (`email`);
+  ADD UNIQUE KEY `app_users_email_unique` (`email`);
 
 --
--- Indexes for table `jw_user_metas`
+-- Indexes for table `app_user_metas`
 --
-ALTER TABLE `jw_user_metas`
+ALTER TABLE `app_user_metas`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `jw_user_metas_user_id_meta_key_unique` (`user_id`,`meta_key`),
-  ADD KEY `jw_user_metas_meta_key_index` (`meta_key`);
+  ADD UNIQUE KEY `app_user_metas_user_id_meta_key_unique` (`user_id`,`meta_key`),
+  ADD KEY `app_user_metas_meta_key_index` (`meta_key`);
 
 --
--- Indexes for table `jw_variants_attributes`
+-- Indexes for table `app_variants_attributes`
 --
-ALTER TABLE `jw_variants_attributes`
+ALTER TABLE `app_variants_attributes`
   ADD PRIMARY KEY (`id`),
   ADD KEY `product_variant_id_foreign` (`product_variant_id`),
   ADD KEY `attribute_id_foreign` (`attribute_id`);
@@ -3719,435 +3719,435 @@ ALTER TABLE `jw_variants_attributes`
 --
 
 --
--- AUTO_INCREMENT for table `jw_attributes`
+-- AUTO_INCREMENT for table `app_attributes`
 --
-ALTER TABLE `jw_attributes`
+ALTER TABLE `app_attributes`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_attribute_values`
+-- AUTO_INCREMENT for table `app_attribute_values`
 --
-ALTER TABLE `jw_attribute_values`
+ALTER TABLE `app_attribute_values`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_comments`
+-- AUTO_INCREMENT for table `app_comments`
 --
-ALTER TABLE `jw_comments`
+ALTER TABLE `app_comments`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `jw_configs`
+-- AUTO_INCREMENT for table `app_configs`
 --
-ALTER TABLE `jw_configs`
+ALTER TABLE `app_configs`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
--- AUTO_INCREMENT for table `jw_dev_tool_cms_versions`
+-- AUTO_INCREMENT for table `app_dev_tool_cms_versions`
 --
-ALTER TABLE `jw_dev_tool_cms_versions`
+ALTER TABLE `app_dev_tool_cms_versions`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `jw_dev_tool_marketplace_plugins`
+-- AUTO_INCREMENT for table `app_dev_tool_marketplace_plugins`
 --
-ALTER TABLE `jw_dev_tool_marketplace_plugins`
+ALTER TABLE `app_dev_tool_marketplace_plugins`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `jw_dev_tool_marketplace_themes`
+-- AUTO_INCREMENT for table `app_dev_tool_marketplace_themes`
 --
-ALTER TABLE `jw_dev_tool_marketplace_themes`
+ALTER TABLE `app_dev_tool_marketplace_themes`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `jw_dev_tool_package_versions`
+-- AUTO_INCREMENT for table `app_dev_tool_package_versions`
 --
-ALTER TABLE `jw_dev_tool_package_versions`
+ALTER TABLE `app_dev_tool_package_versions`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `jw_discounts`
+-- AUTO_INCREMENT for table `app_discounts`
 --
-ALTER TABLE `jw_discounts`
+ALTER TABLE `app_discounts`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_ecomm_addons`
+-- AUTO_INCREMENT for table `app_ecomm_addons`
 --
-ALTER TABLE `jw_ecomm_addons`
+ALTER TABLE `app_ecomm_addons`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_ecomm_carts`
+-- AUTO_INCREMENT for table `app_ecomm_carts`
 --
-ALTER TABLE `jw_ecomm_carts`
+ALTER TABLE `app_ecomm_carts`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
 
 --
--- AUTO_INCREMENT for table `jw_ecomm_currencies`
+-- AUTO_INCREMENT for table `app_ecomm_currencies`
 --
-ALTER TABLE `jw_ecomm_currencies`
+ALTER TABLE `app_ecomm_currencies`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `jw_ecom_download_links`
+-- AUTO_INCREMENT for table `app_ecom_download_links`
 --
-ALTER TABLE `jw_ecom_download_links`
+ALTER TABLE `app_ecom_download_links`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_email_lists`
+-- AUTO_INCREMENT for table `app_email_lists`
 --
-ALTER TABLE `jw_email_lists`
+ALTER TABLE `app_email_lists`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `jw_email_templates`
+-- AUTO_INCREMENT for table `app_email_templates`
 --
-ALTER TABLE `jw_email_templates`
+ALTER TABLE `app_email_templates`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `jw_email_template_users`
+-- AUTO_INCREMENT for table `app_email_template_users`
 --
-ALTER TABLE `jw_email_template_users`
+ALTER TABLE `app_email_template_users`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_evman_event_bookings`
+-- AUTO_INCREMENT for table `app_evman_event_bookings`
 --
-ALTER TABLE `jw_evman_event_bookings`
+ALTER TABLE `app_evman_event_bookings`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
--- AUTO_INCREMENT for table `jw_evman_event_tickets`
+-- AUTO_INCREMENT for table `app_evman_event_tickets`
 --
-ALTER TABLE `jw_evman_event_tickets`
+ALTER TABLE `app_evman_event_tickets`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `jw_failed_jobs`
+-- AUTO_INCREMENT for table `app_failed_jobs`
 --
-ALTER TABLE `jw_failed_jobs`
+ALTER TABLE `app_failed_jobs`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_jobs`
+-- AUTO_INCREMENT for table `app_jobs`
 --
-ALTER TABLE `jw_jobs`
+ALTER TABLE `app_jobs`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_jw_translations`
+-- AUTO_INCREMENT for table `app_app_translations`
 --
-ALTER TABLE `jw_jw_translations`
+ALTER TABLE `app_app_translations`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_languages`
+-- AUTO_INCREMENT for table `app_languages`
 --
-ALTER TABLE `jw_languages`
+ALTER TABLE `app_languages`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `jw_language_lines`
+-- AUTO_INCREMENT for table `app_language_lines`
 --
-ALTER TABLE `jw_language_lines`
+ALTER TABLE `app_language_lines`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_lms_course_lessons`
+-- AUTO_INCREMENT for table `app_lms_course_lessons`
 --
-ALTER TABLE `jw_lms_course_lessons`
+ALTER TABLE `app_lms_course_lessons`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `jw_lms_course_topics`
+-- AUTO_INCREMENT for table `app_lms_course_topics`
 --
-ALTER TABLE `jw_lms_course_topics`
+ALTER TABLE `app_lms_course_topics`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `jw_manual_notifications`
+-- AUTO_INCREMENT for table `app_manual_notifications`
 --
-ALTER TABLE `jw_manual_notifications`
+ALTER TABLE `app_manual_notifications`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `jw_media_files`
+-- AUTO_INCREMENT for table `app_media_files`
 --
-ALTER TABLE `jw_media_files`
+ALTER TABLE `app_media_files`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
--- AUTO_INCREMENT for table `jw_media_folders`
+-- AUTO_INCREMENT for table `app_media_folders`
 --
-ALTER TABLE `jw_media_folders`
+ALTER TABLE `app_media_folders`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT for table `jw_menus`
+-- AUTO_INCREMENT for table `app_menus`
 --
-ALTER TABLE `jw_menus`
+ALTER TABLE `app_menus`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `jw_menu_items`
+-- AUTO_INCREMENT for table `app_menu_items`
 --
-ALTER TABLE `jw_menu_items`
+ALTER TABLE `app_menu_items`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `jw_migrations`
+-- AUTO_INCREMENT for table `app_migrations`
 --
-ALTER TABLE `jw_migrations`
+ALTER TABLE `app_migrations`
   MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 
 --
--- AUTO_INCREMENT for table `jw_oauth_clients`
+-- AUTO_INCREMENT for table `app_oauth_clients`
 --
-ALTER TABLE `jw_oauth_clients`
+ALTER TABLE `app_oauth_clients`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_oauth_personal_access_clients`
+-- AUTO_INCREMENT for table `app_oauth_personal_access_clients`
 --
-ALTER TABLE `jw_oauth_personal_access_clients`
+ALTER TABLE `app_oauth_personal_access_clients`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_orders`
+-- AUTO_INCREMENT for table `app_orders`
 --
-ALTER TABLE `jw_orders`
+ALTER TABLE `app_orders`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=214;
 
 --
--- AUTO_INCREMENT for table `jw_order_items`
+-- AUTO_INCREMENT for table `app_order_items`
 --
-ALTER TABLE `jw_order_items`
+ALTER TABLE `app_order_items`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=221;
 
 --
--- AUTO_INCREMENT for table `jw_order_item_metas`
+-- AUTO_INCREMENT for table `app_order_item_metas`
 --
-ALTER TABLE `jw_order_item_metas`
+ALTER TABLE `app_order_item_metas`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_order_metas`
+-- AUTO_INCREMENT for table `app_order_metas`
 --
-ALTER TABLE `jw_order_metas`
+ALTER TABLE `app_order_metas`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_pages`
+-- AUTO_INCREMENT for table `app_pages`
 --
-ALTER TABLE `jw_pages`
+ALTER TABLE `app_pages`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_page_metas`
+-- AUTO_INCREMENT for table `app_page_metas`
 --
-ALTER TABLE `jw_page_metas`
+ALTER TABLE `app_page_metas`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_payment_histories`
+-- AUTO_INCREMENT for table `app_payment_histories`
 --
-ALTER TABLE `jw_payment_histories`
+ALTER TABLE `app_payment_histories`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_payment_methods`
+-- AUTO_INCREMENT for table `app_payment_methods`
 --
-ALTER TABLE `jw_payment_methods`
+ALTER TABLE `app_payment_methods`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `jw_permissions`
+-- AUTO_INCREMENT for table `app_permissions`
 --
-ALTER TABLE `jw_permissions`
+ALTER TABLE `app_permissions`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `jw_permission_groups`
+-- AUTO_INCREMENT for table `app_permission_groups`
 --
-ALTER TABLE `jw_permission_groups`
+ALTER TABLE `app_permission_groups`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_personal_access_tokens`
+-- AUTO_INCREMENT for table `app_personal_access_tokens`
 --
-ALTER TABLE `jw_personal_access_tokens`
+ALTER TABLE `app_personal_access_tokens`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_posts`
+-- AUTO_INCREMENT for table `app_posts`
 --
-ALTER TABLE `jw_posts`
+ALTER TABLE `app_posts`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
 
 --
--- AUTO_INCREMENT for table `jw_post_likes`
+-- AUTO_INCREMENT for table `app_post_likes`
 --
-ALTER TABLE `jw_post_likes`
+ALTER TABLE `app_post_likes`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_post_metas`
+-- AUTO_INCREMENT for table `app_post_metas`
 --
-ALTER TABLE `jw_post_metas`
+ALTER TABLE `app_post_metas`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=294;
 
 --
--- AUTO_INCREMENT for table `jw_post_ratings`
+-- AUTO_INCREMENT for table `app_post_ratings`
 --
-ALTER TABLE `jw_post_ratings`
+ALTER TABLE `app_post_ratings`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_post_views`
+-- AUTO_INCREMENT for table `app_post_views`
 --
-ALTER TABLE `jw_post_views`
+ALTER TABLE `app_post_views`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
--- AUTO_INCREMENT for table `jw_product_variants`
+-- AUTO_INCREMENT for table `app_product_variants`
 --
-ALTER TABLE `jw_product_variants`
+ALTER TABLE `app_product_variants`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `jw_product_variants_attribute_values`
+-- AUTO_INCREMENT for table `app_product_variants_attribute_values`
 --
-ALTER TABLE `jw_product_variants_attribute_values`
+ALTER TABLE `app_product_variants_attribute_values`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_resources`
+-- AUTO_INCREMENT for table `app_resources`
 --
-ALTER TABLE `jw_resources`
+ALTER TABLE `app_resources`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `jw_resource_metas`
+-- AUTO_INCREMENT for table `app_resource_metas`
 --
-ALTER TABLE `jw_resource_metas`
+ALTER TABLE `app_resource_metas`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_roles`
+-- AUTO_INCREMENT for table `app_roles`
 --
-ALTER TABLE `jw_roles`
+ALTER TABLE `app_roles`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `jw_search`
+-- AUTO_INCREMENT for table `app_search`
 --
-ALTER TABLE `jw_search`
+ALTER TABLE `app_search`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_seo_metas`
+-- AUTO_INCREMENT for table `app_seo_metas`
 --
-ALTER TABLE `jw_seo_metas`
+ALTER TABLE `app_seo_metas`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `jw_shipping_address`
+-- AUTO_INCREMENT for table `app_shipping_address`
 --
-ALTER TABLE `jw_shipping_address`
+ALTER TABLE `app_shipping_address`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_shipping_methods`
+-- AUTO_INCREMENT for table `app_shipping_methods`
 --
-ALTER TABLE `jw_shipping_methods`
+ALTER TABLE `app_shipping_methods`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_single_taxonomies`
+-- AUTO_INCREMENT for table `app_single_taxonomies`
 --
-ALTER TABLE `jw_single_taxonomies`
+ALTER TABLE `app_single_taxonomies`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_single_taxonomy_metas`
+-- AUTO_INCREMENT for table `app_single_taxonomy_metas`
 --
-ALTER TABLE `jw_single_taxonomy_metas`
+ALTER TABLE `app_single_taxonomy_metas`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_social_tokens`
+-- AUTO_INCREMENT for table `app_social_tokens`
 --
-ALTER TABLE `jw_social_tokens`
+ALTER TABLE `app_social_tokens`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_table_groups`
+-- AUTO_INCREMENT for table `app_table_groups`
 --
-ALTER TABLE `jw_table_groups`
+ALTER TABLE `app_table_groups`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_table_group_datas`
+-- AUTO_INCREMENT for table `app_table_group_datas`
 --
-ALTER TABLE `jw_table_group_datas`
+ALTER TABLE `app_table_group_datas`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_table_group_tables`
+-- AUTO_INCREMENT for table `app_table_group_tables`
 --
-ALTER TABLE `jw_table_group_tables`
+ALTER TABLE `app_table_group_tables`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_taxonomies`
+-- AUTO_INCREMENT for table `app_taxonomies`
 --
-ALTER TABLE `jw_taxonomies`
+ALTER TABLE `app_taxonomies`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `jw_taxonomy_metas`
+-- AUTO_INCREMENT for table `app_taxonomy_metas`
 --
-ALTER TABLE `jw_taxonomy_metas`
+ALTER TABLE `app_taxonomy_metas`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_telescope_entries`
+-- AUTO_INCREMENT for table `app_telescope_entries`
 --
-ALTER TABLE `jw_telescope_entries`
+ALTER TABLE `app_telescope_entries`
   MODIFY `sequence` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_test_eomm_plugin`
+-- AUTO_INCREMENT for table `app_test_eomm_plugin`
 --
-ALTER TABLE `jw_test_eomm_plugin`
+ALTER TABLE `app_test_eomm_plugin`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jw_theme_configs`
+-- AUTO_INCREMENT for table `app_theme_configs`
 --
-ALTER TABLE `jw_theme_configs`
+ALTER TABLE `app_theme_configs`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `jw_users`
+-- AUTO_INCREMENT for table `app_users`
 --
-ALTER TABLE `jw_users`
+ALTER TABLE `app_users`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `jw_user_metas`
+-- AUTO_INCREMENT for table `app_user_metas`
 --
-ALTER TABLE `jw_user_metas`
+ALTER TABLE `app_user_metas`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `jw_variants_attributes`
+-- AUTO_INCREMENT for table `app_variants_attributes`
 --
-ALTER TABLE `jw_variants_attributes`
+ALTER TABLE `app_variants_attributes`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -4155,243 +4155,243 @@ ALTER TABLE `jw_variants_attributes`
 --
 
 --
--- Constraints for table `jw_attribute_values`
+-- Constraints for table `app_attribute_values`
 --
-ALTER TABLE `jw_attribute_values`
-  ADD CONSTRAINT `jw_attribute_values_attribute_id_foreign` FOREIGN KEY (`attribute_id`) REFERENCES `jw_attributes` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_attribute_values`
+  ADD CONSTRAINT `app_attribute_values_attribute_id_foreign` FOREIGN KEY (`attribute_id`) REFERENCES `app_attributes` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_comments`
+-- Constraints for table `app_comments`
 --
-ALTER TABLE `jw_comments`
-  ADD CONSTRAINT `jw_comments_object_id_foreign` FOREIGN KEY (`object_id`) REFERENCES `jw_posts` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_comments`
+  ADD CONSTRAINT `app_comments_object_id_foreign` FOREIGN KEY (`object_id`) REFERENCES `app_posts` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_discounts`
+-- Constraints for table `app_discounts`
 --
-ALTER TABLE `jw_discounts`
-  ADD CONSTRAINT `jw_discounts_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `jw_posts` (`id`) ON DELETE SET NULL;
+ALTER TABLE `app_discounts`
+  ADD CONSTRAINT `app_discounts_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `app_posts` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `jw_ecomm_carts`
+-- Constraints for table `app_ecomm_carts`
 --
-ALTER TABLE `jw_ecomm_carts`
-  ADD CONSTRAINT `jw_ecomm_carts_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `jw_users` (`id`) ON DELETE SET NULL;
+ALTER TABLE `app_ecomm_carts`
+  ADD CONSTRAINT `app_ecomm_carts_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `jw_ecom_download_links`
+-- Constraints for table `app_ecom_download_links`
 --
-ALTER TABLE `jw_ecom_download_links`
-  ADD CONSTRAINT `jw_ecom_download_links_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `jw_posts` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `jw_ecom_download_links_variant_id_foreign` FOREIGN KEY (`variant_id`) REFERENCES `jw_product_variants` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_ecom_download_links`
+  ADD CONSTRAINT `app_ecom_download_links_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `app_posts` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `app_ecom_download_links_variant_id_foreign` FOREIGN KEY (`variant_id`) REFERENCES `app_product_variants` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_email_template_users`
+-- Constraints for table `app_email_template_users`
 --
-ALTER TABLE `jw_email_template_users`
-  ADD CONSTRAINT `jw_email_template_users_email_template_id_foreign` FOREIGN KEY (`email_template_id`) REFERENCES `jw_email_templates` (`id`),
-  ADD CONSTRAINT `jw_email_template_users_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `jw_users` (`id`);
+ALTER TABLE `app_email_template_users`
+  ADD CONSTRAINT `app_email_template_users_email_template_id_foreign` FOREIGN KEY (`email_template_id`) REFERENCES `app_email_templates` (`id`),
+  ADD CONSTRAINT `app_email_template_users_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`);
 
 --
--- Constraints for table `jw_evman_event_bookings`
+-- Constraints for table `app_evman_event_bookings`
 --
-ALTER TABLE `jw_evman_event_bookings`
-  ADD CONSTRAINT `jw_evman_event_bookings_event_id_foreign` FOREIGN KEY (`event_id`) REFERENCES `jw_posts` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `jw_evman_event_bookings_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `jw_orders` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `jw_evman_event_bookings_payment_method_id_foreign` FOREIGN KEY (`payment_method_id`) REFERENCES `jw_payment_methods` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `jw_evman_event_bookings_ticket_id_foreign` FOREIGN KEY (`ticket_id`) REFERENCES `jw_evman_event_tickets` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `jw_evman_event_bookings_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `jw_users` (`id`) ON DELETE SET NULL;
+ALTER TABLE `app_evman_event_bookings`
+  ADD CONSTRAINT `app_evman_event_bookings_event_id_foreign` FOREIGN KEY (`event_id`) REFERENCES `app_posts` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `app_evman_event_bookings_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `app_orders` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `app_evman_event_bookings_payment_method_id_foreign` FOREIGN KEY (`payment_method_id`) REFERENCES `app_payment_methods` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `app_evman_event_bookings_ticket_id_foreign` FOREIGN KEY (`ticket_id`) REFERENCES `app_evman_event_tickets` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `app_evman_event_bookings_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `jw_evman_event_tickets`
+-- Constraints for table `app_evman_event_tickets`
 --
-ALTER TABLE `jw_evman_event_tickets`
-  ADD CONSTRAINT `jw_evman_event_tickets_event_id_foreign` FOREIGN KEY (`event_id`) REFERENCES `jw_posts` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `jw_evman_event_tickets_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `jw_users` (`id`) ON DELETE SET NULL;
+ALTER TABLE `app_evman_event_tickets`
+  ADD CONSTRAINT `app_evman_event_tickets_event_id_foreign` FOREIGN KEY (`event_id`) REFERENCES `app_posts` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `app_evman_event_tickets_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `jw_lms_course_lessons`
+-- Constraints for table `app_lms_course_lessons`
 --
-ALTER TABLE `jw_lms_course_lessons`
-  ADD CONSTRAINT `jw_lms_course_lessons_course_topic_id_foreign` FOREIGN KEY (`course_topic_id`) REFERENCES `jw_lms_course_topics` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `jw_lms_course_lessons_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `jw_posts` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_lms_course_lessons`
+  ADD CONSTRAINT `app_lms_course_lessons_course_topic_id_foreign` FOREIGN KEY (`course_topic_id`) REFERENCES `app_lms_course_topics` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `app_lms_course_lessons_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `app_posts` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_lms_course_topics`
+-- Constraints for table `app_lms_course_topics`
 --
-ALTER TABLE `jw_lms_course_topics`
-  ADD CONSTRAINT `jw_lms_course_topics_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `jw_posts` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_lms_course_topics`
+  ADD CONSTRAINT `app_lms_course_topics_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `app_posts` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_menu_items`
+-- Constraints for table `app_menu_items`
 --
-ALTER TABLE `jw_menu_items`
-  ADD CONSTRAINT `jw_menu_items_menu_id_foreign` FOREIGN KEY (`menu_id`) REFERENCES `jw_menus` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `jw_menu_items_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `jw_menu_items` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_menu_items`
+  ADD CONSTRAINT `app_menu_items_menu_id_foreign` FOREIGN KEY (`menu_id`) REFERENCES `app_menus` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `app_menu_items_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `app_menu_items` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_model_has_permissions`
+-- Constraints for table `app_model_has_permissions`
 --
-ALTER TABLE `jw_model_has_permissions`
-  ADD CONSTRAINT `jw_model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `jw_permissions` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_model_has_permissions`
+  ADD CONSTRAINT `app_model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `app_permissions` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_model_has_roles`
+-- Constraints for table `app_model_has_roles`
 --
-ALTER TABLE `jw_model_has_roles`
-  ADD CONSTRAINT `jw_model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `jw_roles` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_model_has_roles`
+  ADD CONSTRAINT `app_model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `app_roles` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_orders`
+-- Constraints for table `app_orders`
 --
-ALTER TABLE `jw_orders`
-  ADD CONSTRAINT `jw_orders_payment_method_id_foreign` FOREIGN KEY (`payment_method_id`) REFERENCES `jw_payment_methods` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `jw_orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `jw_users` (`id`) ON DELETE SET NULL;
+ALTER TABLE `app_orders`
+  ADD CONSTRAINT `app_orders_payment_method_id_foreign` FOREIGN KEY (`payment_method_id`) REFERENCES `app_payment_methods` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `app_orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `jw_order_items`
+-- Constraints for table `app_order_items`
 --
-ALTER TABLE `jw_order_items`
-  ADD CONSTRAINT `jw_order_items_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `jw_orders` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `jw_order_items_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `jw_posts` (`id`) ON DELETE SET NULL;
+ALTER TABLE `app_order_items`
+  ADD CONSTRAINT `app_order_items_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `app_orders` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `app_order_items_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `app_posts` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `jw_order_item_metas`
+-- Constraints for table `app_order_item_metas`
 --
-ALTER TABLE `jw_order_item_metas`
-  ADD CONSTRAINT `jw_order_item_metas_order_item_id_foreign` FOREIGN KEY (`order_item_id`) REFERENCES `jw_order_items` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_order_item_metas`
+  ADD CONSTRAINT `app_order_item_metas_order_item_id_foreign` FOREIGN KEY (`order_item_id`) REFERENCES `app_order_items` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_order_metas`
+-- Constraints for table `app_order_metas`
 --
-ALTER TABLE `jw_order_metas`
-  ADD CONSTRAINT `jw_order_metas_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `jw_orders` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_order_metas`
+  ADD CONSTRAINT `app_order_metas_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `app_orders` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_page_metas`
+-- Constraints for table `app_page_metas`
 --
-ALTER TABLE `jw_page_metas`
-  ADD CONSTRAINT `jw_page_metas_page_id_foreign` FOREIGN KEY (`page_id`) REFERENCES `jw_pages` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_page_metas`
+  ADD CONSTRAINT `app_page_metas_page_id_foreign` FOREIGN KEY (`page_id`) REFERENCES `app_pages` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_payment_histories`
+-- Constraints for table `app_payment_histories`
 --
-ALTER TABLE `jw_payment_histories`
-  ADD CONSTRAINT `jw_payment_histories_payment_method_id_foreign` FOREIGN KEY (`payment_method_id`) REFERENCES `jw_payment_methods` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_payment_histories`
+  ADD CONSTRAINT `app_payment_histories_payment_method_id_foreign` FOREIGN KEY (`payment_method_id`) REFERENCES `app_payment_methods` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_post_likes`
+-- Constraints for table `app_post_likes`
 --
-ALTER TABLE `jw_post_likes`
-  ADD CONSTRAINT `jw_post_likes_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `jw_posts` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_post_likes`
+  ADD CONSTRAINT `app_post_likes_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `app_posts` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_post_metas`
+-- Constraints for table `app_post_metas`
 --
-ALTER TABLE `jw_post_metas`
-  ADD CONSTRAINT `jw_post_metas_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `jw_posts` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_post_metas`
+  ADD CONSTRAINT `app_post_metas_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `app_posts` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_post_ratings`
+-- Constraints for table `app_post_ratings`
 --
-ALTER TABLE `jw_post_ratings`
-  ADD CONSTRAINT `jw_post_ratings_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `jw_posts` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_post_ratings`
+  ADD CONSTRAINT `app_post_ratings_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `app_posts` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_post_views`
+-- Constraints for table `app_post_views`
 --
-ALTER TABLE `jw_post_views`
-  ADD CONSTRAINT `jw_post_views_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `jw_posts` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_post_views`
+  ADD CONSTRAINT `app_post_views_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `app_posts` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_product_variants`
+-- Constraints for table `app_product_variants`
 --
-ALTER TABLE `jw_product_variants`
-  ADD CONSTRAINT `jw_product_variants_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `jw_posts` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_product_variants`
+  ADD CONSTRAINT `app_product_variants_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `app_posts` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_product_variants_attribute_values`
+-- Constraints for table `app_product_variants_attribute_values`
 --
-ALTER TABLE `jw_product_variants_attribute_values`
-  ADD CONSTRAINT `attribute_id_pivot_foreign` FOREIGN KEY (`attribute_id`) REFERENCES `jw_attributes` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `attribute_value_id_pivot_foreign` FOREIGN KEY (`attribute_value_id`) REFERENCES `jw_attribute_values` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `product_variant_id_pivot_foreign` FOREIGN KEY (`product_variant_id`) REFERENCES `jw_product_variants` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_product_variants_attribute_values`
+  ADD CONSTRAINT `attribute_id_pivot_foreign` FOREIGN KEY (`attribute_id`) REFERENCES `app_attributes` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `attribute_value_id_pivot_foreign` FOREIGN KEY (`attribute_value_id`) REFERENCES `app_attribute_values` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `product_variant_id_pivot_foreign` FOREIGN KEY (`product_variant_id`) REFERENCES `app_product_variants` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_resources`
+-- Constraints for table `app_resources`
 --
-ALTER TABLE `jw_resources`
-  ADD CONSTRAINT `jw_resources_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `jw_resources` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `jw_resources_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `jw_posts` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_resources`
+  ADD CONSTRAINT `app_resources_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `app_resources` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `app_resources_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `app_posts` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_resource_metas`
+-- Constraints for table `app_resource_metas`
 --
-ALTER TABLE `jw_resource_metas`
-  ADD CONSTRAINT `jw_resource_metas_resource_id_foreign` FOREIGN KEY (`resource_id`) REFERENCES `jw_resources` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_resource_metas`
+  ADD CONSTRAINT `app_resource_metas_resource_id_foreign` FOREIGN KEY (`resource_id`) REFERENCES `app_resources` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_role_has_permissions`
+-- Constraints for table `app_role_has_permissions`
 --
-ALTER TABLE `jw_role_has_permissions`
-  ADD CONSTRAINT `jw_role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `jw_permissions` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `jw_role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `jw_roles` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_role_has_permissions`
+  ADD CONSTRAINT `app_role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `app_permissions` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `app_role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `app_roles` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_single_taxonomies`
+-- Constraints for table `app_single_taxonomies`
 --
-ALTER TABLE `jw_single_taxonomies`
-  ADD CONSTRAINT `jw_single_taxonomies_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `jw_posts` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_single_taxonomies`
+  ADD CONSTRAINT `app_single_taxonomies_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `app_posts` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_single_taxonomy_metas`
+-- Constraints for table `app_single_taxonomy_metas`
 --
-ALTER TABLE `jw_single_taxonomy_metas`
-  ADD CONSTRAINT `jw_single_taxonomy_metas_taxonomy_id_foreign` FOREIGN KEY (`taxonomy_id`) REFERENCES `jw_single_taxonomies` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_single_taxonomy_metas`
+  ADD CONSTRAINT `app_single_taxonomy_metas_taxonomy_id_foreign` FOREIGN KEY (`taxonomy_id`) REFERENCES `app_single_taxonomies` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_social_tokens`
+-- Constraints for table `app_social_tokens`
 --
-ALTER TABLE `jw_social_tokens`
-  ADD CONSTRAINT `jw_social_tokens_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `jw_users` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_social_tokens`
+  ADD CONSTRAINT `app_social_tokens_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_table_group_datas`
+-- Constraints for table `app_table_group_datas`
 --
-ALTER TABLE `jw_table_group_datas`
-  ADD CONSTRAINT `jw_table_group_datas_table_group_id_foreign` FOREIGN KEY (`table_group_id`) REFERENCES `jw_table_groups` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `jw_table_group_datas_table_group_table_id_foreign` FOREIGN KEY (`table_group_table_id`) REFERENCES `jw_table_group_tables` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_table_group_datas`
+  ADD CONSTRAINT `app_table_group_datas_table_group_id_foreign` FOREIGN KEY (`table_group_id`) REFERENCES `app_table_groups` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `app_table_group_datas_table_group_table_id_foreign` FOREIGN KEY (`table_group_table_id`) REFERENCES `app_table_group_tables` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_table_group_tables`
+-- Constraints for table `app_table_group_tables`
 --
-ALTER TABLE `jw_table_group_tables`
-  ADD CONSTRAINT `jw_table_group_tables_table_group_id_foreign` FOREIGN KEY (`table_group_id`) REFERENCES `jw_table_groups` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_table_group_tables`
+  ADD CONSTRAINT `app_table_group_tables_table_group_id_foreign` FOREIGN KEY (`table_group_id`) REFERENCES `app_table_groups` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_taxonomy_metas`
+-- Constraints for table `app_taxonomy_metas`
 --
-ALTER TABLE `jw_taxonomy_metas`
-  ADD CONSTRAINT `jw_taxonomy_metas_taxonomy_id_foreign` FOREIGN KEY (`taxonomy_id`) REFERENCES `jw_taxonomies` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_taxonomy_metas`
+  ADD CONSTRAINT `app_taxonomy_metas_taxonomy_id_foreign` FOREIGN KEY (`taxonomy_id`) REFERENCES `app_taxonomies` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_telescope_entries_tags`
+-- Constraints for table `app_telescope_entries_tags`
 --
-ALTER TABLE `jw_telescope_entries_tags`
-  ADD CONSTRAINT `jw_telescope_entries_tags_entry_uuid_foreign` FOREIGN KEY (`entry_uuid`) REFERENCES `jw_telescope_entries` (`uuid`) ON DELETE CASCADE;
+ALTER TABLE `app_telescope_entries_tags`
+  ADD CONSTRAINT `app_telescope_entries_tags_entry_uuid_foreign` FOREIGN KEY (`entry_uuid`) REFERENCES `app_telescope_entries` (`uuid`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_user_metas`
+-- Constraints for table `app_user_metas`
 --
-ALTER TABLE `jw_user_metas`
-  ADD CONSTRAINT `jw_user_metas_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `jw_users` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_user_metas`
+  ADD CONSTRAINT `app_user_metas_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `jw_variants_attributes`
+-- Constraints for table `app_variants_attributes`
 --
-ALTER TABLE `jw_variants_attributes`
-  ADD CONSTRAINT `attribute_id_foreign` FOREIGN KEY (`attribute_id`) REFERENCES `jw_attributes` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `product_variant_id_foreign` FOREIGN KEY (`product_variant_id`) REFERENCES `jw_product_variants` (`id`) ON DELETE CASCADE;
+ALTER TABLE `app_variants_attributes`
+  ADD CONSTRAINT `attribute_id_foreign` FOREIGN KEY (`attribute_id`) REFERENCES `app_attributes` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `product_variant_id_foreign` FOREIGN KEY (`product_variant_id`) REFERENCES `app_product_variants` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
