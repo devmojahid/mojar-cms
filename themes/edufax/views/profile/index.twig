@@ -3,7 +3,7 @@
 {% block content %}
     {% include 'theme::components.breadcrumb' with {
         title: page.title,
-        background_image: 'images/breadcrumb_bg.jpg',
+        background_image: upload_url(theme_config('breadcrumb_bg_image')),
         items: [
             {'label': 'Home', 'url': '/'},
             {'label': page.title}
@@ -57,18 +57,7 @@
                                     {% endfor %}
                                 </ul>
                             </div>
-                            {# <div class="tf__dashboard_sidebar_menu">
-                                <ul>
-                                    {% for menu_page in pages %}
-                                        <li>
-                                            <a class="{% if page.key is defined and page.key == menu_page.key %}active{% endif %}"
-                                            href="{{ route('profile', [menu_page.key]) }}">
-                                                <i class="{{ menu_page.icon }}"></i> {{ menu_page.title }}
-                                            </a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div> #}
+                            
                         </div>
                     </div>
                     <div class="col-xxl-9 col-lg-8">

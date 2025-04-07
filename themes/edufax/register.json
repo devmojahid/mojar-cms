@@ -185,6 +185,10 @@
         "footer_bg_image": {
             "label": "Footer Bg Image",
             "type": "image"
+        },
+        "breadcrumb_bg_image" : {
+            "label": "breadcrumb Bg Image",
+            "type": "image"
         }
     }
 }

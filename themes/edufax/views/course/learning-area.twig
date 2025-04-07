@@ -3,7 +3,7 @@
 {% block content %}
 	{% include 'theme::components.breadcrumb' with {
         title: page.title,
-        background_image: 'images/breadcrumb_bg.jpg',
+        background_image: upload_url(page.thumbnail),
         items: [
             {'label': 'Home', 'url': '/'},
             {'label': 'Courses', 'url': '/courses'},
@@ -18,20 +18,95 @@
 					<div class="tf__courses_video_area">
 						<div class="tf__courses_video_play">
 							{% if data.current_lesson %}
-
-								{{dump(data.current_lesson.type)}}
-								{% set video_type = data.current_lesson.type %}
-                                {% if data.current_lesson.type == "local_video" %}
-                                    {% set video_path = data.current_lesson.local_video_path|default(null) %}
-                                    {% set video_url = video_path ? upload_url(video_path) : '#' %}
-                                {% else %}
-                                    {% set video_url = data.current_lesson.content_url|default('#') %}
-                                {% endif %}
-
+								{% set lesson_type = data.current_lesson.type %}
 								{% set lesson_thumbnail = data.current_lesson.attributes['thumbnail'] ?? null %}
-								{% set video_thumbnail = lesson_thumbnail ? upload_url(lesson_thumbnail) :  upload_url(null) %}
+								{% set video_thumbnail = lesson_thumbnail ? upload_url(lesson_thumbnail) : upload_url(null) %}
 
-								<div class="myVideo" id="my_video" data-video="{{ video_url }}" data-poster="{{ video_thumbnail }}" data-type="video/mp4"></div>
+								{% if lesson_type == "video" or lesson_type == "local_video" %}
+									{% if lesson_type == "local_video" %}
+										{% set video_path = data.current_lesson.local_video_path|default(null) %}
+										{% set video_url = video_path ? upload_url(video_path) : '#' %}
+									{% else %}
+										{% set video_url = data.current_lesson.content_url|default('#') %}
+									{% endif %}
+									{% if video_url matches '/youtu(\\.be|be\\.com)/' %}
+										<div class="tf__youtube_embed">
+											<iframe 
+												width="100%" 
+												height="480" 
+												src="{{ video_url|replace({'youtu.be/': 'youtube.com/embed/', 'youtube.com/watch?v=': 'youtube.com/embed/', '?si=': '?'}) }}" 
+												frameborder="0" 
+												allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+												allowfullscreen>
+											</iframe>
+										</div>
+									{% else %}
+										<div class="myVideo" id="my_video" data-video="{{ video_url }}" data-poster="{{ video_thumbnail }}" data-type="video/mp4"></div>
+									{% endif %}
+								{% elseif lesson_type == "audio" or lesson_type == "local_audio" %}
+									{% if lesson_type == "local_audio" %}
+										{% set audio_path = data.current_lesson.local_audio_path|default(null) %}
+										{% set audio_url = audio_path ? upload_url(audio_path) : '#' %}
+									{% else %}
+										{% set audio_url = data.current_lesson.content_url|default('#') %}
+									{% endif %}
+									<div class="tf__audio_player">
+										<div class="audio-poster" style="background-image: url('{{ video_thumbnail }}');">
+											<div class="audio-overlay">
+												<i class="fas fa-headphones"></i>
+												<h4>Audio Lesson</h4>
+											</div>
+										</div>
+										<audio controls class="w-100 mt-3">
+											<source src="{{ audio_url }}" type="audio/mpeg">
+											Your browser does not support the audio element.
+										</audio>
+									</div>
+								{% elseif lesson_type == "document" or lesson_type == "local_document" %}
+									{% if lesson_type == "local_document" %}
+										{% set document_path = data.current_lesson.local_document_path|default(null) %}
+										{% set document_url = document_path ? upload_url(document_path) : '#' %}
+									{% else %}
+										{% set document_url = data.current_lesson.content_url|default('#') %}
+									{% endif %}
+									<div class="tf__document_viewer">
+										<div class="document-poster" style="background-image: url('{{ video_thumbnail }}');">
+											<div class="document-overlay">
+												<i class="fas fa-file-alt"></i>
+												<h4>Document</h4>
+											</div>
+										</div>
+										<div class="document-actions mt-3">
+											<a href="{{ document_url }}" class="btn btn-primary" target="_blank">
+												<i class="fas fa-download me-2"></i> Download Document
+											</a>
+											{% if document_url ends with '.pdf' %}
+												<iframe src="{{ document_url }}" class="document-preview mt-3" width="100%" height="500px"></iframe>
+											{% endif %}
+										</div>
+									</div>
+								{% elseif lesson_type == "link" %}
+									<div class="tf__external_link">
+										<div class="link-poster" style="background-image: url('{{ video_thumbnail }}');">
+											<div class="link-overlay">
+												<i class="fas fa-external-link-alt"></i>
+												<h4>External Link</h4>
+											</div>
+										</div>
+										<div class="link-actions mt-3">
+											<a href="{{ data.current_lesson.content_url }}" class="btn btn-primary" target="_blank">
+												<i class="fas fa-external-link-alt me-2"></i> Visit External Link
+											</a>
+										</div>
+									</div>
+								{% else %}
+									<div class="tf__empty_lesson">
+										<img src="{{ video_thumbnail }}" alt="{{ data.current_lesson.title }}" class="img-fluid w-100">
+										<div class="overlay">
+											<h3>Unsupported lesson type</h3>
+										</div>
+									</div>
+								{% endif %}
 							{% else %}
 								<div class="tf__empty_lesson">
 									<img src="{{ upload_url(page.thumbnail) }}" alt="{{ page.title }}" class="img-fluid w-100">
@@ -93,6 +168,25 @@
 														<li>
 															<a href="{{ route('lms.courses.learning-area', [page.slug, lesson.slug]) }}" class="{{ data.current_lesson and data.current_lesson.id == lesson.id ? 'active' : '' }}">
 																{{ lesson.title }}
+																{% if lesson.type %}
+																	<span class="lesson-type-badge lesson-type-{{ lesson.type }}">
+																		{% if lesson.type == "video" %}
+																			<i class="fas fa-video"></i>
+																		{% elseif lesson.type == "audio" %}
+																			<i class="fas fa-headphones"></i>
+																		{% elseif lesson.type == "document" %}
+																			<i class="fas fa-file-alt"></i>
+																		{% elseif lesson.type == "link" %}
+																			<i class="fas fa-external-link-alt"></i>
+																		{% elseif lesson.type == "local_video" %}
+																			<i class="fas fa-video"></i>
+																		{% elseif lesson.type == "local_audio" %}
+																			<i class="fas fa-headphones"></i>
+																		{% elseif lesson.type == "local_document" %}
+																			<i class="fas fa-file-alt"></i>
+																		{% endif %}
+																	</span>
+																{% endif %}
 															</a>
 														</li>
 													{% else %}
@@ -147,6 +241,127 @@
 			justify-content: center;
 			background-color: rgba(0, 0, 0, 0.5);
 			color: white;
+		}
+
+		/* Audio Player Styles */
+		.tf__audio_player .audio-poster {
+			width: 100%;
+			height: 300px;
+			background-size: cover;
+			background-position: center;
+			position: relative;
+			border-radius: 8px;
+			overflow: hidden;
+		}
+
+		.tf__audio_player .audio-overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			background-color: rgba(0, 0, 0, 0.5);
+			color: white;
+		}
+
+		.tf__audio_player .audio-overlay i {
+			font-size: 3rem;
+			margin-bottom: 1rem;
+		}
+
+		/* Document Viewer Styles */
+		.tf__document_viewer .document-poster {
+			width: 100%;
+			height: 300px;
+			background-size: cover;
+			background-position: center;
+			position: relative;
+			border-radius: 8px;
+			overflow: hidden;
+		}
+
+		.tf__document_viewer .document-overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			background-color: rgba(0, 0, 0, 0.5);
+			color: white;
+		}
+
+		.tf__document_viewer .document-overlay i {
+			font-size: 3rem;
+			margin-bottom: 1rem;
+		}
+
+		.tf__document_viewer .document-preview {
+			border: 1px solid #ddd;
+			border-radius: 8px;
+		}
+
+		/* External Link Styles */
+		.tf__external_link .link-poster {
+			width: 100%;
+			height: 300px;
+			background-size: cover;
+			background-position: center;
+			position: relative;
+			border-radius: 8px;
+			overflow: hidden;
+		}
+
+		.tf__external_link .link-overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			background-color: rgba(0, 0, 0, 0.5);
+			color: white;
+		}
+
+		.tf__external_link .link-overlay i {
+			font-size: 3rem;
+			margin-bottom: 1rem;
+		}
+
+		/* Lesson Type Badges */
+		.lesson-type-badge {
+			display: inline-block;
+			margin-left: 8px;
+			font-size: 0.8rem;
+			padding: 2px 6px;
+			border-radius: 4px;
+			background-color: #f0f0f0;
+		}
+
+		.lesson-type-video, .lesson-type-local_video {
+			color: #e74c3c;
+		}
+
+		.lesson-type-audio, .lesson-type-local_audio {
+			color: #3498db;
+		}
+
+		.lesson-type-document, .lesson-type-local_document {
+			color: #2ecc71;
+		}
+
+		.lesson-type-link {
+			color: #9b59b6;
 		}
 	</style>
 {% endblock %}

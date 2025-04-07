@@ -3,7 +3,7 @@
 {% block content %}
     {% include 'theme::components.breadcrumb' with {
         title: 'Products',
-        background_image: 'images/breadcrumb_bg.jpg',
+        background_image: upload_url(theme_config('breadcrumb_bg_image')),
         items: [
 
             {'label': 'Home', 'url': '/'},

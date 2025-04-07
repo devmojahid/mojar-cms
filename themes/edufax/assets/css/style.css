@@ -5335,3 +5335,8 @@ TERMS AMD CONDITION PAGE END
 /*============================
    DASHBOARD PAGE END
 ============================*/
+
+
+.comment-box .item-img{
+    max-width: 50px;
+}

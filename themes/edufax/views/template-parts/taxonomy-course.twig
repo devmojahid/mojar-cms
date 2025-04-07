@@ -4,7 +4,7 @@
     {% include 'theme::components.breadcrumb' with {
             is_dynamic: true,
             post: post,
-            background_image: post.thumbnail ?? 'images/breadcrumb_bg.jpg'
+            background_image: post.thumbnail ?? upload_url(theme_config('breadcrumb_bg_image')),
         }
     %}
     <section>

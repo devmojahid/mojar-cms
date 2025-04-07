@@ -11,7 +11,7 @@
     {% if background_image %}
         style="background: url({{ background_image }});"
     {% else %}
-        style="background: url({{ 'images/breadcrumb_bg.jpg' }});"
+        style="background: url({{  upload_url(theme_config('breadcrumb_bg_image')) }});"
     {% endif %}
 >
     <div class="container">

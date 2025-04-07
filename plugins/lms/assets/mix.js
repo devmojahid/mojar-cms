@@ -1,8 +1,6 @@
 const mix = require('laravel-mix');
 const path = require('path');
 
-console.log("Plugin Path: ", __dirname);
-
 const baseAsset = path.resolve(__dirname, '');
 const baseStyles = baseAsset + '/styles';
 // const basePublish = baseAsset + '/public';

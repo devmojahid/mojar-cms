@@ -11813,6 +11813,11 @@ TERMS AMD CONDITION PAGE END
 /*============================
    DASHBOARD PAGE END
 ============================*/
+
+
+.comment-box .item-img{
+    max-width: 50px;
+}
 @media (min-width: 1400px) and (max-width: 1599.99px) {
 
     .tf__banner_img span {
