@@ -1,5 +1,4 @@
 <?php
-
 namespace Juzaweb\CMS\Support\Database;
 
 use Exception;
@@ -35,22 +34,17 @@ final class ImportDatabaseService
         try {
             $outputLog->write("Importing SQL file: {$path}", 1);
             
-            // Get SQL file content
-            $sql = File::get($path);
+            // Purge connections and reset
+            DB::purge(DB::getDefaultConnection());
+            DB::connection()->setDatabaseName(DB::getDatabaseName());
             
-            // Split SQL by semicolons to get individual queries
-            // This is a simple split that works for most cases, but complex SQL may need more robust handling
-            $queries = array_filter(array_map('trim', explode(';', $sql)), 'strlen');
+            // Drop all existing tables for a clean import
+            $outputLog->write("Dropping all existing tables", 1);
+            DB::getSchemaBuilder()->dropAllTables();
             
-            DB::beginTransaction();
-            
-            foreach ($queries as $query) {
-                if (!empty($query)) {
-                    DB::unprepared($query);
-                }
-            }
-            
-            DB::commit();
+            // Import the SQL file directly without splitting
+            $outputLog->write("Beginning SQL file import", 1);
+            DB::unprepared(File::get($path));
             
             $message = "SQL file imported successfully";
             $outputLog->write($message, 1);
@@ -61,8 +55,6 @@ final class ImportDatabaseService
                 'dbOutputLog' => $outputLog->fetch(),
             ];
         } catch (Exception $e) {
-            DB::rollBack();
-            
             $message = "Error importing SQL file: " . $e->getMessage();
             $outputLog->write($message, 1);
             
@@ -73,4 +65,4 @@ final class ImportDatabaseService
             ];
         }
     }
-} 
+}
