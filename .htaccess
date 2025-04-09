@@ -55,6 +55,7 @@
     ##
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^jw-styles/mojar/(.*|$) /public/jw-styles/mojar/$1 [NC,L]
+    RewriteRule ^jw-styles/plugins/(.*|$) /public/jw-styles/plugins/$1 [NC,L]
     RewriteRule ^storage/(.*|$) /storage/app/public/$1 [NC,L]
     RewriteRule ^ index.php [L]
 
