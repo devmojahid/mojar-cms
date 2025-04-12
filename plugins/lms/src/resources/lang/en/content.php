@@ -207,4 +207,7 @@ return [
     'your_review' => 'Your review',
     'no_rating' => 'No rating yet',
     'enrolled_courses' => 'Enrolled Courses',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'add_lesson' => 'Add Lesson ',
 ];

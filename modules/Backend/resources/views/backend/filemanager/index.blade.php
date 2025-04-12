@@ -90,7 +90,7 @@
                     </button>
                 </form>
                 <div class="btn-group mr-2 ml-2">
-                    <div class="dropdown" data-bs-toggle="tooltip" title="{{ trans('cms::app.upload') }}">
+                    <div class="dropdown">
                         <a href="#" class="btn dropdown-toggle btn-tabler" data-bs-toggle="dropdown">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"

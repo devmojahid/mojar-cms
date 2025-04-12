@@ -34,13 +34,6 @@ class PaymentMethodDatatable extends DataTable
                     ->render();
                 }
             ],
-            'type' => [
-                'label' => trans('cms::app.method'),
-                'width' => '20%',
-                'formatter' => function ($value, $row, $index) {
-                    return trans("cms::app.data.payment_methods.{$value}");
-                }
-            ],
             'active' => [
                 'label' => trans('cms::app.status'),
                 'width' => '10%',

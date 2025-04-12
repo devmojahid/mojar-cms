@@ -1,11 +1,3 @@
-{# {% if data.meta.last_page > 1 %}
-    <ul>
-        {% for index,page in data.meta.links %}
-        <li><a href="{{ page.url }}" {% if page.active %} class="active" {% endif %}>{{ page.label }}</a></li>
-        {% endfor %}
-    </ul>
-{% endif %} #}
-
 {% if data.meta.last_page > 1 %}
  <nav aria-label="Page navigation example">
     <ul class="pagination">

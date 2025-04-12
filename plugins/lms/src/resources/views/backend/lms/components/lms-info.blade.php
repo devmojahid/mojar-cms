@@ -942,7 +942,7 @@
                         <small class="form-hint">{{ __('YouTube, Vimeo, or direct file URL') }}</small>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">{{ __('Duration (minutes)') }}</label>
+                        <label class="form-label required">{{ __('Duration (minutes)') }}</label>
                         <input type="number" class="form-control" id="lesson-duration" placeholder="0"
                             min="0">
                     </div>
@@ -1068,7 +1068,7 @@
                         ]) }}
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">{{ __('Duration (minutes)') }}</label>
+                        <label class="form-label required">{{ __('Duration (minutes)') }}</label>
                         <input type="number" class="form-control" name="duration" min="0">
                     </div>
                     <div class="mb-3 d-none">

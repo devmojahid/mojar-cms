@@ -63,6 +63,9 @@
         },
         "footer_2": {
             "label": "Footer 2 menu"
+        },
+        "footer_bottom": {
+            "label": "Footer Bottom"
         }
     },
     "blocks": {
@@ -189,6 +192,28 @@
         "breadcrumb_bg_image" : {
             "label": "breadcrumb Bg Image",
             "type": "image"
+        },
+        "copy_right_text" : {
+            "label": "Copy Right Text",
+            "type": "text"
+        },
+        "enable_top_bar" : {
+            "label": "Copy Right Text",
+            "type": "checkbox_json",
+            "data": {
+                "value": 1
+            }
+        },
+        "top_bar_text" : {
+            "label": "Top Bar Text",
+            "type": "text"
+        },
+        "enable_logout_button" : {
+            "label": "Enable Logout Button",
+            "type": "checkbox_json",
+            "data": {
+                "value": 1
+            }
         }
     }
 }

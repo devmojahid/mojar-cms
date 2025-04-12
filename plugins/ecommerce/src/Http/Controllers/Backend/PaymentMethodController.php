@@ -52,14 +52,14 @@ class PaymentMethodController extends BackendController
 
         protected function getTitle(...$params): string
         {
-            return trans('ecomm::app.payment_methods');
+            return trans('cms::app.payment_methods');
         }
 
 
         protected function getDataForForm($model, ...$params): array
         {
             $data = $this->DataForForm($model);
-            $data['methods'] = trans('ecomm::app.data.payment_methods');
+            $data['methods'] = trans('cms::app.data.payment_methods');
             return $data;
         }
 

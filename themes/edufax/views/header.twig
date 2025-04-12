@@ -1,71 +1,116 @@
+<style>
+	.form-logout {
+		background: var(--colorPrimary);
+		color: var(--colorWhite);
+		margin: 0 0 0 10px;
+		font-size: 16px;
+		font-weight: 500;
+		text-transform: capitalize;
+		transition: all linear 0.3s;
+		padding: 11px 25px;
+		border-radius: 8px;
+		border: 1px solid transparent;
+		-webkit-transition: all linear 0.3s;
+		-moz-transition: all linear 0.3s;
+		-ms-transition: all linear 0.3s;
+		-o-transition: all linear 0.3s;
+	}
+	.form-logout .signin {
+		background: none;
+	}
+	.form-logout .signin span {
+		color: #fff;
+	}
+</style>
+
 <!--==============================
         TOPBAR  START
     ===============================-->
-    <section class="tf__topbar">
-        <div class="container">
-            <div class="col-xl-12">
-                <div class="tf__topbar_text">
-                    <p>Enroll now and get <b>40%</b> off any course. Courses from <b>$5.99.</b></p>
-                    <span class="close_topbar"><i class="far fa-times"></i></span>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--==============================
+{% if theme_config('enable_top_bar') == 1 %}
+	<section class="tf__topbar">
+		<div class="container">
+			<div class="col-xl-12">
+				<div class="tf__topbar_text">
+					<p>{{theme_config('top_bar_text')}}</p>
+					<span class="close_topbar">
+						<i class="far fa-times"></i>
+					</span>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endif %}
+<!--==============================
         TOPBAR  END
     ===============================-->
 
 
-    <!--==============================
+<!--==============================
         MENU START
     ===============================-->
-    <nav class="navbar navbar-expand-lg tf__main_menu">
-        <div class="container">
-            <a class="navbar-brand" href="{{ home_url() }}">
-                <img src="{{ get_logo() }}" alt="EduFax" class="img-fluid w-100" style="max-width: 100px; max-height: 80px;">
-            </a>
+<nav class="navbar navbar-expand-lg tf__main_menu">
+	<div class="container">
+		<a class="navbar-brand" href="{{ home_url() }}">
+			<img src="{{ get_logo() }}" alt="EduFax" class="img-fluid w-100" style="max-width: 100px; max-height: 80px;">
+		</a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="far fa-bars menu_bar_icon"></i>
-                <i class="far fa-times menu_close_icon"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                    {{  jw_nav_menu({
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<i class="far fa-bars menu_bar_icon"></i>
+			<i class="far fa-times menu_close_icon"></i>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			{{  jw_nav_menu({
                         'container_before': '<ul class="navbar-nav ms-auto">',
                         'container_after': '</ul>',
                         'theme_location': 'primary',
                         'item_view': 'theme::components.menu_item'
                     }) }}
 
-                <ul class="tf__right_menu d-flex flex-wrap">
-                    <li><a class="menu_search_icon"><i class="far fa-search"></i></a></li>
+			<ul class="tf__right_menu d-flex flex-wrap">
+				<li>
+					<a class="menu_search_icon">
+						<i class="far fa-search"></i>
+					</a>
+				</li>
+				{% if auth %}
+					<li>
+						<a class="signin" href="{{ url('profile/dashboard') }}">{{ __('Dashboard') }}</a>
+					</li>
+				{% else %}
+					<li>
+						<a class="signin" href="{{ url('login') }}">{{ __('sign up') }}</a>
+					</li>
+				{% endif %}
+                {% if theme_config('enable_logout_button') == 1 %}
                     {% if auth %}
-                    <li><a class="signin" href="{{ url('profile/dashboard') }}">{{ __('Dashboard') }}</a></li>
-                    {% else %}
-                    <li><a class="signin" href="{{ url('login') }}">{{ __('sign up') }}</a></li>
+                        <form action="{{ url('logout') }}" method="post" class="form-logout">
+                            {{ csrf_field() }}
+                            <li>
+                                <button class="signin" type="submit">
+                                    <span>
+                                        <i class="fas fa-sign-out-alt"></i>
+                                    </span>
+                                </button>
+                            </li>
+                        </form>
                     {% endif %}
-                {% if auth %}
-                <form action="{{ url('logout') }}"
-                    method="post"
-                        class="form-logout"
-                    >
-                        {{ csrf_field() }}
-                        <li><button class="signin" type="submit">{{ __('Logout') }}</button></li>
-                    </form>
-                {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="menu_search">
-        <form action="{{ url('search') }}">
-            <input type="search" name="q" placeholder="{{ __('Search here...') }}" />
-            <button class="tf__common_btn" type="submit search-btn"><i class="far fa-search"></i> Search</button>
-            <span class="close_search"><i class="far fa-times"></i></span>
-        </form>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="menu_search">
+	<form action="{{ url('search') }}">
+		<input type="search" name="q" placeholder="{{ __('Search here...') }}"/>
+		<button class="tf__common_btn" type="submit search-btn">
+			<i class="far fa-search"></i>
+			Search</button>
+		<span class="close_search">
+			<i class="far fa-times"></i>
+		</span>
+	</form>
 
-    </div>
-    <!--==============================
+</div>
+<!--==============================
         MENU END
     ===============================-->

@@ -31,12 +31,13 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="tf__footer_bottom">
-                            <p>EduFax © 2023, All Rights Reserved </p>
-                            <ul>
-                                <li><a href="#">Privacy Policy </a></li>
-                                <li><a href="#"> Terms & Conditions</a></li>
-                                <li><a href="#">Support</a></li>
-                            </ul>
+                            <p>{{theme_config('copy_right_text')}}</p>
+                            {{  jw_nav_menu({
+                                'container_before': '<ul>',
+                                'container_after': '</ul>',
+                                'theme_location': 'footer_bottom',
+                                'item_view': 'theme::components.menu_item'
+                            }) }}
                         </div>
                     </div>
                 </div>
