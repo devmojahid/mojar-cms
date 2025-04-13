@@ -233,3 +233,23 @@
         -webkit-overflow-scrolling: touch;
     }
 }
+
+  /* Ensure the dropdown menu has a high z-index */
+.dropdown-menu {
+    z-index: 9999 !important;
+}
+
+/* Check if the table container has overflow clipping */
+.fixed-table-body {
+    overflow: visible !important;
+}
+
+/* Position the dropdown relative to its parent */
+.dropdown {
+    position: relative;
+}
+
+/* Confirm table rows don't hide overflow */
+tr {
+    position: static !important;
+}

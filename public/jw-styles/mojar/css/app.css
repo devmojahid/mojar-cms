@@ -1145,6 +1145,18 @@ button[type=button][role=checkbox]{
   overflow-x:auto;
   -webkit-overflow-scrolling:touch;
 }
+.dropdown-menu{
+  z-index:9999 !important;
+}
+.fixed-table-body{
+  overflow:visible !important;
+}
+.dropdown{
+  position:relative;
+}
+tr{
+  position:static !important;
+}
 
 .form-image{
   position:relative;
