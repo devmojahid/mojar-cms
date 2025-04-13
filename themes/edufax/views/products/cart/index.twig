@@ -322,36 +322,33 @@ body: JSON.stringify(
 return response.json();
 },
 
-updateCartDisplay(cartData) { // Update subtotal
-const subtotalElement = document.querySelector('.subtotal-price');
-if (subtotalElement) {
-subtotalElement.textContent = cartData.pricing.subtotal_formatted;
-}
+// Update function to use the correct properties
+updateCartDisplay(cartData) {
+  // Handle discount display
+  const discountRow = document.querySelector('.discount-row');
+  const discountAmount = document.querySelector('.discount-amount');
+  
+  // Check if discount exists and handle it
+  if (cartData.total_discount && cartData.total_discount !== "$0.00") {
+    if (discountRow) 
+      discountRow.style.display = '';
 
-// Handle discount display
-const discountRow = document.querySelector('.discount-row');
-const discountAmount = document.querySelector('.discount-amount');
-if (cartData.pricing.discount > 0) {
-if (discountRow) 
-discountRow.style.display = '';
+    if (discountAmount) {
+      discountAmount.textContent = '-' + cartData.total_discount;
+    }
+  } else {
+    if (discountRow) 
+      discountRow.style.display = 'none';
+  }
 
-if (discountAmount) {
-discountAmount.textContent = '-' + cartData.pricing.discount_formatted;
-}
-} else {
-if (discountRow) 
-discountRow.style.display = 'none';
+  // Update total price
+  const totalElement = document.querySelector('.total-price');
+  if (totalElement) {
+    totalElement.textContent = cartData.total_price;
+  }
 
-}
-
-// Update total price
-const totalElement = document.querySelector('.total-price');
-if (totalElement) {
-totalElement.textContent = cartData.pricing.total_formatted;
-}
-
-// Update cart count in header if exists
-this.updateCartCounter(cartData.total_items);
+  // Update cart count in header if exists
+  this.updateCartCounter(cartData.total_items);
 },
 
 updateCartCounter(count) {
