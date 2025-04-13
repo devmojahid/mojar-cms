@@ -53,10 +53,13 @@
             }
         },
         {
-            "type": "checkbox",
+            "type": "checkbox_json",
             "name": "show_contact_form",
             "label": "Show Contact Form",
-            "description": "Show contact form"
+            "description": "Show contact form",
+            "data": {
+                "value": 1
+            }
         },
         {
             "type": "text",
@@ -104,10 +107,13 @@
             "label": "Message Field Placeholder"
         },
         {
-            "type": "checkbox",
+            "type": "checkbox_json",
             "name": "show_privacy_checkbox",
             "label": "Show Privacy Policy Checkbox",
-            "description": "Show privacy policy checkbox"
+            "description": "Show privacy policy checkbox",
+            "data": {
+                "value": 1
+            }
         },
         {
             "type": "text",

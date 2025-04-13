@@ -3,10 +3,13 @@
     "description": "Display testimonials with slider",
     "form": [
         {
-            "type": "checkbox",
+            "type": "checkbox_json",
             "name": "show_section_title",
             "label": "Show Section Title",
-            "description": "Show section title and description"
+            "description": "Show section title and description",
+            "data": {
+                "value": 1
+            }
         },
         {
             "type": "text",
@@ -97,10 +100,13 @@
             }
         },
         {
-            "type": "checkbox",
+            "type": "checkbox_json",
             "name": "enable_slider",
             "label": "Enable Slider",
-            "description": "Enable slider for testimonials"
+            "description": "Enable slider for testimonials",
+            "data": {
+                "value": 1
+            }
         },
         {
             "type": "select",
@@ -117,10 +123,13 @@
             }
         },
         {
-            "type": "checkbox",
+            "type": "checkbox_json",
             "name": "enable_autoplay",
             "label": "Enable Autoplay",
-            "description": "Enable autoplay for slider"
+            "description": "Enable autoplay for slider",
+            "data": {
+                "value": 1
+            }
         },
         {
             "type": "text",

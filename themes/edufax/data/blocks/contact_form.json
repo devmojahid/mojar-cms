@@ -3,10 +3,12 @@
     "description": "Contact form with information boxes and map",
     "form": [
         {
-            "type": "checkbox",
+            "type": "checkbox_json",
             "name": "show_title",
             "label": "Show Title",
-            "value": true
+            "data": {
+                "value": 1
+            }
         },
         {
             "type": "text",
@@ -15,10 +17,12 @@
             "value": "Get In Touch With Us"
         },
         {
-            "type": "checkbox",
+            "type": "checkbox_json",
             "name": "show_info_boxes",
             "label": "Show Info Boxes",
-            "value": true
+            "data": {
+                "value": 1
+            }
         },
         {
             "type": "repeater",
@@ -135,10 +139,12 @@
             "value": "Send message"
         },
         {
-            "type": "checkbox",
+            "type": "checkbox_json",
             "name": "show_map",
             "label": "Show Map",
-            "value": true
+            "data": {
+                "value": 1
+            }
         },
         {
             "type": "text",

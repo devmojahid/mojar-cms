@@ -21,10 +21,13 @@
             }
         },
         {
-            "type": "checkbox",
+            "type": "checkbox_json",
             "name": "enable_autoplay",
             "label": "Enable Autoplay",
-            "description": "Enable video autoplay when popup opens"
+            "description": "Enable video autoplay when popup opens",
+            "data": {
+                "value": 1
+            }
         },
         {
             "type": "select",
@@ -55,10 +58,13 @@
             }
         },
         {
-            "type": "checkbox",
+            "type": "checkbox_json",
             "name": "enable_animation",
             "label": "Enable Animation",
-            "description": "Enable fade in animation"
+            "description": "Enable fade in animation",
+            "data": {
+                "value": 1
+            }
         },
         {
             "type": "text",
@@ -69,10 +75,13 @@
             }
         },
         {
-            "type": "checkbox",
+            "type": "checkbox_json",
             "name": "enable_overlay",
             "label": "Enable Overlay",
-            "description": "Enable dark overlay on image"
+            "description": "Enable dark overlay on image",
+            "data": {
+                "value": 1
+            }
         }
     ]
 } 

@@ -11,10 +11,13 @@
             }
         },
         {
-            "type": "checkbox",
+            "type": "checkbox_json",
             "name": "enable_overlay",
             "label": "Enable Background Overlay",
-            "description": "Enable dark overlay on background"
+            "description": "Enable dark overlay on background",
+            "data": {
+                "value": 1
+            }
         },
         {
             "type": "repeater",
@@ -82,10 +85,13 @@
             }
         },
         {
-            "type": "checkbox",
+            "type": "checkbox_json",
             "name": "enable_animation",
             "label": "Enable Animation",
-            "description": "Enable fade in animation"
+            "description": "Enable fade in animation",
+            "data": {
+                "value": 1
+            }
         }
     ]
 } 
