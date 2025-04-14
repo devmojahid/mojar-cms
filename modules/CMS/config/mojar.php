@@ -218,7 +218,7 @@ return [
          *
          * Default: true
          */
-        'image_resizer' => env('JW_IMAGE_RESIZER', true),
+        'image_resizer' => env('JW_IMAGE_RESIZER', false),
 
         /**
          * File type
