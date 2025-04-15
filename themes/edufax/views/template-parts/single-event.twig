@@ -87,6 +87,13 @@
         });
 
         function addToCart(postId, type, quantity) {
+            var $button = $('.tf__common_btn[onclick*="addToCart"]');
+            var originalText = $button.text();
+            
+            // Show loading state
+            $button.html('<i class="fas fa-spinner fa-spin"></i> Loading...');
+            $button.prop('disabled', true);
+            
             console.log('Sending data:', {
                 post_id: postId,
                 type: type,
@@ -110,17 +117,32 @@
                 },
                 success: function(response) {
                     console.log('Full response:', response);
-                    if (response.status === 'success') {
-                        console.log('Success:', response.message);
+                    if (response.status === true || response.status === 'success') {
+                        console.log('Success:', response.data ? response.data.message : response.message);
                         updateCartCount();
+                        
+                        // Show Added text
+                        $button.html('Added');
+                        
+                        // Return to original text after 2 seconds
+                        setTimeout(function() {
+                            $button.html(originalText);
+                            $button.prop('disabled', false);
+                        }, 2000);
                     } else {
                         console.log('Error:', response.data ? response.data.message : response.message);
+                        $button.html(originalText);
+                        $button.prop('disabled', false);
                     }
                 },
                 error: function(xhr, status, error) {
                     console.log('Error status:', status);
                     console.log('Error message:', error);
                     console.log('Response:', xhr.responseJSON);
+                    
+                    // Restore original button text on error
+                    $button.html(originalText);
+                    $button.prop('disabled', false);
                 }
             });
         }

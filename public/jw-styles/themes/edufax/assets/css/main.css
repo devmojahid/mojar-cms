@@ -11818,6 +11818,10 @@ TERMS AMD CONDITION PAGE END
 .comment-box .item-img{
     max-width: 50px;
 }
+
+.comment-box .item-img img{
+    border-radius: 50%;
+}
 @media (min-width: 1400px) and (max-width: 1599.99px) {
 
     .tf__banner_img span {

@@ -133,3 +133,33 @@ in modules we have our cms core and full application logic strucutre like
     -> Frontend
     -> Multilang
     and more
+
+
+
+
+Note: read files and apply code and response code with best way and follow existing code prectises with better way
+modules\CMS\Contracts\Field.php
+modules\CMS\Support\Html\Field.php
+modules\CMS\Support\Html\Traits\InputField.php
+modules\CMS\Support\Html\RepeaterField.php
+modules\CMS\Support\Html\RepeaterItem.php
+modules\Backend\resources\views\components\form_checkbox_json.blade.php
+modules\Backend\resources\views\components\form_repeater_item.blade.php
+modules\Backend\resources\views\components\form_repeater.blade.php
+i give you the complete code based how our filed management works and this fields work both blade and JSON files also please read all files before response.
+page block management
+modules\Backend\resources\views\backend\page-block\block.blade.php
+modules\CMS\Abstracts\PageBlock.php
+
+our testimonial blocks with repeater field type the problem is hear themes\edufax\data\blocks\testimonial_area.json . and others places also. and aslo same repeater field in blade temple others places like plugins\event-management\src\resources\views\backend\event\components\event-info.blade.php
+{ Field::repeater(
+in blade template, this repeater works without any problem and error, but problems come in json files it show some error. this repeater and others many filed not workes in json bage blocks. when we add new blocks instantly not work, but when we save or update this page and come this blocks again this repeater workes why this happend please carefully findout the exact problem
+and show this error in json file The page blocks page
+
+Note: read all files folders and complete the system and carefully make changes and make sure do not remove mejor things and do not distory current system why not this cms works many places and production aslo i do not need any breaking changes and breack this system. carefully handle and complete this system with more robust scalable and parfect way and using current system coding prectises. and explain everything.
+Note: do not create any seperet js file add js or css in Internal css. and do not distrube core cms any files why not this system workes others files.
+and aslo "type": "select", also not worked many time one time it workes others time not workes. why its happend i do not no. already i say your some response some times work in create time, some times not work edit time and some times work in edit time some time not work in create time any many more issue carefully handle and also javascript carefully apply id and class also do not remove or distroy. and yout target just json problem not distrube blade i think this is javascript confilct or others problem. without mejor changes first just fix those problem.
+
+Note: and aslo some got error when we add new block in blage block i think this issue should fixed latter 
+VM509:17 Uncaught SyntaxError: Failed to execute 'appendChild' on 'Node': Unexpected token ','
+    at _ (vendor.min.js?v=v1.0.0:5394:32)|

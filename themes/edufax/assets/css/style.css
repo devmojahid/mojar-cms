@@ -5340,3 +5340,7 @@ TERMS AMD CONDITION PAGE END
 .comment-box .item-img{
     max-width: 50px;
 }
+
+.comment-box .item-img img{
+    border-radius: 50%;
+}
