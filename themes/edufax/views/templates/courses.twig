@@ -5,7 +5,6 @@
         title: 'Courses List',
         background_image: upload_url(theme_config('breadcrumb_bg_image')),
         items: [
-
             {'label': 'Home', 'url': '/'},
             {'label': 'Courses'}
         ]
@@ -15,56 +14,84 @@
 		{{ dynamic_block(post, 'content') }}
 	{% endif %}
 
-	{% set items = get_posts('courses', {
-        'paginate': 10
-    }) %}
-
 	<section class="tf__courses_page pt_120 xs_pt_80 pb_120 xs_pb_80">
 		<div class="container">
-			<form class="tf__blog_search_area">
+			<form class="tf__blog_search_area" id="course-filter-form">
 				<div class="row justify-content-between wow fadeInUp" data-wow-duration="1s">
-					<div class="col-xl-4 col-md-6 col-lg-5">
+					<div class="col-xl-4 col-md-4 col-lg-4">
+						<div class="tf__blog_search_item">
+							<label>Sort By</label>
+							<div class="tf__blog_search_input">
+								<select class="select_js course-filter" name="sort">
+									<option value="latest" {% if input_get('sort') == 'latest' %} selected="selected" {% endif %}>Latest First</option>
+									<option value="oldest" {% if input_get('sort') == 'oldest' %} selected="selected" {% endif %}>Oldest First</option>
+									<option value="a-z" {% if input_get('sort') == 'a-z' %} selected="selected" {% endif %}>Title (A-Z)</option>
+									<option value="z-a" {% if input_get('sort') == 'z-a' %} selected="selected" {% endif %}>Title (Z-A)</option>
+									<option value="popular" {% if input_get('sort') == 'popular' %} selected="selected" {% endif %}>Most Popular</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					{% if get_taxonomies({ 'type': 'courses', 'taxonomy': 'categories' }) %}
+					<div class="col-xl-4 col-md-4 col-lg-4">
+						<div class="tf__blog_search_item">
+							<label>By Category</label>
+							<div class="tf__blog_search_input">
+								<select class="select_js course-filter" name="category">
+									<option value="">
+										Please Select
+									</option>
+									{% for category in get_taxonomies({ 'type': 'courses', 'taxonomy': 'categories' }) %}
+										<option value="{{ category.id }}" {% if input_get('category') == category.id %} selected="selected" {% endif %}>
+											{{ category.name }}
+										</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+					</div>
+					{% endif %}
+					<div class="col-xl-4 col-md-4 col-lg-4">
 						<div class="tf__blog_search_item">
 							<label>Search Here</label>
 							<div class="tf__blog_search_input">
-								<input type="text" placeholder="Type here">
+								<input type="text" name="keyword" placeholder="Type here" class="course-filter" value="{{ input_get('keyword') }}">
 								<button type="submit">
 									<i class="far fa-search"></i>
 								</button>
 							</div>
 						</div>
 					</div>
-					<div class="col-xl-4 col-md-6 col-lg-5">
-						<div class="tf__blog_search_item">
-							<label>By Category</label>
-							<div class="tf__blog_search_input">
-								<select class="select_js">
-									<option value="">
-										Please Select
-									</option>
-									<option value="">English</option>
-									<option value="">finance</option>
-									<option value="">design</option>
-									<option value="">marketing</option>
-									<option value="">development</option>
-								</select>
-							</div>
-						</div>
-					</div>
 				</div>
 			</form>
 
-			<div class="row mt_35">
-				{% for post in items.data %}
-					{{ get_template_part(post, 'course-item') }}
-				{% endfor %}
+			<div class="row mt_35" id="course-list">
+				{% set courses = get_posts_by_filter({
+					'type': 'courses', 
+					'paginate': 10,
+					'sort_by': input_get('sort') == 'oldest' ? 'id' : (input_get('sort') == 'a-z' ? 'title' : (input_get('sort') == 'z-a' ? 'title' : 'id')),
+					'sort_order': input_get('sort') == 'oldest' ? 'asc' : (input_get('sort') == 'z-a' ? 'desc' : (input_get('sort') == 'a-z' ? 'asc' : 'desc'))
+				}) %}
+				
+				{% if courses.data|length > 0 %}
+					{% for post in courses.data %}
+						{{ get_template_part(post, 'course-item') }}
+					{% endfor %}
+				{% else %}
+					<div class="col-12">
+						<div class="tf__courses_empty_state">
+							<h3>No Courses Found</h3>
+							<p>We couldn't find any courses matching your criteria. Try changing your search terms or filters.</p>
+							<a href="{{ url('/courses') }}" class="reset-button common_btn">Reset Filters</a>
+						</div>
+					</div>
+				{% endif %}
 			</div>
+			
 			<div class="tf__pagination mt_60">
 				<div class="row">
-					<div class="col-12">
-						<nav aria-label="Page navigation example">
-							{{ paginate_links(items, 'theme::components.pagination') }}
-						</nav>
+					<div class="col-12" id="pagination">
+						{{ paginate_links(courses, 'theme::components.pagination') }}
 					</div>
 				</div>
 			</div>
