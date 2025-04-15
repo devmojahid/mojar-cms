@@ -672,4 +672,13 @@ return [
     'remove_item' => "Remove Item",
     'rating' => 'Rating',
     'confirm_remove' => 'Confirm Remove',
+    'folder_name_hint' => 'Folder Name Hint',
+    'current_location' => 'Current Location',
+    'enter_folder_name' => 'Enter Folder Name',
+    'file_manager' => [ 
+        'url_upload_hint' => 'Url Upload Hint',  
+        'upload_from_url' => 'Upload from url',
+        'download_to_server' => 'Download file to server',
+        'upload_file' => 'Upload file',
+    ],
 ];
