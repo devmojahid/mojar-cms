@@ -25,7 +25,7 @@
         </a>
 
         <!-- Original Hidden Input -->
-        <input type="hidden" name="{{ $name }}" class="input-path" value="{{ $path }}">
+        <input type="hidden" name="{{ $name }}" class="input-path" data-type="media-input" value="{{ $path }}">
 
 
 

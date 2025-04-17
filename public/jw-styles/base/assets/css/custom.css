@@ -730,3 +730,81 @@ table.dataTable thead .sorting_desc:after {
         margin-bottom: 15px;
     }
 }
+
+/* Media Upload Fields */
+.form-image {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.form-image .image-hidden {
+    display: none;
+}
+
+.form-image.previewing .upload-area {
+    display: none;
+}
+
+.form-image .dropify-preview {
+    overflow: hidden;
+    border-radius: 0.25rem;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    margin-bottom: 1rem;
+}
+
+.form-image .dropify-render img {
+    max-height: 150px;
+    width: auto;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+.form-image .image-clear {
+    display: none;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    padding: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.form-image.previewing .image-clear {
+    display: block;
+}
+
+.form-image .upload-area {
+    border: 2px dashed #dee2e6;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-image .upload-area:hover {
+    border-color: #adb5bd;
+    background-color: #f8f9fa;
+}
+
+.form-image .upload-area svg {
+    width: 48px;
+    height: 48px;
+    color: #6c757d;
+}
+
+/* Fix for lesson modal thumbnails */
+#lessonForm .form-image .dropify-preview {
+    display: none;
+}
+
+#lessonForm .form-image.previewing .dropify-preview {
+    display: block;
+}
+
+#lessonForm .lesson-thumbnail-area .form-image .dropify-render img {
+    max-height: 120px;
+}

@@ -36,8 +36,7 @@ class LMSManager {
                 quizForm: '#quizForm',
                 saveQuiz: '#saveQuiz',
                 assignmentModal: '#assignmentModal',
-                assignmentForm: '#assignmentForm',
-                saveAssignment: '#saveAssignment'
+                assignmentForm: '#assignmentForm'
             },
             templates: {
                 topicTemplate: '#topicTemplate',
@@ -127,23 +126,78 @@ class LMSManager {
     initModals() {
         console.log('Initializing modals');
 
-        const modalSelectors = [
-            'topicModal', 'lessonModal', 'quizModal', 'assignmentModal', 'confirmationModal'
-        ];
-
-        modalSelectors.forEach(selector => {
-            const element = document.getElementById(selector);
-            if (element) {
-                console.log(`Initializing modal: ${selector}`);
+        // Initialize image upload functionality
+        this.initImageUploadFields();
+        
+        document.querySelectorAll('.modal').forEach(modalEl => {
+            const id = modalEl.id;
+            if (!this.state.modals[id]) {
                 try {
-                    this.state.modals[selector] = new bootstrap.Modal(element);
-                } catch (error) {
-                    console.error(`Error initializing modal ${selector}:`, error);
+                    this.state.modals[id] = new bootstrap.Modal(modalEl);
+                } catch (e) {
+                    console.error(`Error creating modal for ${id}:`, e);
                 }
-            } else {
-                console.warn(`Modal element not found: ${selector}`);
             }
         });
+    }
+
+    /**
+     * Initialize image upload fields
+     */
+    initImageUploadFields() {
+        // Initialize all image upload fields
+        document.querySelectorAll('.form-image').forEach(container => {
+            const input = container.querySelector('.input-path');
+            const clearBtn = container.querySelector('.image-clear');
+            const uploadArea = container.querySelector('.upload-area');
+            const previewArea = container.querySelector('.dropify-preview');
+            
+            if (!input || !clearBtn || !uploadArea) return;
+            
+            // Check if there's a value and update the preview
+            if (input.value) {
+                container.classList.add('previewing');
+                const imgPreview = container.querySelector('.dropify-render img');
+                if (imgPreview) {
+                    imgPreview.src = input.value.startsWith('http') ? input.value : this.getMediaUrl(input.value);
+                }
+                if (previewArea) {
+                    previewArea.style.display = 'block';
+                }
+            }
+            
+            // Handle upload area click
+            uploadArea.addEventListener('click', () => {
+                //
+            });
+            
+            // Handle clear button click
+            clearBtn.addEventListener('click', () => {
+                input.value = '';
+                container.classList.remove('previewing');
+                if (previewArea) {
+                    previewArea.style.display = 'none';
+                }
+            });
+        });
+    }
+
+    // Helper to get media URL
+    getMediaUrl(path) {
+        if (!path) return '';
+        if (path.startsWith('http')) return path;
+        return `/storage/${path.replace(/^\/storage\//, '')}`;
+    }
+
+    // Open media manager
+    openMediaManager(fieldName, callback) {
+        // This is a placeholder. In your actual implementation,
+        // you would open your CMS's media manager here
+        // For now, we'll simulate it with a prompt
+        const url = prompt('Enter image URL:');
+        if (url) {
+            callback(url);
+        }
     }
 
     /**
@@ -1190,6 +1244,15 @@ class LMSManager {
                     input.value = '';
                 }
             });
+            
+            // Reset image fields
+            lessonForm.querySelectorAll('.form-image').forEach(container => {
+                container.classList.remove('previewing');
+                const previewArea = container.querySelector('.dropify-preview');
+                if (previewArea) {
+                    previewArea.style.display = 'none';
+                }
+            });
         }
         
         this.showModal('lessonModal');
@@ -1206,7 +1269,7 @@ class LMSManager {
 
         // Show loading animation
         this.setLoading('saveLessonLoading', true);
-        document.getElementById('saveLessonText').classList.add('d-none');
+        // document.getElementById('saveLessonText').classList.add('d-none');
 
         // Create a new FormData object
         const formData = new FormData();
@@ -1217,7 +1280,10 @@ class LMSManager {
             if (input.type === 'checkbox') {
                 formData.append(input.name, input.checked ? '1' : '0');
             } else {
-                formData.append(input.name, input.value);
+                // Check if this is a valid field with a name and value
+                if (input.name && input.value !== undefined) {
+                    formData.append(input.name, input.value);
+                }
             }
         });
 
@@ -1263,6 +1329,17 @@ class LMSManager {
                     input.selectedIndex = 0;
                 } else {
                     input.value = '';
+                }
+                
+                // Reset image previews if they exist
+                if (input.dataset.type === 'media-input') {
+                    const previewContainer = input.closest('.form-image-container');
+                    if (previewContainer) {
+                        const previewImg = previewContainer.querySelector('.form-preview-image img');
+                        if (previewImg) {
+                            previewImg.closest('.image-preview').style.display = 'none';
+                        }
+                    }
                 }
             });
             
@@ -1518,13 +1595,39 @@ class LMSManager {
                         // Populate lesson form with data
                         const lessonForm = document.querySelector(this.config.selectors.lessonForm);
                         if (lessonForm) {
-                            const inputs = lessonForm.querySelectorAll('input, select, textarea');
+                            // First handle regular form inputs
+                            const inputs = lessonForm.querySelectorAll('input:not([data-type="media-input"]), select, textarea');
                             inputs.forEach(input => {
                                 if (input.name && itemData[input.name] !== undefined) {
                                     if (input.type === 'checkbox') {
                                         input.checked = Boolean(itemData[input.name]);
                                     } else {
                                         input.value = itemData[input.name];
+                                    }
+                                }
+                            });
+                            
+                            // Then separately handle thumbnail/image fields which may have a different structure
+                            const mediaInputs = lessonForm.querySelectorAll('[data-type="media-input"]');
+                            mediaInputs.forEach(input => {
+                                if (input.name && itemData[input.name] !== undefined) {
+                                    // Set the value in the hidden input
+                                    input.value = itemData[input.name];
+                                    
+                                    // Update the preview image
+                                    const container = input.closest('.form-image');
+                                    if (container) {
+                                        container.classList.add('previewing');
+                                        const imgPreview = container.querySelector('.dropify-render img');
+                                        if (imgPreview && itemData[input.name]) {
+                                            imgPreview.src = itemData[input.name].startsWith('http') 
+                                                ? itemData[input.name] 
+                                                : this.getMediaUrl(itemData[input.name]);
+                                        }
+                                        const previewArea = container.querySelector('.dropify-preview');
+                                        if (previewArea) {
+                                            previewArea.style.display = 'block';
+                                        }
                                     }
                                 }
                             });
