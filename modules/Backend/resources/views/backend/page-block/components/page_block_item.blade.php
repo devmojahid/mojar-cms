@@ -46,86 +46,92 @@
     </div>
     
     <script>
-        // Track initialization to prevent duplicates
-        window.pageBlocksInitialized = window.pageBlocksInitialized || {};
-        const blockId = 'dd-item-{{ $key }}';
-        
-        // Only initialize this block if not already done
-        if (!window.pageBlocksInitialized[blockId]) {
-            window.pageBlocksInitialized[blockId] = true;
+        // Create a scoped context with an IIFE to avoid variable collisions
+        (function() {
+            // Track initialization to prevent duplicates
+            window.pageBlocksInitialized = window.pageBlocksInitialized || {};
+            const blockInstanceId = 'dd-item-{{ $key }}';
             
-            // Initialize Select2 and other components for this block
-            $(document).ready(function() {
-                const $blockItem = $('#dd-item-{{ $key }}');
-                const $blockForm = $('#page-block-{{ $key }}');
+            // Only initialize this block if not already done
+            if (!window.pageBlocksInitialized[blockInstanceId]) {
+                window.pageBlocksInitialized[blockInstanceId] = true;
                 
-                // Function to properly initialize all form elements in the block
-                function initializeBlockFormElements() {
-                    try {
-                        // Use the global initialization function if available
-                        if (typeof window.initializeSelect2Elements === 'function') {
-                            window.initializeSelect2Elements($blockForm);
-                        } else {
-                            // Initialize Select2 dropdowns (fallback)
-                            $blockForm.find('select').each(function() {
-                                if (!$(this).hasClass('select2-hidden-accessible')) {
-                                    $(this).select2({
-                                        dropdownParent: $blockForm,
-                                        width: '100%'
-                                    });
+                // Initialize Select2 and other components for this block
+                $(document).ready(function() {
+                    const $blockItem = $('#dd-item-{{ $key }}');
+                    const $blockForm = $('#page-block-{{ $key }}');
+                    
+                    // Function to properly initialize all form elements in the block
+                    function initializeBlockFormElements() {
+                        try {
+                            // Use the global initialization function if available
+                            if (typeof window.initializeSelect2Elements === 'function') {
+                                window.initializeSelect2Elements($blockForm);
+                            } else {
+                                // Initialize Select2 dropdowns (fallback)
+                                $blockForm.find('select').each(function() {
+                                    if (!$(this).hasClass('select2-hidden-accessible')) {
+                                        $(this).select2({
+                                            dropdownParent: $blockForm,
+                                            width: '100%'
+                                        });
+                                    }
+                                });
+                            }
+                            
+                            // Initialize any repeater fields in this block
+                            $blockForm.find('.repeater-field').each(function() {
+                                if (!$(this).hasClass('initialized')) {
+                                    $(this).addClass('initialized');
+                                    const event = new CustomEvent('repeater:init', { bubbles: true });
+                                    this.dispatchEvent(event);
                                 }
                             });
+                            
+                            // Trigger a custom event for other components that might need initialization
+                            $blockForm.trigger('block:elements:initialized');
+                        } catch (error) {
+                            console.error('Error initializing block elements in page_block_item:', error);
+                            
+                            // Try to recover by reinitializing after a delay
+                            setTimeout(() => {
+                                try {
+                                    // Simpler initialization as fallback
+                                    $blockForm.find('select').select2({
+                                        width: '100%'
+                                    });
+                                } catch (e) {
+                                    // Silent fail for recovery attempt
+                                }
+                            }, 500);
                         }
-                        
-                        // Initialize any repeater fields in this block
-                        $blockForm.find('.repeater-field').each(function() {
-                            if (!$(this).hasClass('initialized')) {
-                                $(this).addClass('initialized');
-                                const event = new CustomEvent('repeater:init', { bubbles: true });
-                                this.dispatchEvent(event);
-                            }
-                        });
-                        
-                        // Trigger a custom event for other components that might need initialization
-                        $blockForm.trigger('block:elements:initialized');
-                    } catch (error) {
-                        console.error('Error initializing block elements in page_block_item:', error);
-                        
-                        // Try to recover by reinitializing after a delay
-                        setTimeout(() => {
-                            try {
-                                // Simpler initialization as fallback
-                                $blockForm.find('select').select2({
-                                    width: '100%'
-                                });
-                            } catch (e) {
-                                // Silent fail for recovery attempt
-                            }
-                        }, 500);
                     }
-                }
-                
-                // Remove existing handler to prevent duplicates
-                $blockItem.find('.show-form-block').off('click.showBlock');
-                
-                // When edit form becomes visible
-                $blockItem.find('.show-form-block').on('click.showBlock', function(e) {
-                    // Prevent default action and propagation
-                    e.preventDefault();
-                    e.stopPropagation();
                     
-                    // Show the form
-                    $blockForm.removeClass('box-hidden');
+                    // Remove existing handler to prevent duplicates
+                    $blockItem.find('.show-form-block').off('click.showBlock');
                     
-                    // Use setTimeout to ensure the DOM is ready before initializing
-                    setTimeout(initializeBlockFormElements, 200);
+                    // When edit form becomes visible or hidden (toggle behavior)
+                    $blockItem.find('.show-form-block').on('click.showBlock', function(e) {
+                        // Prevent default action and propagation
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        // Toggle the form visibility
+                        $blockForm.toggleClass('box-hidden');
+                        
+                        // Only initialize if the form is now visible
+                        if (!$blockForm.hasClass('box-hidden')) {
+                            // Use setTimeout to ensure the DOM is ready before initializing
+                            setTimeout(initializeBlockFormElements, 200);
+                        }
+                    });
+                    
+                    // Initialize elements if the form is already visible (editing existing block)
+                    if (!$blockForm.hasClass('box-hidden')) {
+                        setTimeout(initializeBlockFormElements, 200);
+                    }
                 });
-                
-                // Initialize elements if the form is already visible (editing existing block)
-                if (!$blockForm.hasClass('box-hidden')) {
-                    setTimeout(initializeBlockFormElements, 200);
-                }
-            });
-        }
+            }
+        })(); // End of IIFE
     </script>
 </li>
