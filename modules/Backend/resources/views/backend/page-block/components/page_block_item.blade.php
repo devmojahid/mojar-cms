@@ -46,21 +46,86 @@
     </div>
     
     <script>
-        // Initialize Select2 for this block when it becomes visible
-        $(document).ready(function() {
-            // When edit form becomes visible, initialize select2
-            $('.show-form-block').on('click', function() {
-                let blockId = $(this).closest('.dd-item').find('.form-block-edit').attr('id');
-                if (blockId) {
-                    setTimeout(function() {
-                        $('#' + blockId + ' .select2').each(function() {
-                            if (!$(this).hasClass('select2-hidden-accessible')) {
-                                $(this).select2();
+        // Track initialization to prevent duplicates
+        window.pageBlocksInitialized = window.pageBlocksInitialized || {};
+        const blockId = 'dd-item-{{ $key }}';
+        
+        // Only initialize this block if not already done
+        if (!window.pageBlocksInitialized[blockId]) {
+            window.pageBlocksInitialized[blockId] = true;
+            
+            // Initialize Select2 and other components for this block
+            $(document).ready(function() {
+                const $blockItem = $('#dd-item-{{ $key }}');
+                const $blockForm = $('#page-block-{{ $key }}');
+                
+                // Function to properly initialize all form elements in the block
+                function initializeBlockFormElements() {
+                    try {
+                        // Use the global initialization function if available
+                        if (typeof window.initializeSelect2Elements === 'function') {
+                            window.initializeSelect2Elements($blockForm);
+                        } else {
+                            // Initialize Select2 dropdowns (fallback)
+                            $blockForm.find('select').each(function() {
+                                if (!$(this).hasClass('select2-hidden-accessible')) {
+                                    $(this).select2({
+                                        dropdownParent: $blockForm,
+                                        width: '100%'
+                                    });
+                                }
+                            });
+                        }
+                        
+                        // Initialize any repeater fields in this block
+                        $blockForm.find('.repeater-field').each(function() {
+                            if (!$(this).hasClass('initialized')) {
+                                $(this).addClass('initialized');
+                                const event = new CustomEvent('repeater:init', { bubbles: true });
+                                this.dispatchEvent(event);
                             }
                         });
-                    }, 100);
+                        
+                        // Trigger a custom event for other components that might need initialization
+                        $blockForm.trigger('block:elements:initialized');
+                    } catch (error) {
+                        console.error('Error initializing block elements in page_block_item:', error);
+                        
+                        // Try to recover by reinitializing after a delay
+                        setTimeout(() => {
+                            try {
+                                // Simpler initialization as fallback
+                                $blockForm.find('select').select2({
+                                    width: '100%'
+                                });
+                            } catch (e) {
+                                // Silent fail for recovery attempt
+                            }
+                        }, 500);
+                    }
+                }
+                
+                // Remove existing handler to prevent duplicates
+                $blockItem.find('.show-form-block').off('click.showBlock');
+                
+                // When edit form becomes visible
+                $blockItem.find('.show-form-block').on('click.showBlock', function(e) {
+                    // Prevent default action and propagation
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Show the form
+                    $blockForm.removeClass('box-hidden');
+                    
+                    // Use setTimeout to ensure the DOM is ready before initializing
+                    setTimeout(initializeBlockFormElements, 200);
+                });
+                
+                // Initialize elements if the form is already visible (editing existing block)
+                if (!$blockForm.hasClass('box-hidden')) {
+                    setTimeout(initializeBlockFormElements, 200);
                 }
             });
-        });
+        }
     </script>
 </li>

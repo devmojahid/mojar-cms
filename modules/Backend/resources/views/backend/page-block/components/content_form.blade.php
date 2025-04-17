@@ -147,3 +147,153 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        const contentKey = '{{ $contentKey }}';
+        const key = '{{ $key }}';
+        const blockContainer = $('#page-block-builder-nestable-{{ $key }}');
+        
+        // Function to safely append HTML to the DOM
+        function safeAppendHTML(container, html) {
+            try {
+                // Create a temporary div to parse the HTML
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html.trim();
+                
+                // Get the first child as the new element
+                const newElement = tempDiv.firstElementChild;
+                if (!newElement) {
+                    console.error('Failed to create new element from HTML');
+                    return null;
+                }
+                
+                // Append the new element to the container
+                container.append(newElement);
+                return newElement;
+            } catch (error) {
+                console.error('Error appending HTML:', error);
+                return null;
+            }
+        }
+        
+        // Initialize form elements in a block
+        function initializeBlockFormElements(blockElement) {
+            try {
+                const $blockForm = $(blockElement).find('.form-block-edit');
+                
+                // Use the new global initialization function if available
+                if (typeof window.initializeSelect2Elements === 'function') {
+                    window.initializeSelect2Elements($blockForm);
+                } else {
+                    // Fallback to local initialization
+                    $blockForm.find('select').each(function() {
+                        if (!$(this).hasClass('select2-hidden-accessible')) {
+                            $(this).select2({
+                                dropdownParent: $blockForm,
+                                width: '100%'
+                            });
+                        }
+                    });
+                }
+                
+                // Initialize repeater fields
+                $blockForm.find('.repeater-field').each(function() {
+                    if (!$(this).hasClass('initialized')) {
+                        $(this).addClass('initialized');
+                        const event = new CustomEvent('repeater:init', { bubbles: true });
+                        this.dispatchEvent(event);
+                    }
+                });
+                
+                // Trigger custom event for other components
+                $blockForm.trigger('block:elements:initialized');
+            } catch (error) {
+                console.error('Error initializing block form elements:', error);
+            }
+        }
+        
+        // Remove any existing event handlers to prevent duplicates
+        $('.add-block-data').off('click.addBlock');
+        
+        // Add new block handler with a namespace to prevent multiple bindings
+        $('.add-block-data').on('click.addBlock', function(e) {
+            // Prevent default action and stop event propagation
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Prevent multiple executions by adding a processing flag
+            if ($(this).data('processing')) {
+                return;
+            }
+            
+            // Set processing flag
+            $(this).data('processing', true);
+            
+            const $btn = $(this);
+            
+            try {
+                const blockKey = $btn.data('block');
+                const contentKey = $btn.data('content_key');
+                const newItemId = 'new-block-' + Math.random().toString(36).substring(2, 9);
+                
+                // Get template HTML and replace markers
+                let template = $('#block-' + blockKey + '-template').html();
+                if (!template) {
+                    console.error('Template not found for block:', blockKey);
+                    $btn.data('processing', false);
+                    return;
+                }
+                
+                // Replace markers safely
+                template = template.replace(/{marker}/g, newItemId);
+                template = template.replace(/{content_key}/g, contentKey);
+                
+                // Close the modal
+                $('#blockSelectorModal-{{ $key }}').modal('hide');
+                
+                // Safely append the new block HTML
+                const ddList = blockContainer.find('.dd-list').first();
+                const newBlock = safeAppendHTML(ddList, template);
+                
+                if (newBlock) {
+                    // Initialize the block's form elements after a short delay
+                    setTimeout(function() {
+                        initializeBlockFormElements(newBlock);
+                        
+                        // Show the form immediately for new blocks
+                        $(newBlock).find('.form-block-edit').removeClass('box-hidden');
+                        
+                        // Reset processing flag after successful completion
+                        $btn.data('processing', false);
+                    }, 300); // Increased timeout to ensure DOM is fully ready
+                } else {
+                    $btn.data('processing', false);
+                }
+            } catch (error) {
+                console.error('Error adding new block:', error);
+                $btn.data('processing', false);
+            }
+        });
+        
+        // Handle errors that might occur during block initialization
+        window.addEventListener('error', function(event) {
+            if (event.message && event.message.includes('appendChild')) {
+                console.error('Block initialization error detected:', event.message);
+                event.preventDefault();
+                
+                // Try to recover by refreshing the page blocks
+                setTimeout(function() {
+                    blockContainer.find('.dd-item').each(function() {
+                        const $blockItem = $(this);
+                        const $blockForm = $blockItem.find('.form-block-edit');
+                        
+                        if (!$blockForm.hasClass('box-hidden')) {
+                            initializeBlockFormElements(this);
+                        }
+                    });
+                }, 300);
+            }
+        });
+    });
+</script>

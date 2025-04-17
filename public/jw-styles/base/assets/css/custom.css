@@ -808,3 +808,57 @@ table.dataTable thead .sorting_desc:after {
 #lessonForm .lesson-thumbnail-area .form-image .dropify-render img {
     max-height: 120px;
 }
+
+/* Fix for Select2 in dynamically loaded content */
+.select2-container--open {
+    z-index: 9999 !important;
+}
+
+/* Ensure proper Select2 rendering in page blocks */
+.form-block-edit .select2-container {
+    width: 100% !important;
+}
+
+/* Fix Select2 in repeater fields */
+.repeater-item .select2-container {
+    width: 100% !important;
+    margin-bottom: 5px;
+}
+
+/* Ensure Select2 displays correctly in modals */
+.modal .select2-container {
+    z-index: 9999 !important;
+    width: 100% !important;
+}
+
+/* Improve Select2 appearance */
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--multiple {
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    min-height: 38px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 36px;
+    padding-left: 12px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 36px;
+}
+
+/* Improved dropdown appearance */
+.select2-dropdown {
+    border-color: #dee2e6;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+}
+
+/* Ensure select2 is visible inside page blocks */
+.page-block-content .select2-container {
+    z-index: 1050 !important;
+}
+
+.form-block-edit .select2-container .select2-selection--single {
+    height: 38px;
+}

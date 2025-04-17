@@ -91,52 +91,29 @@
                 }
 
                 const newIndex = currentCount;
-                let newItem = this.template.replace(/__INDEX__/g, newIndex);
-
+                let templateHTML = this.template.replace(/__INDEX__/g, newIndex);
+                
                 // Create a temporary div to safely parse the HTML
                 const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = newItem.trim();
-
+                // Clean any problematic characters from the template HTML
+                templateHTML = templateHTML.trim();
+                tempDiv.innerHTML = templateHTML;
+                
                 // Get the first child as the new item
                 const itemElement = tempDiv.firstElementChild;
                 if (!itemElement) {
-                    console.error('Failed to create new repeater item');
+                    console.error('Failed to create new repeater item - no valid element found in template');
                     return;
                 }
 
-                this.itemsContainer.appendChild(itemElement);
-                this.initializeNewItemFields(itemElement);
-                this.reindexItems();
-            } catch (error) {
-                console.error('Error adding repeater item:', error);
-            }
-        }
-
-        addItem2() {
-            try {
-                const currentCount = this.itemsContainer.children.length;
-
-                if (this.maxItems && currentCount >= this.maxItems) {
-                    return;
+                try {
+                    // Safely append the new item to the container
+                    this.itemsContainer.appendChild(itemElement);
+                    this.initializeNewItemFields(itemElement);
+                    this.reindexItems();
+                } catch (error) {
+                    console.error('Error adding repeater item to DOM:', error);
                 }
-
-                const newIndex = currentCount;
-                let newItem = this.template.replace(/__INDEX__/g, newIndex);
-
-                // Create a temporary div to safely parse the HTML
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = newItem.trim();
-
-                // Get the first child as the new item
-                const itemElement = tempDiv.firstElementChild;
-                if (!itemElement) {
-                    console.error('Failed to create new repeater item');
-                    return;
-                }
-
-                this.itemsContainer.appendChild(itemElement);
-                this.initializeNewItemFields(itemElement);
-                this.reindexItems();
             } catch (error) {
                 console.error('Error adding repeater item:', error);
             }
@@ -201,11 +178,20 @@
         initializeNewItemFields(item) {
             try {
                 // Initialize Select2
-                item.querySelectorAll('select').forEach(select => {
-                    if (typeof $ !== 'undefined' && $.fn.select2) {
-                        $(select).select2();
-                    }
-                });
+                if (item.querySelectorAll('select').length > 0) {
+                    setTimeout(() => {
+                        item.querySelectorAll('select').forEach(select => {
+                            if (typeof $ !== 'undefined' && $.fn.select2) {
+                                if (!$(select).hasClass('select2-hidden-accessible')) {
+                                    $(select).select2({
+                                        dropdownParent: item,
+                                        width: '100%'
+                                    });
+                                }
+                            }
+                        });
+                    }, 100);
+                }
 
                 // Initialize other field types
                 item.querySelectorAll('.editor').forEach(editor => {
@@ -237,15 +223,80 @@
     // Initialize all repeater fields on DOM ready
     document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.repeater-field').forEach(element => {
-            new RepeaterField(element);
+            if (!element.classList.contains('initialized')) {
+                element.classList.add('initialized');
+                new RepeaterField(element);
+            }
         });
     });
 
     // Re-initialize repeaters added dynamically via AJAX
-    document.addEventListener('repeater:init', () => {
-        document.querySelectorAll('.repeater-field:not(.initialized)').forEach(element => {
-            element.classList.add('initialized');
-            new RepeaterField(element);
-        });
+    document.addEventListener('repeater:init', (event) => {
+        if (event.target && event.target.classList.contains('repeater-field') && !event.target.classList.contains('initialized')) {
+            event.target.classList.add('initialized');
+            new RepeaterField(event.target);
+        }
     });
+
+    // Global function to handle select2 initialization in various contexts
+    window.initializeSelect2Elements = function(container) {
+        if (!container) return;
+        
+        try {
+            // Find the closest context (modal, page block, etc.)
+            const $container = $(container);
+            const $modal = $container.closest('.modal');
+            const $pageBlock = $container.closest('.form-block-edit');
+            const $repeaterItem = $container.closest('.repeater-item');
+            
+            // Determine the appropriate parent for the dropdown
+            let dropdownParent = document;
+            if ($modal.length) {
+                dropdownParent = $modal[0];
+            } else if ($pageBlock.length) {
+                dropdownParent = $pageBlock[0];
+            } else if ($repeaterItem.length) {
+                dropdownParent = $repeaterItem[0];
+            }
+            
+            // Initialize select2 for all select elements in the container
+            $container.find('select').each(function() {
+                const $select = $(this);
+                
+                // Skip if already initialized
+                if ($select.hasClass('select2-hidden-accessible')) {
+                    return;
+                }
+                
+                // Initialize with proper dropdown parent and width
+                $select.select2({
+                    dropdownParent: $(dropdownParent),
+                    width: '100%'
+                });
+            });
+            
+            // Ensure dropdowns are properly positioned and visible
+            $container.find('.select2-container').css('z-index', 1050);
+        } catch (error) {
+            console.error('Error initializing Select2 elements:', error);
+        }
+    };
+    
+    // Global helper to reinitialize select2 after dynamic changes
+    window.reinitializeSelect2 = function(selector) {
+        try {
+            const $elements = $(selector);
+            if ($elements.length) {
+                $elements.each(function() {
+                    const $select = $(this);
+                    if ($select.hasClass('select2-hidden-accessible')) {
+                        $select.select2('destroy');
+                    }
+                    initializeSelect2Elements($select.parent());
+                });
+            }
+        } catch (error) {
+            console.error('Error reinitializing Select2:', error);
+        }
+    };
 </script>
