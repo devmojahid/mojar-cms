@@ -1,7 +1,7 @@
 const mix = require('laravel-mix');
 
 // Set this to true for development mode, false for production
-const isDev = true;
+const isDev = false;
 
 // Define paths based on environment
 const cssOutputPath = isDev 
