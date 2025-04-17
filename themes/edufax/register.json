@@ -69,6 +69,11 @@
         }
     },
     "blocks": {
+        "hero_section_home": {
+            "label": "Hero Section Home",
+            "description": "Hero banner section for homepage with image and text",
+            "view": "theme::components.blocks.hero_section_home"
+        },
         "slider": {
             "label": "Slider Image",
             "description": "Slider Home page",

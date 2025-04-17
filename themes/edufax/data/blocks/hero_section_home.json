@@ -1,0 +1,89 @@
+{
+    "label": "Hero Section Home",
+    "description": "Hero banner section for homepage with image and text",
+    "form": [
+        {
+            "type": "image",
+            "name": "background_image",
+            "label": "Background Image",
+            "data": {
+                "value": "images/banner_bg.jpg"
+            }
+        },
+        {
+            "type": "text",
+            "name": "subtitle",
+            "label": "Subtitle",
+            "data": {
+                "value": "Discover your journey"
+            }
+        },
+        {
+            "type": "text",
+            "name": "title",
+            "label": "Title",
+            "data": {
+                "value": "The Best Free Online Courses of All Time"
+            }
+        },
+        {
+            "type": "text",
+            "name": "highlight_text",
+            "label": "Highlighted Text",
+            "description": "Text to be highlighted in the title",
+            "data": {
+                "value": "Courses"
+            }
+        },
+        {
+            "type": "textarea",
+            "name": "description",
+            "label": "Description",
+            "data": {
+                "value": "Take your learning organization to the next level. to the next level. Who will share their knowledge to people."
+            }
+        },
+        {
+            "type": "text",
+            "name": "button_text",
+            "label": "Button Text",
+            "data": {
+                "value": "All Course"
+            }
+        },
+        {
+            "type": "text",
+            "name": "button_url",
+            "label": "Button URL",
+            "data": {
+                "value": "#"
+            }
+        },
+        {
+            "type": "checkbox_json",
+            "name": "show_arrow_icon",
+            "label": "Show Arrow Icon",
+            "description": "Show arrow icon in button",
+            "data": {
+                "value": 1
+            }
+        },
+        {
+            "type": "image",
+            "name": "banner_image",
+            "label": "Banner Image",
+            "data": {
+                "value": "images/banner_img.png"
+            }
+        },
+        {
+            "type": "checkbox_json",
+            "name": "enable_animation",
+            "label": "Enable Animation",
+            "description": "Enable fade in animation effect",
+            "data": {
+                "value": 1
+            }
+        }
+    ]
+} 

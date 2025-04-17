@@ -1,0 +1,40 @@
+<section class="tf__banner" {% if data.background_image %}style="background: url({{ upload_url(data.background_image) }})"{% endif %}>
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-xxl-5 col-md-10 col-lg-6 {% if data.enable_animation %}wow fadeInLeft{% endif %}" {% if data.enable_animation %}data-wow-duration="1s"{% endif %}>
+                <div class="tf__banner_text">
+                    {% if data.subtitle %}<h5>{{ data.subtitle }}</h5>{% endif %}
+                    <h1>
+                        {% if data.title %}
+                            {% set title = data.title %}
+                            {% if data.highlight_text %}
+                                {% set highlight = data.highlight_text %}
+                                {{ title|replace({(highlight): '<span>' ~ highlight ~ '</span>'})|raw }}
+                            {% else %}
+                                {{ title }}
+                            {% endif %}
+                        {% endif %}
+                    </h1>
+                    {% if data.description %}<p>{{ data.description }}</p>{% endif %}
+                    {% if data.button_text and data.button_url %}
+                        <a class="tf__common_btn" href="{{ data.button_url }}">
+                            {{ data.button_text }}
+                            {% if data.show_arrow_icon %}
+                                <i class="far fa-long-arrow-right"></i>
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-xxl-6 col-lg-6 {% if data.enable_animation %}wow fadeInRight{% endif %}" {% if data.enable_animation %}data-wow-duration="1s"{% endif %}>
+                {% if data.banner_image %}
+                    <div class="tf__banner_img">
+                        <div class="img">
+                            <img src="{{ upload_url(data.banner_image) }}" alt="banner" class="img-fluid w-100">
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section> 
