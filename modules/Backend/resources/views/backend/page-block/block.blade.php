@@ -44,6 +44,82 @@
     // Flag to track if initialization has already run
     window.pageBlocksInitialized = window.pageBlocksInitialized || {};
     
+    // Define a global function to initialize all field types in a container
+    window.initializeBlockContent = function(container) {
+        if (!container) return;
+        
+        // Use setTimeout to ensure DOM is ready
+        setTimeout(function() {
+            try {
+                const $container = $(container);
+                
+                // Call the global select2 initialization if available
+                if (typeof initSelect2 === 'function') {
+                    initSelect2(container);
+                }
+                
+                // Initialize any specialized select2 elements
+                if (typeof window.initializeSelect2Elements === 'function') {
+                    window.initializeSelect2Elements($container);
+                }
+                
+                // Initialize repeater fields
+                $container.find('.repeater-field').each(function() {
+                    if (!$(this).hasClass('initialized')) {
+                        $(this).addClass('initialized');
+                        const event = new CustomEvent('repeater:init', { bubbles: true });
+                        this.dispatchEvent(event);
+                    }
+                });
+                
+                // Initialize any taxonomy selects
+                $container.find('.load-taxonomies').each(function() {
+                    if (!$(this).hasClass('select2-hidden-accessible')) {
+                        $(this).select2({
+                            allowClear: true,
+                            dropdownAutoWidth: !$(this).data('width'),
+                            width: $(this).data('width') || '100%',
+                            placeholder: function (params) {
+                                return {
+                                    id: null,
+                                    text: params.placeholder,
+                                }
+                            },
+                            ajax: {
+                                method: 'GET',
+                                url: mojar.adminUrl + '/load-data/loadTaxonomies',
+                                dataType: 'json',
+                                data: function (params) {
+                                    let postType = $(this).data('post-type');
+                                    let taxonomy = $(this).data('taxonomy');
+                                    let explodes = $(this).data('explodes');
+                                    if (explodes) {
+                                        explodes = $("." + explodes).map(function () {
+                                            return $(this).val();
+                                        }).get();
+                                    }
+
+                                    return {
+                                        search: $.trim(params.term),
+                                        page: params.page,
+                                        explodes: explodes,
+                                        post_type: postType,
+                                        taxonomy: taxonomy
+                                    };
+                                }
+                            }
+                        });
+                    }
+                });
+                
+                // Trigger a custom event that other components can listen for
+                $container.trigger('block:content:initialized');
+            } catch (error) {
+                console.error('Error initializing block content:', error);
+            }
+        }, 300);
+    };
+    
     // Only run initialization once per page load
     if (!window.pageBlocksInitialized['global']) {
         window.pageBlocksInitialized['global'] = true;
@@ -58,33 +134,7 @@
                 $pageBlockContent.find('.form-block-edit').each(function() {
                     if (!$(this).hasClass('box-hidden')) {
                         const $blockForm = $(this);
-                        
-                        // Use the global initialization function with better error handling
-                        setTimeout(function() {
-                            // Initialize select fields
-                            if (typeof window.initializeSelect2Elements === 'function') {
-                                window.initializeSelect2Elements($blockForm);
-                            } else {
-                                // Fallback if global function isn't available
-                                $blockForm.find('select').each(function() {
-                                    if (!$(this).hasClass('select2-hidden-accessible')) {
-                                        $(this).select2({
-                                            dropdownParent: $blockForm,
-                                            width: '100%'
-                                        });
-                                    }
-                                });
-                            }
-                            
-                            // Initialize repeater fields
-                            $blockForm.find('.repeater-field').each(function() {
-                                if (!$(this).hasClass('initialized')) {
-                                    $(this).addClass('initialized');
-                                    const event = new CustomEvent('repeater:init', { bubbles: true });
-                                    this.dispatchEvent(event);
-                                }
-                            });
-                        }, 200);
+                        window.initializeBlockContent($blockForm);
                     }
                 });
             });
@@ -104,6 +154,16 @@
                             // Silently continue if recovery fails
                         }
                     });
+                }
+            });
+            
+            // Listen for the block:added event from page.js
+            $(document).on('block:added', function(e, blockId) {
+                if (blockId) {
+                    const blockForm = $('#page-block-' + blockId);
+                    if (blockForm.length) {
+                        window.initializeBlockContent(blockForm);
+                    }
                 }
             });
         });
