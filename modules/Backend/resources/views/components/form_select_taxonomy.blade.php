@@ -16,13 +16,6 @@
         }
     @endphp
 
-<p>{{ print_r($value) }}</p>
-<p>{{ print_r($options) }}</p>
-<p>{{$multiple ?? false}}</p>
-<p>{{$name}}</p>
-<p>{{$taxonomy}}</p>
-<p>{{$post_type}}</p>
-
     <label class="form-label" for="{{ $id ?? $name }}">{{ $label ?? $name }}</label>
     <select name="{{ $multiple ?? false ? "{$name}[]" : $name }}" id="{{ $id ?? $name }}"
         class="form-control load-taxonomies" data-post-type="{{ $post_type ?? '' }}" data-taxonomy="{{ $taxonomy ?? '' }}"
