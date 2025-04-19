@@ -1,0 +1,151 @@
+{
+    "label": "Course Category Home",
+    "description": "Display course categories in a grid layout with icons",
+    "form": [
+        {
+            "type": "image",
+            "name": "background_image",
+            "label": "Background Image",
+            "data": {
+                "value": "images/category_bg.jpg"
+            }
+        },
+        {
+            "type": "text",
+            "name": "section_title",
+            "label": "Section Title",
+            "data": {
+                "value": "Explore Our Categories"
+            }
+        },
+        {
+            "type": "textarea",
+            "name": "section_description",
+            "label": "Section Description",
+            "data": {
+                "value": "Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world."
+            }
+        },
+        {
+            "type": "text",
+            "name": "section_url",
+            "label": "Section Title URL",
+            "description": "URL for the section title (optional)",
+            "data": {
+                "value": "#"
+            }
+        },
+        {
+            "type": "repeater",
+            "name": "categories",
+            "label": "Categories",
+            "fields": [
+                {
+                    "type": "taxonomy",
+                    "name": "category",
+                    "label": "Category",
+                    "data": {
+                        "post_type": "courses",
+                        "taxonomy": "categories"
+                    }
+                },
+                {
+                    "type": "image",
+                    "name": "icon",
+                    "label": "Category Icon"
+                },
+                {
+                    "type": "select",
+                    "name": "color_scheme",
+                    "label": "Color Scheme",
+                    "data": {
+                        "options": {
+                            "category_1": "Color Scheme 1",
+                            "category_2": "Color Scheme 2",
+                            "category_3": "Color Scheme 3",
+                            "category_4": "Color Scheme 4"
+                        },
+                        "value": "category_1"
+                    }
+                },
+                {
+                    "type": "text",
+                    "name": "custom_title",
+                    "label": "Custom Title (Optional)",
+                    "description": "Override category title if needed"
+                },
+                {
+                    "type": "text",
+                    "name": "custom_url",
+                    "label": "Custom URL (Optional)",
+                    "description": "Override category URL if needed"
+                }
+            ],
+            "options": {
+                "min_items": 1,
+                "max_items": 8,
+                "add_button_text": "Add Category",
+                "remove_button_text": "Remove Category",
+                "value": [
+                    {
+                        "color_scheme": "category_1",
+                        "custom_title": "Data Science"
+                    },
+                    {
+                        "color_scheme": "category_2",
+                        "custom_title": "Finance"
+                    },
+                    {
+                        "color_scheme": "category_3",
+                        "custom_title": "Content Writing"
+                    },
+                    {
+                        "color_scheme": "category_4",
+                        "custom_title": "English"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "text",
+            "name": "padding_top",
+            "label": "Top Padding",
+            "data": {
+                "value": "110"
+            }
+        },
+        {
+            "type": "text",
+            "name": "padding_bottom",
+            "label": "Bottom Padding",
+            "data": {
+                "value": "120"
+            }
+        },
+        {
+            "type": "text",
+            "name": "mobile_padding_top",
+            "label": "Mobile Top Padding",
+            "data": {
+                "value": "75"
+            }
+        },
+        {
+            "type": "text",
+            "name": "mobile_padding_bottom",
+            "label": "Mobile Bottom Padding",
+            "data": {
+                "value": "80"
+            }
+        },
+        {
+            "type": "checkbox_json",
+            "name": "enable_animation",
+            "label": "Enable Animation",
+            "description": "Enable fade in animation effect",
+            "data": {
+                "value": 1
+            }
+        }
+    ]
+} 

@@ -74,6 +74,11 @@
             "description": "Hero banner section for homepage with image and text",
             "view": "theme::components.blocks.hero_section_home"
         },
+        "course_category_home": {
+            "label": "Course Category Home",
+            "description": "Display course categories in a grid layout with icons",
+            "view": "theme::components.blocks.course_category_home"
+        },
         "slider": {
             "label": "Slider Image",
             "description": "Slider Home page",

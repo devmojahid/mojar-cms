@@ -1,0 +1,36 @@
+<section class="tf__category pt_{{ data.padding_top|default(110) }} xs_pt_{{ data.mobile_padding_top|default(75) }} pb_{{ data.padding_bottom|default(120) }} xs_pb_{{ data.mobile_padding_bottom|default(80) }}"
+    {% if data.background_image %}style="background: url({{ upload_url(data.background_image) }})"{% endif %}>
+    <div class="container">
+        {% if data.section_title or data.section_description %}
+            <div class="row">
+                <div class="col-xl-6 col-md-9 col-lg-7 m-auto">
+                    <a href="{{ data.section_url|default('#') }}" class="tf__section_heading heading_center mb_30">
+                        <h2>{{ data.section_title }}</h2>
+                        <p>{{ data.section_description }}</p>
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+        
+        {% if data.categories %}
+            <div class="row">
+                {% for category in data.categories %}
+                    <div class="col-xl-3 col-sm-6 col-lg-4 {% if data.enable_animation %}wow fadeInUp{% endif %}" {% if data.enable_animation %}data-wow-duration="1s"{% endif %}>
+                        {% set category_title = category.custom_title ? category.custom_title : category.category.name|default('Category') %}
+                        {% set category_url = category.custom_url ? category.custom_url : (category.category ? category.category.url : '#') %}
+                        {% set color_class = category.color_scheme|default('category_1') %}
+                        
+                        <a href="{{ category_url }}" class="tf__category_item {{ color_class }}">
+                            <div class="tf__category_logo">
+                                {% if category.icon %}
+                                    <img src="{{ upload_url(category.icon) }}" alt="{{ category_title }}" class="img-fluid w-100">
+                                {% endif %}
+                            </div>
+                            <h3>{{ category_title }}</h3>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</section> 
