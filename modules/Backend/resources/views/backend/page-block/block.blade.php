@@ -145,6 +145,69 @@
             }
         }
         
+        // Initialize taxonomy selects (both inside and outside repeaters)
+        function initializeTaxonomySelects(container) {
+            try {
+                if (!container || container.length === 0) return;
+                
+                const $container = $(container);
+                const $blockParent = $container.closest('.form-block-edit');
+                
+                // Process all taxonomy selects regardless of parent container
+                $container.find('.load-taxonomies').each(function() {
+                    if ($(this).hasClass('select2-hidden-accessible')) {
+                        try {
+                            $(this).select2('destroy');
+                        } catch (e) {
+                            // Silent error for already destroyed elements
+                        }
+                    }
+                    
+                    try {
+                        $(this).select2({
+                            allowClear: true,
+                            dropdownParent: $blockParent.length ? $blockParent : $('body'),
+                            width: '100%',
+                            placeholder: function(params) {
+                                return {
+                                    id: null,
+                                    text: params.placeholder || 'Select a taxonomy',
+                                };
+                            },
+                            ajax: {
+                                method: 'GET',
+                                url: mojar.adminUrl + '/load-data/loadTaxonomies',
+                                dataType: 'json',
+                                data: function(params) {
+                                    const postType = $(this).data('post-type');
+                                    const taxonomy = $(this).data('taxonomy');
+                                    let explodes = $(this).data('explodes');
+                                    
+                                    if (explodes) {
+                                        explodes = $("." + explodes).map(function() {
+                                            return $(this).val();
+                                        }).get();
+                                    }
+                                    
+                                    return {
+                                        search: $.trim(params.term || ''),
+                                        page: params.page || 1,
+                                        explodes: explodes,
+                                        post_type: postType,
+                                        taxonomy: taxonomy
+                                    };
+                                }
+                            }
+                        });
+                    } catch (error) {
+                        console.error('Error initializing taxonomy select:', error);
+                    }
+                });
+            } catch (error) {
+                console.error('Error initializing taxonomy selects:', error);
+            }
+        }
+        
         // Define global function to initialize all field types in a container
         window.initializeBlockContent = function(container) {
             if (!container) return;
@@ -154,56 +217,14 @@
                 try {
                     const $container = $(container);
                     
-                    // Initialize select2 first
+                    // First initialize standard select2 elements
                     initializeSelect2Elements($container);
                     
-                    // Initialize repeater fields
+                    // Then initialize repeater fields
                     initializeRepeaterFields($container);
                     
-                    // Initialize any specialized taxonomy selects
-                    $container.find('.load-taxonomies').each(function() {
-                        if (!$(this).hasClass('select2-hidden-accessible')) {
-                            try {
-                                $(this).select2({
-                                    allowClear: true,
-                                    dropdownParent: $(this).closest('.form-block-edit, .repeater-item'),
-                                    width: $(this).data('width') || '100%',
-                                    placeholder: function(params) {
-                                        return {
-                                            id: null,
-                                            text: params.placeholder || 'Select an option',
-                                        };
-                                    },
-                                    ajax: {
-                                        method: 'GET',
-                                        url: mojar.adminUrl + '/load-data/loadTaxonomies',
-                                        dataType: 'json',
-                                        data: function(params) {
-                                            const postType = $(this).data('post-type');
-                                            const taxonomy = $(this).data('taxonomy');
-                                            let explodes = $(this).data('explodes');
-                                            
-                                            if (explodes) {
-                                                explodes = $("." + explodes).map(function() {
-                                                    return $(this).val();
-                                                }).get();
-                                            }
-                                            
-                                            return {
-                                                search: $.trim(params.term || ''),
-                                                page: params.page || 1,
-                                                explodes: explodes,
-                                                post_type: postType,
-                                                taxonomy: taxonomy
-                                            };
-                                        }
-                                    }
-                                });
-                            } catch (error) {
-                                console.error('Error initializing taxonomy select:', error);
-                            }
-                        }
-                    });
+                    // Make sure taxonomies are properly initialized (both within and outside repeaters)
+                    initializeTaxonomySelects($container);
                     
                     // Trigger a custom event that other components can listen for
                     $container.trigger('block:content:initialized');
