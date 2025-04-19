@@ -1,13 +1,21 @@
 <div class="form-group repeater-field" id="{{ $id }}" data-min="{{ $repeater->getConfig()['min_items'] }}"
     data-max="{{ $repeater->getConfig()['max_items'] }}" data-sortable="{{ $repeater->getConfig()['sortable'] }}"
-    data-collapsible="{{ $repeater->getConfig()['collapsible'] }}">
+    data-collapsible="{{ $repeater->getConfig()['collapsible'] }}" data-name="{{ $repeater->getConfig()['name'] }}">
 
     <label class="form-label @if ($required) required @endif">
         {{ $repeater->getConfig()['label'] }}
     </label>
 
     <div class="repeater-items">
-        @foreach ($repeater->getItems() as $index => $item)
+        @php
+            // Ensure items are properly formatted
+            $items = $repeater->getItems();
+            if (empty($items) && !empty($repeater->getDefaultItems())) {
+                $items = $repeater->getDefaultItems();
+            }
+        @endphp
+        
+        @foreach ($items as $index => $item)
             @include('cms::components.form_repeater_item', [
                 'fields' => $repeater->getConfig()['fields'],
                 'values' => $item,
@@ -31,7 +39,7 @@
     <template class="repeater-template">
         @include('cms::components.form_repeater_item', [
             'fields' => $repeater->getConfig()['fields'],
-            'values' => $repeater->getConfig()['value'] ?? [],
+            'values' => [],
             'index' => '__INDEX__',
             'name' => $repeater->getConfig()['name'],
         ])
@@ -45,6 +53,7 @@
             this.itemsContainer = this.container.querySelector('.repeater-items');
             this.template = this.container.querySelector('.repeater-template').innerHTML;
             this.addButton = this.container.querySelector('.add-repeater-item');
+            this.fieldName = this.container.dataset.name;
 
             this.minItems = parseInt(this.container.dataset.min) || 0;
             this.maxItems = parseInt(this.container.dataset.max) || null;
@@ -177,16 +186,69 @@
 
         initializeNewItemFields(item) {
             try {
+                // Find the parent block or modal
+                const parentBlock = this.container.closest('.form-block-edit');
+                const parentModal = this.container.closest('.modal');
+                const dropdownParent = parentBlock || parentModal || document.body;
+
                 // Initialize Select2
                 if (item.querySelectorAll('select').length > 0) {
                     setTimeout(() => {
                         item.querySelectorAll('select').forEach(select => {
                             if (typeof $ !== 'undefined' && $.fn.select2) {
-                                if (!$(select).hasClass('select2-hidden-accessible')) {
-                                    $(select).select2({
-                                        dropdownParent: item,
-                                        width: '100%'
-                                    });
+                                try {
+                                    // Destroy if already initialized
+                                    if ($(select).hasClass('select2-hidden-accessible')) {
+                                        $(select).select2('destroy');
+                                    }
+                                    
+                                    // Handle different select types
+                                    if ($(select).hasClass('load-taxonomies')) {
+                                        $(select).select2({
+                                            allowClear: true,
+                                            dropdownParent: $(dropdownParent),
+                                            width: '100%',
+                                            placeholder: function(params) {
+                                                return {
+                                                    id: null,
+                                                    text: params.placeholder || 'Select an option',
+                                                };
+                                            },
+                                            ajax: {
+                                                method: 'GET',
+                                                url: mojar.adminUrl + '/load-data/loadTaxonomies',
+                                                dataType: 'json',
+                                                data: function(params) {
+                                                    const postType = $(select).data('post-type');
+                                                    const taxonomy = $(select).data('taxonomy');
+                                                    let explodes = $(select).data('explodes');
+                                                    
+                                                    if (explodes) {
+                                                        explodes = $("." + explodes).map(function() {
+                                                            return $(this).val();
+                                                        }).get();
+                                                    }
+                                                    
+                                                    return {
+                                                        search: $.trim(params.term || ''),
+                                                        page: params.page || 1,
+                                                        explodes: explodes,
+                                                        post_type: postType,
+                                                        taxonomy: taxonomy
+                                                    };
+                                                }
+                                            }
+                                        });
+                                    } else {
+                                        // Regular select2
+                                        $(select).select2({
+                                            dropdownParent: $(dropdownParent),
+                                            width: '100%',
+                                            placeholder: $(select).data('placeholder') || 'Select an option'
+                                        });
+                                    }
+                                } catch (error) {
+                                    console.error('Error initializing select2:', error);
                                 }
                             }
                         });
@@ -199,6 +261,16 @@
                         CKEDITOR.replace(editor);
                     }
                 });
+
+                // Initialize nested repeaters
+                setTimeout(() => {
+                    item.querySelectorAll('.repeater-field').forEach(repeater => {
+                        if (!repeater.classList.contains('initialized')) {
+                            repeater.classList.add('initialized');
+                            new RepeaterField(repeater);
+                        }
+                    });
+                }, 100);
 
                 // Trigger custom event for other initializations
                 const event = new CustomEvent('repeater:item-added', {
@@ -222,11 +294,9 @@
 
     // Initialize all repeater fields on DOM ready
     document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('.repeater-field').forEach(element => {
-            if (!element.classList.contains('initialized')) {
-                element.classList.add('initialized');
-                new RepeaterField(element);
-            }
+        document.querySelectorAll('.repeater-field:not(.initialized)').forEach(element => {
+            element.classList.add('initialized');
+            new RepeaterField(element);
         });
     });
 
@@ -247,56 +317,79 @@
             const $container = $(container);
             const $modal = $container.closest('.modal');
             const $pageBlock = $container.closest('.form-block-edit');
-            const $repeaterItem = $container.closest('.repeater-item');
+            const dropdownParent = $pageBlock.length ? $pageBlock : ($modal.length ? $modal : document.body);
             
-            // Determine the appropriate parent for the dropdown
-            let dropdownParent = document;
-            if ($modal.length) {
-                dropdownParent = $modal[0];
-            } else if ($pageBlock.length) {
-                dropdownParent = $pageBlock[0];
-            } else if ($repeaterItem.length) {
-                dropdownParent = $repeaterItem[0];
-            }
-            
-            // Initialize select2 for all select elements in the container
-            $container.find('select').each(function() {
-                const $select = $(this);
-                
-                // Skip if already initialized
-                if ($select.hasClass('select2-hidden-accessible')) {
-                    return;
+            // Initialize regular select2 elements
+            $container.find('select:not(.load-taxonomies)').each(function() {
+                if (!$(this).hasClass('select2-hidden-accessible')) {
+                    try {
+                        $(this).select2({
+                            dropdownParent: $(dropdownParent),
+                            width: '100%',
+                            placeholder: $(this).data('placeholder') || 'Select an option'
+                        });
+                    } catch (error) {
+                        console.error('Error initializing select2:', error);
+                    }
                 }
-                
-                // Initialize with proper dropdown parent and width
-                $select.select2({
-                    dropdownParent: $(dropdownParent),
-                    width: '100%'
-                });
             });
             
-            // Ensure dropdowns are properly positioned and visible
-            $container.find('.select2-container').css('z-index', 1050);
-        } catch (error) {
-            console.error('Error initializing Select2 elements:', error);
-        }
-    };
-    
-    // Global helper to reinitialize select2 after dynamic changes
-    window.reinitializeSelect2 = function(selector) {
-        try {
-            const $elements = $(selector);
-            if ($elements.length) {
-                $elements.each(function() {
-                    const $select = $(this);
-                    if ($select.hasClass('select2-hidden-accessible')) {
-                        $select.select2('destroy');
+            // Initialize taxonomy select2 elements
+            $container.find('.load-taxonomies').each(function() {
+                if (!$(this).hasClass('select2-hidden-accessible')) {
+                    try {
+                        $(this).select2({
+                            allowClear: true,
+                            dropdownParent: $(dropdownParent),
+                            width: '100%',
+                            placeholder: function(params) {
+                                return {
+                                    id: null,
+                                    text: params.placeholder || 'Select an option',
+                                };
+                            },
+                            ajax: {
+                                method: 'GET',
+                                url: mojar.adminUrl + '/load-data/loadTaxonomies',
+                                dataType: 'json',
+                                data: function(params) {
+                                    const postType = $(this).data('post-type');
+                                    const taxonomy = $(this).data('taxonomy');
+                                    let explodes = $(this).data('explodes');
+                                    
+                                    if (explodes) {
+                                        explodes = $("." + explodes).map(function() {
+                                            return $(this).val();
+                                        }).get();
+                                    }
+                                    
+                                    return {
+                                        search: $.trim(params.term || ''),
+                                        page: params.page || 1,
+                                        explodes: explodes,
+                                        post_type: postType,
+                                        taxonomy: taxonomy
+                                    };
+                                }
+                            }
+                        });
+                    } catch (error) {
+                        console.error('Error initializing taxonomy select2:', error);
                     }
-                    initializeSelect2Elements($select.parent());
-                });
-            }
+                }
+            });
+            
+            // Initialize repeater fields
+            $container.find('.repeater-field:not(.initialized)').each(function() {
+                try {
+                    $(this).addClass('initialized');
+                    new RepeaterField(this);
+                } catch (error) {
+                    console.error('Error initializing repeater field:', error);
+                }
+            });
         } catch (error) {
-            console.error('Error reinitializing Select2:', error);
+            console.error('Error in initializeSelect2Elements:', error);
         }
     };
 </script>

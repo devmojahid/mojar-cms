@@ -21,6 +21,15 @@
             }
         },
         {
+            "type": "taxonomy",
+            "name": "taxonomy",
+            "label": "Category",
+            "data": {
+                "post_type": "posts",
+                "taxonomy": "categories"
+            }
+        },
+        {
             "type": "checkbox_json",
             "name": "enable_autoplay",
             "label": "Enable Autoplay",

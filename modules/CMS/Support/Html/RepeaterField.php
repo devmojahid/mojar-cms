@@ -29,7 +29,10 @@ class RepeaterField implements RepeaterFieldContract
     {
         $this->config = $this->normalizeConfig($config);
         $this->defaultItems = $config['default'] ?? [];
-        $this->items = $this->normalizeItems($config['value'] ?? $this->defaultItems);
+        
+        // Normalize the value from config
+        $rawValue = $config['value'] ?? $this->defaultItems;
+        $this->items = $this->normalizeItems($rawValue);
     }
 
     public function getConfig(): array
@@ -102,31 +105,59 @@ class RepeaterField implements RepeaterFieldContract
     /**
      * Normalize and filter items
      *
-     * @param array $items
+     * @param mixed $items
      * @return array
      */
-    protected function normalizeItems(array $items): array
+    protected function normalizeItems($items): array
     {
-        // Handle JSON string values that might come from the database
-        if (count($items) === 1 && is_string(reset($items))) {
-            $jsonValue = reset($items);
-            try {
-                $decodedItems = json_decode($jsonValue, true);
-                if (json_last_error() === JSON_ERROR_NONE && is_array($decodedItems)) {
-                    $items = $decodedItems;
+        // Handle non-array values
+        if (!is_array($items)) {
+            // If it's a JSON string, decode it
+            if (is_string($items)) {
+                try {
+                    $decoded = json_decode($items, true);
+                    if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                        $items = $decoded;
+                    } else {
+                        // If it's not valid JSON, return empty array
+                        return [];
+                    }
+                } catch (\Exception $e) {
+                    // If decoding fails, return empty array
+                    return [];
                 }
-            } catch (\Exception $e) {
-                // If decoding fails, keep original items
+            } else {
+                // For any other non-array value, return empty array
+                return [];
             }
         }
-
-        // If it's not a multidimensional array, but should be
-        if (!empty($items) && !is_array(reset($items))) {
-            // If it appears to be a single item, wrap it
+        
+        // If items is empty, return it as is
+        if (empty($items)) {
+            return [];
+        }
+        
+        // Check if this is a multi-dimensional array or a single item
+        $firstElement = reset($items);
+        if (!is_array($firstElement)) {
+            // This appears to be a single item, wrap it in an array
             $items = [$items];
         }
-
-        // Filter out invalid items
-        return array_filter($items, [$this, 'validateItem']);
+        
+        // Ensure each item has all the required fields
+        $processedItems = [];
+        foreach ($items as $item) {
+            // Skip empty or invalid items
+            if (empty($item) || !is_array($item)) {
+                continue;
+            }
+            
+            // Only add items that pass validation
+            if ($this->validateItem($item)) {
+                $processedItems[] = $item;
+            }
+        }
+        
+        return $processedItems;
     }
 }

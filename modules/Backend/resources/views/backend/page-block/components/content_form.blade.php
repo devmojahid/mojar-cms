@@ -154,142 +154,164 @@
         const key = '{{ $key }}';
         const blockContainer = $('#page-block-builder-nestable-{{ $key }}');
         
-        // Function to safely append HTML to the DOM
-        function safeAppendHTML(container, html) {
+        // Helper function to generate a unique ID
+        function generateUniqueId() {
+            return 'block-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+        }
+        
+        // Function to carefully add a new block to the DOM
+        function addBlockToDOM(container, html) {
             try {
-                // Create a temporary div to parse the HTML
+                // Create a temporary div
                 const tempDiv = document.createElement('div');
                 tempDiv.innerHTML = html.trim();
                 
-                // Get the first child as the new element
-                const newElement = tempDiv.firstElementChild;
-                if (!newElement) {
-                    console.error('Failed to create new element from HTML');
+                // Get the first child element (the block)
+                const newBlock = tempDiv.firstElementChild;
+                
+                if (!newBlock) {
+                    console.error('Failed to create block element from template');
                     return null;
                 }
                 
-                // Append the new element to the container
-                container.append(newElement);
-                return newElement;
+                // Append to container
+                container.append(newBlock);
+                return newBlock;
             } catch (error) {
-                console.error('Error appending HTML:', error);
+                console.error('Error adding block to DOM:', error);
                 return null;
             }
         }
         
-        // Initialize form elements in a block
-        function initializeBlockFormElements(blockElement) {
+        // Function to safely initialize a new block's form elements
+        function initializeNewBlock(blockElement) {
             try {
-                const $blockForm = $(blockElement).find('.form-block-edit');
+                if (!blockElement) return;
                 
-                // Use the new global initialization function if available
-                if (typeof window.initializeSelect2Elements === 'function') {
-                    window.initializeSelect2Elements($blockForm);
-                } else {
-                    // Fallback to local initialization
-                    $blockForm.find('select').each(function() {
-                        if (!$(this).hasClass('select2-hidden-accessible')) {
-                            $(this).select2({
-                                dropdownParent: $blockForm,
-                                width: '100%'
-                            });
+                // Get the form element
+                const formElement = $(blockElement).find('.form-block-edit');
+                
+                if (formElement.length) {
+                    // Make the form visible
+                    formElement.removeClass('box-hidden');
+                    
+                    // Initialize with timeout to ensure DOM is ready
+                    setTimeout(function() {
+                        // Use the global initialization function
+                        if (typeof window.initializeBlockContent === 'function') {
+                            window.initializeBlockContent(formElement);
                         }
-                    });
+                        
+                        // Trigger custom event
+                        $(document).trigger('block:added', [formElement.attr('id').replace('page-block-', '')]);
+                    }, 300);
                 }
-                
-                // Initialize repeater fields
-                $blockForm.find('.repeater-field').each(function() {
-                    if (!$(this).hasClass('initialized')) {
-                        $(this).addClass('initialized');
-                        const event = new CustomEvent('repeater:init', { bubbles: true });
-                        this.dispatchEvent(event);
-                    }
-                });
-                
-                // Trigger custom event for other components
-                $blockForm.trigger('block:elements:initialized');
             } catch (error) {
-                console.error('Error initializing block form elements:', error);
+                console.error('Error initializing new block:', error);
             }
         }
         
         // Remove any existing event handlers to prevent duplicates
         $('.add-block-data').off('click.addBlock');
         
-        // Add new block handler with a namespace to prevent multiple bindings
+        // Add block button handler
         $('.add-block-data').on('click.addBlock', function(e) {
-            // Prevent default action and stop event propagation
             e.preventDefault();
             e.stopPropagation();
             
-            // Prevent multiple executions by adding a processing flag
+            // Prevent multiple executions
             if ($(this).data('processing')) {
                 return;
             }
             
-            // Set processing flag
             $(this).data('processing', true);
-            
             const $btn = $(this);
             
             try {
                 const blockKey = $btn.data('block');
                 const contentKey = $btn.data('content_key');
-                const newItemId = 'new-block-' + Math.random().toString(36).substring(2, 9);
+                const uniqueId = generateUniqueId();
                 
-                // Get template HTML and replace markers
-                let template = $('#block-' + blockKey + '-template').html();
-                if (!template) {
+                // Get the template 
+                const templateElement = $('#block-' + blockKey + '-template');
+                
+                if (!templateElement.length) {
                     console.error('Template not found for block:', blockKey);
                     $btn.data('processing', false);
                     return;
                 }
                 
-                // Replace markers safely
-                template = template.replace(/{marker}/g, newItemId);
-                template = template.replace(/{content_key}/g, contentKey);
+                // Clone the template content
+                let templateHtml = templateElement.html();
+                
+                // Replace placeholder markers
+                templateHtml = templateHtml.replace(/{marker}/g, uniqueId);
+                templateHtml = templateHtml.replace(/{content_key}/g, contentKey);
                 
                 // Close the modal
                 $('#blockSelectorModal-{{ $key }}').modal('hide');
                 
-                // Safely append the new block HTML
+                // Add the block to the DOM
                 const ddList = blockContainer.find('.dd-list').first();
-                const newBlock = safeAppendHTML(ddList, template);
+                const newBlock = addBlockToDOM(ddList, templateHtml);
                 
                 if (newBlock) {
-                    // Initialize the block's form elements after a short delay
-                    setTimeout(function() {
-                        initializeBlockFormElements(newBlock);
-                        
-                        // Show the form immediately for new blocks
-                        $(newBlock).find('.form-block-edit').removeClass('box-hidden');
-                        
-                        // Reset processing flag after successful completion
-                        $btn.data('processing', false);
-                    }, 300); // Increased timeout to ensure DOM is fully ready
-                } else {
-                    $btn.data('processing', false);
+                    // Initialize the new block
+                    initializeNewBlock(newBlock);
+                    
+                    // Make sure nestable is refreshed if using it
+                    if (typeof $.fn.nestable === 'function') {
+                        blockContainer.nestable('refresh');
+                    }
                 }
+                
+                // Reset processing flag
+                setTimeout(function() {
+                    $btn.data('processing', false);
+                }, 500);
+                
             } catch (error) {
-                console.error('Error adding new block:', error);
+                console.error('Error adding block:', error);
                 $btn.data('processing', false);
             }
         });
         
-        // Handle errors that might occur during block initialization
+        // Add search functionality for block selector
+        $('#blockSelectorModal-{{ $key }} .block-search').on('keyup', function() {
+            const searchTerm = $(this).val().toLowerCase();
+            
+            $('#blockSelectorModal-{{ $key }} .block-item').each(function() {
+                const title = $(this).find('.card-title').text().toLowerCase();
+                const description = $(this).find('.text-muted').text().toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+        
+        // Handle errors during block initialization
         window.addEventListener('error', function(event) {
-            if (event.message && event.message.includes('appendChild')) {
-                console.error('Block initialization error detected:', event.message);
+            if (event.message && (
+                event.message.includes('appendChild') || 
+                event.message.includes('Unexpected token')
+            )) {
+                console.warn('Caught DOM error, attempting recovery:', event.message);
                 event.preventDefault();
                 
-                // Try to recover by refreshing the page blocks
+                // Try to recover by reinitializing select2 elements
                 setTimeout(function() {
-                    blockContainer.find('.dd-item').each(function() {
-                        const $blockItem = $(this);
-                        const $blockForm = $blockItem.find('.form-block-edit');
-                        
-                        if (!$blockForm.hasClass('box-hidden')) {
-                            initializeBlockFormElements(this);
+                    blockContainer.find('.select2-hidden-accessible').each(function() {
+                        try {
+                            $(this).select2('destroy');
+                            $(this).select2({
+                                width: '100%',
+                                dropdownParent: $(this).closest('.form-block-edit')
+                            });
+                        } catch (e) {
+                            // Silent fail for recovery attempt
                         }
                     });
                 }, 300);
