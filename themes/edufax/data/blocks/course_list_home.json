@@ -1,0 +1,141 @@
+{
+    "label": "Course List Home",
+    "description": "Display popular courses in a grid layout",
+    "form": [
+        {
+            "type": "image",
+            "name": "background_image",
+            "label": "Background Image",
+            "data": {
+                "value": "images/courses_bg.jpg"
+            }
+        },
+        {
+            "type": "text",
+            "name": "section_title",
+            "label": "Section Title",
+            "data": {
+                "value": "Our Popular Courses"
+            }
+        },
+        {
+            "type": "textarea",
+            "name": "section_description",
+            "label": "Section Description",
+            "data": {
+                "value": "Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world."
+            }
+        },
+        {
+            "type": "taxonomy",
+            "name": "category",
+            "label": "Course Category",
+            "description": "Select a category to filter courses (optional)",
+            "data": {
+                "post_type": "courses",
+                "taxonomy": "categories"
+            }
+        },
+        {
+            "type": "text",
+            "name": "course_limit",
+            "label": "Number of Courses",
+            "description": "Maximum number of courses to display",
+            "data": {
+                "value": "6"
+            }
+        },
+        {
+            "type": "select",
+            "name": "order_by",
+            "label": "Order By",
+            "data": {
+                "options": {
+                    "created_at": "Date Created",
+                    "views": "Most Viewed",
+                    "students": "Most Students",
+                    "rating": "Highest Rating"
+                },
+                "value": "created_at"
+            }
+        },
+        {
+            "type": "select",
+            "name": "order",
+            "label": "Order Direction",
+            "data": {
+                "options": {
+                    "DESC": "Descending",
+                    "ASC": "Ascending"
+                },
+                "value": "DESC"
+            }
+        },
+        {
+            "type": "checkbox_json",
+            "name": "show_all_button",
+            "label": "Show View All Button",
+            "description": "Display a button to view all courses",
+            "data": {
+                "value": 1
+            }
+        },
+        {
+            "type": "text",
+            "name": "view_all_text",
+            "label": "View All Button Text",
+            "data": {
+                "value": "View All Courses"
+            }
+        },
+        {
+            "type": "text",
+            "name": "view_all_url",
+            "label": "View All Button URL",
+            "data": {
+                "value": "/courses"
+            }
+        },
+        {
+            "type": "text",
+            "name": "padding_top",
+            "label": "Top Padding",
+            "data": {
+                "value": "110"
+            }
+        },
+        {
+            "type": "text",
+            "name": "padding_bottom",
+            "label": "Bottom Padding",
+            "data": {
+                "value": "120"
+            }
+        },
+        {
+            "type": "text",
+            "name": "mobile_padding_top",
+            "label": "Mobile Top Padding",
+            "data": {
+                "value": "75"
+            }
+        },
+        {
+            "type": "text",
+            "name": "mobile_padding_bottom",
+            "label": "Mobile Bottom Padding",
+            "data": {
+                "value": "80"
+            }
+        },
+        {
+            "type": "checkbox_json",
+            "name": "enable_animation",
+            "label": "Enable Animation",
+            "description": "Enable fade in animation effect",
+            "data": {
+                "value": 1
+            }
+        }
+    ]
+} 

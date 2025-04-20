@@ -1,0 +1,139 @@
+{
+    "label": "Blogs List Home",
+    "description": "Display blog posts in a slider with title and description",
+    "form": [
+        {
+            "type": "image",
+            "name": "background_image",
+            "label": "Background Image",
+            "data": {
+                "value": "images/blog_bg.jpg"
+            }
+        },
+        {
+            "type": "text",
+            "name": "section_title",
+            "label": "Section Title",
+            "data": {
+                "value": "Latest News Feed"
+            }
+        },
+        {
+            "type": "textarea",
+            "name": "section_description",
+            "label": "Section Description",
+            "data": {
+                "value": "Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world."
+            }
+        },
+        {
+            "type": "taxonomy",
+            "name": "category",
+            "label": "Blog Category",
+            "description": "Filter blogs by category (optional)",
+            "data": {
+                "post_type": "posts",
+                "taxonomy": "categories"
+            }
+        },
+        {
+            "type": "text",
+            "name": "blog_limit",
+            "label": "Number of Blogs",
+            "description": "Maximum number of blogs to display",
+            "data": {
+                "value": "6"
+            }
+        },
+        {
+            "type": "select",
+            "name": "order_by",
+            "label": "Order By",
+            "data": {
+                "options": {
+                    "created_at": "Date Created",
+                    "views": "Views Count"
+                },
+                "value": "created_at"
+            }
+        },
+        {
+            "type": "select",
+            "name": "order",
+            "label": "Order Direction",
+            "data": {
+                "options": {
+                    "DESC": "Descending (newest first)",
+                    "ASC": "Ascending (oldest first)"
+                },
+                "value": "DESC"
+            }
+        },
+        {
+            "type": "checkbox_json",
+            "name": "enable_slider",
+            "label": "Enable Slider",
+            "description": "Display blogs in a slider",
+            "data": {
+                "value": 1
+            }
+        },
+        {
+            "type": "checkbox_json",
+            "name": "show_all_button",
+            "label": "Show View All Button",
+            "description": "Display a button to view all blogs",
+            "data": {
+                "value": 1
+            }
+        },
+        {
+            "type": "text",
+            "name": "view_all_text",
+            "label": "View All Button Text",
+            "data": {
+                "value": "View All Blogs"
+            }
+        },
+        {
+            "type": "text",
+            "name": "view_all_url",
+            "label": "View All Button URL",
+            "data": {
+                "value": "/blogs"
+            }
+        },
+        {
+            "type": "text",
+            "name": "padding_top",
+            "label": "Top Padding",
+            "data": {
+                "value": "110"
+            }
+        },
+        {
+            "type": "text",
+            "name": "padding_bottom",
+            "label": "Bottom Padding",
+            "data": {
+                "value": "100"
+            }
+        },
+        {
+            "type": "text",
+            "name": "mobile_padding_top",
+            "label": "Mobile Top Padding",
+            "data": {
+                "value": "75"
+            }
+        },
+        {
+            "type": "text",
+            "name": "mobile_padding_bottom",
+            "label": "Mobile Bottom Padding",
+            "data": {
+                "value": "60"
+            }
+        }
+    ]
+} 

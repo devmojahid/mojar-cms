@@ -1,0 +1,129 @@
+<section class="tf__blog pt_{{ data.padding_top|default(110) }} xs_pt_{{ data.mobile_padding_top|default(75) }} pb_{{ data.padding_bottom|default(100) }} xs_pb_{{ data.mobile_padding_bottom|default(60) }}"
+    {% if data.background_image %}style="background: url({{ upload_url(data.background_image) }})"{% endif %}>
+    <div class="container">
+        {% if data.section_title or data.section_description %}
+            <div class="row">
+                <div class="col-xl-6 col-md-9 col-lg-7 m-auto">
+                    <div class="tf__section_heading heading_center mb_30 xs_mb_30">
+                        <h2>{{ data.section_title }}</h2>
+                        <p>{{ data.section_description }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        
+        <div class="row {% if data.enable_slider %}blog_slider{% endif %}">
+            {% set query_params = {
+                limit: data.blog_limit|default(6)
+            } %}
+            
+            {% if data.category %}
+                {% set query_params = query_params|merge({
+                    taxonomy: data.category
+                }) %}
+            {% endif %}
+            
+            {% set order_by_param = {} %}
+            
+            {% if data.order_by == 'views' %}
+                {% set order_by_param = {'views': data.order|default('DESC')} %}
+            {% else %}
+                {% set order_by_param = {'created_at': data.order|default('DESC')} %}
+            {% endif %}
+            
+            {% set query_params = query_params|merge({
+                order_by: order_by_param
+            }) %}
+            
+            {% set blogs = get_posts('posts', query_params) %}
+            
+            {% if blogs %}
+                {% for post in blogs %}
+                    <div class="col-xl-4 wow fadeInUp" data-wow-duration="1s">
+                        <div class="tf__single_blog">
+                            <div class="tf__single_blog_img">
+                                <img src="{{ post.thumbnail }}" alt="{{ post.title }}" class="img-fluid w-100">
+                            </div>
+                            <div class="tf__single_blog_text">
+                                <ul>
+                                    <li>
+                                        {% if post.author.avatar %}
+                                            <span>
+                                                <img src="{{ upload_url(post.author.avatar) }}" alt="{{ post.author.name }}" class="img-fluid w-100">
+                                            </span>
+                                        {% endif %}
+                                        {{ post.author.name }}
+                                    </li>
+                                    <li><i class="fal fa-calendar-alt"></i> {{ post.created_at|date("d M, Y") }}</li>
+                                </ul>
+                                <a class="title" href="{{ post.url }}">{{ post.title }}</a>
+                                <div class="tf__single_blog_footer">
+                                    <a href="{{ post.url }}">View Details <i class="far fa-long-arrow-right"></i></a>
+                                    {% if post.views %}
+                                        <span><i class="far fa-eye"></i> {{ post.views }} View{{ post.views != 1 ? 's' : '' }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-12 text-center">
+                    <div class="tf__blog_empty_state">
+                        <h3>{{ __('No blog posts found') }}</h3>
+                        <p>{{ __('There are no blog posts matching your criteria.') }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        
+        {% if data.show_all_button and data.view_all_text and data.view_all_url %}
+            <div class="row">
+                <div class="col-12 text-center mt_50">
+                    <a href="{{ data.view_all_url }}" class="tf__common_btn">{{ data.view_all_text }} <i class="far fa-long-arrow-right"></i></a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+{% if data.enable_slider %}
+<script>
+    $(document).ready(function(){
+        $('.blog_slider').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 4000,
+            dots: false,
+            arrows: false,
+            responsive: [
+                {
+                    breakpoint: 1200,
+                    settings: {
+                        slidesToShow: 2
+                    }
+                },
+                {
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 2
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                },
+                {
+                    breakpoint: 576,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
+        });
+    });
+</script>
+{% endif %} 

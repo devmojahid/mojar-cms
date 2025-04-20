@@ -1,0 +1,154 @@
+{
+    "label": "Events List Home",
+    "description": "Display upcoming events in a grid layout",
+    "form": [
+        {
+            "type": "image",
+            "name": "background_image",
+            "label": "Background Image",
+            "data": {
+                "value": "images/event_bg.jpg"
+            }
+        },
+        {
+            "type": "text",
+            "name": "section_title",
+            "label": "Section Title",
+            "data": {
+                "value": "Our Upcoming Events"
+            }
+        },
+        {
+            "type": "textarea",
+            "name": "section_description",
+            "label": "Section Description",
+            "data": {
+                "value": "Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world."
+            }
+        },
+        {
+            "type": "taxonomy",
+            "name": "category",
+            "label": "Event Category",
+            "description": "Select a category to filter events (optional)",
+            "data": {
+                "post_type": "event-management",
+                "taxonomy": "categories"
+            }
+        },
+        {
+            "type": "text",
+            "name": "event_limit",
+            "label": "Number of Events",
+            "description": "Maximum number of events to display",
+            "data": {
+                "value": "4"
+            }
+        },
+        {
+            "type": "select",
+            "name": "order_by",
+            "label": "Order By",
+            "data": {
+                "options": {
+                    "start_date": "Event Date",
+                    "created_at": "Date Created",
+                    "views": "Most Viewed"
+                },
+                "value": "start_date"
+            }
+        },
+        {
+            "type": "select",
+            "name": "order",
+            "label": "Order Direction",
+            "data": {
+                "options": {
+                    "ASC": "Ascending (nearest first)",
+                    "DESC": "Descending (furthest first)"
+                },
+                "value": "ASC"
+            }
+        },
+        {
+            "type": "select",
+            "name": "date_filter",
+            "label": "Date Filter",
+            "description": "Filter events by date",
+            "data": {
+                "options": {
+                    "all": "All Events",
+                    "upcoming": "Upcoming Events Only",
+                    "past": "Past Events Only"
+                },
+                "value": "upcoming"
+            }
+        },
+        {
+            "type": "checkbox_json",
+            "name": "show_all_button",
+            "label": "Show View All Button",
+            "description": "Display a button to view all events",
+            "data": {
+                "value": 1
+            }
+        },
+        {
+            "type": "text",
+            "name": "view_all_text",
+            "label": "View All Button Text",
+            "data": {
+                "value": "View All Events"
+            }
+        },
+        {
+            "type": "text",
+            "name": "view_all_url",
+            "label": "View All Button URL",
+            "data": {
+                "value": "/events"
+            }
+        },
+        {
+            "type": "text",
+            "name": "padding_top",
+            "label": "Top Padding",
+            "data": {
+                "value": "110"
+            }
+        },
+        {
+            "type": "text",
+            "name": "padding_bottom",
+            "label": "Bottom Padding",
+            "data": {
+                "value": "120"
+            }
+        },
+        {
+            "type": "text",
+            "name": "mobile_padding_top",
+            "label": "Mobile Top Padding",
+            "data": {
+                "value": "75"
+            }
+        },
+        {
+            "type": "text",
+            "name": "mobile_padding_bottom",
+            "label": "Mobile Bottom Padding",
+            "data": {
+                "value": "80"
+            }
+        },
+        {
+            "type": "checkbox_json",
+            "name": "enable_animation",
+            "label": "Enable Animation",
+            "description": "Enable fade in animation effect",
+            "data": {
+                "value": 1
+            }
+        }
+    ]
+} 

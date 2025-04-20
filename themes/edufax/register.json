@@ -84,6 +84,21 @@
             "description": "About us section with images and features",
             "view": "theme::components.blocks.about_us_home"
         },
+        "course_list_home": {
+            "label": "Course List Home",
+            "description": "Display popular courses in a grid layout",
+            "view": "theme::components.blocks.course_list_home"
+        },
+        "events_list_home": {
+            "label": "Events List Home",
+            "description": "Display upcoming events in a grid layout",
+            "view": "theme::components.blocks.events_list_home"
+        },
+        "blogs_list_home": {
+            "label": "Blogs List Home",
+            "description": "Display blog posts in a slider with title and description",
+            "view": "theme::components.blocks.blogs_list_home"
+        },
         "slider": {
             "label": "Slider Image",
             "description": "Slider Home page",

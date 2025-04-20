@@ -1,0 +1,66 @@
+<section class="tf__courses pt_{{ data.padding_top|default(110) }} xs_pt_{{ data.mobile_padding_top|default(75) }} pb_{{ data.padding_bottom|default(120) }} xs_pb_{{ data.mobile_padding_bottom|default(80) }}"
+    {% if data.background_image %}style="background: url({{ upload_url(data.background_image) }})"{% endif %}>
+    <div class="container">
+        {% if data.section_title or data.section_description %}
+            <div class="row">
+                <div class="col-xl-6 col-md-9 col-lg-7 m-auto">
+                    <div class="tf__section_heading heading_center mb_30">
+                        <h2>{{ data.section_title }}</h2>
+                        <p>{{ data.section_description }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        
+        <div class="row">
+            {% set query_params = {
+                limit: data.course_limit|default(6)
+            } %}
+            
+            {% if data.category %}
+                {% set query_params = query_params|merge({
+                    taxonomy: data.category
+                }) %}
+            {% endif %}
+            
+            {% set order_by_param = {} %}
+            
+            {% if data.order_by == 'views' %}
+                {% set order_by_param = {'views': data.order|default('DESC')} %}
+            {% elseif data.order_by == 'students' %}
+                {% set order_by_param = {'students': data.order|default('DESC')} %}
+            {% elseif data.order_by == 'rating' %}
+                {% set order_by_param = {'rating': data.order|default('DESC')} %}
+            {% else %}
+                {% set order_by_param = {'created_at': data.order|default('DESC')} %}
+            {% endif %}
+            
+            {% set query_params = query_params|merge({
+                order_by: order_by_param
+            }) %}
+            
+            {% set courses = get_posts('courses', query_params) %}
+            
+            {% if courses %}
+                {% for post in courses %}
+                    {% include 'theme::template-parts.course-item' %}
+                {% endfor %}
+            {% else %}
+                <div class="col-12 text-center">
+                    <div class="tf__courses_empty_state">
+                        <h3>{{ __('No courses found') }}</h3>
+                        <p>{{ __('There are no courses matching your criteria.') }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        
+        {% if data.show_all_button and data.view_all_text and data.view_all_url %}
+            <div class="row">
+                <div class="col-12 text-center mt_50">
+                    <a href="{{ data.view_all_url }}" class="tf__common_btn">{{ data.view_all_text }} <i class="far fa-long-arrow-right"></i></a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section> 

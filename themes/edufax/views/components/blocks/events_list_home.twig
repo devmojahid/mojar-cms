@@ -1,0 +1,84 @@
+<section class="tf__event pt_{{ data.padding_top|default(110) }} xs_pt_{{ data.mobile_padding_top|default(75) }} pb_{{ data.padding_bottom|default(120) }} xs_pb_{{ data.mobile_padding_bottom|default(80) }}"
+    {% if data.background_image %}style="background: url({{ upload_url(data.background_image) }})"{% endif %}>
+    <div class="container">
+        {% if data.section_title or data.section_description %}
+            <div class="row">
+                <div class="col-xl-6 col-md-9 col-lg-7 m-auto">
+                    <div class="tf__section_heading heading_center mb_35 xs_mb_30">
+                        <h2>{{ data.section_title }}</h2>
+                        <p>{{ data.section_description }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        
+        <div class="row">
+            {% set query_params = {
+                limit: data.event_limit|default(4)
+            } %}
+            
+            {% if data.category %}
+                {% set query_params = query_params|merge({
+                    taxonomy: data.category
+                }) %}
+            {% endif %}
+            
+            {% set order_by_param = {} %}
+            
+            {% if data.order_by == 'views' %}
+                {% set order_by_param = {'views': data.order|default('ASC')} %}
+            {% elseif data.order_by == 'created_at' %}
+                {% set order_by_param = {'created_at': data.order|default('ASC')} %}
+            {% else %}
+                {% set order_by_param = {'metas.start_date': data.order|default('ASC')} %}
+            {% endif %}
+            
+            {% set query_params = query_params|merge({
+                order_by: order_by_param
+            }) %}
+            
+            {% if data.date_filter == 'upcoming' %}
+                {% set query_params = query_params|merge({
+                    meta_query: {
+                        'start_date': {
+                            'operator': '>=',
+                            'value': "now"|date('Y-m-d')
+                        }
+                    }
+                }) %}
+            {% elseif data.date_filter == 'past' %}
+                {% set query_params = query_params|merge({
+                    meta_query: {
+                        'start_date': {
+                            'operator': '<',
+                            'value': "now"|date('Y-m-d')
+                        }
+                    }
+                }) %}
+            {% endif %}
+            
+            {% set events = get_posts('events', query_params) %}
+            
+            {% if events %}
+                {% for post in events %}
+                    {% include 'theme::template-parts.event-item' %}
+                {% endfor %}
+            {% else %}
+                <div class="col-12 text-center">
+                    <div class="tf__event_empty_state">
+                        <h3>{{ __('No events found') }}</h3>
+                        <p>{{ __('There are no events matching your criteria.') }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        
+        {% if data.show_all_button and data.view_all_text and data.view_all_url %}
+            <div class="row">
+                <div class="col-12 text-center mt_50">
+                    <a href="{{ data.view_all_url }}" class="tf__common_btn">{{ data.view_all_text }} <i class="far fa-long-arrow-right"></i></a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section> 
