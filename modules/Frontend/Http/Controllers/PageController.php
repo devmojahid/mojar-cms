@@ -11,6 +11,7 @@ use Juzaweb\Backend\Repositories\PostRepository;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\App;
+use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 
 class PageController extends FrontendController
 {
@@ -60,10 +61,9 @@ class PageController extends FrontendController
             return redirect()->route('home', [], 301);
         }
         
-        // Redirect to posts index if page is designated post page
+        // Use custom handler for post page
         if ($this->isPostPage($page)) {
-            // Use App::call to call PostController's index method
-            return App::call('Juzaweb\Frontend\Http\Controllers\PostController@index');
+            return $this->handlePostPage();
         }
 
         $theme = jw_theme_info();
@@ -104,6 +104,34 @@ class PageController extends FrontendController
     {
         return get_config('show_on_front') == 'page'
             && $page->id == get_config('post_page');
+    }
+
+    /**
+     * Handle the post page display
+     * 
+     * @return mixed
+     */
+    protected function handlePostPage()
+    {
+        // Force set the template to match what's expected
+        $this->template = 'twig';
+        
+        // Get blog posts similar to how PostController does it
+        $title = get_config('title');
+        
+        // Explicitly filter for posts content type, not pages
+        $posts = $this->postRepository
+            ->scopeQuery(fn($q) => $q->where(['type' => 'posts']))
+            ->frontendListPaginate(get_config('posts_per_page', 12));
+            
+        $posts->appends(request()?->query());
+        
+        // Transform using PostResourceCollection to get the correct data structure
+        $page = PostResourceCollection::make($posts)
+            ->response()
+            ->getData(true);
+        
+        return $this->view('theme::index', compact('page', 'title'));
     }
 
     /**
