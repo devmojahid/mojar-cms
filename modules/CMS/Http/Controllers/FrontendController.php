@@ -15,7 +15,7 @@ class FrontendController extends Controller
 {
     use ResponseMessage;
 
-    protected string $template;
+    protected string $template = '';
 
     public function callAction($method, $parameters): Response|string|View|\Inertia\Response
     {

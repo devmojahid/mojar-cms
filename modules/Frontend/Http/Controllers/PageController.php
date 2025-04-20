@@ -10,6 +10,7 @@ use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Repositories\PostRepository;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
+use Illuminate\Support\Facades\App;
 
 class PageController extends FrontendController
 {
@@ -58,6 +59,12 @@ class PageController extends FrontendController
         if ($this->isHomePage($page)) {
             return redirect()->route('home', [], 301);
         }
+        
+        // Redirect to posts index if page is designated post page
+        if ($this->isPostPage($page)) {
+            // Use App::call to call PostController's index method
+            return App::call('Juzaweb\Frontend\Http\Controllers\PostController@index');
+        }
 
         $theme = jw_theme_info();
         $params = $this->getPageParams($page, $slug, $request);
@@ -91,6 +98,12 @@ class PageController extends FrontendController
         return get_config('show_on_front')
             && $page->id == get_config('home_page')
             && Route::getCurrentRoute()?->getName() !== 'home';
+    }
+
+    protected function isPostPage(Post $page): bool
+    {
+        return get_config('show_on_front') == 'page'
+            && $page->id == get_config('post_page');
     }
 
     /**
