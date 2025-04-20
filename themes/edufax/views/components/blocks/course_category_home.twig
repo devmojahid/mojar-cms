@@ -15,9 +15,10 @@
         {% if data.categories %}
             <div class="row">
                 {% for category in data.categories %}
+                    {% set category_title_dynamic = get_taxonomy(category.category) %}
                     <div class="col-xl-3 col-sm-6 col-lg-4 {% if data.enable_animation %}wow fadeInUp{% endif %}" {% if data.enable_animation %}data-wow-duration="1s"{% endif %}>
-                        {% set category_title = category.custom_title ? category.custom_title : category.category.name|default('Category') %}
-                        {% set category_url = category.custom_url ? category.custom_url : (category.category ? category.category.url : '#') %}
+                        {% set category_title = category.custom_title ? category.custom_title : category_title_dynamic.name|default('Category') %}
+                        {% set category_url = category.custom_url ? category.custom_url : (category_title_dynamic ? category_title_dynamic.url : '#') %}
                         {% set color_class = category.color_scheme|default('category_1') %}
                         
                         <a href="{{ category_url }}" class="tf__category_item {{ color_class }}">
