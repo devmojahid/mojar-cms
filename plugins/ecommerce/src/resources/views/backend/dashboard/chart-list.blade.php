@@ -6,7 +6,7 @@
                 <h3 class="card-title">{{ trans('ecomm::content.monthly_sales') }}</h3>
             </div>
             <div class="card-body">
-                <div id="chart-monthly-sales"></div>
+                <div id="chart-monthly-sales" style="height: 240px;"></div>
             </div>
         </div>
     </div>
@@ -16,7 +16,7 @@
                 <h3 class="card-title">{{ trans('ecomm::content.revenue_trend') }}</h3>
             </div>
             <div class="card-body">
-                <div id="chart-revenue-trend"></div>
+                <div id="chart-revenue-trend" style="height: 240px;"></div>
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
                 <h3 class="card-title">{{ trans('ecomm::content.order_status') }}</h3>
             </div>
             <div class="card-body">
-                <div id="chart-order-status"></div>
+                <div id="chart-order-status" style="height: 240px;"></div>
             </div>
         </div>
     </div>

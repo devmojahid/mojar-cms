@@ -84,7 +84,7 @@ $(function () {
 
 
     //=======TEAM SLIDER======
-    $('.team_slider').slick({
+    $('.team_slider_old').slick({
         slidesToShow: 4,
         slidesToScroll: 1,
         autoplay: true,
@@ -127,7 +127,7 @@ $(function () {
     });
 
     //=======TESTI SLIDER======
-    $('.testi_slider').slick({
+    $('.testi_slider_old').slick({
         slidesToShow: 2,
         slidesToScroll: 1,
         autoplay: false,
@@ -173,7 +173,7 @@ $(function () {
     });
 
     //=======BLOG SLIDER======
-    $('.blog_slider').slick({
+    $('.blog_slider_old').slick({
         slidesToShow: 3,
         slidesToScroll: 1,
         autoplay: true,
