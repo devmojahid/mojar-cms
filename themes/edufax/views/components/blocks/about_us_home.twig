@@ -1,0 +1,38 @@
+<section class="tf__about_us pt_{{ data.padding_top|default(120) }} xs_pt_{{ data.mobile_padding_top|default(80) }} pb_{{ data.padding_bottom|default(120) }} xs_pb_{{ data.mobile_padding_bottom|default(80) }}"
+    {% if data.background_image %}style="background: url({{ upload_url(data.background_image) }})"{% endif %}>
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-xl-5 col-md-9 col-lg-6 {% if data.enable_animation %}wow fadeInLeft{% endif %}" {% if data.enable_animation %}data-wow-duration="1s"{% endif %}>
+                <div class="tf__about_us_img">
+                    <div class="img_1">
+                        <img src="{{ upload_url(data.image_1) }}" alt="about us" class="img-fluid w-100">
+                    </div>
+                    <div class="img_2">
+                        <img src="{{ upload_url(data.image_2) }}" alt="about us" class="img-fluid w-100">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 {% if data.enable_animation %}wow fadeInRight{% endif %}" {% if data.enable_animation %}data-wow-duration="1s"{% endif %}>
+                <div class="tf__about_us_text">
+                    <div class="tf__section_heading mb_25">
+                        <h2>{{ data.title }}</h2>
+                    </div>
+                    <p>{{ data.description }}</p>
+                    {% if data.features %}
+                        <ul class="d-flex flex-wrap">
+                            {% for feature in data.features %}
+                                <li>
+                                    <span>
+                                        <i class="{{ feature.icon }}"></i>
+                                    </span>
+                                    <h4>{{ feature.title }}</h4>
+                                    <p>{{ feature.description }}</p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 

@@ -79,6 +79,11 @@
             "description": "Display course categories in a grid layout with icons",
             "view": "theme::components.blocks.course_category_home"
         },
+        "about_us_home": {
+            "label": "About Us Home",
+            "description": "About us section with images and features",
+            "view": "theme::components.blocks.about_us_home"
+        },
         "slider": {
             "label": "Slider Image",
             "description": "Slider Home page",

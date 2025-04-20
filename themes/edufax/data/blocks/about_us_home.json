@@ -1,0 +1,128 @@
+{
+    "label": "About Us Home",
+    "description": "About us section with images and features",
+    "form": [
+        {
+            "type": "image",
+            "name": "background_image",
+            "label": "Background Image",
+            "data": {
+                "value": "images/about_section_bg.jpg"
+            }
+        },
+        {
+            "type": "image",
+            "name": "image_1",
+            "label": "Image 1",
+            "data": {
+                "value": "images/about-_img_1.jpg"
+            }
+        },
+        {
+            "type": "image",
+            "name": "image_2",
+            "label": "Image 2",
+            "data": {
+                "value": "images/about-_img_2.jpg"
+            }
+        },
+        {
+            "type": "text",
+            "name": "title",
+            "label": "Section Title",
+            "data": {
+                "value": "We do great things together"
+            }
+        },
+        {
+            "type": "textarea",
+            "name": "description",
+            "label": "Description",
+            "data": {
+                "value": "Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius."
+            }
+        },
+        {
+            "type": "repeater",
+            "name": "features",
+            "label": "Features",
+            "fields": [
+                {
+                    "type": "text",
+                    "name": "icon",
+                    "label": "Icon Class",
+                    "description": "FontAwesome icon class (e.g. fas fa-star)"
+                },
+                {
+                    "type": "text",
+                    "name": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "text",
+                    "name": "description",
+                    "label": "Description"
+                }
+            ],
+            "options": {
+                "min_items": 1,
+                "max_items": 4,
+                "add_button_text": "Add Feature",
+                "remove_button_text": "Remove Feature",
+                "value": [
+                    {
+                        "icon": "fas fa-star",
+                        "title": "Build your career",
+                        "description": "Online course quickly from anywhere."
+                    },
+                    {
+                        "icon": "fas fa-pencil-ruler",
+                        "title": "Grow your skill",
+                        "description": "Online course quickly from anywhere."
+                    }
+                ]
+            }
+        },
+        {
+            "type": "text",
+            "name": "padding_top",
+            "label": "Top Padding",
+            "data": {
+                "value": "120"
+            }
+        },
+        {
+            "type": "text",
+            "name": "padding_bottom",
+            "label": "Bottom Padding",
+            "data": {
+                "value": "120"
+            }
+        },
+        {
+            "type": "text",
+            "name": "mobile_padding_top",
+            "label": "Mobile Top Padding",
+            "data": {
+                "value": "80"
+            }
+        },
+        {
+            "type": "text",
+            "name": "mobile_padding_bottom",
+            "label": "Mobile Bottom Padding",
+            "data": {
+                "value": "80"
+            }
+        },
+        {
+            "type": "checkbox_json",
+            "name": "enable_animation",
+            "label": "Enable Animation",
+            "description": "Enable fade in animation effect",
+            "data": {
+                "value": 1
+            }
+        }
+    ]
+} 
