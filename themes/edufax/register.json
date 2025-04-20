@@ -141,7 +141,7 @@
         },
         "testimonial_area": {
             "label": "Testimonial Area",
-            "description": "Testimonial Area",
+            "description": "Display testimonials with slider",
             "view": "theme::components.blocks.testimonial_area"
         },
         "certificate_area": {

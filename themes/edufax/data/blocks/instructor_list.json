@@ -8,8 +8,7 @@
             "label": "Display Style",
             "data": {
                 "options": {
-                    "style1": "Style 1 (With Background)",
-                    "style2": "Style 2 (Grid View)"
+                    "style1": "Style 1 (With Background)"
                 },
                 "value": "style1"
             }
@@ -120,15 +119,6 @@
             "name": "enable_slider",
             "label": "Enable Slider (Style 1 only)",
             "description": "Enable slider for style 1",
-            "data": {
-                "value": 1
-            }
-        },
-        {
-            "type": "checkbox_json",
-            "name": "show_pagination",
-            "label": "Show Pagination (Style 2 only)",
-            "description": "Show pagination for style 2",
             "data": {
                 "value": 1
             }
