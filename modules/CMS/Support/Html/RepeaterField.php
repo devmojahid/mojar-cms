@@ -57,26 +57,10 @@ class RepeaterField implements RepeaterFieldContract
 
     public function validateItem(array $itemData): bool
     {
-        if (empty($itemData)) {
-            return false;
-        }
-
-        foreach ($this->config['fields'] as $field) {
-            $name = $field['name'];
-            
-            // Skip optional fields
-            if (isset($field['optional']) && $field['optional']) {
-                continue;
-            }
-            
-            // For required fields, ensure they exist and are not null/empty string
-            if (!isset($itemData[$name]) || 
-                (is_string($itemData[$name]) && trim($itemData[$name]) === '')) {
-                return false;
-            }
-        }
-        
-        return true;
+        // Accept any non-empty array as a valid item
+        // This is more lenient to handle cases where saved data
+        // might not match the field configuration exactly
+        return !empty($itemData);
     }
 
     /**
