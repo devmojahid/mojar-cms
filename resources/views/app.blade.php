@@ -31,7 +31,7 @@
                 <div class="mojar__menuLeft__logo__container">
                     <a href="/{{ config('mojar.admin_prefix') }}">
                         <div class="mojar__menuLeft__logo">
-                            <img src="{{ asset('jw-styles/mojar/images/logo.svg') }}" class="mr-2" alt="Mojar">
+                            <img src="{{ asset('jw-styles/mojar/images/logo.png') }}" class="mr-2" alt="Mojar">
                             <div class="mojar__menuLeft__logo__name">Mojar</div>
                             <div class="mojar__menuLeft__logo__descr">Cms</div>
                         </div>
