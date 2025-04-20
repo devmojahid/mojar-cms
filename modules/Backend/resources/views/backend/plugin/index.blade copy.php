@@ -88,7 +88,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-3">
                                                 <img src="{{ $plugin->screenshot }}" alt="{{ $plugin->name }}"
-                                                    class="rounded">
+                                                    class="rounded" style="height: 122px; object-fit: contain;">
                                             </div>
                                             <div class="col">
                                                 <h3 class="card-title mb-1">
