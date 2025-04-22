@@ -274,7 +274,7 @@ return [
         /**
          * API URL for update system
          */
-        'url' => env('JW_API_URL', 'http://mojar-cms.test/api'),
+        'url' => env('JW_API_URL', 'https://cms.mojarsoft.com/api'),
     ],
 
     /**
