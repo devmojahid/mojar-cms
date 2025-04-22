@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 04, 2025 at 07:13 PM
--- Server version: 8.0.30
--- PHP Version: 8.2.27
+-- Generation Time: Apr 22, 2025 at 07:17 PM
+-- Server version: 10.6.21-MariaDB
+-- PHP Version: 8.3.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,8 +18,26 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `mojar_cms`
+-- Database: `mojarsof_edufax_laravel`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app_app_translations`
+--
+
+CREATE TABLE `app_app_translations` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
+  `locale` varchar(50) NOT NULL,
+  `group` varchar(50) NOT NULL,
+  `namespace` varchar(50) NOT NULL,
+  `key` text NOT NULL,
+  `value` text DEFAULT NULL,
+  `object_type` varchar(50) DEFAULT NULL,
+  `object_key` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
 
@@ -28,8 +46,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `app_attributes` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(150) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -41,10 +59,10 @@ CREATE TABLE `app_attributes` (
 --
 
 CREATE TABLE `app_attribute_values` (
-  `id` bigint UNSIGNED NOT NULL,
-  `value` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `value_type` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `attribute_id` bigint UNSIGNED NOT NULL
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `value` varchar(150) DEFAULT NULL,
+  `value_type` varchar(150) DEFAULT NULL,
+  `attribute_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -54,18 +72,18 @@ CREATE TABLE `app_attribute_values` (
 --
 
 CREATE TABLE `app_comments` (
-  `id` bigint UNSIGNED NOT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `email` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `website` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `object_id` bigint UNSIGNED NOT NULL COMMENT 'Post type ID',
-  `object_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Post type',
-  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `email` varchar(150) DEFAULT NULL,
+  `name` varchar(150) DEFAULT NULL,
+  `website` varchar(150) DEFAULT NULL,
+  `content` varchar(300) NOT NULL,
+  `object_id` bigint(20) UNSIGNED NOT NULL COMMENT 'Post type ID',
+  `object_type` varchar(50) NOT NULL COMMENT 'Post type',
+  `status` varchar(50) NOT NULL DEFAULT 'pending',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `json_metas` json DEFAULT NULL
+  `json_metas` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`json_metas`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -73,15 +91,17 @@ CREATE TABLE `app_comments` (
 --
 
 INSERT INTO `app_comments` (`id`, `user_id`, `email`, `name`, `website`, `content`, `object_id`, `object_type`, `status`, `created_at`, `updated_at`, `json_metas`) VALUES
-(1, 1, NULL, NULL, NULL, 'hello world', 3, 'posts', 'approved', '2025-02-01 07:42:05', '2025-03-21 05:52:06', NULL),
-(2, 1, NULL, NULL, NULL, 'fdadffd', 3, 'posts', 'pending', '2025-02-01 07:42:34', '2025-02-01 07:42:34', NULL),
-(3, 1, NULL, NULL, NULL, 'fdfdsfsdf', 3, 'posts', 'approved', '2025-02-01 07:44:22', '2025-03-01 23:39:01', NULL),
-(5, 1, NULL, NULL, NULL, 'eqdsd', 82, 'courses', 'approved', '2025-03-21 05:20:16', '2025-03-21 07:19:47', '{\"rating\": \"3\"}'),
-(6, 1, NULL, NULL, NULL, 'vzvzxcv', 79, 'posts', 'approved', '2025-03-21 05:51:13', '2025-03-21 05:52:21', NULL),
-(7, 1, NULL, NULL, NULL, 'iyhjkm;l', 79, 'posts', 'approved', '2025-03-21 05:52:32', '2025-03-21 05:52:44', NULL),
-(8, 1, NULL, NULL, NULL, 'Reviews', 82, 'courses', 'approved', '2025-03-21 07:19:07', '2025-03-21 07:19:47', '{\"rating\": \"5\"}'),
-(9, 1, NULL, NULL, NULL, 'sadasd', 82, 'courses', 'pending', '2025-03-21 07:45:35', '2025-03-21 07:45:35', '{\"rating\": \"3\"}'),
-(10, 1, NULL, NULL, NULL, 'sadsad', 79, 'posts', 'pending', '2025-03-22 09:33:31', '2025-03-22 09:33:31', NULL);
+(11, 1, NULL, NULL, NULL, 'Commodo iure eius la', 162, 'courses', 'approved', '2025-04-09 19:15:30', '2025-04-09 19:15:43', '{\"rating\":\"4\"}'),
+(12, 1, NULL, NULL, NULL, 'Elit vitae eaque pl', 162, 'courses', 'approved', '2025-04-09 19:16:07', '2025-04-09 19:16:18', '{\"rating\":\"5\"}'),
+(13, 1, NULL, NULL, NULL, 'Cillum veniam et la', 160, 'courses', 'approved', '2025-04-09 19:16:39', '2025-04-09 19:16:47', '{\"rating\":\"5\"}'),
+(14, 1, NULL, NULL, NULL, 'Voluptatem libero en', 158, 'courses', 'pending', '2025-04-09 19:17:02', '2025-04-09 19:17:02', '{\"rating\":\"5\"}'),
+(15, 1, NULL, NULL, NULL, 'Accusantium voluptat', 142, 'posts', 'approved', '2025-04-09 19:18:34', '2025-04-09 19:18:54', NULL),
+(16, 1, NULL, NULL, NULL, 'Accusantium exercita', 142, 'posts', 'approved', '2025-04-09 19:18:42', '2025-04-09 19:18:54', NULL),
+(17, 1, NULL, NULL, NULL, 'Qui itaque provident', 140, 'posts', 'approved', '2025-04-09 19:19:04', '2025-04-09 19:19:12', NULL),
+(18, 1, NULL, NULL, NULL, 'Consequatur provide', 137, 'posts', 'approved', '2025-04-09 19:19:29', '2025-04-09 19:20:10', NULL),
+(19, 1, NULL, NULL, NULL, 'Porro mollitia et ea', 134, 'posts', 'approved', '2025-04-09 19:19:49', '2025-04-09 19:20:10', NULL),
+(20, 1, NULL, NULL, NULL, 'Eveniet illo anim m', 136, 'posts', 'approved', '2025-04-09 19:20:00', '2025-04-09 19:20:10', NULL),
+(21, 1, NULL, NULL, NULL, 'Sapiente dolor recus', 136, 'posts', 'pending', '2025-04-09 19:20:22', '2025-04-09 19:20:22', NULL);
 
 -- --------------------------------------------------------
 
@@ -90,9 +110,9 @@ INSERT INTO `app_comments` (`id`, `user_id`, `email`, `name`, `website`, `conten
 --
 
 CREATE TABLE `app_configs` (
-  `id` bigint UNSIGNED NOT NULL,
-  `code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `code` varchar(100) NOT NULL,
+  `value` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -100,14 +120,14 @@ CREATE TABLE `app_configs` (
 --
 
 INSERT INTO `app_configs` (`id`, `code`, `value`) VALUES
-(1, 'title', 'JuzaCMS - Laravel CMS for Your Project'),
-(2, 'description', 'Juzacms is a Content Management System (CMS) and web platform whose sole purpose is to make your development workflow simple again.'),
+(1, 'title', 'Mojar - Laravel CMS for Your Project'),
+(2, 'description', 'Mojar is a Content Management System (CMS) and web platform whose sole purpose is to make your development workflow simple again.'),
 (3, 'author_name', 'Mojar Team'),
 (4, 'user_registration', '1'),
-(5, 'user_verification', '1'),
-(6, 'logo', '2025/01/15/logo.png'),
-(7, 'icon', NULL),
-(8, 'sitename', 'JuzaCMS'),
+(5, 'user_verification', '0'),
+(6, 'logo', '2025/04/20/logo.png'),
+(7, 'icon', '2025/04/20/favicon-1.png'),
+(8, 'sitename', 'Mojar'),
 (9, 'google_analytics', NULL),
 (10, 'timezone', 'UTC'),
 (11, 'date_format', 'F j, Y'),
@@ -197,7 +217,12 @@ INSERT INTO `app_configs` (`id`, `code`, `value`) VALUES
 (96, 'lms_my_courses_page', NULL),
 (97, 'lms_checkout_page', NULL),
 (98, 'lms_thank_you_page', NULL),
-(99, 'lms_instructor_page', NULL);
+(99, 'lms_instructor_page', NULL),
+(100, 'show_on_front', 'page'),
+(101, 'home_page', '11'),
+(102, 'posts_per_page', '12'),
+(103, 'posts_per_rss', '10'),
+(104, 'post_page', '133');
 
 -- --------------------------------------------------------
 
@@ -206,13 +231,13 @@ INSERT INTO `app_configs` (`id`, `code`, `value`) VALUES
 --
 
 CREATE TABLE `app_contact_form_contacts` (
-  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `subject` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `message` text COLLATE utf8mb4_unicode_ci,
-  `metas` json DEFAULT NULL,
-  `site_id` bigint UNSIGNED NOT NULL DEFAULT '0',
+  `id` char(36) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `subject` varchar(150) NOT NULL,
+  `message` text DEFAULT NULL,
+  `metas` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`metas`)),
+  `site_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -235,13 +260,13 @@ INSERT INTO `app_contact_form_contacts` (`id`, `name`, `email`, `subject`, `mess
 --
 
 CREATE TABLE `app_dev_tool_cms_versions` (
-  `id` bigint UNSIGNED NOT NULL,
-  `version` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `file_path` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `download_url` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '1',
-  `changelog` text COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `version` varchar(150) NOT NULL,
+  `description` text DEFAULT NULL,
+  `file_path` varchar(150) DEFAULT NULL,
+  `download_url` varchar(150) DEFAULT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `changelog` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -260,21 +285,21 @@ INSERT INTO `app_dev_tool_cms_versions` (`id`, `version`, `description`, `file_p
 --
 
 CREATE TABLE `app_dev_tool_marketplace_plugins` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `thumbnail` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `thumbnail_path` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `banner` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `banner_path` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `url` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `file_path` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `is_paid` tinyint(1) NOT NULL DEFAULT '0',
-  `price` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `is_featured` tinyint(1) NOT NULL DEFAULT '0',
-  `sort_order` int NOT NULL DEFAULT '0',
-  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `title` varchar(150) NOT NULL,
+  `description` text DEFAULT NULL,
+  `thumbnail` varchar(150) DEFAULT NULL,
+  `thumbnail_path` varchar(150) DEFAULT NULL,
+  `banner` varchar(150) DEFAULT NULL,
+  `banner_path` varchar(150) DEFAULT NULL,
+  `url` varchar(150) DEFAULT NULL,
+  `file_path` varchar(150) DEFAULT NULL,
+  `is_paid` tinyint(1) NOT NULL DEFAULT 0,
+  `price` varchar(150) DEFAULT NULL,
+  `is_featured` tinyint(1) NOT NULL DEFAULT 0,
+  `sort_order` int(11) NOT NULL DEFAULT 0,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -293,21 +318,21 @@ INSERT INTO `app_dev_tool_marketplace_plugins` (`id`, `name`, `title`, `descript
 --
 
 CREATE TABLE `app_dev_tool_marketplace_themes` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `screenshot` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `screenshot_path` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `banner` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `banner_path` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `url` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `file_path` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `is_paid` tinyint(1) NOT NULL DEFAULT '0',
-  `price` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `is_featured` tinyint(1) NOT NULL DEFAULT '0',
-  `sort_order` int NOT NULL DEFAULT '0',
-  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `title` varchar(150) NOT NULL,
+  `description` text DEFAULT NULL,
+  `screenshot` varchar(150) DEFAULT NULL,
+  `screenshot_path` varchar(150) DEFAULT NULL,
+  `banner` varchar(150) DEFAULT NULL,
+  `banner_path` varchar(150) DEFAULT NULL,
+  `url` varchar(150) DEFAULT NULL,
+  `file_path` varchar(150) DEFAULT NULL,
+  `is_paid` tinyint(1) NOT NULL DEFAULT 0,
+  `price` varchar(150) DEFAULT NULL,
+  `is_featured` tinyint(1) NOT NULL DEFAULT 0,
+  `sort_order` int(11) NOT NULL DEFAULT 0,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -319,16 +344,16 @@ CREATE TABLE `app_dev_tool_marketplace_themes` (
 --
 
 CREATE TABLE `app_dev_tool_package_versions` (
-  `id` bigint UNSIGNED NOT NULL,
-  `package_name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `package_type` enum('plugin','theme') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `version` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `file_path` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `download_url` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '1',
-  `changelog` text COLLATE utf8mb4_unicode_ci,
-  `requires_cms_version` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `package_name` varchar(150) NOT NULL,
+  `package_type` enum('plugin','theme') NOT NULL,
+  `version` varchar(150) NOT NULL,
+  `description` text DEFAULT NULL,
+  `file_path` varchar(150) DEFAULT NULL,
+  `download_url` varchar(150) DEFAULT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `changelog` text DEFAULT NULL,
+  `requires_cms_version` varchar(150) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -347,11 +372,11 @@ INSERT INTO `app_dev_tool_package_versions` (`id`, `package_name`, `package_type
 --
 
 CREATE TABLE `app_discounts` (
-  `id` bigint UNSIGNED NOT NULL,
-  `code` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tbl` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tbl_column` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `post_id` bigint UNSIGNED DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `code` varchar(150) NOT NULL,
+  `tbl` varchar(150) NOT NULL,
+  `tbl_column` varchar(150) NOT NULL,
+  `post_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -363,19 +388,19 @@ CREATE TABLE `app_discounts` (
 --
 
 CREATE TABLE `app_ecomm_addons` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `version` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `author` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `author_email` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `author_url` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `enabled` tinyint(1) NOT NULL DEFAULT '0',
-  `is_premium` tinyint(1) NOT NULL DEFAULT '0',
-  `license_key` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `license_email` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `metadata` json DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `slug` varchar(150) NOT NULL,
+  `description` varchar(150) DEFAULT NULL,
+  `version` varchar(150) DEFAULT NULL,
+  `author` varchar(150) DEFAULT NULL,
+  `author_email` varchar(150) DEFAULT NULL,
+  `author_url` varchar(150) DEFAULT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT 0,
+  `is_premium` tinyint(1) NOT NULL DEFAULT 0,
+  `license_key` varchar(150) DEFAULT NULL,
+  `license_email` varchar(150) DEFAULT NULL,
+  `metadata` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`metadata`)),
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -387,14 +412,14 @@ CREATE TABLE `app_ecomm_addons` (
 --
 
 CREATE TABLE `app_ecomm_carts` (
-  `id` bigint UNSIGNED NOT NULL,
-  `code` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `items` json DEFAULT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `discount` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `discount_codes` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `discount_target_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `site_id` bigint UNSIGNED NOT NULL DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `code` char(36) NOT NULL,
+  `items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`items`)),
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `discount` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `discount_codes` varchar(150) DEFAULT NULL,
+  `discount_target_type` varchar(50) DEFAULT NULL,
+  `site_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -404,14 +429,7 @@ CREATE TABLE `app_ecomm_carts` (
 --
 
 INSERT INTO `app_ecomm_carts` (`id`, `code`, `items`, `user_id`, `discount`, `discount_codes`, `discount_target_type`, `site_id`, `created_at`, `updated_at`) VALUES
-(1, '1915fce1-2458-4c04-95ae-694059c8ed5d', '\"{\\\"products_15\\\":{\\\"post_id\\\":15,\\\"type\\\":\\\"products\\\",\\\"quantity\\\":1,\\\"price\\\":400,\\\"title\\\":\\\"Product 1\\\",\\\"thumbnail\\\":\\\"2025\\\\/02\\\\/14\\\\/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg\\\",\\\"sku_code\\\":\\\"df32312\\\",\\\"barcode\\\":\\\"3434314\\\",\\\"compare_price\\\":300}}\"', 1, '0.00', NULL, NULL, 0, '2025-02-13 23:59:17', '2025-02-13 23:59:17'),
-(2, 'fce979fe-b25b-47d2-89ab-9cb16f9e9790', '\"{\\\"products_15\\\":{\\\"post_id\\\":15,\\\"type\\\":\\\"products\\\",\\\"quantity\\\":1,\\\"price\\\":400,\\\"title\\\":\\\"Product 1\\\",\\\"thumbnail\\\":\\\"2025\\\\/02\\\\/14\\\\/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg\\\",\\\"sku_code\\\":\\\"df32312\\\",\\\"barcode\\\":\\\"3434314\\\",\\\"compare_price\\\":300}}\"', 1, '0.00', NULL, NULL, 0, '2025-02-14 00:01:03', '2025-02-14 00:01:03'),
-(3, '57badcca-16de-443e-a571-9886e493ba0d', '\"{\\\"products_15\\\":{\\\"post_id\\\":15,\\\"type\\\":\\\"products\\\",\\\"quantity\\\":1,\\\"price\\\":400,\\\"title\\\":\\\"Product 1\\\",\\\"thumbnail\\\":\\\"2025\\\\/02\\\\/14\\\\/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg\\\",\\\"sku_code\\\":\\\"df32312\\\",\\\"barcode\\\":\\\"3434314\\\",\\\"compare_price\\\":300}}\"', 1, '0.00', NULL, NULL, 0, '2025-02-14 00:01:18', '2025-02-14 00:01:18'),
-(4, '0794eba8-b298-4196-a553-85c8f575a248', '\"{\\\"products_15\\\":{\\\"post_id\\\":15,\\\"type\\\":\\\"products\\\",\\\"quantity\\\":1,\\\"price\\\":400,\\\"title\\\":\\\"Product 1\\\",\\\"thumbnail\\\":\\\"2025\\\\/02\\\\/14\\\\/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg\\\",\\\"sku_code\\\":\\\"df32312\\\",\\\"barcode\\\":\\\"3434314\\\",\\\"compare_price\\\":300}}\"', 1, '0.00', NULL, NULL, 0, '2025-02-14 00:02:15', '2025-02-14 00:02:15'),
-(5, 'dcdff9e6-e21e-4c34-b5f1-edd06c47cf45', '\"{\\\"products_15\\\":{\\\"post_id\\\":15,\\\"type\\\":\\\"products\\\",\\\"quantity\\\":1,\\\"price\\\":400,\\\"title\\\":\\\"Product 1\\\",\\\"thumbnail\\\":\\\"2025\\\\/02\\\\/14\\\\/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg\\\",\\\"sku_code\\\":\\\"df32312\\\",\\\"barcode\\\":\\\"3434314\\\",\\\"compare_price\\\":300}}\"', 1, '0.00', NULL, NULL, 0, '2025-02-14 00:03:40', '2025-02-14 00:03:40'),
-(70, '323da9a8-be92-4e5f-877a-47037a9ba630', '\"{\\\"products_15\\\":{\\\"post_id\\\":15,\\\"type\\\":\\\"products\\\",\\\"quantity\\\":1,\\\"price\\\":400,\\\"title\\\":\\\"Product 1\\\",\\\"thumbnail\\\":\\\"2025\\\\/02\\\\/14\\\\/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg\\\",\\\"sku_code\\\":\\\"df32312\\\",\\\"barcode\\\":\\\"3434314\\\",\\\"compare_price\\\":300}}\"', 1, '0.00', NULL, NULL, 0, '2025-02-24 11:35:29', '2025-02-24 11:35:29'),
-(85, '1f21eaea-3556-485e-8e08-947fbbd861e0', '\"{\\\"events_21\\\":{\\\"post_id\\\":21,\\\"type\\\":\\\"events\\\",\\\"quantity\\\":2,\\\"price\\\":900,\\\"title\\\":\\\"Event 2\\\",\\\"thumbnail\\\":\\\"2025\\\\/02\\\\/14\\\\/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg\\\",\\\"sku_code\\\":\\\"\\\",\\\"barcode\\\":\\\"\\\",\\\"compare_price\\\":0}}\"', 1, '0.00', NULL, NULL, 0, '2025-03-01 22:57:08', '2025-03-01 23:13:08'),
-(177, 'a2acaa75-fadc-4398-9f1f-1a5f2c24aa21', '\"{\\\"events_21\\\":{\\\"post_id\\\":21,\\\"type\\\":\\\"events\\\",\\\"quantity\\\":1,\\\"price\\\":400,\\\"title\\\":\\\"Event 2\\\",\\\"thumbnail\\\":\\\"2025\\\\/02\\\\/14\\\\/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg\\\",\\\"sku_code\\\":\\\"\\\",\\\"barcode\\\":\\\"\\\",\\\"compare_price\\\":0,\\\"line_price\\\":400},\\\"courses_80\\\":{\\\"post_id\\\":80,\\\"type\\\":\\\"courses\\\",\\\"quantity\\\":1,\\\"price\\\":35,\\\"title\\\":\\\"dfgdfgdf\\\",\\\"thumbnail\\\":\\\"\\\",\\\"sku_code\\\":\\\"\\\",\\\"barcode\\\":\\\"\\\",\\\"compare_price\\\":65,\\\"line_price\\\":35},\\\"courses_82\\\":{\\\"post_id\\\":82,\\\"type\\\":\\\"courses\\\",\\\"quantity\\\":1,\\\"price\\\":0,\\\"title\\\":\\\"fsdfdsfds\\\",\\\"thumbnail\\\":\\\"2025\\\\/03\\\\/06\\\\/features-product-shape01.png\\\",\\\"sku_code\\\":\\\"\\\",\\\"barcode\\\":\\\"\\\",\\\"compare_price\\\":0,\\\"line_price\\\":0},\\\"products_16\\\":{\\\"post_id\\\":16,\\\"type\\\":\\\"products\\\",\\\"quantity\\\":2,\\\"price\\\":500,\\\"title\\\":\\\"Product 2\\\",\\\"thumbnail\\\":\\\"2025\\\\/02\\\\/14\\\\/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg\\\",\\\"sku_code\\\":\\\"qwew32\\\",\\\"barcode\\\":\\\"dfdf\\\",\\\"compare_price\\\":300,\\\"line_price\\\":1000}}\"', 1, '0.00', NULL, NULL, 0, '2025-03-06 23:39:09', '2025-03-29 13:11:44');
+(204, 'beec58b1-e4e0-4dde-bda0-613a422f7482', '\"{\\\"courses_162\\\":{\\\"post_id\\\":162,\\\"type\\\":\\\"courses\\\",\\\"quantity\\\":1,\\\"price\\\":120,\\\"title\\\":\\\"Project Management Principles & Practices\\\",\\\"thumbnail\\\":\\\"2025\\\\\\/04\\\\\\/08\\\\\\/courses-img-6.jpg\\\",\\\"sku_code\\\":\\\"\\\",\\\"barcode\\\":\\\"\\\",\\\"compare_price\\\":230,\\\"line_price\\\":120}}\"', NULL, 0.00, NULL, NULL, 0, '2025-04-17 17:17:44', '2025-04-17 17:17:44');
 
 -- --------------------------------------------------------
 
@@ -420,20 +438,20 @@ INSERT INTO `app_ecomm_carts` (`id`, `code`, `items`, `user_id`, `discount`, `di
 --
 
 CREATE TABLE `app_ecomm_currencies` (
-  `id` bigint UNSIGNED NOT NULL,
-  `code` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `symbol` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `exchange_rate` double(8,2) NOT NULL DEFAULT '1.00',
-  `is_default` tinyint(1) NOT NULL DEFAULT '0',
-  `is_enabled` tinyint(1) NOT NULL DEFAULT '1',
-  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `symbol_position` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `thousand_separator` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `decimal_separator` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `decimal_place` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `decimal_point` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `currency_format` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `custom_price_format` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `code` varchar(150) DEFAULT NULL,
+  `symbol` varchar(150) DEFAULT NULL,
+  `exchange_rate` double(8,2) NOT NULL DEFAULT 1.00,
+  `is_default` tinyint(1) NOT NULL DEFAULT 0,
+  `is_enabled` tinyint(1) NOT NULL DEFAULT 1,
+  `name` varchar(150) DEFAULT NULL,
+  `symbol_position` varchar(150) DEFAULT NULL,
+  `thousand_separator` varchar(150) DEFAULT NULL,
+  `decimal_separator` varchar(150) DEFAULT NULL,
+  `decimal_place` varchar(150) DEFAULT NULL,
+  `decimal_point` varchar(150) DEFAULT NULL,
+  `currency_format` varchar(150) DEFAULT NULL,
+  `custom_price_format` varchar(150) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -443,10 +461,10 @@ CREATE TABLE `app_ecomm_currencies` (
 --
 
 INSERT INTO `app_ecomm_currencies` (`id`, `code`, `symbol`, `exchange_rate`, `is_default`, `is_enabled`, `name`, `symbol_position`, `thousand_separator`, `decimal_separator`, `decimal_place`, `decimal_point`, `currency_format`, `custom_price_format`, `created_at`, `updated_at`) VALUES
-(1, 'BD', '৳', 120.00, 0, 1, 'Taka', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-01 22:38:01', '2025-04-02 11:50:14'),
-(2, 'IN', '₹', 90.00, 0, 1, 'Rupy', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-01 22:44:02', '2025-04-02 11:50:14'),
-(3, 'PK', 'Rs', 140.00, 0, 1, 'Rupy', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-02 09:24:12', '2025-04-02 11:50:14'),
-(4, 'Dollar', '$', 1.00, 0, 1, 'USD', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-04-02 11:21:31', '2025-04-02 11:50:14');
+(1, 'BD', '৳', 120.00, 0, 1, 'Taka', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-01 22:38:01', '2025-04-09 19:17:49'),
+(2, 'IN', '₹', 90.00, 0, 1, 'Rupy', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-01 22:44:02', '2025-04-09 19:17:49'),
+(3, 'PK', 'Rs', 140.00, 0, 1, 'Rupy', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-02 09:24:12', '2025-04-09 19:17:49'),
+(4, 'Dollar', '$', 1.00, 0, 1, 'USD', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-04-02 11:21:31', '2025-04-09 19:17:49');
 
 -- --------------------------------------------------------
 
@@ -455,15 +473,15 @@ INSERT INTO `app_ecomm_currencies` (`id`, `code`, `symbol`, `exchange_rate`, `is
 --
 
 CREATE TABLE `app_ecom_download_links` (
-  `id` bigint UNSIGNED NOT NULL,
-  `uuid` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `url` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `site_id` bigint UNSIGNED NOT NULL DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` char(36) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `url` varchar(150) NOT NULL,
+  `site_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `product_id` bigint UNSIGNED NOT NULL,
-  `variant_id` bigint UNSIGNED NOT NULL
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `variant_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -473,17 +491,17 @@ CREATE TABLE `app_ecom_download_links` (
 --
 
 CREATE TABLE `app_email_lists` (
-  `id` bigint UNSIGNED NOT NULL,
-  `email` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `template_id` bigint UNSIGNED DEFAULT NULL,
-  `params` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending' COMMENT 'pending => processing => (success || error)',
-  `priority` int NOT NULL DEFAULT '1',
-  `error` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `template_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `params` text DEFAULT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'pending' COMMENT 'pending => processing => (success || error)',
+  `priority` int(11) NOT NULL DEFAULT 1,
+  `error` text DEFAULT NULL,
+  `data` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `template_code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `template_code` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -501,19 +519,19 @@ INSERT INTO `app_email_lists` (`id`, `email`, `template_id`, `params`, `status`,
 --
 
 CREATE TABLE `app_email_templates` (
-  `id` bigint UNSIGNED NOT NULL,
-  `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `subject` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `body` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `params` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `layout` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `code` varchar(50) NOT NULL,
+  `subject` varchar(250) NOT NULL,
+  `body` text NOT NULL,
+  `params` text DEFAULT NULL,
+  `layout` varchar(150) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `email_hook` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `uuid` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1',
-  `to_sender` tinyint(1) NOT NULL DEFAULT '1',
-  `to_emails` json DEFAULT NULL
+  `email_hook` varchar(100) DEFAULT NULL,
+  `uuid` char(36) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `to_sender` tinyint(1) NOT NULL DEFAULT 1,
+  `to_emails` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`to_emails`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -532,9 +550,9 @@ INSERT INTO `app_email_templates` (`id`, `code`, `subject`, `body`, `params`, `l
 --
 
 CREATE TABLE `app_email_template_users` (
-  `id` bigint UNSIGNED NOT NULL,
-  `user_id` bigint UNSIGNED NOT NULL,
-  `email_template_id` bigint UNSIGNED NOT NULL
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `email_template_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -544,27 +562,27 @@ CREATE TABLE `app_email_template_users` (
 --
 
 CREATE TABLE `app_evman_event_bookings` (
-  `id` bigint UNSIGNED NOT NULL,
-  `event_id` bigint UNSIGNED NOT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `ticket_id` bigint UNSIGNED DEFAULT NULL,
-  `name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `state` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `zip` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `country` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
-  `payment_method_id` bigint UNSIGNED DEFAULT NULL,
-  `payment_status` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `total` decimal(15,2) NOT NULL DEFAULT '0.00',
-  `quantity` int NOT NULL DEFAULT '1',
-  `code` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `event_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ticket_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `name` varchar(150) NOT NULL,
+  `email` varchar(150) DEFAULT NULL,
+  `phone` varchar(150) DEFAULT NULL,
+  `address` varchar(150) DEFAULT NULL,
+  `city` varchar(150) DEFAULT NULL,
+  `state` varchar(150) DEFAULT NULL,
+  `zip` varchar(150) DEFAULT NULL,
+  `country` varchar(150) DEFAULT NULL,
+  `status` varchar(150) NOT NULL DEFAULT 'pending',
+  `payment_method_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `payment_status` varchar(150) DEFAULT NULL,
+  `total` decimal(15,2) NOT NULL DEFAULT 0.00,
+  `quantity` int(11) NOT NULL DEFAULT 1,
+  `code` varchar(150) NOT NULL,
   `booking_date` timestamp NULL DEFAULT NULL,
-  `notes` text COLLATE utf8mb4_unicode_ci,
-  `order_id` bigint UNSIGNED DEFAULT NULL,
+  `notes` text DEFAULT NULL,
+  `order_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -574,100 +592,7 @@ CREATE TABLE `app_evman_event_bookings` (
 --
 
 INSERT INTO `app_evman_event_bookings` (`id`, `event_id`, `user_id`, `ticket_id`, `name`, `email`, `phone`, `address`, `city`, `state`, `zip`, `country`, `status`, `payment_method_id`, `payment_status`, `total`, `quantity`, `code`, `booking_date`, `notes`, `order_id`, `created_at`, `updated_at`) VALUES
-(1, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '1800.00', 2, 'EVT-67C4869D6B0E3', '2025-03-02 10:26:05', NULL, 99, '2025-03-02 10:26:05', '2025-03-02 10:26:05'),
-(2, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '400.00', 1, 'EVT-67C4869D6B722', '2025-03-02 10:26:05', NULL, 99, '2025-03-02 10:26:05', '2025-03-02 10:26:05'),
-(3, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 2, NULL, '900.00', 1, 'EVT-67C4871788433', '2025-03-02 10:28:07', NULL, 100, '2025-03-02 10:28:07', '2025-03-02 10:28:07'),
-(4, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 2, NULL, '900.00', 1, 'EVT-67C579380711B', '2025-03-03 03:41:12', NULL, 101, '2025-03-03 03:41:12', '2025-03-03 03:41:12'),
-(5, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, 'adsdasd', NULL, NULL, NULL, NULL, 'pending', 2, NULL, '400.00', 1, 'EVT-67C5793807D8F', '2025-03-03 03:41:12', NULL, 101, '2025-03-03 03:41:12', '2025-03-03 03:41:12'),
-(6, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '900.00', 1, 'EVT-67C597D3BFEC0', '2025-03-03 05:51:47', NULL, 102, '2025-03-03 05:51:47', '2025-03-03 05:51:47'),
-(7, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '400.00', 1, 'EVT-67C59812C1F28', '2025-03-03 05:52:50', NULL, 103, '2025-03-03 05:52:50', '2025-03-03 05:52:50'),
-(8, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '400.00', 1, 'EVT-67C5983609546', '2025-03-03 05:53:26', NULL, 104, '2025-03-03 05:53:26', '2025-03-03 05:53:26'),
-(9, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '400.00', 1, 'EVT-67C5984943C69', '2025-03-03 05:53:45', NULL, 105, '2025-03-03 05:53:45', '2025-03-03 05:53:45'),
-(10, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '400.00', 1, 'EVT-67C598808987D', '2025-03-03 05:54:40', NULL, 106, '2025-03-03 05:54:40', '2025-03-03 05:54:40'),
-(11, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '400.00', 1, 'EVT-67C5988F138AB', '2025-03-03 05:54:55', NULL, 107, '2025-03-03 05:54:55', '2025-03-03 05:54:55'),
-(12, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '400.00', 1, 'EVT-67C5AB432389D', '2025-03-03 07:14:43', NULL, 108, '2025-03-03 07:14:43', '2025-03-03 07:14:43'),
-(13, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '400.00', 1, 'EVT-67C5AB5758B8C', '2025-03-03 07:15:03', NULL, 109, '2025-03-03 07:15:03', '2025-03-03 07:15:03'),
-(14, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '400.00', 1, 'EVT-67C5AB6851609', '2025-03-03 07:15:20', NULL, 110, '2025-03-03 07:15:20', '2025-03-03 07:15:20'),
-(15, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '400.00', 1, 'EVT-67C5ABBD5833E', '2025-03-03 07:16:45', NULL, 111, '2025-03-03 07:16:45', '2025-03-03 07:16:45'),
-(16, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '400.00', 1, 'EVT-67C5AC6E2D184', '2025-03-03 07:19:42', NULL, 112, '2025-03-03 07:19:42', '2025-03-03 07:19:42'),
-(17, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '400.00', 1, 'EVT-67C5ACA5BCCD4', '2025-03-03 07:20:37', NULL, 113, '2025-03-03 07:20:37', '2025-03-03 07:20:37'),
-(18, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '400.00', 1, 'EVT-67C5ACBBB122B', '2025-03-03 07:20:59', NULL, 114, '2025-03-03 07:20:59', '2025-03-03 07:20:59'),
-(19, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '400.00', 1, 'EVT-67C5C963AB1E5', '2025-03-03 09:23:15', NULL, 115, '2025-03-03 09:23:15', '2025-03-03 09:23:15'),
-(20, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '400.00', 1, 'EVT-67C5C9F959EBE', '2025-03-03 09:25:45', NULL, 116, '2025-03-03 09:25:45', '2025-03-03 09:25:45'),
-(21, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '400.00', 1, 'EVT-67C5CA0B9A748', '2025-03-03 09:26:03', NULL, 117, '2025-03-03 09:26:03', '2025-03-03 09:26:03'),
-(22, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '400.00', 1, 'EVT-67C5CA5234D0B', '2025-03-03 09:27:14', NULL, 118, '2025-03-03 09:27:14', '2025-03-03 09:27:14'),
-(23, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '400.00', 1, 'EVT-67C5CA64B0DB0', '2025-03-03 09:27:32', NULL, 119, '2025-03-03 09:27:32', '2025-03-03 09:27:32'),
-(24, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '400.00', 1, 'EVT-67C5CA9D8A079', '2025-03-03 09:28:29', NULL, 120, '2025-03-03 09:28:29', '2025-03-03 09:28:29'),
-(25, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '400.00', 1, 'EVT-67C5CC07B104D', '2025-03-03 09:34:31', NULL, 121, '2025-03-03 09:34:31', '2025-03-03 09:34:31'),
-(26, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '400.00', 1, 'EVT-67C5CC485E7C8', '2025-03-03 09:35:36', NULL, 122, '2025-03-03 09:35:36', '2025-03-03 09:35:36'),
-(27, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '400.00', 1, 'EVT-67C5CC5935E04', '2025-03-03 09:35:53', NULL, 123, '2025-03-03 09:35:53', '2025-03-03 09:35:53'),
-(28, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '400.00', 1, 'EVT-67C5CC86BE219', '2025-03-03 09:36:38', NULL, 124, '2025-03-03 09:36:38', '2025-03-03 09:36:38'),
-(29, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '400.00', 1, 'EVT-67C5CC983519F', '2025-03-03 09:36:56', NULL, 125, '2025-03-03 09:36:56', '2025-03-03 09:36:56'),
-(30, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '400.00', 1, 'EVT-67C5CCBED087C', '2025-03-03 09:37:34', NULL, 126, '2025-03-03 09:37:34', '2025-03-03 09:37:34'),
-(31, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '400.00', 1, 'EVT-67C5D149A2174', '2025-03-03 09:56:57', NULL, 127, '2025-03-03 09:56:57', '2025-03-03 09:56:57'),
-(32, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C680F9C8366', '2025-03-03 22:26:33', NULL, 128, '2025-03-03 22:26:33', '2025-03-03 22:26:33'),
-(33, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C6820C19D97', '2025-03-03 22:31:08', NULL, 129, '2025-03-03 22:31:08', '2025-03-03 22:31:08'),
-(34, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C6834448C27', '2025-03-03 22:36:20', NULL, 130, '2025-03-03 22:36:20', '2025-03-03 22:36:20'),
-(35, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C683C439376', '2025-03-03 22:38:28', NULL, 131, '2025-03-03 22:38:28', '2025-03-03 22:38:28'),
-(36, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C684D6C7EBD', '2025-03-03 22:43:02', NULL, 132, '2025-03-03 22:43:02', '2025-03-03 22:43:02'),
-(37, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C685BFF0EF6', '2025-03-03 22:46:55', NULL, 133, '2025-03-03 22:46:55', '2025-03-03 22:46:55'),
-(38, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C6862592841', '2025-03-03 22:48:37', NULL, 134, '2025-03-03 22:48:37', '2025-03-03 22:48:37'),
-(39, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '900.00', 1, 'EVT-67C6865A3DC69', '2025-03-03 22:49:30', NULL, 135, '2025-03-03 22:49:30', '2025-03-03 22:49:30'),
-(40, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '900.00', 1, 'EVT-67C68676EB8CA', '2025-03-03 22:49:58', NULL, 136, '2025-03-03 22:49:58', '2025-03-03 22:49:58'),
-(41, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C686866DE9E', '2025-03-03 22:50:14', NULL, 137, '2025-03-03 22:50:14', '2025-03-03 22:50:14'),
-(42, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C6877E2DB7A', '2025-03-03 22:54:22', NULL, 138, '2025-03-03 22:54:22', '2025-03-03 22:54:22'),
-(43, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C688DF811F2', '2025-03-03 23:00:15', NULL, 139, '2025-03-03 23:00:15', '2025-03-03 23:00:15'),
-(44, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C689179F0E4', '2025-03-03 23:01:11', NULL, 140, '2025-03-03 23:01:11', '2025-03-03 23:01:11'),
-(45, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C68A1451790', '2025-03-03 23:05:24', NULL, 141, '2025-03-03 23:05:24', '2025-03-03 23:05:24'),
-(46, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C68A8AF3B41', '2025-03-03 23:07:22', NULL, 142, '2025-03-03 23:07:22', '2025-03-03 23:07:22'),
-(47, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C68B764835A', '2025-03-03 23:11:18', NULL, 143, '2025-03-03 23:11:18', '2025-03-03 23:11:18'),
-(48, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C68C99120C7', '2025-03-03 23:16:09', NULL, 144, '2025-03-03 23:16:09', '2025-03-03 23:16:09'),
-(49, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C68D0A94F00', '2025-03-03 23:18:02', NULL, 145, '2025-03-03 23:18:02', '2025-03-03 23:18:02'),
-(50, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C68EE6A9218', '2025-03-03 23:25:58', NULL, 146, '2025-03-03 23:25:58', '2025-03-03 23:25:58'),
-(51, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '900.00', 1, 'EVT-67C68F7DEDFCA', '2025-03-03 23:28:29', NULL, 147, '2025-03-03 23:28:29', '2025-03-03 23:28:29'),
-(52, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C68F905B3D1', '2025-03-03 23:28:48', NULL, 148, '2025-03-03 23:28:48', '2025-03-03 23:28:48'),
-(53, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C690E4EEDEE', '2025-03-03 23:34:28', NULL, 149, '2025-03-03 23:34:28', '2025-03-03 23:34:28'),
-(54, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C693B25D3D4', '2025-03-03 23:46:26', NULL, 150, '2025-03-03 23:46:26', '2025-03-03 23:46:26'),
-(55, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C6942E5C600', '2025-03-03 23:48:30', NULL, 151, '2025-03-03 23:48:30', '2025-03-03 23:48:30'),
-(56, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C6958F7833C', '2025-03-03 23:54:23', NULL, 152, '2025-03-03 23:54:23', '2025-03-03 23:54:23'),
-(57, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C69753D56B1', '2025-03-04 00:01:55', NULL, 153, '2025-03-04 00:01:55', '2025-03-04 00:01:55'),
-(58, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C69DD23C5D0', '2025-03-04 00:29:38', NULL, 154, '2025-03-04 00:29:38', '2025-03-04 00:29:38'),
-(59, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C69EDB00167', '2025-03-04 00:34:03', NULL, 155, '2025-03-04 00:34:03', '2025-03-04 00:34:03'),
-(60, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C69F6BE48A8', '2025-03-04 00:36:27', NULL, 156, '2025-03-04 00:36:27', '2025-03-04 00:36:27'),
-(61, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C6A19E81450', '2025-03-04 00:45:50', NULL, 157, '2025-03-04 00:45:50', '2025-03-04 00:45:50'),
-(62, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '900.00', 1, 'EVT-67C6A4A9824B0', '2025-03-04 00:58:49', NULL, 158, '2025-03-04 00:58:49', '2025-03-04 00:58:49'),
-(63, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, 'paid', '900.00', 1, 'EVT-67C6A4C5E5AC9', '2025-03-04 00:59:17', NULL, 159, '2025-03-04 00:59:17', '2025-03-04 01:00:48'),
-(64, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '900.00', 1, 'EVT-67C6A7A774954', '2025-03-04 01:11:35', NULL, 160, '2025-03-04 01:11:35', '2025-03-04 01:11:35'),
-(65, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '900.00', 1, 'EVT-67C6A7D55994A', '2025-03-04 01:12:21', NULL, 161, '2025-03-04 01:12:21', '2025-03-04 01:12:21'),
-(66, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '900.00', 1, 'EVT-67C6A87C47D50', '2025-03-04 01:15:08', NULL, 162, '2025-03-04 01:15:08', '2025-03-04 01:15:08'),
-(67, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '900.00', 1, 'EVT-67C6A922D8186', '2025-03-04 01:17:54', NULL, 163, '2025-03-04 01:17:54', '2025-03-04 01:17:54'),
-(68, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '900.00', 1, 'EVT-67C6A93794B2F', '2025-03-04 01:18:15', NULL, 164, '2025-03-04 01:18:15', '2025-03-04 01:18:15'),
-(69, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '900.00', 1, 'EVT-67C6AAB97E182', '2025-03-04 01:24:41', NULL, 165, '2025-03-04 01:24:41', '2025-03-04 01:24:41'),
-(70, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '900.00', 1, 'EVT-67C6AB52A8FE9', '2025-03-04 01:27:14', NULL, 166, '2025-03-04 01:27:14', '2025-03-04 01:27:14'),
-(71, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, NULL, '900.00', 1, 'EVT-67C6B0582769B', '2025-03-04 01:48:40', NULL, 167, '2025-03-04 01:48:40', '2025-03-04 01:48:40'),
-(72, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '900.00', 1, 'EVT-67C6B8678CCA4', '2025-03-04 02:23:03', NULL, 168, '2025-03-04 02:23:03', '2025-03-04 02:23:03'),
-(73, 20, 7, NULL, 'adssd', 'customer@botble.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '400.00', 1, 'EVT-67C6B8D51D3E2', '2025-03-04 02:24:53', NULL, 169, '2025-03-04 02:24:53', '2025-03-04 02:24:53'),
-(74, 21, 7, NULL, 'adssd', 'customer@botble.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, 'completed', '900.00', 1, 'EVT-67C6BBDA7A892', '2025-03-04 02:37:46', NULL, 170, '2025-03-04 02:37:46', '2025-03-04 02:38:37'),
-(75, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, 'completed', '900.00', 1, 'EVT-67C6BE17CFB63', '2025-03-04 02:47:19', NULL, 171, '2025-03-04 02:47:19', '2025-03-04 02:47:56'),
-(76, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C6C164CB23E', '2025-03-04 03:01:24', NULL, 172, '2025-03-04 03:01:24', '2025-03-04 03:01:24'),
-(77, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '900.00', 1, 'EVT-67C6C2313DA41', '2025-03-04 03:04:49', NULL, 173, '2025-03-04 03:04:49', '2025-03-04 03:04:49'),
-(78, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C6C24D580CB', '2025-03-04 03:05:17', NULL, 174, '2025-03-04 03:05:17', '2025-03-04 03:05:17'),
-(79, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C6C2708B1B7', '2025-03-04 03:05:52', NULL, 175, '2025-03-04 03:05:52', '2025-03-04 03:05:52'),
-(80, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, NULL, '900.00', 1, 'EVT-67C6C354248DA', '2025-03-04 03:09:40', NULL, 176, '2025-03-04 03:09:40', '2025-03-04 03:09:40'),
-(81, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 4, 'completed', '900.00', 1, 'EVT-67C6C3FE962F1', '2025-03-04 03:12:30', NULL, 177, '2025-03-04 03:12:30', '2025-03-04 03:13:04'),
-(82, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 5, 'completed', '900.00', 1, 'EVT-67C6C655EED13', '2025-03-04 03:22:29', NULL, 178, '2025-03-04 03:22:29', '2025-03-04 03:22:30'),
-(83, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 5, 'completed', '900.00', 1, 'EVT-67C6D65E116AB', '2025-03-04 04:30:54', NULL, 179, '2025-03-04 04:30:54', '2025-03-04 04:30:54'),
-(84, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '900.00', 1, 'EVT-67C6E05B9862C', '2025-03-04 05:13:31', NULL, 180, '2025-03-04 05:13:31', '2025-03-04 05:13:31'),
-(85, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '400.00', 1, 'EVT-67C6E05B98F84', '2025-03-04 05:13:31', NULL, 180, '2025-03-04 05:13:31', '2025-03-04 05:13:31'),
-(86, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '400.00', 1, 'EVT-67C6E117A8A74', '2025-03-04 05:16:39', NULL, 181, '2025-03-04 05:16:39', '2025-03-04 05:16:39'),
-(87, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 5, 'completed', '400.00', 1, 'EVT-67C6E6EC4992E', '2025-03-04 05:41:32', NULL, 182, '2025-03-04 05:41:32', '2025-03-04 05:41:33'),
-(88, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, 'completed', '400.00', 1, 'EVT-67C6E81849841', '2025-03-04 05:46:32', NULL, 183, '2025-03-04 05:46:32', '2025-03-04 05:47:02'),
-(89, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '400.00', 1, 'EVT-67C6E8A78D230', '2025-03-04 05:48:55', NULL, 184, '2025-03-04 05:48:55', '2025-03-04 05:48:55'),
-(90, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, 'completed', '400.00', 1, 'EVT-67C6E8D07A0CA', '2025-03-04 05:49:36', NULL, 185, '2025-03-04 05:49:36', '2025-03-04 05:51:43'),
-(91, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 1, NULL, '400.00', 1, 'EVT-67C6E972CC4EE', '2025-03-04 05:52:18', NULL, 186, '2025-03-04 05:52:18', '2025-03-04 05:52:18'),
-(92, 21, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 5, 'completed', '1800.00', 2, 'EVT-67C7025109386', '2025-03-04 07:38:25', NULL, 187, '2025-03-04 07:38:25', '2025-03-04 07:38:25'),
-(93, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, 'completed', '400.00', 1, 'EVT-67C7028F94AAA', '2025-03-04 07:39:27', NULL, 188, '2025-03-04 07:39:27', '2025-03-04 07:39:49'),
-(94, 20, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 5, 'completed', '0.00', 1, 'EVT-67CA8989E8235', '2025-03-06 23:52:09', NULL, 189, '2025-03-06 23:52:09', '2025-03-06 23:52:11');
+(95, 150, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'pending', 3, 'completed', 220.00, 1, 'EVT-67F6C997BB6D7', '2025-04-09 19:25:11', NULL, 214, '2025-04-09 19:25:11', '2025-04-09 19:26:13');
 
 -- --------------------------------------------------------
 
@@ -676,18 +601,18 @@ INSERT INTO `app_evman_event_bookings` (`id`, `event_id`, `user_id`, `ticket_id`
 --
 
 CREATE TABLE `app_evman_event_tickets` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `description` text DEFAULT NULL,
   `price` decimal(15,2) DEFAULT NULL,
-  `capacity` int DEFAULT NULL,
-  `status` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
-  `min_ticket_number` int DEFAULT NULL,
-  `max_ticket_number` int DEFAULT NULL,
+  `capacity` int(11) DEFAULT NULL,
+  `status` varchar(150) NOT NULL DEFAULT 'active',
+  `min_ticket_number` int(11) DEFAULT NULL,
+  `max_ticket_number` int(11) DEFAULT NULL,
   `start_date` timestamp NULL DEFAULT NULL,
   `end_date` timestamp NULL DEFAULT NULL,
-  `event_id` bigint UNSIGNED NOT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
+  `event_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -697,10 +622,14 @@ CREATE TABLE `app_evman_event_tickets` (
 --
 
 INSERT INTO `app_evman_event_tickets` (`id`, `name`, `description`, `price`, `capacity`, `status`, `min_ticket_number`, `max_ticket_number`, `start_date`, `end_date`, `event_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'Ticket', 'Event 2', '400.00', 10, 'active', 1, 3, '2025-03-05 16:03:00', '2025-03-06 16:04:00', 21, NULL, '2025-03-05 10:04:05', '2025-03-05 10:04:05'),
-(2, 'fafda', 'content', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 20, NULL, '2025-03-05 10:07:56', '2025-03-05 10:07:56'),
-(3, 'Eve Sherman', '', '596.00', 74, 'active', 310, 299, '1980-11-16 11:47:00', '2004-07-28 12:52:00', 28, NULL, '2025-03-19 04:44:12', '2025-03-19 04:44:12'),
-(4, 'Ticket 1', '', '30.00', 20, 'active', 1, 3, '2025-04-03 19:19:00', '2025-04-04 19:19:00', 132, NULL, '2025-04-02 13:19:13', '2025-04-02 13:19:13');
+(5, 'Greenwood Arena', '\r Description\r Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus...', 180.00, 300, 'active', 1, 30, '2025-04-08 19:46:00', '2025-07-24 19:46:00', 143, NULL, '2025-04-08 13:47:18', '2025-04-08 13:47:18'),
+(6, 'Greenwood Arena', '\r Description\r Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus...', 220.00, 30, 'active', 1, 2, '2025-04-08 21:11:00', '2025-10-30 21:11:00', 144, NULL, '2025-04-08 15:11:23', '2025-04-08 15:11:23'),
+(7, 'Ticket 1', '\r Description\r Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus...', 140.00, 40, 'active', 1, 2, '2025-06-19 21:16:00', '2025-11-21 21:16:00', 145, NULL, '2025-04-08 15:19:18', '2025-04-08 15:19:18'),
+(8, 'Ticket', '\r Description\r Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus...', 310.00, 30, 'active', 1, 2, NULL, NULL, 146, NULL, '2025-04-08 16:43:33', '2025-04-08 16:43:33'),
+(9, 'ticket', '\r Description\r Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus...', 380.00, 200, 'active', 1, 2, '2025-04-17 22:46:00', '2025-08-15 22:46:00', 147, NULL, '2025-04-08 16:47:07', '2025-04-08 16:47:07'),
+(10, 'ticket', '\r Description\r Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus...', 170.00, 30, 'active', 1, 2, '2025-04-09 22:49:00', '2025-09-18 22:49:00', 148, NULL, '2025-04-08 16:49:27', '2025-04-08 16:49:27'),
+(11, 'ticket', '\r Description\r Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus...', 230.00, 90, 'active', 1, 2, '2025-04-09 22:51:00', '2025-09-25 22:51:00', 149, NULL, '2025-04-08 16:51:26', '2025-04-08 16:51:26'),
+(12, 'ticket', '\r Description\r Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus...', 220.00, 433, 'active', 1, 2, '2025-04-10 22:52:00', '2025-08-21 22:52:00', 150, NULL, '2025-04-08 16:53:08', '2025-04-08 16:53:08');
 
 -- --------------------------------------------------------
 
@@ -709,13 +638,13 @@ INSERT INTO `app_evman_event_tickets` (`id`, `name`, `description`, `price`, `ca
 --
 
 CREATE TABLE `app_failed_jobs` (
-  `id` bigint UNSIGNED NOT NULL,
-  `uuid` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(150) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -725,32 +654,14 @@ CREATE TABLE `app_failed_jobs` (
 --
 
 CREATE TABLE `app_jobs` (
-  `id` bigint UNSIGNED NOT NULL,
-  `queue` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `attempts` tinyint UNSIGNED NOT NULL,
-  `reserved_at` int UNSIGNED DEFAULT NULL,
-  `available_at` int UNSIGNED NOT NULL,
-  `created_at` int UNSIGNED NOT NULL
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `queue` varchar(150) NOT NULL,
+  `payload` longtext NOT NULL,
+  `attempts` tinyint(3) UNSIGNED NOT NULL,
+  `reserved_at` int(10) UNSIGNED DEFAULT NULL,
+  `available_at` int(10) UNSIGNED NOT NULL,
+  `created_at` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `app_app_translations`
---
-
-CREATE TABLE `app_app_translations` (
-  `id` bigint UNSIGNED NOT NULL,
-  `status` int NOT NULL DEFAULT '1',
-  `locale` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `group` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `namespace` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `key` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `object_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `object_key` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
 
@@ -759,10 +670,10 @@ CREATE TABLE `app_app_translations` (
 --
 
 CREATE TABLE `app_languages` (
-  `id` bigint UNSIGNED NOT NULL,
-  `code` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `default` tinyint(1) NOT NULL DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `code` varchar(10) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `default` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -781,15 +692,15 @@ INSERT INTO `app_languages` (`id`, `code`, `name`, `default`, `created_at`, `upd
 --
 
 CREATE TABLE `app_language_lines` (
-  `id` bigint UNSIGNED NOT NULL,
-  `namespace` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `group` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `key` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `namespace` varchar(50) NOT NULL,
+  `group` varchar(50) NOT NULL,
+  `key` varchar(150) NOT NULL,
+  `text` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `object_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `object_key` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `object_type` varchar(20) DEFAULT NULL,
+  `object_key` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -799,20 +710,20 @@ CREATE TABLE `app_language_lines` (
 --
 
 CREATE TABLE `app_lms_course_lessons` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `thumbnail` text COLLATE utf8mb4_unicode_ci,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `status` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'publish',
-  `order` int NOT NULL DEFAULT '0',
-  `type` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'video',
-  `duration` int NOT NULL DEFAULT '0',
-  `metas` json DEFAULT NULL,
-  `content_url` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `local_video_path` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `post_id` bigint UNSIGNED DEFAULT NULL,
-  `course_topic_id` bigint UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(150) NOT NULL,
+  `slug` varchar(150) NOT NULL,
+  `thumbnail` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `status` varchar(150) NOT NULL DEFAULT 'publish',
+  `order` int(11) NOT NULL DEFAULT 0,
+  `type` varchar(150) NOT NULL DEFAULT 'video',
+  `duration` int(11) NOT NULL DEFAULT 0,
+  `metas` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`metas`)),
+  `content_url` varchar(150) DEFAULT NULL,
+  `local_video_path` varchar(150) DEFAULT NULL,
+  `post_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `course_topic_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -822,9 +733,41 @@ CREATE TABLE `app_lms_course_lessons` (
 --
 
 INSERT INTO `app_lms_course_lessons` (`id`, `title`, `slug`, `thumbnail`, `description`, `status`, `order`, `type`, `duration`, `metas`, `content_url`, `local_video_path`, `post_id`, `course_topic_id`, `created_at`, `updated_at`) VALUES
-(1, 'lesson title 1', 'lesson-title-1', '2025/03/07/paypal.png', 'asdasd', 'publish', 0, 'video', 400, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 1, '2025-03-22 04:31:11', '2025-03-22 05:53:37'),
-(2, 'lesson title 2', 'lesson-title-2', '2025/03/06/features-product-shape01.png', 'desc', 'publish', 0, 'audio', 30, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 1, '2025-03-22 09:23:08', '2025-03-22 09:23:34'),
-(3, 'lesson title 3', 'lesson-title-3', NULL, 'desc', 'publish', 0, 'audio', 30, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 1, '2025-03-22 10:25:40', '2025-03-22 10:25:40');
+(4, 'Video: Introduce Yourself | The Most Important', 'video-introduce-yourself-the-most-important', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 30, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 2, '2025-04-09 16:53:46', '2025-04-09 16:53:46'),
+(5, 'Video: WARNING! 8 Killer Phrases That We Use', 'video-how-to-improve-your-communication', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 20, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 2, '2025-04-09 17:11:00', '2025-04-09 17:12:20'),
+(6, 'Video: How NOT to talk to someone | Communi', 'video-how-to-improve-your-communication-1', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 38, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 3, '2025-04-09 17:12:51', '2025-04-09 17:14:49'),
+(7, 'Video: WARNING! 8 Killer Phrases That We Use', 'video-warning-8-killer-phrases-that-we-use', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 29, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 3, '2025-04-09 17:16:41', '2025-04-09 17:16:41'),
+(8, 'Video: How to Improve Your Communication', 'video-how-to-improve-your-communication-2', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 40, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 2, '2025-04-09 17:17:25', '2025-04-09 17:17:25'),
+(9, 'Video: Introduce Yourself | The Most Important', 'video-introduce-yourself-the-most-important-1', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 30, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 4, '2025-04-09 18:10:35', '2025-04-09 18:10:35'),
+(10, 'Video: WARNING! 8 Killer Phrases That We Use', 'video-warning-8-killer-phrases-that-we-use-1', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 50, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 4, '2025-04-09 18:11:03', '2025-04-09 18:11:03'),
+(11, 'Video: How to Improve Your Communication', 'video-how-to-improve-your-communication-3', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 90, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 4, '2025-04-09 18:11:29', '2025-04-09 18:11:29'),
+(12, 'Video: How NOT to talk to someone | Communi', 'video-how-not-to-talk-to-someone-communi', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 120, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 5, '2025-04-09 18:13:13', '2025-04-09 18:13:13'),
+(13, 'Video: WARNING! 8 Killer Phrases That We Use', 'video-warning-8-killer-phrases-that-we-use-2', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 110, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 5, '2025-04-09 18:13:42', '2025-04-09 18:13:42'),
+(14, 'Video: Introduce Yourself | The Most Important', 'video-introduce-yourself-the-most-important-2', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 40, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 6, '2025-04-09 18:19:50', '2025-04-09 18:19:50'),
+(15, 'Video: WARNING! 8 Killer Phrases That We Use', 'video-warning-8-killer-phrases-that-we-use-3', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 140, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 6, '2025-04-09 18:20:39', '2025-04-09 18:20:39'),
+(16, 'Video: How to Improve Your Communication', 'video-how-to-improve-your-communication-4', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 40, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 6, '2025-04-09 18:21:08', '2025-04-09 18:21:08'),
+(17, 'Video: How NOT to talk to someone | Communi', 'video-how-not-to-talk-to-someone-communi-1', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 40, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 7, '2025-04-09 18:21:42', '2025-04-09 18:21:42'),
+(18, 'Video: WARNING! 8 Killer Phrases That We Use', 'video-warning-8-killer-phrases-that-we-use-4', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 400, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 7, '2025-04-09 18:22:24', '2025-04-09 18:22:24'),
+(19, 'Video: Introduce Yourself | The Most Important', 'video-introduce-yourself-the-most-important-3', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 40, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 8, '2025-04-09 18:19:50', '2025-04-09 18:19:50'),
+(21, 'Video: WARNING! 8 Killer Phrases That We Use', 'video-warning-8-killer-phrases-that-we-use-5', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 140, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 8, '2025-04-09 18:20:39', '2025-04-09 18:20:39'),
+(22, 'Video: How to Improve Your Communication', 'video-how-to-improve-your-communication-5', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 60, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 8, '2025-04-09 18:33:20', '2025-04-09 18:33:20'),
+(23, 'Video: How NOT to talk to someone | Communi', 'video-how-not-to-talk-to-someone-communi-2', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 23, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 9, '2025-04-09 18:33:52', '2025-04-09 18:33:52'),
+(24, 'Video: Introduce Yourself | The Most Important', 'video-introduce-yourself-the-most-important-4', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 30, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 10, '2025-04-09 18:42:42', '2025-04-09 18:42:42'),
+(25, 'Video: WARNING! 8 Killer Phrases That We Use', 'video-warning-8-killer-phrases-that-we-use-6', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 40, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 10, '2025-04-09 18:43:36', '2025-04-09 18:43:36'),
+(26, 'Video: How to Improve Your Communication', 'video-how-to-improve-your-communication-6', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 50, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 10, '2025-04-09 18:44:34', '2025-04-09 18:44:34'),
+(27, 'Video: How NOT to talk to someone | Communi', 'video-how-not-to-talk-to-someone-communi-3', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 80, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 11, '2025-04-09 18:45:31', '2025-04-09 18:45:31'),
+(28, 'Video: WARNING! 8 Killer Phrases That We Use', 'video-warning-8-killer-phrases-that-we-use-7', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 120, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 11, '2025-04-09 18:46:08', '2025-04-09 18:46:08'),
+(29, 'Video: Introduce Yourself | The Most Important', 'video-introduce-yourself-the-most-important-5', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 20, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 12, '2025-04-09 18:49:40', '2025-04-09 18:49:40'),
+(30, 'Video: WARNING! 8 Killer Phrases That We Use', 'video-warning-8-killer-phrases-that-we-use-8', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 40, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 12, '2025-04-09 18:50:05', '2025-04-09 18:50:05'),
+(31, 'Video: How NOT to talk to someone | Communi', 'video-how-not-to-talk-to-someone-communi-4', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 50, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 13, '2025-04-09 18:50:30', '2025-04-09 18:50:30'),
+(32, 'Video: Introduce Yourself | The Most Important', 'video-introduce-yourself-the-most-important-6', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 40, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 14, '2025-04-09 18:52:51', '2025-04-09 18:52:51'),
+(33, 'Video: How to Improve Your Communication', 'video-how-to-improve-your-communication-7', NULL, 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 30, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 15, '2025-04-09 18:53:14', '2025-04-09 18:53:14'),
+(34, 'Video: How NOT to talk to someone | Communi', 'video-how-not-to-talk-to-someone-communi-5', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 50, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 15, '2025-04-09 18:53:41', '2025-04-09 18:53:41'),
+(35, 'Video: How to Improve Your Communication', 'video-how-to-improve-your-communication-8', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 90, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 16, '2025-04-09 18:55:34', '2025-04-09 18:55:34'),
+(36, 'Video: How NOT to talk to someone | Communi', 'video-how-not-to-talk-to-someone-communi-6', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 90, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 17, '2025-04-09 18:56:17', '2025-04-09 18:56:17'),
+(37, 'Video: Introduce Yourself | The Most Important', 'video-introduce-yourself-the-most-important-7', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 50, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 18, '2025-04-09 18:59:17', '2025-04-09 18:59:17'),
+(38, 'Video: How to Improve Your Communication', 'video-how-to-improve-your-communication-9', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 70, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 18, '2025-04-09 18:59:40', '2025-04-09 18:59:40'),
+(39, 'Video: How NOT to talk to someone | Communi', 'video-how-not-to-talk-to-someone-communi-7', '2025/04/09/course-video-img.jpg', 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 'video', 80, NULL, 'https://www.w3schools.com/html/mov_bbb.mp4', NULL, NULL, 18, '2025-04-09 19:00:12', '2025-04-09 19:00:12');
 
 -- --------------------------------------------------------
 
@@ -833,14 +776,14 @@ INSERT INTO `app_lms_course_lessons` (`id`, `title`, `slug`, `thumbnail`, `descr
 --
 
 CREATE TABLE `app_lms_course_topics` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `thumbnail` text COLLATE utf8mb4_unicode_ci,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `status` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'publish',
-  `order` int NOT NULL DEFAULT '0',
-  `post_id` bigint UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(150) NOT NULL,
+  `slug` varchar(150) NOT NULL,
+  `thumbnail` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `status` varchar(150) NOT NULL DEFAULT 'publish',
+  `order` int(11) NOT NULL DEFAULT 0,
+  `post_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -850,7 +793,23 @@ CREATE TABLE `app_lms_course_topics` (
 --
 
 INSERT INTO `app_lms_course_topics` (`id`, `title`, `slug`, `thumbnail`, `description`, `status`, `order`, `post_id`, `created_at`, `updated_at`) VALUES
-(1, 'Topic', 'topic', NULL, 'Desc', 'publish', 0, 82, '2025-03-22 04:30:48', '2025-03-22 04:30:48');
+(2, 'Introduce Yourself | The Most Important', 'introduce-yourself-the-most-important', NULL, 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 153, '2025-04-09 16:50:52', '2025-04-09 16:50:52'),
+(3, 'Topic 2', 'topic-2', NULL, 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 153, '2025-04-09 17:13:14', '2025-04-09 17:13:14'),
+(4, 'Topic', 'topic', NULL, 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 155, '2025-04-09 18:09:54', '2025-04-09 18:09:54'),
+(5, 'Topic 2', 'topic-2-1', NULL, 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 155, '2025-04-09 18:11:57', '2025-04-09 18:11:57'),
+(6, 'Topic 1', 'topic-1', NULL, 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 156, '2025-04-09 18:17:54', '2025-04-09 18:17:54'),
+(7, 'Topic 2', 'topic-2-2', NULL, 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 156, '2025-04-09 18:18:38', '2025-04-09 18:18:38'),
+(8, 'Topic 1', 'topic-1-1', NULL, 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 157, '2025-04-09 18:17:54', '2025-04-09 18:17:54'),
+(9, 'Topic 2', 'topic-2-3', NULL, 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 157, '2025-04-09 18:18:38', '2025-04-09 18:18:38'),
+(10, 'Topic', 'topic-3', NULL, 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 158, '2025-04-09 18:41:20', '2025-04-09 18:41:20'),
+(11, 'Topic 2', 'topic-2-4', NULL, 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 158, '2025-04-09 18:41:44', '2025-04-09 18:41:44'),
+(12, 'Topic 1', 'topic-1-2', NULL, 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 159, '2025-04-09 18:48:53', '2025-04-09 18:48:53'),
+(13, 'Topic 2', 'topic-2-5', NULL, 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 159, '2025-04-09 18:49:03', '2025-04-09 18:49:03'),
+(14, 'Topic 1', 'topic-1-3', NULL, 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 160, '2025-04-09 18:52:10', '2025-04-09 18:52:10'),
+(15, 'Topic 2', 'topic-2-6', NULL, 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 160, '2025-04-09 18:52:27', '2025-04-09 18:52:27'),
+(16, 'Topic 1', 'topic-1-4', NULL, 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 161, '2025-04-09 18:54:58', '2025-04-09 18:54:58'),
+(17, 'Topic 2', 'topic-2-7', NULL, 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 161, '2025-04-09 18:55:45', '2025-04-09 18:55:45'),
+(18, 'Topic', 'topic-4', NULL, 'Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat.', 'publish', 0, 162, '2025-04-09 18:58:42', '2025-04-09 18:58:42');
 
 -- --------------------------------------------------------
 
@@ -859,39 +818,15 @@ INSERT INTO `app_lms_course_topics` (`id`, `title`, `slug`, `thumbnail`, `descri
 --
 
 CREATE TABLE `app_manual_notifications` (
-  `id` bigint UNSIGNED NOT NULL,
-  `method` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `users` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint NOT NULL DEFAULT '2',
-  `error` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `method` varchar(150) DEFAULT NULL,
+  `users` text NOT NULL,
+  `data` text NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 2,
+  `error` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `app_manual_notifications`
---
-
-INSERT INTO `app_manual_notifications` (`id`, `method`, `users`, `data`, `status`, `error`, `created_at`, `updated_at`) VALUES
-(1, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-03-02 07:18:27', '2025-03-02 07:18:28'),
-(2, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-03-06 00:36:00', '2025-03-06 00:36:00'),
-(3, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-03-06 00:41:25', '2025-03-06 00:41:25'),
-(4, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-03-06 22:43:39', '2025-03-06 22:43:40'),
-(5, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-03-07 09:46:17', '2025-03-07 09:46:17'),
-(6, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-03-07 09:50:24', '2025-03-07 09:50:24'),
-(7, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-03-07 09:50:54', '2025-03-07 09:50:54'),
-(8, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-03-07 09:52:08', '2025-03-07 09:52:08'),
-(9, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-03-08 01:18:34', '2025-03-08 01:18:34'),
-(10, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-03-24 11:07:52', '2025-03-24 11:07:52'),
-(11, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-03-24 11:08:35', '2025-03-24 11:08:35'),
-(12, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-03-24 11:09:51', '2025-03-24 11:09:51'),
-(13, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-03-24 11:27:23', '2025-03-24 11:27:23'),
-(14, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-03-25 12:20:23', '2025-03-25 12:20:23'),
-(15, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-03-29 02:05:36', '2025-03-29 02:05:40'),
-(16, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-03-29 10:46:28', '2025-03-29 10:46:29'),
-(17, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-04-03 10:54:56', '2025-04-03 10:54:56'),
-(18, 'database', '1', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', 1, NULL, '2025-04-04 12:37:35', '2025-04-04 12:37:37');
 
 -- --------------------------------------------------------
 
@@ -900,19 +835,19 @@ INSERT INTO `app_manual_notifications` (`id`, `method`, `users`, `data`, `status
 --
 
 CREATE TABLE `app_media_files` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'image',
-  `mime_type` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `path` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extension` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `size` bigint NOT NULL DEFAULT '0',
-  `folder_id` bigint DEFAULT NULL,
-  `user_id` bigint NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `type` varchar(50) NOT NULL DEFAULT 'image',
+  `mime_type` varchar(150) NOT NULL,
+  `path` varchar(150) NOT NULL,
+  `extension` varchar(150) NOT NULL,
+  `size` bigint(20) NOT NULL DEFAULT 0,
+  `folder_id` bigint(20) DEFAULT NULL,
+  `user_id` bigint(20) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `disk` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'public',
-  `metadata` json DEFAULT NULL
+  `disk` varchar(50) NOT NULL DEFAULT 'public',
+  `metadata` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`metadata`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -980,7 +915,91 @@ INSERT INTO `app_media_files` (`id`, `name`, `type`, `mime_type`, `path`, `exten
 (59, '854918-sd_960_540_30fps.mp4', 'file', 'video/mp4', '2025/03/22/854918-sd-960-540-30fps.mp4', 'mp4', 4186058, NULL, 1, '2025-03-22 09:20:27', '2025-03-22 09:20:27', 'public', NULL),
 (60, 'th.jpg', 'image', 'image/jpeg', '2025/04/03/th.jpg', 'jpg', 12890, NULL, 8, '2025-04-03 12:07:44', '2025-04-03 12:07:44', 'public', NULL),
 (61, 'paypal.png', 'image', 'image/png', '2025/04/03/paypal.png', 'png', 14569, NULL, 8, '2025-04-03 12:14:25', '2025-04-03 12:14:25', 'public', NULL),
-(62, 'th.jpg', 'image', 'image/jpeg', '2025/04/03/th-1.jpg', 'jpg', 12890, NULL, 8, '2025-04-03 12:14:35', '2025-04-03 12:14:35', 'public', NULL);
+(62, 'th.jpg', 'image', 'image/jpeg', '2025/04/03/th-1.jpg', 'jpg', 12890, NULL, 8, '2025-04-03 12:14:35', '2025-04-03 12:14:35', 'public', NULL),
+(63, 'footer_bg.png', 'image', 'image/jpeg', '2025/04/08/footer-bg.png', 'png', 383080, NULL, 1, '2025-04-08 11:57:53', '2025-04-08 11:57:53', 'public', NULL),
+(64, 'breadcrumb_bg.jpg', 'image', 'image/jpeg', '2025/04/08/breadcrumb-bg.jpg', 'jpg', 824728, NULL, 1, '2025-04-08 11:58:20', '2025-04-08 11:58:20', 'public', NULL),
+(65, 'blog_img_1.jpg', 'image', 'image/jpeg', '2025/04/08/blog-img-1.jpg', 'jpg', 75178, NULL, 1, '2025-04-08 13:11:20', '2025-04-08 13:11:20', 'public', NULL),
+(66, 'blog_details_video_img.jpg', 'file', 'image/jpeg', '2025/04/08/blog-details-video-img.jpg', 'jpg', 318345, NULL, 1, '2025-04-08 13:14:13', '2025-04-08 13:14:13', 'public', NULL),
+(67, 'blog_img_2.jpg', 'image', 'image/jpeg', '2025/04/08/blog-img-2.jpg', 'jpg', 74791, NULL, 1, '2025-04-08 13:22:47', '2025-04-08 13:22:47', 'public', NULL),
+(68, 'blog_img_3.jpg', 'image', 'image/jpeg', '2025/04/08/blog-img-3.jpg', 'jpg', 81869, NULL, 1, '2025-04-08 13:25:52', '2025-04-08 13:25:52', 'public', NULL),
+(69, 'blog_img_9.jpg', 'image', 'image/jpeg', '2025/04/08/blog-img-9.jpg', 'jpg', 91692, NULL, 1, '2025-04-08 13:26:50', '2025-04-08 13:26:50', 'public', NULL),
+(70, 'blog_img_4.jpg', 'image', 'image/jpeg', '2025/04/08/blog-img-4.jpg', 'jpg', 54992, NULL, 1, '2025-04-08 13:27:02', '2025-04-08 13:27:02', 'public', NULL),
+(71, 'blog_img_5.jpg', 'image', 'image/jpeg', '2025/04/08/blog-img-5.jpg', 'jpg', 96594, NULL, 1, '2025-04-08 13:28:14', '2025-04-08 13:28:14', 'public', NULL),
+(72, 'blog_img_6.jpg', 'image', 'image/jpeg', '2025/04/08/blog-img-6.jpg', 'jpg', 134483, NULL, 1, '2025-04-08 13:29:24', '2025-04-08 13:29:24', 'public', NULL),
+(73, 'blog_img_7.jpg', 'image', 'image/jpeg', '2025/04/08/blog-img-7.jpg', 'jpg', 97643, NULL, 1, '2025-04-08 13:30:16', '2025-04-08 13:30:16', 'public', NULL),
+(74, 'blog_img_8.jpg', 'image', 'image/jpeg', '2025/04/08/blog-img-8.jpg', 'jpg', 105649, NULL, 1, '2025-04-08 13:31:10', '2025-04-08 13:31:10', 'public', NULL),
+(75, 'dashboard_user_img.jpg', 'image', 'image/jpeg', '2025/04/08/dashboard-user-img.jpg', 'jpg', 33320, NULL, 1, '2025-04-08 13:33:49', '2025-04-08 13:33:49', 'public', NULL),
+(76, 'courses_img_1.jpg', 'image', 'image/jpeg', '2025/04/08/courses-img-1.jpg', 'jpg', 46687, NULL, 1, '2025-04-08 13:36:20', '2025-04-08 13:36:20', 'public', NULL),
+(77, 'courses_img_2.jpg', 'image', 'image/jpeg', '2025/04/08/courses-img-2.jpg', 'jpg', 68859, NULL, 1, '2025-04-08 15:04:58', '2025-04-08 15:04:58', 'public', NULL),
+(78, 'courses_img_3.jpg', 'image', 'image/jpeg', '2025/04/08/courses-img-3.jpg', 'jpg', 89378, NULL, 1, '2025-04-08 15:19:00', '2025-04-08 15:19:00', 'public', NULL),
+(79, 'courses_img_4.jpg', 'image', 'image/jpeg', '2025/04/08/courses-img-4.jpg', 'jpg', 56917, NULL, 1, '2025-04-08 16:47:50', '2025-04-08 16:47:50', 'public', NULL),
+(80, 'courses_img_5.jpg', 'image', 'image/jpeg', '2025/04/08/courses-img-5.jpg', 'jpg', 45517, NULL, 1, '2025-04-08 16:49:55', '2025-04-08 16:49:55', 'public', NULL),
+(81, 'courses_img_6.jpg', 'image', 'image/jpeg', '2025/04/08/courses-img-6.jpg', 'jpg', 47018, NULL, 1, '2025-04-08 16:51:51', '2025-04-08 16:51:51', 'public', NULL),
+(82, 'logo.png', 'image', 'image/png', '2025/04/08/logo.png', 'png', 5366, NULL, 1, '2025-04-08 17:25:39', '2025-04-08 17:25:39', 'public', NULL),
+(83, 'footer_logo.png', 'image', 'image/png', '2025/04/08/footer-logo.png', 'png', 6188, NULL, 1, '2025-04-08 17:25:57', '2025-04-08 17:25:57', 'public', NULL),
+(84, 'about_section_bg.jpg', 'image', 'image/jpeg', '2025/04/08/about-section-bg.jpg', 'jpg', 96836, NULL, 1, '2025-04-08 18:05:15', '2025-04-08 18:05:15', 'public', NULL),
+(85, 'about-_img_1.jpg', 'image', 'image/jpeg', '2025/04/08/about-img-1.jpg', 'jpg', 126002, NULL, 1, '2025-04-08 18:05:49', '2025-04-08 18:05:49', 'public', NULL),
+(86, 'about-_img_2.jpg', 'image', 'image/jpeg', '2025/04/08/about-img-2.jpg', 'jpg', 116399, NULL, 1, '2025-04-08 18:06:00', '2025-04-08 18:06:00', 'public', NULL),
+(87, 'about_video_img.jpg', 'image', 'image/jpeg', '2025/04/08/about-video-img.jpg', 'jpg', 680016, NULL, 1, '2025-04-08 18:07:44', '2025-04-08 18:07:44', 'public', NULL),
+(88, 'instructor_bg.jpg', 'image', 'image/jpeg', '2025/04/08/instructor-bg.jpg', 'jpg', 435283, NULL, 1, '2025-04-08 18:16:02', '2025-04-08 18:16:02', 'public', NULL),
+(89, 'instructor_img_1.png', 'image', 'image/png', '2025/04/08/instructor-img-1.png', 'png', 111974, NULL, 1, '2025-04-08 18:17:21', '2025-04-08 18:17:21', 'public', NULL),
+(90, 'instructor_img_2.png', 'image', 'image/png', '2025/04/08/instructor-img-2.png', 'png', 97189, NULL, 1, '2025-04-08 18:23:54', '2025-04-08 18:23:54', 'public', NULL),
+(91, 'instructor_img_3.png', 'image', 'image/png', '2025/04/08/instructor-img-3.png', 'png', 106497, NULL, 1, '2025-04-08 18:30:17', '2025-04-08 18:30:17', 'public', NULL),
+(92, 'instructor_img_4.png', 'image', 'image/png', '2025/04/08/instructor-img-4.png', 'png', 91703, NULL, 1, '2025-04-08 18:30:49', '2025-04-08 18:30:49', 'public', NULL),
+(93, 'instructor_img_5.png', 'image', 'image/png', '2025/04/08/instructor-img-5.png', 'png', 100059, NULL, 1, '2025-04-08 18:31:13', '2025-04-08 18:31:13', 'public', NULL),
+(94, 'instructor_img_6.png', 'image', 'image/png', '2025/04/08/instructor-img-6.png', 'png', 105127, NULL, 1, '2025-04-08 18:31:40', '2025-04-08 18:31:40', 'public', NULL),
+(95, 'certificate_bg.jpg', 'image', 'image/jpeg', '2025/04/08/certificate-bg.jpg', 'jpg', 602178, NULL, 1, '2025-04-08 18:36:18', '2025-04-08 18:36:18', 'public', NULL),
+(96, 'certificate_icon_1.png', 'image', 'image/png', '2025/04/08/certificate-icon-1.png', 'png', 3802, NULL, 1, '2025-04-08 18:37:39', '2025-04-08 18:37:39', 'public', NULL),
+(97, 'certificate_icon_2.png', 'image', 'image/png', '2025/04/08/certificate-icon-2.png', 'png', 2952, NULL, 1, '2025-04-08 18:38:12', '2025-04-08 18:38:12', 'public', NULL),
+(98, 'certificate_icon_3.png', 'image', 'image/png', '2025/04/08/certificate-icon-3.png', 'png', 3642, NULL, 1, '2025-04-08 18:38:44', '2025-04-08 18:38:44', 'public', NULL),
+(99, 'certificate_icon_4.png', 'image', 'image/png', '2025/04/08/certificate-icon-4.png', 'png', 3538, NULL, 1, '2025-04-08 18:39:04', '2025-04-08 18:39:04', 'public', NULL),
+(100, 'testimonial_bg.jpg', 'image', 'image/jpeg', '2025/04/08/testimonial-bg.jpg', 'jpg', 105571, NULL, 1, '2025-04-08 18:40:57', '2025-04-08 18:40:57', 'public', NULL),
+(101, 'testimonial_img_1.jpg', 'image', 'image/jpeg', '2025/04/08/testimonial-img-1.jpg', 'jpg', 6175, NULL, 1, '2025-04-08 18:43:06', '2025-04-08 18:43:06', 'public', NULL),
+(102, 'testimonial_img_2.jpg', 'image', 'image/jpeg', '2025/04/08/testimonial-img-2.jpg', 'jpg', 5669, NULL, 1, '2025-04-08 18:44:53', '2025-04-08 18:44:53', 'public', NULL),
+(103, 'testimonial_img_3.jpg', 'image', 'image/jpeg', '2025/04/08/testimonial-img-3.jpg', 'jpg', 5978, NULL, 1, '2025-04-08 18:46:05', '2025-04-08 18:46:05', 'public', NULL),
+(104, 'course_video_img.jpg', 'image', 'image/jpeg', '2025/04/09/course-video-img.jpg', 'jpg', 115620, NULL, 1, '2025-04-09 16:52:49', '2025-04-09 16:52:49', 'public', NULL),
+(105, 'sidebar_video_img.jpg', 'image', 'image/jpeg', '2025/04/09/sidebar-video-img.jpg', 'jpg', 26629, NULL, 1, '2025-04-09 16:55:34', '2025-04-09 16:55:34', 'public', NULL),
+(106, 'pngwing.com.png', 'image', 'image/png', '2025/04/09/pngwingcom.png', 'png', 23401, NULL, 1, '2025-04-09 19:30:31', '2025-04-09 19:30:31', 'public', NULL),
+(107, 'banner_bg.jpg', 'image', 'image/jpeg', '2025/04/20/banner-bg.jpg', 'jpg', 538084, NULL, 1, '2025-04-20 07:04:22', '2025-04-20 07:04:22', 'public', NULL),
+(108, 'banner_img.png', 'image', 'image/png', '2025/04/20/banner-img.png', 'png', 579553, NULL, 1, '2025-04-20 07:04:54', '2025-04-20 07:04:54', 'public', NULL),
+(109, 'category_bg.jpg', 'image', 'image/jpeg', '2025/04/20/category-bg.jpg', 'jpg', 67182, NULL, 1, '2025-04-20 07:07:54', '2025-04-20 07:07:54', 'public', NULL),
+(110, 'category_icon_1.png', 'image', 'image/png', '2025/04/20/category-icon-1.png', 'png', 2869, NULL, 1, '2025-04-20 07:09:07', '2025-04-20 07:09:07', 'public', NULL),
+(111, 'logo.png', 'image', 'image/png', '2025/04/20/logo.png', 'png', 5366, NULL, 1, '2025-04-20 19:10:40', '2025-04-20 19:10:40', 'public', NULL),
+(112, 'favicon.png', 'image', 'image/png', '2025/04/20/favicon.png', 'png', 1788, NULL, 1, '2025-04-20 19:13:14', '2025-04-20 19:13:14', 'public', NULL),
+(113, 'favicon.png', 'image', 'image/png', '2025/04/20/favicon-1.png', 'png', 2219, NULL, 1, '2025-04-20 19:15:51', '2025-04-20 19:15:51', 'public', NULL),
+(114, 'category_icon_2.png', 'image', 'image/png', '2025/04/21/category-icon-2.png', 'png', 2286, NULL, 1, '2025-04-21 10:56:23', '2025-04-21 10:56:23', 'public', NULL),
+(115, 'category_icon_3.png', 'image', 'image/png', '2025/04/21/category-icon-3.png', 'png', 2176, NULL, 1, '2025-04-21 10:57:12', '2025-04-21 10:57:12', 'public', NULL),
+(116, 'category_icon_4.png', 'image', 'image/png', '2025/04/21/category-icon-4.png', 'png', 2196, NULL, 1, '2025-04-21 10:57:37', '2025-04-21 10:57:37', 'public', NULL),
+(117, 'category_icon_5.png', 'image', 'image/png', '2025/04/21/category-icon-5.png', 'png', 2615, NULL, 1, '2025-04-21 10:59:25', '2025-04-21 10:59:25', 'public', NULL),
+(118, 'category_icon_6.png', 'image', 'image/png', '2025/04/21/category-icon-6.png', 'png', 1971, NULL, 1, '2025-04-21 10:59:46', '2025-04-21 10:59:46', 'public', NULL),
+(119, 'category_icon_7.png', 'image', 'image/png', '2025/04/21/category-icon-7.png', 'png', 2087, NULL, 1, '2025-04-21 11:00:08', '2025-04-21 11:00:08', 'public', NULL),
+(120, 'category_icon_8.png', 'image', 'image/png', '2025/04/21/category-icon-8.png', 'png', 1725, NULL, 1, '2025-04-21 11:00:28', '2025-04-21 11:00:28', 'public', NULL),
+(121, 'about_section_bg.jpg', 'image', 'image/jpeg', '2025/04/21/about-section-bg.jpg', 'jpg', 96836, NULL, 1, '2025-04-21 11:01:36', '2025-04-21 11:01:36', 'public', NULL),
+(122, 'about-_img_1.jpg', 'image', 'image/jpeg', '2025/04/21/about-img-1.jpg', 'jpg', 126002, NULL, 1, '2025-04-21 11:01:58', '2025-04-21 11:01:58', 'public', NULL),
+(123, 'about-_img_2.jpg', 'image', 'image/jpeg', '2025/04/21/about-img-2.jpg', 'jpg', 116399, NULL, 1, '2025-04-21 11:02:10', '2025-04-21 11:02:10', 'public', NULL),
+(124, 'courses_bg.jpg', 'image', 'image/jpeg', '2025/04/21/courses-bg.jpg', 'jpg', 648208, NULL, 1, '2025-04-21 11:04:43', '2025-04-21 11:04:43', 'public', NULL),
+(125, 'student_choose_bg.jpg', 'image', 'image/jpeg', '2025/04/21/student-choose-bg.jpg', 'jpg', 101397, NULL, 1, '2025-04-21 11:06:36', '2025-04-21 11:06:36', 'public', NULL),
+(126, 'student_choose_img_1.jpg', 'image', 'image/jpeg', '2025/04/21/student-choose-img-1.jpg', 'jpg', 65090, NULL, 1, '2025-04-21 11:07:46', '2025-04-21 11:07:46', 'public', NULL),
+(127, 'student_choose_img_2.jpg', 'image', 'image/jpeg', '2025/04/21/student-choose-img-2.jpg', 'jpg', 17200, NULL, 1, '2025-04-21 11:07:56', '2025-04-21 11:07:56', 'public', NULL),
+(128, 'event_bg.jpg', 'image', 'image/jpeg', '2025/04/21/event-bg.jpg', 'jpg', 118399, NULL, 1, '2025-04-21 11:08:51', '2025-04-21 11:08:51', 'public', NULL),
+(129, 'testimonial_bg.jpg', 'image', 'image/jpeg', '2025/04/21/testimonial-bg.jpg', 'jpg', 105571, NULL, 1, '2025-04-21 11:10:40', '2025-04-21 11:10:40', 'public', NULL),
+(130, 'testimonial_img_1.jpg', 'image', 'image/jpeg', '2025/04/21/testimonial-img-1.jpg', 'jpg', 6175, NULL, 1, '2025-04-21 11:11:11', '2025-04-21 11:11:11', 'public', NULL),
+(131, 'testimonial_img_2.jpg', 'image', 'image/jpeg', '2025/04/21/testimonial-img-2.jpg', 'jpg', 5669, NULL, 1, '2025-04-21 11:14:15', '2025-04-21 11:14:15', 'public', NULL),
+(132, 'testimonial_img_3.jpg', 'image', 'image/jpeg', '2025/04/21/testimonial-img-3.jpg', 'jpg', 5978, NULL, 1, '2025-04-21 11:15:51', '2025-04-21 11:15:51', 'public', NULL),
+(133, 'certificate_bg.jpg', 'image', 'image/jpeg', '2025/04/21/certificate-bg.jpg', 'jpg', 602178, NULL, 1, '2025-04-21 11:17:07', '2025-04-21 11:17:07', 'public', NULL),
+(134, 'certificate_icon_1.png', 'image', 'image/png', '2025/04/21/certificate-icon-1.png', 'png', 3802, NULL, 1, '2025-04-21 11:17:35', '2025-04-21 11:17:35', 'public', NULL),
+(135, 'certificate_icon_2.png', 'image', 'image/png', '2025/04/21/certificate-icon-2.png', 'png', 2952, NULL, 1, '2025-04-21 11:18:07', '2025-04-21 11:18:07', 'public', NULL),
+(136, 'certificate_icon_3.png', 'image', 'image/png', '2025/04/21/certificate-icon-3.png', 'png', 3642, NULL, 1, '2025-04-21 11:18:41', '2025-04-21 11:18:41', 'public', NULL),
+(137, 'certificate_icon_4.png', 'image', 'image/png', '2025/04/21/certificate-icon-4.png', 'png', 3538, NULL, 1, '2025-04-21 11:19:11', '2025-04-21 11:19:11', 'public', NULL),
+(138, 'instructor_bg.jpg', 'image', 'image/jpeg', '2025/04/21/instructor-bg.jpg', 'jpg', 435283, NULL, 1, '2025-04-21 11:20:34', '2025-04-21 11:20:34', 'public', NULL),
+(139, 'instructor_details_img.png', 'image', 'image/png', '2025/04/21/instructor-details-img.png', 'png', 200684, NULL, 1, '2025-04-21 11:22:19', '2025-04-21 11:22:19', 'public', NULL),
+(140, 'instructor_img_1.png', 'image', 'image/png', '2025/04/21/instructor-img-1.png', 'png', 111974, NULL, 1, '2025-04-21 11:22:29', '2025-04-21 11:22:29', 'public', NULL),
+(141, 'instructor_img_2.png', 'image', 'image/png', '2025/04/21/instructor-img-2.png', 'png', 97189, NULL, 1, '2025-04-21 11:26:00', '2025-04-21 11:26:00', 'public', NULL),
+(142, 'instructor_img_3.png', 'image', 'image/png', '2025/04/21/instructor-img-3.png', 'png', 106497, NULL, 1, '2025-04-21 11:27:57', '2025-04-21 11:27:57', 'public', NULL),
+(143, 'instructor_img_4.png', 'image', 'image/png', '2025/04/21/instructor-img-4.png', 'png', 91703, NULL, 1, '2025-04-21 11:28:26', '2025-04-21 11:28:26', 'public', NULL),
+(144, 'instructor_img_5.png', 'image', 'image/png', '2025/04/21/instructor-img-5.png', 'png', 100059, NULL, 1, '2025-04-21 11:28:39', '2025-04-21 11:28:39', 'public', NULL),
+(145, 'instructor_img_6.png', 'image', 'image/png', '2025/04/21/instructor-img-6.png', 'png', 105127, NULL, 1, '2025-04-21 11:28:54', '2025-04-21 11:28:54', 'public', NULL),
+(146, 'blog_bg.jpg', 'image', 'image/jpeg', '2025/04/21/blog-bg.jpg', 'jpg', 125393, NULL, 1, '2025-04-21 11:30:49', '2025-04-21 11:30:49', 'public', NULL);
 
 -- --------------------------------------------------------
 
@@ -989,45 +1008,14 @@ INSERT INTO `app_media_files` (`id`, `name`, `type`, `mime_type`, `path`, `exten
 --
 
 CREATE TABLE `app_media_folders` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'image',
-  `folder_id` bigint DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `type` varchar(50) NOT NULL DEFAULT 'image',
+  `folder_id` bigint(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `disk` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'public'
+  `disk` varchar(50) NOT NULL DEFAULT 'public'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `app_media_folders`
---
-
-INSERT INTO `app_media_folders` (`id`, `name`, `type`, `folder_id`, `created_at`, `updated_at`, `disk`) VALUES
-(1, 'new folder', 'file', NULL, '2025-01-26 11:36:26', '2025-01-26 11:36:26', 'public'),
-(2, 'adsds', 'file', NULL, '2025-01-26 11:36:53', '2025-01-26 11:36:53', 'public'),
-(3, 'BDT-taka', 'file', NULL, '2025-01-26 11:44:54', '2025-01-26 11:44:54', 'public'),
-(4, 'dsds', 'file', NULL, '2025-01-26 11:48:52', '2025-01-26 11:48:52', 'public'),
-(5, 'dasdas', 'file', NULL, '2025-01-26 11:50:32', '2025-01-26 11:50:32', 'public'),
-(6, 'sssfdsfd', 'file', 2, '2025-01-26 11:52:31', '2025-01-26 11:52:31', 'public'),
-(7, 'vcvxc', 'file', 2, '2025-01-26 12:07:19', '2025-01-26 12:07:19', 'public'),
-(8, 'new-things', 'file', NULL, '2025-01-26 13:00:27', '2025-01-26 13:00:27', 'public'),
-(9, 'new-things', 'file', NULL, '2025-01-26 13:00:27', '2025-01-26 13:00:27', 'public'),
-(10, 'cxczx', 'image', NULL, '2025-03-06 04:40:55', '2025-03-06 04:40:55', 'public'),
-(11, 'faadf', 'image', 10, '2025-03-06 04:41:17', '2025-03-06 04:41:17', 'public'),
-(12, 'fadfd', 'image', NULL, '2025-03-06 05:06:42', '2025-03-06 05:06:42', 'public'),
-(13, 'dasdsa', 'image', NULL, '2025-03-06 05:07:04', '2025-03-06 05:07:04', 'public'),
-(14, 'gfg', 'image', NULL, '2025-03-06 05:07:48', '2025-03-06 05:07:48', 'public'),
-(15, 'fdfd', 'image', NULL, '2025-03-06 05:09:16', '2025-03-06 05:09:16', 'public'),
-(16, 'dasdsd', 'image', NULL, '2025-03-06 05:11:54', '2025-03-06 05:11:54', 'public'),
-(17, 'bxbcv', 'image', 9, '2025-03-06 07:04:06', '2025-03-06 07:04:06', 'public'),
-(18, 'dasdsad', 'image', 9, '2025-03-06 07:12:50', '2025-03-06 07:12:50', 'public'),
-(19, 'asdasdas', 'image', 9, '2025-03-06 07:13:18', '2025-03-06 07:13:18', 'public'),
-(20, 'asdasdsa', 'image', 9, '2025-03-06 07:13:45', '2025-03-06 07:13:45', 'public'),
-(21, 'adsdasd', 'image', 9, '2025-03-06 07:14:22', '2025-03-06 07:14:22', 'public'),
-(22, 'dasdsa', 'image', 9, '2025-03-06 07:15:12', '2025-03-06 07:15:12', 'public'),
-(23, 'dsdsad', 'image', 9, '2025-03-06 07:18:33', '2025-03-06 07:18:33', 'public'),
-(24, 'adsd', 'image', NULL, '2025-03-06 07:21:15', '2025-03-06 07:21:15', 'public'),
-(25, 'dadasd', 'image', NULL, '2025-03-06 07:21:49', '2025-03-06 07:21:49', 'public');
 
 -- --------------------------------------------------------
 
@@ -1036,12 +1024,12 @@ INSERT INTO `app_media_folders` (`id`, `name`, `type`, `folder_id`, `created_at`
 --
 
 CREATE TABLE `app_menus` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` varchar(150) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `uuid` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `uuid` char(36) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1049,8 +1037,10 @@ CREATE TABLE `app_menus` (
 --
 
 INSERT INTO `app_menus` (`id`, `name`, `description`, `created_at`, `updated_at`, `uuid`) VALUES
-(11, 'Menu 1 test', NULL, '2025-01-28 12:18:15', '2025-01-28 12:18:15', '84ba77ce-7feb-44bb-94c1-02178ca41482'),
-(12, 'fcgjvb', NULL, '2025-02-01 12:30:46', '2025-02-01 12:30:46', 'a6be2487-7db7-4d24-bc46-65113d84c726');
+(11, 'Main Menu', NULL, '2025-01-28 12:18:15', '2025-04-08 17:41:01', '84ba77ce-7feb-44bb-94c1-02178ca41482'),
+(12, 'fcgjvb', NULL, '2025-02-01 12:30:46', '2025-02-01 12:30:46', 'a6be2487-7db7-4d24-bc46-65113d84c726'),
+(13, 'Footer 2 menu', NULL, '2025-04-08 17:41:34', '2025-04-08 17:41:51', '40e7a1f3-2907-4082-91dc-a2c964911bb7'),
+(14, 'Footer Bottom Menu', NULL, '2025-04-21 11:42:18', '2025-04-21 11:42:18', 'b79853bc-81b9-43f2-a84c-93290aa5cada');
 
 -- --------------------------------------------------------
 
@@ -1059,17 +1049,17 @@ INSERT INTO `app_menus` (`id`, `name`, `description`, `created_at`, `updated_at`
 --
 
 CREATE TABLE `app_menu_items` (
-  `id` bigint UNSIGNED NOT NULL,
-  `menu_id` bigint UNSIGNED NOT NULL,
-  `parent_id` bigint UNSIGNED DEFAULT NULL,
-  `box_key` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `label` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model_class` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `model_id` bigint DEFAULT NULL,
-  `link` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `icon` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `target` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '_self',
-  `num_order` int NOT NULL
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `menu_id` bigint(20) UNSIGNED NOT NULL,
+  `parent_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `box_key` varchar(50) NOT NULL,
+  `label` varchar(100) NOT NULL,
+  `model_class` varchar(100) DEFAULT NULL,
+  `model_id` bigint(20) DEFAULT NULL,
+  `link` varchar(150) DEFAULT NULL,
+  `icon` varchar(150) DEFAULT NULL,
+  `target` varchar(10) NOT NULL DEFAULT '_self',
+  `num_order` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1077,12 +1067,29 @@ CREATE TABLE `app_menu_items` (
 --
 
 INSERT INTO `app_menu_items` (`id`, `menu_id`, `parent_id`, `box_key`, `label`, `model_class`, `model_id`, `link`, `icon`, `target`, `num_order`) VALUES
-(1, 11, NULL, 'post_type_pages', 'Home2', 'Juzaweb\\Backend\\Models\\Post', 8, NULL, NULL, '_self', 1),
-(2, 11, NULL, 'post_type_pages', 'dsdsds', 'Juzaweb\\Backend\\Models\\Post', 9, NULL, NULL, '_self', 2),
-(3, 11, NULL, 'post_type_pages', 'home3', 'Juzaweb\\Backend\\Models\\Post', 10, NULL, NULL, '_self', 3),
-(4, 11, NULL, 'post_type_pages', 'home', 'Juzaweb\\Backend\\Models\\Post', 11, NULL, NULL, '_self', 4),
-(5, 11, NULL, 'post_type_pages', 'Somthing', 'Juzaweb\\Backend\\Models\\Post', 12, NULL, NULL, '_self', 5),
-(6, 11, NULL, 'post_type_pages', 'Courses', 'Juzaweb\\Backend\\Models\\Post', 122, NULL, NULL, '_self', 6);
+(7, 11, NULL, 'post_type_pages', 'Home', 'Juzaweb\\Backend\\Models\\Post', 11, NULL, NULL, '_self', 1),
+(8, 11, NULL, 'custom_url', 'Courses', NULL, NULL, '/courses', NULL, '_self', 3),
+(9, 11, NULL, 'custom_url', 'Event', NULL, NULL, '/events', NULL, '_self', 4),
+(10, 11, NULL, 'custom_url', 'Blog', NULL, NULL, '/blogs', NULL, '_self', 5),
+(11, 11, NULL, 'custom_url', 'Pages', NULL, NULL, '#', NULL, '_self', 6),
+(12, 11, NULL, 'post_type_pages', 'Contact', 'Juzaweb\\Backend\\Models\\Post', 22, NULL, NULL, '_self', 15),
+(13, 11, NULL, 'post_type_pages', 'About Us', 'Juzaweb\\Backend\\Models\\Post', 151, NULL, NULL, '_self', 2),
+(14, 11, 11, 'post_type_events', 'Event Details', 'Juzaweb\\Backend\\Models\\Post', 150, NULL, NULL, '_self', 7),
+(15, 11, 11, 'post_type_posts', 'Blog Details', 'Juzaweb\\Backend\\Models\\Post', 142, NULL, NULL, '_self', 8),
+(16, 11, 11, 'post_type_pages', 'Privacy policy', 'Juzaweb\\Backend\\Models\\Post', 24, NULL, NULL, '_self', 9),
+(17, 11, 11, 'post_type_pages', 'Terms And Condition', 'Juzaweb\\Backend\\Models\\Post', 152, NULL, NULL, '_self', 10),
+(18, 11, 11, 'post_type_pages', 'FAQs', 'Juzaweb\\Backend\\Models\\Post', 23, NULL, NULL, '_self', 11),
+(19, 11, 11, 'custom_url', '404', NULL, NULL, '/404', NULL, '_self', 12),
+(20, 11, 11, 'custom_url', 'Cart', NULL, NULL, '/cart', NULL, '_self', 13),
+(21, 13, NULL, 'post_type_pages', 'Privacy policy', 'Juzaweb\\Backend\\Models\\Post', 24, NULL, NULL, '_self', 2),
+(22, 13, NULL, 'post_type_pages', 'Courses', 'Juzaweb\\Backend\\Models\\Post', 122, NULL, NULL, '_self', 3),
+(23, 13, NULL, 'post_type_pages', 'About Us', 'Juzaweb\\Backend\\Models\\Post', 151, NULL, NULL, '_self', 4),
+(24, 13, NULL, 'post_type_pages', 'Terms And Condition', 'Juzaweb\\Backend\\Models\\Post', 152, NULL, NULL, '_self', 5),
+(25, 13, NULL, 'post_type_pages', 'Home', 'Juzaweb\\Backend\\Models\\Post', 11, NULL, NULL, '_self', 1),
+(26, 11, 11, 'custom_url', 'Checkout', NULL, NULL, '/checkout', NULL, '_self', 14),
+(27, 14, NULL, 'post_type_pages', 'Courses', 'Juzaweb\\Backend\\Models\\Post', 122, NULL, NULL, '_self', 1),
+(28, 14, NULL, 'post_type_pages', 'Blogs', 'Juzaweb\\Backend\\Models\\Post', 133, NULL, NULL, '_self', 2),
+(29, 14, NULL, 'post_type_pages', 'About Us', 'Juzaweb\\Backend\\Models\\Post', 151, NULL, NULL, '_self', 3);
 
 -- --------------------------------------------------------
 
@@ -1091,9 +1098,9 @@ INSERT INTO `app_menu_items` (`id`, `menu_id`, `parent_id`, `box_key`, `label`, 
 --
 
 CREATE TABLE `app_migrations` (
-  `id` int UNSIGNED NOT NULL,
-  `migration` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int NOT NULL
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(150) NOT NULL,
+  `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1204,9 +1211,9 @@ INSERT INTO `app_migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `app_model_has_permissions` (
-  `permission_id` bigint UNSIGNED NOT NULL,
-  `model_type` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model_id` bigint UNSIGNED NOT NULL
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(150) NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1216,9 +1223,9 @@ CREATE TABLE `app_model_has_permissions` (
 --
 
 CREATE TABLE `app_model_has_roles` (
-  `role_id` bigint UNSIGNED NOT NULL,
-  `model_type` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model_id` bigint UNSIGNED NOT NULL
+  `role_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(150) NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1228,12 +1235,12 @@ CREATE TABLE `app_model_has_roles` (
 --
 
 CREATE TABLE `app_notifications` (
-  `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` char(36) NOT NULL,
+  `type` varchar(150) NOT NULL,
+  `data` text NOT NULL,
   `read_at` timestamp NULL DEFAULT NULL,
-  `notifiable_type` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `notifiable_id` bigint UNSIGNED NOT NULL,
+  `notifiable_type` varchar(150) NOT NULL,
+  `notifiable_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1245,8 +1252,8 @@ CREATE TABLE `app_notifications` (
 INSERT INTO `app_notifications` (`id`, `type`, `data`, `read_at`, `notifiable_type`, `notifiable_id`, `created_at`, `updated_at`) VALUES
 ('0090267c-f2bb-44a9-98ca-311f4d5c7d70', 'Juzaweb\\CMS\\Support\\Notifications\\DbNotify', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', NULL, 'Juzaweb\\CMS\\Models\\User', 1, '2025-03-29 02:05:40', '2025-03-29 02:05:40'),
 ('093824c2-de08-422e-beed-d0d8643f3911', 'Juzaweb\\CMS\\Support\\Notifications\\DbNotify', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', NULL, 'Juzaweb\\CMS\\Models\\User', 1, '2025-03-06 22:43:40', '2025-03-06 22:43:40'),
-('0d6a3832-a91f-4498-a2d1-99e642d13bfa', 'Juzaweb\\CMS\\Support\\Notifications\\DbNotify', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', NULL, 'Juzaweb\\CMS\\Models\\User', 1, '2025-04-03 10:54:56', '2025-04-03 10:54:56'),
-('4421492a-114f-42d8-ab1f-0c8020e8e18e', 'Juzaweb\\CMS\\Support\\Notifications\\DbNotify', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', NULL, 'Juzaweb\\CMS\\Models\\User', 1, '2025-04-04 12:37:37', '2025-04-04 12:37:37'),
+('0d6a3832-a91f-4498-a2d1-99e642d13bfa', 'Juzaweb\\CMS\\Support\\Notifications\\DbNotify', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', '2025-04-08 16:56:35', 'Juzaweb\\CMS\\Models\\User', 1, '2025-04-03 10:54:56', '2025-04-08 16:56:35'),
+('4421492a-114f-42d8-ab1f-0c8020e8e18e', 'Juzaweb\\CMS\\Support\\Notifications\\DbNotify', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', '2025-04-08 16:55:18', 'Juzaweb\\CMS\\Models\\User', 1, '2025-04-04 12:37:37', '2025-04-08 16:55:18'),
 ('4a30ddfe-f0ca-4989-8157-9da9ccdb96e7', 'Juzaweb\\CMS\\Support\\Notifications\\DbNotify', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', NULL, 'Juzaweb\\CMS\\Models\\User', 1, '2025-03-24 11:09:51', '2025-03-24 11:09:51'),
 ('521b9b46-2023-4942-a5e3-d65412b40b4e', 'Juzaweb\\CMS\\Support\\Notifications\\DbNotify', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', NULL, 'Juzaweb\\CMS\\Models\\User', 1, '2025-03-06 00:41:25', '2025-03-06 00:41:25'),
 ('630d6fab-eb5e-4461-bc8c-e3bd62c1b6c8', 'Juzaweb\\CMS\\Support\\Notifications\\DbNotify', '{\"subject\":\"New Version CMS Available !\",\"body\":\"CMS has a new version, update now!\",\"url\":\"http:\\/\\/mojar-cms.test\\/app\\/updates\",\"image\":null}', NULL, 'Juzaweb\\CMS\\Models\\User', 1, '2025-03-06 00:36:00', '2025-03-06 00:36:00'),
@@ -1269,11 +1276,11 @@ INSERT INTO `app_notifications` (`id`, `type`, `data`, `read_at`, `notifiable_ty
 --
 
 CREATE TABLE `app_oauth_access_tokens` (
-  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `client_id` bigint UNSIGNED NOT NULL,
-  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `scopes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `id` varchar(100) NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `client_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(150) DEFAULT NULL,
+  `scopes` text DEFAULT NULL,
   `revoked` tinyint(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -1287,10 +1294,10 @@ CREATE TABLE `app_oauth_access_tokens` (
 --
 
 CREATE TABLE `app_oauth_auth_codes` (
-  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` bigint UNSIGNED NOT NULL,
-  `client_id` bigint UNSIGNED NOT NULL,
-  `scopes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `id` varchar(100) NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `client_id` bigint(20) UNSIGNED NOT NULL,
+  `scopes` text DEFAULT NULL,
   `revoked` tinyint(1) NOT NULL,
   `expires_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1302,12 +1309,12 @@ CREATE TABLE `app_oauth_auth_codes` (
 --
 
 CREATE TABLE `app_oauth_clients` (
-  `id` bigint UNSIGNED NOT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `secret` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `provider` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `redirect` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `name` varchar(150) NOT NULL,
+  `secret` varchar(100) DEFAULT NULL,
+  `provider` varchar(150) DEFAULT NULL,
+  `redirect` text NOT NULL,
   `personal_access_client` tinyint(1) NOT NULL,
   `password_client` tinyint(1) NOT NULL,
   `revoked` tinyint(1) NOT NULL,
@@ -1322,8 +1329,8 @@ CREATE TABLE `app_oauth_clients` (
 --
 
 CREATE TABLE `app_oauth_personal_access_clients` (
-  `id` bigint UNSIGNED NOT NULL,
-  `client_id` bigint UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `client_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1335,8 +1342,8 @@ CREATE TABLE `app_oauth_personal_access_clients` (
 --
 
 CREATE TABLE `app_oauth_refresh_tokens` (
-  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `access_token_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(100) NOT NULL,
+  `access_token_id` varchar(100) NOT NULL,
   `revoked` tinyint(1) NOT NULL,
   `expires_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1348,29 +1355,29 @@ CREATE TABLE `app_oauth_refresh_tokens` (
 --
 
 CREATE TABLE `app_orders` (
-  `id` bigint UNSIGNED NOT NULL,
-  `token` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `code` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'ecommerce',
-  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
-  `payment_status` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
-  `delivery_status` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
-  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `country_code` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `quantity` int NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `token` char(36) NOT NULL,
+  `code` varchar(150) NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `type` varchar(50) NOT NULL DEFAULT 'ecommerce',
+  `status` varchar(50) NOT NULL DEFAULT 'pending',
+  `payment_status` varchar(150) NOT NULL DEFAULT 'pending',
+  `delivery_status` varchar(150) NOT NULL DEFAULT 'pending',
+  `name` varchar(150) NOT NULL,
+  `email` varchar(150) DEFAULT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `country_code` varchar(15) DEFAULT NULL,
+  `quantity` int(11) NOT NULL,
   `total_price` decimal(20,2) NOT NULL,
   `total` decimal(20,2) NOT NULL,
-  `discount` decimal(20,2) NOT NULL DEFAULT '0.00',
-  `discount_codes` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `payment_method_id` bigint UNSIGNED DEFAULT NULL,
-  `payment_method_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `notes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `site_id` bigint UNSIGNED DEFAULT NULL,
+  `discount` decimal(20,2) NOT NULL DEFAULT 0.00,
+  `discount_codes` varchar(150) DEFAULT NULL,
+  `payment_method_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `payment_method_name` varchar(250) NOT NULL,
+  `notes` text DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `site_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1380,199 +1387,8 @@ CREATE TABLE `app_orders` (
 --
 
 INSERT INTO `app_orders` (`id`, `token`, `code`, `title`, `type`, `status`, `payment_status`, `delivery_status`, `name`, `email`, `phone`, `address`, `country_code`, `quantity`, `total_price`, `total`, `discount`, `discount_codes`, `payment_method_id`, `payment_method_name`, `notes`, `user_id`, `site_id`, `created_at`, `updated_at`) VALUES
-(8, 'fb9f6707-bc07-45ae-b508-3c1a4bebfb1a', '202502151550321', 'Order #202502151550321', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-15 09:50:32', '2025-02-15 09:50:32'),
-(9, 'fcf1f3f0-aaa7-4e6f-b8e4-e74de0de8f8a', '202502151555321', 'Order #202502151555321', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-15 09:55:32', '2025-02-15 09:55:32'),
-(10, 'a116d37d-9522-4b12-83f2-4e4388ba7127', '202502151608001', 'Order #202502151608001', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-15 10:08:00', '2025-02-15 10:08:00'),
-(11, '77667b04-7381-4e92-b9da-cfc2c594e8e6', '202502161338351', 'Order #202502161338351', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-16 07:38:35', '2025-02-16 07:38:35'),
-(12, 'f287cdaf-e910-493c-bea6-c78230437e2f', '202502191356451', 'Order #202502191356451', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-19 07:56:45', '2025-02-19 07:56:45'),
-(13, '2b12563f-1556-4df0-8262-9a16ceb671e6', '202502210457151', 'Order #202502210457151', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-20 22:57:17', '2025-02-20 22:57:17'),
-(14, '839636ce-5a7d-4d2d-8e09-e1964b287dfc', '202502210500371', 'Order #202502210500371', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-20 23:00:37', '2025-02-20 23:00:37'),
-(15, 'a8cfd851-402c-4446-b61e-e333d7c9af1e', '202502210501491', 'Order #202502210501491', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-20 23:01:49', '2025-02-20 23:01:49'),
-(16, 'd96284ee-7682-455a-9d27-6e0b3472f621', '202502211658121', 'Order #202502211658121', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-21 10:58:15', '2025-02-21 10:58:15'),
-(17, 'e4b7adb4-5057-4189-936f-e9f585ddff10', '202502211659161', 'Order #202502211659161', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-21 10:59:16', '2025-02-21 10:59:16'),
-(18, '0fb17925-b368-4443-a71f-0f82868fc53a', '202502211732501', 'Order #202502211732501', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-21 11:32:50', '2025-02-21 11:32:50'),
-(19, 'd2d83528-6284-439a-9a50-f93d53f16aed', '202502211734061', 'Order #202502211734061', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-21 11:34:06', '2025-02-21 11:34:06'),
-(20, '47384a55-e496-4039-9445-e5617f3e2f37', '202502211736341', 'Order #202502211736341', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-21 11:36:34', '2025-02-21 11:36:34'),
-(21, '1884db9c-bee0-4194-9700-d69ace162bbf', '202502211737581', 'Order #202502211737581', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', 'gfgjhb', 1, NULL, '2025-02-21 11:37:58', '2025-02-21 11:37:58'),
-(22, '0af25462-cfaa-4445-97ed-c0026a31c29b', '202502211740351', 'Order #202502211740351', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 2, 'fgf', NULL, 1, NULL, '2025-02-21 11:40:35', '2025-02-21 11:40:35'),
-(23, '9e92a26d-4fec-4be6-ac09-d087e3d25537', '202502221441021', 'Order #202502221441021', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-22 08:41:02', '2025-02-22 08:41:02'),
-(24, '7eddb81e-470e-4555-9c39-adc75f14e2c6', '202502221443131', 'Order #202502221443131', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-22 08:43:13', '2025-02-22 08:43:13'),
-(25, 'a3faa469-f0b8-4587-86a9-cf1e674c7b99', '202502221444271', 'Order #202502221444271', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '0.00', '0.00', '0.00', NULL, 2, 'fgf', NULL, 1, NULL, '2025-02-22 08:44:27', '2025-02-22 08:44:27'),
-(26, '50a4b99a-5027-4e3c-a029-c7c7c0f5d4c3', '202502221446271', 'Order #202502221446271', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 2, 'fgf', 'dsds', 1, NULL, '2025-02-22 08:46:27', '2025-02-22 08:46:27'),
-(27, '672317aa-0e4f-4960-b59b-1cf72bbc1bc3', '202502221456241', 'Order #202502221456241', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 2, 'fgf', NULL, 1, NULL, '2025-02-22 08:56:24', '2025-02-22 08:56:24'),
-(28, 'e2a7727a-009a-4516-8367-98ea7778872e', '202502221522281', 'Order #202502221522281', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-22 09:22:28', '2025-02-22 09:22:28'),
-(29, '62d404c2-102b-46eb-8f2c-45c4be91b6dd', '202502221736541', 'Order #202502221736541', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-22 11:36:54', '2025-02-22 11:36:54'),
-(30, '36a23b87-9b5c-49f2-862d-2e2cc6dbf27a', '202502231423011', 'Order #202502231423011', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-23 08:23:03', '2025-02-23 08:23:03'),
-(31, 'b7f862ed-df93-4540-803d-6ca69270c089', '202502231658011', 'Order #202502231658011', 'ecommerce', 'pending', 'pending', 'pending', 'mojahid islam', 'raofahmedmojahid@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 5, NULL, '2025-02-23 10:58:01', '2025-02-23 10:58:01'),
-(32, 'd594acd0-615e-4029-9f45-4216abc03b6a', '202502240211321', 'Order #202502240211321', 'ecommerce', 'pending', 'pending', 'pending', 'mojahid islam', 'raofahmedmojahid@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 5, NULL, '2025-02-23 20:11:36', '2025-02-23 20:11:36'),
-(33, '5fd0ccbe-2ecc-44ac-ae85-68e57ac7891f', '202502240213481', 'Order #202502240213481', 'ecommerce', 'pending', 'pending', 'pending', 'mojahid islam', 'raofahmedmojahid@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 5, NULL, '2025-02-23 20:13:48', '2025-02-23 20:13:48'),
-(34, '0ed56fc3-b641-43ef-b3a8-f8ef5d252d88', '202502240217441', 'Order #202502240217441', 'ecommerce', 'pending', 'pending', 'pending', 'mojahid islam', 'raofahmedmojahid@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 5, NULL, '2025-02-23 20:17:44', '2025-02-23 20:17:44'),
-(35, 'a328723f-3a4f-4942-9394-254139566498', '202502240220181', 'Order #202502240220181', 'ecommerce', 'pending', 'pending', 'pending', 'dfdf', 'mojahidgenius48@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 6, NULL, '2025-02-23 20:20:18', '2025-02-23 20:20:18'),
-(36, 'fd0eeccf-24b6-4a27-96cc-6bb39e7e16ab', '202502240223501', 'Order #202502240223501', 'ecommerce', 'pending', 'pending', 'pending', 'mojahid islam', 'raofahmedmojahid@gmail.com', NULL, NULL, NULL, 2, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 5, NULL, '2025-02-23 20:23:50', '2025-02-23 20:23:50'),
-(37, 'bfd91928-1033-42a0-82aa-f1e47b09c4ed', '202502241527311', 'Order #202502241527311', 'ecommerce', 'pending', 'pending', 'pending', 'mojahid islam', 'raofahmedmojahid@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 5, NULL, '2025-02-24 09:27:33', '2025-02-24 09:27:33'),
-(38, 'a5b30ab8-b6e8-4955-8dc2-d5be2254b945', '202502241529131', 'Order #202502241529131', 'ecommerce', 'pending', 'pending', 'pending', 'dfdf', 'mojahidgenius48@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 6, NULL, '2025-02-24 09:29:13', '2025-02-24 09:29:13'),
-(39, 'ba033625-de63-4de6-ac48-bae01693e6ce', '202502241540581', 'Order #202502241540581', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 09:40:58', '2025-02-24 09:40:58'),
-(40, '64b90e79-3698-47e5-b8b7-17981d38b483', '202502241547261', 'Order #202502241547261', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-24 09:47:26', '2025-02-24 09:47:26'),
-(41, '08c762c3-0848-4b80-8377-06364a7e453c', '202502241549031', 'Order #202502241549031', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 09:49:03', '2025-02-24 09:49:03'),
-(42, '9cdea5ce-1a1e-48ea-bea1-2a9ad0e8bf8b', '202502241550071', 'Order #202502241550071', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-24 09:50:07', '2025-02-24 09:50:07'),
-(43, '41ba87cc-5875-470b-9209-5146a14f69b5', '202502241624091', 'Order #202502241624091', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 10:24:09', '2025-02-24 10:24:09'),
-(44, 'c15f23c6-0bc3-45d1-b82e-1b092fc21b8d', '202502241625371', 'Order #202502241625371', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-24 10:25:37', '2025-02-24 10:25:37'),
-(45, '6ff12a7c-d2b9-4a9d-9aca-431379a46c0a', '202502241626411', 'Order #202502241626411', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 10:26:41', '2025-02-24 10:26:41'),
-(46, '00fdd983-81a1-4b6e-a6a6-236b821ba695', '202502241627531', 'Order #202502241627531', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 10:27:53', '2025-02-24 10:27:53'),
-(47, '073c987b-3b45-4ff3-ac71-5960b4d61159', '202502241630031', 'Order #202502241630031', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 10:30:03', '2025-02-24 10:30:03'),
-(48, '2a4b0040-7a0c-43d7-9207-b990ef77b0c0', '202502241632271', 'Order #202502241632271', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 10:32:27', '2025-02-24 10:32:27'),
-(49, 'f5aa01f1-243b-4e56-b8d1-c9c66e34ad64', '202502241634401', 'Order #202502241634401', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 10:34:40', '2025-02-24 10:34:40'),
-(50, '5cd63ca4-4d9d-4376-818d-038c36bf688c', '202502241640291', 'Order #202502241640291', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 10:40:29', '2025-02-24 10:40:29'),
-(51, '05e88f17-f426-4740-bd4e-bdacf891d6cc', '202502241647191', 'Order #202502241647191', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 10:47:19', '2025-02-24 10:47:19'),
-(52, '514c25bf-f73c-49d7-ba88-ce474051fa81', '202502241649391', 'Order #202502241649391', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 10:49:39', '2025-02-24 10:49:39'),
-(53, '016a7555-6a33-4ce8-9f74-86f611e18605', '202502241651241', 'Order #202502241651241', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 10:51:24', '2025-02-24 10:51:24'),
-(54, '73270e13-53e4-4bb1-bab1-58aaa28aafab', '202502241654201', 'Order #202502241654201', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 10:54:20', '2025-02-24 10:54:20'),
-(55, '74f01343-9e9a-4734-8a8b-824258d4534e', '202502241654541', 'Order #202502241654541', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 10:54:54', '2025-02-24 10:54:54'),
-(56, 'aee97f67-1a46-4f28-9f4c-0b6738f1dcde', '202502241658101', 'Order #202502241658101', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-24 10:58:11', '2025-02-24 10:58:11'),
-(57, 'f50636ff-5602-4cd3-8449-4436ce9f5ec0', '202502241705351', 'Order #202502241705351', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-24 11:05:35', '2025-02-24 11:05:35'),
-(58, 'a2a34082-92c7-474e-be0a-764b5a650d0d', '202502241708131', 'Order #202502241708131', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-24 11:08:13', '2025-02-24 11:08:13'),
-(59, '6d57f5ea-111e-4fea-b0f3-b5a12fd3e087', '202502241711101', 'Order #202502241711101', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-24 11:11:10', '2025-02-24 11:11:10'),
-(60, '8654ccaf-24b4-4e44-8b8f-2cf05db16fac', '202502241712411', 'Order #202502241712411', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-24 11:12:41', '2025-02-24 11:12:41'),
-(61, 'faf0163d-2a10-49c8-8352-7f12a5244172', '202502241713201', 'Order #202502241713201', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-24 11:13:20', '2025-02-24 11:13:20'),
-(62, '2a14f4f5-8379-4930-b26d-f764eca21789', '202502241718031', 'Order #202502241718031', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 11:18:04', '2025-02-24 11:18:04'),
-(63, '3c7f9258-6a99-44a7-b4bd-a7edfcd9c127', '202502241718471', 'Order #202502241718471', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 11:18:47', '2025-02-24 11:18:47'),
-(64, '0b6c458f-eb65-47ad-95a0-07519d5ebd41', '202502241720321', 'Order #202502241720321', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-24 11:20:32', '2025-02-24 11:20:32'),
-(65, '9baafe77-4f6c-4106-bbd3-fb355903e831', '202502241720581', 'Order #202502241720581', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 11:20:58', '2025-02-24 11:20:58'),
-(66, '7f9f3726-2638-41a3-b569-411d516e00d3', '202502241722451', 'Order #202502241722451', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 11:22:45', '2025-02-24 11:22:45'),
-(67, 'a687a7b6-915f-4910-ad4e-5550c5efb822', '202502241727411', 'Order #202502241727411', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 11:27:41', '2025-02-24 11:27:41'),
-(68, '4dd1457a-ee47-44f7-8ebc-18186d5f189e', '202502241729291', 'Order #202502241729291', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 11:29:29', '2025-02-24 11:29:29'),
-(69, 'f50a3cbd-8659-4f5d-9b36-63088fd9ed2f', '202502241734191', 'Order #202502241734191', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 11:34:19', '2025-02-24 11:34:19'),
-(70, '0eb660bf-78ad-4f96-bd5e-a91f9e89addb', '202502241735181', 'Order #202502241735181', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-02-24 11:35:18', '2025-02-24 11:35:18'),
-(71, 'd375319a-798e-4d24-a3f9-0463e64ece9b', '202502241735461', 'Order #202502241735461', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 11:35:46', '2025-02-24 11:35:46'),
-(72, 'f4ecfeae-edd0-4da9-a942-d2de4f8dc458', '202502241749171', 'Order #202502241749171', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 11:49:17', '2025-02-24 11:49:17'),
-(73, 'c78312c4-6c8f-43d4-90fd-11370b3d8199', '202502241750081', 'Order #202502241750081', 'ecommerce', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-02-24 11:50:08', '2025-02-24 11:50:08'),
-(74, '432a395e-bb46-4df9-98b1-e1418e43f9a4', '202502270201341', 'Order #202502270201341', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 2, 'fgf', NULL, 1, NULL, '2025-02-26 20:01:38', '2025-02-26 20:01:38'),
-(76, 'fdd965a7-34d6-46f9-89cb-23fdabde5a5b', '202502270212301', 'Order #202502270212301', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 2, 'fgf', NULL, 1, NULL, '2025-02-26 20:12:30', '2025-02-26 20:12:30'),
-(78, '32db6f1d-fe34-43e9-963b-70bab2df4dbe', '202502270216211', 'Order #202502270216211', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 2, 'fgf', NULL, 1, NULL, '2025-02-26 20:16:21', '2025-02-26 20:16:21'),
-(79, '7ed6fdc9-16a0-40a5-acfc-c53de47a09d4', '202502270217441', 'Order #202502270217441', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 2, 'fgf', NULL, 1, NULL, '2025-02-26 20:17:44', '2025-02-26 20:17:44'),
-(82, '9cbbf6c3-73f1-4d45-a3be-5021d55ee682', '202502281242361', 'Order #202502281242361', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 3, '0.00', '0.00', '0.00', NULL, 2, 'fgf', NULL, 1, NULL, '2025-02-28 06:42:38', '2025-02-28 06:42:38'),
-(87, 'a8b1b465-b1f2-45c4-91f3-6a361ae8e7dc', '202503010340381', 'Order #202503010340381', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 3, '0.00', '0.00', '0.00', NULL, 2, 'fgf', NULL, 1, NULL, '2025-02-28 21:40:38', '2025-02-28 21:40:38'),
-(88, 'b867fc71-c59a-4077-b31b-2c3ffc78ee1f', '202503010342141', 'Order #202503010342141', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 2, 'fgf', NULL, 1, NULL, '2025-02-28 21:42:14', '2025-02-28 21:42:14'),
-(95, 'e8574641-3c6a-43cf-abd6-1941a857eb7f', '202503011142101', 'Order #202503011142101', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-01 05:42:10', '2025-03-01 05:42:10'),
-(96, '33a78868-0503-4cbc-962a-d3fa24ea4c10', '202503011145081', 'Order #202503011145081', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '0.00', '0.00', '0.00', NULL, 2, 'fgf', NULL, 1, NULL, '2025-03-01 05:45:08', '2025-03-01 05:45:08'),
-(97, '369a39ce-900d-487d-ba14-518b3f4108bc', '202503011323171', 'Order #202503011323171', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-01 07:23:17', '2025-03-01 07:23:17'),
-(98, '82e61139-2739-48f5-9093-d0b963847aa2', '202503011325291', 'Order #202503011325291', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-01 07:25:29', '2025-03-01 07:25:29'),
-(99, 'c00a62c1-ef8b-4054-a827-3ab2faa3390c', '202503021626051', 'Order #202503021626051', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 3, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-02 10:26:05', '2025-03-02 10:26:05'),
-(100, '00c62ba2-7fc0-45b0-a460-8e7f5fd19fb4', '202503021628071', 'Order #202503021628071', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 2, 'fgf', NULL, 1, NULL, '2025-03-02 10:28:07', '2025-03-02 10:28:07'),
-(101, 'fdb2c545-2fbd-4846-babc-0b24634acc3f', '202503030941121', 'Order #202503030941121', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '0.00', '0.00', '0.00', NULL, 2, 'fgf', NULL, 1, NULL, '2025-03-03 03:41:12', '2025-03-03 03:41:12'),
-(102, '9d2db447-b94e-46d2-9833-4d8f0a4f23a2', '202503031151471', 'Order #202503031151471', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-03 05:51:47', '2025-03-03 05:51:47'),
-(103, '60c076ac-a86b-4156-aa56-65a50111f394', '202503031152501', 'Order #202503031152501', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-03 05:52:50', '2025-03-03 05:52:50'),
-(104, 'f3737071-3649-40e3-a322-1f189506292f', '202503031153261', 'Order #202503031153261', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-03 05:53:26', '2025-03-03 05:53:26'),
-(105, '7c947a3f-462a-481d-ab4a-ca413ae5d16e', '202503031153451', 'Order #202503031153451', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-03 05:53:45', '2025-03-03 05:53:45'),
-(106, 'ffcf95c5-1bb1-4358-99b5-d0d97321bef1', '202503031154401', 'Order #202503031154401', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-03 05:54:40', '2025-03-03 05:54:40'),
-(107, '6e90870d-022f-4229-b849-c4423221e4f8', '202503031154551', 'Order #202503031154551', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-03 05:54:55', '2025-03-03 05:54:55'),
-(108, 'a9229f37-cc5b-4950-9c74-2ce8d4187a4e', '202503031314431', 'Order #202503031314431', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-03 07:14:43', '2025-03-03 07:14:43'),
-(109, '9e8270ef-7f6a-4961-b311-ea9537e41fd7', '202503031315031', 'Order #202503031315031', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-03 07:15:03', '2025-03-03 07:15:03'),
-(110, 'd4bee846-17af-4da7-b30e-e7aafcb73970', '202503031315201', 'Order #202503031315201', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-03 07:15:20', '2025-03-03 07:15:20'),
-(111, '10bb837d-05fc-46a0-9d3d-da7e630ae638', '202503031316451', 'Order #202503031316451', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-03 07:16:45', '2025-03-03 07:16:45'),
-(112, '44932046-aca6-4a6b-b648-19aa858ef4db', '202503031319421', 'Order #202503031319421', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-03 07:19:42', '2025-03-03 07:19:42'),
-(113, '1fec8001-8aad-4afb-9af8-356d516bdf81', '202503031320371', 'Order #202503031320371', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-03 07:20:37', '2025-03-03 07:20:37'),
-(114, '98d2191e-220e-42ab-8646-a90ee9fd34c3', '202503031320591', 'Order #202503031320591', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-03 07:20:59', '2025-03-03 07:20:59'),
-(115, '2ee3f3fe-6d2c-4ae2-abe7-eb6909404d72', '202503031523151', 'Order #202503031523151', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-03 09:23:15', '2025-03-03 09:23:15'),
-(116, 'c574c6a9-88f8-4cb3-8a92-f54d7f9ea7f6', '202503031525451', 'Order #202503031525451', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-03 09:25:45', '2025-03-03 09:25:45'),
-(117, '1fcf8427-58e6-47c8-a770-52e5ea9e34b5', '202503031526031', 'Order #202503031526031', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-03 09:26:03', '2025-03-03 09:26:03'),
-(118, '09607629-4b20-4337-b7ac-ff8e0d0b7f8c', '202503031527141', 'Order #202503031527141', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-03 09:27:14', '2025-03-03 09:27:14'),
-(119, '30ed28a9-5256-4cab-8f27-475b1d17e621', '202503031527321', 'Order #202503031527321', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-03 09:27:32', '2025-03-03 09:27:32'),
-(120, '939f2f83-247b-451e-b9ae-9501f4143710', '202503031528291', 'Order #202503031528291', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-03 09:28:29', '2025-03-03 09:28:29'),
-(121, '8dd76de9-5e85-4a8b-a311-d1e2f218288e', '202503031534311', 'Order #202503031534311', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-03 09:34:31', '2025-03-03 09:34:31'),
-(122, '517bcd02-af59-4ac9-b3be-947ffd4f6d31', '202503031535361', 'Order #202503031535361', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-03 09:35:36', '2025-03-03 09:35:36'),
-(123, '2f899adf-b382-4b53-9e10-aa0e28020c71', '202503031535531', 'Order #202503031535531', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-03 09:35:53', '2025-03-03 09:35:53'),
-(124, '219357b8-8740-47d9-9edc-13de82e87792', '202503031536381', 'Order #202503031536381', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-03 09:36:38', '2025-03-03 09:36:38'),
-(125, '8605799f-f216-4010-9a70-fe041da2ac42', '202503031536561', 'Order #202503031536561', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-03 09:36:56', '2025-03-03 09:36:56'),
-(126, '4fbfd24c-0a47-49d8-903c-09bef97a6967', '202503031537341', 'Order #202503031537341', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-03 09:37:34', '2025-03-03 09:37:34'),
-(127, '9ce96d6f-e674-4b16-bd6d-412e01cbf184', '202503031556571', 'Order #202503031556571', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-03 09:56:57', '2025-03-03 09:56:57'),
-(128, 'ccc05c4e-7c59-47d3-a0cf-3b6bf11b3a86', '202503040426331', 'Order #202503040426331', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 22:26:33', '2025-03-03 22:26:33'),
-(129, 'd34f473e-11a4-4c1b-95dc-995f14b7a085', '202503040431081', 'Order #202503040431081', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 22:31:08', '2025-03-03 22:31:08'),
-(130, 'e83a2616-97f5-47a4-ba11-b8a5a03c095b', '202503040436201', 'Order #202503040436201', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 22:36:20', '2025-03-03 22:36:20'),
-(131, 'a1852f79-d52b-4f64-ba2f-0b14e0090cac', '202503040438281', 'Order #202503040438281', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 22:38:28', '2025-03-03 22:38:28'),
-(132, '7c00194c-2947-4ad5-a63d-8b50bd01af01', '202503040443021', 'Order #202503040443021', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 22:43:02', '2025-03-03 22:43:02'),
-(133, '862f4f17-4408-4370-873d-e0ab77c48649', '202503040446551', 'Order #202503040446551', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 22:46:55', '2025-03-03 22:46:55'),
-(134, 'f1f56ebd-66f5-4b74-a35c-6b3e7ea399d0', '202503040448371', 'Order #202503040448371', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 22:48:37', '2025-03-03 22:48:37'),
-(135, 'b810000f-be66-40ca-8df3-b5a8390574a1', '202503040449301', 'Order #202503040449301', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-03 22:49:30', '2025-03-03 22:49:30'),
-(136, 'ae7666ef-e08d-4ee7-91df-12501034ef7e', '202503040449581', 'Order #202503040449581', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-03 22:49:58', '2025-03-03 22:49:58'),
-(137, '63de4ea6-504f-4453-85ec-e44e91d6125a', '202503040450141', 'Order #202503040450141', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 22:50:14', '2025-03-03 22:50:14'),
-(138, '9b532f35-2db4-4d8f-875f-820630254d26', '202503040454221', 'Order #202503040454221', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 22:54:22', '2025-03-03 22:54:22'),
-(139, '52df1166-d806-43fd-8fbb-4c2dfe0dca8f', '202503040500151', 'Order #202503040500151', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 23:00:15', '2025-03-03 23:00:15'),
-(140, '842e3831-b128-4641-9665-d0e3496da609', '202503040501111', 'Order #202503040501111', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 23:01:11', '2025-03-03 23:01:11'),
-(141, '375f844d-2efa-4801-9ead-f008a36e53cc', '202503040505241', 'Order #202503040505241', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 23:05:24', '2025-03-03 23:05:24'),
-(142, '346c099f-2348-49e7-89ff-bb79b5b1f46b', '202503040507221', 'Order #202503040507221', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 23:07:22', '2025-03-03 23:07:22'),
-(143, '04a18abd-cd12-48fd-b6f7-ad602a7b2926', '202503040511181', 'Order #202503040511181', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 23:11:18', '2025-03-03 23:11:18'),
-(144, '47f6825a-90e8-4d99-9fed-1d9d3063c949', '202503040516091', 'Order #202503040516091', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 23:16:09', '2025-03-03 23:16:09'),
-(145, 'f7fe6b6b-2a23-4d3e-bf2c-da99e59299d0', '202503040518021', 'Order #202503040518021', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 23:18:02', '2025-03-03 23:18:02'),
-(146, '7c68bc7d-88f0-45d7-8e3e-42a4b1ea347c', '202503040525581', 'Order #202503040525581', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 23:25:58', '2025-03-03 23:25:58'),
-(147, '28ddcfe5-31c4-4123-a111-4230042ea223', '202503040528291', 'Order #202503040528291', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-03 23:28:29', '2025-03-03 23:28:29'),
-(148, '490efa2d-4d93-42d1-b891-bc1227bad470', '202503040528481', 'Order #202503040528481', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 23:28:48', '2025-03-03 23:28:48'),
-(149, 'fc67341b-f937-4bc0-8e1b-efc3c8ad88bd', '202503040534281', 'Order #202503040534281', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 23:34:28', '2025-03-03 23:34:28'),
-(150, '959a623b-048e-44a2-b16d-0cb8518d9e36', '202503040546261', 'Order #202503040546261', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 23:46:26', '2025-03-03 23:46:26'),
-(151, '7524596d-4746-44cc-94cc-8480e6a5827e', '202503040548301', 'Order #202503040548301', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 23:48:30', '2025-03-03 23:48:30'),
-(152, '0ee2309d-84fa-41d1-a86d-bb363bdb5ac5', '202503040554231', 'Order #202503040554231', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-03 23:54:23', '2025-03-03 23:54:23'),
-(153, '27e6c666-3fa0-48a6-a2e0-75e09bb7823d', '202503040601551', 'Order #202503040601551', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-04 00:01:55', '2025-03-04 00:01:55'),
-(154, '66d3b685-e6e3-4306-a164-4909cbe2e14f', '202503040629381', 'Order #202503040629381', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-04 00:29:38', '2025-03-04 00:29:38'),
-(155, 'b11c322e-48ea-4bc3-b5f8-7b3c12177508', '202503040634021', 'Order #202503040634021', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-04 00:34:02', '2025-03-04 00:34:02'),
-(156, 'a6bf8316-e506-4406-9550-70e849356955', '202503040636271', 'Order #202503040636271', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-04 00:36:27', '2025-03-04 00:36:27'),
-(157, 'e86e1b1f-f958-4e60-906e-fb0a2af55f26', '202503040645501', 'Order #202503040645501', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-04 00:45:50', '2025-03-04 00:45:50'),
-(158, '9cd50145-5337-4bd0-9f0c-ed6a2b341888', '202503040658491', 'Order #202503040658491', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-04 00:58:49', '2025-03-04 00:58:49'),
-(159, '150602b6-52da-403c-82b9-de6804514444', '202503040659171', 'Order #202503040659171', 'events', 'pending', 'paid', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-04 00:59:17', '2025-03-04 01:00:48'),
-(160, '68a820a6-ce02-493e-9999-7f9a97fe04f6', '202503040711351', 'Order #202503040711351', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-04 01:11:35', '2025-03-04 01:11:35'),
-(161, 'b07dcd42-6e5f-416d-b338-10091eae0c6f', '202503040712211', 'Order #202503040712211', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-04 01:12:21', '2025-03-04 01:12:21'),
-(162, '23af8224-14d4-449a-b0e7-1e7f45a58d87', '202503040715081', 'Order #202503040715081', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-04 01:15:08', '2025-03-04 01:15:08'),
-(163, '924b1449-4285-4a1a-be74-d9e8a1e2eecc', '202503040717541', 'Order #202503040717541', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-04 01:17:54', '2025-03-04 01:17:54'),
-(164, '4507e315-5366-4b3c-85b9-ddf0ec052c23', '202503040718151', 'Order #202503040718151', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-04 01:18:15', '2025-03-04 01:18:15'),
-(165, '3de7c3a5-8159-4ccc-8728-bbc722be1690', '202503040724411', 'Order #202503040724411', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-04 01:24:41', '2025-03-04 01:24:41'),
-(166, 'c8b47d07-c267-4d11-a63b-846bbd6743c9', '202503040727141', 'Order #202503040727141', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-04 01:27:14', '2025-03-04 01:27:14'),
-(167, '82b3d4ab-0bf2-4f51-a0b1-2df3000d68fe', '202503040748401', 'Order #202503040748401', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-04 01:48:40', '2025-03-04 01:48:40'),
-(168, '28ccfbba-27da-4279-8c2a-b8e4480f2a62', '202503040823031', 'Order #202503040823031', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-04 02:23:03', '2025-03-04 02:23:03'),
-(169, 'c935930b-e459-4141-8a2a-95b5111236dc', '202503040824531', 'Order #202503040824531', 'events', 'pending', 'pending', 'pending', 'adssd', 'customer@botble.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 7, NULL, '2025-03-04 02:24:53', '2025-03-04 02:24:53'),
-(170, '28272a0d-ab84-4328-b4a7-e4383644710e', '202503040837461', 'Order #202503040837461', 'events', 'pending', 'completed', 'pending', 'adssd', 'customer@botble.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 7, NULL, '2025-03-04 02:37:46', '2025-03-04 02:38:37'),
-(171, '6c4658e6-5b73-4e15-bca9-d699cf665d10', '202503040847191', 'Order #202503040847191', 'events', 'pending', 'completed', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-04 02:47:19', '2025-03-04 02:47:56'),
-(172, 'c32c1abe-abcd-4988-b5f6-ebfdb5415afa', '202503040901241', 'Order #202503040901241', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-04 03:01:24', '2025-03-04 03:01:24'),
-(173, 'cc2941ff-2219-4a1b-889e-08012255e460', '202503040904491', 'Order #202503040904491', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-04 03:04:49', '2025-03-04 03:04:49'),
-(174, '1f741915-4c81-45a4-9daa-cbd918e46e24', '202503040905171', 'Order #202503040905171', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-04 03:05:17', '2025-03-04 03:05:17'),
-(175, '8b749990-0b52-4ca8-a36a-be6dce56e49b', '202503040905521', 'Order #202503040905521', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-04 03:05:52', '2025-03-04 03:05:52'),
-(176, '9625c8f6-e9e6-458c-9cf8-88e0b6e73f09', '202503040909401', 'Order #202503040909401', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-04 03:09:40', '2025-03-04 03:09:40'),
-(177, '92cb3fc6-4089-417c-a906-bcb37fa822eb', '202503040912301', 'Order #202503040912301', 'events', 'pending', 'completed', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-04 03:12:30', '2025-03-04 03:13:04'),
-(178, '757cbd68-7914-4dae-856c-9980fd140f10', '202503040922291', 'Order #202503040922291', 'events', 'pending', 'completed', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 5, 'Cash On Delivery', NULL, 1, NULL, '2025-03-04 03:22:29', '2025-03-04 03:22:30'),
-(179, 'a1cbb098-8455-4252-8526-b7eb55c1cece', '202503041030541', 'Order #202503041030541', 'events', 'pending', 'completed', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 5, 'Cash On Delivery', NULL, 1, NULL, '2025-03-04 04:30:54', '2025-03-04 04:30:54'),
-(180, '1d7039eb-cb90-476f-9862-f5a41c8d60c8', '202503041113291', 'Order #202503041113291', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 3, '1700.00', '1700.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-04 05:13:31', '2025-03-04 05:13:31'),
-(181, '4650bee6-1299-4370-81ca-ff77336b7fe9', '202503041116391', 'Order #202503041116391', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '800.00', '800.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-04 05:16:39', '2025-03-04 05:16:39'),
-(182, '1038b7f8-8985-4dbb-ba94-8eacfed704f7', '202503041141321', 'Order #202503041141321', 'events', 'pending', 'completed', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 3, '1300.00', '1300.00', '0.00', NULL, 5, 'Cash On Delivery', NULL, 1, NULL, '2025-03-04 05:41:32', '2025-03-04 05:41:33'),
-(183, '2946440e-88f7-43f9-a1f9-872e76991bb6', '202503041146321', 'Order #202503041146321', 'events', 'pending', 'completed', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-04 05:46:32', '2025-03-04 05:47:02'),
-(184, 'ec44c083-927c-4dec-9805-c29177f72fc7', '202503041148551', 'Order #202503041148551', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-04 05:48:55', '2025-03-04 05:48:55'),
-(185, '2ef80f51-c274-4802-9160-c7c99e42c042', '202503041149361', 'Order #202503041149361', 'events', 'pending', 'completed', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-04 05:49:36', '2025-03-04 05:51:43'),
-(186, 'dd85d26c-e2fb-42c9-aff4-04143392f800', '202503041152181', 'Order #202503041152181', 'events', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-04 05:52:18', '2025-03-04 05:52:18'),
-(187, '2b72cabe-4a85-428e-9c87-ec3535f833a0', '202503041338251', 'Order #202503041338251', 'events', 'pending', 'completed', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '1800.00', '1800.00', '0.00', NULL, 5, 'Cash On Delivery', NULL, 1, NULL, '2025-03-04 07:38:25', '2025-03-04 07:38:25'),
-(188, 'bdf555f0-3484-493e-a2e7-c317fa29860f', '202503041339271', 'Order #202503041339271', 'events', 'pending', 'completed', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '800.00', '800.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-04 07:39:27', '2025-03-04 07:39:49'),
-(189, '167536cb-0c3c-4e22-b814-f61c336b3aba', '202503070552091', 'Order #202503070552091', 'events', 'pending', 'completed', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '400.00', '400.00', '0.00', NULL, 5, 'Cash On Delivery', NULL, 1, NULL, '2025-03-06 23:52:09', '2025-03-06 23:52:11'),
-(190, 'ba6953cd-a302-4468-a662-4badd62d2491', '202503071006041', 'Order #202503071006041', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-07 04:06:04', '2025-03-07 04:06:04'),
-(191, '1ebee572-941d-4324-85d1-b2f1872fbb42', '202503071605481', 'Order #202503071605481', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-07 10:05:48', '2025-03-07 10:05:48'),
-(192, '0606a3fa-4ca7-4bc1-ac01-24c3f5aec04c', '202503071606291', 'Order #202503071606291', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-07 10:06:29', '2025-03-07 10:06:29'),
-(193, '58bba84d-980d-4969-99cc-11e0a5fb516a', '202503071610321', 'Order #202503071610321', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-07 10:10:32', '2025-03-07 10:10:32');
-INSERT INTO `app_orders` (`id`, `token`, `code`, `title`, `type`, `status`, `payment_status`, `delivery_status`, `name`, `email`, `phone`, `address`, `country_code`, `quantity`, `total_price`, `total`, `discount`, `discount_codes`, `payment_method_id`, `payment_method_name`, `notes`, `user_id`, `site_id`, `created_at`, `updated_at`) VALUES
-(194, '150864a3-4b5e-4023-8a06-2350d407c322', '202503071610471', 'Order #202503071610471', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 4, 'Mollie', NULL, 1, NULL, '2025-03-07 10:10:47', '2025-03-07 10:10:47'),
-(195, 'f7461e5e-763d-4e0b-b544-dba07e2c38d0', '202503071612051', 'Order #202503071612051', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-07 10:12:05', '2025-03-07 10:12:05'),
-(196, '5e4b4955-c735-471e-8d3d-fcc2114988e0', '202503080520091', 'Order #202503080520091', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-07 23:20:09', '2025-03-07 23:20:09'),
-(197, '50cd1227-209f-421b-bed2-786a23d9e36e', '202503080614111', 'Order #202503080614111', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 2, '900.00', '900.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-08 00:14:11', '2025-03-08 00:14:11'),
-(198, '032f309e-c63b-4c44-b492-5715509194c8', '202503080615101', 'Order #202503080615101', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-08 00:15:10', '2025-03-08 00:15:10'),
-(199, 'ec3ecf94-ac7e-4544-9f87-598b4057eeec', '202503080629451', 'Order #202503080629451', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '500.00', '500.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-08 00:29:45', '2025-03-08 00:29:45'),
-(200, '6629dc4b-f38d-498c-8e8f-4c8cff27d242', '202503080711141', 'Order #202503080711141', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '500.00', '500.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-08 01:11:14', '2025-03-08 01:11:14'),
-(201, '3163c196-b97c-416c-b995-e646aed4943f', '202503080711561', 'Order #202503080711561', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-08 01:11:56', '2025-03-08 01:11:56'),
-(202, '4f669cc4-1060-4fc4-a853-428346b7c9b2', '202503080718091', 'Order #202503080718091', 'products', 'pending', 'completed', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 5, 'Cash On Delivery', NULL, 1, NULL, '2025-03-08 01:18:09', '2025-03-08 01:18:09'),
-(203, '1a28ebb9-f01b-4963-8a74-7c1189260391', '202503080729351', 'Order #202503080729351', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-08 01:29:35', '2025-03-08 01:29:35'),
-(204, '0adb5911-df42-469a-abe9-0b67d3b2927c', '202503080733011', 'Order #202503080733011', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '500.00', '500.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-08 01:33:01', '2025-03-08 01:33:01'),
-(205, '2ed85957-c5d7-4bee-b071-b90cc724d3aa', '202503080755371', 'Order #202503080755371', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '500.00', '500.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-08 01:55:37', '2025-03-08 01:55:37'),
-(206, 'b6d9c890-df3d-48db-93ca-f92e39f5020d', '202503080757481', 'Order #202503080757481', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '500.00', '500.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-08 01:57:48', '2025-03-08 01:57:48'),
-(207, 'bfc5a760-90a1-45cc-8f52-775ce69a9d60', '202503080813451', 'Order #202503080813451', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '500.00', '500.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-08 02:13:45', '2025-03-08 02:13:45'),
-(208, '8c31139c-66bd-4352-a655-f25e789c67b4', '202503080814441', 'Order #202503080814441', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '400.00', '400.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-08 02:14:44', '2025-03-08 02:14:44'),
-(209, 'bbc94eae-b855-4334-aa63-b1d4211af569', '202503080815081', 'Order #202503080815081', 'products', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '500.00', '500.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-08 02:15:08', '2025-03-08 02:15:08'),
-(210, 'c571a128-53d6-4656-81c4-8f938ba81b56', '202503211631421', 'Order #202503211631421', 'courses', 'pending', 'pending', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '35.00', '35.00', '0.00', NULL, 1, 'Paypal', NULL, 1, NULL, '2025-03-21 10:31:42', '2025-03-21 10:31:42'),
-(211, '6877b5f0-4474-4b65-a430-2d5055026099', '202503211644001', 'Order #202503211644001', 'courses', 'pending', 'completed', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '35.00', '35.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-21 10:44:00', '2025-03-21 10:44:47'),
-(212, 'fa8b95a5-bf15-45e5-93a9-64f3293eda28', '202503211715411', 'Order #202503211715411', 'courses', 'pending', 'completed', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, '0.00', '0.00', '0.00', NULL, 3, 'Stripe', NULL, 1, NULL, '2025-03-21 11:15:41', '2025-03-21 11:16:07'),
-(213, 'd61d286e-8ec6-4e47-8d23-fcb375829a66', '202504021833461', 'Order #202504021833461', 'courses', 'pending', 'completed', 'pending', 'Student', 'student@gmail.com', NULL, NULL, NULL, 1, '40.00', '40.00', '0.00', NULL, 3, 'Stripe', NULL, 8, NULL, '2025-04-02 12:33:46', '2025-04-02 12:35:11');
+(214, 'b5e070ad-e071-494f-9045-a5bd3fbb4198', '202504091925111', 'Order #202504091925111', 'events', 'pending', 'completed', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, 220.00, 220.00, 0.00, NULL, 3, 'Stripe', NULL, 1, NULL, '2025-04-09 19:25:11', '2025-04-09 19:26:13'),
+(215, 'cbaaea31-cb79-4e16-96d7-c749755f2d3f', '202504111535571', 'Order #202504111535571', 'courses', 'pending', 'completed', 'pending', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, 1, 120.00, 120.00, 0.00, NULL, 3, 'Stripe', NULL, 1, NULL, '2025-04-11 15:35:57', '2025-04-11 15:36:23');
 
 -- --------------------------------------------------------
 
@@ -1581,18 +1397,18 @@ INSERT INTO `app_orders` (`id`, `token`, `code`, `title`, `type`, `status`, `pay
 --
 
 CREATE TABLE `app_order_items` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'product',
-  `thumbnail` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(150) NOT NULL,
+  `type` varchar(50) NOT NULL DEFAULT 'product',
+  `thumbnail` varchar(150) DEFAULT NULL,
   `price` decimal(15,2) NOT NULL,
   `line_price` decimal(15,2) NOT NULL,
-  `quantity` int NOT NULL,
+  `quantity` int(11) NOT NULL,
   `compare_price` decimal(15,2) DEFAULT NULL,
-  `sku_code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `barcode` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `post_id` bigint UNSIGNED DEFAULT NULL,
-  `order_id` bigint UNSIGNED NOT NULL,
+  `sku_code` varchar(100) DEFAULT NULL,
+  `barcode` varchar(100) DEFAULT NULL,
+  `post_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `order_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1602,224 +1418,8 @@ CREATE TABLE `app_order_items` (
 --
 
 INSERT INTO `app_order_items` (`id`, `title`, `type`, `thumbnail`, `price`, `line_price`, `quantity`, `compare_price`, `sku_code`, `barcode`, `post_id`, `order_id`, `created_at`, `updated_at`) VALUES
-(3, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 8, '2025-02-15 09:50:32', '2025-02-15 09:50:32'),
-(4, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 8, '2025-02-15 09:50:32', '2025-02-15 09:50:32'),
-(5, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 9, '2025-02-15 09:55:32', '2025-02-15 09:55:32'),
-(6, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 9, '2025-02-15 09:55:32', '2025-02-15 09:55:32'),
-(7, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 10, '2025-02-15 10:08:00', '2025-02-15 10:08:00'),
-(8, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 10, '2025-02-15 10:08:00', '2025-02-15 10:08:00'),
-(9, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 11, '2025-02-16 07:38:35', '2025-02-16 07:38:35'),
-(10, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 12, '2025-02-19 07:56:45', '2025-02-19 07:56:45'),
-(11, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 12, '2025-02-19 07:56:45', '2025-02-19 07:56:45'),
-(12, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 13, '2025-02-20 22:57:17', '2025-02-20 22:57:17'),
-(13, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 14, '2025-02-20 23:00:37', '2025-02-20 23:00:37'),
-(14, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 15, '2025-02-20 23:01:49', '2025-02-20 23:01:49'),
-(15, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 16, '2025-02-21 10:58:15', '2025-02-21 10:58:15'),
-(16, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 17, '2025-02-21 10:59:16', '2025-02-21 10:59:16'),
-(17, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 18, '2025-02-21 11:32:50', '2025-02-21 11:32:50'),
-(18, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 19, '2025-02-21 11:34:06', '2025-02-21 11:34:06'),
-(19, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 20, '2025-02-21 11:36:34', '2025-02-21 11:36:34'),
-(20, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 21, '2025-02-21 11:37:58', '2025-02-21 11:37:58'),
-(21, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 22, '2025-02-21 11:40:35', '2025-02-21 11:40:35'),
-(22, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 23, '2025-02-22 08:41:02', '2025-02-22 08:41:02'),
-(23, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 24, '2025-02-22 08:43:13', '2025-02-22 08:43:13'),
-(24, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 25, '2025-02-22 08:44:27', '2025-02-22 08:44:27'),
-(25, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 25, '2025-02-22 08:44:27', '2025-02-22 08:44:27'),
-(26, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 26, '2025-02-22 08:46:27', '2025-02-22 08:46:27'),
-(27, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 27, '2025-02-22 08:56:24', '2025-02-22 08:56:24'),
-(28, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 28, '2025-02-22 09:22:28', '2025-02-22 09:22:28'),
-(29, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '800.00', 2, '300.00', 'df32312', '3434314', 15, 29, '2025-02-22 11:36:54', '2025-02-22 11:36:54'),
-(30, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 30, '2025-02-23 08:23:03', '2025-02-23 08:23:03'),
-(31, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 31, '2025-02-23 10:58:01', '2025-02-23 10:58:01'),
-(32, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 32, '2025-02-23 20:11:36', '2025-02-23 20:11:36'),
-(33, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 33, '2025-02-23 20:13:48', '2025-02-23 20:13:48'),
-(34, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 34, '2025-02-23 20:17:44', '2025-02-23 20:17:44'),
-(35, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 35, '2025-02-23 20:20:18', '2025-02-23 20:20:18'),
-(36, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 36, '2025-02-23 20:23:50', '2025-02-23 20:23:50'),
-(37, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 36, '2025-02-23 20:23:50', '2025-02-23 20:23:50'),
-(38, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 37, '2025-02-24 09:27:33', '2025-02-24 09:27:33'),
-(39, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 38, '2025-02-24 09:29:13', '2025-02-24 09:29:13'),
-(40, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 39, '2025-02-24 09:40:58', '2025-02-24 09:40:58'),
-(41, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 40, '2025-02-24 09:47:26', '2025-02-24 09:47:26'),
-(42, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 41, '2025-02-24 09:49:03', '2025-02-24 09:49:03'),
-(43, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 42, '2025-02-24 09:50:07', '2025-02-24 09:50:07'),
-(44, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 43, '2025-02-24 10:24:09', '2025-02-24 10:24:09'),
-(45, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 43, '2025-02-24 10:24:09', '2025-02-24 10:24:09'),
-(46, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 44, '2025-02-24 10:25:37', '2025-02-24 10:25:37'),
-(47, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 44, '2025-02-24 10:25:37', '2025-02-24 10:25:37'),
-(48, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 45, '2025-02-24 10:26:41', '2025-02-24 10:26:41'),
-(49, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 46, '2025-02-24 10:27:53', '2025-02-24 10:27:53'),
-(50, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 47, '2025-02-24 10:30:03', '2025-02-24 10:30:03'),
-(51, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 48, '2025-02-24 10:32:27', '2025-02-24 10:32:27'),
-(52, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 49, '2025-02-24 10:34:40', '2025-02-24 10:34:40'),
-(53, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 50, '2025-02-24 10:40:29', '2025-02-24 10:40:29'),
-(54, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 51, '2025-02-24 10:47:19', '2025-02-24 10:47:19'),
-(55, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 52, '2025-02-24 10:49:39', '2025-02-24 10:49:39'),
-(56, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 53, '2025-02-24 10:51:24', '2025-02-24 10:51:24'),
-(57, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 54, '2025-02-24 10:54:20', '2025-02-24 10:54:20'),
-(58, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 55, '2025-02-24 10:54:54', '2025-02-24 10:54:54'),
-(59, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 56, '2025-02-24 10:58:11', '2025-02-24 10:58:11'),
-(60, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 57, '2025-02-24 11:05:35', '2025-02-24 11:05:35'),
-(61, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 58, '2025-02-24 11:08:13', '2025-02-24 11:08:13'),
-(62, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 59, '2025-02-24 11:11:10', '2025-02-24 11:11:10'),
-(63, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 60, '2025-02-24 11:12:41', '2025-02-24 11:12:41'),
-(64, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 61, '2025-02-24 11:13:20', '2025-02-24 11:13:20'),
-(65, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 62, '2025-02-24 11:18:04', '2025-02-24 11:18:04'),
-(66, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 63, '2025-02-24 11:18:47', '2025-02-24 11:18:47'),
-(67, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 64, '2025-02-24 11:20:32', '2025-02-24 11:20:32'),
-(68, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 65, '2025-02-24 11:20:58', '2025-02-24 11:20:58'),
-(69, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 66, '2025-02-24 11:22:45', '2025-02-24 11:22:45'),
-(70, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 67, '2025-02-24 11:27:41', '2025-02-24 11:27:41'),
-(71, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 67, '2025-02-24 11:27:41', '2025-02-24 11:27:41'),
-(72, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 68, '2025-02-24 11:29:29', '2025-02-24 11:29:29'),
-(73, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 69, '2025-02-24 11:34:19', '2025-02-24 11:34:19'),
-(74, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 70, '2025-02-24 11:35:18', '2025-02-24 11:35:18'),
-(75, 'Product 2', 'product', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 71, '2025-02-24 11:35:46', '2025-02-24 11:35:46'),
-(76, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 72, '2025-02-24 11:49:17', '2025-02-24 11:49:17'),
-(77, 'Product 1', 'product', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 73, '2025-02-24 11:50:08', '2025-02-24 11:50:08'),
-(78, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 74, '2025-02-26 20:01:38', '2025-02-26 20:01:38'),
-(79, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 76, '2025-02-26 20:12:30', '2025-02-26 20:12:30'),
-(80, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 78, '2025-02-26 20:16:21', '2025-02-26 20:16:21'),
-(81, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 79, '2025-02-26 20:17:44', '2025-02-26 20:17:44'),
-(82, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 82, '2025-02-28 06:42:38', '2025-02-28 06:42:38'),
-(83, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 82, '2025-02-28 06:42:38', '2025-02-28 06:42:38'),
-(84, 'Product 2', 'products', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 82, '2025-02-28 06:42:38', '2025-02-28 06:42:38'),
-(85, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 87, '2025-02-28 21:40:38', '2025-02-28 21:40:38'),
-(86, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 87, '2025-02-28 21:40:38', '2025-02-28 21:40:38'),
-(87, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 87, '2025-02-28 21:40:38', '2025-02-28 21:40:38'),
-(88, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 88, '2025-02-28 21:42:14', '2025-02-28 21:42:14'),
-(89, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 95, '2025-03-01 05:42:10', '2025-03-01 05:42:10'),
-(90, 'Product 2', 'products', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 95, '2025-03-01 05:42:10', '2025-03-01 05:42:10'),
-(91, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 96, '2025-03-01 05:45:08', '2025-03-01 05:45:08'),
-(92, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 96, '2025-03-01 05:45:08', '2025-03-01 05:45:08'),
-(93, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 97, '2025-03-01 07:23:17', '2025-03-01 07:23:17'),
-(94, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 97, '2025-03-01 07:23:17', '2025-03-01 07:23:17'),
-(95, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 98, '2025-03-01 07:25:29', '2025-03-01 07:25:29'),
-(96, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '1800.00', 2, '0.00', '', '', 21, 99, '2025-03-02 10:26:05', '2025-03-02 10:26:05'),
-(97, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 99, '2025-03-02 10:26:05', '2025-03-02 10:26:05'),
-(98, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 100, '2025-03-02 10:28:07', '2025-03-02 10:28:07'),
-(99, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 101, '2025-03-03 03:41:12', '2025-03-03 03:41:12'),
-(100, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 101, '2025-03-03 03:41:12', '2025-03-03 03:41:12'),
-(101, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 102, '2025-03-03 05:51:47', '2025-03-03 05:51:47'),
-(102, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 103, '2025-03-03 05:52:50', '2025-03-03 05:52:50'),
-(103, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 104, '2025-03-03 05:53:26', '2025-03-03 05:53:26'),
-(104, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 105, '2025-03-03 05:53:45', '2025-03-03 05:53:45'),
-(105, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 106, '2025-03-03 05:54:40', '2025-03-03 05:54:40'),
-(106, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 107, '2025-03-03 05:54:55', '2025-03-03 05:54:55'),
-(107, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 108, '2025-03-03 07:14:43', '2025-03-03 07:14:43'),
-(108, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 109, '2025-03-03 07:15:03', '2025-03-03 07:15:03'),
-(109, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 110, '2025-03-03 07:15:20', '2025-03-03 07:15:20'),
-(110, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 111, '2025-03-03 07:16:45', '2025-03-03 07:16:45'),
-(111, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 112, '2025-03-03 07:19:42', '2025-03-03 07:19:42'),
-(112, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 113, '2025-03-03 07:20:37', '2025-03-03 07:20:37'),
-(113, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 114, '2025-03-03 07:20:59', '2025-03-03 07:20:59'),
-(114, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 115, '2025-03-03 09:23:15', '2025-03-03 09:23:15'),
-(115, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 116, '2025-03-03 09:25:45', '2025-03-03 09:25:45'),
-(116, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 117, '2025-03-03 09:26:03', '2025-03-03 09:26:03'),
-(117, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 118, '2025-03-03 09:27:14', '2025-03-03 09:27:14'),
-(118, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 119, '2025-03-03 09:27:32', '2025-03-03 09:27:32'),
-(119, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 120, '2025-03-03 09:28:29', '2025-03-03 09:28:29'),
-(120, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 121, '2025-03-03 09:34:31', '2025-03-03 09:34:31'),
-(121, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 122, '2025-03-03 09:35:36', '2025-03-03 09:35:36'),
-(122, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 123, '2025-03-03 09:35:53', '2025-03-03 09:35:53'),
-(123, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 124, '2025-03-03 09:36:38', '2025-03-03 09:36:38'),
-(124, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 125, '2025-03-03 09:36:56', '2025-03-03 09:36:56'),
-(125, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 126, '2025-03-03 09:37:34', '2025-03-03 09:37:34'),
-(126, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 127, '2025-03-03 09:56:57', '2025-03-03 09:56:57'),
-(127, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 128, '2025-03-03 22:26:33', '2025-03-03 22:26:33'),
-(128, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 129, '2025-03-03 22:31:08', '2025-03-03 22:31:08'),
-(129, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 130, '2025-03-03 22:36:20', '2025-03-03 22:36:20'),
-(130, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 131, '2025-03-03 22:38:28', '2025-03-03 22:38:28'),
-(131, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 132, '2025-03-03 22:43:02', '2025-03-03 22:43:02'),
-(132, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 133, '2025-03-03 22:46:55', '2025-03-03 22:46:55'),
-(133, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 134, '2025-03-03 22:48:37', '2025-03-03 22:48:37'),
-(134, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 135, '2025-03-03 22:49:30', '2025-03-03 22:49:30'),
-(135, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 136, '2025-03-03 22:49:58', '2025-03-03 22:49:58'),
-(136, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 137, '2025-03-03 22:50:14', '2025-03-03 22:50:14'),
-(137, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 138, '2025-03-03 22:54:22', '2025-03-03 22:54:22'),
-(138, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 139, '2025-03-03 23:00:15', '2025-03-03 23:00:15'),
-(139, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 140, '2025-03-03 23:01:11', '2025-03-03 23:01:11'),
-(140, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 141, '2025-03-03 23:05:24', '2025-03-03 23:05:24'),
-(141, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 142, '2025-03-03 23:07:23', '2025-03-03 23:07:23'),
-(142, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 143, '2025-03-03 23:11:18', '2025-03-03 23:11:18'),
-(143, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 144, '2025-03-03 23:16:09', '2025-03-03 23:16:09'),
-(144, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 145, '2025-03-03 23:18:02', '2025-03-03 23:18:02'),
-(145, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 146, '2025-03-03 23:25:58', '2025-03-03 23:25:58'),
-(146, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 147, '2025-03-03 23:28:29', '2025-03-03 23:28:29'),
-(147, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 148, '2025-03-03 23:28:48', '2025-03-03 23:28:48'),
-(148, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 149, '2025-03-03 23:34:28', '2025-03-03 23:34:28'),
-(149, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 150, '2025-03-03 23:46:26', '2025-03-03 23:46:26'),
-(150, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 151, '2025-03-03 23:48:30', '2025-03-03 23:48:30'),
-(151, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 152, '2025-03-03 23:54:23', '2025-03-03 23:54:23'),
-(152, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 153, '2025-03-04 00:01:55', '2025-03-04 00:01:55'),
-(153, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 154, '2025-03-04 00:29:38', '2025-03-04 00:29:38'),
-(154, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 155, '2025-03-04 00:34:03', '2025-03-04 00:34:03'),
-(155, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 156, '2025-03-04 00:36:27', '2025-03-04 00:36:27'),
-(156, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 157, '2025-03-04 00:45:50', '2025-03-04 00:45:50'),
-(157, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 158, '2025-03-04 00:58:49', '2025-03-04 00:58:49'),
-(158, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 159, '2025-03-04 00:59:17', '2025-03-04 00:59:17'),
-(159, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 160, '2025-03-04 01:11:35', '2025-03-04 01:11:35'),
-(160, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 161, '2025-03-04 01:12:21', '2025-03-04 01:12:21'),
-(161, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 162, '2025-03-04 01:15:08', '2025-03-04 01:15:08'),
-(162, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 163, '2025-03-04 01:17:54', '2025-03-04 01:17:54'),
-(163, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 164, '2025-03-04 01:18:15', '2025-03-04 01:18:15'),
-(164, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 165, '2025-03-04 01:24:41', '2025-03-04 01:24:41'),
-(165, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 166, '2025-03-04 01:27:14', '2025-03-04 01:27:14'),
-(166, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 167, '2025-03-04 01:48:40', '2025-03-04 01:48:40'),
-(167, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 168, '2025-03-04 02:23:03', '2025-03-04 02:23:03'),
-(168, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 169, '2025-03-04 02:24:53', '2025-03-04 02:24:53'),
-(169, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 170, '2025-03-04 02:37:46', '2025-03-04 02:37:46'),
-(170, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 171, '2025-03-04 02:47:19', '2025-03-04 02:47:19'),
-(171, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 172, '2025-03-04 03:01:24', '2025-03-04 03:01:24'),
-(172, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 173, '2025-03-04 03:04:49', '2025-03-04 03:04:49'),
-(173, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 174, '2025-03-04 03:05:17', '2025-03-04 03:05:17'),
-(174, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 175, '2025-03-04 03:05:52', '2025-03-04 03:05:52'),
-(175, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 176, '2025-03-04 03:09:40', '2025-03-04 03:09:40'),
-(176, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 177, '2025-03-04 03:12:30', '2025-03-04 03:12:30'),
-(177, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 178, '2025-03-04 03:22:29', '2025-03-04 03:22:29'),
-(178, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 179, '2025-03-04 04:30:54', '2025-03-04 04:30:54'),
-(179, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '900.00', 1, '0.00', '', '', 21, 180, '2025-03-04 05:13:31', '2025-03-04 05:13:31'),
-(180, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 180, '2025-03-04 05:13:31', '2025-03-04 05:13:31'),
-(181, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 180, '2025-03-04 05:13:31', '2025-03-04 05:13:31'),
-(182, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 181, '2025-03-04 05:16:39', '2025-03-04 05:16:39'),
-(183, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 181, '2025-03-04 05:16:39', '2025-03-04 05:16:39'),
-(184, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 182, '2025-03-04 05:41:32', '2025-03-04 05:41:32'),
-(185, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 182, '2025-03-04 05:41:32', '2025-03-04 05:41:32'),
-(186, 'Product 2', 'products', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 182, '2025-03-04 05:41:32', '2025-03-04 05:41:32'),
-(187, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 183, '2025-03-04 05:46:32', '2025-03-04 05:46:32'),
-(188, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 184, '2025-03-04 05:48:55', '2025-03-04 05:48:55'),
-(189, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 185, '2025-03-04 05:49:36', '2025-03-04 05:49:36'),
-(190, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 186, '2025-03-04 05:52:18', '2025-03-04 05:52:18'),
-(191, 'Event 2', 'events', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '900.00', '1800.00', 2, '0.00', '', '', 21, 187, '2025-03-04 07:38:25', '2025-03-04 07:38:25'),
-(192, 'event 1', 'events', '', '400.00', '400.00', 1, '0.00', '', '', 20, 188, '2025-03-04 07:39:27', '2025-03-04 07:39:27'),
-(193, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 188, '2025-03-04 07:39:27', '2025-03-04 07:39:27'),
-(194, 'event 1', 'events', '', '0.00', '0.00', 1, '0.00', '', '', 20, 189, '2025-03-06 23:52:09', '2025-03-06 23:52:09'),
-(195, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 189, '2025-03-06 23:52:09', '2025-03-06 23:52:09'),
-(196, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 190, '2025-03-07 04:06:04', '2025-03-07 04:06:04'),
-(197, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 191, '2025-03-07 10:05:48', '2025-03-07 10:05:48'),
-(198, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 192, '2025-03-07 10:06:29', '2025-03-07 10:06:29'),
-(199, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 193, '2025-03-07 10:10:32', '2025-03-07 10:10:32'),
-(200, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 194, '2025-03-07 10:10:47', '2025-03-07 10:10:47'),
-(201, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 195, '2025-03-07 10:12:05', '2025-03-07 10:12:05'),
-(202, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 196, '2025-03-07 23:20:09', '2025-03-07 23:20:09'),
-(203, 'Product 2', 'products', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 197, '2025-03-08 00:14:11', '2025-03-08 00:14:11'),
-(204, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 197, '2025-03-08 00:14:11', '2025-03-08 00:14:11'),
-(205, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 198, '2025-03-08 00:15:10', '2025-03-08 00:15:10'),
-(206, 'Product 2', 'products', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 199, '2025-03-08 00:29:45', '2025-03-08 00:29:45'),
-(207, 'Product 2', 'products', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 200, '2025-03-08 01:11:14', '2025-03-08 01:11:14'),
-(208, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 201, '2025-03-08 01:11:56', '2025-03-08 01:11:56'),
-(209, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 202, '2025-03-08 01:18:09', '2025-03-08 01:18:09'),
-(210, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 203, '2025-03-08 01:29:35', '2025-03-08 01:29:35'),
-(211, 'Product 2', 'products', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 204, '2025-03-08 01:33:01', '2025-03-08 01:33:01'),
-(212, 'Product 2', 'products', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 205, '2025-03-08 01:55:37', '2025-03-08 01:55:37'),
-(213, 'Product 2', 'products', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 206, '2025-03-08 01:57:48', '2025-03-08 01:57:48'),
-(214, 'Product 2', 'products', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 207, '2025-03-08 02:13:45', '2025-03-08 02:13:45'),
-(215, 'Product 1', 'products', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', '400.00', '400.00', 1, '300.00', 'df32312', '3434314', 15, 208, '2025-03-08 02:14:44', '2025-03-08 02:14:44'),
-(216, 'Product 2', 'products', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', '500.00', '500.00', 1, '300.00', 'qwew32', 'dfdf', 16, 209, '2025-03-08 02:15:08', '2025-03-08 02:15:08'),
-(217, 'dfgdfgdf', 'courses', '', '35.00', '35.00', 1, '65.00', '', '', 80, 210, '2025-03-21 10:31:42', '2025-03-21 10:31:42'),
-(218, 'dfgdfgdf', 'courses', '', '35.00', '35.00', 1, '65.00', '', '', 80, 211, '2025-03-21 10:44:00', '2025-03-21 10:44:00'),
-(219, 'fsdfdsfds', 'courses', '2025/03/06/features-product-shape01.png', '0.00', '0.00', 1, '0.00', '', '', 82, 212, '2025-03-21 11:15:41', '2025-03-21 11:15:41'),
-(220, 'dwerqwedw', 'courses', '', '40.00', '40.00', 1, '50.00', '', '', 74, 213, '2025-04-02 12:33:46', '2025-04-02 12:33:46');
+(221, 'The Importance Of Intrinsic Motivation.', 'events', '2025/04/08/courses-img-6.jpg', 220.00, 220.00, 1, 0.00, '', '', 150, 214, '2025-04-09 19:25:11', '2025-04-09 19:25:11'),
+(222, 'Project Management Principles & Practices', 'courses', '2025/04/08/courses-img-6.jpg', 120.00, 120.00, 1, 230.00, '', '', 162, 215, '2025-04-11 15:35:57', '2025-04-11 15:35:57');
 
 -- --------------------------------------------------------
 
@@ -1828,10 +1428,10 @@ INSERT INTO `app_order_items` (`id`, `title`, `type`, `thumbnail`, `price`, `lin
 --
 
 CREATE TABLE `app_order_item_metas` (
-  `id` bigint UNSIGNED NOT NULL,
-  `order_item_id` bigint UNSIGNED NOT NULL,
-  `meta_key` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_item_id` bigint(20) UNSIGNED NOT NULL,
+  `meta_key` varchar(150) NOT NULL,
+  `meta_value` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1841,10 +1441,10 @@ CREATE TABLE `app_order_item_metas` (
 --
 
 CREATE TABLE `app_order_metas` (
-  `id` bigint UNSIGNED NOT NULL,
-  `order_id` bigint UNSIGNED NOT NULL,
-  `meta_key` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` bigint(20) UNSIGNED NOT NULL,
+  `meta_key` varchar(150) NOT NULL,
+  `meta_value` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1854,18 +1454,18 @@ CREATE TABLE `app_order_metas` (
 --
 
 CREATE TABLE `app_pages` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `thumbnail` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `template` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `template_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'draft',
-  `views` bigint NOT NULL DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `thumbnail` varchar(250) DEFAULT NULL,
+  `slug` varchar(150) NOT NULL,
+  `template` varchar(50) DEFAULT NULL,
+  `content` longtext DEFAULT NULL,
+  `template_data` longtext DEFAULT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'draft',
+  `views` bigint(20) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `description` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1875,10 +1475,10 @@ CREATE TABLE `app_pages` (
 --
 
 CREATE TABLE `app_page_metas` (
-  `id` bigint UNSIGNED NOT NULL,
-  `page_id` bigint UNSIGNED NOT NULL,
-  `meta_key` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `page_id` bigint(20) UNSIGNED NOT NULL,
+  `meta_key` varchar(150) NOT NULL,
+  `meta_value` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1888,8 +1488,8 @@ CREATE TABLE `app_page_metas` (
 --
 
 CREATE TABLE `app_password_resets` (
-  `email` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `token` varchar(150) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1900,23 +1500,23 @@ CREATE TABLE `app_password_resets` (
 --
 
 CREATE TABLE `app_payment_histories` (
-  `id` bigint UNSIGNED NOT NULL,
-  `transaction_id` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `payment_method_id` bigint UNSIGNED DEFAULT NULL,
-  `transaction_reference` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `payer_email` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `method` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `agreement_id` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payer_id` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `transaction_id` varchar(150) DEFAULT NULL,
+  `payment_method_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `transaction_reference` varchar(150) DEFAULT NULL,
+  `payer_email` varchar(150) DEFAULT NULL,
+  `method` varchar(50) NOT NULL,
+  `agreement_id` varchar(150) NOT NULL,
+  `payer_id` varchar(150) NOT NULL,
   `amount` decimal(15,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `status` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
-  `metadata` json DEFAULT NULL,
+  `status` varchar(150) NOT NULL DEFAULT 'pending',
+  `metadata` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`metadata`)),
   `processed_at` timestamp NULL DEFAULT NULL,
-  `currency` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'USD',
-  `payment_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `error_message` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `currency` varchar(3) NOT NULL DEFAULT 'USD',
+  `payment_type` varchar(50) DEFAULT NULL,
+  `error_message` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1926,13 +1526,13 @@ CREATE TABLE `app_payment_histories` (
 --
 
 CREATE TABLE `app_payment_methods` (
-  `id` bigint UNSIGNED NOT NULL,
-  `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` text COLLATE utf8mb4_unicode_ci,
-  `data` json DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `description` varchar(150) DEFAULT NULL,
+  `image` text DEFAULT NULL,
+  `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`data`)),
+  `active` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1942,7 +1542,7 @@ CREATE TABLE `app_payment_methods` (
 --
 
 INSERT INTO `app_payment_methods` (`id`, `type`, `name`, `description`, `image`, `data`, `active`, `created_at`, `updated_at`) VALUES
-(1, 'paypal', 'Paypal', 'adadsd', '2025/03/07/paypal.png', '{\"mode\": \"sandbox\", \"live_secret\": null, \"live_client_id\": null, \"sandbox_secret\": \"ECCkJXVtmmMgy_ai5i_1AuUJtbO7e6P_gQISQzwctaApGyJD2h1LPi2reSt5ac_FPGESoprR3i1eIaFC\", \"sandbox_client_id\": \"Ae_EqULnkWwIRsubEs8n6FTVc48VpD5X8a_6Npk23zIhn81Aw7W6QH7hyOqSE443aUoc0FRrxa8IZiGs\"}', 1, '2025-02-06 08:39:41', '2025-03-07 03:29:18'),
+(1, 'paypal', 'Paypal', 'adadsd', '2025/04/09/pngwingcom.png', '{\"mode\":\"sandbox\",\"sandbox_client_id\":\"Ae_EqULnkWwIRsubEs8n6FTVc48VpD5X8a_6Npk23zIhn81Aw7W6QH7hyOqSE443aUoc0FRrxa8IZiGs\",\"sandbox_secret\":\"ECCkJXVtmmMgy_ai5i_1AuUJtbO7e6P_gQISQzwctaApGyJD2h1LPi2reSt5ac_FPGESoprR3i1eIaFC\",\"live_client_id\":null,\"live_secret\":null}', 1, '2025-02-06 08:39:41', '2025-04-09 19:30:39'),
 (2, 'custom', 'fgf', 'You will be redirected to Stripe to complete the payment. (Debit card/Credit card/Online banking)', NULL, '{\"description\": \"Payment description\"}', 1, '2025-02-20 23:58:59', '2025-02-23 10:53:07'),
 (3, 'stripe', 'Stripe', 'Stripe', NULL, '{\"mode\": \"test\", \"webhook_secret\": null, \"live_secret_key\": null, \"test_secret_key\": \"sk_test_51N4eDoFNqndPjg2XrvImm40p6LoRjrJimWykVbpQnzVvUSDyEbA140iXLFsrPeh4wv0i5q3I3SM8aBuUX5ZBE7YD00AE1LVUKN\", \"live_publishable_key\": null, \"test_publishable_key\": \"pk_test_51N4eDoFNqndPjg2XgA6h2UbpIysYQmjOdVh8SaFxsYCPcwNxY5BnIWyuCSYKgxPqK3QhiCOZt6vCmf5rfmgsWPho00GyRSimvC\"}', 1, '2025-02-23 20:10:37', '2025-03-03 05:51:16'),
 (4, 'mollie', 'Mollie', 'Description', NULL, '{\"mode\": \"sandbox\", \"live_api_key\": null, \"sandbox_api_key\": \"test_7UVc8MRSkupvtj9tBuySkt5g4vR3vJ\"}', 1, '2025-03-03 22:21:58', '2025-03-03 22:49:16'),
@@ -1955,12 +1555,12 @@ INSERT INTO `app_payment_methods` (`id`, `type`, `name`, `description`, `image`,
 --
 
 CREATE TABLE `app_permissions` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `guard_name` varchar(100) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `description` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1984,12 +1584,12 @@ INSERT INTO `app_permissions` (`id`, `name`, `guard_name`, `created_at`, `update
 --
 
 CREATE TABLE `app_permission_groups` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `plugin` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `plugin` varchar(50) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `description` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1999,12 +1599,12 @@ CREATE TABLE `app_permission_groups` (
 --
 
 CREATE TABLE `app_personal_access_tokens` (
-  `id` bigint UNSIGNED NOT NULL,
-  `tokenable_type` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tokenable_id` bigint UNSIGNED NOT NULL,
-  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(150) NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -2017,26 +1617,26 @@ CREATE TABLE `app_personal_access_tokens` (
 --
 
 CREATE TABLE `app_posts` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `thumbnail` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'draft',
-  `views` bigint NOT NULL DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `thumbnail` varchar(250) DEFAULT NULL,
+  `slug` varchar(150) NOT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  `content` longtext DEFAULT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'draft',
+  `views` bigint(20) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` bigint DEFAULT NULL,
-  `updated_by` bigint DEFAULT NULL,
-  `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'posts',
-  `json_metas` json DEFAULT NULL,
-  `json_taxonomies` json DEFAULT NULL,
-  `rating` double(8,2) NOT NULL DEFAULT '0.00',
-  `total_rating` int NOT NULL DEFAULT '0',
-  `total_comment` bigint NOT NULL DEFAULT '0',
-  `uuid` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `locale` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'vi'
+  `created_by` bigint(20) DEFAULT NULL,
+  `updated_by` bigint(20) DEFAULT NULL,
+  `type` varchar(50) NOT NULL DEFAULT 'posts',
+  `json_metas` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`json_metas`)),
+  `json_taxonomies` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`json_taxonomies`)),
+  `rating` double(8,2) NOT NULL DEFAULT 0.00,
+  `total_rating` int(11) NOT NULL DEFAULT 0,
+  `total_comment` bigint(20) NOT NULL DEFAULT 0,
+  `uuid` char(36) DEFAULT NULL,
+  `locale` varchar(5) NOT NULL DEFAULT 'vi'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -2044,90 +1644,49 @@ CREATE TABLE `app_posts` (
 --
 
 INSERT INTO `app_posts` (`id`, `title`, `thumbnail`, `slug`, `description`, `content`, `status`, `views`, `created_at`, `updated_at`, `created_by`, `updated_by`, `type`, `json_metas`, `json_taxonomies`, `rating`, `total_rating`, `total_comment`, `uuid`, `locale`) VALUES
-(1, 'post test 1', NULL, 'post-test-1', 'post content', '<p>post content</p>', 'publish', 4, '2025-01-19 07:44:50', '2025-01-19 08:11:00', 1, 1, 'posts', NULL, '[{\"id\": 2, \"url\": \"http://mojar-cms.test/category/new-cat\", \"name\": \"new cat\", \"slug\": \"new-cat\", \"level\": 0, \"singular\": \"category\", \"taxonomy\": \"categories\", \"thumbnail\": \"http://mojar-cms.test/jw-styles/mojar/images/thumb-default.png\", \"total_post\": 1}]', 0.00, 0, 0, '79b4128b-1a6d-4b01-b50d-3a4a9d3f300b', 'vi'),
-(2, 'fddf d', NULL, 'fddf-d', 'dasd', '<p>dasd</p>', 'publish', 4, '2025-01-19 07:54:27', '2025-01-19 07:54:27', 1, 1, 'posts', NULL, '[]', 0.00, 0, 0, '364d6e93-ac55-44cd-a335-97ca0545b72e', 'vi'),
-(3, 'dasds', NULL, 'dasds', 'dasds', '<p>dasds</p>', 'publish', 8, '2025-01-19 08:00:00', '2025-03-21 05:52:06', 1, 1, 'posts', NULL, '[]', 0.00, 0, 2, 'b9e62429-f5a7-4cc1-b282-ba85f2676325', 'vi'),
 (4, 'hgvj', NULL, 'hgvj', '', NULL, 'publish', 0, '2025-01-19 11:26:20', '2025-01-19 11:26:20', 1, 1, 'examples', '{\"select\": \"1\", \"example\": \"jkhj\"}', '[]', 0.00, 0, 0, 'b4649985-c678-403d-807f-366a9c67a739', 'vi'),
-(7, 'asdasdasdsad', NULL, 'asdasdasdsad', '', NULL, 'publish', 1, '2025-01-30 10:21:50', '2025-01-30 10:21:50', 1, 1, 'pages', '{\"template\": \"home\", \"block_content\": {\"content\": [{\"block\": \"test\"}]}}', '[]', 0.00, 0, 0, '509c6845-f7da-432e-9717-42f36fab2650', 'vi'),
-(8, 'Home2', NULL, 'home2', '', NULL, 'publish', 1, '2025-01-30 10:23:14', '2025-01-30 10:24:08', 1, 1, 'pages', '{\"template\": \"home\", \"block_content\": {\"content\": [{\"block\": \"test\"}, {\"block\": \"slider\"}]}}', '[]', 0.00, 0, 0, '46d1ec86-05e5-4cda-8f5b-40016e000ccf', 'vi'),
-(9, 'dsdsds', NULL, 'dsdsds', '', NULL, 'publish', 4, '2025-01-30 10:24:48', '2025-01-30 10:24:48', 1, 1, 'pages', '{\"template\": \"home\", \"block_content\": {\"content\": [{\"block\": \"test\"}]}}', '[]', 0.00, 0, 0, '2768851c-393a-476f-9906-e0279f3cf31c', 'vi'),
-(10, 'home3', NULL, 'home3', '', NULL, 'publish', 1, '2025-01-30 10:25:34', '2025-01-30 10:25:34', 1, 1, 'pages', '{\"template\": \"home\", \"block_content\": {\"content\": [{\"block\": \"test\"}]}}', '[]', 0.00, 0, 0, 'f7c1000f-20ec-4c41-8263-a7016e8f3bf9', 'vi'),
-(11, 'home', NULL, 'home', '', NULL, 'publish', 1, '2025-01-30 10:26:12', '2025-01-31 04:27:25', 1, 1, 'pages', '{\"template\": \"home\", \"block_content\": {\"content\": [{\"block\": \"test\", \"title\": null}, {\"block\": \"test\", \"title\": \"mn\"}, {\"block\": \"test\", \"title\": \"this is new\"}, {\"block\": \"test\", \"title\": \"dsad\"}, {\"block\": \"test\", \"title\": \"dsds\"}]}}', '[]', 0.00, 0, 0, '78b4cf21-0b53-498e-a812-0b87267308c5', 'vi'),
-(12, 'Somthing', NULL, 'somthing', '', NULL, 'publish', 1, '2025-01-30 10:26:50', '2025-01-31 04:35:55', 1, 1, 'pages', '{\"template\": \"home\", \"block_content\": {\"content\": [{\"block\": \"test\", \"title\": null}, {\"col1\": {\"limit\": \"3\", \"title\": null}, \"col2\": {\"title\": null}, \"col3\": {\"limit\": \"3\", \"title\": null}, \"block\": \"featured_games\"}, {\"block\": \"test\", \"title\": \"dad\"}]}}', '[]', 0.00, 0, 0, 'e1504347-f06e-4edf-90b4-b2a4d72b7d40', 'vi'),
-(13, 'Events', NULL, 'events', '', NULL, 'publish', 25, '2025-02-09 09:33:09', '2025-02-09 09:33:09', 1, 1, 'pages', '{\"template\": \"event\"}', '[]', 0.00, 0, 0, 'd88261bf-3ece-4338-afff-ae2462537fe7', 'vi'),
+(11, 'Home', NULL, 'home', '', NULL, 'publish', 18, '2025-01-30 10:26:12', '2025-04-21 11:30:57', 1, 1, 'pages', '{\"template\":\"home\",\"block_content\":{\"content\":[{\"background_image\":\"2025\\/04\\/20\\/banner-bg.jpg\",\"subtitle\":\"Discover your journey\",\"title\":\"The Best Free Online Courses of All Time\",\"highlight_text\":\"Courses\",\"description\":\"Take your learning organization to the next level. to the next level. Who will share their knowledge to people.\",\"button_text\":\"Courses\",\"button_url\":\"\\/courses\",\"show_arrow_icon\":\"1\",\"banner_image\":\"2025\\/04\\/20\\/banner-img.png\",\"enable_animation\":\"1\",\"block\":\"hero_section_home\"},{\"background_image\":\"2025\\/04\\/20\\/category-bg.jpg\",\"section_title\":\"Explore Our Categories\",\"section_description\":\"Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world.\",\"section_url\":null,\"categories\":[{\"category\":\"26\",\"icon\":\"2025\\/04\\/20\\/category-icon-1.png\",\"color_scheme\":\"category_1\",\"custom_title\":null,\"custom_url\":null},{\"category\":\"23\",\"icon\":\"2025\\/04\\/21\\/category-icon-2.png\",\"color_scheme\":\"category_2\",\"custom_title\":null,\"custom_url\":null},{\"category\":\"28\",\"icon\":\"2025\\/04\\/21\\/category-icon-3.png\",\"color_scheme\":\"category_3\",\"custom_title\":null,\"custom_url\":null},{\"category\":\"32\",\"icon\":\"2025\\/04\\/21\\/category-icon-4.png\",\"color_scheme\":\"category_4\",\"custom_title\":null,\"custom_url\":null},{\"category\":\"34\",\"icon\":\"2025\\/04\\/21\\/category-icon-5.png\",\"color_scheme\":\"category_4\",\"custom_title\":null,\"custom_url\":null},{\"category\":\"35\",\"icon\":\"2025\\/04\\/21\\/category-icon-6.png\",\"color_scheme\":\"category_3\",\"custom_title\":null,\"custom_url\":null},{\"category\":\"36\",\"icon\":\"2025\\/04\\/21\\/category-icon-7.png\",\"color_scheme\":\"category_2\",\"custom_title\":null,\"custom_url\":null},{\"category\":\"37\",\"icon\":\"2025\\/04\\/21\\/category-icon-8.png\",\"color_scheme\":\"category_1\",\"custom_title\":null,\"custom_url\":null}],\"padding_top\":null,\"padding_bottom\":null,\"mobile_padding_top\":null,\"mobile_padding_bottom\":null,\"enable_animation\":\"1\",\"block\":\"course_category_home\"},{\"background_image\":\"2025\\/04\\/21\\/about-section-bg.jpg\",\"image_1\":\"2025\\/04\\/21\\/about-img-1.jpg\",\"image_2\":\"2025\\/04\\/21\\/about-img-2.jpg\",\"title\":\"We do great things together\",\"description\":\"Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius.\",\"features\":[{\"icon\":\"fas fa-star\",\"title\":\"Build your career\",\"description\":\"Online course quickly from anywhere.\"},{\"icon\":\"fas fa-pencil-ruler\",\"title\":\"Grow your skill\",\"description\":\"Online course quickly from anywhere.\"}],\"padding_top\":null,\"padding_bottom\":null,\"mobile_padding_top\":null,\"mobile_padding_bottom\":null,\"enable_animation\":\"1\",\"block\":\"about_us_home\"},{\"background_image\":\"2025\\/04\\/21\\/courses-bg.jpg\",\"section_title\":\"Our Popular Courses\",\"section_description\":\"Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world.\",\"course_limit\":\"6\",\"order_by\":\"created_at\",\"order\":\"DESC\",\"show_all_button\":\"0\",\"view_all_text\":null,\"view_all_url\":null,\"padding_top\":null,\"padding_bottom\":null,\"mobile_padding_top\":null,\"mobile_padding_bottom\":null,\"enable_animation\":\"1\",\"block\":\"course_list_home\"},{\"background_image\":\"2025\\/04\\/21\\/student-choose-bg.jpg\",\"section_title\":\"Why Students Choose Us for Gain Their Knowledge\",\"description\":\"Lorem ipsum dolor sit amet consectetur. Posuere vulputate at tortor aenean tortor tincidunt dui consequat enim. Vel iaculis euismod et scelerisque condimentum nulla cras. Praesent diam orci id et eu nulla id. Auctor fermentum.\",\"features\":[{\"text\":\"Free for physically handcraft.\"},{\"text\":\"Easy to enroll courses\"},{\"text\":\"Course certificate for particular course\"}],\"button_text\":\"More About Us\",\"button_url\":\"#\",\"image_1\":\"2025\\/04\\/21\\/student-choose-img-1.jpg\",\"image_2\":\"2025\\/04\\/21\\/student-choose-img-2.jpg\",\"padding_top\":null,\"padding_bottom\":null,\"mobile_padding_top\":null,\"mobile_padding_bottom\":null,\"enable_animation\":\"1\",\"block\":\"student_choose\"},{\"background_image\":\"2025\\/04\\/21\\/event-bg.jpg\",\"section_title\":\"Our Upcoming Events\",\"section_description\":\"Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world.\",\"event_limit\":\"4\",\"order_by\":\"start_date\",\"order\":\"ASC\",\"date_filter\":\"all\",\"show_all_button\":\"0\",\"view_all_text\":null,\"view_all_url\":null,\"padding_top\":null,\"padding_bottom\":null,\"mobile_padding_top\":null,\"mobile_padding_bottom\":null,\"enable_animation\":\"1\",\"block\":\"events_list_home\"},{\"show_section_title\":\"1\",\"section_title\":\"What Our Student Saying\",\"section_description\":\"Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world.\",\"background_image\":\"2025\\/04\\/21\\/testimonial-bg.jpg\",\"testimonials\":[{\"name\":\"Leslie Alexander\",\"designation\":\"Developer\",\"image\":\"2025\\/04\\/21\\/testimonial-img-1.jpg\",\"rating\":\"5\",\"description\":\"Lorem ipsum dolor sit amet consectetur. Hac ullamcorper nisi con velit eget dignissim pharetra at. Libero ultrices semper aliquet fusce aliquam nunc. Platea cursus in duis semper non lectus. Facili nibh duis viverra faucibus a turpis.\"},{\"name\":\"Orabelle\",\"designation\":\"Math Teacher\",\"image\":\"2025\\/04\\/21\\/testimonial-img-2.jpg\",\"rating\":\"4\",\"description\":\"Lorem ipsum dolor sit amet consectetur. Hac ullamcorper nisi con velit eget dignissim pharetra at. Libero ultrices semper aliquet fusce aliquam nunc. Platea cursus in duis semper non lectus. Facili nibh duis viverra faucibus a turpis.\"},{\"name\":\"Alejandro\",\"designation\":\"Founder & CEO\",\"image\":\"2025\\/04\\/21\\/testimonial-img-3.jpg\",\"rating\":\"5\",\"description\":\"Lorem ipsum dolor sit amet consectetur. Hac ullamcorper nisi con velit eget dignissim pharetra at. Libero ultrices semper aliquet fusce aliquam nunc. Platea cursus in duis semper non lectus. Facili nibh duis viverra faucibus a turpis.\"}],\"enable_slider\":\"1\",\"slides_to_show\":\"2\",\"enable_autoplay\":\"0\",\"autoplay_speed\":null,\"block\":\"testimonial_area\"},{\"background_image\":\"2025\\/04\\/21\\/certificate-bg.jpg\",\"enable_overlay\":\"1\",\"certificates\":[{\"title\":\"Online Certification\",\"icon\":\"2025\\/04\\/21\\/certificate-icon-1.png\"},{\"title\":\"Top Instructors\",\"icon\":\"2025\\/04\\/21\\/certificate-icon-2.png\"},{\"title\":\"Unlimited Access\",\"icon\":\"2025\\/04\\/21\\/certificate-icon-3.png\"},{\"title\":\"Experienced Members\",\"icon\":\"2025\\/04\\/21\\/certificate-icon-4.png\"}],\"padding_top\":null,\"padding_bottom\":null,\"mobile_padding_bottom\":null,\"enable_animation\":\"1\",\"block\":\"certificate_area\"},{\"style\":\"style1\",\"show_section_title\":\"1\",\"section_title\":\"Our Expert Instructor\",\"section_description\":\"Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world.\",\"background_image\":\"2025\\/04\\/21\\/instructor-bg.jpg\",\"instructors\":[{\"name\":\"Johnna Smith\",\"designation\":\"Web Developer\",\"image\":\"2025\\/04\\/21\\/instructor-img-1.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"},{\"name\":\"Alice Johnson\",\"designation\":\"Graphic Designer\",\"image\":\"2025\\/04\\/21\\/instructor-img-2.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"},{\"name\":\"Maya Lee\",\"designation\":\"UX\\/UI Designer\",\"image\":\"2025\\/04\\/21\\/instructor-img-3.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"},{\"name\":\"Sarah Brown\",\"designation\":\"Software Engineer\",\"image\":\"2025\\/04\\/21\\/instructor-img-4.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"},{\"name\":\"Emily Clark\",\"designation\":\"Full Stack Developer\",\"image\":\"2025\\/04\\/21\\/instructor-img-5.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"},{\"name\":\"Emma Davis\",\"designation\":\"Frontend Developer\",\"image\":\"2025\\/04\\/21\\/instructor-img-6.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"}],\"enable_slider\":\"1\",\"block\":\"instructor_list\"},{\"background_image\":\"2025\\/04\\/21\\/blog-bg.jpg\",\"section_title\":\"Latest News Feed\",\"section_description\":\"Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world.\",\"blog_limit\":\"6\",\"order_by\":\"created_at\",\"order\":\"DESC\",\"enable_slider\":\"1\",\"show_all_button\":\"0\",\"view_all_text\":null,\"view_all_url\":null,\"padding_top\":null,\"padding_bottom\":null,\"mobile_padding_top\":null,\"mobile_padding_bottom\":null,\"block\":\"blogs_list_home\"}]}}', '[]', 0.00, 0, 0, '78b4cf21-0b53-498e-a812-0b87267308c5', 'vi'),
+(13, 'Events', NULL, 'events', '', NULL, 'publish', 32, '2025-02-09 09:33:09', '2025-02-09 09:33:09', 1, 1, 'pages', '{\"template\": \"event\"}', '[]', 0.00, 0, 0, 'd88261bf-3ece-4338-afff-ae2462537fe7', 'vi'),
 (14, 'Products', NULL, 'products', '', NULL, 'publish', 28, '2025-02-13 23:27:20', '2025-02-13 23:27:20', 1, 1, 'pages', '{\"template\": \"products\"}', '[]', 0.00, 0, 0, 'bcf463ec-e0c0-48aa-8dc7-9cd2a490ac47', 'vi'),
-(15, 'Product 1', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', 'product-1', 'Product Desc', '<p>Product Desc</p>', 'publish', 1, '2025-02-13 23:32:06', '2025-02-13 23:32:06', 1, 1, 'products', '{\"price\": 400, \"images\": [\"2025/02/01/footer-bg.png\", \"2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg\"], \"barcode\": \"3434314\", \"quantity\": 50, \"sku_code\": \"df32312\", \"downloadable\": 0, \"compare_price\": 300, \"disable_out_of_stock\": 0, \"inventory_management\": 0}', '[]', 0.00, 0, 0, 'c7fb39fa-7d1b-4bd4-bf0c-e9fb2b0d8b75', 'vi'),
-(16, 'Product 2', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg', 'product-2', 'This Is product desc', '<p>This Is product desc</p>', 'publish', 1, '2025-02-14 03:50:15', '2025-02-14 03:50:15', 1, 1, 'products', '{\"price\": 500, \"barcode\": \"dfdf\", \"quantity\": 30, \"sku_code\": \"qwew32\", \"downloadable\": 0, \"compare_price\": 300, \"disable_out_of_stock\": 0, \"inventory_management\": \"1\"}', '[]', 0.00, 0, 0, '086c25f8-c1ac-42d0-95ec-1afe2bfd6025', 'vi'),
-(17, 'Checkout', NULL, 'checkout', '', NULL, 'publish', 97, '2025-02-14 04:41:49', '2025-02-14 04:41:50', 1, 1, 'pages', '{\"template\": null}', '[]', 0.00, 0, 0, 'b551bb7a-2db0-4586-b05f-6640cfa93aa1', 'vi'),
-(18, 'Thank You', NULL, 'thank-you', '', NULL, 'publish', 51, '2025-02-23 20:16:52', '2025-02-23 20:16:53', 1, 1, 'pages', '{\"template\": null}', '[]', 0.00, 0, 0, '1abe8021-b6ad-4008-b95c-a8d5218f52b9', 'vi'),
-(20, 'event 1', NULL, 'event-1', 'content', '<p>content</p>', 'publish', 16, '2025-02-24 11:57:29', '2025-03-05 10:07:56', 1, 1, 'events', '{\"name\": \"fafda\", \"price\": null, \"venue\": \"Dhaka\", \"map_url\": \"#\", \"capacity\": null, \"end_date\": null, \"latitude\": \"57\", \"longitude\": \"87\", \"event_logo\": \"2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg\", \"start_date\": null, \"description\": null, \"event_banner\": \"2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg\", \"social_links\": [{\"url\": \"#\", \"icon\": \"fab fa-facebook-f\"}], \"venue_address\": \"mirpur\", \"map_embed_code\": \"gvhj\", \"max_ticket_number\": null, \"min_ticket_number\": null}', '[{\"id\": 5, \"url\": \"http://mojar-cms.test/category/mango\", \"name\": \"Mango\", \"slug\": \"mango\", \"level\": 0, \"singular\": \"category\", \"taxonomy\": \"categories\", \"thumbnail\": \"http://mojar-cms.test/jw-styles/mojar/images/thumb-default.png\", \"total_post\": 2}]', 0.00, 0, 0, '5f717572-20eb-4b76-8ef7-fe9030b9c46a', 'vi'),
-(21, 'Event 2', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg', 'event-2', 'Event 2', '<p>Event 2</p>', 'publish', 13, '2025-02-26 20:09:49', '2025-03-05 10:04:05', 1, 1, 'events', '{\"name\": \"Ticket\", \"price\": 400, \"venue\": \"Dhaka\", \"map_url\": \"#\", \"capacity\": 10, \"end_date\": \"2025-03-06T22:04\", \"latitude\": \"30\", \"longitude\": \"40\", \"event_logo\": \"2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg\", \"start_date\": \"2025-03-05T22:03\", \"description\": \"Desc\", \"event_banner\": null, \"social_links\": [{\"url\": \"#\", \"icon\": \"fab fa-facebook-f\"}], \"venue_address\": \"Mirpur\", \"map_embed_code\": \"#\", \"max_ticket_number\": 3, \"min_ticket_number\": 1}', '[{\"id\": 5, \"url\": \"http://mojar-cms.test/category/mango\", \"name\": \"Mango\", \"slug\": \"mango\", \"level\": 0, \"singular\": \"category\", \"taxonomy\": \"categories\", \"thumbnail\": \"http://mojar-cms.test/jw-styles/mojar/images/thumb-default.png\", \"total_post\": 1}]', 0.00, 0, 0, '319d3cc9-0afe-4a81-bc1d-c2fbcadfb2d5', 'vi'),
-(22, 'Contact', NULL, 'contact', '', NULL, 'publish', 3, '2025-03-05 01:18:38', '2025-03-05 01:48:07', 1, 1, 'pages', '{\"template\": \"home\", \"block_content\": {\"content\": [{\"block\": \"contact_form\", \"title\": \"Get In Touch With Us\", \"map_url\": \"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58404.90712306111!2d90.33188860263257!3d23.807690708042205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2sDhaka!5e0!3m2!1sen!2sbd!4v1685520321950!5m2!1sen!2sbd\", \"show_map\": \"1\", \"info_boxes\": [{\"icon\": null, \"title\": null, \"content\": null, \"subtitle\": null}], \"name_label\": null, \"show_title\": \"1\", \"email_label\": null, \"submit_text\": \"Submit\", \"message_label\": null, \"subject_label\": null, \"show_info_boxes\": \"1\", \"name_placeholder\": null, \"email_placeholder\": null, \"message_placeholder\": null, \"subject_placeholder\": null}]}}', '[]', 0.00, 0, 0, 'b4e3c4af-e1d9-4a5a-bf38-375f02cba23d', 'vi'),
-(23, 'Faq', NULL, 'faq', '', NULL, 'publish', 6, '2025-03-05 02:24:24', '2025-03-18 07:36:46', 1, 1, 'pages', '{\"template\": \"about\", \"block_content\": {\"content\": [{\"block\": \"about_video\", \"play_icon\": null, \"video_url\": null, \"margin_top\": null, \"video_type\": \"video\", \"enable_overlay\": \"0\", \"enable_autoplay\": \"0\", \"background_image\": null, \"enable_animation\": \"0\", \"mobile_margin_top\": null}, {\"block\": \"student_choose\", \"image_1\": null, \"image_2\": null, \"button_url\": null, \"button_text\": null, \"description\": null, \"padding_top\": null, \"section_title\": null, \"padding_bottom\": null, \"background_image\": null, \"enable_animation\": \"0\", \"mobile_padding_top\": null, \"mobile_padding_bottom\": null}, {\"block\": \"about_area\", \"title\": \"About Section title\", \"image_1\": \"2025/03/06/home-shop-thumb06.png\", \"image_2\": null, \"description\": \"About Section desc\", \"background_image\": \"2025/03/07/paypal.png\"}]}}', '[]', 0.00, 0, 0, 'e743e505-1998-4ea3-9133-3b962918d2e2', 'vi'),
-(24, 'Privacy policy', NULL, 'privacy-policy', '\r Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud exercit ation ullamco laboris...', '<div class=\"tf__trems_condition_text\">\r\n<p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud exercit ation ullamco laboris nisi ut aliquip ex ea commodo consequat Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusani um doloremque laudantium, totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo Nemo enim ipsam volupt atem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>\r\n<p>Adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip exea in commodo consequat Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur Excepteur sint occaecat cupidatat non proidentktl sunt in culpa qui officia deserunt mollit anim id est laborum Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusani um doloremque laudantium totamrem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo Nemo enim ipsam volupt</p>\r\n<h3>The Type of Personal Information We Collect</h3>\r\n<p>Vulputate dignissim viverra pretium enim penatibus amet velit. Bibendum tincidunt pretium est sit cursus orci morbi cursus consectetur. Dolor nec a a sollicitudin. Nec elementum arcu arcu in volutpat tristique nunc. Quis ut egestas nec fringilla enim leo. Duis leo morbi mi felis varius et. Suspendisse at est pellentesque sagittis nulla. Magna placerat laoreet quis vulputate. Ornare turpis ut amet arcu vitae. Enim suspendisse sit nec venenatis lobortis.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n</ul>\r\n<h3>How We Use Cookies?</h3>\r\n<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n</ul>\r\n<h3>The Collection, Process, And Use Of Personal Data</h3>\r\n<p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided.</p>\r\n<h3>Accounts, Passwords And Security</h3>\r\n<p>In certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.</p>\r\n</div>', 'publish', 3, '2025-03-05 03:29:45', '2025-03-05 03:29:45', 1, 1, 'pages', '{\"template\": null}', '[]', 0.00, 0, 0, 'e20af4ec-4c2a-4fe1-ae1f-a8b0d180f250', 'vi'),
+(17, 'Checkout', NULL, 'checkout', '', NULL, 'publish', 101, '2025-02-14 04:41:49', '2025-02-14 04:41:50', 1, 1, 'pages', '{\"template\": null}', '[]', 0.00, 0, 0, 'b551bb7a-2db0-4586-b05f-6640cfa93aa1', 'vi'),
+(18, 'Thank You', NULL, 'thank-you', '', NULL, 'publish', 53, '2025-02-23 20:16:52', '2025-02-23 20:16:53', 1, 1, 'pages', '{\"template\": null}', '[]', 0.00, 0, 0, '1abe8021-b6ad-4008-b95c-a8d5218f52b9', 'vi'),
+(22, 'Contact', NULL, 'contact', '', NULL, 'publish', 9, '2025-03-05 01:18:38', '2025-04-08 18:00:06', 1, 1, 'pages', '{\"template\":\"home\",\"block_content\":{\"content\":[{\"show_title\":\"1\",\"title\":\"Get In Touch With Us\",\"show_info_boxes\":\"1\",\"info_boxes\":[{\"icon\":\"fas fa-envelope\",\"title\":\"Email\",\"subtitle\":\"Our friendly team is here to help.\",\"content\":\"example@gmail.com\"},{\"icon\":\"fas fa-map-marker-alt\",\"title\":\"Office\",\"subtitle\":\"Come say hello at our office.\",\"content\":\"8502 Preston Rd. Maine 98380, USA\"},{\"icon\":\"fas fa-phone-alt\",\"title\":\"Phone\",\"subtitle\":\"Mon-Fri from 8am to 5pm.\",\"content\":\"+088 (246) 642-27\"},{\"icon\":\"fas fa-clock\",\"title\":\"Working Hours\",\"subtitle\":\"Satday to Friday:\",\"content\":\"09:00am - 10:00pm\"}],\"name_label\":null,\"name_placeholder\":\"Name\",\"email_label\":null,\"email_placeholder\":\"example@gmail.com\",\"subject_label\":null,\"subject_placeholder\":\"Phone\",\"message_label\":null,\"message_placeholder\":\"Type here..\",\"submit_text\":\"Send message\",\"show_map\":\"1\",\"map_url\":\"https:\\/\\/www.google.com\\/maps\\/embed?pb=!1m18!1m12!1m3!1d58404.90712306111!2d90.33188860263257!3d23.807690708042205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2sDhaka!5e0!3m2!1sen!2sbd!4v1685520321950!5m2!1sen!2sbd\",\"block\":\"contact_form\"}]}}', '[]', 0.00, 0, 0, 'b4e3c4af-e1d9-4a5a-bf38-375f02cba23d', 'vi'),
+(23, 'Faq', NULL, 'faq', '', NULL, 'publish', 8, '2025-03-05 02:24:24', '2025-03-18 07:36:46', 1, 1, 'pages', '{\"template\": \"about\", \"block_content\": {\"content\": [{\"block\": \"about_video\", \"play_icon\": null, \"video_url\": null, \"margin_top\": null, \"video_type\": \"video\", \"enable_overlay\": \"0\", \"enable_autoplay\": \"0\", \"background_image\": null, \"enable_animation\": \"0\", \"mobile_margin_top\": null}, {\"block\": \"student_choose\", \"image_1\": null, \"image_2\": null, \"button_url\": null, \"button_text\": null, \"description\": null, \"padding_top\": null, \"section_title\": null, \"padding_bottom\": null, \"background_image\": null, \"enable_animation\": \"0\", \"mobile_padding_top\": null, \"mobile_padding_bottom\": null}, {\"block\": \"about_area\", \"title\": \"About Section title\", \"image_1\": \"2025/03/06/home-shop-thumb06.png\", \"image_2\": null, \"description\": \"About Section desc\", \"background_image\": \"2025/03/07/paypal.png\"}]}}', '[]', 0.00, 0, 0, 'e743e505-1998-4ea3-9133-3b962918d2e2', 'vi'),
+(24, 'Privacy policy', NULL, 'privacy-policy', '\r Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud exercit ation ullamco laboris...', '<div class=\"tf__trems_condition_text\">\r\n<p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud exercit ation ullamco laboris nisi ut aliquip ex ea commodo consequat Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusani um doloremque laudantium, totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo Nemo enim ipsam volupt atem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>\r\n<p>Adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip exea in commodo consequat Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur Excepteur sint occaecat cupidatat non proidentktl sunt in culpa qui officia deserunt mollit anim id est laborum Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusani um doloremque laudantium totamrem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo Nemo enim ipsam volupt</p>\r\n<h3>The Type of Personal Information We Collect</h3>\r\n<p>Vulputate dignissim viverra pretium enim penatibus amet velit. Bibendum tincidunt pretium est sit cursus orci morbi cursus consectetur. Dolor nec a a sollicitudin. Nec elementum arcu arcu in volutpat tristique nunc. Quis ut egestas nec fringilla enim leo. Duis leo morbi mi felis varius et. Suspendisse at est pellentesque sagittis nulla. Magna placerat laoreet quis vulputate. Ornare turpis ut amet arcu vitae. Enim suspendisse sit nec venenatis lobortis.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n</ul>\r\n<h3>How We Use Cookies?</h3>\r\n<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n</ul>\r\n<h3>The Collection, Process, And Use Of Personal Data</h3>\r\n<p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided.</p>\r\n<h3>Accounts, Passwords And Security</h3>\r\n<p>In certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.</p>\r\n</div>', 'publish', 6, '2025-03-05 03:29:45', '2025-03-05 03:29:45', 1, 1, 'pages', '{\"template\": null}', '[]', 0.00, 0, 0, 'e20af4ec-4c2a-4fe1-ae1f-a8b0d180f250', 'vi'),
 (25, 'Accusantium quod atq', NULL, 'accusantium-quod-atq', '', NULL, 'publish', 0, '2025-03-08 05:43:17', '2025-03-08 05:43:17', 1, 1, 'theme', '{\"theme_name\": \"Sandra Nolan\", \"theme_author\": \"Distinctio Sint qua\", \"theme_version\": \"Adipisci consectetur\"}', '[]', 0.00, 0, 0, 'b4ad5fc0-a3dc-4d9f-8b8c-a235670fe319', 'vi'),
 (26, 'Recusandae Ex tempo', '2025/03/06/features-product-shape01.png', 'recusandae-ex-tempo', 'Lorem ipsum is a dummy or placeholder text commonly used in graphic design, publishing, and web development to fill empty spaces in a layout that does not yet have content', '<p>Lorem ipsum is a dummy or placeholder text commonly used in graphic design, publishing, and web development to fill empty spaces in a layout that does not yet have content</p>', 'publish', 2, '2025-03-08 05:53:48', '2025-03-08 07:14:45', 1, 1, 'dev_tool_plugin', '{\"plugin_name\": \"Silas Butler\", \"plugin_author\": \"Eiusmod autem quo te\", \"plugin_version\": \"Culpa officia non al\"}', '[]', 0.00, 0, 0, 'e9a5dfd8-4c9c-4c47-a138-1c7f2d9ea0d5', 'vi'),
-(28, 'Amet ipsum quam no', NULL, 'amet-ipsum-quam-no', '', NULL, 'private', 0, '2025-03-19 04:44:12', '2025-03-19 04:44:12', 1, 1, 'events', '{\"name\": \"Eve Sherman\", \"price\": 596, \"venue\": \"In molestiae quia do\", \"map_url\": \"Voluptates reiciendi\", \"capacity\": 74, \"end_date\": \"2004-07-28T18:52\", \"latitude\": \"Eos sed omnis quia i\", \"longitude\": \"Nisi harum impedit\", \"event_logo\": null, \"start_date\": \"1980-11-16T17:47\", \"description\": \"Magna tempore ipsum\", \"event_banner\": null, \"social_links\": [{\"url\": \"#\", \"icon\": \"fab fa-facebook-f\"}], \"venue_address\": \"Eum et est sit aperi\", \"map_embed_code\": \"Amet ut iure aut qu\", \"max_ticket_number\": 299, \"min_ticket_number\": 310}', '[]', 0.00, 0, 0, 'a8216d07-2ad1-4b01-b8c6-83f82e5e5cfa', 'vi'),
-(29, 'course 1', '2025/03/06/features-product-shape01.png', 'course-1', '', NULL, 'publish', 0, '2025-03-19 05:47:19', '2025-03-19 07:12:41', 1, 1, 'courses', '{\"price\": 300, \"language\": \"vi\", \"max_students\": \"20\", \"compare_price\": 400, \"difficulty_level\": \"intermediate\", \"preview_video_url\": \"#\"}', '[]', 0.00, 0, 0, '1adb6213-6fad-474b-bffa-72d39847709c', 'vi'),
-(30, 'course 2.0', '2025/03/06/home-shop-thumb06.png', 'course-20', 'desc', '<p>desc</p>', 'publish', 0, '2025-03-19 07:23:03', '2025-03-19 07:23:03', 1, 1, 'courses', '{\"price\": null, \"language\": \"en\", \"max_students\": 0, \"compare_price\": null, \"difficulty_level\": \"beginner\", \"preview_video_url\": \"\"}', '[]', 0.00, 0, 0, 'df0683fd-f6e2-4b54-80af-7226deec137e', 'vi'),
-(31, 'New Course', NULL, 'new-course', '', NULL, 'draft', 0, '2025-03-19 07:56:57', '2025-03-19 07:56:57', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, 'a7309ff3-64d0-44e0-9e48-e27f488a5889', 'vi'),
-(32, 'New Course', NULL, 'new-course-1', '', NULL, 'draft', 0, '2025-03-19 08:52:10', '2025-03-19 08:52:10', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, '0b41a67e-1d36-48f2-9259-645a89d9dd4a', 'vi'),
-(33, 'New Course', NULL, 'new-course-2', '', NULL, 'draft', 0, '2025-03-19 08:52:15', '2025-03-19 08:52:15', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, '28eb81df-0e63-44c5-9ab8-002d849e301e', 'vi'),
-(34, 'New Course', NULL, 'new-course-3', '', NULL, 'draft', 0, '2025-03-19 08:52:21', '2025-03-19 08:52:21', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, 'fe2a483b-64f1-461e-8def-a4e8fc2f3a01', 'vi'),
-(35, 'New Course', NULL, 'new-course-4', '', NULL, 'draft', 0, '2025-03-19 08:52:53', '2025-03-19 08:52:53', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, 'b9f2e8bb-58fd-449f-a45c-388615ad1ed3', 'vi'),
-(36, 'New Course', NULL, 'new-course-5', '', NULL, 'draft', 0, '2025-03-19 08:53:37', '2025-03-19 08:53:37', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, 'e3b19dc5-da66-435e-b5e3-0d3dd887cbfc', 'vi'),
-(37, 'New Course', NULL, 'new-course-6', '', NULL, 'draft', 0, '2025-03-19 08:53:41', '2025-03-19 08:53:41', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, 'e1e52ae4-2001-41a0-b90b-565a55609f48', 'vi'),
-(38, 'New Course', NULL, 'new-course-7', '', NULL, 'draft', 0, '2025-03-19 08:53:45', '2025-03-19 08:53:45', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, 'f0b7c12e-2bf0-4d1c-8565-51b92baf0bce', 'vi'),
-(39, 'New Course', NULL, 'new-course-8', '', NULL, 'draft', 0, '2025-03-19 08:53:53', '2025-03-19 08:53:53', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, 'e5999d23-cd55-4c31-97a6-5195053db1d2', 'vi'),
-(40, 'New Course', NULL, 'new-course-9', '', NULL, 'draft', 0, '2025-03-19 08:53:58', '2025-03-19 08:53:58', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, '0d8f8fc5-6978-4bd8-99ca-b48f46e9c91c', 'vi'),
-(41, 'New Course', NULL, 'new-course-10', '', NULL, 'draft', 0, '2025-03-19 08:54:15', '2025-03-19 08:54:15', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, '9786111f-5b8c-47ce-b091-eaf749c92967', 'vi'),
-(42, 'New Course', NULL, 'new-course-11', '', NULL, 'draft', 0, '2025-03-19 08:54:37', '2025-03-19 08:54:37', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, 'f139bf02-3c14-4f67-9a34-9a5ea7882dd5', 'vi'),
-(43, 'New Course', NULL, 'new-course-12', '', NULL, 'draft', 0, '2025-03-19 08:55:02', '2025-03-19 08:55:02', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, '0d19de53-c5be-4052-bb6a-ba9f7ace9387', 'vi'),
-(44, 'New Course', NULL, 'new-course-13', '', NULL, 'draft', 0, '2025-03-19 08:55:54', '2025-03-19 08:55:54', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, 'bcb51fbe-53b8-4529-9777-bb8f26770be5', 'vi'),
-(45, 'New Course', NULL, 'new-course-14', '', NULL, 'draft', 0, '2025-03-19 08:56:10', '2025-03-19 08:56:10', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, 'a3b16f5c-3367-4bd5-90a5-1c926a6a0653', 'vi'),
-(46, 'New Course', NULL, 'new-course-15', '', NULL, 'draft', 0, '2025-03-19 08:56:11', '2025-03-19 08:56:11', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, '95ee7178-b239-4c1d-a23f-214c8b128766', 'vi'),
-(47, 'New Course', NULL, 'new-course-16', '', NULL, 'draft', 0, '2025-03-19 08:56:26', '2025-03-19 08:56:26', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, '497e09ce-bd4d-4ce1-9855-21d62342fb2d', 'vi'),
-(48, 'New Course', NULL, 'new-course-17', '', NULL, 'draft', 0, '2025-03-19 08:56:29', '2025-03-19 08:56:29', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, 'fca3b2ce-ca56-44c1-9f12-58281380b3b0', 'vi'),
-(49, 'New Course', NULL, 'new-course-18', '', NULL, 'draft', 0, '2025-03-19 08:56:59', '2025-03-19 08:56:59', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, '2923a196-e03a-4af3-9b62-89a32030367f', 'vi'),
-(50, 'New Course', NULL, 'new-course-19', '', NULL, 'draft', 0, '2025-03-19 08:57:07', '2025-03-19 08:57:07', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, 'fc0fd932-e31c-46c5-bf4e-cb29bd931c14', 'vi'),
-(51, 'New Course', NULL, 'new-course-20', '', NULL, 'draft', 0, '2025-03-19 08:58:37', '2025-03-19 08:58:37', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, '5e2996a8-b863-4ee8-b6d7-6e4e14bd1f0e', 'vi'),
-(52, 'New Course', NULL, 'new-course-21', '', NULL, 'draft', 0, '2025-03-19 08:58:44', '2025-03-19 08:58:44', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, '66b82ee5-b678-4629-995f-f5703db3ccf0', 'vi'),
-(53, 'New Course', NULL, 'new-course-22', '', NULL, 'draft', 0, '2025-03-19 08:58:47', '2025-03-19 08:58:47', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, 'a9c2897f-516f-4ef4-b852-824f554824ad', 'vi'),
-(54, 'New Course', NULL, 'new-course-23', '', NULL, 'draft', 0, '2025-03-19 08:58:52', '2025-03-19 08:58:52', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, '088bc29c-8739-4492-814f-9d6eaa1910b9', 'vi'),
-(55, 'New Course', NULL, 'new-course-24', '', NULL, 'draft', 0, '2025-03-19 08:59:36', '2025-03-19 08:59:36', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, 'bc727e8e-91fe-46d0-88ae-18f4095e7700', 'vi'),
-(56, 'New Course', NULL, 'new-course-25', '', NULL, 'draft', 0, '2025-03-19 08:59:41', '2025-03-19 08:59:41', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, 'dbfe0c56-e409-4f47-b44e-b518fea2f945', 'vi'),
-(57, 'New Course', NULL, 'new-course-26', '', NULL, 'draft', 0, '2025-03-19 09:00:06', '2025-03-19 09:00:06', 1, 1, 'course', NULL, NULL, 0.00, 0, 0, '5a54c73a-dca9-4aaf-a772-4582328c822f', 'vi'),
-(58, 'New Course', NULL, 'new-course-27', '', NULL, 'draft', 0, '2025-03-19 09:01:38', '2025-03-19 09:01:38', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, 'd3978fc2-6d08-449f-9c3e-26a358b8cea4', 'vi'),
-(59, 'New Course', NULL, 'new-course-28', '', NULL, 'draft', 0, '2025-03-19 09:03:59', '2025-03-19 09:03:59', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, 'c6539a3f-af16-4d12-94db-3519e96766cc', 'vi'),
-(60, 'New Course', NULL, 'new-course-29', '', NULL, 'draft', 0, '2025-03-19 09:04:04', '2025-03-19 09:04:04', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, 'dd289ee3-9085-4612-806f-6a7f3836cd49', 'vi'),
-(61, 'New Course', NULL, 'new-course-30', '', NULL, 'draft', 0, '2025-03-19 09:04:10', '2025-03-19 09:04:10', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, '21f5877a-b433-4d7c-a9cd-a542b380b3dd', 'vi'),
-(62, 'New Course', NULL, 'new-course-31', '', NULL, 'draft', 0, '2025-03-19 09:05:11', '2025-03-19 09:05:11', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, 'bd5b7adb-dcaf-4af3-9ce2-f801a0f2aa0e', 'vi'),
-(63, 'New Course', NULL, 'new-course-32', '', NULL, 'draft', 0, '2025-03-19 09:05:14', '2025-03-19 09:05:14', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, 'c1c944b1-ced1-437e-8af1-bf58e16ef69f', 'vi'),
-(64, 'New Course', NULL, 'new-course-33', '', NULL, 'draft', 0, '2025-03-19 09:05:21', '2025-03-19 09:05:21', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, 'a2280949-2152-4868-9220-223faa4d93fa', 'vi'),
-(65, 'New Course', NULL, 'new-course-34', '', NULL, 'draft', 0, '2025-03-19 09:05:42', '2025-03-19 09:05:42', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, 'ccc015b7-480c-4655-bf5f-73af9dbdd009', 'vi'),
-(66, 'New Course', NULL, 'new-course-35', '', NULL, 'draft', 0, '2025-03-19 09:06:14', '2025-03-19 09:06:14', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, '554f9f23-d949-4c7d-a868-76adf1bb6e58', 'vi'),
-(67, 'New Course', NULL, 'new-course-36', '', NULL, 'draft', 0, '2025-03-19 09:07:15', '2025-03-19 09:07:15', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, 'c1b398da-6bb9-4ebb-bb3c-e10df57d36a1', 'vi'),
-(68, 'New Course', NULL, 'new-course-37', '', NULL, 'draft', 0, '2025-03-19 09:16:29', '2025-03-19 09:16:29', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, 'bf43f2f8-5647-4e0f-ab1e-fb92e294dbe4', 'vi'),
-(69, 'New Course', NULL, 'new-course-38', '', NULL, 'draft', 0, '2025-03-19 09:16:33', '2025-03-19 09:16:33', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, '1d3078ba-d54e-4757-9b3b-ee60fc926394', 'vi'),
-(70, 'New Course', NULL, 'new-course-39', '', NULL, 'draft', 0, '2025-03-19 09:20:47', '2025-03-19 09:20:47', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, '551c718b-1f57-41ef-9da5-cb9faeb8be17', 'vi'),
-(71, 'New Course', NULL, 'new-course-40', '', NULL, 'draft', 0, '2025-03-19 09:21:06', '2025-03-19 09:21:06', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, 'cd2091b5-810f-4bc0-9c06-d0df168a3036', 'vi'),
-(72, 'New Course', NULL, 'new-course-41', '', NULL, 'draft', 0, '2025-03-19 09:21:11', '2025-03-19 09:21:11', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, '51eb5533-67d3-468a-8275-a242cb1b92f2', 'vi'),
-(73, 'New Course', NULL, 'new-course-42', '', NULL, 'draft', 0, '2025-03-19 09:22:09', '2025-03-19 09:22:09', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, 'a3cb93d3-a23a-4a95-98e0-d187ab006aa2', 'vi'),
-(74, 'dwerqwedw', NULL, 'dwerqwedw', '', NULL, 'publish', 1, '2025-03-19 09:23:13', '2025-03-19 09:23:13', 1, 1, 'courses', '{\"price\": 40, \"language\": \"en\", \"max_students\": 0, \"compare_price\": 50, \"difficulty_level\": \"beginner\", \"preview_video_url\": \"\"}', '[]', 0.00, 0, 0, '11ff0655-8c39-4f65-9f6d-01185226e5c3', 'vi'),
-(75, 'New Course', NULL, 'new-course-43', '', NULL, 'draft', 0, '2025-03-19 09:24:00', '2025-03-19 09:24:00', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, '946472fe-e32f-4cef-8533-2b8011d7a050', 'vi'),
-(76, 'New Course', NULL, 'new-course-44', '', NULL, 'draft', 0, '2025-03-19 09:26:18', '2025-03-19 09:26:18', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, '5dc10f3d-65b7-4fc4-834c-70e5cb5b5569', 'vi'),
-(77, 'New Course', NULL, 'new-course-45', '', NULL, 'draft', 0, '2025-03-19 09:35:10', '2025-03-19 09:35:10', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, '072776df-673c-4949-b67b-1b778b32ba99', 'vi'),
-(79, 'asdasd', NULL, 'asdasd', '', NULL, 'publish', 2, '2025-03-19 09:38:56', '2025-03-22 09:33:31', 1, 1, 'posts', NULL, '[]', 0.00, 0, 2, 'f57d9ad8-fad7-4200-a2c1-c5058f87411c', 'vi'),
-(80, 'dfgdfgdf', '2025/03/06/features-product-shape02.png', 'dfgdfgdf', '\r Study Plan\r Lorem ipsum dolor sit amet consectetur. Condimentum et eget faucibus tempor. Amet odio diam mattis volutpat sed platea sed pulvinar. Arcu ut urna sagittis sit eu ante ut urna...', '<div class=\"tf__course_overview\">\r\n<h3>Study Plan</h3>\r\n<p>Lorem ipsum dolor sit amet consectetur. Condimentum et eget faucibus tempor. Amet odio diam mattis volutpat sed platea sed pulvinar. Arcu ut urna sagittis sit eu ante ut urna facilisis. In viverra dui malesuada adipiscing velit erat eu. Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat. Lectus congue congue vitae enim dignissim justo. Sagittis eu et tellus morbi maecenas egestas ullamcorper euismod vulputate. Nulla in elit in amet vitae aliquam.</p>\r\n<h3>What will you learn from this course?</h3>\r\n<p>Lectus congue congue vitae enim dignissim justo. Sagittis eu et tellus morbi maecenas egestas ullamcorper euismod vulputate. Nulla in elit in amet vitae aliquam.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n<li>How to Convert Ul/UX to HTM</li>\r\n<li>Detailed ideas about structured project creation</li>\r\n<li>Steps to start freelancing by Learning Web design</li>\r\n</ul>\r\n<h3>Details about the course</h3>\r\n<p>Being able to speak Engltst\' fluently iS an important skill in this age. Having spoken English skills can help you advance in every stage ot lite. Acquiring English speaking SkillS or correct pronunciation ot English is very important.</p>\r\n<p>There are many people who know English well, but teel reluctant to speak English due to lack Ot confidence. Ten Minute School brings you the spoken English.</p>\r\n</div>', 'publish', 4, '2025-03-19 09:41:52', '2025-03-21 12:40:50', 1, 1, 'courses', '{\"price\": 35, \"duration\": \"\", \"language\": \"en\", \"certificate\": \"0\", \"max_students\": \"0\", \"compare_price\": 65, \"difficulty_level\": \"beginner\", \"preview_video_url\": \"\", \"preview_video_thumbnail\": \"\"}', '[{\"id\": 6, \"url\": \"http://mojar-cms.test/category/cat-course-1\", \"name\": \"Cat Course 1\", \"slug\": \"cat-course-1\", \"level\": 0, \"singular\": \"category\", \"taxonomy\": \"categories\", \"thumbnail\": \"http://mojar-cms.test/jw-styles/mojar/images/thumb-default.png\", \"total_post\": 2}]', 0.00, 0, 0, '1f9d9db0-087f-4dae-b623-fc6eba739e81', 'vi'),
-(82, 'fsdfdsfds', '2025/03/06/features-product-shape01.png', 'fsdfdsfds', '', NULL, 'publish', 6, '2025-03-19 09:53:10', '2025-03-22 10:25:47', 1, 1, 'courses', '{\"price\": 0, \"duration\": \"\", \"language\": \"en\", \"certificate\": \"0\", \"max_students\": \"0\", \"compare_price\": 0, \"difficulty_level\": \"beginner\", \"preview_video_url\": \"\", \"preview_video_thumbnail\": \"\"}', '[{\"id\": 6, \"url\": \"http://mojar-cms.test/category/cat-course-1\", \"name\": \"Cat Course 1\", \"slug\": \"cat-course-1\", \"level\": 0, \"singular\": \"category\", \"taxonomy\": \"categories\", \"thumbnail\": \"http://mojar-cms.test/jw-styles/mojar/images/thumb-default.png\", \"total_post\": 2}]', 0.00, 0, 2, '50d86591-5871-4169-b412-f0322391b533', 'vi'),
-(122, 'Courses', NULL, 'courses', '', NULL, 'publish', 15, '2025-03-21 00:11:06', '2025-03-21 00:11:06', 1, 1, 'pages', '{\"template\": \"courses\"}', '[]', 0.00, 0, 0, '61167aaa-9b06-47e3-8541-73fbf3b1be1f', 'vi'),
-(124, 'k[ok', NULL, 'kok', '', NULL, 'publish', 0, '2025-03-29 13:23:28', '2025-03-29 13:23:28', 1, 1, 'products', '{\"price\": null, \"barcode\": null, \"quantity\": null, \"sku_code\": null, \"downloadable\": \"0\", \"compare_price\": null, \"disable_out_of_stock\": \"0\", \"inventory_management\": \"0\"}', '[]', 0.00, 0, 0, '2b528146-ed84-4f5a-837c-13214eb0fe04', 'vi'),
-(125, 'Basic Course', NULL, 'basic-course', '', NULL, 'publish', 0, '2025-04-02 08:29:28', '2025-04-02 08:29:28', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, '148f7c3c-4d23-43c6-864c-f584358256a6', 'vi'),
-(126, 'Basic Course', NULL, 'basic-course-1', '', NULL, 'publish', 0, '2025-04-02 08:29:53', '2025-04-02 08:29:53', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, '42990ef4-1223-464f-a059-553b203f1361', 'vi'),
-(127, 'kh', NULL, 'kh', '', NULL, 'publish', 0, '2025-04-02 12:41:34', '2025-04-02 12:41:34', 1, 1, 'pages', '{\"template\": \"home\", \"block_content\": {\"content\": [{\"block\": \"student_choose\", \"image_1\": null, \"image_2\": null, \"button_url\": null, \"button_text\": null, \"description\": null, \"padding_top\": null, \"section_title\": null, \"padding_bottom\": null, \"background_image\": null, \"enable_animation\": \"0\", \"mobile_padding_top\": null, \"mobile_padding_bottom\": null}]}}', '[]', 0.00, 0, 0, 'c69fbd19-89a9-4bcd-ad2f-ef001608391f', 'vi'),
-(128, 'Basic Course', NULL, 'basic-course-2', '', NULL, 'publish', 0, '2025-04-02 13:04:34', '2025-04-02 13:04:34', 1, 1, 'courses', NULL, NULL, 0.00, 0, 0, '56bac643-1ca5-4c9c-9e03-51c5bf298ad7', 'vi'),
-(129, 'fasdasd', NULL, 'f', '', NULL, 'publish', 0, '2025-04-02 13:15:04', '2025-04-02 13:15:04', 1, 1, 'pages', '{\"template\": \"courses\", \"block_content\": {\"content\": [{\"block\": \"contact_form\", \"title\": \"sdasd\", \"map_url\": null, \"show_map\": \"0\", \"name_label\": null, \"show_title\": \"0\", \"email_label\": null, \"submit_text\": null, \"message_label\": null, \"subject_label\": null, \"show_info_boxes\": \"0\", \"name_placeholder\": null, \"email_placeholder\": null, \"message_placeholder\": null, \"subject_placeholder\": null}]}}', '[]', 0.00, 0, 0, '0b0ff5bc-7e50-4067-937d-2948ff02e2af', 'vi'),
-(132, 'Labore est irure cum', NULL, 'labore-est-irure-cum', '', NULL, 'publish', 0, '2025-04-02 13:19:13', '2025-04-02 13:19:13', 1, 1, 'events', '{\"name\": \"Ticket 1\", \"price\": 30, \"venue\": \"asdfasd\", \"map_url\": \"#\", \"capacity\": 20, \"end_date\": \"2025-04-05T01:19\", \"latitude\": \"32432\", \"longitude\": \"32432\", \"event_logo\": null, \"start_date\": \"2025-04-04T01:19\", \"description\": \"Desc\", \"event_banner\": null, \"social_links\": [{\"url\": \"Est distinctio Sit\", \"icon\": \"Nihil provident quo\"}, {\"url\": \"Amet autem id incid\", \"icon\": \"Sit enim dolor labor\"}], \"venue_address\": \"asdasd\", \"map_embed_code\": \"#\", \"max_ticket_number\": 3, \"min_ticket_number\": 1}', '[{\"id\": 5, \"url\": \"http://mojar-cms.test/category/mango\", \"name\": \"Mango\", \"slug\": \"mango\", \"level\": 0, \"singular\": \"category\", \"taxonomy\": \"categories\", \"thumbnail\": \"http://mojar-cms.test/jw-styles/mojar/images/thumb-default.png\", \"total_post\": 3}]', 0.00, 0, 0, '6c019afd-df25-4644-bc6b-cd69c4967368', 'vi');
+(122, 'Courses', NULL, 'courses', '', NULL, 'publish', 39, '2025-03-21 00:11:06', '2025-03-21 00:11:06', 1, 1, 'pages', '{\"template\": \"courses\"}', '[]', 0.00, 0, 0, '61167aaa-9b06-47e3-8541-73fbf3b1be1f', 'vi'),
+(133, 'Blogs', NULL, 'blogs', '', NULL, 'publish', 6, '2025-04-08 11:44:34', '2025-04-08 11:44:34', 1, 1, 'pages', '{\"template\":null}', '[]', 0.00, 0, 0, 'fe5b153c-9e1a-4caa-b6d3-9e29fe7b7728', 'vi'),
+(134, 'How do I Sell Affiliate Products to My Customers', '2025/04/08/blog-img-1.jpg', 'how-do-i-sell-affiliate-products-to-my-customers', 'Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum...', '<p>Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus libero non senectus est. Eu vulputate enim diam nunc et suscipit nunc. Blandit aliquet aliquam congue enim. Suspendisse risus id viverra scelerisque sagittis at.</p>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n<div class=\"tf__quote\">\r\n<p>Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus.</p>\r\n<h5>Jerome Bell</h5>\r\n</div>\r\n<h3>Know More About Preschool</h3>\r\n<p>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean. Netus sed amet tortor viverra sit orci vitae. Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus. Sed dictum dui venenatis.</p>\r\n<div class=\"tf__community_img\"><img class=\"img-fluid w-100\" src=\"2025/04/08/blog-details-video-img.jpg\" alt=\"community\" />\r\n<div class=\"tf__community_img_overlay\"><a class=\"venobox tf__play_btn\" href=\"https://youtu.be/CZkux700lqU\" data-autoplay=\"true\" data-vbtype=\"video\"> </a></div>\r\n</div>\r\n<h3>What&rsquo;s New Here</h3>\r\n<p>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean. Netus sed amet tortor viverra sit orci vitae. Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus. Sed dictum dui venenatis.</p>\r\n<ul>\r\n<li>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean.</li>\r\n<li>Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl.</li>\r\n<li>Pharetra et ullamcorper in lacus amet posuere consequat vulputate Erat vitae iaculis malesuada.</li>\r\n<li>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean.</li>\r\n</ul>', 'publish', 3, '2025-04-08 13:14:51', '2025-04-09 19:20:10', 1, 1, 'posts', NULL, '[{\"id\":7,\"name\":\"Education\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"education\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/education\"},{\"id\":8,\"name\":\"Learning\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"learning\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/learning\"},{\"id\":9,\"name\":\"College\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"college\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/college\"},{\"id\":10,\"name\":\"Education\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"education-1\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/education-1\"}]', 0.00, 0, 1, 'ca23eee0-1c7a-4a11-afcc-7431453d9714', 'vi'),
+(135, 'Group Of Students Sharing Their Ideas', '2025/04/08/blog-img-2.jpg', 'group-of-students-sharing-their-ideas', 'Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum...', '<p>Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus libero non senectus est. Eu vulputate enim diam nunc et suscipit nunc. Blandit aliquet aliquam congue enim. Suspendisse risus id viverra scelerisque sagittis at.</p>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n<div class=\"tf__quote\">\r\n<p>Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus.</p>\r\n<h5>Jerome Bell</h5>\r\n</div>\r\n<h3>Know More About Preschool</h3>\r\n<p>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean. Netus sed amet tortor viverra sit orci vitae. Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus. Sed dictum dui venenatis.</p>\r\n<div class=\"tf__community_img\"><img class=\"img-fluid w-100\" src=\"2025/04/08/blog-details-video-img.jpg\" alt=\"community\" />\r\n<div class=\"tf__community_img_overlay\"><a class=\"venobox tf__play_btn\" href=\"https://youtu.be/CZkux700lqU\" data-autoplay=\"true\" data-vbtype=\"video\"> </a></div>\r\n</div>\r\n<h3>What&rsquo;s New Here</h3>\r\n<p>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean. Netus sed amet tortor viverra sit orci vitae. Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus. Sed dictum dui venenatis.</p>\r\n<ul>\r\n<li>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean.</li>\r\n<li>Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl.</li>\r\n<li>Pharetra et ullamcorper in lacus amet posuere consequat vulputate Erat vitae iaculis malesuada.</li>\r\n<li>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean.</li>\r\n</ul>', 'publish', 4, '2025-04-08 13:23:45', '2025-04-08 13:23:45', 1, 1, 'posts', NULL, '[{\"id\":7,\"name\":\"Education\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"education\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/education\"},{\"id\":8,\"name\":\"Learning\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"learning\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/learning\"},{\"id\":9,\"name\":\"College\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"college\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/college\"},{\"id\":10,\"name\":\"Education\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"education-1\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/education-1\"}]', 0.00, 0, 0, '2eb65995-2b60-42a9-9d06-89c01c4314b9', 'vi'),
+(136, 'Creative Class Library For Students', '2025/04/08/blog-img-3.jpg', 'creative-class-library-for-students', 'Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum...', '<p>Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus libero non senectus est. Eu vulputate enim diam nunc et suscipit nunc. Blandit aliquet aliquam congue enim. Suspendisse risus id viverra scelerisque sagittis at.</p>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n<div class=\"tf__quote\">\r\n<p>Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus.</p>\r\n<h5>Jerome Bell</h5>\r\n</div>\r\n<h3>Know More About Preschool</h3>\r\n<p>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean. Netus sed amet tortor viverra sit orci vitae. Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus. Sed dictum dui venenatis.</p>\r\n<div class=\"tf__community_img\"><img class=\"img-fluid w-100\" src=\"2025/04/08/blog-details-video-img.jpg\" alt=\"community\" />\r\n<div class=\"tf__community_img_overlay\"><a class=\"venobox tf__play_btn\" href=\"https://youtu.be/CZkux700lqU\" data-autoplay=\"true\" data-vbtype=\"video\"> </a></div>\r\n</div>\r\n<h3>What&rsquo;s New Here</h3>\r\n<p>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean. Netus sed amet tortor viverra sit orci vitae. Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus. Sed dictum dui venenatis.</p>\r\n<ul>\r\n<li>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean.</li>\r\n<li>Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl.</li>\r\n<li>Pharetra et ullamcorper in lacus amet posuere consequat vulputate Erat vitae iaculis malesuada.</li>\r\n<li>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean.</li>\r\n</ul>', 'publish', 3, '2025-04-08 13:26:05', '2025-04-09 19:20:22', 1, 1, 'posts', NULL, '[{\"id\":7,\"name\":\"Education\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"education\",\"level\":0,\"total_post\":3,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/education\"},{\"id\":9,\"name\":\"College\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"college\",\"level\":0,\"total_post\":3,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/college\"},{\"id\":11,\"name\":\"Lms\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"lms\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/lms\"},{\"id\":12,\"name\":\"College\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"college-1\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/college-1\"}]', 0.00, 0, 1, '76d31bc7-784e-46ca-a63d-bb513546f6d5', 'vi'),
+(137, '12th Batch Student’s Convocational Day', '2025/04/08/blog-img-4.jpg', '12th-batch-students-convocational-day', 'Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum...', '<p>Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus libero non senectus est. Eu vulputate enim diam nunc et suscipit nunc. Blandit aliquet aliquam congue enim. Suspendisse risus id viverra scelerisque sagittis at.</p>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n<div class=\"tf__quote\">\r\n<p>Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus.</p>\r\n<h5>Jerome Bell</h5>\r\n</div>\r\n<h3>Know More About Preschool</h3>\r\n<p>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean. Netus sed amet tortor viverra sit orci vitae. Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus. Sed dictum dui venenatis.</p>\r\n<div class=\"tf__community_img\"><img class=\"img-fluid w-100\" src=\"2025/04/08/blog-details-video-img.jpg\" alt=\"community\" />\r\n<div class=\"tf__community_img_overlay\"><a class=\"venobox tf__play_btn\" href=\"https://youtu.be/CZkux700lqU\" data-autoplay=\"true\" data-vbtype=\"video\"> </a></div>\r\n</div>\r\n<h3>What&rsquo;s New Here</h3>\r\n<p>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean. Netus sed amet tortor viverra sit orci vitae. Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus. Sed dictum dui venenatis.</p>\r\n<ul>\r\n<li>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean.</li>\r\n<li>Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl.</li>\r\n<li>Pharetra et ullamcorper in lacus amet posuere consequat vulputate Erat vitae iaculis malesuada.</li>\r\n<li>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean.</li>\r\n</ul>', 'publish', 3, '2025-04-08 13:27:39', '2025-04-09 19:20:10', 1, 1, 'posts', NULL, '[{\"id\":9,\"name\":\"College\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"college\",\"level\":0,\"total_post\":4,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/college\"},{\"id\":10,\"name\":\"Education\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"education-1\",\"level\":0,\"total_post\":3,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/education-1\"},{\"id\":11,\"name\":\"Lms\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"lms\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/lms\"}]', 0.00, 0, 1, '42484013-ede3-49fb-96e1-63b7225b9d38', 'vi'),
+(138, 'The Complete Digital Marketing Learning Path', '2025/04/08/blog-img-5.jpg', 'the-complete-digital-marketing-learning-path', 'Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum...', '<p>Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus libero non senectus est. Eu vulputate enim diam nunc et suscipit nunc. Blandit aliquet aliquam congue enim. Suspendisse risus id viverra scelerisque sagittis at.</p>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n<div class=\"tf__quote\">\r\n<p>Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus.</p>\r\n<h5>Jerome Bell</h5>\r\n</div>\r\n<h3>Know More About Preschool</h3>\r\n<p>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean. Netus sed amet tortor viverra sit orci vitae. Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus. Sed dictum dui venenatis.</p>\r\n<div class=\"tf__community_img\"><img class=\"img-fluid w-100\" src=\"2025/04/08/blog-details-video-img.jpg\" alt=\"community\" />\r\n<div class=\"tf__community_img_overlay\"><a class=\"venobox tf__play_btn\" href=\"https://youtu.be/CZkux700lqU\" data-autoplay=\"true\" data-vbtype=\"video\"> </a></div>\r\n</div>\r\n<h3>What&rsquo;s New Here</h3>\r\n<p>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean. Netus sed amet tortor viverra sit orci vitae. Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus. Sed dictum dui venenatis.</p>\r\n<ul>\r\n<li>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean.</li>\r\n<li>Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl.</li>\r\n<li>Pharetra et ullamcorper in lacus amet posuere consequat vulputate Erat vitae iaculis malesuada.</li>\r\n<li>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean.</li>\r\n</ul>', 'publish', 0, '2025-04-08 13:28:38', '2025-04-08 13:28:38', 1, 1, 'posts', NULL, '[{\"id\":7,\"name\":\"Education\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"education\",\"level\":0,\"total_post\":4,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/education\"},{\"id\":9,\"name\":\"College\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"college\",\"level\":0,\"total_post\":5,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/college\"},{\"id\":10,\"name\":\"Education\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"education-1\",\"level\":0,\"total_post\":4,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/education-1\"},{\"id\":11,\"name\":\"Lms\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"lms\",\"level\":0,\"total_post\":3,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/lms\"}]', 0.00, 0, 0, '47d450bb-5ed6-4535-af54-07620615f1d4', 'vi'),
+(139, 'How to Make Your UX Design Portfolio Stand Out', '2025/04/08/blog-img-6.jpg', 'how-to-make-your-ux-design-portfolio-stand-out', 'Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum...', '<p>Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus libero non senectus est. Eu vulputate enim diam nunc et suscipit nunc. Blandit aliquet aliquam congue enim. Suspendisse risus id viverra scelerisque sagittis at.</p>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n<div class=\"tf__quote\">\r\n<p>Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus.</p>\r\n<h5>Jerome Bell</h5>\r\n</div>\r\n<h3>Know More About Preschool</h3>\r\n<p>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean. Netus sed amet tortor viverra sit orci vitae. Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus. Sed dictum dui venenatis.</p>\r\n<div class=\"tf__community_img\"><img class=\"img-fluid w-100\" src=\"2025/04/08/blog-details-video-img.jpg\" alt=\"community\" />\r\n<div class=\"tf__community_img_overlay\"><a class=\"venobox tf__play_btn\" href=\"https://youtu.be/CZkux700lqU\" data-autoplay=\"true\" data-vbtype=\"video\"> </a></div>\r\n</div>\r\n<h3>What&rsquo;s New Here</h3>\r\n<p>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean. Netus sed amet tortor viverra sit orci vitae. Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus. Sed dictum dui venenatis.</p>\r\n<ul>\r\n<li>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean.</li>\r\n<li>Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl.</li>\r\n<li>Pharetra et ullamcorper in lacus amet posuere consequat vulputate Erat vitae iaculis malesuada.</li>\r\n<li>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean.</li>\r\n</ul>', 'publish', 1, '2025-04-08 13:29:50', '2025-04-08 13:29:50', 1, 1, 'posts', NULL, '[{\"id\":9,\"name\":\"College\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"college\",\"level\":0,\"total_post\":6,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/college\"},{\"id\":12,\"name\":\"College\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"college-1\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/college-1\"}]', 0.00, 0, 0, 'cea3cc68-5398-4d04-9546-a5f23cfbc507', 'vi');
+INSERT INTO `app_posts` (`id`, `title`, `thumbnail`, `slug`, `description`, `content`, `status`, `views`, `created_at`, `updated_at`, `created_by`, `updated_by`, `type`, `json_metas`, `json_taxonomies`, `rating`, `total_rating`, `total_comment`, `uuid`, `locale`) VALUES
+(140, 'How To Start Learn Online Study From Your Home', '2025/04/08/blog-img-7.jpg', 'how-to-start-learn-online-study-from-your-home', 'Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum...', '<p>Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus libero non senectus est. Eu vulputate enim diam nunc et suscipit nunc. Blandit aliquet aliquam congue enim. Suspendisse risus id viverra scelerisque sagittis at.</p>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n<div class=\"tf__quote\">\r\n<p>Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus.</p>\r\n<h5>Jerome Bell</h5>\r\n</div>\r\n<h3>Know More About Preschool</h3>\r\n<p>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean. Netus sed amet tortor viverra sit orci vitae. Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus. Sed dictum dui venenatis.</p>\r\n<div class=\"tf__community_img\"><img class=\"img-fluid w-100\" src=\"2025/04/08/blog-details-video-img.jpg\" alt=\"community\" />\r\n<div class=\"tf__community_img_overlay\"><a class=\"venobox tf__play_btn\" href=\"https://youtu.be/CZkux700lqU\" data-autoplay=\"true\" data-vbtype=\"video\"> </a></div>\r\n</div>\r\n<h3>What&rsquo;s New Here</h3>\r\n<p>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean. Netus sed amet tortor viverra sit orci vitae. Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus. Sed dictum dui venenatis.</p>\r\n<ul>\r\n<li>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean.</li>\r\n<li>Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl.</li>\r\n<li>Pharetra et ullamcorper in lacus amet posuere consequat vulputate Erat vitae iaculis malesuada.</li>\r\n<li>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean.</li>\r\n</ul>', 'publish', 2, '2025-04-08 13:30:39', '2025-04-09 19:19:12', 1, 1, 'posts', NULL, '[{\"id\":7,\"name\":\"Education\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"education\",\"level\":0,\"total_post\":5,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/education\"},{\"id\":9,\"name\":\"College\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"college\",\"level\":0,\"total_post\":7,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/college\"},{\"id\":12,\"name\":\"College\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"college-1\",\"level\":0,\"total_post\":3,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/college-1\"}]', 0.00, 0, 1, '24acc493-d453-4146-8e6f-753168c69b60', 'vi'),
+(141, 'How To Start Learn Online Study From Your Home', '2025/04/08/blog-img-8.jpg', 'how-to-start-learn-online-study-from-your-home-1', 'Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum...', '<p>Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus libero non senectus est. Eu vulputate enim diam nunc et suscipit nunc. Blandit aliquet aliquam congue enim. Suspendisse risus id viverra scelerisque sagittis at.</p>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n<div class=\"tf__quote\">\r\n<p>Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus.</p>\r\n<h5>Jerome Bell</h5>\r\n</div>\r\n<h3>Know More About Preschool</h3>\r\n<p>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean. Netus sed amet tortor viverra sit orci vitae. Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus. Sed dictum dui venenatis.</p>\r\n<div class=\"tf__community_img\"><img class=\"img-fluid w-100\" src=\"2025/04/08/blog-details-video-img.jpg\" alt=\"community\" />\r\n<div class=\"tf__community_img_overlay\"><a class=\"venobox tf__play_btn\" href=\"https://youtu.be/CZkux700lqU\" data-autoplay=\"true\" data-vbtype=\"video\"> </a></div>\r\n</div>\r\n<h3>What&rsquo;s New Here</h3>\r\n<p>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean. Netus sed amet tortor viverra sit orci vitae. Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus. Sed dictum dui venenatis.</p>\r\n<ul>\r\n<li>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean.</li>\r\n<li>Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl.</li>\r\n<li>Pharetra et ullamcorper in lacus amet posuere consequat vulputate Erat vitae iaculis malesuada.</li>\r\n<li>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean.</li>\r\n</ul>', 'publish', 1, '2025-04-08 13:31:36', '2025-04-08 13:31:36', 1, 1, 'posts', NULL, '[{\"id\":8,\"name\":\"Learning\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"learning\",\"level\":0,\"total_post\":3,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/learning\"},{\"id\":11,\"name\":\"Lms\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"lms\",\"level\":0,\"total_post\":4,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/lms\"},{\"id\":12,\"name\":\"College\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"college-1\",\"level\":0,\"total_post\":4,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/college-1\"}]', 0.00, 0, 0, 'd7f336b1-64bb-417b-b289-c00166119d9f', 'vi'),
+(142, 'The Complete Digital Marketing Learning Path', '2025/04/08/blog-img-9.jpg', 'the-complete-digital-marketing-learning-path-1', 'Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum...', '<p>Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus libero non senectus est. Eu vulputate enim diam nunc et suscipit nunc. Blandit aliquet aliquam congue enim. Suspendisse risus id viverra scelerisque sagittis at.</p>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n<div class=\"tf__quote\">\r\n<p>Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus.</p>\r\n<h5>Jerome Bell</h5>\r\n</div>\r\n<h3>Know More About Preschool</h3>\r\n<p>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean. Netus sed amet tortor viverra sit orci vitae. Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus. Sed dictum dui venenatis.</p>\r\n<div class=\"tf__community_img\"><img class=\"img-fluid w-100\" src=\"2025/04/08/blog-details-video-img.jpg\" alt=\"community\" />\r\n<div class=\"tf__community_img_overlay\"><a class=\"venobox tf__play_btn\" href=\"https://youtu.be/CZkux700lqU\" data-autoplay=\"true\" data-vbtype=\"video\"> </a></div>\r\n</div>\r\n<h3>What&rsquo;s New Here</h3>\r\n<p>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean. Netus sed amet tortor viverra sit orci vitae. Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl. Lacus mi lorem sodales proin faucibus. Tempor dui in faucibus sed nunc maecenas nullam ut. Pharetra et ullamcorper in lacus amet posuere consequat vulputate. Erat vitae iaculis malesuada pharetra vestibulum aliquam elit ipsum cursus. Sed dictum dui venenatis.</p>\r\n<ul>\r\n<li>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean.</li>\r\n<li>Nunc est purus nunc eleifend. Habitasse netus sollicitudin pharetra nisl.</li>\r\n<li>Pharetra et ullamcorper in lacus amet posuere consequat vulputate Erat vitae iaculis malesuada.</li>\r\n<li>Aliquet lectus nisi pharetra neque faucibus dapibus semper turpis. Dolor integer mauris eu praesent aenean.</li>\r\n</ul>', 'publish', 2, '2025-04-08 13:32:35', '2025-04-09 19:18:54', 1, 1, 'posts', NULL, '[{\"id\":7,\"name\":\"Education\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"education\",\"level\":0,\"total_post\":6,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/education\"},{\"id\":10,\"name\":\"Education\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"education-1\",\"level\":0,\"total_post\":5,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/education-1\"},{\"id\":11,\"name\":\"Lms\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"lms\",\"level\":0,\"total_post\":5,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/lms\"},{\"id\":12,\"name\":\"College\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"college-1\",\"level\":0,\"total_post\":5,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/college-1\"}]', 0.00, 0, 2, 'd9dafe98-209c-446a-9e9e-1cb3f34125a1', 'vi'),
+(143, 'A Better Alternative To Grading Student Writing', '2025/04/08/courses-img-1.jpg', 'a-better-alternative-to-grading-student-writing', '\r Description\r Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at...', '<div class=\"tf__event_details_text\">\r\n<h3>Description</h3>\r\n<p>Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus libero non senectus est. Eu vulputate enim diam nunc et suscipit nunc. Blandit aliquet aliquam congue enim. Suspendisse risus id viverra scelerisque sagittis at.</p>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n<h3>Event content</h3>\r\n<p>Vulputate dignissim viverra pretium enim penatibus amet velit. Bibendum tincidunt pretium est sit cursus orci morbi cursus consectetur. Dolor nec a a sollicitudin. Nec elementum arcu arcu in volutpat tristique nunc. Quis ut egestas nec fringilla enim leo. Duis leo morbi mi felis varius et. Suspendisse at est pellentesque sagittis nulla. Magna placerat laoreet quis vulputate. Ornare turpis ut amet arcu vitae. Enim suspendisse sit nec venenatis lobortis.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n</ul>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n</div>', 'publish', 2, '2025-04-08 13:47:18', '2025-04-08 13:48:22', 1, 1, 'events', '{\"start_date\":\"2025-04-08T19:46\",\"end_date\":\"2025-07-24T19:46\",\"venue\":\"Greenwood Arena\",\"venue_address\":\"45 Sports Blvd, Greenfield, DEF 56789\",\"latitude\":\"34.052235\",\"longitude\":\"118.243683\",\"map_url\":null,\"map_embed_code\":\"<iframe src=\\\"https:\\/\\/www.google.com\\/maps\\/embed?pb=!1m18!1m12!1m3!1d3329.134746087092!2d-118.243683!3d34.052235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzQwMDAxJzI2LjgiTiA3Ni1mIzg0OTE!5e0!3m2!1sen!2sus!4v1674571812048\\\" width=\\\"600\\\" height=\\\"450\\\" frameborder=\\\"0\\\" style=\\\"border:0;\\\" allowfullscreen=\\\"\\\" aria-hidden=\\\"false\\\" tabindex=\\\"0\\\"><\\/iframe>\",\"event_logo\":null,\"event_banner\":null,\"name\":\"Greenwood Arena\",\"description\":\"Description\\r\\n Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus...\",\"price\":180,\"capacity\":300,\"min_ticket_number\":1,\"max_ticket_number\":30,\"social_links\":[{\"icon\":\"fab fa-facebook-f\",\"url\":\"#\"},{\"icon\":\"fab fa-twitter\",\"url\":\"#\"}]}', '[{\"id\":13,\"name\":\"Music\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"music\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/music\"},{\"id\":14,\"name\":\"Concerts\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"concerts\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/concerts\"},{\"id\":15,\"name\":\"Festivals\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"festivals\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/festivals\"},{\"id\":16,\"name\":\"Live Bands\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"live-bands\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/live-bands\"}]', 0.00, 0, 0, 'bec556fc-dd2e-4c15-a34b-91cce4928974', 'vi'),
+(144, '12 Things Successful Mompreneurs', '2025/04/08/courses-img-2.jpg', '12-things-successful-mompreneurs', '\r Description\r Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at...', '<div class=\"tf__event_details_text\">\r\n<h3>Description</h3>\r\n<p>Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus libero non senectus est. Eu vulputate enim diam nunc et suscipit nunc. Blandit aliquet aliquam congue enim. Suspendisse risus id viverra scelerisque sagittis at.</p>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n<h3>Event content</h3>\r\n<p>Vulputate dignissim viverra pretium enim penatibus amet velit. Bibendum tincidunt pretium est sit cursus orci morbi cursus consectetur. Dolor nec a a sollicitudin. Nec elementum arcu arcu in volutpat tristique nunc. Quis ut egestas nec fringilla enim leo. Duis leo morbi mi felis varius et. Suspendisse at est pellentesque sagittis nulla. Magna placerat laoreet quis vulputate. Ornare turpis ut amet arcu vitae. Enim suspendisse sit nec venenatis lobortis.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n</ul>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n</div>', 'publish', 1, '2025-04-08 15:11:23', '2025-04-08 15:11:23', 1, 1, 'events', '{\"start_date\":\"2025-04-08T21:11\",\"end_date\":\"2025-10-30T21:11\",\"venue\":\"Sunset Beach Resort\",\"venue_address\":\"789 Beachside Lane, Sunview Island, GHI 11223\",\"latitude\":\"36.778259\",\"longitude\":\"-119.417931\",\"map_url\":null,\"map_embed_code\":null,\"event_logo\":null,\"event_banner\":null,\"name\":\"Greenwood Arena\",\"description\":\"Description\\r\\n Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus...\",\"price\":220,\"capacity\":30,\"min_ticket_number\":1,\"max_ticket_number\":2,\"social_links\":[{\"icon\":\"fab fa-facebook-f\",\"url\":\"#\"}]}', '[{\"id\":13,\"name\":\"Music\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"music\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/music\"},{\"id\":14,\"name\":\"Concerts\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"concerts\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/concerts\"},{\"id\":15,\"name\":\"Festivals\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"festivals\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/festivals\"},{\"id\":16,\"name\":\"Live Bands\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"live-bands\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/live-bands\"}]', 0.00, 0, 0, '3ddc2a58-07c4-4feb-8b0b-e7b7c404c36f', 'vi'),
+(145, 'Ethics in Al Live Event Machines Judging.', '2025/04/08/courses-img-3.jpg', 'ethics-in-al-live-event-machines-judging', '\r Description\r Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at...', '<div class=\"tf__event_details_text\">\r\n<h3>Description</h3>\r\n<p>Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus libero non senectus est. Eu vulputate enim diam nunc et suscipit nunc. Blandit aliquet aliquam congue enim. Suspendisse risus id viverra scelerisque sagittis at.</p>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n<h3>Event content</h3>\r\n<p>Vulputate dignissim viverra pretium enim penatibus amet velit. Bibendum tincidunt pretium est sit cursus orci morbi cursus consectetur. Dolor nec a a sollicitudin. Nec elementum arcu arcu in volutpat tristique nunc. Quis ut egestas nec fringilla enim leo. Duis leo morbi mi felis varius et. Suspendisse at est pellentesque sagittis nulla. Magna placerat laoreet quis vulputate. Ornare turpis ut amet arcu vitae. Enim suspendisse sit nec venenatis lobortis.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n</ul>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n</div>', 'publish', 0, '2025-04-08 15:19:18', '2025-04-08 15:19:18', 1, 1, 'events', '{\"start_date\":\"2025-06-19T21:16\",\"end_date\":\"2025-11-21T21:16\",\"venue\":\"Greenwood Arena\",\"venue_address\":\"101 Art St, Downtown City, JKL 24680\",\"latitude\":null,\"longitude\":null,\"map_url\":null,\"map_embed_code\":null,\"event_logo\":null,\"event_banner\":null,\"name\":\"Ticket 1\",\"description\":\"Description\\r\\n Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus...\",\"price\":140,\"capacity\":40,\"min_ticket_number\":1,\"max_ticket_number\":2,\"social_links\":[{\"icon\":\"fab fa-facebook-f\",\"url\":\"#\"},{\"icon\":\"fab fa-twitter\",\"url\":\"#\"}]}', '[{\"id\":17,\"name\":\"Conferences\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"conferences\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/conferences\"},{\"id\":18,\"name\":\"Technology Conferences\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"technology-conferences\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/technology-conferences\"},{\"id\":19,\"name\":\"Business Seminars\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"business-seminars\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/business-seminars\"}]', 0.00, 0, 0, '4858bfb2-d42f-4288-8b6a-d77bc9972ec4', 'vi'),
+(146, 'The Importance Of Intrinsic Motivation.', '2025/04/08/courses-img-2.jpg', 'the-importance-of-intrinsic-motivation', '\r Description\r Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at...', '<div class=\"tf__event_details_text\">\r\n<h3>Description</h3>\r\n<p>Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus libero non senectus est. Eu vulputate enim diam nunc et suscipit nunc. Blandit aliquet aliquam congue enim. Suspendisse risus id viverra scelerisque sagittis at.</p>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n<h3>Event content</h3>\r\n<p>Vulputate dignissim viverra pretium enim penatibus amet velit. Bibendum tincidunt pretium est sit cursus orci morbi cursus consectetur. Dolor nec a a sollicitudin. Nec elementum arcu arcu in volutpat tristique nunc. Quis ut egestas nec fringilla enim leo. Duis leo morbi mi felis varius et. Suspendisse at est pellentesque sagittis nulla. Magna placerat laoreet quis vulputate. Ornare turpis ut amet arcu vitae. Enim suspendisse sit nec venenatis lobortis.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n</ul>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n</div>', 'publish', 0, '2025-04-08 16:43:33', '2025-04-09 19:22:47', 1, 1, 'events', '{\"start_date\":null,\"end_date\":null,\"venue\":\"Hilltop Conference\",\"venue_address\":\"250 Summit Ave, Hillview, MNO 33445\",\"latitude\":\"39.739236\",\"longitude\":null,\"map_url\":null,\"map_embed_code\":null,\"event_logo\":null,\"event_banner\":null,\"name\":\"Ticket\",\"description\":\"Description\\r\\n Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus...\",\"price\":310,\"capacity\":30,\"min_ticket_number\":1,\"max_ticket_number\":2,\"social_links\":[{\"icon\":\"fab fa-facebook-f\",\"url\":\"#\"}]}', '[{\"id\":14,\"name\":\"Concerts\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"concerts\",\"level\":0,\"total_post\":4,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/concerts\"},{\"id\":17,\"name\":\"Conferences\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"conferences\",\"level\":0,\"total_post\":3,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/conferences\"},{\"id\":18,\"name\":\"Technology Conferences\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"technology-conferences\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/technology-conferences\"}]', 0.00, 0, 0, 'd552a82d-812b-4a6f-894a-102b6c18b44b', 'vi'),
+(147, 'A Better Alternative To Grading Student Writing', '2025/04/08/courses-img-1.jpg', 'a-better-alternative-to-grading-student-writing-1', '\r Description\r Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at...', '<div class=\"tf__event_details_text\">\r\n<h3>Description</h3>\r\n<p>Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus libero non senectus est. Eu vulputate enim diam nunc et suscipit nunc. Blandit aliquet aliquam congue enim. Suspendisse risus id viverra scelerisque sagittis at.</p>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n<h3>Event content</h3>\r\n<p>Vulputate dignissim viverra pretium enim penatibus amet velit. Bibendum tincidunt pretium est sit cursus orci morbi cursus consectetur. Dolor nec a a sollicitudin. Nec elementum arcu arcu in volutpat tristique nunc. Quis ut egestas nec fringilla enim leo. Duis leo morbi mi felis varius et. Suspendisse at est pellentesque sagittis nulla. Magna placerat laoreet quis vulputate. Ornare turpis ut amet arcu vitae. Enim suspendisse sit nec venenatis lobortis.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n</ul>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n</div>', 'publish', 1, '2025-04-08 16:47:07', '2025-04-08 16:47:07', 1, 1, 'events', '{\"start_date\":\"2025-04-17T22:46\",\"end_date\":\"2025-08-15T22:46\",\"venue\":\"The Downtown Gallery\",\"venue_address\":\"101 Art St, Downtown City, JKL 24680\",\"latitude\":null,\"longitude\":null,\"map_url\":null,\"map_embed_code\":null,\"event_logo\":null,\"event_banner\":null,\"name\":\"ticket\",\"description\":null,\"price\":380,\"capacity\":200,\"min_ticket_number\":1,\"max_ticket_number\":2,\"social_links\":[{\"icon\":\"fab fa-facebook-f\",\"url\":\"#\"}]}', '[{\"id\":20,\"name\":\"Seasonal Themes\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"seasonal-themes\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/seasonal-themes\"},{\"id\":21,\"name\":\"Summer Vibes\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"summer-vibes\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/summer-vibes\"},{\"id\":22,\"name\":\"Holiday Cheer\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"holiday-cheer\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/holiday-cheer\"}]', 0.00, 0, 0, '4e76ec78-a6f1-4e04-8453-360974e5d61c', 'vi'),
+(148, '12 Things Successful Mompreneurs', '2025/04/08/courses-img-4.jpg', '12-things-successful-mompreneurs-1', '\r Description\r Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at...', '<div class=\"tf__event_details_text\">\r\n<h3>Description</h3>\r\n<p>Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus libero non senectus est. Eu vulputate enim diam nunc et suscipit nunc. Blandit aliquet aliquam congue enim. Suspendisse risus id viverra scelerisque sagittis at.</p>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n<h3>Event content</h3>\r\n<p>Vulputate dignissim viverra pretium enim penatibus amet velit. Bibendum tincidunt pretium est sit cursus orci morbi cursus consectetur. Dolor nec a a sollicitudin. Nec elementum arcu arcu in volutpat tristique nunc. Quis ut egestas nec fringilla enim leo. Duis leo morbi mi felis varius et. Suspendisse at est pellentesque sagittis nulla. Magna placerat laoreet quis vulputate. Ornare turpis ut amet arcu vitae. Enim suspendisse sit nec venenatis lobortis.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n</ul>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n</div>', 'publish', 0, '2025-04-08 16:49:27', '2025-04-08 16:49:27', 1, 1, 'events', '{\"start_date\":\"2025-04-09T22:49\",\"end_date\":\"2025-09-18T22:49\",\"venue\":\"Greenwood Arena\",\"venue_address\":\"45 Sports Blvd, Greenfield, DEF 56789\",\"latitude\":null,\"longitude\":null,\"map_url\":null,\"map_embed_code\":null,\"event_logo\":null,\"event_banner\":null,\"name\":\"ticket\",\"description\":null,\"price\":170,\"capacity\":30,\"min_ticket_number\":1,\"max_ticket_number\":2,\"social_links\":[{\"icon\":\"fab fa-facebook-f\",\"url\":\"#\"}]}', '[{\"id\":13,\"name\":\"Music\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"music\",\"level\":0,\"total_post\":3,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/music\"},{\"id\":16,\"name\":\"Live Bands\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"live-bands\",\"level\":0,\"total_post\":3,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/live-bands\"},{\"id\":22,\"name\":\"Holiday Cheer\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"holiday-cheer\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/holiday-cheer\"}]', 0.00, 0, 0, '83d58628-be44-4b9c-8b63-fc6326791a36', 'vi'),
+(149, 'Ethics in Al Live Event Machines Judging.', '2025/04/08/courses-img-5.jpg', 'ethics-in-al-live-event-machines-judging-1', '\r Description\r Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at...', '<div class=\"tf__event_details_text\">\r\n<h3>Description</h3>\r\n<p>Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus libero non senectus est. Eu vulputate enim diam nunc et suscipit nunc. Blandit aliquet aliquam congue enim. Suspendisse risus id viverra scelerisque sagittis at.</p>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n<h3>Event content</h3>\r\n<p>Vulputate dignissim viverra pretium enim penatibus amet velit. Bibendum tincidunt pretium est sit cursus orci morbi cursus consectetur. Dolor nec a a sollicitudin. Nec elementum arcu arcu in volutpat tristique nunc. Quis ut egestas nec fringilla enim leo. Duis leo morbi mi felis varius et. Suspendisse at est pellentesque sagittis nulla. Magna placerat laoreet quis vulputate. Ornare turpis ut amet arcu vitae. Enim suspendisse sit nec venenatis lobortis.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n</ul>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n</div>', 'publish', 0, '2025-04-08 16:51:26', '2025-04-09 19:22:19', 1, 1, 'events', '{\"start_date\":\"2025-04-09T22:51\",\"end_date\":\"2025-09-25T22:51\",\"venue\":\"Hilltop Conference\",\"venue_address\":\"250 Summit Ave, Hillview, MNO 33445\",\"latitude\":null,\"longitude\":null,\"map_url\":null,\"map_embed_code\":null,\"event_logo\":null,\"event_banner\":null,\"name\":\"ticket\",\"description\":\"Description\\r\\n Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus...\",\"price\":230,\"capacity\":90,\"min_ticket_number\":1,\"max_ticket_number\":2,\"social_links\":[{\"icon\":\"fab fa-facebook-f\",\"url\":\"#\"}]}', '[{\"id\":15,\"name\":\"Festivals\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"festivals\",\"level\":0,\"total_post\":3,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/festivals\"},{\"id\":17,\"name\":\"Conferences\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"conferences\",\"level\":0,\"total_post\":3,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/conferences\"},{\"id\":21,\"name\":\"Summer Vibes\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"summer-vibes\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/summer-vibes\"}]', 0.00, 0, 0, 'f5dad7b9-6e1e-482e-8f1c-d7213daf30ec', 'vi'),
+(150, 'The Importance Of Intrinsic Motivation.', '2025/04/08/courses-img-6.jpg', 'the-importance-of-intrinsic-motivation-1', '\r Description\r Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at...', '<div class=\"tf__event_details_text\">\r\n<h3>Description</h3>\r\n<p>Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus libero non senectus est. Eu vulputate enim diam nunc et suscipit nunc. Blandit aliquet aliquam congue enim. Suspendisse risus id viverra scelerisque sagittis at.</p>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n<h3>Event content</h3>\r\n<p>Vulputate dignissim viverra pretium enim penatibus amet velit. Bibendum tincidunt pretium est sit cursus orci morbi cursus consectetur. Dolor nec a a sollicitudin. Nec elementum arcu arcu in volutpat tristique nunc. Quis ut egestas nec fringilla enim leo. Duis leo morbi mi felis varius et. Suspendisse at est pellentesque sagittis nulla. Magna placerat laoreet quis vulputate. Ornare turpis ut amet arcu vitae. Enim suspendisse sit nec venenatis lobortis.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n</ul>\r\n<p>Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius. Sed vulputate fames.</p>\r\n</div>', 'publish', 5, '2025-04-08 16:53:08', '2025-04-09 19:21:51', 1, 1, 'events', '{\"start_date\":\"2025-04-10T22:52\",\"end_date\":\"2025-08-21T22:52\",\"venue\":\"The Grand\",\"venue_address\":\"Downtown City\",\"latitude\":null,\"longitude\":null,\"map_url\":null,\"map_embed_code\":null,\"event_logo\":null,\"event_banner\":null,\"name\":\"ticket\",\"description\":\"Description\\r\\n Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus...\",\"price\":220,\"capacity\":433,\"min_ticket_number\":1,\"max_ticket_number\":2,\"social_links\":[{\"icon\":\"fab fa-facebook-f\",\"url\":\"#\"}]}', '[{\"id\":5,\"name\":\"Mango\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"mango\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/mango\"},{\"id\":14,\"name\":\"Concerts\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"concerts\",\"level\":0,\"total_post\":4,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/concerts\"},{\"id\":16,\"name\":\"Live Bands\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"live-bands\",\"level\":0,\"total_post\":4,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/live-bands\"}]', 0.00, 0, 0, '849d13c5-a911-4d6c-b7cc-d387702b5729', 'vi');
+INSERT INTO `app_posts` (`id`, `title`, `thumbnail`, `slug`, `description`, `content`, `status`, `views`, `created_at`, `updated_at`, `created_by`, `updated_by`, `type`, `json_metas`, `json_taxonomies`, `rating`, `total_rating`, `total_comment`, `uuid`, `locale`) VALUES
+(151, 'About Us', NULL, 'about-us', '', NULL, 'publish', 6, '2025-04-08 17:02:49', '2025-04-21 11:40:26', 1, 1, 'pages', '{\"template\":\"about\",\"block_content\":{\"content\":[{\"title\":\"We do great things together\",\"description\":\"Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius.\",\"background_image\":\"2025\\/04\\/08\\/about-section-bg.jpg\",\"image_1\":\"2025\\/04\\/08\\/about-img-1.jpg\",\"image_2\":\"2025\\/04\\/08\\/about-img-2.jpg\",\"features\":[{\"icon\":\"fas fa-star\",\"title\":\"Build your career\",\"description\":\"Online course quickly from anywhere.\"},{\"icon\":\"fas fa-pencil-ruler\",\"title\":\"Grow your skill\",\"description\":\"Online course quickly from anywhere.\"}],\"block\":\"about_area\"},{\"background_image\":\"2025\\/04\\/08\\/about-video-img.jpg\",\"video_url\":\"https:\\/\\/youtu.be\\/CZkux700lqU\",\"enable_autoplay\":\"1\",\"video_type\":\"video\",\"margin_top\":null,\"mobile_margin_top\":null,\"enable_animation\":\"1\",\"play_icon\":\"fas fa-play\",\"enable_overlay\":\"1\",\"block\":\"about_video\"},{\"style\":\"style1\",\"show_section_title\":\"1\",\"section_title\":\"Our Expert Instructor\",\"section_description\":\"Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world.\",\"background_image\":\"2025\\/04\\/08\\/instructor-bg.jpg\",\"instructors\":[{\"name\":\"Floyd Miles\",\"designation\":\"Graphic Designer\",\"image\":\"2025\\/04\\/08\\/instructor-img-1.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"},{\"name\":\"Darrell Steward\",\"designation\":\"Sales & Marketing\",\"image\":\"2025\\/04\\/08\\/instructor-img-2.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"},{\"name\":\"Darrell Steward\",\"designation\":\"Sales & Marketing\",\"image\":\"2025\\/04\\/08\\/instructor-img-3.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"},{\"name\":\"Darrell Steward\",\"designation\":\"Sales & Marketing\",\"image\":\"2025\\/04\\/08\\/instructor-img-4.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"},{\"name\":\"Darrell Steward\",\"designation\":\"Web Development\",\"image\":\"2025\\/04\\/08\\/instructor-img-5.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"},{\"name\":\"Devon Lane\",\"designation\":\"Web Designer\",\"image\":\"2025\\/04\\/08\\/instructor-img-6.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"}],\"enable_slider\":\"1\",\"block\":\"instructor_list\"},{\"background_image\":\"2025\\/04\\/08\\/certificate-bg.jpg\",\"enable_overlay\":\"0\",\"certificates\":[{\"title\":\"Online Certification\",\"icon\":\"2025\\/04\\/08\\/certificate-icon-1.png\"},{\"title\":\"Top Instructors\",\"icon\":\"2025\\/04\\/08\\/certificate-icon-2.png\"},{\"title\":\"Unlimited Access\",\"icon\":\"2025\\/04\\/08\\/certificate-icon-3.png\"},{\"title\":\"Experienced Members\",\"icon\":\"2025\\/04\\/08\\/certificate-icon-4.png\"}],\"padding_top\":null,\"padding_bottom\":null,\"mobile_padding_bottom\":null,\"enable_animation\":\"0\",\"block\":\"certificate_area\"},{\"show_section_title\":\"1\",\"section_title\":\"What Our Student Saying\",\"section_description\":\"Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world.\",\"background_image\":\"2025\\/04\\/08\\/testimonial-bg.jpg\",\"testimonials\":[{\"name\":\"Leslie Alexander\",\"designation\":\"Dog Trainer\",\"image\":\"2025\\/04\\/08\\/testimonial-img-1.jpg\",\"rating\":\"4\",\"description\":\"Lorem ipsum dolor sit amet consectetur. Hac ullamcorper nisi con veliteget dignissim pharetra at. Libero ultrices semper aliquet fusce aliquam nunc. Platea cursus in duis semper non lectus. Facili nibh duis viverra faucibus a turpis.\"},{\"name\":\"Leslie Alexander\",\"designation\":\"Dog Trainer\",\"image\":\"2025\\/04\\/08\\/testimonial-img-2.jpg\",\"rating\":\"5\",\"description\":\"Lorem ipsum dolor sit amet consectetur. Hac ullamcorper nisi con veliteget dignissim pharetra at. Libero ultrices semper aliquet fusce aliquam nunc. Platea cursus in duis semper non lectus. Facili nibh duis viverra faucibus a turpis.\"},{\"name\":\"Leslie Alexander\",\"designation\":\"Dog Trainer\",\"image\":\"2025\\/04\\/08\\/testimonial-img-3.jpg\",\"rating\":\"3\",\"description\":\"Lorem ipsum dolor sit amet consectetur. Hac ullamcorper nisi con veliteget dignissim pharetra at. Libero ultrices semper aliquet fusce aliquam nunc. Platea cursus in duis semper non lectus. Facili nibh duis viverra faucibus a turpis.\"}],\"enable_slider\":\"1\",\"slides_to_show\":\"2\",\"enable_autoplay\":\"1\",\"autoplay_speed\":null,\"block\":\"testimonial_area\"},{\"background_image\":\"2025\\/04\\/21\\/blog-bg.jpg\",\"section_title\":\"Latest News Feed\",\"section_description\":\"Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world.\",\"blog_limit\":\"6\",\"order_by\":\"created_at\",\"order\":\"DESC\",\"enable_slider\":\"1\",\"show_all_button\":\"0\",\"view_all_text\":null,\"view_all_url\":null,\"padding_top\":null,\"padding_bottom\":null,\"mobile_padding_top\":null,\"mobile_padding_bottom\":null,\"block\":\"blogs_list_home\"}]}}', '[]', 0.00, 0, 0, 'ebe58c32-8a11-449e-9d0a-99bdfbe3911e', 'vi'),
+(152, 'Terms And Condition', NULL, 'terms-and-condition', '\r Legal Disclaimer\r Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud exercit...', '<div class=\"tf__trems_condition_text\">\r\n<h3>Legal Disclaimer</h3>\r\n<p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud exercit ation ullamco laboris nisi ut aliquip ex ea commodo consequat Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusani um doloremque laudantium, totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo Nemo enim ipsam volupt atem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>\r\n<p>Adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip exea in commodo consequat Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur Excepteur sint occaecat cupidatat non proidentktl sunt in culpa qui officia deserunt mollit anim id est laborum Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusani um doloremque laudantium totamrem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo Nemo enim ipsam volupt</p>\r\n<h3>Credit Reporting Terms Of Service</h3>\r\n<p>Vulputate dignissim viverra pretium enim penatibus amet velit. Bibendum tincidunt pretium est sit cursus orci morbi cursus consectetur. Dolor nec a a sollicitudin. Nec elementum arcu arcu in volutpat tristique nunc. Quis ut egestas nec fringilla enim leo. Duis leo morbi mi felis varius et. Suspendisse at est pellentesque sagittis nulla. Magna placerat laoreet quis vulputate. Ornare turpis ut amet arcu vitae. Enim suspendisse sit nec venenatis lobortis.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n</ul>\r\n<h3>Ownership Of Site Agreement To Terms Of Use</h3>\r\n<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.</p>\r\n<h3>Provision Of Services</h3>\r\n<p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided.</p>\r\n<h3>Accounts, Passwords And Security</h3>\r\n<p>In certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.</p>\r\n</div>', 'publish', 1, '2025-04-08 17:20:07', '2025-04-08 17:20:07', 1, 1, 'pages', '{\"template\":null}', '[]', 0.00, 0, 0, '9816fa33-e8c0-46af-b5c3-ed2ce56815fa', 'vi'),
+(153, 'Programming for all (Started With Python)', '2025/04/08/courses-img-1.jpg', 'programming-for-all-started-with-python', '\r Study Plan\r Lorem ipsum dolor sit amet consectetur. Condimentum et eget faucibus tempor. Amet odio diam mattis volutpat sed platea sed pulvinar. Arcu ut urna sagittis sit eu ante ut urna...', '<div class=\"tf__course_overview\">\r\n<h3>Study Plan</h3>\r\n<p>Lorem ipsum dolor sit amet consectetur. Condimentum et eget faucibus tempor. Amet odio diam mattis volutpat sed platea sed pulvinar. Arcu ut urna sagittis sit eu ante ut urna facilisis. In viverra dui malesuada adipiscing velit erat eu. Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat. Lectus congue congue vitae enim dignissim justo. Sagittis eu et tellus morbi maecenas egestas ullamcorper euismod vulputate. Nulla in elit in amet vitae aliquam.</p>\r\n<h3>What will you learn from this course?</h3>\r\n<p>Lectus congue congue vitae enim dignissim justo. Sagittis eu et tellus morbi maecenas egestas ullamcorper euismod vulputate. Nulla in elit in amet vitae aliquam.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n<li>How to Convert Ul/UX to HTM</li>\r\n<li>Detailed ideas about structured project creation</li>\r\n<li>Steps to start freelancing by Learning Web design</li>\r\n</ul>\r\n<h3>Details about the course</h3>\r\n<p>Being able to speak Engltst\' fluently iS an important skill in this age. Having spoken English skills can help you advance in every stage ot lite. Acquiring English speaking SkillS or correct pronunciation ot English is very important.</p>\r\n<p>There are many people who know English well, but teel reluctant to speak English due to lack Ot confidence. Ten Minute School brings you the spoken English.</p>\r\n</div>', 'publish', 2, '2025-04-09 15:34:16', '2025-04-09 16:56:32', 1, 1, 'courses', '{\"max_students\":\"90\",\"language\":\"en\",\"difficulty_level\":\"beginner\",\"preview_video_thumbnail\":\"2025\\/04\\/09\\/sidebar-video-img.jpg\",\"preview_video_url\":\"https:\\/\\/youtu.be\\/CZkux700lqU?si=o3BzouuR9aTyviUr\",\"duration\":\"300\",\"certificate\":\"1\",\"price\":300,\"compare_price\":300}', '[{\"id\":23,\"name\":\"Design\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"design\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/design\"},{\"id\":24,\"name\":\"Web Design\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"web-design\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/web-design\"}]', 0.00, 0, 0, 'a4793904-3e78-43df-9a43-0cedb9062222', 'vi'),
+(155, 'Dave conservatoire is the Entirely free online', '2025/04/08/courses-img-2.jpg', 'dave-conservatoire-is-the-entirely-free-online', '\r Study Plan\r Lorem ipsum dolor sit amet consectetur. Condimentum et eget faucibus tempor. Amet odio diam mattis volutpat sed platea sed pulvinar. Arcu ut urna sagittis sit eu ante ut urna...', '<div class=\"tf__course_overview\">\r\n<h3>Study Plan</h3>\r\n<p>Lorem ipsum dolor sit amet consectetur. Condimentum et eget faucibus tempor. Amet odio diam mattis volutpat sed platea sed pulvinar. Arcu ut urna sagittis sit eu ante ut urna facilisis. In viverra dui malesuada adipiscing velit erat eu. Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat. Lectus congue congue vitae enim dignissim justo. Sagittis eu et tellus morbi maecenas egestas ullamcorper euismod vulputate. Nulla in elit in amet vitae aliquam.</p>\r\n<h3>What will you learn from this course?</h3>\r\n<p>Lectus congue congue vitae enim dignissim justo. Sagittis eu et tellus morbi maecenas egestas ullamcorper euismod vulputate. Nulla in elit in amet vitae aliquam.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n<li>How to Convert Ul/UX to HTM</li>\r\n<li>Detailed ideas about structured project creation</li>\r\n<li>Steps to start freelancing by Learning Web design</li>\r\n</ul>\r\n<h3>Details about the course</h3>\r\n<p>Being able to speak Engltst\' fluently iS an important skill in this age. Having spoken English skills can help you advance in every stage ot lite. Acquiring English speaking SkillS or correct pronunciation ot English is very important.</p>\r\n<p>There are many people who know English well, but teel reluctant to speak English due to lack Ot confidence. Ten Minute School brings you the spoken English.</p>\r\n</div>', 'publish', 2, '2025-04-09 15:34:16', '2025-04-09 18:16:27', 1, 1, 'courses', '{\"max_students\":\"90\",\"language\":\"en\",\"difficulty_level\":\"beginner\",\"preview_video_thumbnail\":\"2025\\/04\\/09\\/sidebar-video-img.jpg\",\"preview_video_url\":\"https:\\/\\/youtu.be\\/CZkux700lqU?si=o3BzouuR9aTyviUr\",\"duration\":\"300\",\"certificate\":\"1\",\"price\":200,\"compare_price\":400}', '[{\"id\":24,\"name\":\"Web Design\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"web-design\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/web-design\"},{\"id\":26,\"name\":\"Business\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"business\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/business\"},{\"id\":27,\"name\":\"Buisness Web\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"buisness-web\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/buisness-web\"}]', 0.00, 0, 0, 'a4793904-3e78-43df-9a43-0cedb9062223', 'vi'),
+(156, 'Project Management Principles & Practices', '2025/04/08/courses-img-3.jpg', 'project-management-principles-practices', '\r Study Plan\r Lorem ipsum dolor sit amet consectetur. Condimentum et eget faucibus tempor. Amet odio diam mattis volutpat sed platea sed pulvinar. Arcu ut urna sagittis sit eu ante ut urna...', '<div class=\"tf__course_overview\">\r\n<h3>Study Plan</h3>\r\n<p>Lorem ipsum dolor sit amet consectetur. Condimentum et eget faucibus tempor. Amet odio diam mattis volutpat sed platea sed pulvinar. Arcu ut urna sagittis sit eu ante ut urna facilisis. In viverra dui malesuada adipiscing velit erat eu. Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat. Lectus congue congue vitae enim dignissim justo. Sagittis eu et tellus morbi maecenas egestas ullamcorper euismod vulputate. Nulla in elit in amet vitae aliquam.</p>\r\n<h3>What will you learn from this course?</h3>\r\n<p>Lectus congue congue vitae enim dignissim justo. Sagittis eu et tellus morbi maecenas egestas ullamcorper euismod vulputate. Nulla in elit in amet vitae aliquam.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n<li>How to Convert Ul/UX to HTM</li>\r\n<li>Detailed ideas about structured project creation</li>\r\n<li>Steps to start freelancing by Learning Web design</li>\r\n</ul>\r\n<h3>Details about the course</h3>\r\n<p>Being able to speak Engltst\' fluently iS an important skill in this age. Having spoken English skills can help you advance in every stage ot lite. Acquiring English speaking SkillS or correct pronunciation ot English is very important.</p>\r\n<p>There are many people who know English well, but teel reluctant to speak English due to lack Ot confidence. Ten Minute School brings you the spoken English.</p>\r\n</div>', 'publish', 1, '2025-04-09 18:13:57', '2025-04-09 18:17:33', 1, 1, 'courses', '{\"price\":300,\"compare_price\":400,\"max_students\":\"190\",\"language\":\"vi\",\"difficulty_level\":\"intermediate\",\"preview_video_thumbnail\":\"2025\\/04\\/09\\/sidebar-video-img.jpg\",\"preview_video_url\":\"https:\\/\\/youtu.be\\/CZkux700lqU?si=o3BzouuR9aTyviUr\",\"duration\":\"300\",\"certificate\":\"1\"}', '[{\"id\":25,\"name\":\"Web Developed\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"web-developed\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/web-developed\"},{\"id\":28,\"name\":\"Finance\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"finance\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/finance\"},{\"id\":29,\"name\":\"Finance\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"finance-1\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/finance-1\"}]', 0.00, 0, 0, 'b978b59a-7a70-4dc5-8cfd-984c5b557969', 'vi'),
+(157, 'Project Management Principles & Practices', '2025/04/08/courses-img-4.jpg', 'project-management-principles-practices-1', '\r Study Plan\r Lorem ipsum dolor sit amet consectetur. Condimentum et eget faucibus tempor. Amet odio diam mattis volutpat sed platea sed pulvinar. Arcu ut urna sagittis sit eu ante ut urna...', '<div class=\"tf__course_overview\">\r\n<h3>Study Plan</h3>\r\n<p>Lorem ipsum dolor sit amet consectetur. Condimentum et eget faucibus tempor. Amet odio diam mattis volutpat sed platea sed pulvinar. Arcu ut urna sagittis sit eu ante ut urna facilisis. In viverra dui malesuada adipiscing velit erat eu. Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat. Lectus congue congue vitae enim dignissim justo. Sagittis eu et tellus morbi maecenas egestas ullamcorper euismod vulputate. Nulla in elit in amet vitae aliquam.</p>\r\n<h3>What will you learn from this course?</h3>\r\n<p>Lectus congue congue vitae enim dignissim justo. Sagittis eu et tellus morbi maecenas egestas ullamcorper euismod vulputate. Nulla in elit in amet vitae aliquam.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n<li>How to Convert Ul/UX to HTM</li>\r\n<li>Detailed ideas about structured project creation</li>\r\n<li>Steps to start freelancing by Learning Web design</li>\r\n</ul>\r\n<h3>Details about the course</h3>\r\n<p>Being able to speak Engltst\' fluently iS an important skill in this age. Having spoken English skills can help you advance in every stage ot lite. Acquiring English speaking SkillS or correct pronunciation ot English is very important.</p>\r\n<p>There are many people who know English well, but teel reluctant to speak English due to lack Ot confidence. Ten Minute School brings you the spoken English.</p>\r\n</div>', 'publish', 1, '2025-04-09 18:23:07', '2025-04-09 18:24:55', 1, 1, 'courses', '{\"price\":140,\"compare_price\":220,\"max_students\":\"70\",\"language\":\"vi\",\"difficulty_level\":\"intermediate\",\"preview_video_thumbnail\":\"2025\\/04\\/09\\/sidebar-video-img.jpg\",\"preview_video_url\":\"https:\\/\\/youtu.be\\/CZkux700lqU?si=o3BzouuR9aTyviUr\",\"duration\":\"800\",\"certificate\":\"1\"}', '[{\"id\":25,\"name\":\"Web Developed\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"web-developed\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/web-developed\"},{\"id\":30,\"name\":\"Marketing\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"marketing\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/marketing\"},{\"id\":31,\"name\":\"Marketing\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"marketing-1\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/marketing-1\"}]', 0.00, 0, 0, '44a26eed-e8cd-4368-96a0-9de8a94efb8a', 'vi'),
+(158, 'Programming for all (Started With Python)', '2025/04/08/courses-img-2.jpg', 'programming-for-all-started-with-python-1', '\r Study Plan\r Lorem ipsum dolor sit amet consectetur. Condimentum et eget faucibus tempor. Amet odio diam mattis volutpat sed platea sed pulvinar. Arcu ut urna sagittis sit eu ante ut urna...', '<div class=\"tf__course_overview\">\r\n<h3>Study Plan</h3>\r\n<p>Lorem ipsum dolor sit amet consectetur. Condimentum et eget faucibus tempor. Amet odio diam mattis volutpat sed platea sed pulvinar. Arcu ut urna sagittis sit eu ante ut urna facilisis. In viverra dui malesuada adipiscing velit erat eu. Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat. Lectus congue congue vitae enim dignissim justo. Sagittis eu et tellus morbi maecenas egestas ullamcorper euismod vulputate. Nulla in elit in amet vitae aliquam.</p>\r\n<h3>What will you learn from this course?</h3>\r\n<p>Lectus congue congue vitae enim dignissim justo. Sagittis eu et tellus morbi maecenas egestas ullamcorper euismod vulputate. Nulla in elit in amet vitae aliquam.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n<li>How to Convert Ul/UX to HTM</li>\r\n<li>Detailed ideas about structured project creation</li>\r\n<li>Steps to start freelancing by Learning Web design</li>\r\n</ul>\r\n<h3>Details about the course</h3>\r\n<p>Being able to speak Engltst\' fluently iS an important skill in this age. Having spoken English skills can help you advance in every stage ot lite. Acquiring English speaking SkillS or correct pronunciation ot English is very important.</p>\r\n<p>There are many people who know English well, but teel reluctant to speak English due to lack Ot confidence. Ten Minute School brings you the spoken English.</p>\r\n</div>', 'publish', 2, '2025-04-09 18:34:02', '2025-04-09 19:17:02', 1, 1, 'courses', '{\"price\":340,\"compare_price\":599,\"max_students\":\"99\",\"language\":\"en\",\"difficulty_level\":\"advanced\",\"preview_video_thumbnail\":\"2025\\/04\\/09\\/sidebar-video-img.jpg\",\"preview_video_url\":\"https:\\/\\/youtu.be\\/CZkux700lqU?si=o3BzouuR9aTyviUr\",\"duration\":\"80\",\"certificate\":\"1\"}', '[{\"id\":26,\"name\":\"Business\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"business\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/business\"},{\"id\":27,\"name\":\"Buisness Web\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"buisness-web\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/buisness-web\"},{\"id\":29,\"name\":\"Finance\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"finance-1\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/finance-1\"}]', 0.00, 0, 0, '6b91a27b-bcc7-46ea-ae99-91c8ba9a1b20', 'vi'),
+(159, 'Dave conservatoire is the Entirely free online', '2025/04/08/courses-img-6.jpg', 'dave-conservatoire-is-the-entirely-free-online-1', 'Study Plan\r Lorem ipsum dolor sit amet consectetur. Condimentum et eget faucibus tempor. Amet odio diam mattis volutpat sed platea sed pulvinar. Arcu ut urna sagittis sit eu ante ut urna...', '<h3>Study Plan</h3>\r\n<p>Lorem ipsum dolor sit amet consectetur. Condimentum et eget faucibus tempor. Amet odio diam mattis volutpat sed platea sed pulvinar. Arcu ut urna sagittis sit eu ante ut urna facilisis. In viverra dui malesuada adipiscing velit erat eu. Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat. Lectus congue congue vitae enim dignissim justo. Sagittis eu et tellus morbi maecenas egestas ullamcorper euismod vulputate. Nulla in elit in amet vitae aliquam.</p>\r\n<h3>What will you learn from this course?</h3>\r\n<p>Lectus congue congue vitae enim dignissim justo. Sagittis eu et tellus morbi maecenas egestas ullamcorper euismod vulputate. Nulla in elit in amet vitae aliquam.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n<li>How to Convert Ul/UX to HTM</li>\r\n<li>Detailed ideas about structured project creation</li>\r\n<li>Steps to start freelancing by Learning Web design</li>\r\n</ul>\r\n<h3>Details about the course</h3>\r\n<p>Being able to speak Engltst\' fluently iS an important skill in this age. Having spoken English skills can help you advance in every stage ot lite. Acquiring English speaking SkillS or correct pronunciation ot English is very important.</p>\r\n<p>There are many people who know English well, but teel reluctant to speak English due to lack Ot confidence. Ten Minute School brings you the spoken English.</p>', 'publish', 1, '2025-04-09 18:46:55', '2025-04-09 18:48:40', 1, 1, 'courses', '{\"price\":90,\"compare_price\":130,\"max_students\":\"100\",\"language\":\"en\",\"difficulty_level\":\"intermediate\",\"preview_video_thumbnail\":\"2025\\/04\\/09\\/sidebar-video-img.jpg\",\"preview_video_url\":\"https:\\/\\/youtu.be\\/CZkux700lqU?si=o3BzouuR9aTyviUr\",\"duration\":\"800\",\"certificate\":\"1\"}', '[{\"id\":32,\"name\":\"UI\\/UX\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"uiux\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/uiux\"},{\"id\":33,\"name\":\"UI\\/UX\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"uiux-1\",\"level\":0,\"total_post\":1,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/uiux-1\"}]', 0.00, 0, 0, '5db55ab6-e599-410f-b6d6-bba0c5efe7e9', 'vi'),
+(160, 'Programming for all (Started With Python)', '2025/04/08/courses-img-1.jpg', 'programming-for-all-started-with-python-2', '\r Study Plan\r Lorem ipsum dolor sit amet consectetur. Condimentum et eget faucibus tempor. Amet odio diam mattis volutpat sed platea sed pulvinar. Arcu ut urna sagittis sit eu ante ut urna...', '<div class=\"tf__course_overview\">\r\n<h3>Study Plan</h3>\r\n<p>Lorem ipsum dolor sit amet consectetur. Condimentum et eget faucibus tempor. Amet odio diam mattis volutpat sed platea sed pulvinar. Arcu ut urna sagittis sit eu ante ut urna facilisis. In viverra dui malesuada adipiscing velit erat eu. Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat. Lectus congue congue vitae enim dignissim justo. Sagittis eu et tellus morbi maecenas egestas ullamcorper euismod vulputate. Nulla in elit in amet vitae aliquam.</p>\r\n<h3>What will you learn from this course?</h3>\r\n<p>Lectus congue congue vitae enim dignissim justo. Sagittis eu et tellus morbi maecenas egestas ullamcorper euismod vulputate. Nulla in elit in amet vitae aliquam.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n<li>How to Convert Ul/UX to HTM</li>\r\n<li>Detailed ideas about structured project creation</li>\r\n<li>Steps to start freelancing by Learning Web design</li>\r\n</ul>\r\n<h3>Details about the course</h3>\r\n<p>Being able to speak Engltst\' fluently iS an important skill in this age. Having spoken English skills can help you advance in every stage ot lite. Acquiring English speaking SkillS or correct pronunciation ot English is very important.</p>\r\n<p>There are many people who know English well, but teel reluctant to speak English due to lack Ot confidence. Ten Minute School brings you the spoken English.</p>\r\n</div>', 'publish', 2, '2025-04-09 18:50:52', '2025-04-09 19:16:47', 1, 1, 'courses', '{\"price\":310,\"compare_price\":440,\"max_students\":\"90\",\"language\":\"en\",\"difficulty_level\":\"intermediate\",\"preview_video_thumbnail\":\"2025\\/04\\/09\\/sidebar-video-img.jpg\",\"preview_video_url\":\"https:\\/\\/www.w3schools.com\\/html\\/mov_bbb.mp4\",\"duration\":\"400\",\"certificate\":\"1\"}', '[{\"id\":23,\"name\":\"Design\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"design\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/design\"},{\"id\":24,\"name\":\"Web Design\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"web-design\",\"level\":0,\"total_post\":3,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/web-design\"},{\"id\":33,\"name\":\"UI\\/UX\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"uiux-1\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/uiux-1\"}]', 0.00, 0, 1, '88b98b4c-a6f5-4c44-a0d7-9b471e7c62d1', 'vi'),
+(161, 'Project Management Principles & Practices', '2025/04/08/courses-img-1.jpg', 'project-management-principles-practices-3', '\r Study Plan\r Lorem ipsum dolor sit amet consectetur. Condimentum et eget faucibus tempor. Amet odio diam mattis volutpat sed platea sed pulvinar. Arcu ut urna sagittis sit eu ante ut urna...', '<div class=\"tf__course_overview\">\r\n<h3>Study Plan</h3>\r\n<p>Lorem ipsum dolor sit amet consectetur. Condimentum et eget faucibus tempor. Amet odio diam mattis volutpat sed platea sed pulvinar. Arcu ut urna sagittis sit eu ante ut urna facilisis. In viverra dui malesuada adipiscing velit erat eu. Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat. Lectus congue congue vitae enim dignissim justo. Sagittis eu et tellus morbi maecenas egestas ullamcorper euismod vulputate. Nulla in elit in amet vitae aliquam.</p>\r\n<h3>What will you learn from this course?</h3>\r\n<p>Lectus congue congue vitae enim dignissim justo. Sagittis eu et tellus morbi maecenas egestas ullamcorper euismod vulputate. Nulla in elit in amet vitae aliquam.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n<li>How to Convert Ul/UX to HTM</li>\r\n<li>Detailed ideas about structured project creation</li>\r\n<li>Steps to start freelancing by Learning Web design</li>\r\n</ul>\r\n<h3>Details about the course</h3>\r\n<p>Being able to speak Engltst\' fluently iS an important skill in this age. Having spoken English skills can help you advance in every stage ot lite. Acquiring English speaking SkillS or correct pronunciation ot English is very important.</p>\r\n<p>There are many people who know English well, but teel reluctant to speak English due to lack Ot confidence. Ten Minute School brings you the spoken English.</p>\r\n</div>', 'publish', 3, '2025-04-09 18:53:52', '2025-04-09 19:01:33', 1, 1, 'courses', '{\"max_students\":0,\"language\":\"en\",\"difficulty_level\":\"beginner\",\"preview_video_thumbnail\":\"\",\"preview_video_url\":\"\",\"duration\":\"\",\"certificate\":\"0\",\"price\":0,\"compare_price\":0}', '[{\"id\":28,\"name\":\"Finance\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"finance\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/finance\"},{\"id\":29,\"name\":\"Finance\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"finance-1\",\"level\":0,\"total_post\":4,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/finance-1\"}]', 0.00, 0, 0, '3a9aa167-1f03-49b3-893c-c7cf888dce9a', 'vi'),
+(162, 'Project Management Principles & Practices', '2025/04/08/courses-img-6.jpg', 'project-management-principles-practices-2', '\r Study Plan\r Lorem ipsum dolor sit amet consectetur. Condimentum et eget faucibus tempor. Amet odio diam mattis volutpat sed platea sed pulvinar. Arcu ut urna sagittis sit eu ante ut urna...', '<div class=\"tf__course_overview\">\r\n<h3>Study Plan</h3>\r\n<p>Lorem ipsum dolor sit amet consectetur. Condimentum et eget faucibus tempor. Amet odio diam mattis volutpat sed platea sed pulvinar. Arcu ut urna sagittis sit eu ante ut urna facilisis. In viverra dui malesuada adipiscing velit erat eu. Commodo justo id amet scelerisque gravida id neque. Euismod nisi venenatis arcu nibh pellentesque nam bibendum proin consequat. Lectus congue congue vitae enim dignissim justo. Sagittis eu et tellus morbi maecenas egestas ullamcorper euismod vulputate. Nulla in elit in amet vitae aliquam.</p>\r\n<h3>What will you learn from this course?</h3>\r\n<p>Lectus congue congue vitae enim dignissim justo. Sagittis eu et tellus morbi maecenas egestas ullamcorper euismod vulputate. Nulla in elit in amet vitae aliquam.</p>\r\n<ul>\r\n<li>Basic knowledge and detailed understanding of CSS3 to create attract websites</li>\r\n<li>Details Idea about HTMLS, Creating Basic Web Pages using HTMLS</li>\r\n<li>Web Page Layout Design and Slider Creation</li>\r\n<li>Image Insert method af web site</li>\r\n<li>Creating Styling Web Pages Using CSS3</li>\r\n<li>How to Convert Ul/UX to HTM</li>\r\n<li>Detailed ideas about structured project creation</li>\r\n<li>Steps to start freelancing by Learning Web design</li>\r\n</ul>\r\n<h3>Details about the course</h3>\r\n<p>Being able to speak Engltst\' fluently iS an important skill in this age. Having spoken English skills can help you advance in every stage ot lite. Acquiring English speaking SkillS or correct pronunciation ot English is very important.</p>\r\n<p>There are many people who know English well, but teel reluctant to speak English due to lack Ot confidence. Ten Minute School brings you the spoken English.</p>\r\n</div>', 'publish', 8, '2025-04-09 18:56:26', '2025-04-09 19:16:18', 1, 1, 'courses', '{\"price\":120,\"compare_price\":230,\"max_students\":\"220\",\"language\":\"en\",\"difficulty_level\":\"intermediate\",\"preview_video_thumbnail\":\"2025\\/04\\/09\\/sidebar-video-img.jpg\",\"preview_video_url\":\"https:\\/\\/youtu.be\\/CZkux700lqU?si=o3BzouuR9aTyviUr\",\"duration\":\"90\",\"certificate\":\"1\"}', '[{\"id\":29,\"name\":\"Finance\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"finance-1\",\"level\":0,\"total_post\":3,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/finance-1\"},{\"id\":30,\"name\":\"Marketing\",\"taxonomy\":\"categories\",\"singular\":\"category\",\"slug\":\"marketing\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/category\\/marketing\"},{\"id\":31,\"name\":\"Marketing\",\"taxonomy\":\"tags\",\"singular\":\"tag\",\"slug\":\"marketing-1\",\"level\":0,\"total_post\":2,\"thumbnail\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/jw-styles\\/mojar\\/images\\/thumb-default.png\",\"url\":\"https:\\/\\/laravel-edufax.mojarsoft.com\\/tag\\/marketing-1\"}]', 0.00, 0, 2, '6464abef-ca26-4f27-a7f8-27265cfd3683', 'vi');
 
 -- --------------------------------------------------------
 
@@ -2136,10 +1695,10 @@ INSERT INTO `app_posts` (`id`, `title`, `thumbnail`, `slug`, `description`, `con
 --
 
 CREATE TABLE `app_post_likes` (
-  `id` bigint UNSIGNED NOT NULL,
-  `post_id` bigint UNSIGNED NOT NULL,
-  `user_id` bigint UNSIGNED NOT NULL,
-  `client_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `post_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `client_ip` varchar(50) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -2151,10 +1710,10 @@ CREATE TABLE `app_post_likes` (
 --
 
 CREATE TABLE `app_post_metas` (
-  `id` bigint UNSIGNED NOT NULL,
-  `post_id` bigint UNSIGNED NOT NULL,
-  `meta_key` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `post_id` bigint(20) UNSIGNED NOT NULL,
+  `meta_key` varchar(150) NOT NULL,
+  `meta_value` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -2164,75 +1723,14 @@ CREATE TABLE `app_post_metas` (
 INSERT INTO `app_post_metas` (`id`, `post_id`, `meta_key`, `meta_value`) VALUES
 (1, 4, 'example', 'jkhj'),
 (2, 4, 'select', '1'),
-(7, 7, 'template', 'home'),
-(8, 7, 'block_content', '{\"content\":[{\"block\":\"test\"}]}'),
-(9, 8, 'template', 'home'),
-(10, 8, 'block_content', '{\"content\":[{\"block\":\"test\"},{\"block\":\"slider\"}]}'),
-(11, 9, 'template', 'home'),
-(12, 9, 'block_content', '{\"content\":[{\"block\":\"test\"}]}'),
-(13, 10, 'template', 'home'),
-(14, 10, 'block_content', '{\"content\":[{\"block\":\"test\"}]}'),
 (15, 11, 'template', 'home'),
-(16, 11, 'block_content', '{\"content\":[{\"title\":null,\"block\":\"test\"},{\"title\":\"mn\",\"block\":\"test\"},{\"title\":\"this is new\",\"block\":\"test\"},{\"title\":\"dsad\",\"block\":\"test\"},{\"title\":\"dsds\",\"block\":\"test\"}]}'),
-(17, 12, 'template', 'home'),
-(18, 12, 'block_content', '{\"content\":[{\"title\":null,\"block\":\"test\"},{\"col1\":{\"title\":null,\"limit\":\"3\"},\"col2\":{\"title\":null},\"col3\":{\"title\":null,\"limit\":\"3\"},\"block\":\"featured_games\"},{\"title\":\"dad\",\"block\":\"test\"}]}'),
+(16, 11, 'block_content', '{\"content\":[{\"background_image\":\"2025\\/04\\/20\\/banner-bg.jpg\",\"subtitle\":\"Discover your journey\",\"title\":\"The Best Free Online Courses of All Time\",\"highlight_text\":\"Courses\",\"description\":\"Take your learning organization to the next level. to the next level. Who will share their knowledge to people.\",\"button_text\":\"Courses\",\"button_url\":\"\\/courses\",\"show_arrow_icon\":\"1\",\"banner_image\":\"2025\\/04\\/20\\/banner-img.png\",\"enable_animation\":\"1\",\"block\":\"hero_section_home\"},{\"background_image\":\"2025\\/04\\/20\\/category-bg.jpg\",\"section_title\":\"Explore Our Categories\",\"section_description\":\"Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world.\",\"section_url\":null,\"categories\":[{\"category\":\"26\",\"icon\":\"2025\\/04\\/20\\/category-icon-1.png\",\"color_scheme\":\"category_1\",\"custom_title\":null,\"custom_url\":null},{\"category\":\"23\",\"icon\":\"2025\\/04\\/21\\/category-icon-2.png\",\"color_scheme\":\"category_2\",\"custom_title\":null,\"custom_url\":null},{\"category\":\"28\",\"icon\":\"2025\\/04\\/21\\/category-icon-3.png\",\"color_scheme\":\"category_3\",\"custom_title\":null,\"custom_url\":null},{\"category\":\"32\",\"icon\":\"2025\\/04\\/21\\/category-icon-4.png\",\"color_scheme\":\"category_4\",\"custom_title\":null,\"custom_url\":null},{\"category\":\"34\",\"icon\":\"2025\\/04\\/21\\/category-icon-5.png\",\"color_scheme\":\"category_4\",\"custom_title\":null,\"custom_url\":null},{\"category\":\"35\",\"icon\":\"2025\\/04\\/21\\/category-icon-6.png\",\"color_scheme\":\"category_3\",\"custom_title\":null,\"custom_url\":null},{\"category\":\"36\",\"icon\":\"2025\\/04\\/21\\/category-icon-7.png\",\"color_scheme\":\"category_2\",\"custom_title\":null,\"custom_url\":null},{\"category\":\"37\",\"icon\":\"2025\\/04\\/21\\/category-icon-8.png\",\"color_scheme\":\"category_1\",\"custom_title\":null,\"custom_url\":null}],\"padding_top\":null,\"padding_bottom\":null,\"mobile_padding_top\":null,\"mobile_padding_bottom\":null,\"enable_animation\":\"1\",\"block\":\"course_category_home\"},{\"background_image\":\"2025\\/04\\/21\\/about-section-bg.jpg\",\"image_1\":\"2025\\/04\\/21\\/about-img-1.jpg\",\"image_2\":\"2025\\/04\\/21\\/about-img-2.jpg\",\"title\":\"We do great things together\",\"description\":\"Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius.\",\"features\":[{\"icon\":\"fas fa-star\",\"title\":\"Build your career\",\"description\":\"Online course quickly from anywhere.\"},{\"icon\":\"fas fa-pencil-ruler\",\"title\":\"Grow your skill\",\"description\":\"Online course quickly from anywhere.\"}],\"padding_top\":null,\"padding_bottom\":null,\"mobile_padding_top\":null,\"mobile_padding_bottom\":null,\"enable_animation\":\"1\",\"block\":\"about_us_home\"},{\"background_image\":\"2025\\/04\\/21\\/courses-bg.jpg\",\"section_title\":\"Our Popular Courses\",\"section_description\":\"Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world.\",\"course_limit\":\"6\",\"order_by\":\"created_at\",\"order\":\"DESC\",\"show_all_button\":\"0\",\"view_all_text\":null,\"view_all_url\":null,\"padding_top\":null,\"padding_bottom\":null,\"mobile_padding_top\":null,\"mobile_padding_bottom\":null,\"enable_animation\":\"1\",\"block\":\"course_list_home\"},{\"background_image\":\"2025\\/04\\/21\\/student-choose-bg.jpg\",\"section_title\":\"Why Students Choose Us for Gain Their Knowledge\",\"description\":\"Lorem ipsum dolor sit amet consectetur. Posuere vulputate at tortor aenean tortor tincidunt dui consequat enim. Vel iaculis euismod et scelerisque condimentum nulla cras. Praesent diam orci id et eu nulla id. Auctor fermentum.\",\"features\":[{\"text\":\"Free for physically handcraft.\"},{\"text\":\"Easy to enroll courses\"},{\"text\":\"Course certificate for particular course\"}],\"button_text\":\"More About Us\",\"button_url\":\"#\",\"image_1\":\"2025\\/04\\/21\\/student-choose-img-1.jpg\",\"image_2\":\"2025\\/04\\/21\\/student-choose-img-2.jpg\",\"padding_top\":null,\"padding_bottom\":null,\"mobile_padding_top\":null,\"mobile_padding_bottom\":null,\"enable_animation\":\"1\",\"block\":\"student_choose\"},{\"background_image\":\"2025\\/04\\/21\\/event-bg.jpg\",\"section_title\":\"Our Upcoming Events\",\"section_description\":\"Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world.\",\"event_limit\":\"4\",\"order_by\":\"start_date\",\"order\":\"ASC\",\"date_filter\":\"all\",\"show_all_button\":\"0\",\"view_all_text\":null,\"view_all_url\":null,\"padding_top\":null,\"padding_bottom\":null,\"mobile_padding_top\":null,\"mobile_padding_bottom\":null,\"enable_animation\":\"1\",\"block\":\"events_list_home\"},{\"show_section_title\":\"1\",\"section_title\":\"What Our Student Saying\",\"section_description\":\"Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world.\",\"background_image\":\"2025\\/04\\/21\\/testimonial-bg.jpg\",\"testimonials\":[{\"name\":\"Leslie Alexander\",\"designation\":\"Developer\",\"image\":\"2025\\/04\\/21\\/testimonial-img-1.jpg\",\"rating\":\"5\",\"description\":\"Lorem ipsum dolor sit amet consectetur. Hac ullamcorper nisi con velit eget dignissim pharetra at. Libero ultrices semper aliquet fusce aliquam nunc. Platea cursus in duis semper non lectus. Facili nibh duis viverra faucibus a turpis.\"},{\"name\":\"Orabelle\",\"designation\":\"Math Teacher\",\"image\":\"2025\\/04\\/21\\/testimonial-img-2.jpg\",\"rating\":\"4\",\"description\":\"Lorem ipsum dolor sit amet consectetur. Hac ullamcorper nisi con velit eget dignissim pharetra at. Libero ultrices semper aliquet fusce aliquam nunc. Platea cursus in duis semper non lectus. Facili nibh duis viverra faucibus a turpis.\"},{\"name\":\"Alejandro\",\"designation\":\"Founder & CEO\",\"image\":\"2025\\/04\\/21\\/testimonial-img-3.jpg\",\"rating\":\"5\",\"description\":\"Lorem ipsum dolor sit amet consectetur. Hac ullamcorper nisi con velit eget dignissim pharetra at. Libero ultrices semper aliquet fusce aliquam nunc. Platea cursus in duis semper non lectus. Facili nibh duis viverra faucibus a turpis.\"}],\"enable_slider\":\"1\",\"slides_to_show\":\"2\",\"enable_autoplay\":\"0\",\"autoplay_speed\":null,\"block\":\"testimonial_area\"},{\"background_image\":\"2025\\/04\\/21\\/certificate-bg.jpg\",\"enable_overlay\":\"1\",\"certificates\":[{\"title\":\"Online Certification\",\"icon\":\"2025\\/04\\/21\\/certificate-icon-1.png\"},{\"title\":\"Top Instructors\",\"icon\":\"2025\\/04\\/21\\/certificate-icon-2.png\"},{\"title\":\"Unlimited Access\",\"icon\":\"2025\\/04\\/21\\/certificate-icon-3.png\"},{\"title\":\"Experienced Members\",\"icon\":\"2025\\/04\\/21\\/certificate-icon-4.png\"}],\"padding_top\":null,\"padding_bottom\":null,\"mobile_padding_bottom\":null,\"enable_animation\":\"1\",\"block\":\"certificate_area\"},{\"style\":\"style1\",\"show_section_title\":\"1\",\"section_title\":\"Our Expert Instructor\",\"section_description\":\"Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world.\",\"background_image\":\"2025\\/04\\/21\\/instructor-bg.jpg\",\"instructors\":[{\"name\":\"Johnna Smith\",\"designation\":\"Web Developer\",\"image\":\"2025\\/04\\/21\\/instructor-img-1.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"},{\"name\":\"Alice Johnson\",\"designation\":\"Graphic Designer\",\"image\":\"2025\\/04\\/21\\/instructor-img-2.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"},{\"name\":\"Maya Lee\",\"designation\":\"UX\\/UI Designer\",\"image\":\"2025\\/04\\/21\\/instructor-img-3.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"},{\"name\":\"Sarah Brown\",\"designation\":\"Software Engineer\",\"image\":\"2025\\/04\\/21\\/instructor-img-4.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"},{\"name\":\"Emily Clark\",\"designation\":\"Full Stack Developer\",\"image\":\"2025\\/04\\/21\\/instructor-img-5.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"},{\"name\":\"Emma Davis\",\"designation\":\"Frontend Developer\",\"image\":\"2025\\/04\\/21\\/instructor-img-6.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"}],\"enable_slider\":\"1\",\"block\":\"instructor_list\"},{\"background_image\":\"2025\\/04\\/21\\/blog-bg.jpg\",\"section_title\":\"Latest News Feed\",\"section_description\":\"Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world.\",\"blog_limit\":\"6\",\"order_by\":\"created_at\",\"order\":\"DESC\",\"enable_slider\":\"1\",\"show_all_button\":\"0\",\"view_all_text\":null,\"view_all_url\":null,\"padding_top\":null,\"padding_bottom\":null,\"mobile_padding_top\":null,\"mobile_padding_bottom\":null,\"block\":\"blogs_list_home\"}]}'),
 (19, 13, 'template', 'event'),
 (20, 14, 'template', 'products'),
-(21, 15, 'price', '400'),
-(22, 15, 'compare_price', '300'),
-(23, 15, 'sku_code', 'df32312'),
-(24, 15, 'barcode', '3434314'),
-(25, 15, 'quantity', '50'),
-(26, 15, 'images', '[\"2025\\/02\\/01\\/footer-bg.png\",\"2025\\/02\\/14\\/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg\"]'),
-(27, 15, 'inventory_management', '0'),
-(28, 15, 'disable_out_of_stock', '0'),
-(29, 15, 'downloadable', '0'),
-(30, 16, 'price', '500'),
-(31, 16, 'compare_price', '300'),
-(32, 16, 'sku_code', 'qwew32'),
-(33, 16, 'barcode', 'dfdf'),
-(34, 16, 'inventory_management', '1'),
-(35, 16, 'quantity', '30'),
-(36, 16, 'disable_out_of_stock', '0'),
-(37, 16, 'downloadable', '0'),
 (38, 17, 'template', NULL),
 (39, 18, 'template', NULL),
-(57, 20, 'start_date', NULL),
-(58, 20, 'end_date', NULL),
-(59, 20, 'venue', 'Dhaka'),
-(60, 20, 'venue_address', 'mirpur'),
-(61, 20, 'latitude', '57'),
-(62, 20, 'longitude', '87'),
-(63, 20, 'map_url', '#'),
-(64, 20, 'map_embed_code', 'gvhj'),
-(65, 20, 'event_logo', '2025/02/14/freepicdownloadercom-diners-customers-chef-waiters-restaurant-with-various-dishes-peruvian-seafoo.jpg'),
-(66, 20, 'event_banner', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg'),
-(67, 20, 'name', 'fafda'),
-(68, 20, 'description', NULL),
-(69, 20, 'price', NULL),
-(70, 20, 'capacity', NULL),
-(71, 20, 'min_ticket_number', NULL),
-(72, 20, 'max_ticket_number', NULL),
-(73, 20, 'social_links', '[{\"icon\":\"fab fa-facebook-f\",\"url\":\"#\"}]'),
-(74, 21, 'start_date', '2025-03-05T22:03'),
-(75, 21, 'end_date', '2025-03-06T22:04'),
-(76, 21, 'venue', 'Dhaka'),
-(77, 21, 'venue_address', 'Mirpur'),
-(78, 21, 'latitude', '30'),
-(79, 21, 'longitude', '40'),
-(80, 21, 'map_url', '#'),
-(81, 21, 'map_embed_code', '#'),
-(82, 21, 'event_logo', '2025/02/14/freepicdownloadercom-attentive-bearded-man-sitting-semi-position-looking-colorful-vegetables-plat.jpg'),
-(83, 21, 'event_banner', NULL),
-(84, 21, 'name', 'Ticket'),
-(85, 21, 'description', 'Desc'),
-(86, 21, 'price', '400'),
-(87, 21, 'capacity', '10'),
-(88, 21, 'min_ticket_number', '1'),
-(89, 21, 'max_ticket_number', '3'),
-(90, 21, 'social_links', '[{\"icon\":\"fab fa-facebook-f\",\"url\":\"#\"}]'),
 (91, 22, 'template', 'home'),
-(92, 22, 'block_content', '{\"content\":[{\"show_title\":\"1\",\"title\":\"Get In Touch With Us\",\"show_info_boxes\":\"1\",\"info_boxes\":[{\"icon\":null,\"title\":null,\"subtitle\":null,\"content\":null}],\"name_label\":null,\"name_placeholder\":null,\"email_label\":null,\"email_placeholder\":null,\"subject_label\":null,\"subject_placeholder\":null,\"message_label\":null,\"message_placeholder\":null,\"submit_text\":\"Submit\",\"show_map\":\"1\",\"map_url\":\"https:\\/\\/www.google.com\\/maps\\/embed?pb=!1m18!1m12!1m3!1d58404.90712306111!2d90.33188860263257!3d23.807690708042205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2sDhaka!5e0!3m2!1sen!2sbd!4v1685520321950!5m2!1sen!2sbd\",\"block\":\"contact_form\"}]}'),
+(92, 22, 'block_content', '{\"content\":[{\"show_title\":\"1\",\"title\":\"Get In Touch With Us\",\"show_info_boxes\":\"1\",\"info_boxes\":[{\"icon\":\"fas fa-envelope\",\"title\":\"Email\",\"subtitle\":\"Our friendly team is here to help.\",\"content\":\"example@gmail.com\"},{\"icon\":\"fas fa-map-marker-alt\",\"title\":\"Office\",\"subtitle\":\"Come say hello at our office.\",\"content\":\"8502 Preston Rd. Maine 98380, USA\"},{\"icon\":\"fas fa-phone-alt\",\"title\":\"Phone\",\"subtitle\":\"Mon-Fri from 8am to 5pm.\",\"content\":\"+088 (246) 642-27\"},{\"icon\":\"fas fa-clock\",\"title\":\"Working Hours\",\"subtitle\":\"Satday to Friday:\",\"content\":\"09:00am - 10:00pm\"}],\"name_label\":null,\"name_placeholder\":\"Name\",\"email_label\":null,\"email_placeholder\":\"example@gmail.com\",\"subject_label\":null,\"subject_placeholder\":\"Phone\",\"message_label\":null,\"message_placeholder\":\"Type here..\",\"submit_text\":\"Send message\",\"show_map\":\"1\",\"map_url\":\"https:\\/\\/www.google.com\\/maps\\/embed?pb=!1m18!1m12!1m3!1d58404.90712306111!2d90.33188860263257!3d23.807690708042205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2sDhaka!5e0!3m2!1sen!2sbd!4v1685520321950!5m2!1sen!2sbd\",\"block\":\"contact_form\"}]}'),
 (93, 23, 'template', 'about'),
 (94, 23, 'block_content', '{\"content\":[{\"background_image\":null,\"video_url\":null,\"enable_autoplay\":\"0\",\"video_type\":\"video\",\"margin_top\":null,\"mobile_margin_top\":null,\"enable_animation\":\"0\",\"play_icon\":null,\"enable_overlay\":\"0\",\"block\":\"about_video\"},{\"background_image\":null,\"section_title\":null,\"description\":null,\"button_text\":null,\"button_url\":null,\"image_1\":null,\"image_2\":null,\"padding_top\":null,\"padding_bottom\":null,\"mobile_padding_top\":null,\"mobile_padding_bottom\":null,\"enable_animation\":\"0\",\"block\":\"student_choose\"},{\"title\":\"About Section title\",\"description\":\"About Section desc\",\"background_image\":\"2025\\/03\\/07\\/paypal.png\",\"image_1\":\"2025\\/03\\/06\\/home-shop-thumb06.png\",\"image_2\":null,\"block\":\"about_area\"}]}'),
 (95, 24, 'template', NULL),
@@ -2242,89 +1740,228 @@ INSERT INTO `app_post_metas` (`id`, `post_id`, `meta_key`, `meta_value`) VALUES
 (99, 26, 'plugin_name', 'Silas Butler'),
 (100, 26, 'plugin_version', 'Culpa officia non al'),
 (101, 26, 'plugin_author', 'Eiusmod autem quo te'),
-(119, 28, 'start_date', '1980-11-16T17:47'),
-(120, 28, 'end_date', '2004-07-28T18:52'),
-(121, 28, 'venue', 'In molestiae quia do'),
-(122, 28, 'venue_address', 'Eum et est sit aperi'),
-(123, 28, 'latitude', 'Eos sed omnis quia i'),
-(124, 28, 'longitude', 'Nisi harum impedit'),
-(125, 28, 'map_url', 'Voluptates reiciendi'),
-(126, 28, 'map_embed_code', 'Amet ut iure aut qu'),
-(127, 28, 'event_logo', NULL),
-(128, 28, 'event_banner', NULL),
-(129, 28, 'name', 'Eve Sherman'),
-(130, 28, 'description', 'Magna tempore ipsum'),
-(131, 28, 'price', '596'),
-(132, 28, 'capacity', '74'),
-(133, 28, 'min_ticket_number', '310'),
-(134, 28, 'max_ticket_number', '299'),
-(135, 28, 'social_links', '[{\"icon\":\"fab fa-facebook-f\",\"url\":\"#\"}]'),
-(136, 29, 'price', '300'),
-(137, 29, 'compare_price', '400'),
-(138, 29, 'max_students', '20'),
-(139, 29, 'language', 'vi'),
-(140, 29, 'difficulty_level', 'intermediate'),
-(141, 29, 'preview_video_url', '#'),
-(142, 30, 'price', NULL),
-(143, 30, 'compare_price', NULL),
-(144, 30, 'max_students', '0'),
-(145, 30, 'language', 'en'),
-(146, 30, 'difficulty_level', 'beginner'),
-(147, 30, 'preview_video_url', ''),
-(148, 74, 'price', '40'),
-(149, 74, 'compare_price', '50'),
-(150, 74, 'max_students', '0'),
-(151, 74, 'language', 'en'),
-(152, 74, 'difficulty_level', 'beginner'),
-(153, 74, 'preview_video_url', ''),
-(171, 80, 'price', '35'),
-(172, 80, 'compare_price', '65'),
-(173, 80, 'max_students', '0'),
-(174, 80, 'language', 'en'),
-(175, 80, 'difficulty_level', 'beginner'),
-(176, 80, 'preview_video_url', ''),
-(177, 82, 'price', '0'),
-(178, 82, 'compare_price', '0'),
-(179, 82, 'max_students', '0'),
-(180, 82, 'language', 'en'),
-(181, 82, 'difficulty_level', 'beginner'),
-(182, 82, 'preview_video_url', ''),
 (207, 122, 'template', 'courses'),
-(208, 82, 'preview_video_thumbnail', ''),
-(209, 82, 'duration', ''),
-(210, 82, 'certificate', '0'),
-(211, 80, 'preview_video_thumbnail', ''),
-(212, 80, 'duration', ''),
-(213, 80, 'certificate', '0'),
-(231, 124, 'price', NULL),
-(232, 124, 'compare_price', NULL),
-(233, 124, 'sku_code', NULL),
-(234, 124, 'barcode', NULL),
-(235, 124, 'inventory_management', '0'),
-(236, 124, 'quantity', NULL),
-(237, 124, 'disable_out_of_stock', '0'),
-(238, 124, 'downloadable', '0'),
-(239, 127, 'template', 'home'),
-(240, 127, 'block_content', '{\"content\":[{\"background_image\":null,\"section_title\":null,\"description\":null,\"button_text\":null,\"button_url\":null,\"image_1\":null,\"image_2\":null,\"padding_top\":null,\"padding_bottom\":null,\"mobile_padding_top\":null,\"mobile_padding_bottom\":null,\"enable_animation\":\"0\",\"block\":\"student_choose\"}]}'),
-(241, 129, 'template', 'courses'),
-(242, 129, 'block_content', '{\"content\":[{\"show_title\":\"0\",\"title\":\"sdasd\",\"show_info_boxes\":\"0\",\"name_label\":null,\"name_placeholder\":null,\"email_label\":null,\"email_placeholder\":null,\"subject_label\":null,\"subject_placeholder\":null,\"message_label\":null,\"message_placeholder\":null,\"submit_text\":null,\"show_map\":\"0\",\"map_url\":null,\"block\":\"contact_form\"}]}'),
-(277, 132, 'start_date', '2025-04-04T01:19'),
-(278, 132, 'end_date', '2025-04-05T01:19'),
-(279, 132, 'venue', 'asdfasd'),
-(280, 132, 'venue_address', 'asdasd'),
-(281, 132, 'latitude', '32432'),
-(282, 132, 'longitude', '32432'),
-(283, 132, 'map_url', '#'),
-(284, 132, 'map_embed_code', '#'),
-(285, 132, 'event_logo', NULL),
-(286, 132, 'event_banner', NULL),
-(287, 132, 'name', 'Ticket 1'),
-(288, 132, 'description', 'Desc'),
-(289, 132, 'price', '30'),
-(290, 132, 'capacity', '20'),
-(291, 132, 'min_ticket_number', '1'),
-(292, 132, 'max_ticket_number', '3'),
-(293, 132, 'social_links', '[{\"icon\":\"Nihil provident quo\",\"url\":\"Est distinctio Sit\"},{\"icon\":\"Sit enim dolor labor\",\"url\":\"Amet autem id incid\"}]');
+(294, 133, 'template', NULL),
+(295, 143, 'start_date', '2025-04-08T19:46'),
+(296, 143, 'end_date', '2025-07-24T19:46'),
+(297, 143, 'venue', 'Greenwood Arena'),
+(298, 143, 'venue_address', '45 Sports Blvd, Greenfield, DEF 56789'),
+(299, 143, 'latitude', '34.052235'),
+(300, 143, 'longitude', '118.243683'),
+(301, 143, 'map_url', NULL),
+(302, 143, 'map_embed_code', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3329.134746087092!2d-118.243683!3d34.052235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzQwMDAxJzI2LjgiTiA3Ni1mIzg0OTE!5e0!3m2!1sen!2sus!4v1674571812048\" width=\"600\" height=\"450\" frameborder=\"0\" style=\"border:0;\" allowfullscreen=\"\" aria-hidden=\"false\" tabindex=\"0\"></iframe>'),
+(303, 143, 'event_logo', NULL),
+(304, 143, 'event_banner', NULL),
+(305, 143, 'name', 'Greenwood Arena'),
+(306, 143, 'description', 'Description\r\n Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus...'),
+(307, 143, 'price', '180'),
+(308, 143, 'capacity', '300'),
+(309, 143, 'min_ticket_number', '1'),
+(310, 143, 'max_ticket_number', '30'),
+(311, 143, 'social_links', '[{\"icon\":\"fab fa-facebook-f\",\"url\":\"#\"},{\"icon\":\"fab fa-twitter\",\"url\":\"#\"}]'),
+(312, 144, 'start_date', '2025-04-08T21:11'),
+(313, 144, 'end_date', '2025-10-30T21:11'),
+(314, 144, 'venue', 'Sunset Beach Resort'),
+(315, 144, 'venue_address', '789 Beachside Lane, Sunview Island, GHI 11223'),
+(316, 144, 'latitude', '36.778259'),
+(317, 144, 'longitude', '-119.417931'),
+(318, 144, 'map_url', NULL),
+(319, 144, 'map_embed_code', NULL),
+(320, 144, 'event_logo', NULL),
+(321, 144, 'event_banner', NULL),
+(322, 144, 'name', 'Greenwood Arena'),
+(323, 144, 'description', 'Description\r\n Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus...'),
+(324, 144, 'price', '220'),
+(325, 144, 'capacity', '30'),
+(326, 144, 'min_ticket_number', '1'),
+(327, 144, 'max_ticket_number', '2'),
+(328, 144, 'social_links', '[{\"icon\":\"fab fa-facebook-f\",\"url\":\"#\"}]'),
+(329, 145, 'start_date', '2025-06-19T21:16'),
+(330, 145, 'end_date', '2025-11-21T21:16'),
+(331, 145, 'venue', 'Greenwood Arena'),
+(332, 145, 'venue_address', '101 Art St, Downtown City, JKL 24680'),
+(333, 145, 'latitude', NULL),
+(334, 145, 'longitude', NULL),
+(335, 145, 'map_url', NULL),
+(336, 145, 'map_embed_code', NULL),
+(337, 145, 'event_logo', NULL),
+(338, 145, 'event_banner', NULL),
+(339, 145, 'name', 'Ticket 1'),
+(340, 145, 'description', 'Description\r\n Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus...'),
+(341, 145, 'price', '140'),
+(342, 145, 'capacity', '40'),
+(343, 145, 'min_ticket_number', '1'),
+(344, 145, 'max_ticket_number', '2'),
+(345, 145, 'social_links', '[{\"icon\":\"fab fa-facebook-f\",\"url\":\"#\"},{\"icon\":\"fab fa-twitter\",\"url\":\"#\"}]'),
+(346, 146, 'start_date', NULL),
+(347, 146, 'end_date', NULL),
+(348, 146, 'venue', 'Hilltop Conference'),
+(349, 146, 'venue_address', '250 Summit Ave, Hillview, MNO 33445'),
+(350, 146, 'latitude', '39.739236'),
+(351, 146, 'longitude', NULL),
+(352, 146, 'map_url', NULL),
+(353, 146, 'map_embed_code', NULL),
+(354, 146, 'event_logo', NULL),
+(355, 146, 'event_banner', NULL),
+(356, 146, 'name', 'Ticket'),
+(357, 146, 'description', 'Description\r\n Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus...'),
+(358, 146, 'price', '310'),
+(359, 146, 'capacity', '30'),
+(360, 146, 'min_ticket_number', '1'),
+(361, 146, 'max_ticket_number', '2'),
+(362, 146, 'social_links', '[{\"icon\":\"fab fa-facebook-f\",\"url\":\"#\"}]'),
+(363, 147, 'start_date', '2025-04-17T22:46'),
+(364, 147, 'end_date', '2025-08-15T22:46'),
+(365, 147, 'venue', 'The Downtown Gallery'),
+(366, 147, 'venue_address', '101 Art St, Downtown City, JKL 24680'),
+(367, 147, 'latitude', NULL),
+(368, 147, 'longitude', NULL),
+(369, 147, 'map_url', NULL),
+(370, 147, 'map_embed_code', NULL),
+(371, 147, 'event_logo', NULL),
+(372, 147, 'event_banner', NULL),
+(373, 147, 'name', 'ticket'),
+(374, 147, 'description', NULL),
+(375, 147, 'price', '380'),
+(376, 147, 'capacity', '200'),
+(377, 147, 'min_ticket_number', '1'),
+(378, 147, 'max_ticket_number', '2'),
+(379, 147, 'social_links', '[{\"icon\":\"fab fa-facebook-f\",\"url\":\"#\"}]'),
+(380, 148, 'start_date', '2025-04-09T22:49'),
+(381, 148, 'end_date', '2025-09-18T22:49'),
+(382, 148, 'venue', 'Greenwood Arena'),
+(383, 148, 'venue_address', '45 Sports Blvd, Greenfield, DEF 56789'),
+(384, 148, 'latitude', NULL),
+(385, 148, 'longitude', NULL),
+(386, 148, 'map_url', NULL),
+(387, 148, 'map_embed_code', NULL),
+(388, 148, 'event_logo', NULL),
+(389, 148, 'event_banner', NULL),
+(390, 148, 'name', 'ticket'),
+(391, 148, 'description', NULL),
+(392, 148, 'price', '170'),
+(393, 148, 'capacity', '30'),
+(394, 148, 'min_ticket_number', '1'),
+(395, 148, 'max_ticket_number', '2'),
+(396, 148, 'social_links', '[{\"icon\":\"fab fa-facebook-f\",\"url\":\"#\"}]'),
+(397, 149, 'start_date', '2025-04-09T22:51'),
+(398, 149, 'end_date', '2025-09-25T22:51'),
+(399, 149, 'venue', 'Hilltop Conference'),
+(400, 149, 'venue_address', '250 Summit Ave, Hillview, MNO 33445'),
+(401, 149, 'latitude', NULL),
+(402, 149, 'longitude', NULL),
+(403, 149, 'map_url', NULL),
+(404, 149, 'map_embed_code', NULL),
+(405, 149, 'event_logo', NULL),
+(406, 149, 'event_banner', NULL),
+(407, 149, 'name', 'ticket'),
+(408, 149, 'description', 'Description\r\n Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus...'),
+(409, 149, 'price', '230'),
+(410, 149, 'capacity', '90'),
+(411, 149, 'min_ticket_number', '1'),
+(412, 149, 'max_ticket_number', '2'),
+(413, 149, 'social_links', '[{\"icon\":\"fab fa-facebook-f\",\"url\":\"#\"}]'),
+(414, 150, 'start_date', '2025-04-10T22:52'),
+(415, 150, 'end_date', '2025-08-21T22:52'),
+(416, 150, 'venue', 'The Grand'),
+(417, 150, 'venue_address', 'Downtown City'),
+(418, 150, 'latitude', NULL),
+(419, 150, 'longitude', NULL),
+(420, 150, 'map_url', NULL),
+(421, 150, 'map_embed_code', NULL),
+(422, 150, 'event_logo', NULL),
+(423, 150, 'event_banner', NULL),
+(424, 150, 'name', 'ticket'),
+(425, 150, 'description', 'Description\r\n Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit malesuada faucibus...'),
+(426, 150, 'price', '220'),
+(427, 150, 'capacity', '433'),
+(428, 150, 'min_ticket_number', '1'),
+(429, 150, 'max_ticket_number', '2'),
+(430, 150, 'social_links', '[{\"icon\":\"fab fa-facebook-f\",\"url\":\"#\"}]'),
+(431, 151, 'template', 'about'),
+(432, 151, 'block_content', '{\"content\":[{\"title\":\"We do great things together\",\"description\":\"Lorem ipsum dolor sit amet consectetur. Aliquet suspendisse elementum feugiat sit vel scelerisque. Pellentesque elit purus vel viverra rhoncus. Tempus eget dolor feugiat porttitor. Et gravida tortor vel venenatis varius odio vivamus. Quam sed egestas amet vel. Sed et viverra leo in pellentesque varius.\",\"background_image\":\"2025\\/04\\/08\\/about-section-bg.jpg\",\"image_1\":\"2025\\/04\\/08\\/about-img-1.jpg\",\"image_2\":\"2025\\/04\\/08\\/about-img-2.jpg\",\"features\":[{\"icon\":\"fas fa-star\",\"title\":\"Build your career\",\"description\":\"Online course quickly from anywhere.\"},{\"icon\":\"fas fa-pencil-ruler\",\"title\":\"Grow your skill\",\"description\":\"Online course quickly from anywhere.\"}],\"block\":\"about_area\"},{\"background_image\":\"2025\\/04\\/08\\/about-video-img.jpg\",\"video_url\":\"https:\\/\\/youtu.be\\/CZkux700lqU\",\"enable_autoplay\":\"1\",\"video_type\":\"video\",\"margin_top\":null,\"mobile_margin_top\":null,\"enable_animation\":\"1\",\"play_icon\":\"fas fa-play\",\"enable_overlay\":\"1\",\"block\":\"about_video\"},{\"style\":\"style1\",\"show_section_title\":\"1\",\"section_title\":\"Our Expert Instructor\",\"section_description\":\"Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world.\",\"background_image\":\"2025\\/04\\/08\\/instructor-bg.jpg\",\"instructors\":[{\"name\":\"Floyd Miles\",\"designation\":\"Graphic Designer\",\"image\":\"2025\\/04\\/08\\/instructor-img-1.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"},{\"name\":\"Darrell Steward\",\"designation\":\"Sales & Marketing\",\"image\":\"2025\\/04\\/08\\/instructor-img-2.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"},{\"name\":\"Darrell Steward\",\"designation\":\"Sales & Marketing\",\"image\":\"2025\\/04\\/08\\/instructor-img-3.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"},{\"name\":\"Darrell Steward\",\"designation\":\"Sales & Marketing\",\"image\":\"2025\\/04\\/08\\/instructor-img-4.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"},{\"name\":\"Darrell Steward\",\"designation\":\"Web Development\",\"image\":\"2025\\/04\\/08\\/instructor-img-5.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"},{\"name\":\"Devon Lane\",\"designation\":\"Web Designer\",\"image\":\"2025\\/04\\/08\\/instructor-img-6.png\",\"detail_url\":\"#\",\"facebook_url\":\"#\",\"linkedin_url\":\"#\",\"twitter_url\":\"#\"}],\"enable_slider\":\"1\",\"block\":\"instructor_list\"},{\"background_image\":\"2025\\/04\\/08\\/certificate-bg.jpg\",\"enable_overlay\":\"0\",\"certificates\":[{\"title\":\"Online Certification\",\"icon\":\"2025\\/04\\/08\\/certificate-icon-1.png\"},{\"title\":\"Top Instructors\",\"icon\":\"2025\\/04\\/08\\/certificate-icon-2.png\"},{\"title\":\"Unlimited Access\",\"icon\":\"2025\\/04\\/08\\/certificate-icon-3.png\"},{\"title\":\"Experienced Members\",\"icon\":\"2025\\/04\\/08\\/certificate-icon-4.png\"}],\"padding_top\":null,\"padding_bottom\":null,\"mobile_padding_bottom\":null,\"enable_animation\":\"0\",\"block\":\"certificate_area\"},{\"show_section_title\":\"1\",\"section_title\":\"What Our Student Saying\",\"section_description\":\"Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world.\",\"background_image\":\"2025\\/04\\/08\\/testimonial-bg.jpg\",\"testimonials\":[{\"name\":\"Leslie Alexander\",\"designation\":\"Dog Trainer\",\"image\":\"2025\\/04\\/08\\/testimonial-img-1.jpg\",\"rating\":\"4\",\"description\":\"Lorem ipsum dolor sit amet consectetur. Hac ullamcorper nisi con veliteget dignissim pharetra at. Libero ultrices semper aliquet fusce aliquam nunc. Platea cursus in duis semper non lectus. Facili nibh duis viverra faucibus a turpis.\"},{\"name\":\"Leslie Alexander\",\"designation\":\"Dog Trainer\",\"image\":\"2025\\/04\\/08\\/testimonial-img-2.jpg\",\"rating\":\"5\",\"description\":\"Lorem ipsum dolor sit amet consectetur. Hac ullamcorper nisi con veliteget dignissim pharetra at. Libero ultrices semper aliquet fusce aliquam nunc. Platea cursus in duis semper non lectus. Facili nibh duis viverra faucibus a turpis.\"},{\"name\":\"Leslie Alexander\",\"designation\":\"Dog Trainer\",\"image\":\"2025\\/04\\/08\\/testimonial-img-3.jpg\",\"rating\":\"3\",\"description\":\"Lorem ipsum dolor sit amet consectetur. Hac ullamcorper nisi con veliteget dignissim pharetra at. Libero ultrices semper aliquet fusce aliquam nunc. Platea cursus in duis semper non lectus. Facili nibh duis viverra faucibus a turpis.\"}],\"enable_slider\":\"1\",\"slides_to_show\":\"2\",\"enable_autoplay\":\"1\",\"autoplay_speed\":null,\"block\":\"testimonial_area\"},{\"background_image\":\"2025\\/04\\/21\\/blog-bg.jpg\",\"section_title\":\"Latest News Feed\",\"section_description\":\"Take your learning organization to the next level. to the next level. Who will share their knowledge to people around the world.\",\"blog_limit\":\"6\",\"order_by\":\"created_at\",\"order\":\"DESC\",\"enable_slider\":\"1\",\"show_all_button\":\"0\",\"view_all_text\":null,\"view_all_url\":null,\"padding_top\":null,\"padding_bottom\":null,\"mobile_padding_top\":null,\"mobile_padding_bottom\":null,\"block\":\"blogs_list_home\"}]}'),
+(433, 152, 'template', NULL),
+(434, 153, 'max_students', '90'),
+(435, 153, 'language', 'en'),
+(436, 153, 'difficulty_level', 'beginner'),
+(437, 153, 'preview_video_thumbnail', '2025/04/09/sidebar-video-img.jpg'),
+(438, 153, 'preview_video_url', 'https://youtu.be/CZkux700lqU?si=o3BzouuR9aTyviUr'),
+(439, 153, 'duration', '300'),
+(440, 153, 'certificate', '1'),
+(441, 153, 'price', '300'),
+(442, 153, 'compare_price', '300'),
+(443, 155, 'price', '200'),
+(444, 155, 'compare_price', '400'),
+(445, 155, 'max_students', '90'),
+(446, 155, 'language', 'en'),
+(447, 155, 'difficulty_level', 'beginner'),
+(448, 155, 'preview_video_thumbnail', '2025/04/09/sidebar-video-img.jpg'),
+(449, 155, 'preview_video_url', 'https://youtu.be/CZkux700lqU?si=o3BzouuR9aTyviUr'),
+(450, 155, 'duration', '300'),
+(451, 155, 'certificate', '1'),
+(452, 156, 'price', '300'),
+(453, 156, 'compare_price', '400'),
+(454, 156, 'max_students', '190'),
+(455, 156, 'language', 'vi'),
+(456, 156, 'difficulty_level', 'intermediate'),
+(457, 156, 'preview_video_thumbnail', '2025/04/09/sidebar-video-img.jpg'),
+(458, 156, 'preview_video_url', 'https://youtu.be/CZkux700lqU?si=o3BzouuR9aTyviUr'),
+(459, 156, 'duration', '300'),
+(460, 156, 'certificate', '1'),
+(461, 157, 'price', '140'),
+(462, 157, 'compare_price', '220'),
+(463, 157, 'max_students', '70'),
+(464, 157, 'language', 'vi'),
+(465, 157, 'difficulty_level', 'intermediate'),
+(466, 157, 'preview_video_thumbnail', '2025/04/09/sidebar-video-img.jpg'),
+(467, 157, 'preview_video_url', 'https://youtu.be/CZkux700lqU?si=o3BzouuR9aTyviUr'),
+(468, 157, 'duration', '800'),
+(469, 157, 'certificate', '1'),
+(470, 158, 'price', '340'),
+(471, 158, 'compare_price', '599'),
+(472, 158, 'max_students', '99'),
+(473, 158, 'language', 'en'),
+(474, 158, 'difficulty_level', 'advanced'),
+(475, 158, 'preview_video_thumbnail', '2025/04/09/sidebar-video-img.jpg'),
+(476, 158, 'preview_video_url', 'https://youtu.be/CZkux700lqU?si=o3BzouuR9aTyviUr'),
+(477, 158, 'duration', '80'),
+(478, 158, 'certificate', '1'),
+(479, 159, 'price', '90'),
+(480, 159, 'compare_price', '130'),
+(481, 159, 'max_students', '100'),
+(482, 159, 'language', 'en'),
+(483, 159, 'difficulty_level', 'intermediate'),
+(484, 159, 'preview_video_thumbnail', '2025/04/09/sidebar-video-img.jpg'),
+(485, 159, 'preview_video_url', 'https://youtu.be/CZkux700lqU?si=o3BzouuR9aTyviUr'),
+(486, 159, 'duration', '800'),
+(487, 159, 'certificate', '1'),
+(488, 160, 'price', '310'),
+(489, 160, 'compare_price', '440'),
+(490, 160, 'max_students', '90'),
+(491, 160, 'language', 'en'),
+(492, 160, 'difficulty_level', 'intermediate'),
+(493, 160, 'preview_video_thumbnail', '2025/04/09/sidebar-video-img.jpg'),
+(494, 160, 'preview_video_url', 'https://www.w3schools.com/html/mov_bbb.mp4'),
+(495, 160, 'duration', '400'),
+(496, 160, 'certificate', '1'),
+(497, 162, 'price', '120'),
+(498, 162, 'compare_price', '230'),
+(499, 162, 'max_students', '220'),
+(500, 162, 'language', 'en'),
+(501, 162, 'difficulty_level', 'intermediate'),
+(502, 162, 'preview_video_thumbnail', '2025/04/09/sidebar-video-img.jpg'),
+(503, 162, 'preview_video_url', 'https://youtu.be/CZkux700lqU?si=o3BzouuR9aTyviUr'),
+(504, 162, 'duration', '90'),
+(505, 162, 'certificate', '1'),
+(506, 161, 'max_students', '0'),
+(507, 161, 'language', 'en'),
+(508, 161, 'difficulty_level', 'beginner'),
+(509, 161, 'preview_video_thumbnail', ''),
+(510, 161, 'preview_video_url', ''),
+(511, 161, 'duration', ''),
+(512, 161, 'certificate', '0'),
+(513, 161, 'price', '0'),
+(514, 161, 'compare_price', '0');
 
 -- --------------------------------------------------------
 
@@ -2333,9 +1970,9 @@ INSERT INTO `app_post_metas` (`id`, `post_id`, `meta_key`, `meta_value`) VALUES
 --
 
 CREATE TABLE `app_post_ratings` (
-  `id` bigint UNSIGNED NOT NULL,
-  `post_id` bigint UNSIGNED NOT NULL,
-  `client_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `post_id` bigint(20) UNSIGNED NOT NULL,
+  `client_ip` varchar(50) NOT NULL,
   `star` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -2348,9 +1985,9 @@ CREATE TABLE `app_post_ratings` (
 --
 
 CREATE TABLE `app_post_views` (
-  `id` bigint UNSIGNED NOT NULL,
-  `post_id` bigint UNSIGNED NOT NULL,
-  `views` bigint NOT NULL DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `post_id` bigint(20) UNSIGNED NOT NULL,
+  `views` bigint(20) NOT NULL DEFAULT 0,
   `day` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -2359,14 +1996,7 @@ CREATE TABLE `app_post_views` (
 --
 
 INSERT INTO `app_post_views` (`id`, `post_id`, `views`, `day`) VALUES
-(3, 7, 1, '2025-01-30'),
-(4, 8, 1, '2025-01-30'),
-(5, 9, 1, '2025-01-30'),
-(6, 10, 1, '2025-01-30'),
 (7, 11, 1, '2025-01-30'),
-(8, 12, 1, '2025-01-30'),
-(9, 3, 4, '2025-02-01'),
-(10, 2, 1, '2025-02-01'),
 (11, 13, 3, '2025-02-09'),
 (12, 13, 1, '2025-02-09'),
 (13, 14, 3, '2025-02-14'),
@@ -2375,7 +2005,6 @@ INSERT INTO `app_post_views` (`id`, `post_id`, `views`, `day`) VALUES
 (16, 14, 1, '2025-02-15'),
 (17, 14, 1, '2025-02-16'),
 (18, 17, 1, '2025-02-16'),
-(19, 16, 1, '2025-02-18'),
 (20, 14, 1, '2025-02-19'),
 (21, 17, 1, '2025-02-19'),
 (22, 17, 34, '2025-02-21'),
@@ -2388,98 +2017,154 @@ INSERT INTO `app_post_views` (`id`, `post_id`, `views`, `day`) VALUES
 (29, 17, 6, '2025-02-24'),
 (30, 18, 1, '2025-02-24'),
 (31, 13, 1, '2025-02-24'),
-(32, 20, 1, '2025-02-24'),
 (33, 17, 3, '2025-02-27'),
-(34, 20, 2, '2025-02-27'),
 (35, 13, 2, '2025-02-27'),
 (36, 18, 1, '2025-02-27'),
-(37, 21, 1, '2025-02-27'),
 (38, 14, 1, '2025-02-27'),
 (39, 17, 1, '2025-02-28'),
 (40, 18, 1, '2025-02-28'),
 (41, 13, 1, '2025-02-28'),
-(42, 21, 1, '2025-02-28'),
 (43, 13, 3, '2025-03-01'),
-(44, 20, 3, '2025-03-01'),
 (45, 14, 2, '2025-03-01'),
 (46, 17, 4, '2025-03-01'),
 (47, 18, 2, '2025-03-01'),
-(48, 21, 2, '2025-03-01'),
 (49, 13, 4, '2025-03-02'),
-(50, 21, 2, '2025-03-02'),
 (51, 17, 2, '2025-03-02'),
-(52, 9, 1, '2025-03-02'),
-(53, 2, 3, '2025-03-02'),
-(54, 1, 1, '2025-03-02'),
-(55, 1, 1, '2025-03-02'),
-(56, 1, 1, '2025-03-02'),
-(57, 1, 1, '2025-03-02'),
-(58, 3, 2, '2025-03-02'),
-(59, 20, 1, '2025-03-02'),
 (60, 18, 1, '2025-03-02'),
 (61, 17, 5, '2025-03-03'),
 (62, 17, 1, '2025-03-03'),
-(63, 20, 5, '2025-03-03'),
 (64, 13, 3, '2025-03-03'),
 (65, 18, 8, '2025-03-03'),
-(66, 21, 1, '2025-03-03'),
 (67, 17, 8, '2025-03-04'),
 (68, 13, 2, '2025-03-04'),
-(69, 21, 3, '2025-03-04'),
 (70, 18, 12, '2025-03-04'),
-(71, 20, 2, '2025-03-04'),
 (72, 14, 2, '2025-03-04'),
 (73, 17, 1, '2025-03-05'),
 (74, 22, 2, '2025-03-05'),
 (75, 23, 2, '2025-03-05'),
 (76, 24, 2, '2025-03-05'),
 (77, 13, 1, '2025-03-05'),
-(78, 20, 1, '2025-03-05'),
-(79, 21, 1, '2025-03-05'),
 (80, 17, 2, '2025-03-06'),
 (81, 17, 6, '2025-03-07'),
 (82, 13, 2, '2025-03-07'),
-(83, 20, 1, '2025-03-07'),
 (84, 14, 3, '2025-03-07'),
-(85, 21, 1, '2025-03-07'),
 (86, 18, 20, '2025-03-07'),
-(87, 15, 1, '2025-03-07'),
 (88, 17, 1, '2025-03-08'),
 (89, 14, 1, '2025-03-08'),
 (90, 18, 1, '2025-03-08'),
-(91, 3, 2, '2025-03-08'),
 (92, 26, 2, '2025-03-08'),
 (93, 13, 1, '2025-03-08'),
-(94, 21, 1, '2025-03-08'),
-(95, 9, 1, '2025-03-08'),
 (96, 17, 2, '2025-03-09'),
 (97, 23, 4, '2025-03-18'),
 (98, 24, 1, '2025-03-18'),
 (99, 17, 1, '2025-03-19'),
 (100, 14, 1, '2025-03-21'),
 (101, 122, 3, '2025-03-21'),
-(102, 80, 3, '2025-03-21'),
-(103, 82, 6, '2025-03-21'),
-(104, 79, 1, '2025-03-21'),
 (105, 17, 4, '2025-03-21'),
 (106, 18, 3, '2025-03-21'),
 (107, 122, 6, '2025-03-22'),
-(108, 79, 1, '2025-03-22'),
 (109, 13, 1, '2025-03-22'),
 (110, 14, 1, '2025-03-22'),
 (111, 122, 1, '2025-03-23'),
 (112, 122, 2, '2025-03-24'),
-(113, 9, 1, '2025-03-24'),
-(114, 80, 1, '2025-03-24'),
 (115, 14, 1, '2025-03-29'),
 (116, 22, 1, '2025-04-02'),
 (117, 122, 1, '2025-04-02'),
-(118, 74, 1, '2025-04-02'),
 (119, 17, 1, '2025-04-02'),
 (120, 18, 1, '2025-04-02'),
 (121, 17, 2, '2025-04-03'),
 (122, 122, 1, '2025-04-03'),
-(123, 122, 1, '2025-04-04');
+(123, 122, 1, '2025-04-04'),
+(124, 11, 1, '2025-04-08'),
+(128, 122, 1, '2025-04-08'),
+(129, 133, 1, '2025-04-08'),
+(130, 134, 1, '2025-04-08'),
+(131, 135, 1, '2025-04-08'),
+(132, 140, 1, '2025-04-08'),
+(133, 143, 1, '2025-04-08'),
+(134, 13, 1, '2025-04-08'),
+(135, 144, 1, '2025-04-08'),
+(136, 22, 1, '2025-04-08'),
+(137, 151, 1, '2025-04-08'),
+(138, 24, 1, '2025-04-08'),
+(139, 23, 2, '2025-04-08'),
+(140, 17, 1, '2025-04-08'),
+(141, 13, 2, '2025-04-09'),
+(142, 122, 1, '2025-04-09'),
+(143, 153, 1, '2025-04-09'),
+(144, 150, 1, '2025-04-09'),
+(145, 141, 1, '2025-04-09'),
+(146, 161, 1, '2025-04-09'),
+(147, 151, 1, '2025-04-09'),
+(148, 139, 1, '2025-04-09'),
+(149, 162, 1, '2025-04-09'),
+(150, 160, 1, '2025-04-09'),
+(151, 158, 1, '2025-04-09'),
+(152, 133, 1, '2025-04-09'),
+(153, 142, 1, '2025-04-09'),
+(154, 140, 1, '2025-04-09'),
+(155, 137, 1, '2025-04-09'),
+(156, 134, 1, '2025-04-09'),
+(157, 136, 1, '2025-04-09'),
+(158, 17, 1, '2025-04-09'),
+(159, 18, 1, '2025-04-09'),
+(160, 151, 1, '2025-04-11'),
+(161, 122, 3, '2025-04-11'),
+(162, 133, 1, '2025-04-11'),
+(163, 162, 2, '2025-04-11'),
+(164, 17, 1, '2025-04-11'),
+(165, 18, 1, '2025-04-11'),
+(166, 22, 1, '2025-04-11'),
+(167, 150, 1, '2025-04-11'),
+(168, 13, 1, '2025-04-11'),
+(169, 137, 2, '2025-04-12'),
+(170, 152, 1, '2025-04-12'),
+(171, 150, 2, '2025-04-12'),
+(172, 136, 1, '2025-04-12'),
+(173, 133, 1, '2025-04-12'),
+(174, 22, 1, '2025-04-12'),
+(175, 133, 1, '2025-04-13'),
+(176, 22, 1, '2025-04-13'),
+(177, 136, 1, '2025-04-13'),
+(178, 135, 1, '2025-04-17'),
+(179, 153, 1, '2025-04-17'),
+(180, 11, 2, '2025-04-17'),
+(181, 17, 1, '2025-04-17'),
+(182, 122, 13, '2025-04-17'),
+(183, 133, 1, '2025-04-17'),
+(184, 151, 1, '2025-04-17'),
+(185, 22, 1, '2025-04-17'),
+(186, 13, 2, '2025-04-17'),
+(187, 162, 4, '2025-04-17'),
+(188, 161, 2, '2025-04-17'),
+(189, 143, 1, '2025-04-17'),
+(190, 157, 1, '2025-04-17'),
+(191, 158, 1, '2025-04-17'),
+(192, 160, 1, '2025-04-17'),
+(193, 159, 1, '2025-04-17'),
+(194, 147, 1, '2025-04-18'),
+(195, 155, 1, '2025-04-18'),
+(196, 156, 1, '2025-04-18'),
+(197, 122, 1, '2025-04-18'),
+(198, 122, 1, '2025-04-18'),
+(199, 151, 1, '2025-04-19'),
+(200, 11, 4, '2025-04-20'),
+(201, 24, 1, '2025-04-20'),
+(202, 122, 1, '2025-04-20'),
+(203, 11, 3, '2025-04-21'),
+(204, 151, 1, '2025-04-21'),
+(205, 122, 1, '2025-04-21'),
+(206, 13, 1, '2025-04-21'),
+(207, 22, 1, '2025-04-21'),
+(208, 162, 1, '2025-04-21'),
+(209, 134, 1, '2025-04-21'),
+(210, 150, 1, '2025-04-21'),
+(211, 142, 1, '2025-04-21'),
+(212, 24, 1, '2025-04-21'),
+(213, 135, 1, '2025-04-21'),
+(214, 11, 7, '2025-04-22'),
+(215, 122, 2, '2025-04-22'),
+(216, 135, 1, '2025-04-22');
 
 -- --------------------------------------------------------
 
@@ -2488,29 +2173,21 @@ INSERT INTO `app_post_views` (`id`, `post_id`, `views`, `day`) VALUES
 --
 
 CREATE TABLE `app_product_variants` (
-  `id` bigint UNSIGNED NOT NULL,
-  `sku_code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `barcode` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `title` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `thumbnail` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `names` json DEFAULT NULL,
-  `images` json DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `sku_code` varchar(100) DEFAULT NULL,
+  `barcode` varchar(100) DEFAULT NULL,
+  `title` varchar(150) NOT NULL,
+  `thumbnail` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `names` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`names`)),
+  `images` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`images`)),
   `price` decimal(15,2) DEFAULT NULL,
   `compare_price` decimal(15,2) DEFAULT NULL,
-  `type` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'default',
-  `post_id` bigint UNSIGNED NOT NULL,
+  `type` varchar(150) NOT NULL DEFAULT 'default',
+  `post_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `app_product_variants`
---
-
-INSERT INTO `app_product_variants` (`id`, `sku_code`, `barcode`, `title`, `thumbnail`, `description`, `names`, `images`, `price`, `compare_price`, `type`, `post_id`, `created_at`, `updated_at`) VALUES
-(1, 'qwew32', 'dfdf', 'Default', '2025/02/14/freepicdownloadercom-seafoo.jpg', 'This Is product desc', '[\"Default\"]', NULL, '500.00', '300.00', 'default', 16, '2025-02-14 03:50:15', '2025-02-14 03:50:15'),
-(2, NULL, NULL, 'Default', NULL, '', '[\"Default\"]', NULL, NULL, NULL, 'default', 124, '2025-03-29 13:23:28', '2025-03-29 13:23:28');
 
 -- --------------------------------------------------------
 
@@ -2519,10 +2196,10 @@ INSERT INTO `app_product_variants` (`id`, `sku_code`, `barcode`, `title`, `thumb
 --
 
 CREATE TABLE `app_product_variants_attribute_values` (
-  `id` bigint UNSIGNED NOT NULL,
-  `product_variant_id` bigint UNSIGNED NOT NULL,
-  `attribute_id` bigint UNSIGNED NOT NULL,
-  `attribute_value_id` bigint UNSIGNED NOT NULL
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_variant_id` bigint(20) UNSIGNED NOT NULL,
+  `attribute_id` bigint(20) UNSIGNED NOT NULL,
+  `attribute_value_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2532,20 +2209,20 @@ CREATE TABLE `app_product_variants_attribute_values` (
 --
 
 CREATE TABLE `app_resources` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `thumbnail` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `json_metas` json DEFAULT NULL,
-  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'publish',
-  `post_id` bigint UNSIGNED DEFAULT NULL,
-  `parent_id` bigint UNSIGNED DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `thumbnail` varchar(150) DEFAULT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  `json_metas` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`json_metas`)),
+  `status` varchar(50) NOT NULL DEFAULT 'publish',
+  `post_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `parent_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `display_order` int NOT NULL DEFAULT '1',
-  `slug` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `uuid` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `display_order` int(11) NOT NULL DEFAULT 1,
+  `slug` varchar(150) DEFAULT NULL,
+  `uuid` char(36) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -2562,10 +2239,10 @@ INSERT INTO `app_resources` (`id`, `name`, `type`, `thumbnail`, `description`, `
 --
 
 CREATE TABLE `app_resource_metas` (
-  `id` bigint UNSIGNED NOT NULL,
-  `resource_id` bigint UNSIGNED NOT NULL,
-  `meta_key` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `resource_id` bigint(20) UNSIGNED NOT NULL,
+  `meta_key` varchar(150) NOT NULL,
+  `meta_value` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2575,12 +2252,12 @@ CREATE TABLE `app_resource_metas` (
 --
 
 CREATE TABLE `app_roles` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `guard_name` varchar(100) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `description` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -2599,8 +2276,8 @@ INSERT INTO `app_roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`,
 --
 
 CREATE TABLE `app_role_has_permissions` (
-  `permission_id` bigint UNSIGNED NOT NULL,
-  `role_id` bigint UNSIGNED NOT NULL
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `role_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -2624,14 +2301,14 @@ INSERT INTO `app_role_has_permissions` (`permission_id`, `role_id`) VALUES
 --
 
 CREATE TABLE `app_search` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `keyword` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `post_id` bigint UNSIGNED NOT NULL,
-  `post_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(190) NOT NULL,
+  `description` varchar(250) DEFAULT NULL,
+  `keyword` varchar(190) DEFAULT NULL,
+  `slug` varchar(150) NOT NULL,
+  `post_id` bigint(20) UNSIGNED NOT NULL,
+  `post_type` varchar(50) NOT NULL,
+  `status` varchar(50) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -2643,11 +2320,11 @@ CREATE TABLE `app_search` (
 --
 
 CREATE TABLE `app_seo_metas` (
-  `id` bigint UNSIGNED NOT NULL,
-  `object_type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `object_id` bigint UNSIGNED NOT NULL,
-  `meta_title` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_description` varchar(320) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `object_type` varchar(10) NOT NULL,
+  `object_id` bigint(20) UNSIGNED NOT NULL,
+  `meta_title` varchar(150) DEFAULT NULL,
+  `meta_description` varchar(320) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -2655,7 +2332,8 @@ CREATE TABLE `app_seo_metas` (
 --
 
 INSERT INTO `app_seo_metas` (`id`, `object_type`, `object_id`, `meta_title`, `meta_description`) VALUES
-(1, 'posts', 12, 'sdsad', NULL);
+(1, 'posts', 12, 'sdsad', NULL),
+(2, 'posts', 148, '12 Things Successful Mompreneurs', 'Description Lorem ipsum dolor sit amet consectetur. Sed quis mauris dictumst adipiscing. A feugiat pellentesque mi diam ullamcorper condimentum risus quam aliquet. Sem urna cursus at cursus vestibulum vel varius tellus nunc. Nunc ipsum ac non cras parturient tristique adipiscing tortor. Sit...');
 
 -- --------------------------------------------------------
 
@@ -2664,15 +2342,15 @@ INSERT INTO `app_seo_metas` (`id`, `object_type`, `object_id`, `meta_title`, `me
 --
 
 CREATE TABLE `app_shipping_address` (
-  `id` bigint UNSIGNED NOT NULL,
-  `full_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `province` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `country_code` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address_id` bigint DEFAULT NULL,
-  `order_id` bigint NOT NULL,
-  `shop_id` bigint NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `full_name` varchar(250) NOT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `province` varchar(150) DEFAULT NULL,
+  `country_code` varchar(15) DEFAULT NULL,
+  `address_id` bigint(20) DEFAULT NULL,
+  `order_id` bigint(20) NOT NULL,
+  `shop_id` bigint(20) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -2684,11 +2362,11 @@ CREATE TABLE `app_shipping_address` (
 --
 
 CREATE TABLE `app_shipping_methods` (
-  `id` bigint UNSIGNED NOT NULL,
-  `province_id` bigint NOT NULL,
-  `country_code` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint NOT NULL DEFAULT '1',
-  `shop_id` bigint NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `province_id` bigint(20) NOT NULL,
+  `country_code` varchar(5) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1,
+  `shop_id` bigint(20) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -2700,15 +2378,15 @@ CREATE TABLE `app_shipping_methods` (
 --
 
 CREATE TABLE `app_single_taxonomies` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `thumbnail` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `slug` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `post_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `post_id` bigint UNSIGNED NOT NULL,
-  `taxonomy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `total_post` bigint NOT NULL DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `thumbnail` varchar(150) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `slug` varchar(100) NOT NULL,
+  `post_type` varchar(50) NOT NULL,
+  `post_id` bigint(20) UNSIGNED NOT NULL,
+  `taxonomy` varchar(50) NOT NULL,
+  `total_post` bigint(20) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -2720,10 +2398,10 @@ CREATE TABLE `app_single_taxonomies` (
 --
 
 CREATE TABLE `app_single_taxonomy_metas` (
-  `id` bigint UNSIGNED NOT NULL,
-  `taxonomy_id` bigint UNSIGNED NOT NULL,
-  `meta_key` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `taxonomy_id` bigint(20) UNSIGNED NOT NULL,
+  `meta_key` varchar(150) NOT NULL,
+  `meta_value` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2733,12 +2411,12 @@ CREATE TABLE `app_single_taxonomy_metas` (
 --
 
 CREATE TABLE `app_social_tokens` (
-  `id` bigint UNSIGNED NOT NULL,
-  `user_id` bigint UNSIGNED NOT NULL,
-  `social_provider` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `social_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `social_token` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `social_refresh_token` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `social_provider` varchar(10) NOT NULL,
+  `social_id` varchar(100) NOT NULL,
+  `social_token` varchar(500) NOT NULL,
+  `social_refresh_token` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2748,10 +2426,10 @@ CREATE TABLE `app_social_tokens` (
 --
 
 CREATE TABLE `app_table_groups` (
-  `id` bigint UNSIGNED NOT NULL,
-  `table` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `total_rows` bigint NOT NULL DEFAULT '0',
-  `migrations` json NOT NULL
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `table` varchar(50) NOT NULL,
+  `total_rows` bigint(20) NOT NULL DEFAULT 0,
+  `migrations` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`migrations`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2761,12 +2439,12 @@ CREATE TABLE `app_table_groups` (
 --
 
 CREATE TABLE `app_table_group_datas` (
-  `id` bigint UNSIGNED NOT NULL,
-  `table_group_id` bigint UNSIGNED NOT NULL,
-  `table_group_table_id` bigint UNSIGNED NOT NULL,
-  `table` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `real_table` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `table_key` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `table_group_id` bigint(20) UNSIGNED NOT NULL,
+  `table_group_table_id` bigint(20) UNSIGNED NOT NULL,
+  `table` varchar(50) NOT NULL,
+  `real_table` varchar(50) NOT NULL,
+  `table_key` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2776,11 +2454,11 @@ CREATE TABLE `app_table_group_datas` (
 --
 
 CREATE TABLE `app_table_group_tables` (
-  `id` bigint UNSIGNED NOT NULL,
-  `table` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `real_table` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `table_group_id` bigint UNSIGNED NOT NULL,
-  `total_rows` bigint NOT NULL DEFAULT '0'
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `table` varchar(50) NOT NULL,
+  `real_table` varchar(50) NOT NULL,
+  `table_group_id` bigint(20) UNSIGNED NOT NULL,
+  `total_rows` bigint(20) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2790,19 +2468,19 @@ CREATE TABLE `app_table_group_tables` (
 --
 
 CREATE TABLE `app_taxonomies` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `thumbnail` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `slug` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `post_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `taxonomy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `parent_id` bigint DEFAULT NULL,
-  `total_post` bigint NOT NULL DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `thumbnail` varchar(150) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `slug` varchar(100) NOT NULL,
+  `post_type` varchar(50) NOT NULL,
+  `taxonomy` varchar(50) NOT NULL,
+  `parent_id` bigint(20) DEFAULT NULL,
+  `total_post` bigint(20) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `level` int NOT NULL DEFAULT '0',
-  `uuid` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `level` int(11) NOT NULL DEFAULT 0,
+  `uuid` char(36) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -2810,9 +2488,39 @@ CREATE TABLE `app_taxonomies` (
 --
 
 INSERT INTO `app_taxonomies` (`id`, `name`, `thumbnail`, `description`, `slug`, `post_type`, `taxonomy`, `parent_id`, `total_post`, `created_at`, `updated_at`, `level`, `uuid`) VALUES
-(2, 'new cat', NULL, NULL, 'new-cat', 'posts', 'categories', NULL, 1, '2025-01-17 04:24:19', '2025-01-19 07:44:51', 0, 'fe958ba3-b0ea-4a29-add3-643125aeb23e'),
-(5, 'Mango', NULL, NULL, 'mango', 'events', 'categories', NULL, 3, '2025-03-05 10:03:08', '2025-04-02 13:19:13', 0, '562fdb4e-85f8-48fa-853c-8d8498b5322f'),
-(6, 'Cat Course 1', NULL, NULL, 'cat-course-1', 'courses', 'categories', NULL, 2, '2025-03-20 11:49:07', '2025-03-21 09:36:20', 0, '3988138d-8765-4a3e-acbe-b9527b14d192');
+(2, 'new cat', NULL, NULL, 'new-cat', 'posts', 'categories', NULL, 0, '2025-01-17 04:24:19', '2025-04-08 12:59:00', 0, 'fe958ba3-b0ea-4a29-add3-643125aeb23e'),
+(5, 'Mango', NULL, NULL, 'mango', 'events', 'categories', NULL, 1, '2025-03-05 10:03:08', '2025-04-08 16:53:08', 0, '562fdb4e-85f8-48fa-853c-8d8498b5322f'),
+(7, 'Education', NULL, NULL, 'education', 'posts', 'tags', NULL, 6, '2025-04-08 13:08:32', '2025-04-08 13:32:35', 0, 'db3a65ba-5331-4079-84ed-2328a37d9aa9'),
+(8, 'Learning', NULL, NULL, 'learning', 'posts', 'tags', NULL, 3, '2025-04-08 13:08:39', '2025-04-08 13:31:36', 0, '1ed4195f-addb-4c37-bc59-1c9f0df6ddbc'),
+(9, 'College', NULL, NULL, 'college', 'posts', 'tags', NULL, 7, '2025-04-08 13:08:54', '2025-04-08 13:30:39', 0, 'b9e0c9e5-1619-42a1-ab4a-1b4bae6328e3'),
+(10, 'Education', NULL, NULL, 'education-1', 'posts', 'categories', NULL, 5, '2025-04-08 13:09:15', '2025-04-08 13:32:35', 0, '6291f7b2-111f-4f05-a6b6-a29a1752b24d'),
+(11, 'Lms', NULL, NULL, 'lms', 'posts', 'tags', NULL, 5, '2025-04-08 13:25:26', '2025-04-08 13:32:35', 0, '7691ffc3-da5d-4954-871e-60e4b3c5c59d'),
+(12, 'College', NULL, NULL, 'college-1', 'posts', 'categories', NULL, 5, '2025-04-08 13:25:36', '2025-04-08 13:32:35', 0, '7b841f43-392a-401d-b397-61c8757ea704'),
+(13, 'Music', NULL, NULL, 'music', 'events', 'categories', NULL, 3, '2025-04-08 13:36:56', '2025-04-08 16:49:27', 0, '1d42cfa0-73d4-45c6-8b9c-2cb83fd0c616'),
+(14, 'Concerts', NULL, NULL, 'concerts', 'events', 'tags', NULL, 4, '2025-04-08 13:39:35', '2025-04-08 16:53:08', 0, 'f1132dca-346a-4623-8ebf-4e4e94c6d0e8'),
+(15, 'Festivals', NULL, NULL, 'festivals', 'events', 'tags', NULL, 3, '2025-04-08 13:39:41', '2025-04-08 16:51:26', 0, '3cf91a7e-da86-4668-9561-3a019e274af7'),
+(16, 'Live Bands', NULL, NULL, 'live-bands', 'events', 'tags', NULL, 4, '2025-04-08 13:39:50', '2025-04-08 16:53:08', 0, 'f99b4134-2d0c-4ca2-8557-f165578d4f1e'),
+(17, 'Conferences', NULL, NULL, 'conferences', 'events', 'categories', NULL, 3, '2025-04-08 15:17:33', '2025-04-08 16:51:26', 0, 'cfeac787-6062-4ba9-a895-52fd6ab2b8cc'),
+(18, 'Technology Conferences', NULL, NULL, 'technology-conferences', 'events', 'tags', NULL, 2, '2025-04-08 15:17:46', '2025-04-08 16:43:51', 0, '3438755e-fa5c-4d86-977e-35bbc18a4e67'),
+(19, 'Business Seminars', NULL, NULL, 'business-seminars', 'events', 'tags', NULL, 1, '2025-04-08 15:17:55', '2025-04-08 15:19:18', 0, 'ffa56d89-b132-4622-a39c-d2628e8f6eb2'),
+(20, 'Seasonal Themes', NULL, NULL, 'seasonal-themes', 'events', 'categories', NULL, 1, '2025-04-08 16:46:33', '2025-04-08 16:47:07', 0, 'beebc46b-f82a-4e56-bd64-305e8afb14d5'),
+(21, 'Summer Vibes', NULL, NULL, 'summer-vibes', 'events', 'tags', NULL, 2, '2025-04-08 16:46:43', '2025-04-08 16:51:26', 0, '10afa2dc-f189-4827-9b4d-b89957bf4ba9'),
+(22, 'Holiday Cheer', NULL, NULL, 'holiday-cheer', 'events', 'tags', NULL, 2, '2025-04-08 16:46:53', '2025-04-08 16:49:27', 0, 'f022fa61-a58d-401a-8078-70086f75b341'),
+(23, 'Design', NULL, NULL, 'design', 'courses', 'categories', NULL, 2, '2025-04-09 15:37:12', '2025-04-09 18:51:53', 0, 'fe19f9bd-43a1-4688-9a08-d4af23646c85'),
+(24, 'Web Design', NULL, NULL, 'web-design', 'courses', 'tags', NULL, 3, '2025-04-09 15:37:20', '2025-04-09 18:51:53', 0, 'b6a709c4-b004-44aa-b894-0fcbead49663'),
+(25, 'Web Developed', NULL, NULL, 'web-developed', 'courses', 'tags', NULL, 2, '2025-04-09 15:37:40', '2025-04-09 18:24:55', 0, 'b31b0a32-ed18-47a8-ac35-65882da0cd64'),
+(26, 'Business', NULL, NULL, 'business', 'courses', 'categories', NULL, 2, '2025-04-09 17:23:57', '2025-04-09 18:35:59', 0, '38282ddb-b85d-4be8-afff-f6855d40e2bc'),
+(27, 'Buisness Web', NULL, NULL, 'buisness-web', 'courses', 'tags', NULL, 2, '2025-04-09 17:24:22', '2025-04-09 18:35:59', 0, '4ba5925e-47ad-41fe-9d60-fc799364a119'),
+(28, 'Finance', NULL, NULL, 'finance', 'courses', 'categories', NULL, 2, '2025-04-09 18:08:13', '2025-04-09 19:01:33', 0, 'd97eac3e-ba67-4cd7-aa2b-f9aac3916bb6'),
+(29, 'Finance', NULL, NULL, 'finance-1', 'courses', 'tags', NULL, 4, '2025-04-09 18:08:26', '2025-04-09 19:01:33', 0, 'fdc91432-3806-47ce-9994-6ed3f6a4b184'),
+(30, 'Marketing', NULL, NULL, 'marketing', 'courses', 'categories', NULL, 2, '2025-04-09 18:23:53', '2025-04-09 19:00:25', 0, '7bc07bd9-e534-49a2-a213-c18391ce8b96'),
+(31, 'Marketing', NULL, NULL, 'marketing-1', 'courses', 'tags', NULL, 2, '2025-04-09 18:24:00', '2025-04-09 19:00:25', 0, '7f089879-2aaf-4ebd-975c-ff4a599fa25c'),
+(32, 'UI/UX', NULL, NULL, 'uiux', 'courses', 'categories', NULL, 1, '2025-04-09 18:47:45', '2025-04-09 18:48:40', 0, 'ca8645a4-58f8-4219-88c8-d35a2e928363'),
+(33, 'UI/UX', NULL, NULL, 'uiux-1', 'courses', 'tags', NULL, 2, '2025-04-09 18:47:49', '2025-04-09 18:51:53', 0, 'bf301483-296b-4d70-a1ee-ade9fc7dc538'),
+(34, 'Development', NULL, NULL, 'development', 'courses', 'categories', NULL, 0, '2025-04-21 10:58:22', '2025-04-21 10:58:22', 0, '7c667034-d89b-481d-b919-144a1093b0e1'),
+(35, 'Email Marketing', NULL, NULL, 'email-marketing', 'courses', 'categories', NULL, 0, '2025-04-21 10:58:34', '2025-04-21 10:58:34', 0, '5dfe9ac5-3d35-4f17-952e-b780c81a6b9e'),
+(36, 'Chemistry', NULL, NULL, 'chemistry', 'courses', 'categories', NULL, 0, '2025-04-21 10:58:41', '2025-04-21 10:58:41', 0, 'b2fd50c3-4155-4a2e-85b2-eb79f9baa62e'),
+(37, 'IT / Technology', NULL, NULL, 'it-technology', 'courses', 'categories', NULL, 0, '2025-04-21 10:58:50', '2025-04-21 10:58:50', 0, 'd47c4c8c-c356-4bee-8f61-007c8445c894');
 
 -- --------------------------------------------------------
 
@@ -2821,10 +2529,10 @@ INSERT INTO `app_taxonomies` (`id`, `name`, `thumbnail`, `description`, `slug`, 
 --
 
 CREATE TABLE `app_taxonomy_metas` (
-  `id` bigint UNSIGNED NOT NULL,
-  `taxonomy_id` bigint UNSIGNED NOT NULL,
-  `meta_key` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `taxonomy_id` bigint(20) UNSIGNED NOT NULL,
+  `meta_key` varchar(150) NOT NULL,
+  `meta_value` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2834,13 +2542,13 @@ CREATE TABLE `app_taxonomy_metas` (
 --
 
 CREATE TABLE `app_telescope_entries` (
-  `sequence` bigint UNSIGNED NOT NULL,
-  `uuid` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `family_hash` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `should_display_on_index` tinyint(1) NOT NULL DEFAULT '1',
-  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sequence` bigint(20) UNSIGNED NOT NULL,
+  `uuid` char(36) NOT NULL,
+  `batch_id` char(36) NOT NULL,
+  `family_hash` varchar(150) DEFAULT NULL,
+  `should_display_on_index` tinyint(1) NOT NULL DEFAULT 1,
+  `type` varchar(20) NOT NULL,
+  `content` longtext NOT NULL,
   `created_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -2851,8 +2559,8 @@ CREATE TABLE `app_telescope_entries` (
 --
 
 CREATE TABLE `app_telescope_entries_tags` (
-  `entry_uuid` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tag` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+  `entry_uuid` char(36) NOT NULL,
+  `tag` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2862,7 +2570,7 @@ CREATE TABLE `app_telescope_entries_tags` (
 --
 
 CREATE TABLE `app_telescope_monitoring` (
-  `tag` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+  `tag` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2872,9 +2580,9 @@ CREATE TABLE `app_telescope_monitoring` (
 --
 
 CREATE TABLE `app_term_taxonomies` (
-  `term_id` bigint NOT NULL,
-  `taxonomy_id` bigint NOT NULL,
-  `term_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+  `term_id` bigint(20) NOT NULL,
+  `taxonomy_id` bigint(20) NOT NULL,
+  `term_type` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -2887,7 +2595,88 @@ INSERT INTO `app_term_taxonomies` (`term_id`, `taxonomy_id`, `term_type`) VALUES
 (21, 5, 'events'),
 (80, 6, 'courses'),
 (82, 6, 'courses'),
-(132, 5, 'events');
+(132, 5, 'events'),
+(134, 7, 'posts'),
+(134, 8, 'posts'),
+(134, 9, 'posts'),
+(134, 10, 'posts'),
+(135, 7, 'posts'),
+(135, 8, 'posts'),
+(135, 9, 'posts'),
+(135, 10, 'posts'),
+(136, 7, 'posts'),
+(136, 9, 'posts'),
+(136, 11, 'posts'),
+(136, 12, 'posts'),
+(137, 9, 'posts'),
+(137, 10, 'posts'),
+(137, 11, 'posts'),
+(138, 7, 'posts'),
+(138, 9, 'posts'),
+(138, 10, 'posts'),
+(138, 11, 'posts'),
+(139, 9, 'posts'),
+(139, 12, 'posts'),
+(140, 7, 'posts'),
+(140, 9, 'posts'),
+(140, 12, 'posts'),
+(141, 8, 'posts'),
+(141, 11, 'posts'),
+(141, 12, 'posts'),
+(142, 7, 'posts'),
+(142, 10, 'posts'),
+(142, 11, 'posts'),
+(142, 12, 'posts'),
+(143, 13, 'events'),
+(143, 14, 'events'),
+(143, 15, 'events'),
+(143, 16, 'events'),
+(144, 13, 'events'),
+(144, 14, 'events'),
+(144, 15, 'events'),
+(144, 16, 'events'),
+(145, 17, 'events'),
+(145, 18, 'events'),
+(145, 19, 'events'),
+(146, 14, 'events'),
+(146, 17, 'events'),
+(146, 18, 'events'),
+(147, 20, 'events'),
+(147, 21, 'events'),
+(147, 22, 'events'),
+(148, 13, 'events'),
+(148, 16, 'events'),
+(148, 22, 'events'),
+(149, 15, 'events'),
+(149, 17, 'events'),
+(149, 21, 'events'),
+(150, 5, 'events'),
+(150, 14, 'events'),
+(150, 16, 'events'),
+(153, 23, 'courses'),
+(153, 24, 'courses'),
+(155, 24, 'courses'),
+(155, 26, 'courses'),
+(155, 27, 'courses'),
+(156, 25, 'courses'),
+(156, 28, 'courses'),
+(156, 29, 'courses'),
+(157, 25, 'courses'),
+(157, 30, 'courses'),
+(157, 31, 'courses'),
+(158, 26, 'courses'),
+(158, 27, 'courses'),
+(158, 29, 'courses'),
+(159, 32, 'courses'),
+(159, 33, 'courses'),
+(160, 23, 'courses'),
+(160, 24, 'courses'),
+(160, 33, 'courses'),
+(161, 28, 'courses'),
+(161, 29, 'courses'),
+(162, 29, 'courses'),
+(162, 30, 'courses'),
+(162, 31, 'courses');
 
 -- --------------------------------------------------------
 
@@ -2896,8 +2685,8 @@ INSERT INTO `app_term_taxonomies` (`term_id`, `taxonomy_id`, `term_type`) VALUES
 --
 
 CREATE TABLE `app_test_eomm_plugin` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(150) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -2909,10 +2698,10 @@ CREATE TABLE `app_test_eomm_plugin` (
 --
 
 CREATE TABLE `app_theme_configs` (
-  `id` bigint UNSIGNED NOT NULL,
-  `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `theme` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `code` varchar(50) NOT NULL,
+  `theme` varchar(150) NOT NULL,
+  `value` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -2923,10 +2712,18 @@ CREATE TABLE `app_theme_configs` (
 
 INSERT INTO `app_theme_configs` (`id`, `code`, `theme`, `value`, `created_at`, `updated_at`) VALUES
 (1, 'sidebar_sidebar', 'gamxo', '{\"uYdEqfrntd\":{\"title\":null,\"widget\":\"categories\",\"key\":\"uYdEqfrntd\"}}', '2025-01-28 10:57:41', '2025-01-28 10:57:41'),
-(2, 'footer_bg_image', 'edufax', '2025/03/02/footer-bg.png', '2025-02-01 10:33:45', '2025-03-02 07:19:36'),
-(3, 'sidebar_sidebar', 'edufax', '{\"IAyBP33RoN\":{\"title\":\"Search Here\",\"widget\":\"search_area\",\"key\":\"IAyBP33RoN\"},\"fuWc2TaLeM\":{\"title\":\"title of menu\",\"custom_menu\":\"11\",\"widget\":\"categories_list\",\"key\":\"fuWc2TaLeM\"}}', '2025-02-01 10:47:56', '2025-02-01 12:36:33'),
-(4, 'nav_location', 'edufax', '{\"primary\":11}', '2025-02-01 12:47:07', '2025-02-21 12:39:00'),
-(5, 'thumbnail_sizes', 'edufax', '{\"pages\":{\"width\":\"241\",\"height\":\"241\"},\"posts\":{\"width\":\"241\",\"height\":\"241\"},\"theme\":{\"width\":\"241\",\"height\":\"241\"},\"plugin\":{\"width\":\"241\",\"height\":\"241\"},\"products\":{\"width\":\"241\",\"height\":\"241\"},\"events\":{\"width\":\"241\",\"height\":\"241\"}}', '2025-03-07 09:51:39', '2025-03-07 09:51:39');
+(2, 'footer_bg_image', 'edufax', '2025/04/08/footer-bg.png', '2025-02-01 10:33:45', '2025-04-08 11:58:33'),
+(3, 'sidebar_sidebar', 'edufax', '{\"IAyBP33RoN\":{\"title\":\"Search Here\",\"widget\":\"search_area\",\"key\":\"IAyBP33RoN\"},\"fuWc2TaLeM\":{\"title\":\"Categories\",\"custom_menu\":\"11\",\"widget\":\"categories_list\",\"key\":\"fuWc2TaLeM\"},\"JWqfyRRH5w\":{\"title\":\"Popular Posts\",\"post_type\":\"posts\",\"sort_by\":\"views\",\"widget\":\"popular_posts\",\"key\":\"JWqfyRRH5w\"}}', '2025-02-01 10:47:56', '2025-04-21 11:44:42'),
+(4, 'nav_location', 'edufax', '{\"primary\":11,\"footer_2\":13,\"footer_bottom\":14}', '2025-02-01 12:47:07', '2025-04-21 11:42:40'),
+(5, 'thumbnail_sizes', 'edufax', '{\"pages\":{\"width\":\"241\",\"height\":\"241\"},\"posts\":{\"width\":\"241\",\"height\":\"241\"},\"theme\":{\"width\":\"241\",\"height\":\"241\"},\"plugin\":{\"width\":\"241\",\"height\":\"241\"},\"products\":{\"width\":\"241\",\"height\":\"241\"},\"events\":{\"width\":\"241\",\"height\":\"241\"}}', '2025-03-07 09:51:39', '2025-03-07 09:51:39'),
+(6, 'breadcrumb_bg_image', 'edufax', '2025/04/08/breadcrumb-bg.jpg', '2025-04-08 11:58:33', '2025-04-08 11:58:33'),
+(7, 'sidebar_footer_1', 'edufax', '{\"lMxRisfdhg\":{\"logo\":\"2025\\/04\\/08\\/footer-logo.png\",\"logo_alt\":\"Logo\",\"description\":\"You made it so simple. My new site is so much faster and easier to work with than my old site. I just choose the page, make the change.\",\"social_links\":[{\"icon\":\"fab fa-facebook-f\",\"url\":\"#\"},{\"icon\":\"fab fa-linkedin-in\",\"url\":\"#\"},{\"icon\":\"fab fa-twitter\",\"url\":\"#\"},{\"icon\":\"fab fa-pinterest-p\",\"url\":\"#\"}],\"widget\":\"footer_1\",\"key\":\"lMxRisfdhg\"}}', '2025-04-08 17:26:22', '2025-04-08 17:27:30'),
+(8, 'sidebar_footer_3', 'edufax', '{\"BprSfRLv27\":{\"title\":\"Get in touch\",\"address\":\"4543 Washington. Manchester,mukly 545322 USA\",\"phones\":[{\"number\":\"+088 (246) 642-27\"},{\"number\":\"+088 (246) 342-28\"}],\"email\":\"mail@example.com\",\"widget\":\"footer_3\",\"key\":\"BprSfRLv27\"}}', '2025-04-08 17:28:26', '2025-04-08 17:28:59'),
+(9, 'sidebar_footer_4', 'edufax', '{\"gY1mb1R9oq\":{\"title\":\"Subscribe\",\"description\":\"You made it so simple. My new site is so much faster and easier to work with than my old site. I just choose the page, make the change.\",\"placeholder\":\"Subscribe\",\"button_text\":\"Subscribe\",\"widget\":\"footer_4\",\"key\":\"gY1mb1R9oq\"}}', '2025-04-08 17:30:15', '2025-04-08 17:30:15'),
+(10, 'copy_right_text', 'edufax', 'EduFax © 2025, All Rights Reserved', '2025-04-20 19:16:55', '2025-04-20 19:16:55'),
+(11, 'enable_top_bar', 'edufax', '1', '2025-04-20 19:16:55', '2025-04-20 19:16:55'),
+(12, 'top_bar_text', 'edufax', 'Enroll now and get 40% off any course. Courses from $5.99.', '2025-04-20 19:16:55', '2025-04-20 19:16:55'),
+(13, 'enable_logout_button', 'edufax', '1', '2025-04-20 19:16:55', '2025-04-20 19:16:55');
 
 -- --------------------------------------------------------
 
@@ -2935,22 +2732,22 @@ INSERT INTO `app_theme_configs` (`id`, `code`, `theme`, `value`, `created_at`, `
 --
 
 CREATE TABLE `app_users` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `email` varchar(150) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(150) DEFAULT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `avatar` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `is_admin` tinyint(1) NOT NULL DEFAULT '0',
-  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active' COMMENT 'unconfimred, banned, active',
-  `language` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'en',
-  `verification_token` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `json_metas` json DEFAULT NULL,
-  `is_fake` tinyint(1) NOT NULL DEFAULT '0'
+  `avatar` varchar(150) DEFAULT NULL,
+  `is_admin` tinyint(1) NOT NULL DEFAULT 0,
+  `status` varchar(50) NOT NULL DEFAULT 'active' COMMENT 'unconfimred, banned, active',
+  `language` varchar(5) NOT NULL DEFAULT 'en',
+  `verification_token` varchar(150) DEFAULT NULL,
+  `data` text DEFAULT NULL,
+  `json_metas` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`json_metas`)),
+  `is_fake` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -2958,14 +2755,8 @@ CREATE TABLE `app_users` (
 --
 
 INSERT INTO `app_users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `avatar`, `is_admin`, `status`, `language`, `verification_token`, `data`, `json_metas`, `is_fake`) VALUES
-(1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$Ii4Uty/j2kbrmb5skyVFMOpMx1qBqP/LWrScoOHoV9xQUM2WdbsdC', '49CZm5hQ75Zv3GuwXFGtVXCw10xxJHHiMJyBhF7b0rjmDvuJmeJrrXPZKHAy', '2024-11-24 19:59:45', '2025-03-21 05:56:36', '2025/03/05/testimonial-img-1.jpg', 1, 'active', 'en', NULL, NULL, '{\"country\": \"AQ\", \"birthday\": \"2025-02-11\"}', 0),
-(2, 'hellow world', 'hello@gmail.com', NULL, '$2y$10$yTPeBnir5d..4skcuatmPek/1oppWd5ZGTgl4UAXPx0.nYxalNogO', 'Q69nAW0le3XYyMpZrudEUOQiqIJ7nUjwAUObOpjg4XwXHGDjFV7NsfqmMNGg', '2025-02-01 09:43:44', '2025-02-01 09:43:44', NULL, 0, 'active', 'en', NULL, NULL, NULL, 0),
-(3, 'fsfd daac', 'user@gmail.com', NULL, '$2y$10$8AwhsfcdeTiYW8Bxg4E38./E41Of0r1xpCWybLMMV4GkS4CKUTqK6', 's854p71SFIGcSzGGFUMAPYhz4AqsSykFl0dCTxlbnDFN2nxKkAXnhrViOf5Q', '2025-02-21 02:39:24', '2025-02-21 02:39:24', NULL, 0, 'active', 'en', NULL, NULL, NULL, 0),
-(5, 'mojahid islam', 'raofahmedmojahid@gmail.com', NULL, '$2y$10$TprMQpHITHKiS0S0ophNGeUOwl1pdVYjJ06CWIdNllSToUeCCfL1O', NULL, '2025-02-23 10:58:01', '2025-02-23 10:58:01', NULL, 0, 'active', 'en', NULL, NULL, NULL, 0),
-(6, 'dfdf', 'mojahidgenius48@gmail.com', NULL, '$2y$10$7K.V0Q7JosA6aweW1559MOoRweH3rCtd2IxRreOQI2.O1H3oZAwb2', NULL, '2025-02-23 20:20:18', '2025-02-23 20:20:18', NULL, 0, 'active', 'en', NULL, NULL, NULL, 0),
-(7, 'adssd', 'customer@botble.com', NULL, '$2y$10$UBygl7LA.Acy3bX1rHWsM.cjHRcEZKP7tTH/feaORSXvMIXopQSvO', NULL, '2025-03-04 02:24:53', '2025-03-04 02:24:53', NULL, 0, 'active', 'en', NULL, NULL, NULL, 0),
-(8, 'Student afdaf', 'student@gmail.com', NULL, '$2y$10$ol5gh5LAP.mz9oMlyD2KpuuRZXgdJBfODBDDauWrfO12hnaoE64ye', '9pcQrT9zT6DRcl7IYIjkRg0NLIqhREnfTIcvzdXXqbpMC9O23ZcdnhhIzVKr', '2025-04-02 12:21:50', '2025-04-03 12:14:35', '2025/04/03/th-1.jpg', 0, 'active', 'en', NULL, NULL, '{\"phone\": \"017733626939\", \"address\": \"Baisherkot\\r\\nMohanpur 3\"}', 0),
-(9, 'Student 2', 'student2@gmail.com', NULL, '$2y$10$POtYXa4fM0hqmPhF0ZN6gO7qBGqTBByPc4VunF3kxzZ9M/cd2JqUe', NULL, '2025-04-02 12:24:39', '2025-04-02 12:25:31', NULL, 0, 'active', 'en', NULL, NULL, NULL, 0);
+(1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$Ii4Uty/j2kbrmb5skyVFMOpMx1qBqP/LWrScoOHoV9xQUM2WdbsdC', '3ZWCEwFiKbhsXmnEluUXPv2dRQYgZ8IEnEbxeEteRpoPAor37U2q9r9vMH7G', '2024-11-24 19:59:45', '2025-04-08 13:33:53', '2025/04/08/dashboard-user-img.jpg', 1, 'active', 'en', NULL, NULL, '{\"country\": \"AQ\", \"birthday\": \"2025-02-11\"}', 0),
+(10, 'admin1', 'admin1@gmail.com', NULL, '$2y$10$BSA9fxk04St5wko4EPQoT.SFOUlPiGYKp5cd4OKFd6tYU6ww4Kfwa', NULL, '2025-04-08 11:42:03', '2025-04-08 11:42:03', NULL, 1, 'active', 'en', NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -2974,10 +2765,10 @@ INSERT INTO `app_users` (`id`, `name`, `email`, `email_verified_at`, `password`,
 --
 
 CREATE TABLE `app_user_metas` (
-  `id` bigint UNSIGNED NOT NULL,
-  `user_id` bigint UNSIGNED NOT NULL,
-  `meta_key` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `meta_key` varchar(150) NOT NULL,
+  `meta_value` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -2986,9 +2777,7 @@ CREATE TABLE `app_user_metas` (
 
 INSERT INTO `app_user_metas` (`id`, `user_id`, `meta_key`, `meta_value`) VALUES
 (1, 1, 'birthday', '2025-02-11'),
-(2, 1, 'country', 'AQ'),
-(3, 8, 'address', 'Baisherkot\r\nMohanpur 3'),
-(4, 8, 'phone', '017733626939');
+(2, 1, 'country', 'AQ');
 
 -- --------------------------------------------------------
 
@@ -2997,14 +2786,26 @@ INSERT INTO `app_user_metas` (`id`, `user_id`, `meta_key`, `meta_value`) VALUES
 --
 
 CREATE TABLE `app_variants_attributes` (
-  `id` bigint UNSIGNED NOT NULL,
-  `product_variant_id` bigint UNSIGNED NOT NULL,
-  `attribute_id` bigint UNSIGNED NOT NULL
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_variant_id` bigint(20) UNSIGNED NOT NULL,
+  `attribute_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `app_app_translations`
+--
+ALTER TABLE `app_app_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `app_app_translations_status_index` (`status`),
+  ADD KEY `app_app_translations_locale_index` (`locale`),
+  ADD KEY `app_app_translations_group_index` (`group`),
+  ADD KEY `app_app_translations_namespace_index` (`namespace`),
+  ADD KEY `app_app_translations_object_type_index` (`object_type`),
+  ADD KEY `app_app_translations_object_key_index` (`object_key`);
 
 --
 -- Indexes for table `app_attributes`
@@ -3173,18 +2974,6 @@ ALTER TABLE `app_failed_jobs`
 ALTER TABLE `app_jobs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `app_jobs_queue_index` (`queue`);
-
---
--- Indexes for table `app_app_translations`
---
-ALTER TABLE `app_app_translations`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `app_app_translations_status_index` (`status`),
-  ADD KEY `app_app_translations_locale_index` (`locale`),
-  ADD KEY `app_app_translations_group_index` (`group`),
-  ADD KEY `app_app_translations_namespace_index` (`namespace`),
-  ADD KEY `app_app_translations_object_type_index` (`object_type`),
-  ADD KEY `app_app_translations_object_key_index` (`object_key`);
 
 --
 -- Indexes for table `app_languages`
@@ -3719,436 +3508,436 @@ ALTER TABLE `app_variants_attributes`
 --
 
 --
+-- AUTO_INCREMENT for table `app_app_translations`
+--
+ALTER TABLE `app_app_translations`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `app_attributes`
 --
 ALTER TABLE `app_attributes`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_attribute_values`
 --
 ALTER TABLE `app_attribute_values`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_comments`
 --
 ALTER TABLE `app_comments`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `app_configs`
 --
 ALTER TABLE `app_configs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT for table `app_dev_tool_cms_versions`
 --
 ALTER TABLE `app_dev_tool_cms_versions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `app_dev_tool_marketplace_plugins`
 --
 ALTER TABLE `app_dev_tool_marketplace_plugins`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `app_dev_tool_marketplace_themes`
 --
 ALTER TABLE `app_dev_tool_marketplace_themes`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `app_dev_tool_package_versions`
 --
 ALTER TABLE `app_dev_tool_package_versions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `app_discounts`
 --
 ALTER TABLE `app_discounts`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_ecomm_addons`
 --
 ALTER TABLE `app_ecomm_addons`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_ecomm_carts`
 --
 ALTER TABLE `app_ecomm_carts`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
 
 --
 -- AUTO_INCREMENT for table `app_ecomm_currencies`
 --
 ALTER TABLE `app_ecomm_currencies`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `app_ecom_download_links`
 --
 ALTER TABLE `app_ecom_download_links`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_email_lists`
 --
 ALTER TABLE `app_email_lists`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `app_email_templates`
 --
 ALTER TABLE `app_email_templates`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `app_email_template_users`
 --
 ALTER TABLE `app_email_template_users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_evman_event_bookings`
 --
 ALTER TABLE `app_evman_event_bookings`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT for table `app_evman_event_tickets`
 --
 ALTER TABLE `app_evman_event_tickets`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `app_failed_jobs`
 --
 ALTER TABLE `app_failed_jobs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_jobs`
 --
 ALTER TABLE `app_jobs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `app_app_translations`
---
-ALTER TABLE `app_app_translations`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_languages`
 --
 ALTER TABLE `app_languages`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `app_language_lines`
 --
 ALTER TABLE `app_language_lines`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_lms_course_lessons`
 --
 ALTER TABLE `app_lms_course_lessons`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `app_lms_course_topics`
 --
 ALTER TABLE `app_lms_course_topics`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `app_manual_notifications`
 --
 ALTER TABLE `app_manual_notifications`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `app_media_files`
 --
 ALTER TABLE `app_media_files`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
 
 --
 -- AUTO_INCREMENT for table `app_media_folders`
 --
 ALTER TABLE `app_media_folders`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `app_menus`
 --
 ALTER TABLE `app_menus`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `app_menu_items`
 --
 ALTER TABLE `app_menu_items`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `app_migrations`
 --
 ALTER TABLE `app_migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 
 --
 -- AUTO_INCREMENT for table `app_oauth_clients`
 --
 ALTER TABLE `app_oauth_clients`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_oauth_personal_access_clients`
 --
 ALTER TABLE `app_oauth_personal_access_clients`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_orders`
 --
 ALTER TABLE `app_orders`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=214;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
 
 --
 -- AUTO_INCREMENT for table `app_order_items`
 --
 ALTER TABLE `app_order_items`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=221;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
 
 --
 -- AUTO_INCREMENT for table `app_order_item_metas`
 --
 ALTER TABLE `app_order_item_metas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_order_metas`
 --
 ALTER TABLE `app_order_metas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_pages`
 --
 ALTER TABLE `app_pages`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_page_metas`
 --
 ALTER TABLE `app_page_metas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_payment_histories`
 --
 ALTER TABLE `app_payment_histories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_payment_methods`
 --
 ALTER TABLE `app_payment_methods`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `app_permissions`
 --
 ALTER TABLE `app_permissions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `app_permission_groups`
 --
 ALTER TABLE `app_permission_groups`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_personal_access_tokens`
 --
 ALTER TABLE `app_personal_access_tokens`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_posts`
 --
 ALTER TABLE `app_posts`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 
 --
 -- AUTO_INCREMENT for table `app_post_likes`
 --
 ALTER TABLE `app_post_likes`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_post_metas`
 --
 ALTER TABLE `app_post_metas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=294;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=515;
 
 --
 -- AUTO_INCREMENT for table `app_post_ratings`
 --
 ALTER TABLE `app_post_ratings`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_post_views`
 --
 ALTER TABLE `app_post_views`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
 
 --
 -- AUTO_INCREMENT for table `app_product_variants`
 --
 ALTER TABLE `app_product_variants`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `app_product_variants_attribute_values`
 --
 ALTER TABLE `app_product_variants_attribute_values`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_resources`
 --
 ALTER TABLE `app_resources`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `app_resource_metas`
 --
 ALTER TABLE `app_resource_metas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_roles`
 --
 ALTER TABLE `app_roles`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `app_search`
 --
 ALTER TABLE `app_search`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_seo_metas`
 --
 ALTER TABLE `app_seo_metas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `app_shipping_address`
 --
 ALTER TABLE `app_shipping_address`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_shipping_methods`
 --
 ALTER TABLE `app_shipping_methods`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_single_taxonomies`
 --
 ALTER TABLE `app_single_taxonomies`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_single_taxonomy_metas`
 --
 ALTER TABLE `app_single_taxonomy_metas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_social_tokens`
 --
 ALTER TABLE `app_social_tokens`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_table_groups`
 --
 ALTER TABLE `app_table_groups`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_table_group_datas`
 --
 ALTER TABLE `app_table_group_datas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_table_group_tables`
 --
 ALTER TABLE `app_table_group_tables`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_taxonomies`
 --
 ALTER TABLE `app_taxonomies`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `app_taxonomy_metas`
 --
 ALTER TABLE `app_taxonomy_metas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_telescope_entries`
 --
 ALTER TABLE `app_telescope_entries`
-  MODIFY `sequence` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `sequence` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_test_eomm_plugin`
 --
 ALTER TABLE `app_test_eomm_plugin`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `app_theme_configs`
 --
 ALTER TABLE `app_theme_configs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `app_users`
 --
 ALTER TABLE `app_users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `app_user_metas`
 --
 ALTER TABLE `app_user_metas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `app_variants_attributes`
 --
 ALTER TABLE `app_variants_attributes`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

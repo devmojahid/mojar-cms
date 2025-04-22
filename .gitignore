@@ -18,3 +18,4 @@ yarn-error.log
 /.php-cs-fixer.cache
 /.deploy.yml
 /public/jw-styles/mojar/build
+/storage
