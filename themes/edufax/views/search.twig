@@ -2,4 +2,41 @@
 
 {% block content %}
 
+	{% include 'theme::components.breadcrumb' with {
+        title: 'Search',
+        background_image:  upload_url(theme_config('breadcrumb_bg_image')),
+        items: [
+            {'label': 'Home', 'url': '/'},
+            {'label': 'Search'}
+        ]
+    } %}
+
+    <section class="tf__blog_page pt_120 xs_pt_80 pb_120 xs_pb_80">
+		<div class="container">
+			<div class="row mt_35" id="post-list">
+				{% if page.data|length > 0 %}
+					{% for post in page.data %}
+						{{ get_template_part(post, 'content') }}
+					{% endfor %}
+				{% else %}
+					<div class="col-12">
+						<div class="tf__blog_empty_state">
+							<h3>No Posts Found</h3>
+							<p>We couldn't find any posts matching your criteria. Try changing your search terms or filters.</p>
+							<a href="{{ url('/') }}" class="reset-button">Reset Filters</a>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+
+			<div class="tf__pagination mt_60">
+				<div class="row">
+					<div class="col-12" id="pagination">
+						{{ paginate_links(page, 'theme::components.pagination') }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
 {% endblock %}

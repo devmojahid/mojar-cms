@@ -1,6 +1,6 @@
 {% if data.style == 'style1' %}
     <!-- Instructor Section style 1 -->
-    <section class="tf__instructor mt_120 xs_mt_80" {% if data.background_image %}style="background: url({{ upload_url(data.background_image) }})"{% endif %}>
+    <section class="tf__instructor xs_mt_80" {% if data.background_image %}style="background: url({{ upload_url(data.background_image) }})"{% endif %}>
         <div class="tf__instructor_overlay pt_110 xs_pt_75 pb_80 xs_pb_40">
             <div class="container">
                 {% if data.show_section_title %}

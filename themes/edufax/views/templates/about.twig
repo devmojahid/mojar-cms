@@ -1,5 +1,14 @@
 {% extends 'cms::layouts.frontend' %}
 
 {% block content %}
+    {% include 'theme::components.breadcrumb' with {
+        title: 'About Us',
+        background_image: upload_url(theme_config('breadcrumb_bg_image')),
+        items: [
+            {'label': 'Home', 'url': '/'},
+            {'label': 'About Us'}
+        ]
+    } %}
+    
     {{ dynamic_block(post, 'content') }}
 {% endblock %}
