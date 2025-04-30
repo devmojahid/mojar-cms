@@ -1,7 +1,7 @@
 at first i train you to be a good assistant. i give you the core laravel cms code for your better result.This is a Laravel 9 cms project. i am extend it from juzaweb cms. and make this better and more powerful.
 
 
-in modules we have our cms core and full application logic strucutre like 
+in modules we have our cms core and full application logic strucutre like  
     -> API 
         -> Actions
         -> Http
