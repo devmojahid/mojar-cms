@@ -1751,32 +1751,33 @@ input[type=radio] {
     stroke-linecap: round;
     fill: none
 }
-.main_footer{
+.main_footer {
     display: none;
 }
 
-.main_footer.footer.unprint{
+.main_footer.footer.unprint {
     display: none;
 }
 
-body{
+body {
     height: 100vh;
 }
 
-.section__title .control-label{
+.section__title .control-label {
     font-size: 1.6rem;
-    font-weight:500;
+    font-weight: 500;
     color: #000;
 }
 
 .sidebar {
     width: 100%;
+    display: none;
 }
 
-.form-control{
+.form-control {
     height: 40px;
 }
 
-.payment_methods_section{
+.payment_methods_section {
     margin-top: 20px;
 }
